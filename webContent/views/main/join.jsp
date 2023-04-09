@@ -6,14 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- header css -->
-    <link rel="stylesheet" href="/common/css/reset.css">
-    <link rel="stylesheet" href="/common/css/header.css">
-    <link rel="stylesheet" href="/webContent/resources/css/join.css">
+    <link rel="stylesheet" href="/css/coomon/reset.css">
+    <link rel="stylesheet" href="/css/coomon/header.css">
+    <link rel="stylesheet" href="/css/mypage/join.css">
 
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <script src="/common/js/header.js"></script>
-    <script src="/webContent/resources/js/join.js"></script>
-
+    <script src="/js/common/header.js"></script>
+    <script src="/js/mypage/join.js"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 
