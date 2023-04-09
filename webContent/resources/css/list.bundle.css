@@ -1773,3 +1773,28 @@ label.label_block {
 .orderDetailInfo {
     border-top: 2px solid gray;
 }
+#formTable{
+    width: 500px;
+}
+#formTable > tbody > tr{
+    font-weight: 900;
+    font-size: large;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    padding-bottom: 15px;
+    padding-top: 15px;
+}
+#formTable input::placeholder {
+    padding-left: 15px;
+}
+#payPrice{
+    font-size: large;
+    font-weight: 900;
+    padding-bottom: 15px;
+    border-bottom: 2px solid gray;
+}
+.totalPrice {
+    padding-top: 15px;
+}
