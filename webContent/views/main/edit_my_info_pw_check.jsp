@@ -6,13 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>내정보수정_비밀번호확인</title>
 
-    <link rel="stylesheet" href="css/reset.css" />
-    <link rel="stylesheet" href="css/header.css" />
-    <link rel="stylesheet" href="css/edit_my_info_pw_check.css" />
-    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="/css/common/reset.css" />
+    <link rel="stylesheet" href="/css/common/header.css" />
+    <link rel="stylesheet" href="/css/mypage/edit_my_info_pw_check.css" />
+    <link rel="stylesheet" href="/css/common/common.css">
     
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <script defer src="js/header.js"></script>
+    <script defer src="/js/common/header.js"></script>
 
 </head>
 <body>

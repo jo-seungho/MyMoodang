@@ -1,0 +1,203 @@
+
+/* footer */
+#footer {
+    width: 1050px;
+    margin: 0 auto;
+    padding-bottom: 60px;
+    font-weight: 400;
+    letter-spacing: -.2px;
+    border-top: 3px solid lightgray;
+}
+
+#footer::after {
+    display: block;
+    content: '';
+    clear: both;
+}
+
+#footer .inner_footer {
+    /* overflow: hidden; */
+    padding-bottom: 20px;
+}
+
+#footer .inner_footer::after {
+    content: '';
+    clear: both;
+    display: block;
+}
+
+.inner_footer .cc_footer {
+    float: left;
+    /* width: 534px; */
+}
+
+.inner_footer .cc_tit {
+    padding: 29px 0 2px;
+    font-weight: 700;
+    font-size: 30px;
+    color: #333;
+    line-height: 24px;
+}
+
+.inner_footer .cc_view {
+    /* overflow: hidden; */
+    padding-top: 16px;
+}
+
+.inner_footer .cc_view .tit {
+    float: left;
+    width: 140px;
+    margin-right: 16px;
+}
+
+.inner_footer .cc_call {
+    padding-top: 20px;
+}
+
+.inner_footer .cc_call .tit {
+    padding-top: 4px;
+    font-weight: 800;
+    font-size: 18px;
+    color: #333;
+    line-height: 36px;
+    letter-spacing: -.5px;
+    white-space: nowrap;
+}
+
+.cc_footer .list {
+    font-size: 14px;
+    color: #333;
+    line-height: 22px;
+    letter-spacing: -.2px;
+}
+
+.cc_footer .cc_kakao .tit,
+.cc_footer .cc_qna .tit {
+    height: 40px;
+    padding-top: 7px;
+    margin-top: 3px;
+    border: 1px solid #e3e3e3;
+    border-radius: 3px;
+    font-weight: 700;
+    font-size: 14px;
+    color: #333;
+    line-height: 22px;
+    text-align: center;
+}
+
+.cc_footer .list dd {
+    color: #999;
+}
+
+/* #footer right */
+#footer .company_info {
+    float: right;
+    padding-top: 29px;
+    font-size: 12px;
+    color: #999;
+    line-height: 20px;
+}
+
+.company_info .list {
+    padding-bottom: 29px;
+    display: inline-block;
+}
+
+.company_info .list li {
+    float: left;
+    padding-right: 16px;
+}
+
+.company_info .list .link {
+    font-size: 14px;
+    color: #333;
+    line-height: 18px;
+}
+
+.company_info .spec_info .bar {
+    padding: 0 4px 0 3px;
+}
+
+.company_info .spec_info .link {
+    color: #5f0080;
+}
+
+.company_info .spec_info .copy {
+    display: block;
+    font-size: 10px;
+    color: #949296;
+    line-height: 22px;
+    letter-spacing: 0;
+}
+
+.spec_info .sns {
+    float: left;
+    padding-top: 16px;
+}
+
+.sns li {
+    float: left;
+}
+
+.sns .link_sns {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    
+}
+
+#footer .link_footer {
+    width: 100%;
+    height: auto;
+    padding-top: 19px;
+    letter-spacing: 0;
+    border-top: 1px solid #eee;
+}
+
+.link_footer::after {
+    display: block;
+    content: '';
+    clear: both;
+}
+
+.link_footer .authentication {
+    float: left;
+    padding-top: 3px;
+}
+
+.link_footer .authentication .mark {
+    float: left;
+    width: 267px;
+}
+
+.link_footer .mark .logo {
+    float: left;
+    width: 34px;
+    height: 34px;
+    margin-right: 10px;
+}
+
+.link_footer .mark .txt {
+    float: left;
+    padding-top: 1px;
+    font-size: 10px;
+    color: #999;
+    line-height: 16px;
+    letter-spacing: -.5px;
+    white-space: nowrap;
+}
+
+#footer .lguplus {
+    width: 428px;
+    display: inline-block;
+}
+
+.link_footer .lguplus .logo {
+    width: 102px;
+    height: 34px;
+}
+
+
+
+

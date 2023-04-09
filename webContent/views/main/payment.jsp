@@ -6,14 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- header css -->
 
-    <link rel="stylesheet" href="/common/css/reset.css" />
-    <link rel="stylesheet" href="/common/css/header.css" />
-    <link rel="stylesheet" href="/webContent/resources/css/list.bundle.css">    
+    <link rel="stylesheet" href="/css/coomon/reset.css" />
+    <link rel="stylesheet" href="/css/coomon/header.css" />
+    <link rel="stylesheet" href="/css/order/list.bundle.csss">    
  
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 
-    <script src="/common/js/header.js"></script>
-    <script src="/webContent/resources/js/payment.js"></script>
+    <script src="/js/coomon/header.js"></script>
+    <script src="/js/order/payment.js"></script>
 
     <title>주문 결제</title>
   </head>
