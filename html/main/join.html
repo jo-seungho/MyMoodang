@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- header css -->
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/join.css">
+
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="../js/header.js"></script>
+    <script src="../js/join.js"></script>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+
+    <title>회원가입</title>
+</head>
+
+<body>
+    <!-- 규칙:
+    축약형(link, emph, gnb 등)을 먼저 사용)
+    alt로 적절한 대체 텍스트 제공, 너무 긴 경우 공통클래스 blind로 제공-->
+    <div id="header">
+        <div class="user_menu">
+            <!-- bnr = banner -->
+            <a href="#" class="bnr_delivery">
+                <img src="/webContent/resources/img/image.gif" alt="서울, 경기, 인천 샛별배송, 수도권 이외 지역 택배배송" class="bnr_delivery_img" />
+            </a>
+            <ul class="sign_menu">
+                <!--login class 추가-->
+                <li class="link">
+                    <a href="#" class="item after join">회원가입</a>
+                </li>
+                <li class="link">
+                    <a href="#" class="item after login_none">로그인</a>
+                    <a class="item login login_check grade_comm">
+                        <span class="ico_grade grade0">일반</span>
+                        <span class="txt">
+                            <span class="name"></span>
+                            <span class="sir">님</span>
+                        </span>
+                    </a>
+                    <ul class="sub">
+                        <li class="list">
+                            <a href="#" class="list_item">주문 내역</a>
+                        </li>
+                        <li class="list">
+                            <a href="#" class="list_item">배송지 관리</a>
+                        </li>
+                        <li class="list">
+                            <a href="#" class="list_item">개인 정보 수정</a>
+                        </li>
+                        <li class="list">
+                            <a href="#" class="list_item">로그아웃</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="link">
+                    <a href="#" class="item service">고객센터</a>
+                    <!-- 고객센터 hover 시 sub_menu 등장 -->
+                    <ul class="sub_menu">
+                        <li class="list">
+                            <a href="#" class="list_item">공지사항</a>
+                        </li>
+                        <li class="list">
+                            <a href="#" class="list_item">자주하는 질문</a>
+                        </li>
+                        <li class="list">
+                            <a href="#" class="list_item">1:1 문의</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <!-- .sign_menu -->
+        </div>
+        <div class="header_logo">
+            <h1 class="logo">
+                <a href="#" class="link_main">
+                    <span class="gnb_logo_container"></span>
+                    <img src="/webContent/resources/img/logo.png" alt="마켓컬리 로고" class="logo_img" />
+                </a>
+            </h1>
+        </div>
+        <div class="gnb">
+            <!-- gnb = global nav bar = 최상위 메뉴  -->
+            <h2 class="blind">메뉴</h2>
+            <ul class="gnb_menu">
+                <li class="list gnb_main">
+                    <a href="#" class="link">
+                        <span class="ico"></span>
+                        <!-- ico는 css에서 bg url로 처리 -->
+                        <span class="txt">전체 카테고리</span>
+                    </a>
+                    <div class="gnb_sub">
+                        <ul class="menu">
+                            <li class="current">
+                                <!-- hover나 active시 current가 옮겨가도록 설정해야 함 -->
+                                <a href="#" class="main_item">
+                                    <span class="ico">
+                                        <img src="https://img-cf.kurly.com/shop/data/category/icon_newyear_inactive_pc@2x.1609722514.png" alt="" class="ico off" />
+                                        <img src="https://img-cf.kurly.com/shop/data/category/icon_newyear_active_pc@2x.1609722514.png" alt="" class="ico on" />
+                                        <!--카테고리 별 아이콘은 직관적이게 img src로 바로 삽입 
+                                                클릭X(off): 기본, 클릭(on): 보라색 아이콘-->
+                                    </span>
+                                    <span class="tit">
+                                        <span class="txt">제로 음료</span>
+                                        <!-- ico_nex: bg url로 처리 -->
+                                    </span>
+                                    <!-- tit: text + ico -->
+                                </a>
+
+                                <a href="#" class="main_item">
+                                    <span class="ico">
+                                        <img src="https://img-cf.kurly.com/shop/data/category/icon_newyear_inactive_pc@2x.1609722514.png" alt="" class="ico off" />
+                                        <img src="https://img-cf.kurly.com/shop/data/category/icon_newyear_active_pc@2x.1609722514.png" alt="" class="ico on" />
+                                        <!--카테고리 별 아이콘은 직관적이게 img src로 바로 삽입 
+                                                클릭X(off): 기본, 클릭(on): 보라색 아이콘-->
+                                    </span>
+                                    <span class="tit">
+                                        <span class="txt">무가당</span>
+                                        <span class="ico_new" alt="new"></span>
+                                        <!-- ico_nex: bg url로 처리 -->
+                                    </span>
+                                    <!-- tit: text + ico -->
+                                </a>
+
+                                <a href="#" class="main_item">
+                                    <span class="ico">
+                                        <img src="https://img-cf.kurly.com/shop/data/category/icon_newyear_inactive_pc@2x.1609722514.png" alt="" class="ico off" />
+                                        <img src="https://img-cf.kurly.com/shop/data/category/icon_newyear_active_pc@2x.1609722514.png" alt="" class="ico on" />
+                                        <!--카테고리 별 아이콘은 직관적이게 img src로 바로 삽입 
+                                                클릭X(off): 기본, 클릭(on): 보라색 아이콘-->
+                                    </span>
+                                    <span class="tit">
+                                        <span class="txt">단백질</span>
+                                        <!-- ico_nex: bg url로 처리 -->
+                                    </span>
+                                    <!-- tit: text + ico -->
+                                </a>
+
+                                <a href="#" class="main_item">
+                                    <span class="ico">
+                                        <img src="https://img-cf.kurly.com/shop/data/category/icon_newyear_inactive_pc@2x.1609722514.png" alt="" class="ico off" />
+                                        <img src="https://img-cf.kurly.com/shop/data/category/icon_newyear_active_pc@2x.1609722514.png" alt="" class="ico on" />
+                                        <!--카테고리 별 아이콘은 직관적이게 img src로 바로 삽입 
+                                                클릭X(off): 기본, 클릭(on): 보라색 아이콘-->
+                                    </span>
+                                    <span class="tit">
+                                        <span class="txt">도시락</span>
+                                        <!-- ico_nex: bg url로 처리 -->
+                                    </span>
+                                    <!-- tit: text + ico -->
+                                </a>
+
+                                <a href="#" class="main_item">
+                                    <span class="ico">
+                                        <img src="https://img-cf.kurly.com/shop/data/category/icon_newyear_inactive_pc@2x.1609722514.png" alt="" class="ico off" />
+                                        <img src="https://img-cf.kurly.com/shop/data/category/icon_newyear_active_pc@2x.1609722514.png" alt="" class="ico on" />
+                                        <!--카테고리 별 아이콘은 직관적이게 img src로 바로 삽입 
+                                                클릭X(off): 기본, 클릭(on): 보라색 아이콘-->
+                                    </span>
+                                    <span class="tit">
+                                        <span class="txt">기타</span>
+                                        <!-- ico_nex: bg url로 처리 -->
+                                    </span>
+                                    <!-- tit: text + ico -->
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="list">
+                    <a href="#" class="link">
+                        <span class="txt">신상품</span>
+                    </a>
+                </li>
+                <li class="list">
+                    <a href="#" class="link">
+                        <span class="txt">할인</span>
+                    </a>
+                </li>
+                <li class="list">
+                    <a href="#" class="link">
+                        <span class="txt">베스트</span>
+                    </a>
+                </li>
+                <li class="list">
+                    <a href="#" class="link">
+                        <span class="txt">이벤트</span>
+                    </a>
+                </li>
+
+                <div class="gnb_search">
+                    <form action="">
+                        <input type="text" id="keyword" value="건강 기원 새해맞이 보양식 레시피" title="검색어입력" class="inp_search" />
+                        <input type="image" src="https://res.kurly.com/pc/service/common/1908/ico_search_x2.png" class="btn_search" />
+                        <div class="init">
+                            <button type="button" id="search_init" class="btn_delete">검색어 삭제하기</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="location_login">
+                    <!-- 버튼 뒤로 넘기기, 가상요소 선택자로 bg url 아이콘 처리-->
+                    <button type="button" class="btn_location on">배송지 등록</button>
+
+                    <div class="location_notice">
+                        <!-- 첫 홈페이지 화면에 몇 초간 notice 띄우고 자동으로 off -->
+                        <span class="emph">배송지를 등록</span>하고<br />
+                        <span class="txt">구매가능한 상품을 확인하세요!</span>
+                        <div class="group_button">
+                            <button type="button" class="btn login">로그인</button>
+                            <button type="button" class="btn search_address">
+                                <span class="ico"></span>
+                                주소검색
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cart_count">
+                    <!-- bg url 아이콘 추가 -->
+                    <a href="#" class="btn_cart">
+                        <span class="blind">장바구니</span>
+                    </a>
+                </div>
+            </ul>
+        </div>
+    </div>
+
+    <div id="content">
+        <div class="main_page_aticle">
+            <div class="form">
+                <h3 class="main_title">회원가입</h3>
+                <p class="sub">
+                    <span id="ico">*</span>
+                    필수입력사항
+                </p>
+
+
+                <form action="join_complete.html" method="POST" onsubmit="return on_submit_check();">
+                    <div class="row mb-3" id="font_size">
+                        <div class="col-sm-6 id_bell_f">
+                            <span class="member_name">
+                                <label>아이디(이메일) <span id=ico>*</span></label>
+                            </span>
+                            <span class="member_content">
+                                <input type="text" name="memberId" class="width300 form-control" id="loginId" placeholder="예) stopeatting@mymudang.com">&nbsp;&nbsp;
+                                <button type="button" class="btn-outline-primary width100" id="emailjungbok">중복확인</button>&nbsp;&nbsp;
+                                <button type="button" class="btn-outline-primary width100">이메일 인증</button>
+                                <p class="txt_guide">
+                                    <span class="id_txt_case1 id_bell_s">6자 이상의 영문 혹은 영문과 숫자를 조합</span>
+                                    <span class="id_txt_case2 id_bell_t">아이디 중복확인</span>
+                                </p>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3" id="font_size">
+                        <div class="col-sm-6 pw_bell_f">
+                            <span class="member_name">
+                                <label>비밀번호 <span id=ico>*</span></label>
+                            </span>
+                            <span class="member_content">
+                                <input type="password" name="password" class="form-control inpt_pw check_pw" id="submit_check_pw" placeholder="비밀번호를 입력해주세요">
+                                <p class="txt_guide">
+                                    <span class="pw_txt_case1 pw_bell_s ">10자 이상 입력</span>
+                                    <span class="pw_txt_case2 pw_bell_t ">영문/숫자/특수문자 (- 제외) 조합해주세요</span>
+                                </p>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3" id="font_size">
+                        <div class="col-sm-6 pw2_bell_f">
+                            <span class="member_name">
+                                <label class="col-sm-2 col-form-label">비밀번호확인 <span id=ico>*</span></label>
+                            </span>
+                            <span class="member_content">
+                                <input type="password" name="pwCheck" class="form-control inpt_pw2 check_pw" id="submit_check_pw2" placeholder="비밀번호를 한번 더 입력해주세요">
+                                <p class="txt_guide">
+                                    <span class="pw2_txt_case1  pw2_bell_s">동일한 비밀번호를 입력해주세요</span>
+                                </p>
+                            </span>
+                        </div>
+                    </div>
+
+
+                    <div class="row mb-3" id="font_size">
+                        <div class="col-sm-6">
+                            <span class="member_name">
+                                <label class="col-sm-2 col-form-label">이름 <span id=ico>*</span></label>
+                            </span>
+                            <span class="member_content">
+                                <input type="text" name="userName" class="form-control" id="submit_check_name" placeholder="이름을 입력해주세요">
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3" id="font_size">
+                        <div class="col-sm-6">
+                            <span class="member_name">
+                                <label class="col-sm-2 col-form-label">휴대폰 <span id=ico>*</span></label>
+                            </span>
+                            <span class="member_content">
+                                <input type="text" name="phone_number" class="form-control" id="submit_check_phone" placeholder="숫자만 입력해주세요">
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3" id="font_size">
+                        <span class="member_name">
+                            <label class="col-sm-2 col-form-label">주소 <span id=ico>*</span></label>
+                        </span>
+                        <span class="member_content">
+                          <input type="text" name="zipCode" class="form-control width100 text_disabled" readonly="readonly" placeholder="우편번호">
+                          <input type="text" name="shipAddr" class="form-control width309 text_disabled" readonly="readonly" placeholder="주소">
+                          <button type="button" id="juso" class="btn-outline-primary width100"><span id="adressNo">주소 검색</span></button>
+                        </span>
+                    </div>
+                    <div class="row mb-3" id="font_size">
+                      <span class="member_name"></span>
+                      <span class="member_content">
+                        <input type="text" name="shipAddrInfo" class="form-control" placeholder="상세주소">
+                      </span>
+                  </div>
+
+                    <div class="row mb-3" id="font_size">
+                        <div class="col-sm-6">
+                            <span class="member_name">
+                                <label class="col-sm-2 col-form-label">성별 <span id=ico></span></label>
+                            </span>
+                            <span class="member_content">
+                                <label><input type="radio" name="gender" class="gender" value="F" id="gender_M"><label class="gender_label" for="gender_M">남자</label>
+                                <label><input type="radio" name="gender" class="gender" value="M" id="gender_W"><label class="gender_label" for="gender_W">여자</label>
+                                <label><input type="radio" name="gender" class="gender" value="X" id="gender_N" checked="checked"><label class="gender_label" for="gender_N">선택안함</label>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3  btom_line" id="font_size">
+                        <div class="col-sm-6 ">
+                            <span class="member_name">
+                                <label class="col-sm-2 col-form-label">생년월일</label>
+                            </span>
+                            <span class="member_content">
+                                <input type="text" name="year" class="form-control width100" id="birth_year" pattern="[0-9]*" value="" label="생년월일" size="4" maxlength="4" placeholder="YYYY">
+                                <span class="bar"></span>
+                                <input type="text" name="month" class="form-control width100" id="birth_month" pattern="[0-9]*" value="" label="생년월일" size="2" maxlength="2" placeholder="MM">
+                                <span class="bar"></span>
+                                <input type="text" name="day" class="form-control width100" id="birth_day" pattern="[0-9]*" value="" label="생년월일" size="2" maxlength="2" placeholder="DD">
+                              </span>
+                        </div>
+
+                    </div>
+
+                    <div class="boder_btom"></div>
+
+                    <div class="checkbox_group" id="font_size">
+                        <div class="col-sm-6">
+                          <span class="member_name">
+                            <label class="col-sm-2 col-form-label" style="font-weight: 800;">이용약관동의 <span id=ico> * </span></label>
+                          </span>  
+                          <span class="member_content">
+                            <label for="check_all"><input type="checkbox" id="check_all"> 전체 동의합니다.</label>
+                          </span>
+                        </div>
+                        <div class="col-sm-6">
+                          <span class="member_name">
+                          </span>  
+                          <span class="member_content">
+                            <label for="check_1"><input type="checkbox" class="normal" id="check_1"> 이용약관 동의 <span class="redFont">(필수)</span></label>
+                          </span>
+                        </div>
+                        <div class="col-sm-6">
+                          <span class="member_name">
+                         </span>  
+                          <span class="member_content">
+                            <label for="check_2"><input type="checkbox" class="normal" id="check_2"> 개인정보 수집, 이용 동의 <span class="redFont">(필수)</span></label>
+                          </span>
+                        </div>
+                        <div class="col-sm-6">
+                          <span class="member_name">
+                         </span>  
+                          <span class="member_content">
+                            <label  for="check_3"><input type="checkbox" class="normal" id="check_3"> 마케팅 수신 동의 <span class="grayFont">(선택)</span></label>
+                          </span>
+                        </div>
+                    </div>
+
+                    <script>
+
+                     
+                    </script>
+
+
+                    <div id="formSubmit" class="form_footer">
+                        <button type="submit" class="btn active btn_join">가입하기</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+
+</html>
