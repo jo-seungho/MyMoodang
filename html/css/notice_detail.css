@@ -35,8 +35,10 @@ a {
 }
 
 .notice_view {
-    width: 100%;
-    border-top: 2px solid #000;
+    width: 1000px;
+    margin: 0 auto;
+    border-top: 2px solid lavenderblush;
+    background: #fff;
 }
 
 .notice_view .title {
@@ -80,6 +82,7 @@ a {
 .notice_view .info dl dd {
     display: inline-block;
     font-size: 1.4rem;
+    
 }
 
 
@@ -90,8 +93,38 @@ a {
 
 .notice_view .cont {
     padding: 15px;
-    border-bottom: 1px solid #000;
     line-height: 160%;
-    font-size: 1.4rem;
+    font-size: 16px;
 }
+
+.notice_view .cont img {
+    max-width: 100%;
+}
+
+.notice_view .btns {
+    padding: 15px;
+    text-align: right;
+}
+
+.notice_view .btns .btn {
+    display: inline-block;
+    padding: 5px 10px;
+    border: 1px solid #000;
+    border-radius: 3px;
+    font-size: 1.4rem;
+    cursor: pointer;
+}
+
+
+.btn {
+    display: inline-block;
+    padding: 5px 10px;
+    border: 2px solid gray;
+    border-radius: 3px;
+    font-size: 15px;
+    cursor: pointer;
+    color : black;
+}
+
+
 
