@@ -186,13 +186,12 @@ ol, ul {
       height: 56px;
       font-size: 16px;
       line-height: 41px;
+      border: 1px solid  rgb(254,116,119);
     }
   
     #formSubmit .active{  /*가입하기 버튼 */
-      border: 1px solid #5f0081;
-      background-color: rgb(254,116,119)
-
-      ;
+      border: 1px solid rgb(254,116,119);
+      background-color: rgb(254,116,119);
       color: #fff;
     }
     
@@ -425,6 +424,18 @@ ol, ul {
     border: 1px solid #e0e0e0;
   }
   
+
+  form button:hover {
+    background-color: rgb(243, 176, 177) ;
+    border:rgb(243, 176, 177) ;
+    cursor: pointer;
+}
+
+#join_btn:hover {
+  background-color: rgb(243, 176, 177) ;
+  border:rgb(243, 176, 177) ;
+  cursor: pointer;
+}
   
   
   
