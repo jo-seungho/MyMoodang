@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../css/reset.css" />
     <link rel="stylesheet" href="../css/header.css" />
     <link rel="stylesheet" href="../css/list.bundle.css">    
+    <link rel="stylesheet" href="../css/payment_order.css">
  
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 
@@ -242,31 +243,42 @@
               <div class="orderDetailInfo">
 
           <div style="display: flex; margin-bottom: 20px; margin-top: 20px;">
-            <h2 style="font-weight: 900;">이름 *</h2>
+            <h2 style="font-weight: 900; margin-right: 200px;">이름 *</h2>
             <p style="font-weight: 900; font-size: large;">조승호</p>
           </div>
           <div style="display: flex; margin-bottom: 20px;">
-            <h2 style="font-weight: 900;">이메일 *</h2>
+            <h2 style="font-weight: 900; margin-right: 183px;">이메일 *</h2>
             <p style="font-weight: 900; font-size: large;">11017sk@hanmail.net</p>
           </div>
           <div style="display: flex; margin-bottom: 20px;">
-            <h2 style="font-weight: 900;">휴대폰번호 *</h2>
+            <h2 style="font-weight: 900; margin-right: 150px;">휴대폰번호 *</h2>
             <p style="font-weight: 900; font-size: large;">010-5548-5482</p>
           </div>
+           
+            <h2 class="tit_section" id="divAddressWrapper">
+                배송정보
+                <span class="desc">배송 휴무일: 무당배송(휴무없음), 택배배송(일요일)</span>
+            </h2>
+
+            <div class="order_section order_address" id="dataDelivery">
+                <h3 href="#" class="section_crux">
+                    배송지
+                </h3>
+                <div class="section_full">
+                    <span class="address" id="divDesination">
+                        <span class="addr" id="addrInfo">경기도 광명시 하안동</span>
+                        <span class="tag" id="addrTags">
+                            <span class="badge star" id="addrBadge">무당배송</span>
+                            <span style="display:block; margin-top:5px;">배송지 수정은 마이무당  > 배송지 관리에서 변경할 수 있어요!</span>
+                        </span>
+                    </span>
+                </div>
+            </div> 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
+            
               </div>
                 <div class="cart_select">
                     <div class="inner_select">
@@ -391,19 +403,86 @@
      -->
                     </ul>
                 </div>
-    
-    
-                <!-- 여긴 고정. -->
-                <div class="cart_select">
-                    <div class="inner_select">
-                        <label class="check">
-                            <input type="checkbox" name="checkAll" onclick="sel_all(this)">
-                            <span class="ico"></span>전체선택 (1/1)
-                        </label>
-                        <!-- 1/n : db-->
-                        <a href="#none" class="btn_delete">선택삭제</a>
+
+                <div class="data_payment">
+                    <div class="tbl_left">
+                      <h2 id="tit_pay" class="tit_section">적립금</h2>
+
+                        <table class="goodsinfo_table">
+                            <tbody>
+                                <tr class="emoney_use">
+                                    <th>
+                                        적립금 적용
+                                    </th>
+
+                                    <td>
+                                        <div id="ondealCheck">
+                                            <div class="emoney_reg">
+                                                <input type="text" name="using_point" id="emoney"  class="number_only" value="" placeholder="0" pattern="[0-9]*" inputmode="decimal">
+                                                <div class="check">
+                                                    <label class="emoney_chkbox">
+                                                        <span class="txt_checkbox">모두사용</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                            <p class="possess">
+                                                보유 적립금 : <strong class="emph">1900</strong>원
+
+                                            </p>
+
+                                            <ul class="list_notice">
+                                                <li>· 보유 적립금 1천원 이상부터 사용가능</li>
+                                                <li>· 적립금 내역: 마이컬리 &gt; 적립금</li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
+
+
+
+                            <div class="data_method" style="height: 700px;">
+                                <h2 class="tit_section" id="titFocusMethod">결제수단</h2>
+
+
+                                <table class="goodsinfo_table tbl_left">
+                                    <tbody>
+                                        <tr>
+                                            <th> 카카오페이 결제</th>
+                                            <td>
+                                              <div style="display: flex; gap: 35px">
+                                                <label class="label_radio" id="cardBenefit_kakaopay">
+                                                    <input type="radio" name="settlekind" value="kakaopay">
+                                                    <span id="kakaopay">카카오페이</span>
+                                                    
+                                                    <div class="info_benefit"></div>
+                                                </label>
+                                                <label class="label_radio" id="cardBenefit_kakaopay">
+                                                    <input type="radio" name="settlekind" value="kakaopay">
+                                                    <span id="kakaopay" style="background-color: lightsalmon;">신용 카드</span>
+                                                    
+                                                    <div class="info_benefit"></div>
+                                                </label>
+                                                <label class="label_radio" id="cardBenefit_kakaopay">
+                                                    <input type="radio" name="settlekind" value="kakaopay">
+                                                    <span id="kakaopay" style="background-color: lightsteelblue;">무통장 입금</span>
+                                                    
+                                                    <div class="info_benefit"></div>
+                                                </label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+
+
+
             </div>
             <div class="cart_result">
                 <div class="inner_result">
