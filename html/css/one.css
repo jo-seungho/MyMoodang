@@ -1,0 +1,391 @@
+#container, #content{
+    position:relative;
+    /* height: 1200px */
+}
+
+.page_aticle button, .page_aticle input, .page_aticle select, .page_aticle * {
+    font-family: noto sans;
+    font-weight: 400;
+    letter-spacing: 0;
+}
+
+
+#main{
+    border-bottom: 1px solid #f7f7f7;
+}
+
+#content{
+    min-width:1050px;
+    padding-bottom: 120px;
+}
+
+.page_aticle {
+    margin: 0 auto;
+}
+
+.page_aticle.aticle_type2 {
+    padding-top: 65px;
+}
+
+.page_aticle {
+    width: 1050px;
+    margin: 0 auto;
+}
+
+#snb {
+    float: left;
+    width: 200px;
+}
+
+#snb .tit_snb {
+    padding: 8px 0 33px 1px;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 34px;
+    color: #333;
+    letter-spacing: -.5px;
+}
+
+#snb .inner_sub{
+    border: 1px solid #f2f2f2;
+    border-bottom: 0;
+}
+
+#snb .list_menu li {
+    border-bottom: 1px solid #f2f2f2;
+}
+
+#snb .list_menu li.on a, #snb .list_menu li a:hover {
+    background: #fafafa url(https://res.kurly.com/pc/ico/2008/ico_arrow_6x11_on.svg) no-repeat 174px 52%;
+    background-size: 6px 11px;
+    font-weight: 700;
+    color: #666;
+}
+
+#snb .list_menu li a {
+    display: block;
+    overflow: hidden;
+    padding: 15px 0 15px 20px;
+    background: #fff url(https://res.kurly.com/pc/ico/2008/ico_arrow_6x11.svg) no-repeat 174px 52%;
+    background-size: 6px 11px;
+    font-size: 14px;
+    color: #666;
+    line-height: 20px;
+    letter-spacing: -.3px;
+}
+
+#snb .list_menu li.one a {
+    display: block;
+    overflow: hidden;
+    padding: 15px 0 15px 20px;
+    background: #fff url(https://res.kurly.com/pc/ico/2008/ico_arrow_6x11.svg) no-repeat 174px 52%;
+    background-size: 6px 11px;
+    font-size: 14px;
+    color:  #5f0080;
+    line-height: 20px;
+    letter-spacing: -.3px;
+}
+
+
+
+#snb .link_inquire {
+    display: block;
+    overflow: hidden;
+    width: 200px;
+    height: 60px;
+    margin-top: 20px;
+    padding: 9px 0 0 21px;
+    border-radius: 0 100px 100px 0;
+    background: #fafafa url(https://res.kurly.com/pc/ico/2008/ico_arrow_6x11_on.svg) no-repeat 174px 25px;
+    background-size: 6px 11px;
+    font-size: 12px;
+    color: #333;
+    line-height: 20px;
+}
+
+#snb .link_inquire .emph {
+    display: block;
+    padding-bottom: 1px;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.page_aticle.aticle_type2:after {
+    content: "";
+    display: block;
+    overflow: hidden;
+    width: 100%;
+    clear: both;
+}
+
+.page_aticle.aticle_type2 .page_section {
+    float: right;
+    width: 820px;
+}
+
+.page_aticle .head_aticle {
+    padding: 5px 0 34px;
+}
+
+.page_aticle .head_aticle .tit {
+    height: 36px;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 36px;
+    color: #333;
+    letter-spacing: -.5px;
+}
+
+.page_aticle .head_aticle .tit_sub {
+    padding-left: 11px;
+    font-size: 14px;
+    color: #999;
+    line-height: 20px;
+    letter-spacing: -.3px;
+    vertical-align: 3px;
+}
+
+.page_aticle .layout-pagination {
+    font-size: 0;
+}
+
+.page_aticle .layout-pagination-first-page:first-child {
+    border-left: 1px solid #ddd;
+}
+
+.page_aticle .layout-pagination-button:first-child {
+    border-left: 0;
+}
+
+.page_aticle .layout-pagination a {
+    cursor: pointer;
+}
+
+.page_aticle .layout-pagination a, .page_aticle .layout-pagination strong {
+    font-weight: 700;
+    font-size: 12px;
+}
+
+body #container #main .layout-pagination-button:first-child{
+    border-left: 1px solid #ddd;
+}
+.layout-pagination-prev-page {
+    background-image: url(https://res.kurly.com/pc/etc/old/images/common/icon-pagination-prev.png);
+}
+.layout-pagination-first-page, .layout-pagination-prev-page, .layout-pagination-next-page, .layout-pagination-last-page {
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    text-indent: -9999px;
+}
+
+.layout-pagination-button {
+    display: inline-block;
+    width: 34px;
+    height: 34px;
+    border: 1px solid #ddd;
+    border-left: 0;
+    vertical-align: top;
+}
+
+.layout-pagination {
+    margin: 60px 0 0;
+    text-align: center;
+}
+
+.layout-pagination-first-page {
+    background-image: url(https://res.kurly.com/pc/etc/old/images/common/icon-pagination-first.png);
+}
+
+.layout-pagination-number:hover, .layout-pagination-number.__active {
+    background-color: #f7f7f7;
+    color: #5f0080;
+}
+
+.layout-pagination-number{
+    font-weight: 700;
+    color: #333;
+    line-height: 34px;
+}
+
+body #container #main .layout-pagination .pagediv span strong{
+    border-left: 0px;
+}
+
+.layout-pagination-next-page {
+    background-image: url(https://res.kurly.com/pc/etc/old/images/common/icon-pagination-next.png);
+}
+
+.layout-pagination-last-page {
+    background-image: url(https://res.kurly.com/pc/etc/old/images/common/icon-pagination-last.png);
+}
+
+#drop-section {
+    width: 85px!important;
+    height: 30px!important;
+    font-size: revert!important;
+    font-weight: bold!important;
+    border:2px solid lightgray;
+}
+
+.n1{
+    width: 80px; 
+    font-weight: 900;
+}
+.n2{
+    width:300px;
+    position:relative; 
+    left:10px; 
+    font-weight: 900;
+}
+.n3{
+    width:900px;
+    position:relative;
+    left:50px; 
+    font-weight: 900;
+}
+
+.n4{
+    width:400px; 
+    position:relative;
+    left:85px; 
+    font-weight: 900;
+}
+
+.n5{
+    
+    width:500px;
+    position:relative; 
+    left:30px; 
+    font-weight: 900;
+}
+
+.s1{
+     width:40px;  
+     font-weight: 500;
+}
+
+.s2{
+     width:190px;
+     font-weight: 500;
+}
+
+.s3{
+    width:350px;
+    font-weight: 500;
+}
+
+.s4{
+    width:100px;
+    position:relative; 
+    left:-75px; 
+    color:#cb2b2b; 
+    font-weight: 500;
+}
+
+.s5{
+    width:120px;
+    font-weight: 500;
+}
+.s6{
+    width:120px; 
+    font-weight: 500;
+}
+ 
+#md{
+    border-radius:8px; 
+    border:none; 
+    width:90px;
+    height:40px; 
+    float: right; 
+    background-color:gray; 
+    color:white; 
+    font-size:medium; 
+    font-weight:500;
+}
+.b1{
+     width:40px;  
+     font-weight: 500;
+}
+
+.b2{
+    width:190px; 
+    font-weight: 500;
+}
+
+.b3{
+    width:370px;
+    font-weight: 500;
+}
+
+.b4{
+    width:100px;
+    position:relative; 
+    left:-60px; 
+    color:#cb2b2b; 
+    font-weight: 500;
+}
+.b5{
+    width:130px;
+    font-weight: 500;
+}
+
+.d1{
+    margin: 30px 140px;
+}
+
+.d2{
+    font-size: medium;
+     font-weight: 500;
+}
+
+.d3{
+    border-top: 1.5px solid lightgray;
+}
+
+.d4{
+    color: red; 
+    font-size: large; 
+    font-weight: 600; 
+    position:relative; 
+    left: 110px;
+}
+
+.d5{
+    font-size: medium; 
+    font-weight: 500; 
+    position:relative;
+    left:120px;
+}
+
+.d6{
+     font-size: medium; 
+     font-weight: 500; 
+     position:relative;
+     left:135px;
+}
+#bs1{
+     border-spacing: 20px; 
+     border-top: 1.2px solid lightgray; 
+     font-size: medium;
+    border-bottom: 1.5px solid lightgray;
+}
+
+#sd1{
+     border-spacing: 20px; 
+     border-top: 1px solid lightgray; 
+     font-size: medium; 
+     border-bottom: 1px solid lightgray;
+}
+
+#nb1{
+     border-top: 5px solid lightgray;
+     font-size: large; 
+     font-weight: 900; 
+     border-radius: 5px; 
+     border-spacing: 20px; 
+     border-collapse: separate; 
+}
+
+#one-section{
+    margin-top: 50px;
+}
