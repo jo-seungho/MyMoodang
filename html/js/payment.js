@@ -1,18 +1,18 @@
 // 배송지추가에 쓰일 api : problem 
-window.addEventListener('DOMContentLoaded',function(){
+window.addEventListener('DOMContentLoaded', function () {
 
     const juso = document.querySelector('#juso');
     const user_address = document.querySelector('#addrMain');
-    const user_detail_address = document.querySelector('#addrSub'); 
+    const user_detail_address = document.querySelector('#addrSub');
     const juso_search = document.querySelector('.feild');
 
-    // juso.addEventListener('click', addr_search);  
+    // juso.addEventListener('click', addr_search);
     // 검색 클릭 하면 함수 실행
 
-    
-    function addr_search(){   //주소 검색 카카오 api 
+
+    function addr_search() {   //주소 검색 카카오 api 
         new daum.Postcode({
-            oncomplete: function(data) {
+            oncomplete: function (data) {
                 // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
 
                 // 각 주소의 노출 규칙에 따라 주소를 조합한다.
@@ -28,23 +28,23 @@ window.addEventListener('DOMContentLoaded',function(){
                 }
 
                 // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
-                if(data.userSelectedType === 'R'){
+                if (data.userSelectedType === 'R') {
                     // 법정동명이 있을 경우 추가한다. (법정리는 제외)
                     // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                    if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
                         extraAddr += data.bname;
                     }
                     // 건물명이 있고, 공동주택일 경우 추가한다.
-                    if(data.buildingName !== '' && data.apartment === 'Y'){
+                    if (data.buildingName !== '' && data.apartment === 'Y') {
                         extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
                     }
                     // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-                    if(extraAddr !== ''){
+                    if (extraAddr !== '') {
                         extraAddr = ' (' + extraAddr + ')';
                     }
                     // 조합된 참고항목을 해당 필드에 넣는다.
-                    
-                
+
+
                 } else {
                     document.getElementById("sample6_extraAddress").value = '';
                 }
@@ -62,32 +62,45 @@ window.addEventListener('DOMContentLoaded',function(){
     }
 });
 
-$(function () { 
-    $('.plus').click(function(){ //count up
-        let price = $(this).parents('.price').find('.selling').text().split('\n')[0];
+$(function () {
+    $('.plus').click(function () { //count up
+        // let price = $(this).parents('.price').find('.selling').text().split('\n')[0];
+        let price1 = $(this).parents('.price').find('.selling1').val();
+        console.log(price1, "price1");
         var n = $('.plus').index(this);
         var num = $(".num:eq(" + n + ")").val();
+        console.log(num, "num")
+
+        if (num == 1) {
+            console.log("1")
+            $(this).parents('.price').find('.selling').text(parseInt(price1) + parseInt(price1) + ' 원')
+        }
+        if (num > 1) {
+            console.log("2")
+            $(this).parents('.price').find('.selling').text(parseInt(price1) * (parseInt(num) + 1) + ' 원')
+
+        }
         num = $(".num:eq(" + n + ")").val(num * 1 + 1);
-        console.log($(this).parents('.price').find('.selling').text())
-        console.log(price)
-        $(this).parents('.price').find('.selling').text(parseInt(price) + parseInt(price) + ' 원')
 
     });
     $('.minus').click(function () {  // count down..
-        let price = $(this).parents('.price').find('.selling').text().split('\n')[0];        
+        let price = $(this).parents('.price').find('.selling').text().split('\n')[0];
+        let price1 = $(this).parents('.price').find('.selling1').val();
         var n = $('.minus').index(this);
-        var num = $(".num:eq("+n+")").val();
-        if (num!=1){
-            num = $(".num:eq("+n+")").val(num*1-1); 
-            $(this).parents('.price').find('.selling').text(parseInt(price) -= parseInt(price) + '원')        
+        var num = $(".num:eq(" + n + ")").val();
+        if (num != 1) {
+            console.log(num)
+            $(this).parents('.price').find('.selling').text(parseInt(price) - parseInt(price1) + ' 원')
+            num = $(".num:eq(" + n + ")").val(num * 1 - 1);
         }
+
     });
 });
 
 
 // function check_sel_all(checkbox)  { /*개별 선택에 따른 전체선택상태변경 */
 //     const selectall = document.querySelectorAll('input[name="checkAll"]');
-//     const checkboxes = document.querySelectorAll('input[name="checkOne"]');    
+//     const checkboxes = document.querySelectorAll('input[name="checkOne"]');
 //     var temp = false;
 //     var temp2 = true;
 //     checkboxes.forEach((checkbox) => {
@@ -98,32 +111,32 @@ $(function () {
 //             temp2=false;
 //         }
 //         if (selectall[0].checked && !checkbox.checked){ //전체 선택이 아닐 경우1
-//             selectall[0].checked = false;            
+//             selectall[0].checked = false;
 //             selectall[1].checked = false;
 //         }
 //     });
-    
+
 //     if (temp === false){  //전체 선택이 아닐 경우2
-//         selectall[0].checked = false;            
+//         selectall[0].checked = false;
 //         selectall[1].checked = false;
-//     }  
-    
+//     }
+
 //     else if (temp2 === true){ //전체선택일 경우
-//         selectall[0].checked = true;            
+//         selectall[0].checked = true;
 //         selectall[1].checked = true;
-//     }  
-    
+//     }
+
 // }
 
-function sel_all(selectAll){ /* 전체선택버튼 활성화 */
+function sel_all(selectAll) { /* 전체선택버튼 활성화 */
     const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-    
+
     checkboxes.forEach((checkbox) => {
         checkbox.checked = selectAll.checked
     });
 }
 
-function del_row(ths){
+function del_row(ths) {
     var ths = $(ths);
 
     ths.parents("li").remove();
@@ -131,35 +144,34 @@ function del_row(ths){
 
 
 
-function dropup(){ /* 접기 / 펼치기 */
-    
+function dropup() { /* 접기 / 펼치기 */
 
-    if(document.getElementById('dropup_list').style.display === 'block') {
+
+    if (document.getElementById('dropup_list').style.display === 'block') {
         document.getElementById('dropup_list').style.display = 'none';
         $(".btn_dropup").addClass('off');
         return;
-      } 
-    
-    
-    else{
+    }
+
+
+    else {
         document.getElementById('dropup_list').style.display = 'block';
         $(".btn_dropup").removeClass('off');
 
 
-    }  
+    }
 }
 
 
-$(document).ready(function(){ /* 체크박스 선택후 삭제하기 */
-    $('.btn_delete').click(function(){
- 
-      // 현재 체크된 체크박스의 li 정보 얻기
-      $("input:checkbox[name=checkOne]").each(function() {
-          if (this.checked)
-          {
+$(document).ready(function () { /* 체크박스 선택후 삭제하기 */
+    $('.btn_delete').click(function () {
+
+        // 현재 체크된 체크박스의 li 정보 얻기
+        $("input:checkbox[name=checkOne]").each(function () {
+            if (this.checked) {
                 var ths = $(this);
                 ths.parents("li").remove();
-          }
-      }); 
+            }
+        });
     });
 });
