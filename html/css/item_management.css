@@ -1,0 +1,100 @@
+.item_state .state dl {
+    position: relative;
+    display: inline-block;
+    padding: 15px;
+    top : 10px    
+}
+
+.item_state .state dl dt,
+.item_state .state dl dd {
+    display: inline-block;
+    font-size: 100%;
+    
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+
+
+ul, li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+
+.item_manage_list th,
+.item_manage_list td {
+    border : 1px solid lightgray;
+    padding : 15px;
+}
+
+.item_manage_list {
+    width: 100%;
+}
+.item_manage_list tbody tr td:nth-child(1) {
+    width: 05%;
+}
+
+.item_manage_list tbody tr td:nth-child(2) {
+    width: 09%;
+}
+
+.item_manage_list tbody tr td:nth-child(3) {
+    width: 10%;
+}
+
+.item_manage_list tbody tr td:nth-child(4) {
+    width: 50%;
+}
+
+.item_manage_list tbody tr td:nth-child(5) {
+    width: 08%;
+}
+
+.item_manage_list tbody tr td:nth-child(6) {
+    width: 10%;
+}
+
+
+
+
+.item_manage_list thead th {
+    text-align: center;
+    background-color: lightcyan
+}
+
+.item_manage_list tbody tr {
+    text-align: center;
+}
+
+
+
+.item_list_manage {
+    position: relative;
+    top: 20px;
+    left: 14px;
+
+    
+}
+
+.state>dl>dt,
+.state>dl>dd {
+    position: relative;
+    display: inline-block;
+    top : 60px    
+}
+
+
+  
+    
+
+
+
+

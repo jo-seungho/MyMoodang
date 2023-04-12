@@ -18,7 +18,22 @@
     <!-- 커스텀 js css -->
     <script src="../resources/js/admin.js"></script>
     <link href="../resources/css/styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/html/css/item_management.css">
+    <link rel="stylesheet" href="/html/css/item_manage_insert.css">
   </head>
+
+  <style>
+    #btn {
+      background-color: #fe7477;
+      color: white;
+      border: 1px solid white;
+      float: right;
+      margin-left: 10px;
+      margin-bottom: 10px;
+    }
+
+    /* 고유한 */
+  </style>
 
   <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -62,7 +77,7 @@
                 <div class="sb-nav-link-icon"><i class="fas fa-home"></i></div>
                 메인 / 통계
               </a>
-              <a class="nav-link" href="/html/admin/item_management.html">
+              <a class="nav-link" href="item.html">
                 <div class="sb-nav-link-icon"><i class="fa fa-fw fa-gift"></i></div>
                 상품 관리
               </a>
@@ -91,8 +106,74 @@
           <!-- <div class="sb-sidenav-footer"></div> sidenav의 footer-->
         </nav>
       </div>
+
+      <div id="layoutSidenav_content">
+        <main>
+          <div class="container px-6 white">
+            <div class="item_state" align="left">
+              <div class="state" align="left">
+                <li class="item_manage_insert"><h2>상품 등록</h2></li>
+              </div>
+            </div>
+
+
+
+            <hr>
+            <!-- 
+            <div style="height: 60px"><button type="button" id="btn" class="btn">글쓰기</button></div> -->
+            
+            <div class="form-group row">
+              <label class="col-sm-2">* 상품명</label>
+              <div class="com-sm-3">
+                <input type="text" id="name" name="name" class="form-control">
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-sm-2">* 수량(재고)</label>
+              <div class="com-sm-3">
+                <input type="text" id="unitsInStock" name="unitsInStock" class="form-control">
+              </div>
+            </div>
+            
+            <div class="form-group row">
+              <label class="col-sm-2">* 판매가격</label>
+              <div class="com-sm-3">
+                <input type="text" id="unitPrice" name="unitPrice" class="form-control">
+              </div>
+            </div>
+            
+            <div class="form-group row">
+              <label class="col-sm-2">* 상품 이미지</label>
+              <div>
+                <input type="file" name="productImage" class="form-control">
+              </div>
+            </div>
+              
+            <div class="form-group row">
+              <div class="col-sm-offset-2 col-sm-10">
+                <input type="button" class="btn btn-primary" value="등록" onclick="CheckAddProduct()" style="margin-top: 40px;" >
+              </div>
+            </div>
+
+
+          </div>
+          <br />
+        </main>
+      </div>
     </div>
-    <!-- <script src="assets/demo/chart-area-demo.js"></script>
-    <script src="assets/demo/chart-bar-demo.js"></script> -->
+
+    //td 클릭시 notice_detail.html로 이동
+    <script>
+      $(document).ready(function () {
+        $('tbody tr').click(function () {
+          location.href = '';
+        });
+      });
+    </script>
+    <!-- <script src="assets/demo/chart-area-demo.js">
+    </script>
+    <script src="assets/demo/chart-bar-demo.js"></script>
+    -->
   </body>
 </html>
