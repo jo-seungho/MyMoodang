@@ -7,7 +7,7 @@ $(document).ready(function(){
     text_pw.blur(function(){              //포커스에서 벗어나면
         
         pw_check();              //pw_check() 함수 실행    
-    });
+    });  
 
 
      //비밀번호확인 조건 만족 불만족 확인하기

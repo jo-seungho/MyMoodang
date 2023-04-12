@@ -107,6 +107,7 @@
 .page_aticle.aticle_type2 .page_section {
     float: right;
     width: 820px;
+    height: 500px;
 }
 
 .page_aticle .head_aticle {
@@ -221,7 +222,7 @@ body #container #main .layout-pagination .pagediv span strong{
     border: 1px solid rgb(254,116,119);
     border-radius: 3px;
     left: 504px;
-    width: 100%;
+    width: 70%;
     height: 44px;
     font-size:14px;
 }
@@ -236,8 +237,13 @@ body #container #main .layout-pagination .pagediv span strong{
 .form-control {
     height: 40px;
     width: 200px;
+    padding: auto;
 }
 
 .pwd_check_input>table tr {
-    height: 50px;
+    height: 60px;
+}
+
+.pwd_check_input>table th {
+    width: 100px;
 }
