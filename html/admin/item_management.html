@@ -18,7 +18,7 @@
     <!-- 커스텀 js css -->
     <script src="../resources/js/admin.js"></script>
     <link href="../resources/css/styles.css" rel="stylesheet" />
-    <link rel="stylesheet" href="/html/css/item_management.css">
+    <link rel="stylesheet" href="../css/item_management.css" />
   </head>
 
   <style>
@@ -35,6 +35,33 @@
   </style>
 
   <body class="sb-nav-fixed">
+    <script>
+      $(document).ready(function () {
+        // Apply underline effect when page loads for the first time
+        $('#btn1').addClass('underline');
+
+        // Apply underline effect when clicking btn1, and remove underline effect for btn2 and btn3
+        $('#btn1').click(function () {
+          $('#btn1').addClass('underline');
+          $('#btn2').removeClass('underline');
+          $('#btn3').removeClass('underline');
+        });
+
+        // Apply underline effect when clicking btn2, and remove underline effect for btn1 and btn3
+        $('#btn2').click(function () {
+          $('#btn2').addClass('underline');
+          $('#btn1').removeClass('underline');
+          $('#btn3').removeClass('underline');
+        });
+
+        // Apply underline effect when clicking btn3, and remove underline effect for btn1 and btn2
+        $('#btn3').click(function () {
+          $('#btn3').addClass('underline');
+          $('#btn1').removeClass('underline');
+          $('#btn2').removeClass('underline');
+        });
+      });
+    </script>
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
       <!-- Navbar Brand-->
       <a class="navbar-brand ps-3" href="index.html">
@@ -106,41 +133,30 @@
         </nav>
       </div>
 
-
       <div id="layoutSidenav_content">
         <main>
           <div class="container px-6 white">
             <div class="item_state" align="left">
               <li class="item_list_manage"><h2>상품 리스트 관리</h2></li>
-
-              <div class="state" align="left">
-                <dl>
-                  <dt class="item_state_all">전체 &nbsp;</dt>
-                  <dd>19</dd>
-                </dl>
-                <dl>
-                  <dt class="item_state_sale">판매중 &nbsp;</dt>
-                  <dd>17</dd>
-                </dl>
-                <dl>
-                  <dt class="item_state_soldout">품절 &nbsp;</dt>
-                  <dd>2</dd>
-                </dl>
+            </div>
+            <hr />
+            <div class="row">
+              <div class="col btn-hover">
+                <button class="btn" id="btn1">전체 <span class="list-btn">17</span></button>
+                <button class="btn" id="btn2">판매 <span class="list-btn">15</span></button>
+                <button class="btn" id="btn3">품절 <span class="list-btn">2</span></button>
               </div>
             </div>
-              <a class="item_registration" href="/html/admin/item_manage_insert.html">
-              <div style="height: 40px"><button type="button" id="btn" class="btn">글쓰기</button></div>
-              </a>
-            <hr>
 
             <div>
-              <button type="button" id="btn" class="btn">상품추가</button>
-              <button type="button" id="btn" class="btn" style="width: 07%;">검색</button>
+              <a class="item_registration" href="/html/admin/item_manage_insert.html">
+                <button type="button" id="btn" class="btn">상품추가</button>
+              </a>
               <form role="search">
-                <input type="search" class="form-control" placeholder="상품명 검색" aria-label="Search" style="width: 84%; float: left;" />
+                <button type="submit" id="btn" class="btn">검색하기</button>
+                <input type="search" class="form-control" placeholder="" aria-label="Search" style="width: 30%; float: right" />
               </form>
             </div>
-
 
             <table class="item_manage_list">
               <thead>
@@ -149,7 +165,7 @@
                   <th>등록일</th>
                   <th>이미지</th>
                   <th>상품명</th>
-                  <th>수량(재고)</th>
+                  <th>재고</th>
                   <th>판매가격</th>
                   <th>상태</th>
                 </tr>
@@ -158,13 +174,13 @@
                 <tr>
                   <td>10</td>
                   <td>2023-04-10 12:25:40</td>
-                  <td></td>
-                  <td></td>
+                  <td><img src="../resources/img/logo.png" style="width: 40px" /></td>
+                  <td>무당이 텀블러</td>
                   <td>100</td>
-                  <td></td>
-                  <td></td>
+                  <td>100,000원</td>
+                  <td>판매중</td>
                 </tr>
-                <tr>
+
                 <tr>
                   <td>9</td>
                   <td>2023-04-10 12:25:40</td>
@@ -175,7 +191,6 @@
                   <td></td>
                 </tr>
                 <tr>
-                <tr>
                   <td>8</td>
                   <td>2023-04-10 12:25:40</td>
                   <td></td>
@@ -184,7 +199,6 @@
                   <td></td>
                   <td></td>
                 </tr>
-                <tr>
                 <tr>
                   <td>7</td>
                   <td>2023-04-10 12:25:40</td>
@@ -195,7 +209,6 @@
                   <td></td>
                 </tr>
                 <tr>
-                <tr>
                   <td>6</td>
                   <td>2023-04-10 12:25:40</td>
                   <td></td>
@@ -204,7 +217,6 @@
                   <td></td>
                   <td></td>
                 </tr>
-                <tr>
                 <tr>
                   <td>5</td>
                   <td>2023-04-10 12:25:40</td>
@@ -215,7 +227,6 @@
                   <td></td>
                 </tr>
                 <tr>
-                <tr>
                   <td>4</td>
                   <td>2023-04-10 12:25:40</td>
                   <td></td>
@@ -224,7 +235,6 @@
                   <td></td>
                   <td></td>
                 </tr>
-                <tr>
                 <tr>
                   <td>3</td>
                   <td>2023-04-10 12:25:40</td>
@@ -255,7 +265,7 @@
               </tbody>
             </table>
 
-            <div class="pagination" style="margin-top: 50px;">
+            <div class="pagination" style="margin-top: 50px">
               <a href="#">&lt;</a>
               <a href="#">1</a>
               <a class="active" href="#">2</a>
@@ -264,8 +274,9 @@
               <a href="#">5</a>
               <a href="#">&gt;</a>
             </div>
+
+            <br /><br />
           </div>
-          <br />
         </main>
       </div>
     </div>

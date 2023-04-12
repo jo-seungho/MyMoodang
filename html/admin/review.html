@@ -29,6 +29,9 @@
       margin-left: 10px;
       margin-bottom: 10px;
     }
+    .checked {
+      color: orange;
+    }
   </style>
 
   <body class="sb-nav-fixed">
@@ -108,7 +111,7 @@
           <div class="container px-6 white">
             <h1 class="mt-4">2023-04-09(일)</h1>
             <ol class="breadcrumb mb-4">
-              <li class="breadcrumb-item active"><h5>1대1 문의 관리</h5></li>
+              <li class="breadcrumb-item active"><h5>상품 리뷰 관리</h5></li>
             </ol>
             <hr />
             <!-- 
@@ -124,20 +127,40 @@
             <table class="table table-hover center">
               <thead>
                 <tr>
-                  <th>문의번호</th>
-                  <th>문의유형</th>
+                  <th colspan="0.1">주문번호</th>
+                  <th>별점</th>
+                  <th>리뷰제목</th>
                   <th>회원아이디</th>
-                  <th>문의제목</th>
-                  <th>문의날짜</th>
+                  <th>작성날짜</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td>1</td>
-                  <td>상품문의</td>
+                  <td>202302340054</td>
+                  <td>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                  </td>
+                  <td>최고에요</td>
                   <td>hyuna95</td>
-                  <td>언제 입고되나요?</td>
                   <td>2023-03-24 06:18:21</td>
+                </tr>
+
+                <tr>
+                  <td>202302340053</td>
+                  <td>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                  </td>
+                  <td>님들 여기서 먹지마셈</td>
+                  <td>user01</td>
+                  <td>2023-03-23 06:18:22</td>
                 </tr>
               </tbody>
             </table>
