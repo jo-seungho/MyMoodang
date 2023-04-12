@@ -238,14 +238,14 @@ label.label_block {
 }
 
 .btn.default {
-    border: 1px solid #5f0080;
+    border: 1px solid rgb(254, 116, 119);
     background-color: #fff;
-    color: #5f0080
+    color: rgb(254, 116, 119);
 }
 
 .btn.active {
-    border: 1px solid #5f0081;
-    background-color: #5f0080;
+    border: 1px solid rgb(254, 116, 119);
+    background-color: rgb(254, 116, 119);
     color: #fff
 }
 
@@ -1766,7 +1766,6 @@ label.label_block {
 }
 
 .orderInfo {
-    border-top: 5px solid black;
     padding-top: 30px;
     margin-bottom: 30px;
 }
