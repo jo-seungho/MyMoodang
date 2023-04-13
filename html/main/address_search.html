@@ -34,9 +34,18 @@
                         </div>
                         <input type="text" id="addrSub" name="user_detail_address" placeholder="나머지 주소를 입력해주세요">
                     </div>
-                    <label class="label_default"><br>
+
+                    <!-- <label class="label_default"><br>
                         <input type="checkbox" id="isDefault" name="isDefault">
-                        <span class="ico"></span>기본 배송지로 저장</label>
+                        <span class="ico"></span>기본 배송지로 저장</label> -->
+
+                    <label class="label_default">
+                        <input type="checkbox" id="isDefault" name="Default_address" value="1">
+                        <span class="ico"></span>
+                        기본 배송지로 저장
+                    </label>
+                        
+                        
                         <!-- db에 반영해야할 요소로 보임.(기본배송지)-->
                         <button type="submit" class="btn active">저장</button>
                         <!-- 저장시 db에 반영됨. 기본배송지 체크 시 반영해야함.-->
