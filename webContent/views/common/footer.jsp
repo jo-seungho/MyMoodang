@@ -1,3 +1,8 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+	String paths = request.getContextPath();
+%> 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,11 +10,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- footer css -->
-  <link rel="stylesheet" href="/webContent/resources/css/reset.css">
-  <link rel="stylesheet" href="/webContent/resources/css/footer.css">
-
-  <link rel="stylesheet" href="/common/css/footer.css">
-  <link rel="stylesheet" href="/common/css/reset.css">
+  <link rel="stylesheet" href="<%= paths %>/resources/css/reset.css">
+  <link rel="stylesheet" href="<%= paths %>/resources/css/footer.css">
 
   <!-- CDN -->
   <script src="http://code.jquery.com/jquery-latest.min.js"></script>
