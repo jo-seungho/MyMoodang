@@ -7,6 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>테스트 마이무당 입니당</h1>
+
+	 <%@ include file="views/common/header.jsp" %>
+	 <%@ include file="views/common/footer.jsp" %>
+
 </body>
 </html>

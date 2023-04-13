@@ -1,0 +1,80 @@
+.form-control_noImg1{
+    inline-size: 100%;
+
+}
+
+
+.form-control_noImg2{
+    inline-size: 100%;
+
+}
+
+
+.form-group.row {
+    margin-bottom: 10px;
+  }
+  
+  .col-sm-2, .col-sm-3, .col-sm-10 {
+    padding: 0 10px;
+    margin-right: 10px;
+  }
+  
+  .col-sm-offset-2 {
+    margin-left: 15%;
+  }
+  
+  .col-sm-10 {
+    width: 75%;
+  }
+
+  .col-count-2 {
+    inline-size: 150px;
+    text-align: right;
+  }
+
+  .col-count {
+    inline-size: 150px;
+  }
+
+  .col-price {
+    inline-size: 166px;
+  }
+
+  .col-price-2 {
+    inline-size: 150px;
+    text-align: right;
+  }
+
+  .btn btn-primary {
+    inline-size: 100px;
+  }
+
+  .text-center {
+    text-align: center;
+  }
+
+  .insert-area {
+    text-align: center;
+    margin-top: 50px;
+
+
+
+  }
+  
+  .form-group.row {
+    text-align: left;
+    margin-left: 40px;
+    padding: 10px;
+    font-size: 20px;
+    
+  }
+
+  .state {
+    padding-top: 20px;
+    padding-left: 20px;
+  }
+
+  .insert-form {
+    text-align: center;
+    margin-top: 50px;
+  }
