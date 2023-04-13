@@ -209,7 +209,7 @@
     letter-spacing: -.5px;
 }
 
-.rev-title, .rev-content, .rev-image {
+.rev-title, .rev-content, .rev-image, #insert-sp {
     border-bottom: 1px solid lightblue;
     width: 100px;
     box-sizing: border-box;
@@ -292,4 +292,16 @@
     font-weight: bold;
     color : white;
     background-color:rgb(254, 116, 119);
+}
+#insert-spTd {
+    width : 700px;
+    border: 1px solid black;   border: 1px solid black;
+    width: 700px;
+    box-sizing: border-box;
+    height: 100px;
+}
+#input-starPoint {
+    width: 100px;
+    margin-left: 10px;
+    margin-right: 200px;
 }

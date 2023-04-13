@@ -1,0 +1,97 @@
+*{
+    margin: 0px;
+    padding : 0;
+}
+
+table {
+    border-collapse: collapse;
+}
+#myRev-div {
+    width: 700px;
+}
+caption {
+    display: none;
+}
+
+a {
+    text-decoration: none;
+    color : inherit;
+}
+
+.board_list_head{
+    border-top: 4px solid lightgray;
+    border-bottom: 1px solid lightgray;
+}
+
+.board_list_body .item{
+    border-bottom : 1px solid lightgray;
+}
+
+.board_list_head,
+.board_list_body .item {
+    font-size: 0;
+}
+.board_list_head>div{
+    display: inline-block;
+    font-size : 20px;
+    text-align: center;
+
+}
+.board_list_head,
+.board_list_body .item{
+    padding: 20px 0;
+}
+.board_list_body .item>div {
+    display: inline-block;
+    font-size : 15px;
+}
+.board_list_body .item{
+    text-align: center;
+}
+.board_list_head, .board_list_body {
+    width: 700px;
+    max-height: 600px;
+}
+
+.product_img {
+    width :20%;
+}
+
+.productSp {
+    width :15%;
+}
+
+.order_num {
+    width :20%;
+}
+
+.review-Date {
+    width :15%;
+}
+
+.review_title {
+    width :30%;
+}
+
+.board_list_body .productSp{
+    text-align: center;
+}
+
+
+
+.board_list_body div.productSp a:hover {
+    background: lightcyan  no-repeat 174px 52%;
+    background-size: 6px 11px;
+    font-weight: 700px;
+    color: #5f0080;
+    cursor: pointer;
+}
+.myRev-deContent {
+    border : 1px solid lightgray;
+    width: 700px;
+    display: inline-block;
+    max-height: 1000px;
+ 
+    box-sizing : border-box;
+
+}
