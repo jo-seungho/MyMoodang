@@ -1,0 +1,88 @@
+/* 2023-04-12 22:36 최명진 수정 사항 */
+/* 관리자 상품 관리 리스트 */
+/* 언더라인 클래스 */
+
+.underline {
+  color: rgb(52, 152, 219);
+  text-decoration: underline;
+}
+/* list-btn 클래스 컬러 지정 */
+.list-btn {
+  color: rgb(52, 152, 219);
+}
+
+/* 버튼에 마우스 가져갈 시 color 효과 */
+.btn-hover:hover {
+  color: rgb(52, 152, 219);
+}
+
+.btn * {
+  margin: 0;
+  padding: 0;
+}
+
+ul,
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.item_manage_list th,
+.item_manage_list td {
+  border: 1px solid lightgray;
+  padding: 10px;
+}
+
+.item_manage_list {
+  width: 100%;
+}
+.item_manage_list tbody tr td:nth-child(1) {
+  width: 02%;
+}
+
+.item_manage_list tbody tr td:nth-child(2) {
+  width: 17%;
+}
+
+.item_manage_list tbody tr td:nth-child(3) {
+  width: 10%;
+}
+
+.item_manage_list tbody tr td:nth-child(4) {
+  width: 30%;
+}
+
+.item_manage_list tbody tr td:nth-child(5) {
+  width: 5%;
+}
+
+.item_manage_list tbody tr td:nth-child(6) {
+  width: 10%;
+}
+.item_manage_list tbody tr td:nth-child(7) {
+  width: 7%;
+}
+
+.item_manage_list thead th {
+  text-align: center;
+  background-color: lightcyan;
+}
+
+.item_manage_list tbody tr {
+  text-align: center;
+}
+
+.item_manage_list tbody tr:hover {
+  background-color: whitesmoke;
+}
+
+.state > dl > dt,
+.state > dl > dd {
+  position: relative;
+  display: inline-block;
+  top: 60px;
+}
