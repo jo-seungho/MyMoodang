@@ -1,7 +1,7 @@
 package com.kh.member.model.vo;
 
 public class Member {
-
+// 2023-04-13 김서영
 	private int memberNo;
 	private String memberId;
 	private String password;
