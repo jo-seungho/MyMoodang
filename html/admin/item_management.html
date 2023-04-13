@@ -35,33 +35,6 @@
   </style>
 
   <body class="sb-nav-fixed">
-    <script>
-      $(document).ready(function () {
-        // Apply underline effect when page loads for the first time
-        $('#btn1').addClass('underline');
-
-        // Apply underline effect when clicking btn1, and remove underline effect for btn2 and btn3
-        $('#btn1').click(function () {
-          $('#btn1').addClass('underline');
-          $('#btn2').removeClass('underline');
-          $('#btn3').removeClass('underline');
-        });
-
-        // Apply underline effect when clicking btn2, and remove underline effect for btn1 and btn3
-        $('#btn2').click(function () {
-          $('#btn2').addClass('underline');
-          $('#btn1').removeClass('underline');
-          $('#btn3').removeClass('underline');
-        });
-
-        // Apply underline effect when clicking btn3, and remove underline effect for btn1 and btn2
-        $('#btn3').click(function () {
-          $('#btn3').addClass('underline');
-          $('#btn1').removeClass('underline');
-          $('#btn2').removeClass('underline');
-        });
-      });
-    </script>
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
       <!-- Navbar Brand-->
       <a class="navbar-brand ps-3" href="index.html">
@@ -281,11 +254,37 @@
       </div>
     </div>
 
-    //td 클릭시 notice_detail.html로 이동
+    <!-- 나중에 JSP에서 js파일로 뺄거니 건들지 말것 -->
     <script>
       $(document).ready(function () {
         $('tbody tr').click(function () {
           location.href = '';
+        });
+      });
+
+      $(document).ready(function () {
+        // Apply underline effect when page loads for the first time
+        $('#btn1').addClass('underline');
+
+        // Apply underline effect when clicking btn1, and remove underline effect for btn2 and btn3
+        $('#btn1').click(function () {
+          $('#btn1').addClass('underline');
+          $('#btn2').removeClass('underline');
+          $('#btn3').removeClass('underline');
+        });
+
+        // Apply underline effect when clicking btn2, and remove underline effect for btn1 and btn3
+        $('#btn2').click(function () {
+          $('#btn2').addClass('underline');
+          $('#btn1').removeClass('underline');
+          $('#btn3').removeClass('underline');
+        });
+
+        // Apply underline effect when clicking btn3, and remove underline effect for btn1 and btn2
+        $('#btn3').click(function () {
+          $('#btn3').addClass('underline');
+          $('#btn1').removeClass('underline');
+          $('#btn2').removeClass('underline');
         });
       });
     </script>

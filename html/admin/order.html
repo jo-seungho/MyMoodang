@@ -29,6 +29,20 @@
       margin-left: 10px;
       margin-bottom: 10px;
     }
+
+    .underline {
+      color: rgb(52, 152, 219);
+      text-decoration: underline;
+    }
+    /* list-btn 클래스 컬러 지정 */
+    .list-btn {
+      color: rgb(52, 152, 219);
+    }
+
+    /* 버튼에 마우스 가져갈 시 color 효과 */
+    .btn-hover:hover {
+      color: rgb(52, 152, 219);
+    }
   </style>
 
   <body class="sb-nav-fixed">
@@ -106,11 +120,15 @@
       <div id="layoutSidenav_content">
         <main>
           <div class="container px-6 white">
-            <h1 class="mt-4">2023-04-09(일)</h1>
-            <ol class="breadcrumb mb-4">
-              <li class="breadcrumb-item active"><h5>주문 관리</h5></li>
-            </ol>
+            <h2>회원 주문 관리</h2>
             <hr />
+            <div class="row">
+              <div class="col btn-hover">
+                <button class="btn" id="btn1">전체 <span class="list-btn">17</span></button>
+                <button class="btn" id="btn2">판매 <span class="list-btn">15</span></button>
+                <button class="btn" id="btn3">품절 <span class="list-btn">2</span></button>
+              </div>
+            </div>
             <!-- 
             <div style="height: 60px"><button type="button" id="btn" class="btn">글쓰기</button></div> -->
 
@@ -124,20 +142,52 @@
             <table class="table table-hover center">
               <thead>
                 <tr>
-                  <th colspan="0.1">주문번호</th>
-                  <th>주문날짜</th>
-                  <th>회원아이디</th>
-                  <th>문의제목</th>
-                  <th>문의날짜</th>
+                  <th>주문번호</th>
+                  <th>주문자 ID</th>
+                  <th>결제금액</th>
+                  <th>주문일자</th>
+                  <th>배송주소</th>
+                  <th>배송상태</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td>202302340054</td>
-                  <td>상품문의</td>
+                  <td>2</td>
                   <td>hyuna95</td>
-                  <td>언제 입고되나요?</td>
+                  <td>35,000원</td>
                   <td>2023-03-24 06:18:21</td>
+                  <td>서울 영등포구 당산로 1길</td>
+                  <th>
+                    <div class="btn-group">
+                      <select class="form-select-sm" aria-label="Default select example">
+                        <option selected>배송대기중</option>
+                        <option value="1">배송중</option>
+                        <option value="2">배송완료</option>
+                      </select>
+                      <button class="btn btn-secondary btn-sm modify">수정</button>
+                    </div>
+                  </th>
+                </tr>
+
+                <tr>
+                  <td>1</td>
+                  <td>user02</td>
+                  <td>42,000원</td>
+                  <td>2023-03-23 06:18:21</td>
+                  <td>서울 영등포구 당산로 2길</td>
+                  <th>
+                    <div class="btn-group">
+                      <select class="form-select-sm" name="status">
+                        <option value="0">배송대기중</option>
+                        <option value="1">배송중</option>
+                        <option value="2">배송완료</option>
+                        <!-- <option value="0" <% if (storedValue.equals("0")) out.print("selected"); %>>배송대기중</option>
+                          <option value="1" <% if (storedValue.equals("1")) out.print("selected"); %>배송중</option>
+                          <option value="2" <% if (storedValue.equals("2")) out.print("selected"); %>배송완료</option> -->
+                      </select>
+                      <button class="btn btn-secondary btn-sm modify">수정</button>
+                    </div>
+                  </th>
                 </tr>
               </tbody>
             </table>
@@ -157,6 +207,44 @@
         </main>
       </div>
     </div>
+
+    <script>
+      //1번 행의 배송상태 수정 버튼 클릭시 이벤트
+      $(document).ready(function () {
+        // Apply underline effect when page loads for the first time
+        $('#btn1').addClass('underline');
+
+        // Apply underline effect when clicking btn1, and remove underline effect for btn2 and btn3
+        $('#btn1').click(function () {
+          $('#btn1').addClass('underline');
+          $('#btn2').removeClass('underline');
+          $('#btn3').removeClass('underline');
+        });
+
+        // Apply underline effect when clicking btn2, and remove underline effect for btn1 and btn3
+        $('#btn2').click(function () {
+          $('#btn2').addClass('underline');
+          $('#btn1').removeClass('underline');
+          $('#btn3').removeClass('underline');
+        });
+
+        // Apply underline effect when clicking btn3, and remove underline effect for btn1 and btn2
+        $('#btn3').click(function () {
+          $('#btn3').addClass('underline');
+          $('#btn1').removeClass('underline');
+          $('#btn2').removeClass('underline');
+        });
+      });
+
+      $('.modify').click(function () {
+        var order_id = $(this).parent().parent().parent().find('td').eq(0).text();
+        alert(order_id + '번 주문의 배송상태가 수정되었습니다.');
+      });
+
+      $('#btn').click(function () {
+        location.href = 'order_write.html';
+      });
+    </script>
 
     <!-- <script src="assets/demo/chart-area-demo.js"></script>
     <script src="assets/demo/chart-bar-demo.js"></script> -->
