@@ -7,13 +7,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>배송지 추가</title>
-    <link rel="stylesheet" href="../css/reset.css">
-    <link rel="stylesheet" href="../css/footer.css">
-    <link rel="stylesheet" href="../css/address_search.css">
+ <!--    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/footer.css"> -->
+    <link rel="stylesheet" href="/resources/css/shop/address_search.css">
 
 
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <script src="../js/deliver.js"></script>
+    <script src="/resources/js/shop/deliver.js"></script>
     <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
    
 </head>
@@ -51,7 +51,7 @@
                         <!-- db에 반영해야할 요소로 보임.(기본배송지)-->
                         <button type="submit" class="btn active">저장</button>
                         <!-- 저장시 db에 반영됨. 기본배송지 체크 시 반영해야함.-->
-                        
+                        <br><br>
                 </div>
             </form>
         </div>
@@ -149,5 +149,7 @@
 
        
     </script>
+    
+    <%@ include file="../common/footer.jsp" %>
 </body>
 </html>
