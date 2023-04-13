@@ -1,10 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%
-	String path = request.getContextPath();
-	pageContext.setAttribute("path", path);
-	System.out.println(path);
-%>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -13,12 +9,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- header css -->
 
-    <link rel="stylesheet" href="<%= path %>/resources/css/reset.css">
-    <link rel="stylesheet" href="<%= path %>/resources/css/header.css">
+    <link rel="stylesheet" href="/resources/css/common/reset.css">
+    <link rel="stylesheet" href="/resources/css/common/header.css">
 
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     
-    <script src="<%= path %>/resources/js/header.js"></script>
+    <script src="/resources/js/common/header.js"></script>
 
     <title>header</title>
   </head>
@@ -30,7 +26,7 @@
       <div class="user_menu">
         <!-- bnr = banner -->
         <a href="#" class="bnr_delivery">
-          <img src="<%= path %>/resources/img/image.gif" alt="서울, 경기, 인천 샛별배송, 수도권 이외 지역 택배배송" class="bnr_delivery_img" />
+          <img src="/resources/img/image.gif" alt="서울, 경기, 인천 샛별배송, 수도권 이외 지역 택배배송" class="bnr_delivery_img" />
         </a>
         <ul class="sign_menu">
           <!--login class 추가-->
@@ -83,7 +79,7 @@
         <h1 class="logo">
           <a href="#" class="link_main">
             <span class="gnb_logo_container"></span>
-            <img src="<%= path %>/resources/img/logo.png" alt="마켓컬리 로고" class="logo_img" />
+            <img src="/resources/img/logo.png" alt="마켓컬리 로고" class="logo_img" />
           </a>
         </h1>
       </div>
