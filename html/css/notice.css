@@ -48,6 +48,8 @@ a {
 }
 
 .notice_num {
+    position:absolute;
+    left: 220px;
     width :10%;
 }
 

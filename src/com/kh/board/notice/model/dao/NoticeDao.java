@@ -28,6 +28,9 @@ public class NoticeDao {
 	}
 
 	
+	// 공지사항 리스트 조회
+	// 2023/04/14
+	// 소현아
 	public ArrayList<Notice> selectNoticeList(Connection conn) {
 
 		// 필요한 변수셋팅해주고
