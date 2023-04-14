@@ -752,6 +752,18 @@
             </form>
         </div>
       </div>
+      <script>
+        $(function() {
+
+            $(".info").click(function() {
+                location.href = "/item.detail";
+            }); 
+        });
+      </script>
+
+
+
+
 	<%@ include file="../common/footer.jsp" %>
   </div>
 </body>

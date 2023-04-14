@@ -67,7 +67,7 @@
             </ul>
           </li>
           <li class="link">
-            <a href="#" class="item service">고객센터</a>
+            <a href="" class="item service">고객센터</a>
             <!-- 고객센터 hover 시 sub_menu 등장 -->
             <ul class="sub_menu">
               <li class="list">

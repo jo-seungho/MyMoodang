@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+
+<properties>
+    <entry key="">
+        UPDATE ITEM
+        SET COUNT = COUNT + 1
+        WHERE ITEM_NO = ?
+    </entry>
+
+    <entry key="">
+        SELECT ITEM_NO
+        ,
+
+    </entry>
+
+
+</properties>
