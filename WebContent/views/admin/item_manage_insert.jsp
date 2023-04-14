@@ -11,11 +11,13 @@
     <title>관리자 페이지</title>
 
     <!-- jquery 및 라이브러리 -->
+    
     <link rel="stylesheet" href="/resources/css/shop/item_management.css">
     <link rel="stylesheet" href="/resources/css/shop/item_manage_insert.css">
     <link rel="stylesheet" href="/resources/css/shop/item_management.css">
     <link rel="stylesheet" href="/resources/css/shop/item_manage_insert.css">
     <link rel="stylesheet" href="/resources/css/shop/item_manage_detail.css">
+
 
   </head>
 

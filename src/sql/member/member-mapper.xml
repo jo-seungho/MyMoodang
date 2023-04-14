@@ -1,20 +1,43 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
-        <entry key="selectMemberList">SELECT * FROM MEMBER
-                                WHERE STATUS = 'Y'
-        </entry>
-
-
-
 
         <entry key="emailCheck">
          <!-- 이메일 중복체크 용 쿼리문 / 2023-04-14 김서영 -->
         	SELECT COUNT(*) AS CNT
-			  FROM MEMBER
-			 WHERE EMAIL = ?
+			    FROM MEMBER
+			    WHERE EMAIL = ?
         </entry>
-
+        <!-- 회원 전체 조회 / 2023-04-14 최명진 -->
+        <entry key="selectMemberList">
+        SELECT MEMBER_NO, MEMBER_ID
+		     , PASSWORD , NAME
+		     , BIRTH_DATE ,GENDER
+		     , EMAIL , PHONE 
+		     , TO_CHAR(ENROLL_DATE, 'YY/MM/DD HH:MI:SS') ENROLL_DATE 
+		     , TO_CHAR(MODIFY_DATE, 'YY/MM/DD HH:MI:SS') MODIFY_DATE
+		     , STATUS
+		     , GRADE_NAME
+		     , TOTAL_MONEY
+		      FROM MEMBER
+		      JOIN MEMBER_GRADE USING (GRADE_NO)          
+        </entry>
+        <!-- 회원 번호에 따른 상세 조회 / 2023-04-14 최명진 -->
+        <entry key="selectMember">
+        SELECT MEMBER_NO, MEMBER_ID
+		     , PASSWORD , NAME
+		     , BIRTH_DATE ,GENDER
+		     , EMAIL , PHONE 
+		     , TO_CHAR(ENROLL_DATE, 'YY/MM/DD HH:MI:SS') ENROLL_DATE 
+		     , TO_CHAR(MODIFY_DATE, 'YY/MM/DD HH:MI:SS') MODIFY_DATE
+		     , STATUS
+		     , GRADE_NAME
+		     , TOTAL_MONEY
+		FROM MEMBER
+		JOIN MEMBER_GRADE USING (GRADE_NO)
+		WHERE MEMBER_NO = ? 
+        </entry>
+        
 </properties>
 
 

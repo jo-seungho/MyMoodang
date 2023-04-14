@@ -116,7 +116,7 @@ a {
 }
 
 
-.btn {
+.btn .btn_close{
     display: inline-block;
     padding: 5px 10px;
     border: 2px solid gray;
