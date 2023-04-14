@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -8,16 +10,6 @@
     <meta name="author" content="" />
     <title>관리자 페이지</title>
 
-    <!-- jquery 및 라이브러리 -->
-    <script src="https://code.jquery.com/jquery-3.6.4.js" crossorigin="anonymous"></script>
-    <link href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" rel="stylesheet" />
-    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
-    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-    <!-- 커스텀 js css -->
-    <script src="/resources/js/common/admin.js"></script>
-    <link href="/resources/css/common/styles.css" rel="stylesheet" />
   </head>
 
   <style>
@@ -26,34 +18,17 @@
       color: white;
       border: 1px solid white;
       float: right;
-      margin-right: 4px;
-    }
-
-    /* 자체적인 css */
-    .row {
-      float: none;
-      margin: 0 auto;
-    }
-
-    /* col과 input text 라인 맞춰주기 */
-    .col {
-      line-height: 35px;
-    }
-
-    .form-control {
-      resize: none;
-    }
-
-    .btns {
-      height: 100%;
-      margin-top: 15px;
+      margin-left: 10px;
+      margin-bottom: 10px;
     }
   </style>
 
   <body class="sb-nav-fixed">
+  
+  	<%@ include file="sidebar.jsp" %>
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
       <!-- Navbar Brand-->
-      <a class="navbar-brand ps-3" href="index.html">
+      <a class="navbar-brand ps-3" href="../main.html">
         <div><i class="fas fa-bug" style="color: red"></i><b>&nbsp; MY MOODANG</b></div>
       </a>
       <!-- Sidebar Toggle-->
@@ -78,7 +53,7 @@
           <div class="sb-sidenav-menu">
             <div class="nav">
               <div class="text-center">
-                <img src="../resources/img/logo.png" class="rounded logo" alt="로고" />
+                <img src="/resources/img/logo.png" class="rounded logo" alt="로고" />
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                   <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">관리자</a>
@@ -123,44 +98,53 @@
       </div>
 
       <div id="layoutSidenav_content">
-        <main style="height: 100%">
+        <main>
           <div class="container px-6 white">
-            <h2>1대1 문의 내용</h2>
+            <h2>1대1 문의 관리</h2>
             <hr />
-            <div class="container">
-              <div class="row center">
-                <div class="col-6 xl-6">제목</div>
-                <div class="col-2 xl-2">문의유형</div>
-                <div class="col-2 xl-2">작성자</div>
-                <div class="col-2 xl-2">작성일</div>
-              </div>
-              <hr />
-              <div class="row center">
-                <div class="col-6 xl-6">1대1 문의에 대한 제목부분입니다.제목을 길게해볼게요</div>
-                <div class="col-2 xl-2">상품문의</div>
-                <div class="col-2 xl-2">healthy</div>
-                <div class="col-2 xl-2">2023-03-24</div>
-              </div>
+            <!-- 
+            <div style="height: 60px"><button type="button" id="btn" class="btn">글쓰기</button></div> -->
+
+            <div>
+              <button type="button" id="btn" class="btn">글쓰기</button>
+              <form role="search">
+                <button type="submit" id="btn" class="btn">검색하기</button>
+                <input type="search" class="form-control" placeholder="" aria-label="Search" style="width: 30%; float: right" />
+              </form>
             </div>
-            <hr />
-            <textarea class="form-control-plaintext col-sm-5" rows="10" readonly>안녕하세요 상품문의 합니다.</textarea>
-            <hr />
+            <table class="table table-hover center">
+              <thead>
+                <tr>
+                  <th>문의번호</th>
+                  <th>문의유형</th>
+                  <th>회원아이디</th>
+                  <th>문의제목</th>
+                  <th>문의날짜</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>상품문의</td>
+                  <td>hyuna95</td>
+                  <td>언제 입고되나요?</td>
+                  <td>2023-03-24 06:18:21</td>
+                </tr>
+              </tbody>
+            </table>
             <br />
-            <h2>1대1 문의 답변</h2>
-            <hr />
-            <form action="" method="POST">
-              <div class="row center">
-                <div class="col-xl-12"><input text class="form-control col-xl-12" value="" placeholder="제목을 입력해주세요" /></div>
-              </div>
-              <hr />
-              <textarea class="form-control col-sm-5" rows="10">안녕하세요 고객님! 마이무당입니다. 상품 설명에서 자세한 정보 확인 부탁드립니다.</textarea>
-              <div class="btns">
-                <button id="btn" class="btn">목록</button>
-                <button id="btn" class="btn" type="submit">글쓰기</button>
-              </div>
-              <br /><br />
-            </form>
+
+            <div class="pagination">
+              <a href="#">&lt;</a>
+              <a href="#">1</a>
+              <a class="active" href="#">2</a>
+              <a href="#">3</a>
+              <a href="#">4</a>
+              <a href="#">5</a>
+              <a href="#">&gt;</a>
+            </div>
           </div>
+          <br />
         </main>
       </div>
     </div>

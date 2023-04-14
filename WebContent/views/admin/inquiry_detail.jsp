@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%> 
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -8,16 +10,6 @@
     <meta name="author" content="" />
     <title>관리자 페이지</title>
 
-    <!-- jquery 및 라이브러리 -->
-    <script src="https://code.jquery.com/jquery-3.6.4.js" crossorigin="anonymous"></script>
-    <link href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" rel="stylesheet" />
-    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
-    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-    <!-- 커스텀 js css -->
-    <script src="/resources/js/common/admin.js"></script>
-    <link href="/resources/css/common/styles.css" rel="stylesheet" />
   </head>
 
   <style>
@@ -51,6 +43,7 @@
   </style>
 
   <body class="sb-nav-fixed">
+  	<%@ include file="sidebar.jsp" %>
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
       <!-- Navbar Brand-->
       <a class="navbar-brand ps-3" href="index.html">
@@ -78,7 +71,7 @@
           <div class="sb-sidenav-menu">
             <div class="nav">
               <div class="text-center">
-                <img src="../resources/img/logo.png" class="rounded logo" alt="로고" />
+                <img src="/resources/img/logo.png" class="rounded logo" alt="로고" />
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                   <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">관리자</a>
