@@ -28,18 +28,58 @@ public class MemberDao {
 
 	}
 
-  	 * 어드민 회원관리 페이지에서 회원 리스트 불러오는 메소드
-	 * 2023-04-14 최명진
-	 * @param selectMemberList
+	/**
+	 * 이메일 중복 체크 메소드 2023/04/14 김서영
+	 * 
+	 * @param conn
+	 * @param checkEmail
 	 * @return
 	 */
-	public ArrayList<Member> selectMemberList(Connection conn) {
+	public int emailCheck(Connection conn, String checkEmail) {
+
+		int count = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		String sql = prop.getProperty("emailCheck");
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, checkEmail);
+
+			rset = pstmt.executeQuery();
+
+			if (rset.next()) {
+				count = rset.getInt("CNT");
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+
+		return count;
+
+	}
+
+//    ---------------------------------- 어드민 부분 -------------------------
+	/*
+	 * 어드민 회원관리 페이지에서 회원 리스트 불러오는 메소드 2023-04-14 최명진
+	 * 
+	 * @param selectMemberList
+	 * 
+	 * @return
+	 */
+	public ArrayList<Member> selectMemberListAd(Connection conn) {
 
 		ArrayList<Member> list = new ArrayList<Member>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
-		String sql = prop.getProperty("selectMemberList");
+		String sql = prop.getProperty("selectMemberListAd");
 
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -78,55 +118,20 @@ public class MemberDao {
 		return list;
 	}
 
-	/**
-	 * 이메일 중복 체크 메소드
-	 * 2023/04/14 김서영
-	 * @param conn
-	 * @param checkEmail
-	 * @return
-	 */
-	public int emailCheck(Connection conn, String checkEmail) {
-
-		int count = 0;
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-
-		String sql = prop.getProperty("emailCheck");
-
-		try {
-			pstmt = conn.prepareStatement(sql);
-
-			pstmt.setString(1, checkEmail);
-
-			rset = pstmt.executeQuery();
-
-			if(rset.next()) {
-				count = rset.getInt("CNT");
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			JDBCTemplate.close(rset);
-			JDBCTemplate.close(pstmt);
-		}
-
-		return count;
-
-}
-
-  	 * 어드민 회원관리 페이지에서 회원 상세 정보 불러오는 메소드
-	 * 2023-04-14 최명진
+	/*
+	 * 어드민 회원관리 페이지에서 회원 상세 정보 불러오는 메소드 2023-04-14 최명진
+	 * 
 	 * @param selectMemberList
+	 *
 	 * @return
 	 */
-	public Member selectMember(Connection conn, int id) {
-		
+	public Member selectMemberAd(Connection conn, int id) {
+
 		Member m = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
-		String sql = prop.getProperty("selectMember");
+		String sql = prop.getProperty("selectMemberAd");
 
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -163,6 +168,41 @@ public class MemberDao {
 
 		return m;
 
+	}
+
+	/**
+	 * 어드민 상세조회에서 회원 정보 변경하는 메소드 2023-04-14 최명진
+	 * @param m
+	 * @return
+	 */
+	public int updateMemberAd(Connection conn, Member m) {
+		
+		int result = 0;
+
+		PreparedStatement pstmt = null;
+
+		String sql = prop.getProperty("updateMemberAd");
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, m.getGradeNo());
+			pstmt.setString(2, m.getStatus());
+			pstmt.setInt(3, m.getMemberNo());
+
+			result = pstmt.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+		return result;
 	}
 
 }

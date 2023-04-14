@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -10,7 +9,18 @@
     <meta name="author" content="" />
     <title>관리자 페이지</title>
 
+    <!-- jquery 및 라이브러리 -->
+    <script src="https://code.jquery.com/jquery-3.6.4.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
 
+    <!-- 커스텀 js css -->
+
+    <link href="/resources/css/admin/styles.css" rel="stylesheet" />
+    <script src="/resources/js/admin/admin.js"></script>
   </head>
 
   <style>
@@ -27,7 +37,7 @@
   </style>
 
   <body class="sb-nav-fixed">
-  <%@ include file="sidebar.jsp" %>
+    <%@ include file="sidebar.jsp" %>
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
       <!-- Navbar Brand-->
       <a class="navbar-brand ps-3" href="index.html">
@@ -100,112 +110,105 @@
       </div>
 
       <div id="layoutSidenav_content">
-        <main>
+        <main style="height: 100%">
           <div class="container px-6 white">
-            <div class="item_state" align="left">
-              <div class="state">
-                <li class="item_manage_insert"><h2>상품 상세페이지</h2></li>
-              </div>
-            </div>
+            <br />
+            <h2>상품 수정</h2>
+            <hr />
 
-            <form id="item_manage_detail" name="item_manage_detail" enctype="multipart/form-data" method="">
-              <table class="item_manage_detail_table">
-                <tr>
+            <form id="myForm" action="" method="POST">
+              <div class="mx-auto col-10 col-md-8 col-lg-6 center">
+                <div id="img_view">
+                  <label for="titleImg" style="margin-bottom: 10px">* 대표 이미지</label>
+                  <div class="col">
+                    <img id="img1" name="img1" src="/resources/img/noimage.png" class="img-thumbnail" style="width: 500px; height: 300px" />
+                    <input type="file" id="titleImg" name="productImage1" class="form-control" onchange="loadImg(this, 1);" required style="margin-top: 20px; margin-bottom: 20px" />
+                  </div>
 
+                  <div class="col form-floating mb-4">
+                    <input type="text" class="form-control" value="" />
+                    <label for="floatingInput">* 상품명</label>
+                  </div>
+                  <div class="col form-floating mb-3">
+                    <input type="number" class="form-control" />
+                    <label for="floatingPassword">* 수량(재고)</label>
+                  </div>
+                  <div class="col form-floating mb-3">
+                    <input type="number" class="form-control" />
+                    <label for="floatingPassword">* 판매 가격</label>
+                  </div>
 
-                  <div class="insert-area">
-                    <div id="img_view">
-                      <div class="form-group row">
-                        <label class="col-sm-2" style="margin-top: 15px;">* 대표 이미지</label>
-                        <div class="col-sm-10">
-                          <img id="img1" src="/resources/img/noimage.png" class="img-thumbnail" style="width: 500px; height: 300px;">
-                          <input type="file"  id = "titleImg" name="productImage1" class="form-control" onchange="loadImg(this, 1);" required>
-                        </div>
-                      </div>
+                  <div class="col form-floating mb-3">
+                    <textarea class="form-control" style="height: 200px; resize: none; margin-bottom: 15px"></textarea>
+                    <label for="floatingTextarea2">상품 상세설명</label>
 
-                    <div class="form-group row">
-                      <label class="col-sm-2">* 상품명</label>
-                      <div class="col-sm-3">
-                        <input type="text" id="content" name="content" class="form-control_noImg1">
-                      </div>  
-                      <label class="col-count-2">* 수량(재고)</label>
-                      <div class="col-count">
-                        <input type="text" id="unitsInStock" name="unitsInStock" class="form-control_noImg1">
-                      </div>
-                      <label class="col-price-2">* 판매가격</label>
-                      <div class="col-price">
-                        <input type="text" id="unitPrice" name="unitPrice" class="form-control_noImg1">
-                      </div>
+                    <div class="col form-floating mb-3">
+                      <input type="number" class="form-control" value="0" />
+                      <label for="floatingPassword">할인율 (%)</label>
                     </div>
-                    
-                    <div class="form-group row" style="margin-top: 20px;">
-                      <label class="col-sm-2">* 내용</label>
-                      <div class="col-sm-10">
-                        <textarea id="name" rows="10" cols="50" class="form-control_noImg2"></textarea>
-                      </div>
 
+                    <div class="col form-floating mb-3">
+                      <select class="form-select">
+                        <option value="1">제로음료</option>
+                        <option value="2">단백질</option>
+                        <option value="2">무가당</option>
+                      </select>
+                      <label for="floatingSelect">* 카테고리</label>
+                    </div>
 
-                      <div class="form-group row" style="margin: 0 auto; margin-top: 20px;">
-                        <label class="col-sm-2">* 상품 할인율</label>
-                        <div class="col-sm-10 discount">
-                          <input type="number" id="discount"class="form-discount" placeholder="ex)    0.3" value="" style="width: 98px;">
-                        </div>
-                      </div>
-
-                      
-                      
-                      <div class="form-group row" style="margin: 0 auto; margin-top: 20px;">
-                        <label class="col-sm-2">* 상품 상태</label>
-                        <div class="col-sm-10">
-                          <select >
-                            <option value="판매중">판매중</option>
-                            <option value="판매중지">판매중지</option>
-                          </select>
-                        </div>
-                      </div>
-
-                      <div class="form-group row" style="margin: 0 auto;  margin-top: 20px;">
-                        <label class="col-sm-2">* 카테고리</label>
-                        <div class="col-sm-10">
-                          <select>
-                            <option value="판매중">제로음료</option>
-                            <option value="판매중지">단백질</option>
-                            <option value="판매중지">무가당</option>
-                          </select>
-                        </div>
-                      </div>
+                    <!-- 추가 사진 3개 -->
+                  </div>
+                  <br /><br />
                 </div>
               </div>
-
-
-                </tr>
-                <div class="detail-form">
-                  <a href="item.html" class="btn btn-primary"  id="addBtn" style="margin-top: 40px; font-size : larger">수정하기</a>
-                  <a href="item.html" class="btn btn-primary"  id="addBtn" style="margin-top: 40px; font-size : larger">삭제하기</a>
-                  <a href="/html/admin/item_management.html" class="btn btn-primary"  id="listBtn"style="margin-top: 40px; font-size : larger">목록가기</a>
-                </div>
-
-
-              </table>
-
             </form>
-            
-
-            </div>
           </div>
         </main>
+      </div>
+      <!-- layoutSidenav_content -->
+    </div>
+
     <script>
       // class img-thumbnail 에 첨부파일 이미지 띄우기
+      //이미지 파일이 아니면 업로드 안되게 하기
+
       function loadImg(input, num) {
         if (input.files && input.files[0]) {
+          // 파일 유효성 검사: 이미지 파일 체크
+          if (!input.files[0].type.match('image.*')) {
+            alert('이미지 파일만 업로드 가능합니다.');
+            // 파일 선택 초기화
+            input.value = '';
+            // 이미지 초기화
+            $('#img' + num).attr('src', '/resources/img/noimage.png');
+            return;
+          }
+
           var reader = new FileReader();
+
           reader.onload = function (e) {
             $('#img' + num).attr('src', e.target.result);
-          }
+          };
           reader.readAsDataURL(input.files[0]);
+        } else {
+          // 파일 선택 초기화
+          input.value = '';
+          // 이미지 초기화
+          $('#img' + num).attr('src', '/resources/img/noimage.png');
         }
       }
-      
+
+      // #img 클릭하면 파일 업로드 하기
+      $('#img1').click(function () {
+        $('#titleImg').click();
+      });
+
+      //숫자 외에 입력 못하게 하기
+      $("#myForm input[type='number']").on('input', function () {
+        var inputValue = $(this).val();
+        var numericValue = inputValue.replace(/[^0-9]/g, ''); // 숫자 이외의 문자 제거
+        $(this).val(numericValue);
+      });
     </script>
     <!-- <script src="assets/demo/chart-area-demo.js">
     </script>

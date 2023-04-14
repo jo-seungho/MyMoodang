@@ -8,8 +8,18 @@
 			    FROM MEMBER
 			    WHERE EMAIL = ?
         </entry>
+        
+        
+        
+        
+        
+        
+        
+        
+<!--  어드민부분 -->
+
         <!-- 회원 전체 조회 / 2023-04-14 최명진 -->
-        <entry key="selectMemberList">
+        <entry key="selectMemberListAd">
         SELECT MEMBER_NO, MEMBER_ID
 		     , PASSWORD , NAME
 		     , BIRTH_DATE ,GENDER
@@ -23,7 +33,7 @@
 		      JOIN MEMBER_GRADE USING (GRADE_NO)          
         </entry>
         <!-- 회원 번호에 따른 상세 조회 / 2023-04-14 최명진 -->
-        <entry key="selectMember">
+        <entry key="selectMemberAd">
         SELECT MEMBER_NO, MEMBER_ID
 		     , PASSWORD , NAME
 		     , BIRTH_DATE ,GENDER
@@ -37,7 +47,15 @@
 		JOIN MEMBER_GRADE USING (GRADE_NO)
 		WHERE MEMBER_NO = ? 
         </entry>
-        
+
+		<!-- 회원 등급 수정 / 2023-04-14 최명진 -->
+		<entry key="updateMemberAd">
+		UPDATE MEMBER
+		SET GRADE_NO = ?
+		, STATUS = ?
+		WHERE MEMBER_NO = ?
+		</entry>
+			
 </properties>
 
 

@@ -147,7 +147,7 @@
                     <span class="input-group-text" id="spanId">&nbsp;&nbsp;ID&nbsp;&nbsp;</span>
                     <input type="text" class="form-control" id="userId" placeholder="아이디" aria-label="userId" aria-describedby="userId" readonly />
                     <span class="input-group-text" id="spanNo">회원번호</span>
-                    <input type="text" class="form-control" id="userNo" placeholder="회원번호" aria-label="userNo" aria-describedby="userNo" readonly />
+                    <input type="text" class="form-control" id="userNo" placeholder="회원번호" aria-label="userNo" aria-describedby="userNo" name="userNo" readonly />
                   </div>
 
                   <div class="input-group mb-3">

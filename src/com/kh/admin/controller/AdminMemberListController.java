@@ -24,7 +24,7 @@ public class AdminMemberListController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		ArrayList<Member> list = new MemberService().selectMemberList();
+		ArrayList<Member> list = new MemberService().selectMemberListAd();
 
 		request.setAttribute("list", list);
 

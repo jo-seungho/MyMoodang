@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<% String alertMsg = (String)session.getAttribute("alertMsg"); %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -24,15 +25,28 @@
     
     <link href="/resources/css/admin/order.css" rel="stylesheet" />
         <script src="/resources/js/admin/order.js"></script>
+
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>     
         
-    <link rel="stylesheet" href="/resources/css/shop/item_management.css">
-    <link rel="stylesheet" href="/resources/css/shop/item_manage_insert.css">
-    <link rel="stylesheet" href="/resources/css/shop/item_manage_detail.css">
 
   </head>
   <body>
     <!-- <script src="assets/demo/chart-area-demo.js"></script>
     <script src="assets/demo/chart-bar-demo.js"></script> -->
 
+    <script>
+          // 자바 변수인 alertMsg 에 담긴 문구를 자바스크립트 alert 로 출력해보기
+
+          //script 태그 내에서도 스크립트릿과 같은 jsp 요소 사용 가능
+
+          let msg = '<%= alertMsg %>';
+
+          if (msg != "null") {
+            alert(msg);
+            //알림창을 띄워준 후 session 에 담긴 해당 메세지를 한번 지워줘야지만 깔끔하게 일회성 알람 문구로 활용 가능
+            // => 안그러면 menubar.jsp 가 로딩될때마다 매턴 alert가 뜰것임
+            <% session.removeAttribute("alertMsg"); %>
+          }
+        </script>
   </body>
 </html>
