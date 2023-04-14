@@ -1,4 +1,4 @@
-package com.kh.admin.controller;
+package com.kh.board.notice.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;

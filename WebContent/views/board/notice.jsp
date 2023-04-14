@@ -28,6 +28,8 @@
     alt로 적절한 대체 텍스트 제공, 너무 긴 경우 공통클래스 blind로 제공-->
 
 	<%@ include file="../common/header.jsp" %>
+	
+	
               <!--  사이드바 영역 시작 -->
              <div id="Container-Wrapper">
                     <div id="container">
@@ -82,16 +84,18 @@
                           
                           
                           
-                          		<%for(Notice n : list){ %>
                             <div class="board_list_body">
-                              <div class="item">
-                                <div class="notice_num"><%=n.getNoticeNo() %></div>
-                                <div class="notice_tit" ><a href="#"><%=n.getNoticeTitle() %></a></div>
-                                <div class="notice_date"><%=n.getCreateDate() %></div>
-                                <div class="notice_view"><%=n.getViews() %></div>
-                              </div>   
+                          		<%for(Notice n : list){ %>
+	                              <div class="item">
+	                                <div class="notice_num"><%=n.getNoticeNo() %></div>
+	                                <div class="notice_tit" ><a id="no_tit" href="#"><%=n.getNoticeTitle() %></a></div>
+	                                <div class="notice_date"><%=n.getCreateDate() %></div>
+	                                <div class="notice_view"><%=n.getViews() %></div>
+	                              </div>  
+                         	<%} %> 
                             </div>
-                         	<%} %>
+                         	
+                         	
                           <div class="layout-pagination">
                             <div class="pagediv">
                                 <a href="#viewOrderList" class="layout-pagination-button layout-pagination-first-page">맨 처음 페이지로 가기</a>
@@ -114,6 +118,8 @@
           </div>
       </div>    
     <!-- 자주하는질문 페이지 영역 끝 -->
+    
+    
 
        <%@ include file="../common/footer.jsp" %>
 
