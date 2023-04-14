@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, com.kh.board.notice.model.vo.Notice"%>
+    
+    <%
+    	ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("list");
+    %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -8,16 +12,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- header css -->
 
-    <link rel="stylesheet" href="../css/reset.css" />
-    <link rel="stylesheet" href="../css/header.css" />
-    <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="/resources/css/common/reset.css" />
     <link rel="stylesheet" href="/resources/css/board/faq.css">
     <link rel="stylesheet" href="/resources/css/board/notice.css">
-    <link rel="stylesheet" href="../css/common.css">
-
+  
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 
-    <script defer src="../js/header.js"></script>
+    <script defer src="/resources/js/common/header.js"></script>
 
     <title>공지사항</title>
   </head>
@@ -48,11 +49,6 @@
                                                 </li>
                                             </ul>
                                         </div>
-
-                                        <a href="#" class="link_inquire">
-                                            <span class="emph">도움이 필요하신가요?</span>
-                                            1:1 문의하기
-                                        </a>
                                     </div>
                      <!--  사이드바 영역 끝 -->
 
@@ -72,34 +68,30 @@
                             <div class="board_list_head">
                               <div class="notice_num">번호</div>
                               <div class="notice_tit">제목</div>
-                              <div class="notice_writer">작성자</div>
                               <div class="notice_date">작성일</div>
                               <div class="notice_view">조회수</div>
                             </div>
+                            
+                            
+                          	
+                          		<!-- 
+                          		if(list.isEmpty)
+                          		이부분 채워야함!!!!!!! 
+                          		
+                          		-->
+                          
+                          
+                          
+                          		<%for(Notice n : list){ %>
                             <div class="board_list_body">
                               <div class="item">
-                                <div class="notice_num">공지</div>
-                                <div class="notice_tit" ><a href="#">마이무당만의 철학을 알려드립니다!</a></div>
-                                <div class="notice_writer">health1004</div>
-                                <div class="notice_date">2023-04-07</div>
-                                <div class="notice_view">145</div>
-                              </div>
-                                <div class="item">
-                                  <div class="notice_num">공지</div>
-                                  <div class="notice_tit"><a href="#">마이무당 고객님께 안내드립니다!</a></div>
-                                  <div class="notice_writer">health1004</div>
-                                  <div class="notice_date">2023-04-07</div>
-                                  <div class="notice_view">108</div>
-                                </div>
-                                <div class="item">
-                                  <div class="notice_num">공지</div>
-                                  <div class="notice_tit"><a href="#">친환경 지퍼백 운영 안내</a></div>
-                                  <div class="notice_writer">health1004</div>
-                                  <div class="notice_date">2023-04-07</div>
-                                  <div class="notice_view">122</div>
-                                </div>
+                                <div class="notice_num"><%=n.getNoticeNo() %></div>
+                                <div class="notice_tit" ><a href="#"><%=n.getNoticeTitle() %></a></div>
+                                <div class="notice_date"><%=n.getCreateDate() %></div>
+                                <div class="notice_view"><%=n.getViews() %></div>
+                              </div>   
                             </div>
-
+                         	<%} %>
                           <div class="layout-pagination">
                             <div class="pagediv">
                                 <a href="#viewOrderList" class="layout-pagination-button layout-pagination-first-page">맨 처음 페이지로 가기</a>
