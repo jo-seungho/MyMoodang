@@ -158,7 +158,7 @@
                   </div>
                   <div class="input-group mb-3">
                     <span class="input-group-text" id="spanName">성별</span>
-                    <input type="text" class="form-control" id="gender" placeholder="성별" aria-label="gender" aria-describedby="gender" readonly />
+                    <input type="text" class="form-control" id="gender" placeholder="성별" aria-label="gender" aria-describedby="gender" name="gender" readonly />
                     <span class="input-group-text" id="spanPay">결제금액</span>
                     <input type="text" class="form-control" id="pay" placeholder="결제금액" aria-label="pay" aria-describedby="pay" value="1,000,000원" readonly />
                   </div>
@@ -175,8 +175,8 @@
 
                     <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">상태</button>
                     <ul class="dropdown-menu drop2">
-                      <li><a class="dropdown-item" href="#">활동</a></li>
-                      <li><a class="dropdown-item" href="#">탈퇴</a></li>
+                      <li><a class="dropdown-item" href="#">활성</a></li>
+                      <li><a class="dropdown-item" href="#">비활성</a></li>
                     </ul>
                     <input type="text" class="form-control" id="status" aria-label="text" name="status" readonly />
                   </div>

@@ -1,5 +1,7 @@
 package com.kh.member.model.vo;
 
+import com.kh.admin.common.Status;
+
 public class Member {
 // 2023-04-13 김서영
 	private int memberNo;
@@ -176,10 +178,11 @@ public class Member {
 		return gradeNo;
 	}
 
-
 	public void setGradeNo(String gradeNo) {
 		this.gradeNo = gradeNo;
 	}
+	
+	
 	
 	@Override
 	public String toString() {
