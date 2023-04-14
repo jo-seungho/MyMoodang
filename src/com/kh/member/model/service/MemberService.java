@@ -3,6 +3,7 @@ package com.kh.member.model.service;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import com.kh.common.JDBCTemplate;
 import com.kh.member.model.dao.MemberDao;
 import com.kh.member.model.vo.Member;
 
@@ -22,4 +23,20 @@ public class MemberService {
 		return list;
 	}
 
+
+	/**
+	 * 이메일 중복 체크 메소드
+	 * 2023-04-14 김서영
+	 * @param checkEmail
+	 * @return
+	 */
+	public int emailCheck(String checkEmail) {
+		Connection conn = getConnection();
+
+		int count = new MemberDao().emailCheck(conn, checkEmail);
+
+		JDBCTemplate.close(conn);
+
+		return count;
+	}
 }

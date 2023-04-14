@@ -37,19 +37,54 @@
                 </p>
 
 
-                <form action="join_complete.html" method="POST" onsubmit="return on_submit_check();">
+                <form id="enroll_form" action="/insert.me" method="POST" onsubmit="return on_submit_check();">
                     <div class="row mb-3" id="font_size">
                         <div class="col-sm-6 id_bell_f">
                             <span class="member_name">
-                                <label>아이디(이메일) <span id=ico>*</span></label>
+                                <label>아이디<span id=ico>*</span></label>
                             </span>
-                            <span class="member_content">
+                            <span class="member_content" id="memId">
                                 <input type="email" name="memberId" class="width300 form-control" id="loginId" placeholder="예) stopeatting@mymudang.com">&nbsp;&nbsp;
-                                <button type="button" class="btn-outline-primary width100" id="emailjungbok">중복확인</button>&nbsp;&nbsp;
-                                <button type="button" class="btn-outline-primary width100">이메일 인증</button>
+                                <button type="button" class="btn-outline-primary width100" id="emailjungbok" onclick="idCheck();">중복확인</button>&nbsp;&nbsp;
                             </span>
                         </div>
                     </div>
+
+
+                    <script>
+                    	function idCheck() {
+                    		let $memberId = $("#memId input[name=memberId]");
+
+                    		$.ajax({
+                    			  url : "idCheck.me"
+                    			, type : "get"
+                    			, data : { checkEmail : $memberId.val() }
+                    			, success : function(result) {
+
+									if(result == "NN") { // 사용불가
+										alert("이미 존재하거나 탈퇴한 회원의 아이디입니다.");
+										$memberId.focus();  // 다시 입력유도
+									} else { // 사용가능
+										let answer = confirm("사용 가능한 아이디입니다. 사용하시겠습니까?");
+
+										if(answer) { // 사용할 것임
+											$("#formSubmit button[type=submit]").removeAttr("disabled"); // 회원가입 버튼 활성화
+
+											$memberId.attr("readonly", true); // 아이디값 수정 못하게 확정
+										} else { // 사용 안할것 임
+											$memberId.focus(); // 다시 입력 유도
+										}
+									}
+                    			}
+                    			, error : function() {
+                    				console.log("아이디 중복체크용 ajax 통신 실패!!")
+                    			}
+
+                    		});
+                    	}
+                    </script>
+
+
 
                     <div class="row mb-3" id="font_size">
                         <div class="col-sm-6 pw_bell_f">
@@ -84,6 +119,20 @@
                             </span>
                         </div>
                     </div>
+
+
+                     <div class="row mb-3" id="font_size">
+                        <div class="col-sm-6">
+                            <span class="member_name">
+                                <label class="col-sm-2 col-form-label">이메일 <span id=ico>*</span></label>
+                            </span>
+                            <span class="member_content">
+                                <input type="email" name="email" class="form-control" id="loginId" placeholder="예) stopeatting@mymudang.com">&nbsp;&nbsp;
+                                <button type="button" class="btn-outline-primary width100" data-toggle="modal" data-target="#email_confirm">이메일 인증</button>
+                            </span>
+                        </div>
+                    </div>
+
 
                     <div class="row mb-3" id="font_size">
                         <div class="col-sm-6">
@@ -198,13 +247,70 @@
 
 
                     <div id="formSubmit" class="form_footer">
-                        <button type="submit" class="btn active btn_join" id="join_btn">가입하기</button>
+                        <button type="submit" class="btn active btn_join" id="join_btn" >가입하기</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
     </div>
+
+
+    <!-- 이메일 인증 모달창 (부트스트랩) -->
+    <div class="modal" id="email_confirm">
+        <div class="modal-dialog">
+            <div class="modal-content" >
+
+                <!-- Modal Header -->
+                <div class="modal-header" align="center">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" style="text-align: center; font-size: 20px;">이메일 인증</h4> <br>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body" align="center">
+                    <form action="<%= contextPath %>/updatePwd.me" method="post">
+                        <!--
+                                비밀번호 변경 시 고려할 사항
+                                현재 비밀번호, 변경할 비밀번호, 변경할 비밀번호 재입력
+
+                                추가적으로 로그인한 회원의 아이디도 같이 넘기기 (hidden)
+                         -->
+                         <input type="hidden" name="userId" value="<%= userId %>">
+                         <table id="modal_pwd">
+                             <tr>
+                                 <td>아이디(이메일)</td>
+                                 <td>
+                                    <input type="text" placeholder="입력한 아이디" readonly>
+                                 </td>
+                                 <td>
+                                    <button type="button">인증 메일 보내기</button>
+                                 </td>
+                             </tr>
+                             <tr>
+                                 <td>새 비밀번호</td>
+                                 <td>
+                                    <input type="password" name="updatePwd" required> <br><br>
+                                    * 이메일이 도착하는데 1~2분 정도 소요될
+                                 </td>
+                                 <td>
+                                    <button>인증</button>
+                                 </td>
+                             </tr>
+                         </table>
+
+                         <br>
+
+                         <button type="submit" class="btn btn-secondary btn-block" id="edit_pwd_btn1" onclick="return validatePwd();">비밀번호 변경</button>
+                      </form>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
 </body>
 
 </html>

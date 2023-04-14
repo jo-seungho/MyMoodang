@@ -5,9 +5,11 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.kh.common.JDBCTemplate;
 import com.kh.member.model.vo.Member;
 
 public class MemberDao {
@@ -64,6 +66,44 @@ public class MemberDao {
 		}
 
 		return list;
+	}
+
+
+	/**
+	 * 이메일 중복 체크 메소드
+	 * 2023/04/14 김서영
+	 * @param conn
+	 * @param checkEmail
+	 * @return
+	 */
+	public int emailCheck(Connection conn, String checkEmail) {
+
+		int count = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		String sql = prop.getProperty("emailCheck");
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, checkEmail);
+
+			rset = pstmt.executeQuery();
+
+			if(rset.next()) {
+				count = rset.getInt("CNT");
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+
+		return count;
+
 	}
 
 }

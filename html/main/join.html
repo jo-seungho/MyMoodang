@@ -247,12 +247,12 @@
                     <div class="row mb-3" id="font_size">
                         <div class="col-sm-6 id_bell_f">
                             <span class="member_name">
-                                <label>아이디(이메일) <span id=ico>*</span></label>
+                                <label>아이디 <span id=ico>*</span></label>
                             </span>
                             <span class="member_content">
-                                <input type="email" name="memberId" class="width300 form-control" id="loginId" placeholder="예) stopeatting@mymudang.com">&nbsp;&nbsp;
+                                <input type="text" name="memberId" class="form-control" id="submit_check_id" placeholder="아이디를 입력해 주세요">&nbsp;&nbsp;
                                 <button type="button" class="btn-outline-primary width100" id="emailjungbok">중복확인</button>&nbsp;&nbsp;
-                                <button type="button" class="btn-outline-primary width100">이메일 인증</button>                               
+                                                           
                             </span>
                         </div>
                     </div>
@@ -274,7 +274,7 @@
                                 <label class="col-sm-2 col-form-label">비밀번호확인 <span id=ico>*</span></label>
                             </span>
                             <span class="member_content">
-                                <input type="password" name="pwCheck" class="form-control inpt_pw2 check_pw" id="submit_check_pw2" placeholder="위와 동일한 비밀번호를 한번 더 입력해주세요">
+                                <input type="password" name="pwCheck" class="form-control inpt_pw2 check_pw" id="submit_check_pw2" placeholder="위와 동일한 비밀번호를 한번 더 입력해 주세요">
                             </span>
                         </div>
                     </div>
@@ -286,10 +286,24 @@
                                 <label class="col-sm-2 col-form-label">이름 <span id=ico>*</span></label>
                             </span>
                             <span class="member_content">
-                                <input type="text" name="userName" class="form-control" id="submit_check_name" placeholder="이름을 입력해주세요">
+                                <input type="text" name="userName" class="form-control" id="submit_check_name" placeholder="이름을 입력해 주세요">
                             </span>
                         </div>
                     </div>
+
+
+                    <div class="row mb-3" id="font_size">
+                        <div class="col-sm-6">
+                            <span class="member_name">
+                                <label class="col-sm-2 col-form-label">이메일 <span id=ico>*</span></label>
+                            </span>
+                            <span class="member_content">
+                                <input type="email" name="email" class="form-control" id="loginId" placeholder="예) stopeatting@mymudang.com">&nbsp;&nbsp;
+                                <button type="button" class="btn-outline-primary width100" data-toggle="modal" data-target="#email_confirm" onclick="openModal()">이메일 인증</button>   
+                            </span>
+                        </div>
+                    </div>
+
 
                     <div class="row mb-3" id="font_size">
                         <div class="col-sm-6">
@@ -297,7 +311,7 @@
                                 <label class="col-sm-2 col-form-label">휴대폰 <span id=ico>*</span></label>
                             </span>
                             <span class="member_content">
-                                <input type="text" name="phone_number" class="form-control" id="submit_check_phone" placeholder="숫자만 입력해주세요">
+                                <input type="text" name="phone_number" class="form-control" id="submit_check_phone" placeholder="숫자만 입력해 주세요">
                             </span>
                         </div>
                     </div>
@@ -411,6 +425,103 @@
         </div>
     </div>
     </div>
+
+
+
+
+    <!-- 이메일 인증 모달창 (부트스트랩) -->
+    <div class="modal" id="email_confirm">
+        <div class="modal-dialog">
+            <div class="modal-content" >
+ 
+                <!-- Modal Header -->
+                <div class="modal-header" align="center">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" style="text-align: center; font-size: 20px;">이메일 인증</h4> <br>
+                </div>
+ 
+                <!-- Modal body -->
+                <div class="modal-body" align="center">
+                    <form action="<%= contextPath %>/updatePwd.me" method="post">
+                        <!--
+                                비밀번호 변경 시 고려할 사항
+                                현재 비밀번호, 변경할 비밀번호, 변경할 비밀번호 재입력
+ 
+                                추가적으로 로그인한 회원의 아이디도 같이 넘기기 (hidden)
+                         -->
+                         <input type="hidden" name="userId" value="<%= userId %>">
+                         <table id="modal_confirm">
+                             <tr>
+                                 <td>아이디(이메일)</td>
+                                 <td>
+                                    <input type="text" placeholder="입력한 아이디" readonly>
+                                 </td>
+                                 <td>
+                                    <button type="button">인증 메일 보내기</button>
+                                 </td>
+                             </tr>
+                             <tr>
+                                 <td>새 비밀번호</td>
+                                 <td>
+                                    <input type="password" name="updatePwd" required> <br><br>
+                                 </td>
+                                 <td>
+                                    <button>인증</button>
+                                 </td>
+                             </tr>  
+                             <tr>
+                                <td></td>
+                                <td colspan="2"> * 이메일이 도착하는데 1~2분 정도 소요될 수 있습니다.</td>
+                             </tr>                           
+                         </table>
+ 
+                         <br>
+ 
+                         <button type="submit" class="btn btn-secondary btn-block" id="confirm_btn1" onclick="return validateEmail();">인증완료</button>
+                      </form>
+ 
+
+                      <script>
+                        var modal = document.getElementById("email_confirm");
+
+                        // Get the <span> element that closes the modal
+                        var closeBtn = document.getElementsByClassName("close")[0];
+
+                        // When the user clicks on the button, open the modal
+                        btn.onclick = function() {
+                        modal.style.display = "block";
+                        }
+
+                        // When the user clicks on <span> (x), close the modal
+                        closeBtn.onclick = function() {
+                        modal.style.display = "none";
+                        }
+
+                        // When the user clicks anywhere outside of the modal, close it
+                        window.onclick = function(event) {
+                        if (event.target == modal) {
+                            modal.style.display = "none";
+                        }
+                        }
+
+
+                        function openModal() {
+                         var modal = document.getElementById("email_confirm");
+                         modal.style.display = "block";
+                        }
+
+
+
+                      </script>
+                     
+                </div>
+ 
+            </div>
+        </div>
+    </div>
+
+
+
 </body>
 
 </html>

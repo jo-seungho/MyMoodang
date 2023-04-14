@@ -13,6 +13,10 @@
     <!-- jquery 및 라이브러리 -->
     <link rel="stylesheet" href="/resources/css/shop/item_management.css">
     <link rel="stylesheet" href="/resources/css/shop/item_manage_insert.css">
+    <link rel="stylesheet" href="/resources/css/shop/item_management.css">
+    <link rel="stylesheet" href="/resources/css/shop/item_manage_insert.css">
+    <link rel="stylesheet" href="/resources/css/shop/item_manage_detail.css">
+
   </head>
 
   <style>
@@ -113,14 +117,14 @@
 
 
             <hr>
-            <!-- 
+            <!--
             <div style="height: 60px"><button type="button" id="btn" class="btn">글쓰기</button></div> -->
             <div class="insert-area">
             <div class="form-group row">
               <label class="col-sm-2">* 상품명</label>
               <div class="col-sm-3">
                 <input type="text" id="content" name="content" class="form-control_noImg1">
-              </div>  
+              </div>
               <label class="col-count-2">* 수량(재고)</label>
               <div class="col-count">
                 <input type="text" id="unitsInStock" name="unitsInStock" class="form-control_noImg1">
@@ -130,7 +134,7 @@
                 <input type="text" id="unitPrice" name="unitPrice" class="form-control_noImg1">
               </div>
             </div>
-            
+
             <div class="form-group row">
               <label class="col-sm-2">* 내용</label>
               <div class="col-sm-10">
@@ -145,21 +149,21 @@
                 <input type="file"  id = "titleImg" name="productImage1" class="form-control" onchange="loadImg(this, 1);" required>
               </div>
             </div>
-            
+
             <div class="form-group row">
               <label class="col-sm-2">* 상품 이미지1</label>
               <div class="col-sm-10">
                 <input type="file" id="contentImg1" name="productImage2" class="form-control" onchange="loadImg(this, 2);">
               </div>
             </div>
-            
+
             <div class="form-group row">
               <label class="col-sm-2">* 상품 이미지2</label>
               <div class="col-sm-10">
                 <input type="file" id="contentImg2" name="productImage3" class="form-control" onchange="loadImg(this, 3);">
               </div>
             </div>
-            
+
             <div class="form-group row">
               <label class="col-sm-2">* 상품 이미지3</label>
               <div class="col-sm-10">
@@ -167,7 +171,7 @@
               </div>
             </div>
             </div>
-            
+
               <div class="insert-form">
                 <a href="item.html" class="btn btn-primary"  id="addBtn" style="margin-top: 40px; font-size : larger">등록하기</a>
                 <a href="/html/admin/item_management.html" class="btn btn-primary"  id="listBtn"style="margin-top: 40px; font-size : larger">목록가기</a>
@@ -192,7 +196,7 @@
           reader.readAsDataURL(input.files[0]);
         }
       }
-      
+
     </script>
     <!-- <script src="assets/demo/chart-area-demo.js">
     </script>

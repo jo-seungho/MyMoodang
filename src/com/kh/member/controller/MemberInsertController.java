@@ -1,3 +1,5 @@
+// 2023-04-14 김서영
+
 package com.kh.member.controller;
 
 import java.io.IOException;
@@ -7,22 +9,33 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
-@WebServlet("/list.me")
-public class memberListController extends HttpServlet {
+/**
+ * Servlet implementation class MemberInsertController
+ */
+@WebServlet("/insert.me")
+public class MemberInsertController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
 
-    public memberListController() {}
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public MemberInsertController() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
 
-
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 	}
 
-
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 
