@@ -22,4 +22,16 @@ public class MemberService {
 		return list;
 	}
 
+	// 어드민 회원관리 페이지에서 회원 상세정보 불러오는 메소드
+	// 2023-04-14 최명진
+	public Member selectMember(int id) {
+		Connection conn = getConnection();
+
+		Member m = new MemberDao().selectMember(conn, id);
+
+		close(conn);
+
+		return m;
+	}
+
 }

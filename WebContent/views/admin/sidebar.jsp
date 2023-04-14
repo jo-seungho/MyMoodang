@@ -24,6 +24,10 @@
     
     <link href="/resources/css/admin/order.css" rel="stylesheet" />
         <script src="/resources/js/admin/order.js"></script>
+        
+    <link rel="stylesheet" href="/resources/css/shop/item_management.css">
+    <link rel="stylesheet" href="/resources/css/shop/item_manage_insert.css">
+    <link rel="stylesheet" href="/resources/css/shop/item_manage_detail.css">
 
   </head>
   <body>

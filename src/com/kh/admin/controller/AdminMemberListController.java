@@ -14,11 +14,11 @@ import com.kh.member.model.vo.Member;
 
 // 2023-04-14 최명진
 // 회원관리 페이지에서 회원 리스트 불러오는 컨트롤러
-@WebServlet("/list.me")
-public class memberListController extends HttpServlet {
+@WebServlet("/listMember.ad")
+public class AdminMemberListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public memberListController() {
+	public AdminMemberListController() {
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)

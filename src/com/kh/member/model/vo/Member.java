@@ -96,8 +96,13 @@ public class Member {
 
 
 	public void setGender(String gender) {
-		this.gender = gender;
+		if(gender.equals("M")) {
+			this.gender = "남자";
+		} else {
+			this.gender = "여자";
+		}
 	}
+	
 
 
 	public String getEmail() {
@@ -146,8 +151,15 @@ public class Member {
 
 
 	public void setStatus(String status) {
-		this.status = status;
+		if(status.equals("Y")) {
+			this.status = "활동";
+		} else {
+			this.status = "탈퇴";
+		}
+		
 	}
+	
+
 
 
 	public int getTotalMoney() {
@@ -168,8 +180,7 @@ public class Member {
 	public void setGradeNo(String gradeNo) {
 		this.gradeNo = gradeNo;
 	}
-
-
+	
 	@Override
 	public String toString() {
 		return "Member [memberNo=" + memberNo + ", memberId=" + memberId + ", password=" + password + ", name=" + name

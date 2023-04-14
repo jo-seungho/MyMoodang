@@ -10,9 +10,7 @@
     <meta name="author" content="" />
     <title>관리자 페이지</title>
 
-    <link rel="stylesheet" href="/resources/css/shop/item_management.css">
-    <link rel="stylesheet" href="/resources/css/shop/item_manage_insert.css">
-    <link rel="stylesheet" href="/resources/css/shop/item_manage_detail.css">
+
   </head>
 
   <style>

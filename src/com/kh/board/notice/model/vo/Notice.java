@@ -14,8 +14,8 @@ public class Notice {
 		private String deleteStatus;  //	delete_status	char(1 byte)
 	
 		public Notice() { }
-
-		public Notice(int noticeNo, String noticeTitle, String noticeContent,String createDate, int views,
+		
+		public Notice(int noticeNo, String noticeTitle, String noticeContent, String createDate, int views,
 				String deleteStatus) {
 			super();
 			this.noticeNo = noticeNo;
@@ -26,10 +26,6 @@ public class Notice {
 			this.deleteStatus = deleteStatus;
 		}
 		
-		
-		
-		
-
 		public Notice(int noticeNo, String noticeTitle, String createDate, int views) {
 			super();
 			this.noticeNo = noticeNo;
@@ -38,8 +34,6 @@ public class Notice {
 			this.views = views;
 		}
 
-		
-		
 		public int getNoticeNo() {
 			return noticeNo;
 		}
@@ -88,16 +82,7 @@ public class Notice {
 			this.deleteStatus = deleteStatus;
 		}
 
-		
-		
-		@Override
-		public String toString() {
-			return "Notice [noticeNo=" + noticeNo + ", noticeTitle=" + noticeTitle + ", noticeContent=" + noticeContent
-					+ ", createDate=" + createDate + ", views=" + views + ", deleteStatus=" + deleteStatus + "]";
-		}
-		
-		
-		
+
 		
 		
 }
