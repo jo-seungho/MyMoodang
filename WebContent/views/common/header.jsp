@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="/resources/css/common/header.css">
 
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-    
+
     <script src="/resources/js/common/header.js"></script>
 
     <title>header</title>
@@ -31,10 +31,10 @@
         <ul class="sign_menu">
           <!--login class 추가-->
           <li class="link">
-            <a href="../main/join.html" class="item after join">회원가입</a>
+            <a  class="item after join" onclick="enrollpage();">회원가입</a>
           </li>
           <li class="link">
-            <a href="../main/login.html" class="item after login_none">로그인</a>
+            <a class="item after login_none">로그인</a>
             <a class="item login login_check grade_comm">
               <span class="ico_grade grade0">일반</span>
               <span class="txt">
@@ -42,6 +42,15 @@
                 <span class="sir">님</span>
               </span>
             </a>
+
+           	<script>
+            	function enrollpage() {
+            		location.href = "/enrollForm.me";
+            	}
+            </script>
+
+
+
             <ul class="sub">
               <li class="list">
                 <a href="#" class="list_item">주문 내역</a>
@@ -101,7 +110,7 @@
                     <span class="ico">
                       <img src="https://img-cf.kurly.com/shop/data/category/icon_newyear_inactive_pc@2x.1609722514.png" alt="" class="ico off" />
                       <img src="https://img-cf.kurly.com/shop/data/category/icon_newyear_active_pc@2x.1609722514.png" alt="" class="ico on" />
-                      <!--카테고리 별 아이콘은 직관적이게 img src로 바로 삽입 
+                      <!--카테고리 별 아이콘은 직관적이게 img src로 바로 삽입
                                                 클릭X(off): 기본, 클릭(on): 보라색 아이콘-->
                     </span>
                     <span class="tit">
@@ -115,7 +124,7 @@
                     <span class="ico">
                       <img src="https://img-cf.kurly.com/shop/data/category/icon_newyear_inactive_pc@2x.1609722514.png" alt="" class="ico off" />
                       <img src="https://img-cf.kurly.com/shop/data/category/icon_newyear_active_pc@2x.1609722514.png" alt="" class="ico on" />
-                      <!--카테고리 별 아이콘은 직관적이게 img src로 바로 삽입 
+                      <!--카테고리 별 아이콘은 직관적이게 img src로 바로 삽입
                                                 클릭X(off): 기본, 클릭(on): 보라색 아이콘-->
                     </span>
                     <span class="tit">
@@ -130,7 +139,7 @@
                     <span class="ico">
                       <img src="https://img-cf.kurly.com/shop/data/category/icon_newyear_inactive_pc@2x.1609722514.png" alt="" class="ico off" />
                       <img src="https://img-cf.kurly.com/shop/data/category/icon_newyear_active_pc@2x.1609722514.png" alt="" class="ico on" />
-                      <!--카테고리 별 아이콘은 직관적이게 img src로 바로 삽입 
+                      <!--카테고리 별 아이콘은 직관적이게 img src로 바로 삽입
                                                 클릭X(off): 기본, 클릭(on): 보라색 아이콘-->
                     </span>
                     <span class="tit">
@@ -144,7 +153,7 @@
                     <span class="ico">
                       <img src="https://img-cf.kurly.com/shop/data/category/icon_newyear_inactive_pc@2x.1609722514.png" alt="" class="ico off" />
                       <img src="https://img-cf.kurly.com/shop/data/category/icon_newyear_active_pc@2x.1609722514.png" alt="" class="ico on" />
-                      <!--카테고리 별 아이콘은 직관적이게 img src로 바로 삽입 
+                      <!--카테고리 별 아이콘은 직관적이게 img src로 바로 삽입
                                                 클릭X(off): 기본, 클릭(on): 보라색 아이콘-->
                     </span>
                     <span class="tit">
@@ -158,7 +167,7 @@
                     <span class="ico">
                       <img src="https://img-cf.kurly.com/shop/data/category/icon_newyear_inactive_pc@2x.1609722514.png" alt="" class="ico off" />
                       <img src="https://img-cf.kurly.com/shop/data/category/icon_newyear_active_pc@2x.1609722514.png" alt="" class="ico on" />
-                      <!--카테고리 별 아이콘은 직관적이게 img src로 바로 삽입 
+                      <!--카테고리 별 아이콘은 직관적이게 img src로 바로 삽입
                                                 클릭X(off): 기본, 클릭(on): 보라색 아이콘-->
                     </span>
                     <span class="tit">
@@ -229,7 +238,7 @@
         </ul>
       </div>
     </div>
-    
+
     <script>
     	$.noConflict();
     </script>

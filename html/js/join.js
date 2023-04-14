@@ -18,7 +18,6 @@ $(".checkbox_group").on("click", ".normal", function() {
 */
 
    
-/*  => 이메일 형식으로 아이디 받을 것임!!
 function on_id_check(){          //id 검사 함수
     var id = $("#submit_check_id").val();
     var spe = /[~!@#$%^&*()_+|<>?:{}]/;
@@ -35,7 +34,6 @@ function on_id_check(){          //id 검사 함수
       return true;
     }
   }
-  */
 
   function on_pw_check(){           //비밀번호 검사 함수
     var pw = $("#submit_check_pw").val();
@@ -133,3 +131,31 @@ function on_id_check(){          //id 검사 함수
       return true;
     }
   }
+
+
+
+
+  /*--------------------------[ 모달 관련 ]-------------------------------------*/
+  
+// Get the modal
+var modal = document.getElementById("email_confirm");
+
+// Get the <span> element that closes the modal
+var closeBtn = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+closeBtn.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
