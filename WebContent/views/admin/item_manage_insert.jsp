@@ -14,8 +14,6 @@
     
     <link rel="stylesheet" href="/resources/css/shop/item_management.css">
     <link rel="stylesheet" href="/resources/css/shop/item_manage_insert.css">
-    <link rel="stylesheet" href="/resources/css/shop/item_management.css">
-    <link rel="stylesheet" href="/resources/css/shop/item_manage_insert.css">
     <link rel="stylesheet" href="/resources/css/shop/item_manage_detail.css">
 
 

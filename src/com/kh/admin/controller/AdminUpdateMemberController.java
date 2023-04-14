@@ -8,9 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.admin.common.Gender;
-import com.kh.admin.common.Grade;
-import com.kh.admin.common.Status;
+import com.kh.admin.common.Converter;
+import com.kh.member.model.dao.MemberDao;
+import com.kh.member.model.service.MemberService;
 import com.kh.member.model.vo.Member;
 
 //2023-04-14 최명진
@@ -23,19 +23,31 @@ public class AdminUpdateMemberController extends HttpServlet {
     public AdminUpdateMemberController() {
     }
 
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		
-		String status = Status.getStatusCode(request.getParameter("status"));
-		String gender = Gender.getGenderCode(request.getParameter("gender"));
-		String grade = Grade.getMemberGradeCode(request.getParameter("grade"));
+		int userNo = Integer.parseInt(request.getParameter("userNo"));
+		String status = request.getParameter("status");
+		String grade = Converter.convert(request.getParameter("grade"));
 
 		Member m = new Member();
+		m.setMemberNo(userNo);
+		m.setStatus(status);
+		m.setGradeNo(grade);
 		
-		
-		
+		int result = new MemberService().updateMemberAd(m);
+
+		if(result > 0) {
+			request.getSession().setAttribute("alertMsg", "회원 정보가 수정되었습니다.");
+			response.sendRedirect("/listMember.ad");
+		} else {
+			request.getSession().setAttribute("alertMsg", "회원 정보 수정에 실패했습니다.");
+			response.sendRedirect("/listMember.ad");
+		}
+
 	}
+		
+		
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

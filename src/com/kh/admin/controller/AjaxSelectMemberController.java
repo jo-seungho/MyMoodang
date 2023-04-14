@@ -26,7 +26,7 @@ public class AjaxSelectMemberController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int id = Integer.parseInt(request.getParameter("userNo"));
 		
-		Member m = new MemberService().selectMember(id);
+		Member m = new MemberService().selectMemberAd(id);
 		
 		response.setContentType("application/json; charset=UTF-8");
 		

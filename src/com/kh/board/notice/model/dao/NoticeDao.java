@@ -27,6 +27,7 @@ public class NoticeDao {
 		}
 	}
 
+	
 	public ArrayList<Notice> selectNoticeList(Connection conn) {
 
 		// 필요한 변수셋팅해주고
@@ -50,7 +51,7 @@ public class NoticeDao {
 //				n.setNoticeTitle(rset.getString("NOTICE_TITLE"));
 //				n.setCreateDate(rset.getString("CREATE_DATE"));
 //				n.setViews(rset.getInt("VIEWS")); 
-				// 2번 방법 생성자 만들기 글구 주석 쓰세요 위에,,,
+				
 				list.add(new Notice(rset.getInt("NOTICE_NO"), rset.getString("NOTICE_TITLE"),
 						rset.getString("CREATE_DATE"), rset.getInt("VIEWS")));
 			}
