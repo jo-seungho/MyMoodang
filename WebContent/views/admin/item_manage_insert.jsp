@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -9,15 +11,8 @@
     <title>관리자 페이지</title>
 
     <!-- jquery 및 라이브러리 -->
-    <script src="https://code.jquery.com/jquery-3.6.4.js" crossorigin="anonymous"></script>
-    <link href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" rel="stylesheet" />
-    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
-    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-    <!-- 커스텀 js css -->
-    <script src="/resources/js/common/admin.js"></script>
-    <link href="/resources/css/common/styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/resources/css/shop/item_management.css">
+    <link rel="stylesheet" href="/resources/css/shop/item_manage_insert.css">
   </head>
 
   <style>
@@ -26,31 +21,15 @@
       color: white;
       border: 1px solid white;
       float: right;
-      margin-right: 4px;
+      margin-left: 10px;
+      margin-bottom: 10px;
     }
 
-    /* 자체적인 css */
-    .row {
-      float: none;
-      margin: 0 auto;
-    }
-
-    /* col과 input text 라인 맞춰주기 */
-    .col {
-      line-height: 35px;
-    }
-
-    .form-control {
-      resize: none;
-    }
-
-    .btns {
-      height: 100%;
-      margin-top: 15px;
-    }
+    /* 고유한 */
   </style>
 
   <body class="sb-nav-fixed">
+  <%@ include file="sidebar.jsp" %>
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
       <!-- Navbar Brand-->
       <a class="navbar-brand ps-3" href="index.html">
@@ -78,7 +57,7 @@
           <div class="sb-sidenav-menu">
             <div class="nav">
               <div class="text-center">
-                <img src="../resources/img/logo.png" class="rounded logo" alt="로고" />
+                <img src="/resources/img/logo.png" class="rounded logo" alt="로고" />
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                   <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">관리자</a>
@@ -123,49 +102,101 @@
       </div>
 
       <div id="layoutSidenav_content">
-        <main style="height: 100%">
+        <main>
           <div class="container px-6 white">
-            <h2>1대1 문의 내용</h2>
-            <hr />
-            <div class="container">
-              <div class="row center">
-                <div class="col-6 xl-6">제목</div>
-                <div class="col-2 xl-2">문의유형</div>
-                <div class="col-2 xl-2">작성자</div>
-                <div class="col-2 xl-2">작성일</div>
-              </div>
-              <hr />
-              <div class="row center">
-                <div class="col-6 xl-6">1대1 문의에 대한 제목부분입니다.제목을 길게해볼게요</div>
-                <div class="col-2 xl-2">상품문의</div>
-                <div class="col-2 xl-2">healthy</div>
-                <div class="col-2 xl-2">2023-03-24</div>
+            <div class="item_state" align="left">
+              <div class="state">
+                <li class="item_manage_insert"><h2>상품 등록</h2></li>
               </div>
             </div>
-            <hr />
-            <textarea class="form-control-plaintext col-sm-5" rows="10" readonly>안녕하세요 상품문의 합니다.</textarea>
-            <hr />
-            <br />
-            <h2>1대1 문의 답변</h2>
-            <hr />
-            <form action="" method="POST">
-              <div class="row center">
-                <div class="col-xl-12"><input text class="form-control col-xl-12" value="" placeholder="제목을 입력해주세요" /></div>
+
+
+
+            <hr>
+            <!-- 
+            <div style="height: 60px"><button type="button" id="btn" class="btn">글쓰기</button></div> -->
+            <div class="insert-area">
+            <div class="form-group row">
+              <label class="col-sm-2">* 상품명</label>
+              <div class="col-sm-3">
+                <input type="text" id="content" name="content" class="form-control_noImg1">
+              </div>  
+              <label class="col-count-2">* 수량(재고)</label>
+              <div class="col-count">
+                <input type="text" id="unitsInStock" name="unitsInStock" class="form-control_noImg1">
               </div>
-              <hr />
-              <textarea class="form-control col-sm-5" rows="10">안녕하세요 고객님! 마이무당입니다. 상품 설명에서 자세한 정보 확인 부탁드립니다.</textarea>
-              <div class="btns">
-                <button id="btn" class="btn">목록</button>
-                <button id="btn" class="btn" type="submit">글쓰기</button>
+              <label class="col-price-2">* 판매가격</label>
+              <div class="col-price">
+                <input type="text" id="unitPrice" name="unitPrice" class="form-control_noImg1">
               </div>
-              <br /><br />
-            </form>
+            </div>
+            
+            <div class="form-group row">
+              <label class="col-sm-2">* 내용</label>
+              <div class="col-sm-10">
+                <textarea id="name" rows="10" cols="50" class="form-control_noImg2"></textarea>
+              </div>
+            </div>
+
+            <div id="img_view">
+            <div class="form-group row">
+              <label class="col-sm-2">* 대표 이미지</label>
+              <div class="col-sm-10">
+                <input type="file"  id = "titleImg" name="productImage1" class="form-control" onchange="loadImg(this, 1);" required>
+              </div>
+            </div>
+            
+            <div class="form-group row">
+              <label class="col-sm-2">* 상품 이미지1</label>
+              <div class="col-sm-10">
+                <input type="file" id="contentImg1" name="productImage2" class="form-control" onchange="loadImg(this, 2);">
+              </div>
+            </div>
+            
+            <div class="form-group row">
+              <label class="col-sm-2">* 상품 이미지2</label>
+              <div class="col-sm-10">
+                <input type="file" id="contentImg2" name="productImage3" class="form-control" onchange="loadImg(this, 3);">
+              </div>
+            </div>
+            
+            <div class="form-group row">
+              <label class="col-sm-2">* 상품 이미지3</label>
+              <div class="col-sm-10">
+                <input type="file" id="contentImg3" name="productImage4" class="form-control" onchange="loadImg(this, 4);">
+              </div>
+            </div>
+            </div>
+            
+              <div class="insert-form">
+                <a href="item.html" class="btn btn-primary"  id="addBtn" style="margin-top: 40px; font-size : larger">등록하기</a>
+                <a href="/html/admin/item_management.html" class="btn btn-primary"  id="listBtn"style="margin-top: 40px; font-size : larger">목록가기</a>
+              </div>
           </div>
+
+          </div>
+          <br />
         </main>
       </div>
     </div>
 
-    <!-- <script src="assets/demo/chart-area-demo.js"></script>
-    <script src="assets/demo/chart-bar-demo.js"></script> -->
+
+    <script>
+
+      function loadImg(input, num) {
+        if (input.files && input.files[0]) {
+          var reader = new FileReader();
+          reader.onload = function (e) {
+            $('#img_view').append('<img id="img' + num + '" src="' + e.target.result + '" width="200px" height="200px" style="margin-left: 20px; margin-top: 20px;"/>');
+          }
+          reader.readAsDataURL(input.files[0]);
+        }
+      }
+      
+    </script>
+    <!-- <script src="assets/demo/chart-area-demo.js">
+    </script>
+    <script src="assets/demo/chart-bar-demo.js"></script>
+    -->
   </body>
 </html>

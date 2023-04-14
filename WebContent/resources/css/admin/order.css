@@ -1,0 +1,22 @@
+    #btn {
+      background-color: #fe7477;
+      color: white;
+      border: 1px solid white;
+      float: right;
+      margin-left: 10px;
+      margin-bottom: 10px;
+    }
+
+    .underline {
+      color: rgb(52, 152, 219);
+      text-decoration: underline;
+    }
+    /* list-btn 클래스 컬러 지정 */
+    .list-btn {
+      color: rgb(52, 152, 219);
+    }
+
+    /* 버튼에 마우스 가져갈 시 color 효과 */
+    .btn-hover:hover {
+      color: rgb(52, 152, 219);
+    }
