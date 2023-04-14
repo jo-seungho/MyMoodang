@@ -48,19 +48,17 @@ a {
 }
 
 .notice_num {
-    width :10%;
+    width :15%;
+   
 }
 
 .notice_tit {
+	
     width :55%;
 }
 
-.notice_writer {
-    width :10%;
-}
-
 .notice_date {
-    width :15%;
+    width :20%;
 }
 
 .notice_view {
@@ -79,4 +77,8 @@ a {
     font-weight: 700;
     color: #5f0080;
     cursor: pointer;
+}
+
+#no_tit{
+	margin-left:195px;
 }
