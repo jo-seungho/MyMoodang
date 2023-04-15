@@ -13,11 +13,13 @@ public class Item {
 	private int item_hits;
 	private String itemText;
 	private int itemDiscount;
+	private String itemImg;
+	private String itemStatus;
 	
 	public Item() { }
 
 	public Item(int itemCode, String itemCategory, String itemDate, String itemName, int itemStock, int itemPrice,
-			int item_hits, String itemText, int itemDiscount) {
+			int item_hits, String itemText, int itemDiscount, String itemImg, String itemStatus) {
 		super();
 		this.itemCode = itemCode;
 		this.itemCategory = itemCategory;
@@ -28,7 +30,10 @@ public class Item {
 		this.item_hits = item_hits;
 		this.itemText = itemText;
 		this.itemDiscount = itemDiscount;
+		this.itemImg = itemImg;
+		this.itemStatus = itemStatus;
 	}
+
 
 	public int getItemCode() {
 		return itemCode;
@@ -102,11 +107,31 @@ public class Item {
 		this.itemDiscount = itemDiscount;
 	}
 
+	public String getItemImg() {
+		return itemImg;
+	}
+
+	public void setItemImg(String itemImg) {
+		this.itemImg = itemImg;
+	}
+
+	public String getItemStatus() {
+		return itemStatus;
+	}
+
+	public void setItemStatus(String itemStatus) {
+		this.itemStatus = itemStatus;
+	}
+
 	@Override
 	public String toString() {
 		return "Item [itemCode=" + itemCode + ", itemCategory=" + itemCategory + ", itemDate=" + itemDate
 				+ ", itemName=" + itemName + ", itemStock=" + itemStock + ", itemPrice=" + itemPrice + ", item_hits="
-				+ item_hits + ", itemText=" + itemText + ", itemDiscount=" + itemDiscount + "]";
-	} 
+				+ item_hits + ", itemText=" + itemText + ", itemDiscount=" + itemDiscount + ", itemImg=" + itemImg
+				+ ", itemStatus=" + itemStatus + "]";
+	}
+
+
+
 	
 }

@@ -146,6 +146,14 @@
                       <input type="number" class="form-control" value="0" />
                       <label for="floatingPassword">할인율 (%)</label>
                     </div>
+                    
+                    <div class="col form-floating mb-3">
+                      <select class="form-select">
+                        <option value="1">판매중</option>
+                        <option value="2">판매중지</option>
+                      </select>
+                      <label for="floatingSelect">* 판매 상태</label>
+                    </div>
 
                     <div class="col form-floating mb-3">
                       <select class="form-select">

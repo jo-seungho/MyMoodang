@@ -2,17 +2,43 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 
 <properties>
-    <entry key="">
-        UPDATE ITEM
-        SET COUNT = COUNT + 1
-        WHERE ITEM_NO = ?
-    </entry>
+	<entry key="">
+		UPDATE ITEM
+		SET COUNT = COUNT + 1
+		WHERE ITEM_NO = ?
+	</entry>
 
-    <entry key="">
-        SELECT ITEM_NO
-        ,
+	<entry key="">
+		SELECT ITEM_NO
+		,
 
-    </entry>
+	</entry>
+
+	<entry key="selectListCount">
+		SELECT COUNT(*) COUNT FROM ITEM
+	</entry>
+
+	<entry key="selectItemListAd">
+		SELECT *
+		FROM (
+		SELECT ROWNUM RNUM,
+		A.*
+		FROM (
+		SELECT ITEM_CODE
+		, TO_CHAR(ITEM_DATE, 'YY/MM/DD HH:MI:SS') ITEM_DATE
+		, ITEM_IMAGE
+		, ITEM_NAME
+		, ITEM_STOCK
+		, ITEM_PRICE
+		, ITEM_STATUS
+		FROM ITEM
+		LEFT JOIN ITEM_IMG ON (ITEM_IMG_CODE = ITEM_CODE)
+		ORDER BY ITEM_DATE DESC
+		) A
+		)
+		WHERE RNUM BETWEEN ? AND ?
+
+	</entry>
 
 
 </properties>
