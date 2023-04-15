@@ -365,7 +365,9 @@ body #header .location_login .location_notice{  /* 안내메세지 처음에 blo
     font-size: larger;
 }
 .slick-prev {
+	position: absolute;
     left: -75px!important;
+    top: 170px
 }
 .discountImg {
     position: absolute;
@@ -379,7 +381,9 @@ body #header .location_login .location_notice{  /* 안내메세지 처음에 blo
     right: -20px;
 }
 .slick-next {
+	position: absolute;
     right: -10px!important;
+    top: 170px;
 }
 .main_type2 {
     margin-top: 100px;

@@ -19,6 +19,8 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 
+<!-- 폰트 어썸 -->
+<script src="https://kit.fontawesome.com/bbeda4c5cf.js" crossorigin="anonymous"></script>
 
 
   <script src="/resources/js/common/header.js"></script> 

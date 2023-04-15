@@ -85,4 +85,21 @@ public class ItemService {
 		return list;
 	}
 	
+	/**
+	 * 2023-04-16 조승호
+	 * 전체 상품 리스트
+	 * @return
+	 */
+	public ArrayList<Item> selectItemList(PageInfo pi) {
+		
+		Connection conn = getConnection();
+		
+		ArrayList<Item> list = new ItemDao().selectItemList(conn, pi);
+		
+		close(conn);
+		
+		
+		return list;
+	}
+	
 }

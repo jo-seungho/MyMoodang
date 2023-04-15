@@ -1,6 +1,6 @@
 package com.kh.shop.item.model.dao;
 
-import static com.kh.common.JDBCTemplate.close;
+import static com.kh.common.JDBCTemplate.*;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -117,7 +117,7 @@ public class ItemDao {
 					close(rset);
 					close(pstmt);
 				}
-
+				System.out.println(listCount);
 				return listCount;
 			}
 
@@ -173,6 +173,56 @@ public class ItemDao {
 
 		return list;
 
+	}
+
+    /**
+     * 전체 상품 리스트 조회
+     * 2023-04-16 조승호
+     * @param conn
+     * @param pi
+     * @return
+     */
+	public ArrayList<Item> selectItemList(Connection conn, PageInfo pi) {
+		
+		ArrayList<Item> list = new ArrayList<>();
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("selectItemList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage() -1) * pi.getBoardLimit() + 1;
+			int endRow = pi.getCurrentPage() * pi.getBoardLimit();
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Item(
+						  rset.getInt("ITEM_CODE")
+						, rset.getString("ITEM_DATE")
+						, rset.getString("ITEM_CATEGORY")
+						, rset.getString("ITEM_IMAGE")
+						, rset.getString("ITEM_NAME")
+						, rset.getString("ITEM_TEXT")
+						, rset.getInt("ITEM_STOCK")
+						, rset.getInt("ITEM_PRICE")
+						, rset.getInt("ITEM_HITS")
+						, rset.getString("ITEM_STATUS")
+						));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
 	}
 
 }

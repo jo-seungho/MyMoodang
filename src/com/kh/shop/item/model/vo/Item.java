@@ -17,9 +17,11 @@ public class Item {
 	private String itemStatus;
 	
 	public Item() { }
-
+	
+	
+	
 	public Item(int itemCode, String itemCategory, String itemDate, String itemName, int itemStock, int itemPrice,
-			int item_hits, String itemText, int itemDiscount, String itemImg, String itemStatus) {
+			String itemText, String itemImg, String itemStatus) {
 		super();
 		this.itemCode = itemCode;
 		this.itemCategory = itemCategory;
@@ -27,12 +29,32 @@ public class Item {
 		this.itemName = itemName;
 		this.itemStock = itemStock;
 		this.itemPrice = itemPrice;
-		this.item_hits = item_hits;
 		this.itemText = itemText;
-		this.itemDiscount = itemDiscount;
 		this.itemImg = itemImg;
 		this.itemStatus = itemStatus;
 	}
+	
+	
+    /**
+     * 전체 상품 리스트 조회용 생성자
+     * 2023-04-16 조승호
+     * @return
+     */
+	public Item(int itemCode, String itemDate, String itemCategory, String itemImg, String itemName
+			, String itemText, int itemStock, int itemPrice, int item_hits, String itemStatus) {
+		super();
+		this.itemCode = itemCode;
+		this.itemDate = itemDate;
+		this.itemCategory = itemCategory;
+		this.itemImg = itemImg;
+		this.itemName = itemName;
+		this.itemText = itemText;
+		this.itemStock = itemStock;
+		this.itemPrice = itemPrice;
+		this.item_hits = item_hits;
+		this.itemStatus = itemStatus;
+	}
+
 
 
 	public int getItemCode() {
