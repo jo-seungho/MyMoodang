@@ -1,5 +1,7 @@
 package com.kh.member.model.vo;
 
+import com.kh.admin.common.Converter;
+
 public class Member {
 // 2023-04-13 김서영
 	private int memberNo;
@@ -107,11 +109,7 @@ public class Member {
 	}
 
 	public void setGender(String gender) {
-		if (gender.equals("M")) {
-			this.gender = "남자";
-		} else {
-			this.gender = "여자";
-		}
+		this.gender = Converter.convert(gender);
 	}
 
 	public String getEmail() {
@@ -151,11 +149,7 @@ public class Member {
 	}
 
 	public void setStatus(String status) {
-		if (status.equals("Y")) {
-			this.status = "활동";
-		} else {
-			this.status = "탈퇴";
-		}
+		this.status = Converter.convert(status);
 
 	}
 

@@ -87,7 +87,7 @@
             </ul>
           </li>
           <li class="link">
-            <a href="#" class="item service">고객센터</a>
+            <a href="" class="item service">고객센터</a>
             <!-- 고객센터 hover 시 sub_menu 등장 -->
             <ul class="sub_menu">
               <li class="list">
@@ -106,7 +106,7 @@
       </div>
       <div class="header_logo">
         <h1 class="logo">
-          <a href="#" class="link_main">
+          <a href="/views/main/main.jsp" class="link_main">
             <span class="gnb_logo_container"></span>
             <img src="/resources/img/logo.png" alt="마켓컬리 로고" class="logo_img" />
           </a>
@@ -117,7 +117,7 @@
         <h2 class="blind">메뉴</h2>
         <ul class="gnb_menu">
           <li class="list gnb_main">
-            <a href="#" class="link">
+            <a href="/itemList.it?currentPage=1" class="link">
               <span class="ico"></span>
               <!-- ico는 css에서 bg url로 처리 -->
               <span class="txt">전체 카테고리</span>

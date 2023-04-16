@@ -482,7 +482,6 @@ button{
 }
 
 .layout-pagination-number:hover, .layout-pagination-number.__active {
-    background-color: #f7f7f7;
     color: #5f0080;
 }
 

@@ -29,18 +29,21 @@ public class MemberDao {
 
 	}
 
-  	 /* 어드민 회원관리 페이지에서 회원 리스트 불러오는 메소드
-	 * 2023-04-14 최명진
+//    ---------------------------------- 어드민 부분 -------------------------
+	/*
+	 * 어드민 회원관리 페이지에서 회원 리스트 불러오는 메소드 2023-04-14 최명진
+	 *
 	 * @param selectMemberList
+	 *
 	 * @return
 	 */
-	public ArrayList<Member> selectMemberList(Connection conn) {
+	public ArrayList<Member> selectMemberListAd(Connection conn) {
 
 		ArrayList<Member> list = new ArrayList<Member>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
-		String sql = prop.getProperty("selectMemberList");
+		String sql = prop.getProperty("selectMemberListAd");
 
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -80,54 +83,55 @@ public class MemberDao {
 	}
 
 	/**
-	 * 아이디 중복 체크 메소드
-	 * 2023/04/14 김서영
-	 * @param conn
-	 * @param checkEmail
+	 * 어드민 상세조회에서 회원 정보 변경하는 메소드 2023-04-14 최명진
+	 *
+	 * @param m
 	 * @return
 	 */
-	public int idCheck(Connection conn, String checkId) {
+	public int updateMemberAd(Connection conn, Member m) {
 
-		int count = 0;
+		int result = 0;
+
 		PreparedStatement pstmt = null;
-		ResultSet rset = null;
 
-		String sql = prop.getProperty("idCheck");
+		String sql = prop.getProperty("updateMemberAd");
 
 		try {
 			pstmt = conn.prepareStatement(sql);
 
-			pstmt.setString(1, checkId);
+			pstmt.setString(1, m.getGradeNo());
+			pstmt.setString(2, m.getStatus());
+			pstmt.setInt(3, m.getMemberNo());
 
-			rset = pstmt.executeQuery();
+			result = pstmt.executeUpdate();
 
-			if(rset.next()) {
-				count = rset.getInt("CNT");
-			}
-
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			JDBCTemplate.close(rset);
-			JDBCTemplate.close(pstmt);
+			try {
+				pstmt.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 
-		return count;
+		return result;
+	}
 
-}
-
-  	 /* 어드민 회원관리 페이지에서 회원 상세 정보 불러오는 메소드
-	 * 2023-04-14 최명진
+	/*
+	 * 어드민 회원관리 페이지에서 회원 상세 정보 불러오는 메소드 2023-04-14 최명진
+	 *
 	 * @param selectMemberList
+	 *
 	 * @return
 	 */
-	public Member selectMember(Connection conn, int id) {
+	public Member selectMemberAd(Connection conn, int id) {
 
 		Member m = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
-		String sql = prop.getProperty("selectMember");
+		String sql = prop.getProperty("selectMemberAd");
 
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -136,7 +140,6 @@ public class MemberDao {
 
 			if (rset.next()) {
 				m = new Member();
-
 				m.setMemberNo(rset.getInt("MEMBER_NO"));
 				m.setMemberId(rset.getString("MEMBER_ID"));
 				m.setPassword(rset.getString("PASSWORD"));
@@ -166,6 +169,10 @@ public class MemberDao {
 		return m;
 
 	}
+
+
+//  ---------------------------------- 회원 부분 -------------------------
+
 
 	/** 가입하는 회원의 회원번호 조회용 메소드
 	 * 2023-04-14 김서영
@@ -200,9 +207,46 @@ public class MemberDao {
 		return memberNo;
 	}
 
+	/**
+	 * 아이디 중복 체크 메소드 2023/04/14 김서영
+	 *
+	 * @param conn
+	 * @param checkEmail
+	 * @return
+	 */
+	public int idCheck(Connection conn, String checkId) {
 
-	/** 회원가입 (회원정보 추가) 메소드
-	 * 2023-04-15 김서영
+		int count = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		String sql = prop.getProperty("idCheck");
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, checkId);
+
+			rset = pstmt.executeQuery();
+
+			if (rset.next()) {
+				count = rset.getInt("CNT");
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+
+		return count;
+
+	}
+
+	/**
+	 * 회원가입 (회원정보 추가) 메소드 2023-04-15 김서영
+	 *
 	 * @param conn
 	 * @param m
 	 * @return
@@ -236,11 +280,9 @@ public class MemberDao {
 		return result;
 	}
 
-
-
-
-	/** 회원가입용 (주소정보 추가) 메소드
-	 * 2023-04-15 김서영
+	/**
+	 * 회원가입용 (주소정보 추가) 메소드 2023-04-15 김서영
+	 *
 	 * @param conn
 	 * @param addr
 	 * @return

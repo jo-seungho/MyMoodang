@@ -1,5 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" 
+pageEncoding="UTF-8" import="com.kh.shop.item.model.vo.Item, java.util.ArrayList, com.kh.common.model.vo.PageInfo"%>
+<%
+	PageInfo pi = (PageInfo)request.getAttribute("pi"); 
+	ArrayList<Item>list = (ArrayList<Item>)request.getAttribute("list"); 
+	int currentPage = pi.getCurrentPage(); 
+	int startPage = pi.getStartPage(); 
+	int endPage = pi.getEndPage(); 
+	int maxPage = pi.getMaxPage();
+%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -9,7 +17,7 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>관리자 페이지</title>
-
+    <link rel="stylesheet" href="/resources/css/shop/item_management.css" />
   </head>
 
   <style>
@@ -26,7 +34,7 @@
   </style>
 
   <body class="sb-nav-fixed">
-  	<%@ include file="sidebar.jsp" %>
+    <%@ include file="sidebar.jsp" %>
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
       <!-- Navbar Brand-->
       <a class="navbar-brand ps-3" href="index.html">
@@ -107,7 +115,7 @@
             <hr />
             <div class="row">
               <div class="col btn-hover">
-                <button class="btn" id="btn1">전체 <span class="list-btn">17</span></button>
+                <button class="btn" id="btn1">전체 <span class="list-btn"><%=  list.size() %></span></button>
                 <button class="btn" id="btn2">판매 <span class="list-btn">15</span></button>
                 <button class="btn" id="btn3">품절 <span class="list-btn">2</span></button>
               </div>
@@ -136,97 +144,28 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>10</td>
-                  <td>2023-04-10 12:25:40</td>
-                  <td><img src="/resources/img/logo.png" style="width: 40px" /></td>
-                  <td>무당이 텀블러</td>
-                  <td>100</td>
-                  <td>100,000원</td>
-                  <td>판매중</td>
-                </tr>
 
-                <tr>
-                  <td>9</td>
-                  <td>2023-04-10 12:25:40</td>
-                  <td></td>
-                  <td></td>
-                  <td>100</td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>8</td>
-                  <td>2023-04-10 12:25:40</td>
-                  <td></td>
-                  <td></td>
-                  <td>100</td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>7</td>
-                  <td>2023-04-10 12:25:40</td>
-                  <td></td>
-                  <td></td>
-                  <td>100</td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>6</td>
-                  <td>2023-04-10 12:25:40</td>
-                  <td></td>
-                  <td></td>
-                  <td>100</td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>5</td>
-                  <td>2023-04-10 12:25:40</td>
-                  <td></td>
-                  <td></td>
-                  <td>100</td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>4</td>
-                  <td>2023-04-10 12:25:40</td>
-                  <td></td>
-                  <td></td>
-                  <td>100</td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td>2023-04-10 12:25:40</td>
-                  <td></td>
-                  <td></td>
-                  <td>100</td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>2023-04-01 10:14:52</td>
-                  <td></td>
-                  <td></td>
-                  <td>200</td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>1</td>
-                  <td>2023-03-31 09:14:42</td>
-                  <td></td>
-                  <td></td>
-                  <td>300</td>
-                  <td></td>
-                  <td></td>
-                </tr>
+
+                <% if (list.isEmpty()) { %>
+              <tr>
+                <td colspan="7">게시글이 없습니다.</td>
+              </tr>
+
+              <% } else { %> <% for (Item i : list) { %>
+              <tr>
+                <td><%= i.getItemCode() %></td>
+                <td><%= i.getItemDate() %></td>
+                <% if (i.getItemImg() == null) { %>
+                <td><img src="/resources/img/noimage.png" style='width : 80px; height : 50px'></td>
+                <% } else { %> 
+                <td><img src="<%= i.getItemImg()%>" style='width : 80px; height: 50px;'></td>
+                <% } %>
+                <td><%= i.getItemName() %></td>
+                <td><%= i.getItemStock() %></td>
+                <td><%= i.getItemPrice() %>
+                <td><%= i.getItemStatus() %></td>
+              </tr>
+              <% } %> <% } %>
               </tbody>
             </table>
 
@@ -249,7 +188,7 @@
     <script>
       $(document).ready(function () {
         $('tbody tr').click(function () {
-          location.href = "/html/admin/item_manage_detail.html";
+          location.href = '/html/admin/item_manage_detail.html';
         });
       });
 
