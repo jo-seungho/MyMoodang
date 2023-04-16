@@ -6,10 +6,10 @@
 	PageInfo pi = (PageInfo) request.getAttribute("pi");
 	ArrayList<Item> list = (ArrayList<Item>) request.getAttribute("list");
 
-int currentPage = pi.getCurrentPage();
-int startPage = pi.getStartPage();
-int endPage = pi.getEndPage();
-int maxPage = pi.getMaxPage();
+	int currentPage = pi.getCurrentPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	int maxPage = pi.getMaxPage();
 %>
 
 
@@ -117,7 +117,7 @@ int maxPage = pi.getMaxPage();
 						<div class="layout-pagination">
 							<div class="pagediv">
 								<% if(currentPage != 1) { %>
-								<a href="/itemList.total?currentPage=<%= startPage %>"
+								<a href="/itemList.it?currentPage=<%= startPage %>"
 									class="layout-pagination-button layout-pagination-first-page">맨 처음 페이지로 가기
 								</a> 
 								<a href="/itemList.total?currentPage=<%= currentPage - 1 %>" class="layout-pagination-button layout-pagination-prev-page">
@@ -133,7 +133,7 @@ int maxPage = pi.getMaxPage();
 								<% } %>
 								<% for(int p = startPage; p <= endPage; p++) { %>
 									<% if(p != currentPage) { %>
-								<a href="/itemList.total?currentPage=<%= p %>"> 
+								<a href="/itemList.it?currentPage=<%= p %>"> 
 									<span> 
 										<strong class="layout-pagination-button layout-pagination-number __active"><%= p %></strong>
 									</span>
@@ -146,10 +146,10 @@ int maxPage = pi.getMaxPage();
 									<% } %>
 								<% } %>
 								<% if(currentPage != maxPage) { %>
-								 <a href="/itemList.total?currentPage=<%= currentPage + 1 %>" class="layout-pagination-button layout-pagination-next-page">
+								 <a href="/itemList.it?currentPage=<%= currentPage + 1 %>" class="layout-pagination-button layout-pagination-next-page">
 								 다음 페이지로 가기
 								 </a> 
-								 <a href="/itemList.total?currentPage=<%= endPage %>" class="layout-pagination-button layout-pagination-last-page">
+								 <a href="/itemList.it?currentPage=<%= endPage %>" class="layout-pagination-button layout-pagination-last-page">
 								 맨끝 페이지로 가기
 								 </a>
 								 <% } else { %>
@@ -221,7 +221,7 @@ int maxPage = pi.getMaxPage();
 			$(function() {
 
 				$(".info").click(function() {
-					location.href = "/item.detail";
+					location.href = "/item.it";
 				});
 			});
 		</script>

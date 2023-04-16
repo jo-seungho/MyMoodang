@@ -14,7 +14,7 @@ import com.kh.shop.item.model.vo.Item;
 /**
  * Servlet implementation class itemDetailController
  */
-@WebServlet("/item.detail")
+@WebServlet("/item.it")
 public class itemDetailController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
