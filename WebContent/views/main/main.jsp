@@ -154,7 +154,7 @@
                                     <li data-index="1">
                                         <a class="thumb_goods">
                                             <img src="/resources/img/과일1.jpg" alt="상품이미지" class="thumb"
-                                            style="background-image: url('https://img-cf.kurly.com/shop/data/main/3/pc_img_1611247553.jpg');">
+                                            style="background-image: url('');">
                                             <!-- 상품 이미지 임시값임. src는 데이터로 받아오기 -->
                                         </a>
                                         <div class="info_goods">
@@ -173,7 +173,7 @@
                                     <li data-index="2">
                                         <a class="thumb_goods">
                                             <img src="/resources/img/과일2.jpg" alt="상품이미지" class="thumb"
-                                            style="background-image: url('https://img-cf.kurly.com/shop/data/main/3/pc_img_1611317260.jpg');">
+                                            style="background-image: url('');">
                                             <!-- 상품 이미지 임시값임. src는 데이터로 받아오기 -->
                                         </a>
                                         <div class="info_goods">
@@ -192,7 +192,7 @@
                                     <li data-index="3">
                                         <a class="thumb_goods">
                                             <img src="/resources/img/과일3.jpg" alt="상품이미지" class="thumb"
-                                            style="background-image: url('https://img-cf.kurly.com/shop/data/main/3/pc_img_1611553491.jpg');">
+                                            style="background-image: url('');">
                                             <!-- 상품 이미지 임시값임. src는 데이터로 받아오기 -->
                                         </a>
                                         <div class="info_goods">
@@ -230,7 +230,7 @@
                                 <ul id="slideUlTag" class="autoplay">
                                     <li>
                                         <a class="slideLinkTag" href="../path.html">
-                                            <img class="discountImg" src="https://img-cf.kurly.com/shop/data/my_icon/icon_save_10.png">
+                                            <img class="discountImg" src="">
                                             <img src="/resources/img/상품1.jpg" style="width: 90%; height: 310px;">
                                               <div class="slideText-area">
                                                 <span class="name">
@@ -317,7 +317,7 @@
                                     <li data-index="1">
                                         <a class="thumb_goods">
                                             <img src="/resources/img/과일1.jpg" alt="상품이미지" class="thumb"
-                                            style="background-image: url('https://img-cf.kurly.com/shop/data/main/3/pc_img_1611247553.jpg');">
+                                            style="background-image: url('');">
                                             <!-- 상품 이미지 임시값임. src는 데이터로 받아오기 -->
                                         </a>
                                         <div class="info_goods">
@@ -336,7 +336,7 @@
                                     <li data-index="2">
                                         <a class="thumb_goods">
                                             <img src="/resources/img/과일2.jpg" alt="상품이미지" class="thumb"
-                                            style="background-image: url('https://img-cf.kurly.com/shop/data/main/3/pc_img_1611317260.jpg');">
+                                            style="background-image: url('');">
                                             <!-- 상품 이미지 임시값임. src는 데이터로 받아오기 -->
                                         </a>
                                         <div class="info_goods">
@@ -355,7 +355,7 @@
                                     <li data-index="3">
                                         <a class="thumb_goods">
                                             <img src="/resources/img/과일3.jpg" alt="상품이미지" class="thumb"
-                                            style="background-image: url('https://img-cf.kurly.com/shop/data/main/3/pc_img_1611553491.jpg');">
+                                            style="background-image: url('');">
                                             <!-- 상품 이미지 임시값임. src는 데이터로 받아오기 -->
                                         </a>
                                         <div class="info_goods">
