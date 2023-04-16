@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+
+<properties>
+
+	<entry key="selectListCount">
+		SELECT COUNT(*) COUNT FROM ITEM
+	</entry>
+
+	<entry key="selectItemListAd">
+		SELECT *
+		FROM (
+		SELECT ROWNUM RNUM,
+		A.*
+		FROM (
+		SELECT ITEM_CODE
+		, TO_CHAR(ITEM_DATE, 'YY/MM/DD HH:MI:SS') ITEM_DATE
+		, ITEM_IMAGE
+		, ITEM_NAME
+		, ITEM_STOCK
+		, ITEM_PRICE
+		, ITEM_STATUS
+		FROM ITEM
+		LEFT JOIN ITEM_IMG ON (ITEM_IMG_CODE = ITEM_CODE)
+		ORDER BY ITEM_DATE DESC
+		) A
+		)
+		WHERE RNUM BETWEEN ? AND ?
+	</entry>
+
+	<entry key="selectItemList">
+		SELECT *
+		FROM (
+		SELECT ROWNUM RNUM,
+		A.*
+		FROM (
+        SELECT ITEM_CODE
+		, TO_CHAR(ITEM_DATE, 'YY/MM/DD HH:MI:SS') ITEM_DATE
+        , ITEM_CATEGORY
+		, ITEM_IMAGE
+		, ITEM_NAME
+        , ITEM_TEXT
+		, ITEM_STOCK
+		, ITEM_PRICE
+		, ITEM_HITS
+		, ITEM_STATUS
+		FROM ITEM
+		LEFT JOIN ITEM_IMG ON (ITEM_IMG_CODE = ITEM_CODE)
+		ORDER BY ITEM_DATE DESC
+		) A
+		)
+		WHERE RNUM BETWEEN ? AND ?
+	</entry>
+
+</properties>
