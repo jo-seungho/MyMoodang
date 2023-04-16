@@ -1,6 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+<%@ page import="com.kh.member.model.vo.Member" %>
+
+<%
+	Member loginUser = (Member)session.getAttribute("loginUser");
+
+	String alertMsg = (String)request.getAttribute("alertMsg");
+
+	String errorMsg = (String)request.getAttribute("errorMsg");
+	
+	
+%>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -31,7 +43,7 @@
         <ul class="sign_menu">
           <!--login class 추가-->
           <li class="link">
-            <a  class="item after join" onclick="enrollpage();">회원가입</a>
+            <a  class="item after join" href="/enrollForm.me">회원가입</a>
           </li>
           <li class="link">
             <a class="item after login_none">로그인</a>
@@ -44,8 +56,16 @@
             </a>
 
            	<script>
-            	function enrollpage() {
-            		location.href = "/enrollForm.me";
+
+            	let msg = '<%= alertMsg == null ? "" : alertMsg %>';
+            	if(msg != null && msg.length > 0) {
+            		alert(msg);
+            	}
+
+            	//----------------------------------------------------
+            	let emsg = '<%= errorMsg == null ? "" : errorMsg %>';
+            	if(emsg != null && emsg.length > 0) {
+            		alert(emsg);
             	}
             </script>
 

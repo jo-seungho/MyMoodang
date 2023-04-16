@@ -4,7 +4,6 @@ package com.kh.member.controller;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,19 +17,18 @@ import javax.servlet.http.HttpServletResponse;
 public class MemberEnrollFormController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public MemberEnrollFormController() {
-        super();
-    }
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public MemberEnrollFormController() {
+		super();
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("views/member/join.jsp").forward(request, response);  // 회원가입 페이지로 연결
-
+		request.getRequestDispatcher("views/member/join.jsp").forward(request, response); // 회원가입 페이지로 연결
 	}
 
 	/**

@@ -14,41 +14,43 @@ import com.kh.member.model.service.MemberService;
 /**
  * Servlet implementation class AjaxEmailCheckController
  */
-@WebServlet("/emailCheck.me")
+@WebServlet("/idCheck.me")
 public class AjaxEmailCheckController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public AjaxEmailCheckController() {
-        super();
-    }
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public AjaxEmailCheckController() {
+		super();
+	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String checkEmail = request.getParameter("checkEmail");
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String checkId = request.getParameter("memberId");
 
-		int count = new MemberService().emailCheck(checkEmail);  // 사용중 이메일 수 가져오기
+		int count = new MemberService().idCheck(checkId); // 사용중 아이디 수 가져오기
 
 		response.setContentType("text/html; charset=UTF-8");
 
-		if(count > 0) { // 사용불가 일치하는 회원 있음
+		if (count > 0) { // 사용불가 일치하는 회원 있음
 			response.getWriter().print("NN");
 		} else { // 사용가능 일치하는 회원 없음
 			response.getWriter().print("YY");
 		}
 
-
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doGet(request, response);
 	}
 

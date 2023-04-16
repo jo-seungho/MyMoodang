@@ -12,12 +12,12 @@
     <link rel="stylesheet" href="/resources/css/common/header.css">
     <link rel="stylesheet" href="/resources/css/member/join.css">
 
-    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <script src="/resources/js/common/header.js"></script>
-
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 
+    <script src="/resources/js/common/header.js"></script>
+    <script src="/resources/js/member/join.js"></script>
 
     <title>회원가입</title>
 </head>
@@ -37,52 +37,18 @@
                 </p>
 
 
-                <form id="enroll_form" action="/insert.me" method="POST" onsubmit="return on_submit_check();">
+                <form id="enroll_form" action="/insert.me" method="POST">
                     <div class="row mb-3" id="font_size">
                         <div class="col-sm-6 id_bell_f">
                             <span class="member_name">
                                 <label>아이디<span id=ico>*</span></label>
                             </span>
                             <span class="member_content" id="memId">
-                                <input type="email" name="memberId" class="width300 form-control" id="loginId" placeholder="예) stopeatting@mymudang.com">&nbsp;&nbsp;
+                                <input type="text" name="memberId" class="width300 form-control" id="submit_check_id" placeholder="소문자, 숫자를 포함한 6 ~ 12의 아이디를 입력해주세요.">&nbsp;&nbsp;
                                 <button type="button" class="btn-outline-primary width100" id="emailjungbok" onclick="idCheck();">중복확인</button>&nbsp;&nbsp;
                             </span>
                         </div>
                     </div>
-
-
-                    <script>
-                    	function idCheck() {
-                    		let $memberId = $("#memId input[name=memberId]");
-
-                    		$.ajax({
-                    			  url : "idCheck.me"
-                    			, type : "get"
-                    			, data : { checkEmail : $memberId.val() }
-                    			, success : function(result) {
-
-									if(result == "NN") { // 사용불가
-										alert("이미 존재하거나 탈퇴한 회원의 아이디입니다.");
-										$memberId.focus();  // 다시 입력유도
-									} else { // 사용가능
-										let answer = confirm("사용 가능한 아이디입니다. 사용하시겠습니까?");
-
-										if(answer) { // 사용할 것임
-											$("#formSubmit button[type=submit]").removeAttr("disabled"); // 회원가입 버튼 활성화
-
-											$memberId.attr("readonly", true); // 아이디값 수정 못하게 확정
-										} else { // 사용 안할것 임
-											$memberId.focus(); // 다시 입력 유도
-										}
-									}
-                    			}
-                    			, error : function() {
-                    				console.log("아이디 중복체크용 ajax 통신 실패!!")
-                    			}
-
-                    		});
-                    	}
-                    </script>
 
 
 
@@ -92,7 +58,7 @@
                                 <label>비밀번호 <span id=ico>*</span></label>
                             </span>
                             <span class="member_content">
-                                <input type="password" name="password" class="form-control inpt_pw check_pw" id="submit_check_pw" placeholder="영문/숫자/특수문자를 제외한 10글자 이상의 비밀번호를 입력해 주세요">
+                                <input type="password" name="password" class="form-control inpt_pw check_pw" id="submit_check_pw" placeholder="영문/숫자/특수문자를 포함한 10글자 이상의 비밀번호를 입력해 주세요">
                             </span>
                         </div>
                     </div>
@@ -150,19 +116,23 @@
                             <label class="col-sm-2 col-form-label">주소 <span id=ico>*</span></label>
                         </span>
                         <span class="member_content">
-                          <input type="text" name="zipCode" class="form-control width100 text_disabled" readonly="readonly" placeholder="우편번호">
-                          <input type="text" name="shipAddr" class="form-control width309 text_disabled" readonly="readonly" placeholder="주소">
-                          <button type="button" id="juso" class="btn-outline-primary width100"><span id="adressNo">주소 검색</span></button>
+                          <input type="text" name="zipCode" id="zipCode" class="form-control width100 text_disabled" readonly="readonly" placeholder="우편번호">
+                          <input type="text" name="shipAddr" id="shipAddr" class="form-control width309 text_disabled" readonly="readonly" placeholder="주소">
+                          <button type="button" id="juso" class="btn-outline-primary width100" onclick="searchAddr();"><span id="adressNo">주소 검색</span></button>
+                       		<input type="hidden" id="sample6_extraAddress" placeholder="참고항목">
                         </span>
                     </div>
                     <div class="row mb-3" id="font_size">
                       <span class="member_name"></span>
                       <span class="member_content">
-                        <input type="text" name="shipAddrInfo" class="form-control" placeholder="상세주소">
+                        <input type="text" name="shipAddrInfo" id="shipAddrInfo" class="form-control" placeholder="상세주소">
                       </span>
                   </div>
 
-                    <div class="row mb-3" id="font_size">
+
+
+
+					<div class="row mb-3" id="font_size">
                         <div class="col-sm-6">
                             <span class="member_name">
                                 <label class="col-sm-2 col-form-label">성별 <span id=ico></span></label>
@@ -170,7 +140,7 @@
                             <span class="member_content">
                                 <label><input type="radio" name="gender" class="gender" value="F" id="gender_M"><label class="gender_label" for="gender_M">남자</label>
                                 <label><input type="radio" name="gender" class="gender" value="M" id="gender_W"><label class="gender_label" for="gender_W">여자</label>
-                                <label><input type="radio" name="gender" class="gender" value="X" id="gender_N" checked="checked"><label class="gender_label" for="gender_N">선택안함</label>
+                                <label><input type="radio" name="gender" class="gender" value="N" id="gender_N" checked="checked"><label class="gender_label" for="gender_N">선택안함</label>
                             </span>
                         </div>
                     </div>
@@ -206,14 +176,14 @@
                           <span class="member_name">
                           </span>
                           <span class="member_content">
-                            <label for="check_1"><input type="checkbox" class="normal" id="check_1"> 이용약관 동의 <span class="redFont">(필수)</span></label>
+                            <label for="check_1"><input type="checkbox" class="normal" id="check_1" required> 이용약관 동의 <span class="redFont">(필수)</span></label>
                           </span>
                         </div>
                         <div class="col-sm-6">
                           <span class="member_name">
                          </span>
                           <span class="member_content">
-                            <label for="check_2"><input type="checkbox" class="normal" id="check_2"> 개인정보 수집, 이용 동의 <span class="redFont">(필수)</span></label>
+                            <label for="check_2"><input type="checkbox" class="normal" id="check_2" required> 개인정보 수집, 이용 동의 <span class="redFont">(필수)</span></label>
                           </span>
                         </div>
                         <div class="col-sm-6">
@@ -225,38 +195,18 @@
                         </div>
                     </div>
 
-                    <script>
-                        // 체크박스 전체 선택
-                        $(".checkbox_group").on("click", "#check_all", function () {
-                            $(this).parents(".checkbox_group").find('input').prop("checked", $(this).is(":checked"));
-                        });
-
-                        // 체크박스 개별 선택
-                        $(".checkbox_group").on("click", ".normal", function() {
-                            var is_checked = true;
-
-                            $(".checkbox_group .normal").each(function(){
-                                is_checked = is_checked && $(this).is(":checked");
-                            });
-
-                            $("#check_all").prop("checked", is_checked);
-                            });
-
-
-                    </script>
 
 
                     <div id="formSubmit" class="form_footer">
-                        <button type="submit" class="btn active btn_join" id="join_btn" >가입하기</button>
+                        <button type="button" class="btn active btn_join" id="join_btn" onclick="validate();">가입하기</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-    </div>
 
 
-    <!-- 이메일 인증 모달창 (부트스트랩) -->
+        <!-- 이메일 인증 모달창 (부트스트랩) -->
     <div class="modal" id="email_confirm">
         <div class="modal-dialog">
             <div class="modal-content" >
@@ -269,48 +219,49 @@
 
                 <!-- Modal body -->
                 <div class="modal-body" align="center">
-                    <form action="<%= contextPath %>/updatePwd.me" method="post">
+                    <form action="/updatePwd.me" method="post">
                         <!--
                                 비밀번호 변경 시 고려할 사항
                                 현재 비밀번호, 변경할 비밀번호, 변경할 비밀번호 재입력
 
                                 추가적으로 로그인한 회원의 아이디도 같이 넘기기 (hidden)
                          -->
-                         <input type="hidden" name="userId" value="<%= userId %>">
-                         <table id="modal_pwd">
+                         <input type="hidden" name="userId" value="">
+                         <table id="modal_confirm">
                              <tr>
-                                 <td>아이디(이메일)</td>
+                                 <td style="font-weight: 700;">아이디(이메일)</td>
                                  <td>
                                     <input type="text" placeholder="입력한 아이디" readonly>
                                  </td>
-                                 <td>
+                                 <td style="width: 150px;">
                                     <button type="button">인증 메일 보내기</button>
                                  </td>
                              </tr>
                              <tr>
-                                 <td>새 비밀번호</td>
+                                 <td style="font-weight: 700;">새 비밀번호</td>
                                  <td>
                                     <input type="password" name="updatePwd" required> <br><br>
-                                    * 이메일이 도착하는데 1~2분 정도 소요될
                                  </td>
                                  <td>
                                     <button>인증</button>
                                  </td>
                              </tr>
+                             <tr>
+                                <td></td>
+                                <td colspan="2" style="font-size: 13px; color: rgb(133, 133, 133);"> * 이메일이 도착하는데 1~2분 정도 소요될 수 있습니다.</td>
+                             </tr>
                          </table>
 
                          <br>
 
-                         <button type="submit" class="btn btn-secondary btn-block" id="edit_pwd_btn1" onclick="return validatePwd();">비밀번호 변경</button>
+                         <button type="submit" class="btn btn-secondary btn-block" id="confirm_btn1" onclick="return validateEmail();">인증완료</button>
                       </form>
-
 
                 </div>
 
             </div>
         </div>
     </div>
-
 </body>
 
 </html>
