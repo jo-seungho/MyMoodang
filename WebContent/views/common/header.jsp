@@ -97,7 +97,7 @@
         <h2 class="blind">메뉴</h2>
         <ul class="gnb_menu">
           <li class="list gnb_main">
-            <a href="/itemList.total?currentPage=1" class="link">
+            <a href="/itemList.it?currentPage=1" class="link">
               <span class="ico"></span>
               <!-- ico는 css에서 bg url로 처리 -->
               <span class="txt">전체 카테고리</span>
