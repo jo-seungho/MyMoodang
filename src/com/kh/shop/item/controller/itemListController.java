@@ -69,6 +69,9 @@ public class itemListController extends HttpServlet {
 		 
 		 ArrayList<Item> list = new ItemService().selectItemList(pi);
 		 
+		 String category = request.getParameter("category");
+		 System.out.println(category);
+		 
 		 request.setAttribute("pi", pi);
 		 request.setAttribute("list", list);
 		

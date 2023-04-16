@@ -9,6 +9,8 @@ public class PageInfo {
     private int maxPage;		// 전체 페이지들 중에서의 가장 마지막 페이지 (즉, 총 페이지 수)
     private int startPage;		// 현재 페이지에 하단에 보여질 페이징 바의 시작 수 => 18페이지라면 11, 28페이지라면 21
     private int endPage;		// 현재 페이지에 하단에 보여질 페이징 바의 끝 수 => 18페이지라면 20, 28페이지라면 30
+   
+    
     
     public PageInfo() {}
 
@@ -22,6 +24,20 @@ public class PageInfo {
         this.startPage = startPage;
         this.endPage = endPage;
     }
+    
+    
+
+	public PageInfo(int listCount, int currentPage, int pageLimit, int boardLimit, int maxPage, int startPage,
+			int endPage, int enablePage, int disablePage) {
+		super();
+		this.listCount = listCount;
+		this.currentPage = currentPage;
+		this.pageLimit = pageLimit;
+		this.boardLimit = boardLimit;
+		this.maxPage = maxPage;
+		this.startPage = startPage;
+		this.endPage = endPage;
+	}
 
 	public int getListCount() {
 		return listCount;
@@ -78,6 +94,8 @@ public class PageInfo {
 	public void setEndPage(int endPage) {
 		this.endPage = endPage;
 	}
+	
+	
 
 	@Override
 	public String toString() {

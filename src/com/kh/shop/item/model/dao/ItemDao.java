@@ -117,7 +117,7 @@ public class ItemDao {
 					close(rset);
 					close(pstmt);
 				}
-				System.out.println(listCount);
+				
 				return listCount;
 			}
 
