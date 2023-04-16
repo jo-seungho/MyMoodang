@@ -55,11 +55,32 @@ public class Item {
 		this.itemStatus = itemStatus;
 	}
 
-
-
+	/**
+     * 전체 상품 상세조회 리스트 조회용 생성자
+     * 2023-04-16 이태화
+     * @return
+     */
+	public Item(int itemCode, String itemCategory, String itemName, int itemPrice, int item_hits, String itemText,
+			int itemDiscount, String itemImg, String itemStatus) {
+		super();
+		this.itemCode = itemCode;
+		this.itemCategory = itemCategory;
+		this.itemName = itemName;
+		this.itemPrice = itemPrice;
+		this.item_hits = item_hits;
+		this.itemText = itemText;
+		this.itemDiscount = itemDiscount;
+		this.itemImg = itemImg;
+		this.itemStatus = itemStatus;
+	}
+	
+	
+	
 	public int getItemCode() {
 		return itemCode;
 	}
+
+
 
 	public void setItemCode(int itemCode) {
 		this.itemCode = itemCode;

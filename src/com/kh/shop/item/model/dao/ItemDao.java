@@ -11,9 +11,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
-import com.kh.board.notice.model.dao.NoticeDao;
 import com.kh.common.JDBCTemplate;
 import com.kh.common.model.vo.PageInfo;
+import com.kh.shop.item.model.vo.Attachment;
 import com.kh.shop.item.model.vo.Item;
 
 public class ItemDao {
@@ -30,8 +30,22 @@ public class ItemDao {
 			e.printStackTrace();
 		}
 	}
-
-    public int increaseCount(Connection conn, int itemNo) {
+	
+	//-------------------------------------------------------------------------------------
+	
+	
+	
+    /**
+     * 사용자용 상품 상세페이지 조회수 증가용
+     * 2023-04-16 이태화
+     * @param conn, itemCode
+     * @return
+     */
+	
+    public int increaseCount(Connection conn, int itemCode) {
+    	
+    	// UPDATE 문 = > int (처리된 행의 갯수)
+    	
         int result = 0;
         PreparedStatement pstmt = null;
 
@@ -39,7 +53,7 @@ public class ItemDao {
         
         try {
             pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, itemNo);
+            pstmt.setInt(1, itemCode);
             
             result = pstmt.executeUpdate();
             
@@ -52,7 +66,14 @@ public class ItemDao {
         return result;
     }
 
-    public Item selectItem(Connection conn, int itemNo) {
+    /**
+     * 사용자용 상품 상세페이지 조회용
+     * 2023-04-16 이태화
+     * @param conn, itemCode
+     * @return
+     */
+
+    public Item selectItem(Connection conn, int itemCode) {
         Item i = null;
         PreparedStatement pstmt = null;
         ResultSet rset = null;
@@ -61,7 +82,9 @@ public class ItemDao {
         
         try {
             pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, itemNo);
+			pstmt.setInt(1, itemCode);
+			
+
             
             rset = pstmt.executeQuery();
             
@@ -79,6 +102,49 @@ public class ItemDao {
         
         return i;
     }
+
+    /**
+     * 사용자용 상품 상세페이지 사진조회용
+     * 2023-04-16 이태화
+     * @param conn , itemCode
+     * @return
+     */
+
+
+	public ArrayList<Attachment> selectAttachmentList(Connection conn, int itemCode) {
+		ArrayList<Attachment> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectAttachment");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setInt(1, itemCode);
+
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Attachment at = new Attachment();
+
+				at.setItemImgTF(rset.getString("ITEM_IMG_TF"));
+				at.setItemImage(rset.getString("ITEM_IMAGE"));
+				at.setItemImgDeleteTF(rset.getString("ITEM_IMG_DELETE_TF"));
+
+				list.add(at);	
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return list;
+	}
     
     
     

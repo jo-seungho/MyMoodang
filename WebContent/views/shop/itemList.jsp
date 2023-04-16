@@ -220,8 +220,8 @@ int maxPage = pi.getMaxPage();
 		<script>
 			$(function() {
 
-				$(".info").click(function() {
-					location.href = "/item.detail";
+				$(".thumb").click(function() {
+					location.href = "/itemDetail.it";
 				});
 			});
 		</script>

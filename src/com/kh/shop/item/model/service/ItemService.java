@@ -10,18 +10,28 @@ import java.util.ArrayList;
 
 import com.kh.common.model.vo.PageInfo;
 import com.kh.shop.item.model.dao.ItemDao;
+import com.kh.shop.item.model.vo.Attachment;
 import com.kh.shop.item.model.vo.Item;
 
 
 public class ItemService {
 	
 	
-	public int increaseCount(int itemNo) {
+    /**
+     * 사용자용 상품 상세페이지 조회수 증가용
+     * 2023-04-16 이태화
+     * @param itemCode
+     * @return
+     */
+	
+	public int increaseCount(int itemCode) {
 		
 		Connection conn = getConnection();
 
-		int result = new ItemDao().increaseCount(conn, itemNo);
-
+		int result = new ItemDao().increaseCount(conn, itemCode);
+		
+		
+		// 트렌잭션 처리
 		if(result > 0) {
 			commit(conn);
 		} else {
@@ -32,15 +42,43 @@ public class ItemService {
 
 		return result;
 	}
+	
+	/**
+     * 사용자용 상품 상세조회용 서비스
+     * 2023-04-16 이태화
+     * @param itemCode
+     * @return
+     */
+	
 
-	public Item selectItem(int itemNo) {
+	public Item selectItem(int itemCode) {
+
 		Connection conn = getConnection();
 
-		Item i = new ItemDao().selectItem(conn, itemNo);
+		Item i = new ItemDao().selectItem(conn, itemCode);
 
 		close(conn);
 
 		return i;
+	}
+	/**
+     * 상품사진 리스트 조회용 서비스
+     * 2023-04-16 이태화
+     * @param itemCode
+     * @return
+     */
+
+	public ArrayList<Attachment> selectAttachmentList(int itemCode) {
+		Connection conn = getConnection();
+
+		ArrayList<Attachment> list = new ItemDao().selectAttachmentList(conn, itemCode);
+
+		// SELECT 문이라 트랜잭션 필요 없음
+
+
+		close(conn);
+
+		return list;
 	}
 	
 
