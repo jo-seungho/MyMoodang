@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"
-	import="java.util.ArrayList, com.kh.shop.item.model.vo.Item, com.kh.common.model.vo.PageInfo"%>
+	import="java.util.ArrayList, com.kh.user.shop.item.model.vo.Item, com.kh.common.model.vo.PageInfo"%>
 <%-- 2023-04-16 조승호 --%>
 <%
 	PageInfo pi = (PageInfo) request.getAttribute("pi");

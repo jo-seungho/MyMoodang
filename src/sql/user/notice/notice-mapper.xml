@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+	<entry key="selectNoticeList">
+			SELECT NOTICE_NO
+			     , NOTICE_TITLE
+			     , TO_CHAR(CREATE_DATE, 'YY/MM/DD HH:MI:SS') CREATE_DATE
+			     , VIEWS
+              FROM NOTICE 
+              ORDER BY CREATE_DATE DESC
+	</entry>
+
+
+
+</properties>
+

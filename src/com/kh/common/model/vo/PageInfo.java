@@ -11,7 +11,7 @@ public class PageInfo {
     private int endPage;		// 현재 페이지에 하단에 보여질 페이징 바의 끝 수 => 18페이지라면 20, 28페이지라면 30
    
     
-    
+   
     public PageInfo() {}
 
     public PageInfo(int listCount, int currentPage, int pageLimit, int boardLimit, int maxPage, int startPage, int endPage) {
@@ -24,20 +24,7 @@ public class PageInfo {
         this.startPage = startPage;
         this.endPage = endPage;
     }
-    
-    
 
-	public PageInfo(int listCount, int currentPage, int pageLimit, int boardLimit, int maxPage, int startPage,
-			int endPage, int enablePage, int disablePage) {
-		super();
-		this.listCount = listCount;
-		this.currentPage = currentPage;
-		this.pageLimit = pageLimit;
-		this.boardLimit = boardLimit;
-		this.maxPage = maxPage;
-		this.startPage = startPage;
-		this.endPage = endPage;
-	}
 
 	public int getListCount() {
 		return listCount;
@@ -96,7 +83,6 @@ public class PageInfo {
 	}
 	
 	
-
 	@Override
 	public String toString() {
 		return "PageInfo [listCount=" + listCount + ", currentPage=" + currentPage + ", pageLimit=" + pageLimit
