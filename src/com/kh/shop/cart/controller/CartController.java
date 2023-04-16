@@ -20,7 +20,7 @@ import com.kh.shop.cart.model.vo.Cart;
 @WebServlet("/cartList.ca")
 public class CartController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -33,25 +33,25 @@ public class CartController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
+
+
 		HttpSession session = request.getSession();
 		System.out.println("나는 셀렉트 성공");
-		
+
 		int userNo = (int) session.getAttribute("userNo");
 		System.out.println("userNO: "+userNo);
-		
-		List<Cart> list = CartService.selectAll(userNo);
-		request.setAttribute("list", list);
-		
+
+		// List<Cart> list = CartService.selectAll(userNo);
+		// request.setAttribute("list", list);
 
 
 
 
 
 
-		
-		
+
+
+
 	}
 
 	/**

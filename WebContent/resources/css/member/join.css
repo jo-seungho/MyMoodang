@@ -2,28 +2,28 @@
 
 ol, ul {
     list-style-type: none;
-    
+
   }
-  
+
   #main{      /*main과 footer의 경계선을 주기 위해 main 아래 부분에다가 선 만들어놈 */
     border-bottom: 1px solid #f7f7f7;
   }
-    
+
   #content{     /*main 부분에서 내용이 들어갈 세로 크기 지정*/
       min-width: 1050px;
       padding-bottom: 170px;
   }
-  
+
   .main_page_aticle{     /* main 부분에서 내용이 들어갈 부분 가로크기지정후 가운데 정렬 */
       width: 1050px;
       margin: 0 auto;    /*가운데 정렬 */
   }
-  
+
   #content .form{               /*회원 가입 폼 가운데 정렬 */
       width: 640px;
-      margin: 0 auto;       
+      margin: 0 auto;
   }
-  
+
   #content .form .main_title{      /*회원가입 적혀있는 부분 */
       padding-top: 64px;
       font-weight: 900;
@@ -32,7 +32,7 @@ ol, ul {
       line-height: 40px;
       text-align: center;
       letter-spacing: -.5px;
-      
+
   }
   #content .form .sub{                 /*필수 입력 사항 적혀있는 부분*/
       padding: 23px 0 10px;
@@ -43,21 +43,21 @@ ol, ul {
       border-bottom: 2px solid black;
       margin-bottom:0;
   }
-  
+
   #ico{                      /*    *표시 빨간색으로 하는거 */
       padding-right: 2px;
       color: #ee6a7b;
   }
-  
-  #main .col-sm-6 input::placeholder{         /* input칸에 있는 글씨 옅은색으로 */ 
+
+  #main .col-sm-6 input::placeholder{         /* input칸에 있는 글씨 옅은색으로 */
       color: rgba(110, 107, 107,0.4)
   }
-  
+
   #font_size{        /*font 크기를 14로 할때 이거 사용*/
       font-size:14px;
       position: relative;
   }
-  
+
   #fst{    /*회원 가입 폼에서 왼쪽 부분 == 아이디, 비밀번호확인 */
       width: 180px;
       padding: 12px 0 0 20px;
@@ -80,7 +80,7 @@ ol, ul {
     text-align: left;
 }
 
-  
+
   #sst{  /*회원 가입 폼에서 오른쪽 부분 ex)input 기능, 중복확인 기능 등등.. */
       display:flex;
       padding: 10px 0;
@@ -89,7 +89,7 @@ ol, ul {
       vertical-align: top;
       text-align: left;
   }
-  
+
   #idjungbok{ /* 아이디 중복 확인 */
       /* position: absolute; */
       color: white;
@@ -99,7 +99,7 @@ ol, ul {
       height: 44px;
       font-size:14px
   }
-  
+
   #emailcheck{ /* 이메일 중복 확인 */
     /* position: absolute; */
     color: white;
@@ -109,9 +109,9 @@ ol, ul {
     height: 44px;
     font-size:14px
   }
-  
 
-  
+
+
     #adressNo{    /*주소검색 */
       display: inline-block;
       height: 100%;
@@ -124,21 +124,21 @@ ol, ul {
       background-size: 25px 24px;
       padding-top: 7px;
     }
-    
+
     #content .form form .standard{  /*배송지에 따라 상품 정보가 달라질수 있습니다 */
       position:relative;
     }
-  
+
     #content .form form .standard > span{   /*배송지에 따라 상품 정보가 달라질수 있습니다 */
       position:absolute;
       top: 22px;
       left: 159px;
       font-size:12px;
       color: #666;
-      
+
     }
-    
-  
+
+
     .birth_day{           /*생년월일 칸 */
       overflow: hidden;
       width: 332px;
@@ -146,9 +146,9 @@ ol, ul {
       border: 1px solid #ccc;
       border-radius: 3px;
     }
-  
-    
-  
+
+
+
     .birth_day input[type=text]{      /*생년월일 안에있는 input 들 */
       float: left;
       width: 84px;
@@ -156,8 +156,8 @@ ol, ul {
       border: 0;
       text-align: center;
     }
-  
-  
+
+
     .bar::after{   /*생년 월일 칸 안에 있는 bar */
       content: "/";
       font-size: 14px;
@@ -166,21 +166,21 @@ ol, ul {
       text-align: center;
       padding: 5px;
     }
-  
+
     .boder_btom{       /*가입하기 위에 줄 */
         border-bottom: 2px solid black;
     }
-  
+
     .btom_line{  /*가입 하기 위에 줄 */
         height:64px;
         margin-bottom:19px;
     }
-  
+
     .form_footer{   /*footer로 부터 가입하기 사이 간격 */
       padding-top: 40px;
       text-align: center;
     }
-  
+
     .btn_join{    /*가입하기 버튼 */
       width: 240px;
       height: 56px;
@@ -188,36 +188,36 @@ ol, ul {
       line-height: 41px;
       border: 1px solid  rgb(254,116,119);
     }
-  
+
     #formSubmit .active{  /*가입하기 버튼 */
       border: 1px solid rgb(254,116,119);
       background-color: rgb(254,116,119);
       color: #fff;
     }
-    
-    
-  
+
+
+
     .txt_guide{
       position:relative;
     }
-  
+
     .id_bell_f .id_txt_case1{  /*6자 이상의 영문 혹은 영문과 숫자를 조합 */
       display:none;
       top:51px;
       left:-329px;
   }
-    
-  
+
+
     .id_bell_f .id_txt_case2{  /* 아이디 중복확인 */
       display:none;
       top:74px;
       left:-329px;
     }
-  
+
     #content .id_bell_f.on{
       height: 129px;
     }
-    
+
     #content .form .txt_guide span::before{      /* 앞에 점 붙이는거  */
       content: '\2022';
       display: inline-block;
@@ -225,60 +225,60 @@ ol, ul {
       font-size: 12px;
       vertical-align: 0;
     }
-  
-    
-  
-    
-    
-  
+
+
+
+
+
+
     .pw_bell_f .pw_txt_case1{  /* 10자 이상 입력 */
       display:none;
       top:51px;
       left:-329px;
     }
-  
+
     .pw_bell_f .pw_txt_case2{  /*영문/숫자/특수문자/(공백 제외)만 허용하며, 2개 이상 조합 */
       display:none;
       top:73px;
       left:-329px;
     }
-  
+
     .pw_bell_f .pw_txt_case3{ /*동일한 숫자 3개 이상 연속 사용 불가 */
       display:none;
       top:95px;
       left:-329px;
     }
-  
+
     #content .pw_bell_f.on{    /*비밀번호 입력칸 활성화 되면 길이 늘어나게 */
       height: 115px;
     }
-  
-    
-  
-  
+
+
+
+
     .pw2_bell_f .pw2_bell_s{    /*동일한 비밀번호를 입력해주세요 */
       display:none;
       top:53px;
       left:-329px;
     }
-  
-  
+
+
     #content .pw2_bell_f.on{      /* 비밀번호 확인칸 활성화되면 길이 늘어나게 */
       height:101px;
     }
-  
+
     #content .id_bell_s.on, .id_bell_t.on, .pw_bell_s.on, .pw_bell_t.on, .pw_bell_u.on, .pw2_bell_s.on{    /*공통분모 묶기 */
       display:block;
       position:absolute;
       font-size:12px;
       color: #666;
     }
-  
+
     #main #content .main_page_aticle .form .juso_search.on{  /* juso_search 뒤에 .on 붙여야댐 */
       padding-bottom:0 !important;
       height:200px;
     }
-  
+
     #juso.on{             /* 주소가 입력됐을떄 주소버튼 작게만드는거 */
       position: absolute;
       color: #5f0080;
@@ -288,18 +288,18 @@ ol, ul {
       font-size: 14px;
       top: 8px;
     }
-  
+
     #user_address{         /*주소 칸 */
       display:none;
     }
-  
+
     #user_detail_address{  /*상세주소 칸 */
       display:none;
     }
-  
-  
-  
-  
+
+
+
+
     #user_address.on{    /* 주소 칸 활성화 됐을 때 */
       display:block;
       border: 1px solid #ced4da;
@@ -310,7 +310,7 @@ ol, ul {
       left: 159px;
       border-radius: 0.25rem;
     }
-  
+
     #user_detail_address.on{   /*상세 주소 칸 활성화 됐을 때 */
       display:block;
       width: 332px;
@@ -338,9 +338,9 @@ ol, ul {
 
 
     /*======================================================================*/
-   
+
   .form-control {
-    height: 44px; 
+    height: 44px;
     width: 514px;
     padding: 0.375rem 0.75rem;
     font-size: 14px;
@@ -360,7 +360,7 @@ ol, ul {
   button {
     border-radius: 5px;
   }
-  
+
   .member_name {
     width: 16%;
     display: inline-block;
@@ -410,8 +410,8 @@ ol, ul {
     height: 44px;
     font-size: 14px;
   }
-  
-  
+
+
   .gender {
     margin-right: 5px;
     margin-top:14px;
@@ -423,7 +423,7 @@ ol, ul {
     background-color: #e0e0e0;
     border: 1px solid #e0e0e0;
   }
-  
+
 
   form button:hover {
     background-color: rgb(243, 176, 177) ;
@@ -436,16 +436,98 @@ ol, ul {
   border:rgb(243, 176, 177) ;
   cursor: pointer;
 }
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-    
-  
-  
+
+
+#submit_check_id, #loginId {
+  width: 405px;
+}
+
+/*=========================================[ 모달창 ]=============================================================*/
+/* 이메일 인증 모달 */
+#email_confirm {
+  display: none;
+  position: absolute;
+  z-index: 100;
+  left: 0;
+  right: 0;
+  top: 200px;
+  width: 900px;
+  height: 1000px;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+#email_confirm.modal.show {
+ width: 100%;
+ height: 100%;
+ background-color: rgba(0, 0, 0, 0.4);
+}
+
+
+.modal-content {
+  background-color: white;
+  margin: auto;
+  padding: 10px;
+  width: 80%;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#modal_confirm{
+  font-size: 15px;
+  margin: auto;
+}
+
+#modal_confirm td {
+  padding: 10px;
+}
+
+#modal_confirm input {
+  height: 40px;
+  width: 300px;
+}
+
+#confirm_btn1 {
+  font-size: 15px ;
+  height: 35px;
+  border: 1px solid rgb(254,116,119);
+  border-radius: 5px;
+  background-color: rgb(254,116,119);
+  color: white;
+  width: 100%;
+  padding: 10px;
+}
+
+#modal_confirm button {
+  font-size: 15px ;
+  height: 35px;
+  border: 1px solid rgb(254,116,119);
+  border-radius: 5px;
+  background-color: rgb(254,116,119);
+  color: white;
+  width: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -19,6 +19,7 @@ public class Member {
 	private String gradeNo;
 
 	public Member() {
+
 	}
 
 	public Member(int memberNo, String memberId, String password, String name, String birthDate, String gender,
@@ -38,6 +39,29 @@ public class Member {
 		this.status = status;
 		this.totalMoney = totalMoney;
 		this.gradeNo = gradeNo;
+	}
+
+	/**
+	 * 2023-04-15 김서영 회원가입용 생성자
+	 *
+	 * @param memberId
+	 * @param password
+	 * @param name
+	 * @param birthDate
+	 * @param gender
+	 * @param email
+	 * @param phone
+	 */
+	public Member(String memberId, String password, String name, String birthDate, String gender, String email,
+			String phone) {
+		super();
+		this.memberId = memberId;
+		this.password = password;
+		this.name = name;
+		this.birthDate = birthDate;
+		this.gender = gender;
+		this.email = email;
+		this.phone = phone;
 	}
 
 	public int getMemberNo() {

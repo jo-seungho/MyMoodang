@@ -2,20 +2,14 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 
-        <entry key="emailCheck">
-         <!-- 이메일 중복체크 용 쿼리문 / 2023-04-14 김서영 -->
+        <entry key="idCheck">
+         <!-- 아이디 중복체크 용 쿼리문 / 2023-04-14 김서영 -->
         	SELECT COUNT(*) AS CNT
-			    FROM MEMBER
-			    WHERE EMAIL = ?
+			  FROM MEMBER
+		 	 WHERE MEMBER_ID = ?
         </entry>
-        
-        
-        
-        
-        
-        
-        
-        
+
+
 <!--  어드민부분 -->
 
         <!-- 회원 전체 조회 / 2023-04-14 최명진 -->
@@ -23,30 +17,31 @@
         SELECT MEMBER_NO, MEMBER_ID
 		     , PASSWORD , NAME
 		     , BIRTH_DATE ,GENDER
-		     , EMAIL , PHONE 
-		     , TO_CHAR(ENROLL_DATE, 'YY/MM/DD HH:MI:SS') ENROLL_DATE 
+		     , EMAIL , PHONE
+		     , TO_CHAR(ENROLL_DATE, 'YY/MM/DD HH:MI:SS') ENROLL_DATE
 		     , TO_CHAR(MODIFY_DATE, 'YY/MM/DD HH:MI:SS') MODIFY_DATE
 		     , STATUS
 		     , GRADE_NAME
 		     , TOTAL_MONEY
 		      FROM MEMBER
-		      JOIN MEMBER_GRADE USING (GRADE_NO)          
+		      JOIN MEMBER_GRADE USING (GRADE_NO)
         </entry>
         <!-- 회원 번호에 따른 상세 조회 / 2023-04-14 최명진 -->
         <entry key="selectMemberAd">
         SELECT MEMBER_NO, MEMBER_ID
 		     , PASSWORD , NAME
 		     , BIRTH_DATE ,GENDER
-		     , EMAIL , PHONE 
-		     , TO_CHAR(ENROLL_DATE, 'YY/MM/DD HH:MI:SS') ENROLL_DATE 
+		     , EMAIL , PHONE
+		     , TO_CHAR(ENROLL_DATE, 'YY/MM/DD HH:MI:SS') ENROLL_DATE
 		     , TO_CHAR(MODIFY_DATE, 'YY/MM/DD HH:MI:SS') MODIFY_DATE
 		     , STATUS
 		     , GRADE_NAME
 		     , TOTAL_MONEY
 		FROM MEMBER
 		JOIN MEMBER_GRADE USING (GRADE_NO)
-		WHERE MEMBER_NO = ? 
+		WHERE MEMBER_NO = ?
         </entry>
+
 
 		<!-- 회원 등급 수정 / 2023-04-14 최명진 -->
 		<entry key="updateMemberAd">
@@ -55,7 +50,51 @@
 		, STATUS = ?
 		WHERE MEMBER_NO = ?
 		</entry>
-			
+
+		<!-- 회원가입할 회원의 번호를 조회하는 쿼리문 / 2023-04-15 김서영  -->
+		<entry key="selectMemberNo">
+			SELECT SEQ_MNO.NEXTVAL AS MEMBER_NO
+			FROM DUAL
+		</entry>
+
+		<!-- 회원가입용 (회원 정보 추가) 쿼리문 / 2023-04-15 김서영  -->
+        <entry key="insertMember">
+        	INSERT INTO MEMBER (MEMBER_NO
+                               , MEMBER_ID
+                               , PASSWORD
+                               , NAME
+                               , BIRTH_DATE
+                               , GENDER
+                               , EMAIL
+                               , PHONE
+                               , ENROLL_DATE)
+                     VALUES (?
+                           , ?
+                           , ?
+                           , ?
+                           , ?
+                           , ?
+                           , ?
+                           , ?
+                           , SYSDATE)
+        </entry>
+
+        <!-- 회원가입하는 회원의 주소 추가용 쿼리문 -->
+        <entry key="insertMemberAddr">
+        	INSERT INTO SHIPPING_ADDRESS (SHIP_NO
+                                        , SHIP_ADDR
+                                        , SHIP_ADDR_INFO
+                                        , PHONE
+                                        , ZIPCODE
+                                        , MEMBER_NO)
+                                  VALUES (SEQ_SHIP_NO.NEXTVAL
+                                        , ?
+                                        , ?
+                                        , ?
+                                        , ?
+                                        , ?)
+        </entry>
+
 </properties>
 
 

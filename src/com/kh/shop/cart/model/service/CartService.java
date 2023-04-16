@@ -1,4 +1,4 @@
-package com.kh.shop.cart.service;
+package com.kh.shop.cart.model.service;
 
 public class CartService {
 
