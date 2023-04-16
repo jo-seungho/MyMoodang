@@ -75,7 +75,7 @@ int maxPage = pi.getMaxPage();
 										<div class="item">
 											<div class="thumb">
 												<a
-													href="/item.detail?bno=<%= i.getItemCode() %>"
+													href="/itemDetail.it?bno=<%= i.getItemCode() %>"
 													class="img"
 													style="background-image: url(https://img-cf.kurly.com/shop/data/goods/1567574126435l0.jpg);">
 													<img src="<%= i.getItemImg() %>"
@@ -91,7 +91,7 @@ int maxPage = pi.getMaxPage();
 												</div>
 											</div>
 
-											<a href="/item.detail?bno=<%= i.getItemCode() %>" class="info"> 
+											<a href="/itemDetail.it?bno=<%= i.getItemCode() %>" class="info"> 
 											<span class="name"> <%= i.getItemName() %> </span> 
 											<span class="cost"> <span class="price"><%= i.getItemPrice() %></span> 
 											<input type="hidden" id="product_cost1" value=1300> 
@@ -220,8 +220,8 @@ int maxPage = pi.getMaxPage();
 		<script>
 			$(function() {
 
-				$(".info").click(function() {
-					location.href = "/item.detail";
+				$(".thumb").click(function() {
+					location.href = "/itemDetail.it";
 				});
 			});
 		</script>
