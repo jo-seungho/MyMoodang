@@ -1,71 +1,97 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"
 	import="java.util.ArrayList, com.kh.user.shop.item.model.vo.Item, com.kh.common.model.vo.PageInfo"%>
-<%-- 2023-04-16 조승호 --%>
+<%-- 2023-04-17 조승호 --%>
 <%
 	PageInfo pi = (PageInfo) request.getAttribute("pi");
 	ArrayList<Item> list = (ArrayList<Item>) request.getAttribute("list");
-
-	String category = (String)request.getAttribute("category");
 
 	int currentPage = pi.getCurrentPage();
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage();
 	int maxPage = pi.getMaxPage();
-
 %>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>신상품</title>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<link rel="stylesheet" href="/resources/css/shop/best_item_list.css" />
 <link rel="stylesheet" href="/resources/css/shop/itemList.css" />
 
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="/resources/js/shop/best_item_list.js"></script>
 <script src="/resources/js/shop/itemList.js"></script>
-<title>상품 리스트</title>
+
+
+<link rel="stylesheet" type="text/css"
+	href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" />
+<script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
 </head>
 <body>
-	<div id="wrap">
-		<%@ include file="../common/header.jsp"%>
-		<div id="main">
-			<div id="contents">
-				<div class="page_aticle">
-					<div id="lnbMenu" class="lnb_menu">
-						<div class="inner_lnb">
-							<div class="ico_cate">
-								<span class="ico" style="display: block;"> <img
-									src="/resources/img/logo.png" alt="카테고리 아이콘">
-									<p>${category}</p>
-									<p><%= category %></p>
-								</span> <span class="tit">전체보기</span>
-							</div>
 
-							<ul class="list">
-								<li name="cate_gory"><a class="on" href="/itemList.it?currentPage=1&category=전체">전체보기</a></li>
-								<li name="cate_gory"><a href="/itemList.it?currentPage=1&category=제로음료" class=>제로음료</a></li>
-								<li name="cate_gory"><a href="/itemList.it?currentPage=1&category=무가당" class=>무가당</a></li>
-								<li name="cate_gory"><a href="/itemList.it?currentPage=1&category=단백질" class=>단백질</a></li>
-								<li name="cate_gory"><a href="/itemList.it?currentPage=1&category=도시락" class=>도시락</a></li>
-								<li name="cate_gory"><a href="/itemList.it?currentPage=1&category=기타" class=>기타</a></li>
-							</ul>
+	<%@ include file="../common/header.jsp"%>
+	<!-- 카테고리 메뉴바 시작 -->
+	<!-- 내용 컨텐츠 영역 시작-->
+	<!-- 내용 컨텐츠 영역 시작-->
+	<div id="Container-Wrapper">
+		<div class="page_aticle">
+			<div class="content">
+
+				<!-- 카테고리 메뉴바 시작 -->
+				<div id="lnbMenu" class="lnb_menu">
+					<div class="inner_lnb">
+						<div class="ico_cate">
+							<span class="ico" style="display: block;"> <img
+								src="/resources/img/logo.png" alt="카테고리 아이콘">
+							</span> <span class="tit">전체보기</span>
+						</div>
+
+						<ul class="list">
+							<li name="cate_gory"><a class="on">전체보기</a></li>
+							<li name="cate_gory"><a class=>제로음료</a></li>
+							<li name="cate_gory"><a class=>무가당</a></li>
+							<li name="cate_gory"><a class=>단백질</a></li>
+							<li name="cate_gory"><a class=>도시락</a></li>
+							<li name="cate_gory"><a class=>기타</a></li>
+						</ul>
+					</div>
+				</div>
+				<!-- 카테고리 메뉴바 끝 -->
+
+
+
+				<!-- 배너 시작 -->
+				<div class="banner_wrapper">
+					<div class="slider">
+						<div class="imgs">
+							<img src="/resources/img/배너1.jpg" align="center">
+						</div>
+
+						<div class="imgs">
+							<img src="/resources/img/배너2.jpg" align="center">
+						</div>
+
+						<div class="imgs">
+							<img src="/resources/img/배너3.jpg" align="center">
 						</div>
 					</div>
+				</div>
 
-
-					<div id="goodsList" class="page_section section_goodslist">
-						<div class="list_ability"></div>
-
-
-						<div class="list_goods">
-							<div class="inner_listgoods">
-								<ul class="list">
-									<!-- 여기서 부터 물건 리스트-->
-
-									<%
+				<!-- 배너 끝 -->
+				<div id="goodsList" class="page_section section_goodslist">
+					<div class="list_goods">
+						<div class="inner_listgoods">
+							<ul class="list">
+								<!-- 여기서 부터 물건 리스트-->
+<%
 										if (list.isEmpty()) {
 									%>
 									<div class="item">등록된 상품이 없습니다.</div>
@@ -79,7 +105,7 @@
 										<div class="item">
 											<div class="thumb">
 												<a
-													href="/itemDetail.it?bno=<%= i.getItemCode() %>"
+													href="/item.detail?bno=<%= i.getItemCode() %>"
 													class="img"
 													style="background-image: url(https://img-cf.kurly.com/shop/data/goods/1567574126435l0.jpg);">
 													<img src="<%= i.getItemImg() %>"
@@ -95,7 +121,7 @@
 												</div>
 											</div>
 
-											<a href="/itemDetail.it?bno=<%= i.getItemCode() %>" class="info"> 
+											<a href="/item.detail?bno=<%= i.getItemCode() %>" class="info"> 
 											<span class="name"> <%= i.getItemName() %> </span> 
 											<span class="cost"> <span class="price"><%= i.getItemPrice() %></span> 
 											<input type="hidden" id="product_cost1" value=1300> 
@@ -111,22 +137,35 @@
 									<%
 										}
 									%>
-
-								</ul>
-							</div>
+							</ul>
 						</div>
+					</div>
+				</div>
 
+
+
+			</div>
+
+
+
+
+
+
+			<div id="viewOrderList" class="page_section section_orderlist">
+
+				<div id="viewOrderList" class="page_section section_orderlist">
+
+					<!-- 주문내역 페이지 시작 -->
+					<div id="viewOrderList">
 
 
 						<div class="layout-pagination">
 							<div class="pagediv">
 								<% if(currentPage != 1) { %>
-
-								<a href="/itemList.it?currentPage=<%= startPage %>&category=${category}"
-
+								<a href="/bestItemList.it?currentPage=<%= startPage %>"
 									class="layout-pagination-button layout-pagination-first-page">맨 처음 페이지로 가기
 								</a> 
-								<a href="/itemList.total?currentPage=<%= currentPage - 1 %>&category=${category}" class="layout-pagination-button layout-pagination-prev-page">
+								<a href="/bestItemList.it?currentPage=<%= currentPage - 1 %>" class="layout-pagination-button layout-pagination-prev-page">
 									이전 페이지로 가기
 								</a> 
 								<% } else {%>
@@ -139,9 +178,7 @@
 								<% } %>
 								<% for(int p = startPage; p <= endPage; p++) { %>
 									<% if(p != currentPage) { %>
-
-								<a href="/itemList.it?currentPage=<%= p %>&category=${category}"> 
-
+								<a href="/bestItemList.it?currentPage=<%= p %>"> 
 									<span> 
 										<strong class="layout-pagination-button layout-pagination-number __active"><%= p %></strong>
 									</span>
@@ -154,12 +191,10 @@
 									<% } %>
 								<% } %>
 								<% if(currentPage != maxPage) { %>
-
-								 <a href="/itemList.it?currentPage=<%= currentPage + 1 %>&category=${category}" class="layout-pagination-button layout-pagination-next-page">
+								 <a href="/bestItemList.it?currentPage=<%= currentPage + 1 %>" class="layout-pagination-button layout-pagination-next-page">
 								 다음 페이지로 가기
 								 </a> 
-								 <a href="/itemList.it?currentPage=<%= endPage %>&category=${category}" class="layout-pagination-button layout-pagination-last-page">
-
+								 <a href="/bestItemList.it?currentPage=<%= endPage %>" class="layout-pagination-button layout-pagination-last-page">
 								 맨끝 페이지로 가기
 								 </a>
 								 <% } else { %>
@@ -173,10 +208,14 @@
 
 							</div>
 						</div>
+
+
 					</div>
 				</div>
 			</div>
 		</div>
+	</div>
+	</div>
 		<div id="cartPut">
 			<div class="cart_option cart_type3" style="opacity: 1;">
 				<form action="" method="POST" id="contactsForm">
@@ -227,23 +266,14 @@
 				</form>
 			</div>
 		</div>
-		<script>
-
-		/*
-			//$(function() {
-
-				$(".info").click(function() {
-					location.href = "/item.it";
-
-				});
-			});
-		*/
-		</script>
 
 
 
+	<%@ include file="../common/footer.jsp"%>
 
-		<%@ include file="../common/footer.jsp"%>
-	</div>
+	<script>
+	$.noConflict();
+	</script>
+
 </body>
 </html>

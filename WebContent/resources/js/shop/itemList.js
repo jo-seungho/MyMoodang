@@ -6,6 +6,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
   $(document).ready(function () {
 
+
     var noBody = $('.noBody');
 
 
@@ -22,7 +23,6 @@ window.addEventListener('DOMContentLoaded', function () {
       product_cost[i] = $(' li:nth-child(' + i + ') input').val();
 
       product_id[i] = $('li:nth-child(' + i + ') .btn_cart').val();
-      console.log("sadsadsad")
     }
 
 
@@ -198,7 +198,8 @@ window.addEventListener('DOMContentLoaded', function () {
 
     $('li[name=cate_gory]').click(function () {                  // li태그에서 name이 cate_gory인걸 클릭했을 때
       var cate_index = $('li[name=cate_gory]').index(this);  // 변수 cate_index에다 , 현재 클릭한 name=category의 인덱스를 저장
-
+      console.log(cate_index);
+      $(this).css("backgroundColor", "red");
 
       for (i = 0; i < $('.inner_lnb ul li').length; i++) {           // li의 갯수만큼 반복해서 on이라는 클래스를 가지고 있는 애를 찾아서 on 삭제
         if ($('.inner_lnb ul li a').hasClass("on") === true) {      // 여기서 on은 글자색 보라색으로 해주는 css클래스요소
@@ -209,7 +210,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
       var change_bg = $('.inner_lnb ul li:eq(' + cate_index + ') a').innerWidth();  //change_bg라는 변수에다가 방금 클릭한 a태그의 가로길이 값을 저장(막대 바 크기 조절을 위해)
 
-      console.log($('.inner_lnb ul li:eq(' + cate_index + ') a').text());
+      console.log($('.inner_lnb ul li:eq(' + cate_index + ') a').text());  
 
 
       var pos = $('.inner_lnb ul li:eq(' + cate_index + ') a').position()  // 변수 pos에다가 현재 클릭한 a 태그의 위치값 저장
