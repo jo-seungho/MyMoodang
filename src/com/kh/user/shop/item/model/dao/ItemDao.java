@@ -13,6 +13,7 @@ import java.util.Properties;
 
 import com.kh.common.JDBCTemplate;
 import com.kh.common.model.vo.PageInfo;
+import com.kh.user.shop.item.model.vo.Attachment;
 import com.kh.user.shop.item.model.vo.Item;
 
 public class ItemDao {
@@ -21,7 +22,7 @@ public class ItemDao {
 
 	public ItemDao() {
 
-		String fileName = ItemDao.class.getResource("/sql/user/item/item-mapper.xml").getPath();
+		String fileName = ItemDao.class.getResource("/sql/item/item-mapper.xml").getPath();
 
 		try {
 			prop.loadFromXML(new FileInputStream(fileName));
@@ -29,8 +30,17 @@ public class ItemDao {
 			e.printStackTrace();
 		}
 	}
+	//-------------------------------------------------------------------------------------------------
 
-    public int increaseCount(Connection conn, int itemNo) {
+
+	/**
+     * 상품 상세보기에서 조회수 증가
+     * 2023-04-16 이태화
+     * @param itemcode
+	 * @param conn
+     * @return
+     */
+    public int increaseCount(Connection conn, int itemcode) {
         int result = 0;
         PreparedStatement pstmt = null;
 
@@ -38,7 +48,7 @@ public class ItemDao {
         
         try {
             pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, itemNo);
+            pstmt.setInt(1, itemcode);
             
             result = pstmt.executeUpdate();
             
@@ -50,8 +60,14 @@ public class ItemDao {
         
         return result;
     }
-
-    public Item selectItem(Connection conn, int itemNo) {
+	/**
+     * 상품 상세보기
+     * 2023-04-16 이태화
+     * @param itemcode
+	 * @param conn
+     * @return
+     */
+    public Item selectItem(Connection conn, int itemcode) {
         Item i = null;
         PreparedStatement pstmt = null;
         ResultSet rset = null;
@@ -60,7 +76,7 @@ public class ItemDao {
         
         try {
             pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, itemNo);
+            pstmt.setInt(1, itemcode);
             
             rset = pstmt.executeQuery();
             
@@ -78,6 +94,45 @@ public class ItemDao {
         
         return i;
     }
+    
+	/**
+     * 상품 상세보기에서 이미지 조회
+     * 2023-04-16 이태화
+     * @param itemcode
+	 * @param conn
+     * @return
+     */
+	public ArrayList<Attachment> selectAttachmentList(Connection conn, int itemcode) {
+
+		ArrayList<Attachment> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectAttachmentList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, itemcode);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Attachment at = new Attachment();
+
+				
+				at.setItemImage(rset.getString("ITEM_IMAGE"));
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
     
     
     
@@ -116,7 +171,7 @@ public class ItemDao {
 					close(rset);
 					close(pstmt);
 				}
-				
+				System.out.println(listCount);
 				return listCount;
 			}
 
@@ -311,6 +366,7 @@ public class ItemDao {
 		return list;
 	}
 
+
     /**
      * 신규 리스트 조회
      * 2023-04-17 조승호
@@ -414,3 +470,4 @@ public class ItemDao {
 
 
 }
+

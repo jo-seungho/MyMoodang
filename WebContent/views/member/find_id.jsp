@@ -4,14 +4,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    
     <link rel="stylesheet" href="/resources/css/common/reset.css">
     <link rel="stylesheet" href="/resources/css/common/header.css">
     <link rel="stylesheet" href="/resources/css/common/footer.css">
     <link rel="stylesheet" href="/resources/css/member/login.css">
     <link rel="stylesheet" href="/resources/css/member/find_id.css">
-
+   
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script src="/resources/js/common/header.js"></script>
     <script src="/resources/js/member/find_id.js"></script>
 

@@ -2,15 +2,39 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 
 <properties>
-	<entry key="">
+	<entry key="increaseCount">
 		UPDATE ITEM
-		SET COUNT = COUNT + 1
-		WHERE ITEM_NO = ?
+		SET ITEM_HITS = ITEM_HITS + 1
+		WHERE ITEM_CODE = ?
+		AND ITEM_STATUS = 'Y'
 	</entry>
 
-	<entry key="">
-		SELECT ITEM_NO
-		,
+	<entry key="selectItem">
+	SELECT ITEM_CODE
+      ,ITEM_NAME
+      ,ITEM_PRICE
+      ,ITEM_PRICE * (1-ITEM_DISCOUNT) as DISCOUNT_PRICE
+      ,ITEM_DISCOUNT
+      ,ITEM_CATEGORY    
+      ,ITEM_IMAGE
+	FROM ITEM I 
+	JOIN (
+    	SELECT ITEM_IMG_CODE, ITEM_IMAGE
+    	FROM ITEM_IMG
+    	WHERE ITEM_IMG_T_F = 'Y'
+		) 
+		IMG ON ( IMG.ITEM_IMG_CODE = I.ITEM_CODE)
+		WHERE ITEM_CODE = ?
+		AND ITEM_STATUS = 'Y';
+
+	</entry>
+
+	<entry key="selectAttachmentList">
+		SELECT ITEM_IMG_CODE
+		, ITEM_IMAGE
+		, ITEM_IMG_T_F
+		FROM ITEM_IMG
+		WHERE ITEM_IMG_CODE = ?
 
 	</entry>
 

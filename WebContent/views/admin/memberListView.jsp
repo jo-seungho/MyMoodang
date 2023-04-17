@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="com.kh.member.model.vo.Member, java.util.ArrayList" %> <% ArrayList<Member
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="com.kh.admin.member.model.vo.Member, java.util.ArrayList" %> <% ArrayList<Member
   >list = (ArrayList<Member
     >) request.getAttribute("list"); %>
     <!DOCTYPE html>

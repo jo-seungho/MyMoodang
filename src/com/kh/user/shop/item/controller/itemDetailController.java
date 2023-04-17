@@ -1,6 +1,7 @@
 package com.kh.user.shop.item.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,12 +10,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.user.shop.item.model.service.ItemService;
+import com.kh.user.shop.item.model.vo.Attachment;
 import com.kh.user.shop.item.model.vo.Item;
 
 /**
  * Servlet implementation class itemDetailController
  */
-@WebServlet("/item.it")
+@WebServlet("/itemDetail.it")
 public class itemDetailController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -31,19 +33,27 @@ public class itemDetailController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		int itemNo = Integer.parseInt(request.getParameter("No"));
+		// 상품을 클릭 했을 때 상품코드를 받아와서 상품 상세보기 페이지로 이동
+		int itemcode = Integer.parseInt(request.getParameter("code"));
 
-		int result = new ItemService().increaseCount(itemNo);
+		// 상품 조회수 증가용 서비스 호출
+		int result = new ItemService().increaseCount(itemcode);
 
-		if(result > 0) {
+		if(result > 0) { // 조회수 증가 성공 시 상품 상세보기 페이지로 이동
 			
-			Item i = new ItemService().selectItem(itemNo);
-		} else {
+			// 상품 상세보기용 서비스 호출
+			Item i = new ItemService().selectItem(itemcode);
+
+			ArrayList<Attachment> list = new ItemService().selelctAttachmentList(itemcode);
+
+			// 응답데이터 전달용 request 객체에 저장
+			request.setAttribute("i", i);
+			request.setAttribute("list", list);
+
+		} else { // 조회수 증가 실패 시 에러페이지로 이동
 			request.setAttribute("", "");
 		}	
 
-		
-		
 		
 		request.getRequestDispatcher("views/shop/itemdetail.jsp").forward(request, response);
 		
