@@ -1,11 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="com.kh.shop.item.model.vo.Item, java.util.ArrayList, com.kh.common.model.vo.PageInfo"%> <% PageInfo pi = (PageInfo)request.getAttribute("pi"); ArrayList<Item
-  >list = (ArrayList<Item
-    >)request.getAttribute("list");
-int currentPage = pi.getCurrentPage(); 
-int startPage = pi.getStartPage(); 
-int endPage = pi.getEndPage(); 
-int maxPage = pi.getMaxPage();
-String category = request.getParameter("category");
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="com.kh.admin.shop.item.model.vo.Item, java.util.ArrayList, com.kh.admin.common.model.vo.AdminPageInfo"%> 
+<% 
+	AdminPageInfo pi = (AdminPageInfo)request.getAttribute("pi"); 
+	ArrayList<Item>list = (ArrayList<Item>)request.getAttribute("list");
+	int currentPage = pi.getCurrentPage(); 
+	int startPage = pi.getStartPage(); 
+	int endPage = pi.getEndPage(); 
+	int maxPage = pi.getMaxPage();
+	String category = request.getParameter("category");
 %>
     <!DOCTYPE html>
     <html lang="en">
@@ -114,9 +115,9 @@ String category = request.getParameter("category");
                 <hr />
                 <div class="row">
                   <div class="col btn-hover">
-                    <button class="btn" id="btn1">전체 <span class="list-btn"><%= pi.getListCount() %></span></button>
-                    <button class="btn" id="btn2">판매 <span class="list-btn"><%= pi.getEnablePage() %></span></button>
-                    <button class="btn" id="btn3">품절 <span class="list-btn"><%= pi.getDisablePage() %></span></button>
+                    <button class="btn" id="btn1">전체 <span class="list-btn"><%= pi.getTotalCount() %></span></button>
+                    <button class="btn" id="btn2">판매 <span class="list-btn"><%= pi.getSaleCount() %></span></button>
+                    <button class="btn" id="btn3">품절 <span class="list-btn"><%= pi.getSoldCount() %></span></button>
                   </div>
                 </div>
 
@@ -166,25 +167,66 @@ String category = request.getParameter("category");
                   </tbody>
                 </table>
 
-                <div class="pagination" style="margin-top: 50px">
+                <%-- <div class="pagination" style="margin-top: 50px">
                   <% if(currentPage != 1) { %>
-                  <a href="/itemList.ad?page=<%= startPage %>">&lt;&lt;</a>
-                  <a href="/itemList.ad?Page=<%= currentPage -1 %>">&lt;</a>
+                  <a href="/itemList.ad?page=<%= startPage %>&category=<%=category%>">&lt;&lt;</a>
+                  <a href="/itemList.ad?Page=<%= currentPage -1 %>&category=<%=category%>">&lt;</a>
                   <% } else { %>
-                  <a href="">&lt;&lt;</a>
+                  <a href="" class="disabled">&lt;&lt;</a>
                   <a href="">&lt;</a>
                   <% } %> <% for(int p = startPage; p <= endPage; p++) { %> <% if(p == currentPage) { %>
-                  <a class="active" href="/itemList.ad?page=<%= p %>"><%= p %></a>
+                  <a class="active" href="/itemList.ad?page=<%= p %>&category=<%=category%>"><%= p %></a>
                   <% } else { %>
-                  <a href="/itemList.ad?page=<%= p %>"><%= p %></a>
+                  <a href="/itemList.ad?page=<%= p %>&category=<%=category%>"><%= p %></a>
                   <% } %> <% } %> <% if(currentPage != maxPage) { %>
-                  <a href="/itemList.ad?page=<%= currentPage + 1 %>">&gt;</a>
-                  <a href="/itemList.ad?page=<%= maxPage %>">&gt;&gt;</a>
+                  <a href="/itemList.ad?page=<%= currentPage + 1 %>&category=<%=category%>">&gt;</a>
+                  <a href="/itemList.ad?page=<%= maxPage %>&category=<%=category%>">&gt;&gt;</a>
                   <% } else { %>
                   <a href="#">&gt;</a>
                   <a href="#">&gt;&gt;</a>
                   <% } %>
-                </div>
+                </div> --%>
+                <ul class="pagination" style="margin-top: 50px">
+                  <% if(currentPage != 1) { %>
+                  <li class="page-item">
+                  	<a href="/itemList.ad?page=<%= startPage %>&category=<%=category%>">&lt;&lt;</a>
+                  </li>
+                  <li class="page-item">
+                  	<a href="/itemList.ad?Page=<%= currentPage -1 %>&category=<%=category%>">&lt;</a>
+                  </li>
+                  <% } else { %>
+                  <li class="page-item disabled">
+                  <a class="page-link" href="#" tabindex="-1">&lt;&lt;</a>
+                  </li>
+                  <li class="page-item disabled">
+                  <a class="page-link" href="#" tabindex="-1">&lt;</a>
+                  </li>
+                  <% } %> <% for(int p = startPage; p <= endPage; p++) { %> <% if(p == currentPage) { %>
+                  <li class="page-item active">
+                  <a class="page-link" href="/itemList.ad?page=<%= p %>&category=<%=category%>"><%= p %></a>
+                  </li>
+                  <% } else { %>
+                  <li class="page-item">
+                  <a class="page-link" href="/itemList.ad?page=<%= p %>&category=<%=category%>"><%= p %></a>
+                  </li>
+                  <% } %> 
+                  	<% } %> 
+                  <% if(currentPage != maxPage) { %>
+                  <li lass="page-item">
+                  <a class="page-link" href="/itemList.ad?page=<%= currentPage + 1 %>&category=<%=category%>">&gt;</a>
+                  </li>
+                  <li lass="page-item">
+                  <a class="page-link" href="/itemList.ad?page=<%= maxPage %>&category=<%=category%>">&gt;&gt;</a>
+                  </li>
+                  <% } else { %>
+                  <li class="page-item disabled">
+                  <a class="page-link" href="#" tabindex="-1">&gt;</a>
+                  </li>
+                  <li class="page-item disabled">
+                  <a class="page-link" href="#" tabindex="-1">&gt;&gt;</a>
+                  </li>
+                  <% } %>
+                </ul>
 
                 <br /><br />
               </div>
@@ -218,17 +260,17 @@ String category = request.getParameter("category");
 
             // Apply underline effect when clicking btn1, and remove underline effect for btn2 and btn3
             $('#btn1').click(function () {
-              location.href = '/itemList.ad?page=<%=currentPage%>&category=a';
+              location.href = '/itemList.ad?page=1&category=a';
             });
 
             // Apply underline effect when clicking btn2, and remove underline effect for btn1 and btn3
             $('#btn2').click(function () {
-              location.href = '/itemList.ad?page=<%=currentPage%>&category=y';
+              location.href = '/itemList.ad?page=1&category=y';
             });
 
             // Apply underline effect when clicking btn3, and remove underline effect for btn1 and btn2
             $('#btn3').click(function () {
-              location.href = '/itemList.ad?page=<%=currentPage%>&category=n';
+              location.href = '/itemList.ad?page=1&category=n';
             });
           });
         </script>
