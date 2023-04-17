@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class MemberLoginController
  */
-@WebServlet("/login.me")
+@WebServlet("/loginForm.me")
 public class MemberLoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -25,7 +25,7 @@ public class MemberLoginController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("views/member/login.jsp").forward(request, response);
+		request.getRequestDispatcher("views/member/login.jsp").forward(request, response);  // 로그인 화면으로 이동
 	}
 
 	/**

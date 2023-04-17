@@ -1,23 +1,24 @@
-var name = "test"
-var email = "test@inu.ac.kr"
 
 
 function check_input_fid(){
-    if (!document.fm_id.srch_id.value){
-        alert("이름을 입력하세요");
-        document.fm_id.srch_id.focus();
-        return;
+
+    let name = $("#srch_id")
+    let phone = $("#srch_phone")
+   
+    // 이름 유효성 검사
+    let regExp = /^[가-힣]{2,}$/;
+    if(!regExp.test(name.val())) {
+        alert("이름을 확인하고 다시 입력해주세요.");
+        name.focus();
+        return false;
     }
-    if (!document.fm_id.srch_phone.value){
-        alert("가입 시 등록한 휴대폰번호를 입력하세요");
-        document.fm_id.srch_phone.focus();
-        return;
+
+    regExp = /^\d{3}\d{3,4}\d{4}$/;
+    if(!regExp.test(phone.val())) {
+        alert("핸드폰 번호를 확인하고 다시 입력해주세요.");
+        phone.focus();
+        return false;
     }
-    if (document.fm_id.srch_id.value != name || document.fm_id.srch_email.value != email){
-        alert("등록하신 회원정보가 없습니다.");
-        location.href="find_id.html";
-        return;
-    }
-    document.fm_id.submit();//action미지정. 이동없음
+    return true;
 
 }

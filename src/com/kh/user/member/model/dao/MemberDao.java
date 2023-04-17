@@ -313,4 +313,36 @@ public class MemberDao {
 
 		return result;
 	}
+
+
+	public Member findId(Connection conn, Member m) {
+
+		Member fi = new Member();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		String sql = prop.getProperty("findId");
+
+		try {
+			int i = 0;
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(++i, m.getName());
+			pstmt.setString(++i, m.getPhone());
+
+			rset = pstmt.executeQuery();
+
+			while(rset.next()) {
+				fi.setName(rset.getString("NAME"));
+				fi.setMemberId(rset.getString("MEMBER_ID"));
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return fi;
+	}
 }

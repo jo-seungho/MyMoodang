@@ -10,47 +10,6 @@
         </entry>
 
 
-<!--  어드민부분 -->
-
-        <!-- 회원 전체 조회 / 2023-04-14 최명진 -->
-        <entry key="selectMemberListAd">
-        SELECT MEMBER_NO, MEMBER_ID
-		     , PASSWORD , NAME
-		     , BIRTH_DATE ,GENDER
-		     , EMAIL , PHONE
-		     , TO_CHAR(ENROLL_DATE, 'YY/MM/DD HH:MI:SS') ENROLL_DATE
-		     , TO_CHAR(MODIFY_DATE, 'YY/MM/DD HH:MI:SS') MODIFY_DATE
-		     , STATUS
-		     , GRADE_NAME
-		     , TOTAL_MONEY
-		      FROM MEMBER
-		      JOIN MEMBER_GRADE USING (GRADE_NO)
-        </entry>
-        <!-- 회원 번호에 따른 상세 조회 / 2023-04-14 최명진 -->
-        <entry key="selectMemberAd">
-        SELECT MEMBER_NO, MEMBER_ID
-		     , PASSWORD , NAME
-		     , BIRTH_DATE ,GENDER
-		     , EMAIL , PHONE
-		     , TO_CHAR(ENROLL_DATE, 'YY/MM/DD HH:MI:SS') ENROLL_DATE
-		     , TO_CHAR(MODIFY_DATE, 'YY/MM/DD HH:MI:SS') MODIFY_DATE
-		     , STATUS
-		     , GRADE_NAME
-		     , TOTAL_MONEY
-		FROM MEMBER
-		JOIN MEMBER_GRADE USING (GRADE_NO)
-		WHERE MEMBER_NO = ?
-        </entry>
-
-
-		<!-- 회원 등급 수정 / 2023-04-14 최명진 -->
-		<entry key="updateMemberAd">
-		UPDATE MEMBER
-		SET GRADE_NO = ?
-		, STATUS = ?
-		WHERE MEMBER_NO = ?
-		</entry>
-
 		<!-- 회원가입할 회원의 번호를 조회하는 쿼리문 / 2023-04-15 김서영  -->
 		<entry key="selectMemberNo">
 			SELECT SEQ_MNO.NEXTVAL AS MEMBER_NO
@@ -93,6 +52,16 @@
                                         , ?
                                         , ?
                                         , ?)
+        </entry>
+
+
+        <entry key="findId">
+			SELECT NAME
+          		 , MEMBER_ID
+			  FROM MEMBER
+			 WHERE NAME = ?
+  			   AND PHONE = ?
+  			   AND STATUS = 'Y'
         </entry>
 
 </properties>

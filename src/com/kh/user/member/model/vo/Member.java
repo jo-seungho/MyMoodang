@@ -64,6 +64,22 @@ public class Member {
 		this.phone = phone;
 	}
 
+
+
+
+
+	/**
+	 * 아이디 찾기 용 생성자
+	 * 2023-04-17 김서영
+	 * @param name
+	 * @param phone
+	 */
+	public Member(String name, String phone) {
+		super();
+		this.name = name;
+		this.phone = phone;
+	}
+
 	public int getMemberNo() {
 		return memberNo;
 	}

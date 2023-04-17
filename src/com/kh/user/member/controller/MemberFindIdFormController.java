@@ -13,14 +13,14 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class MemberFindIdController
  */
-@WebServlet("/findId.me")
-public class MemberFindIdController extends HttpServlet {
+@WebServlet("/findIdForm.me")
+public class MemberFindIdFormController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberFindIdController() {
+    public MemberFindIdFormController() {
         super();
     }
 
