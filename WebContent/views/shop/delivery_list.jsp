@@ -1,3 +1,9 @@
+<!-- 2023.04.17 이지환 -->
+<!-- jsp명 수정
+	 delibery_lilst.jsp
+	 	->
+	 delibery_list.jsp
+-->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -61,7 +67,7 @@
                                       <a href="#">찜한 상품</a>
                                   </li>
                                   <li>
-                                      <a href="#" style="color: #5f0080;">배송지관리</a>
+                                      <a href="delibery_List.do" style="color: #5f0080;">배송지관리</a>
                                   </li>
                                   <li>
                                       <a href="#">리뷰 관리</a>
@@ -82,7 +88,13 @@
                     <div class="page_section section_destination">
                         <div class="head_aticle">
                             <h2 class="tit">
-                                배송지 관리
+                 <!--              
+		                               배송지 관리
+		                                
+		                                db 회원 배송지 정보
+		                                요걸 불러오려고 하거든요?
+		                                ArrayList<ShippingAdress> = new ArrayList<
+                                -->
                                 <span id="addrListInfo" class="tit_sub">배송지에 따라 상품 정보가 달라질 수 있습니다.</span>
                             </h2>
                             <div class="new_address">
@@ -103,18 +115,25 @@
                                         <th class="tit_phone">연락처</th>
                                         <th class="tit_delivery">배송유형</th>
                                         <th class="tit_modify">수정</th>
-                                        
+                                     <!--  
+											 회원 정보 받는 메소드, 
+											회원정보를 뽑은 멤버객체에서 회원넘버 외래키를 get 으로뽑아서 그거를 매개변수로 배송지를 불러오는 메서드 만들기
+											memeber 회원정보, ArrayList<배송정보> 이 배송정보를 리퀘스트로 담아서 여기서 뽑으면 됨
+                                        =
+                                     -->
                                     </tr>
                                 </thead>
 
                                 <tbody id="addrList">
                                     <tr>
+
                                         <td class="num">1</td>
 
                                         <td class="address">
                                             <span class="badge_default">
                                                 기본 배송지
                                             </span>
+                                        
                                             <p class="addr">
                                                 경기도 광명시 하안동
                                             </p>
@@ -135,6 +154,7 @@
                                                 수정하기
                                             </button>
                                         </td>
+                                        
 
                                         
                                     </tr>
@@ -171,4 +191,4 @@
       </div>
     </div>  
   </body>
-</htm>
+</html>

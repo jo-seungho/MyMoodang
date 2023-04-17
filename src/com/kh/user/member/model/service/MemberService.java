@@ -131,5 +131,18 @@ public class MemberService {
 		return result1 * result2;
 
 	}
+	
+	/* 로그인한 회원 본인 2023.04.17 이지환 */
+	
+	 public ArrayList<ShippingAddress> selectShippingAddressList(int memberNo) {
+	        Connection conn = JDBCTemplate.getConnection();
+	        
+	        ArrayList<ShippingAddress> list = new MemberDao().selectShippingAddressList(conn, memberNo);
+	        
+	        close(conn);
+	        
+	        return list;
+	    }
+		
 
 }
