@@ -11,6 +11,16 @@
 		SELECT COUNT(*) COUNT FROM ITEM
 		WHERE ITEM_STATUS = ?
 	</entry>
+
+	<entry key="selectAttachmentList">
+	SELECT ITEM_IMG_CODE
+      ,ITEM_IMG_T_F
+      ,ITEM_IMAGE
+      ,ITEM_IMG_DELETE_T_F
+	FROM ITEM_IMG
+	WHERE ITEM_IMG_CODE = ?
+
+	</entry>
 	
 
 	<entry key="selectItemList">

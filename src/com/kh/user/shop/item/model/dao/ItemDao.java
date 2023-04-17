@@ -22,7 +22,7 @@ public class ItemDao {
 
 	public ItemDao() {
 
-		String fileName = ItemDao.class.getResource("/sql/item/item-mapper.xml").getPath();
+		String fileName = ItemDao.class.getResource("/sql/user/item/item-mapper.xml").getPath();
 
 		try {
 			prop.loadFromXML(new FileInputStream(fileName));
@@ -36,11 +36,11 @@ public class ItemDao {
 	/**
      * 상품 상세보기에서 조회수 증가
      * 2023-04-16 이태화
-     * @param itemcode
+     * @param bno
 	 * @param conn
      * @return
      */
-    public int increaseCount(Connection conn, int itemcode) {
+    public int increaseCount(Connection conn, int bno) {
         int result = 0;
         PreparedStatement pstmt = null;
 
@@ -48,7 +48,7 @@ public class ItemDao {
         
         try {
             pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, itemcode);
+            pstmt.setInt(1, bno);
             
             result = pstmt.executeUpdate();
             
@@ -63,11 +63,11 @@ public class ItemDao {
 	/**
      * 상품 상세보기
      * 2023-04-16 이태화
-     * @param itemcode
+     * @param bno
 	 * @param conn
      * @return
      */
-    public Item selectItem(Connection conn, int itemcode) {
+    public Item selectItem(Connection conn, int bno) {
         Item i = null;
         PreparedStatement pstmt = null;
         ResultSet rset = null;
@@ -76,14 +76,22 @@ public class ItemDao {
         
         try {
             pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, itemcode);
+            pstmt.setInt(1, bno);
             
             rset = pstmt.executeQuery();
-            
-            if(rset.next()) {
-                i = new Item();
 
-            }
+			if(rset.next()) {
+				i = new Item();
+				
+				i.setItemCategory(rset.getString("ITEM_CATEGORY"));
+				i.setItemName(rset.getString("ITEM_NAME"));
+				i.setItemPrice(rset.getInt("ITEM_PRICE"));
+				i.setItemText(rset.getString("ITEM_TEXT"));
+				i.setItemDiscount(rset.getInt("ITEM_DISCOUNT"));
+				i.setItemImg(rset.getString("ITEM_IMG_PATH"));
+				i.setDiscountPrice(rset.getInt("DISCOUNT_PRICE"));
+				
+			}
             
         } catch (SQLException e) {
             e.printStackTrace();
@@ -98,11 +106,11 @@ public class ItemDao {
 	/**
      * 상품 상세보기에서 이미지 조회
      * 2023-04-16 이태화
-     * @param itemcode
+     * @param bno
 	 * @param conn
      * @return
      */
-	public ArrayList<Attachment> selectAttachmentList(Connection conn, int itemcode) {
+	public ArrayList<Attachment> selectAttachmentList(Connection conn, int bno) {
 
 		ArrayList<Attachment> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
@@ -112,7 +120,7 @@ public class ItemDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, itemcode);
+			pstmt.setInt(1, bno);
 			
 			rset = pstmt.executeQuery();
 			
@@ -120,7 +128,41 @@ public class ItemDao {
 				Attachment at = new Attachment();
 
 				
-				at.setItemImage(rset.getString("ITEM_IMAGE"));
+				at.setItemImgPath(rset.getString("ITEM_IMG_PATH"));
+				
+				
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+
+	public ArrayList<Attachment> selelctAttachmentCategory(Connection conn, String category) {
+		ArrayList<Attachment> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selelctAttachmentCategory");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, category);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Attachment at = new Attachment();
+
+				
+				at.setItemImgPath(rset.getString("ITEM_IMG_PATH"));
+				
 				
 			}
 			

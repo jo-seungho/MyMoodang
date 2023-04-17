@@ -11,10 +11,10 @@ window.addEventListener('DOMContentLoaded',function(){
         var start_price = $('.goods_price .dc_price').text()  // 개당가격 표시할 변수!
         
         var number = $('.inp').val();                  //구매 수량을 조절할 변수 ! (inp클래스 초기 value값은 1로 헸음! 시작 수량이 1이니깐)
-        var cost = $('.goods_price input').val(); ;    // 상품의 가격을 설정해줘야됨.  goods_price안에있는 input의 value값에 탬플릿 언어로 반찬 가격을 불러와야됨 
-        $('.emph').text((number*cost)/20 + '원 적립');  // 첫 화면의 emph(적립금) 은  반찬가격(cost)의 0.5%로 출력
+        var cost = $('.goods_price input').val();    // 상품의 가격을 설정해줘야됨.  goods_price안에있는 input의 value값에 탬플릿 언어로 반찬 가격을 불러와야됨 
+        //$('.emph').text((number*cost)/20 + '원 적립');  // 첫 화면의 emph(적립금) 은  반찬가격(cost)의 0.5%로 출력
         $('.price .num').text(start_price);             // 첫 화면의 총 상품금액 (.price 안에 .num) 에다가 초기 가격을 출력!
-        $('.emphh').text((number*cost)/20 + '원 적립'); //첫 화면의 윗쪽 1개당 적립금(변하지않는 값) 출력!
+        //$('.emphh').text((number*cost)/20 + '원 적립'); //첫 화면의 윗쪽 1개당 적립금(변하지않는 값) 출력!
     
         
 
@@ -40,7 +40,7 @@ window.addEventListener('DOMContentLoaded',function(){
                 
                 // $(".num").text(Math.floor(number*cost/1000) + ',' + number*cost%1000);  // 몫 + 콤마 + 나머지 이렇게해서 표현
                 // }
-                $(".num").text(comma(number*cost)); // comma = comma찍는 함수 아래에 생성했음
+                $(".num").text(num(number*cost)); // comma = comma찍는 함수 아래에 생성했음
                 
             }
     
@@ -49,7 +49,7 @@ window.addEventListener('DOMContentLoaded',function(){
             }
     
     
-            $('.emph').text(comma((number*cost)/20) + '원 적립');// 적립금은 항상 가격x수량 x 0.05 해서 표현 하도록 설정
+            //$('.emph').text(num((number*cost)/200) + '원 적립');// 적립금은 항상 가격x수량 x 0.05 해서 표현 하도록 설정
             
         
             
@@ -74,12 +74,12 @@ window.addEventListener('DOMContentLoaded',function(){
                 
     
             // }
-            $(".num").text(comma(number*cost));
+            //$('.num').text(num(number*cost));
     
     
     
             
-            $('.emph').text(comma((number*cost)/20) + '원 적립');  // 마찬가지로 적립금 은 가격x수량x0.05로 출력
+            //$('.emph').text(num((number*cost)/20) + '원 적립');  // 마찬가지로 적립금 은 가격x수량x0.05로 출력
             
     
             
@@ -129,30 +129,36 @@ window.addEventListener('DOMContentLoaded',function(){
         }
 
 
+//        function comma(num){                       //콤마찍는 함수
+//        var len, point, str; 
+//           
+//        num = num + ""; 
+//        point = num.length % 3 ;
+//        len = num.length; 
+//       
+//        str = num.substring(0, point); 
+//        while (point < len) { 
+//            if (str != "") str += ","; 
+//            str += num.substring(point, point + 4); 
+//            point += 4; 
+//        } 
+//         
+//        return str;
+     
+    }
+        
+        
+        
+        
 
-       
 
 
 
 
 
-        function comma(num){                       //콤마찍는 함수
-            var len, point, str; 
-               
-            num = num + ""; 
-            point = num.length % 3 ;
-            len = num.length; 
-           
-            str = num.substring(0, point); 
-            while (point < len) { 
-                if (str != "") str += ","; 
-                str += num.substring(point, point + 3); 
-                point += 3; 
-            } 
-             
-            return str;
-         
-        }
+
+
+   
 
 
 
