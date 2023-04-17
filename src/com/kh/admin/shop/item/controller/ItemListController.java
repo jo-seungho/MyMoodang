@@ -20,10 +20,10 @@ import com.kh.admin.shop.item.model.vo.Item;
  *
  */
 @WebServlet("/itemList.ad")
-public class AdminItemListController extends HttpServlet {
+public class ItemListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public AdminItemListController() {
+	public ItemListController() {
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
