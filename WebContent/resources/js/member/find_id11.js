@@ -1,7 +1,13 @@
-
+/**
+ *
+ */
+// 2023-04-17 김서영
+// 유효성 검사 수정 / ajax 추가
 function check_input_fid(){
     let name = $("#srch_id")
     let phone = $("#srch_phone")
+
+
 
     // 이름 유효성 검사
     let regExp = /^[가-힣]{2,}$/;
@@ -29,7 +35,6 @@ function check_input_fid(){
 			 if(result.success == "Y") { // 성공
 				 console.log("성공");
 				location.href = "views/member/find_id_success.jsp";
-
 			 } else { // 실패
 				 alert(result.message);
 				 console.log("실패");

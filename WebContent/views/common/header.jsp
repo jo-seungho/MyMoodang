@@ -97,7 +97,7 @@
                 <a href="../main/faq.html" class="list_item">자주하는 질문</a>
               </li>
               <li class="list">
-                <a href="../main/oneonone.html" class="list_item">1:1 문의</a>
+                <a href="/list.in" class="list_item">1:1 문의</a>
               </li>
             </ul>
           </li>

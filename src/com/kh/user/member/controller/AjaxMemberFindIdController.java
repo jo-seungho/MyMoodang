@@ -1,3 +1,6 @@
+// 2023-04-17 김서영
+// 아이디 찾기 컨트롤러
+
 package com.kh.user.member.controller;
 
 import java.io.IOException;
@@ -7,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 import com.kh.user.member.model.service.MemberService;
@@ -37,13 +41,21 @@ public class AjaxMemberFindIdController extends HttpServlet {
 
 		Member m = new Member( name, phone);
 
+
 		Member fi = new MemberService().findId(m);	// 아이디 찾기 용
 
+		System.out.println(fi);
 		MemberFindId findId = new MemberFindId();
 
-		if(fi != null) { // 아이디 조회 됨
+		if(fi.getMemberId() != null) { // 아이디 조회 됨
 			findId.setSuccess("Y");
 //			findId.setMessage("아이디 찾기에 성공하였습니다.");
+			findId.setMemberId(fi.getMemberId());
+			findId.setMemberName(fi.getName());
+
+			HttpSession session = request.getSession();
+
+			session.setAttribute("findId", findId); // 아이디 찾기한 회원의 정보(이름, 아이디)
 
 		} else { // 조회되는 아이디가 없음
 			findId.setSuccess("N");

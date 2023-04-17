@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="/resources/css/common/header.css">
     <link rel="stylesheet" href="/resources/css/common/footer.css">
     <link rel="stylesheet" href="/resources/css/member/login.css">
+
+
 </head>
 <body>
 <!-- jsp 변환 / 2023-04-14 / 김서영 -->
@@ -21,15 +23,15 @@
             <div class="section_login">
                 <h3 class="tit_login">비밀번호 찾기</h3>
                 <div class="write_form find_view">
-                    <form method="post" name="fm_pw" id="form" onsubmit="return chkForm(this);" action="">
+                    <form method="post" name="fm_pw" id="form"  action="">
                         <input type="hidden" name="act" value="Y">
                         <input type="hidden" name="rncheck" value="none">
                         <input type="hidden" name="dupeinfo" value>
                         <strong class="tit_label">이름</strong>
-                        <input type="text" name="srch_name" size="20" tabindex="2" size="29" required placeholder="이름 입력">
+                        <input type="text" name="srch_name" id="srch_name" size="20" tabindex="2" size="29" required placeholder="이름 입력">
 
                         <strong class="tit_label">이메일</strong>
-                        <input type="text" name="srch_email" size="20" tabindex="5" size="29" required placeholder="가입 시 등록한 이메일 입력">
+                        <input type="email" name="srch_email" id="srch_email" size="20" tabindex="5" size="29" required placeholder="가입 시 등록한 이메일 입력">
                         <button type="button" onclick="check_input_fpw()" class="btn_type1">
                             <span class="txt_type">확인</span>
                         </button>

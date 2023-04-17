@@ -29,150 +29,6 @@ public class MemberDao {
 
 	}
 
-//    ---------------------------------- 어드민 부분 -------------------------
-	/*
-	 * 어드민 회원관리 페이지에서 회원 리스트 불러오는 메소드 2023-04-14 최명진
-	 *
-	 * @param selectMemberList
-	 *
-	 * @return
-	 */
-	public ArrayList<Member> selectMemberListAd(Connection conn) {
-
-		ArrayList<Member> list = new ArrayList<Member>();
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-
-		String sql = prop.getProperty("selectMemberListAd");
-
-		try {
-			pstmt = conn.prepareStatement(sql);
-			rset = pstmt.executeQuery();
-
-			while (rset.next()) {
-				Member m = new Member();
-				m.setMemberNo(rset.getInt("MEMBER_NO"));
-				m.setMemberId(rset.getString("MEMBER_ID"));
-				m.setPassword(rset.getString("PASSWORD"));
-				m.setName(rset.getString("NAME"));
-				m.setBirthDate(rset.getString("BIRTH_DATE"));
-				m.setGender(rset.getString("GENDER"));
-				m.setEmail(rset.getString("EMAIL"));
-				m.setPhone(rset.getString("PHONE"));
-				m.setEnrollDate(rset.getString("ENROLL_DATE"));
-				m.setModifyDate(rset.getString("MODIFY_DATE"));
-				m.setStatus(rset.getString("STATUS"));
-				m.setTotalMoney(rset.getInt("TOTAL_MONEY"));
-				m.setGradeNo(rset.getString("GRADE_NAME"));
-
-				list.add(m);
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				rset.close();
-				pstmt.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-
-		return list;
-	}
-
-	/**
-	 * 어드민 상세조회에서 회원 정보 변경하는 메소드 2023-04-14 최명진
-	 *
-	 * @param m
-	 * @return
-	 */
-	public int updateMemberAd(Connection conn, Member m) {
-
-		int result = 0;
-
-		PreparedStatement pstmt = null;
-
-		String sql = prop.getProperty("updateMemberAd");
-
-		try {
-			pstmt = conn.prepareStatement(sql);
-
-			pstmt.setString(1, m.getGradeNo());
-			pstmt.setString(2, m.getStatus());
-			pstmt.setInt(3, m.getMemberNo());
-
-			result = pstmt.executeUpdate();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				pstmt.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-
-		return result;
-	}
-
-	/*
-	 * 어드민 회원관리 페이지에서 회원 상세 정보 불러오는 메소드 2023-04-14 최명진
-	 *
-	 * @param selectMemberList
-	 *
-	 * @return
-	 */
-	public Member selectMemberAd(Connection conn, int id) {
-
-		Member m = null;
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-
-		String sql = prop.getProperty("selectMemberAd");
-
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, id);
-			rset = pstmt.executeQuery();
-
-			if (rset.next()) {
-				m = new Member();
-				m.setMemberNo(rset.getInt("MEMBER_NO"));
-				m.setMemberId(rset.getString("MEMBER_ID"));
-				m.setPassword(rset.getString("PASSWORD"));
-				m.setName(rset.getString("NAME"));
-				m.setBirthDate(rset.getString("BIRTH_DATE"));
-				m.setGender(rset.getString("GENDER"));
-				m.setEmail(rset.getString("EMAIL"));
-				m.setPhone(rset.getString("PHONE"));
-				m.setEnrollDate(rset.getString("ENROLL_DATE"));
-				m.setModifyDate(rset.getString("MODIFY_DATE"));
-				m.setStatus(rset.getString("STATUS"));
-				m.setTotalMoney(rset.getInt("TOTAL_MONEY"));
-				m.setGradeNo(rset.getString("GRADE_NAME"));
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				rset.close();
-				pstmt.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-
-		return m;
-
-	}
-
-
-//  ---------------------------------- 회원 부분 -------------------------
-
 
 	/** 가입하는 회원의 회원번호 조회용 메소드
 	 * 2023-04-14 김서영
@@ -208,7 +64,8 @@ public class MemberDao {
 	}
 
 	/**
-	 * 아이디 중복 체크 메소드 2023/04/14 김서영
+	 * 아이디 중복 체크 메소드
+	 * 2023/04/14 김서영
 	 *
 	 * @param conn
 	 * @param checkEmail
@@ -245,7 +102,8 @@ public class MemberDao {
 	}
 
 	/**
-	 * 회원가입 (회원정보 추가) 메소드 2023-04-15 김서영
+	 * 회원가입 (회원정보 추가) 메소드
+	 *  2023-04-15 김서영
 	 *
 	 * @param conn
 	 * @param m
@@ -281,7 +139,8 @@ public class MemberDao {
 	}
 
 	/**
-	 * 회원가입용 (주소정보 추가) 메소드 2023-04-15 김서영
+	 * 회원가입용 (주소정보 추가) 메소드
+	 * 2023-04-15 김서영
 	 *
 	 * @param conn
 	 * @param addr
@@ -315,6 +174,13 @@ public class MemberDao {
 	}
 
 
+	/**
+	 * 아이디 찾기 메소드
+	 * 2023-04-17 김서영
+	 * @param conn
+	 * @param m
+	 * @return
+	 */
 	public Member findId(Connection conn, Member m) {
 
 		Member fi = new Member();
@@ -344,5 +210,47 @@ public class MemberDao {
 			JDBCTemplate.close(pstmt);
 		}
 		return fi;
+	}
+
+
+	/**
+	 * 회원정보 수정 시 정보 조회용 메소드
+	 * 2023-04-17 김서영
+	 * @param conn
+	 * @param memberId
+	 * @return
+	 */
+	public Member selectMemberInfo(Connection conn, String memberId) {
+
+		Member m = new Member();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		String sql = prop.getProperty("selectMemberInfo");
+
+		try {
+			int i = 0;
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(++i, memberId);
+
+			rset = pstmt.executeQuery();
+
+			while(rset.next()) {
+				m.setMemberId(rset.getString("MEMBER_ID"));
+				m.setEmail(rset.getString("EMAIL"));
+				m.setName(rset.getString("NAME"));
+				m.setGender(rset.getString("GENDER"));
+				m.setBirthDate(rset.getString("BIRTH_DATE"));
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+
+		return m;
 	}
 }

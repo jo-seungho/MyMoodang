@@ -292,12 +292,12 @@ body #container #main .layout-pagination .pagediv span strong{
 }
  
 #md{
-    border-radius:8px; 
+    border-radius:5px; 
     border:none; 
     width:90px;
     height:40px; 
     float: right; 
-    background-color:gray; 
+    background-color:rgb(254,116,119); 
     color:white; 
     font-size:medium; 
     font-weight:500;
