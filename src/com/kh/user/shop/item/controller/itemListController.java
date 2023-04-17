@@ -44,8 +44,10 @@ public class itemListController extends HttpServlet {
 		int maxPage; 		// 가장 마지막 페이지가 몇 번째 페이지인지 (즉, 총 페이지 수)
 		int startPage; 		// 페이지 하단에 보여질 페이징바의 시작수
 		int endPage; 		// 페이지 하단에 보여질 페이징바의 끝수
+		String category = request.getParameter("category");
+		request.setAttribute("category", category);
 		
-		listCount = new ItemService().selectListCount();
+		listCount = new ItemService().selectListCountUser(category);
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		// * pageLimit : 페이지 하단에 보여질 페이징바의 페이지 최대 갯수
 		pageLimit = 10;
@@ -67,13 +69,13 @@ public class itemListController extends HttpServlet {
 				  boardLimit, maxPage, startPage, endPage);
 		
 		 
-		 ArrayList<Item> list = new ItemService().selectItemList(pi);
+		 ArrayList<Item> list = new ItemService().selectItemList(pi, category);
 		 
-		 String category = request.getParameter("category");
-		 System.out.println(category);
+		 // System.out.println(category);
 		 
 		 request.setAttribute("pi", pi);
 		 request.setAttribute("list", list);
+		 
 		
 		request.getRequestDispatcher("views/shop/itemList.jsp").forward(request, response);
 		

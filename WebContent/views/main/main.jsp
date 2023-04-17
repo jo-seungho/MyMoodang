@@ -391,13 +391,15 @@
 
     <script>
         $(document).ready(function() {
+        	console.log($("#s").text())
             $('.autoplay').slick({
                 slidesToShow: 4,
                 slidesToScroll: 1,
                 autoplay: true,
                 autoplaySpeed: 2000,
                 draggable: true,
-                arrows: true,
+                prevArrow : "<button type='button' class='slick-prev'></button>", 
+                nextArrow : "<button type='button' class='slick-next'></button>", 
                 slide: 'li'
             })
         });

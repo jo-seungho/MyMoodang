@@ -77,6 +77,14 @@
 	</entry>
 
 
+        
+        <!-- 개인 회원의 배송지 조회용 쿼리문 2023.04.17 이지환 -->
+        
+        <entry key="selectShippingAddress">     
+	        SELECT 
+	        FROM SHIPPING_ADDRESS
+	        WHERE MEMBER_NO = ?
+        </entry>
 
 </properties>
 

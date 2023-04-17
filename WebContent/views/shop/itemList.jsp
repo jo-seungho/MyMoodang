@@ -5,10 +5,14 @@
 <%
 	PageInfo pi = (PageInfo) request.getAttribute("pi");
 	ArrayList<Item> list = (ArrayList<Item>) request.getAttribute("list");
-int currentPage = pi.getCurrentPage();
-int startPage = pi.getStartPage();
-int endPage = pi.getEndPage();
-int maxPage = pi.getMaxPage();
+
+	String category = (String)request.getAttribute("category");
+
+	int currentPage = pi.getCurrentPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	int maxPage = pi.getMaxPage();
+
 %>
 
 
@@ -35,16 +39,18 @@ int maxPage = pi.getMaxPage();
 							<div class="ico_cate">
 								<span class="ico" style="display: block;"> <img
 									src="/resources/img/logo.png" alt="카테고리 아이콘">
+									<p>${category}</p>
+									<p><%= category %></p>
 								</span> <span class="tit">전체보기</span>
 							</div>
 
 							<ul class="list">
-								<li name="cate_gory"><a class="on">전체보기</a></li>
-								<li name="cate_gory"><a class=>제로음료</a></li>
-								<li name="cate_gory"><a class=>무가당</a></li>
-								<li name="cate_gory"><a class=>단백질</a></li>
-								<li name="cate_gory"><a class=>도시락</a></li>
-								<li name="cate_gory"><a class=>기타</a></li>
+								<li name="cate_gory"><a class="on" href="/itemList.it?currentPage=1&category=전체">전체보기</a></li>
+								<li name="cate_gory"><a href="/itemList.it?currentPage=1&category=제로음료" class=>제로음료</a></li>
+								<li name="cate_gory"><a href="/itemList.it?currentPage=1&category=무가당" class=>무가당</a></li>
+								<li name="cate_gory"><a href="/itemList.it?currentPage=1&category=단백질" class=>단백질</a></li>
+								<li name="cate_gory"><a href="/itemList.it?currentPage=1&category=도시락" class=>도시락</a></li>
+								<li name="cate_gory"><a href="/itemList.it?currentPage=1&category=기타" class=>기타</a></li>
 							</ul>
 						</div>
 					</div>
@@ -52,7 +58,6 @@ int maxPage = pi.getMaxPage();
 
 					<div id="goodsList" class="page_section section_goodslist">
 						<div class="list_ability"></div>
-
 
 
 						<div class="list_goods">
@@ -116,10 +121,12 @@ int maxPage = pi.getMaxPage();
 						<div class="layout-pagination">
 							<div class="pagediv">
 								<% if(currentPage != 1) { %>
-								<a href="/itemList.total?currentPage=<%= startPage %>"
+
+								<a href="/itemList.it?currentPage=<%= startPage %>&category=${category}"
+
 									class="layout-pagination-button layout-pagination-first-page">맨 처음 페이지로 가기
 								</a> 
-								<a href="/itemList.total?currentPage=<%= currentPage - 1 %>" class="layout-pagination-button layout-pagination-prev-page">
+								<a href="/itemList.total?currentPage=<%= currentPage - 1 %>&category=${category}" class="layout-pagination-button layout-pagination-prev-page">
 									이전 페이지로 가기
 								</a> 
 								<% } else {%>
@@ -132,7 +139,9 @@ int maxPage = pi.getMaxPage();
 								<% } %>
 								<% for(int p = startPage; p <= endPage; p++) { %>
 									<% if(p != currentPage) { %>
-								<a href="/itemList.total?currentPage=<%= p %>"> 
+
+								<a href="/itemList.it?currentPage=<%= p %>&category=${category}"> 
+
 									<span> 
 										<strong class="layout-pagination-button layout-pagination-number __active"><%= p %></strong>
 									</span>
@@ -145,10 +154,12 @@ int maxPage = pi.getMaxPage();
 									<% } %>
 								<% } %>
 								<% if(currentPage != maxPage) { %>
-								 <a href="/itemList.total?currentPage=<%= currentPage + 1 %>" class="layout-pagination-button layout-pagination-next-page">
+
+								 <a href="/itemList.it?currentPage=<%= currentPage + 1 %>&category=${category}" class="layout-pagination-button layout-pagination-next-page">
 								 다음 페이지로 가기
 								 </a> 
-								 <a href="/itemList.total?currentPage=<%= endPage %>" class="layout-pagination-button layout-pagination-last-page">
+								 <a href="/itemList.it?currentPage=<%= endPage %>&category=${category}" class="layout-pagination-button layout-pagination-last-page">
+
 								 맨끝 페이지로 가기
 								 </a>
 								 <% } else { %>
@@ -217,11 +228,16 @@ int maxPage = pi.getMaxPage();
 			</div>
 		</div>
 		<script>
-			$(function() {
-				$(".thumb").click(function() {
-					location.href = "/itemDetail.it";
+
+		/*
+			//$(function() {
+
+				$(".info").click(function() {
+					location.href = "/item.it";
+
 				});
 			});
+		*/
 		</script>
 
 

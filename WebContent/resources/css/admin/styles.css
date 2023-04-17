@@ -11605,6 +11605,8 @@ body {
 }
 
 /* tbody 포인터 */
-tbody:hover {
+tbody>tr>td:hover {
   cursor: pointer;
 }
+
+

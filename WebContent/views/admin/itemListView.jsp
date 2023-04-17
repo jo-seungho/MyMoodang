@@ -122,7 +122,7 @@
                 </div>
 
                 <div>
-                  <a class="item_registration" href="/html/admin/item_manage_insert.html">
+                  <a class="item_registration" href="/itemForm.ad">
                     <button type="button" id="btn" class="btn">상품추가</button>
                   </a>
                   <form role="search">
@@ -236,10 +236,16 @@
 
         <script>
           $(document).ready(function () {
-            $('tbody tr').click(function () {
-              location.href = '/html/admin/item_manage_detail.html';
-            });
-          });
+        	  if ($('tbody tr td').eq(0).text() == '게시글이 없습니다.') {
+                  $('tbody tr td').css('cursor', 'default');
+                } else {
+                	$('tbody tr').click(function () {
+                        location.href = '/itemDetail.ad?code=' + $(this).children().eq(0).text();
+                      });
+                    }
+                });
+        	  
+        	  
 
           $(document).ready(function () {
             if ('<%= category %>' == 'a') {
@@ -276,5 +282,4 @@
         </script>
       </body>
     </html>
-  </Item></Item
 >
