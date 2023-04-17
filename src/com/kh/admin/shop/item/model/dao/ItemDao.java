@@ -14,6 +14,7 @@ import java.util.Properties;
 import com.kh.common.JDBCTemplate;
 import com.kh.common.model.vo.PageInfo;
 import com.kh.admin.shop.item.model.vo.Item;
+import com.kh.admin.shop.item.model.vo.ItemImg;
 
 public class ItemDao {
 	
@@ -30,28 +31,8 @@ public class ItemDao {
 		}
 	}
 
-    public int increaseCount(Connection conn, int itemNo) {
-        int result = 0;
-        PreparedStatement pstmt = null;
 
-        String sql = prop.getProperty("increaseCount");
-        
-        try {
-            pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, itemNo);
-            
-            result = pstmt.executeUpdate();
-            
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-        	JDBCTemplate.close(pstmt);
-        }
-        
-        return result;
-    }
-
-    public Item selectItem(Connection conn, int itemNo) {
+    public Item selectItem(Connection conn, int itemCode) {
         Item i = null;
         PreparedStatement pstmt = null;
         ResultSet rset = null;
@@ -60,13 +41,23 @@ public class ItemDao {
         
         try {
             pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, itemNo);
+            pstmt.setInt(1, itemCode);
             
             rset = pstmt.executeQuery();
             
             if(rset.next()) {
                 i = new Item();
-
+                i.setItem_hits(rset.getInt("ITEM_HITS"));
+                i.setItemCategory(rset.getString("ITEM_CATEGORY"));
+                i.setItemDiscount(rset.getInt("ITEM_DISCOUNT"));
+                i.setItemImg(rset.getString("ITEM_IMG_PATH"));
+                i.setItemName(rset.getString("ITEM_NAME"));
+                i.setItemPrice(rset.getInt("ITEM_PRICE"));
+                i.setItemStock(rset.getInt("ITEM_STOCK"));
+                i.setItemDate(rset.getString("ITEM_DATE"));
+                i.setItemText(rset.getString("ITEM_TEXT"));
+                i.setDiscountPrice(rset.getInt("DISCOUNT_PRICE"));
+               
             }
             
         } catch (SQLException e) {
@@ -78,8 +69,6 @@ public class ItemDao {
         
         return i;
     }
-    
-    
     
     
     
@@ -184,7 +173,7 @@ public class ItemDao {
 				
 				i.setItemCode(rset.getInt("ITEM_CODE"));
 				i.setItemDate(rset.getString("ITEM_DATE"));
-				i.setItemImg(rset.getString("ITEM_IMAGE"));
+				i.setItemImg(rset.getString("ITEM_IMG_PATH"));
 				i.setItemName(rset.getString("ITEM_NAME"));
 				i.setItemStock(rset.getInt("ITEM_STOCK"));
 				i.setItemPrice(rset.getInt("ITEM_PRICE"));
@@ -232,7 +221,7 @@ public class ItemDao {
 				
 				i.setItemCode(rset.getInt("ITEM_CODE"));
 				i.setItemDate(rset.getString("ITEM_DATE"));
-				i.setItemImg(rset.getString("ITEM_IMAGE"));
+				i.setItemImg(rset.getString("ITEM_IMG_PATH"));
 				i.setItemName(rset.getString("ITEM_NAME"));
 				i.setItemStock(rset.getInt("ITEM_STOCK"));
 				i.setItemPrice(rset.getInt("ITEM_PRICE"));
@@ -250,6 +239,57 @@ public class ItemDao {
 
 		return list;
 
+	}
+
+	public int insertItem(Connection conn, Item i) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+
+		String sql = prop.getProperty("insertItem");
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, i.getItemCategory());
+			pstmt.setString(2, i.getItemName());
+			pstmt.setInt(3, i.getItemStock());
+			pstmt.setInt(4, i.getItemPrice());
+			pstmt.setString(5, i.getItemText());
+			pstmt.setDouble(6, i.getItemDiscount());
+
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+
+		return result;
+	}
+
+	public int insertItemImg(Connection conn, ArrayList<ItemImg> list) {
+		int result = 1;
+		// insert를 반복해서 진행 = > 하나라도 실패 할 경우 실패처리
+		// result 를 애초에 1로 셋팅해두고 누적 곱을 구할 예정
+
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertItemImg");
+
+		try {
+
+			for (ItemImg im : list) {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, im.getItemImgLevel());
+				pstmt.setString(2, im.getItemImgPath());
+
+				result *= pstmt.executeUpdate();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+
+		return result;
 	}
  
 

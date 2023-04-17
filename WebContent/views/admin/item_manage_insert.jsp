@@ -106,97 +106,150 @@
       </div>
 
       <div id="layoutSidenav_content">
-        <main>
+        <main style="height: 100%">
           <div class="container px-6 white">
-            <div class="item_state" align="left">
-              <div class="state">
-                <li class="item_manage_insert"><h2>상품 등록</h2></li>
-              </div>
-            </div>
+            <br />
+            <h2>상품 추가</h2>
+            <hr />
 
+            <form id="myForm" action="/itemInsert.ad" method="POST" enctype="multipart/form-data">
+              <div class="mx-auto col-10 col-md-8 col-lg-6 center">
+                <div id="img_view">
+                  <label for="titleImg" style="margin-bottom: 10px">* 대표 이미지</label>
+                  <div class="col">
+                    <img id="img1" name="img1" src="/resources/img/noimage.png" class="img-thumbnail" style="width: 500px; height: 300px" />
+                    <input type="file" id="file1" name="file1" class="form-control" onchange="loadImg(this, 1);" required style="margin-top: 20px; margin-bottom: 20px" />
+                  </div>
 
+                  <div class="col form-floating mb-4">
+                    <input type="text" name="itemName" class="form-control" value="" required />
+                    <label for="floatingInput">* 상품명</label>
+                  </div>
+                  <div class="col form-floating mb-3">
+                    <input type="number" name="itemStock" class="form-control" />
+                    <label for="floatingPassword">* 수량(재고)</label>
+                  </div>
+                  <div class="col form-floating mb-3">
+                    <input type="number" name="itemPrice" class="form-control" />
+                    <label for="floatingPassword">* 판매 가격</label>
+                  </div>
 
-            <hr>
-            <!--
-            <div style="height: 60px"><button type="button" id="btn" class="btn">글쓰기</button></div> -->
-            <div class="insert-area">
-            <div class="form-group row">
-              <label class="col-sm-2">* 상품명</label>
-              <div class="col-sm-3">
-                <input type="text" id="content" name="content" class="form-control_noImg1">
-              </div>
-              <label class="col-count-2">* 수량(재고)</label>
-              <div class="col-count">
-                <input type="text" id="unitsInStock" name="unitsInStock" class="form-control_noImg1">
-              </div>
-              <label class="col-price-2">* 판매가격</label>
-              <div class="col-price">
-                <input type="text" id="unitPrice" name="unitPrice" class="form-control_noImg1">
-              </div>
-            </div>
+                  <div class="col form-floating mb-3">
+                    <textarea class="form-control" name="itemText" style="height: 200px; resize: none; margin-bottom: 15px" required></textarea>
+                    <label for="floatingTextarea2">상품 상세설명</label>
 
-            <div class="form-group row">
-              <label class="col-sm-2">* 내용</label>
-              <div class="col-sm-10">
-                <textarea id="name" rows="10" cols="50" class="form-control_noImg2"></textarea>
-              </div>
-            </div>
+                    <div class="col form-floating mb-3">
+                      <input type="number" class="form-control" name="itemDiscount"/>
+                      <label for="floatingPassword">할인율 (%)</label>
+                    </div>
 
-            <div id="img_view">
-            <div class="form-group row">
-              <label class="col-sm-2">* 대표 이미지</label>
-              <div class="col-sm-10">
-                <input type="file"  id = "titleImg" name="productImage1" class="form-control" onchange="loadImg(this, 1);" required>
-              </div>
-            </div>
+                    <div class="col form-floating mb-3">
+                      <select class="form-select" name="itemStatus">
+                        <option value="1">판매중</option>
+                        <option value="2">판매중지</option>
+                      </select>
+                      <label for="floatingSelect">* 판매 상태</label>
+                    </div>
 
-            <div class="form-group row">
-              <label class="col-sm-2">* 상품 이미지1</label>
-              <div class="col-sm-10">
-                <input type="file" id="contentImg1" name="productImage2" class="form-control" onchange="loadImg(this, 2);">
-              </div>
-            </div>
+                    <div class="col form-floating mb-3">
+                      <select class="form-select" name="itemCategory">
+                        <option value="1">제로음료</option>
+                        <option value="2">단백질</option>
+                        <option value="2">무가당</option>
+                      </select>
+                      <label for="floatingSelect">* 카테고리</label>
+                    </div>
 
-            <div class="form-group row">
-              <label class="col-sm-2">* 상품 이미지2</label>
-              <div class="col-sm-10">
-                <input type="file" id="contentImg2" name="productImage3" class="form-control" onchange="loadImg(this, 3);">
-              </div>
-            </div>
+                    <!-- 추가 사진 3개 -->
+                    <div class="form-group">
+                      <label class="col image">상품 이미지1</label>
+                      <input type="file" id="file2" name="file2" class="form-control" onchange="loadImg(this, 2);" />
+                    </div>
 
-            <div class="form-group row">
-              <label class="col-sm-2">* 상품 이미지3</label>
-              <div class="col-sm-10">
-                <input type="file" id="contentImg3" name="productImage4" class="form-control" onchange="loadImg(this, 4);">
-              </div>
-            </div>
-            </div>
+                    <div class="form-group">
+                      <label class="col image">상품 이미지2</label>
+                      <input type="file" id="file3" name="file3" class="form-control" onchange="loadImg(this, 3);" />
+                    </div>
 
-              <div class="insert-form">
-                <a href="item.html" class="btn btn-primary"  id="addBtn" style="margin-top: 40px; font-size : larger">등록하기</a>
-                <a href="/html/admin/item_management.html" class="btn btn-primary"  id="listBtn"style="margin-top: 40px; font-size : larger">목록가기</a>
+                    <div class="form-group">
+                      <label class="col image">상품 이미지3</label>
+                      <input type="file" id="file4" name="file4" class="form-control" onchange="loadImg(this, 4);" />
+                    </div>
+                    <br />
+                    <img id="img2" name="img2" src="/resources/img/noimage.png" class="img-thumbnail" style="width: 200px; height: 200px" />
+                    <img id="img3" name="img3" src="/resources/img/noimage.png" class="img-thumbnail" style="width: 200px; height: 200px" />
+                    <img id="img4" name="img4" src="/resources/img/noimage.png" class="img-thumbnail" style="width: 200px; height: 200px" />
+
+                    <div class="insert-form">
+                      <button type="submit" class="btn btn-primary" id="addBtn" style="font-size: larger">추가</button>
+                      <a href="/itemList.ad?page=1&category=a" class="btn btn-primary" id="listBtn" style="font-size: larger">목록</a>
+                    </div>
+                  </div>
+                  <br /><br />
+                </div>
               </div>
+            </form>
           </div>
-
-          </div>
-          <br />
         </main>
       </div>
+      <!-- layoutSidenav_content -->
     </div>
 
-
     <script>
+      // class img-thumbnail 에 첨부파일 이미지 띄우기
+      //이미지 파일이 아니면 업로드 안되게 하기
 
       function loadImg(input, num) {
         if (input.files && input.files[0]) {
-          var reader = new FileReader();
-          reader.onload = function (e) {
-            $('#img_view').append('<img id="img' + num + '" src="' + e.target.result + '" width="200px" height="200px" style="margin-left: 20px; margin-top: 20px;"/>');
+          // 파일 유효성 검사: 이미지 파일 체크
+          if (!input.files[0].type.match('image.*')) {
+            alert('이미지 파일만 업로드 가능합니다.');
+            // 파일 선택 초기화
+            input.value = '';
+            // 이미지 초기화
+            $('#img' + num).attr('src', '/resources/img/noimage.png');
+            return;
           }
+
+          var reader = new FileReader();
+
+          // num에 따라 해당하는 이미지 요소의 src 속성 업데이트
+          reader.onload = function (e) {
+            $('#img' + num).attr('src', e.target.result);
+          };
+
           reader.readAsDataURL(input.files[0]);
+        } else {
+          // 파일 선택 초기화
+          input.value = '';
+          // 이미지 초기화
+          $('#img' + num).attr('src', '/resources/img/noimage.png');
         }
       }
 
+      // #img 클릭하면 파일 업로드 하기
+      $('#img1').click(function () {
+        $('#titleImg').click();
+      });
+
+      $('#img2').click(function () {
+        $('#titleImg').click();
+      });
+
+      $('#img3').click(function () {
+        $('#titleImg').click();
+      });
+
+      $('#img4').click(function () {
+        $('#titleImg').click();
+      });
+
+      //숫자 외에 입력 못하게 하기
+      $("#myForm input[type='number']").on('input', function () {
+        var inputValue = $(this).val();
+        var numericValue = inputValue.replace(/[^0-9]/g, ''); // 숫자 이외의 문자 제거
+        $(this).val(numericValue);
+      });
     </script>
     <!-- <script src="assets/demo/chart-area-demo.js">
     </script>

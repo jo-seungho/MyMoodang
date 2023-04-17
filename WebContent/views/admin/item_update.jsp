@@ -33,6 +33,11 @@
       margin-bottom: 10px;
     }
 
+    .image {
+      margin-bottom: 10px;
+      margin-top: 5px;
+    }
+
     /* 고유한 */
   </style>
 
@@ -146,7 +151,7 @@
                       <input type="number" class="form-control" value="0" />
                       <label for="floatingPassword">할인율 (%)</label>
                     </div>
-                    
+
                     <div class="col form-floating mb-3">
                       <select class="form-select">
                         <option value="1">판매중</option>
@@ -165,6 +170,30 @@
                     </div>
 
                     <!-- 추가 사진 3개 -->
+                    <div class="form-group">
+                      <label class="col image">상품 이미지1</label>
+                      <input type="file" id="contentImg1" name="productImage2" class="form-control" onchange="loadImg(this, 2);" />
+                    </div>
+
+                    <div class="form-group">
+                      <label class="col image">상품 이미지2</label>
+                      <input type="file" id="contentImg2" name="productImage3" class="form-control" onchange="loadImg(this, 3);" />
+                    </div>
+
+                    <div class="form-group">
+                      <label class="col image">상품 이미지3</label>
+                      <input type="file" id="contentImg3" name="productImage4" class="form-control" onchange="loadImg(this, 4);" />
+                    </div>
+                    <br />
+                    <img id="img2" name="img2" src="/resources/img/noimage.png" class="img-thumbnail" style="width: 200px; height: 200px" />
+                    <img id="img3" name="img3" src="/resources/img/noimage.png" class="img-thumbnail" style="width: 200px; height: 200px" />
+                    <img id="img4" name="img4" src="/resources/img/noimage.png" class="img-thumbnail" style="width: 200px; height: 200px" />
+
+                    <div class="insert-form">
+                      <a href="item.html" class="btn btn-primary" id="addBtn" style="margin-top: 40px; font-size: larger">수정</a>
+                      <a href="/html/admin/item_management.html" class="btn btn-primary" id="listBtn" style="margin-top: 40px; font-size: larger">목록</a>
+                      <a href="/html/admin/item_management.html" class="btn btn-primary" id="listBtn" style="margin-top: 40px; font-size: larger">삭제</a>
+                    </div>
                   </div>
                   <br /><br />
                 </div>
@@ -194,9 +223,11 @@
 
           var reader = new FileReader();
 
+          // num에 따라 해당하는 이미지 요소의 src 속성 업데이트
           reader.onload = function (e) {
             $('#img' + num).attr('src', e.target.result);
           };
+
           reader.readAsDataURL(input.files[0]);
         } else {
           // 파일 선택 초기화
@@ -208,6 +239,18 @@
 
       // #img 클릭하면 파일 업로드 하기
       $('#img1').click(function () {
+        $('#titleImg').click();
+      });
+
+      $('#img2').click(function () {
+        $('#titleImg').click();
+      });
+
+      $('#img3').click(function () {
+        $('#titleImg').click();
+      });
+
+      $('#img4').click(function () {
         $('#titleImg').click();
       });
 

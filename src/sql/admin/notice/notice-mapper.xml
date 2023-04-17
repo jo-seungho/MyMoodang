@@ -5,7 +5,7 @@
 	<entry key="selectNoticeList">
 			SELECT NOTICE_NO
 			     , NOTICE_TITLE
-			     , TO_CHAR(CREATE_DATE, 'YY/MM/DD HH:MI:SS') CREATE_DATE
+			     , TO_CHAR(CREATE_DATE, 'YY/MM/DD HH24:MI:SS') CREATE_DATE
 			     , VIEWS
               FROM NOTICE 
               ORDER BY CREATE_DATE DESC
