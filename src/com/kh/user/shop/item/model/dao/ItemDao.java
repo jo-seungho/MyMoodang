@@ -22,7 +22,7 @@ public class ItemDao {
 
 	public ItemDao() {
 
-		String fileName = ItemDao.class.getResource("/sql/item/item-mapper.xml").getPath();
+		String fileName = ItemDao.class.getResource("/sql/user/item/item-mapper.xml").getPath();
 
 		try {
 			prop.loadFromXML(new FileInputStream(fileName));
