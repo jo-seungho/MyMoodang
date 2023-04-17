@@ -118,19 +118,83 @@ public class ItemService {
 	
 	/**
 	 * 2023-04-16 조승호
-	 * 전체 상품 리스트
+	 * 리스트 갯수 조회용
 	 * @return
 	 */
-	public ArrayList<Item> selectItemList(PageInfo pi) {
+	public int selectListCountUser(String category) {
 		
 		Connection conn = getConnection();
 		
-		ArrayList<Item> list = new ItemDao().selectItemList(conn, pi);
+		int listCount = new ItemDao().selectListCountUser(conn, category);
+		
+		close(conn);
+		
+		return listCount;
+	}
+	
+	/**
+	 * 2023-04-16 조승호
+	 * 전체 상품 리스트
+	 * @return
+	 */
+	public ArrayList<Item> selectItemList(PageInfo pi, String category) {
+		
+		Connection conn = getConnection();
+		
+		ArrayList<Item> list = new ItemDao().selectItemList(conn, pi, category);
 		
 		close(conn);
 		
 		
 		return list;
 	}
+	/**
+	 * 2023-04-17 조승호
+	 * 베스트 상품 리스트
+	 * @return
+	 */
+	public ArrayList<Item> selectBestItemList(PageInfo pi) {
+		
+		Connection conn = getConnection();
+		
+		ArrayList<Item> list = new ItemDao().selectBestItemList(conn, pi);
+		
+		close(conn);
+		
+		return list;
+	}
+
+	/**
+	 * 2023-04-17 조승호
+	 * 신규 상품 리스트
+	 * @return
+	 */
+	public ArrayList<Item> selectNewItemList(PageInfo pi) {
+		
+		Connection conn = getConnection();
+		
+		ArrayList<Item> list = new ItemDao().selectNewItemList(conn, pi);
+		
+		close(conn);
+		
+		return list;
+	}
+
+	/**
+	 * 2023-04-17 조승호
+	 * 할인 상품 리스트
+	 * @return
+	 */
+	public ArrayList<Item> selectDiscountItemList(PageInfo pi) {
+
+		Connection conn = getConnection();
+		
+		ArrayList<Item> list = new ItemDao().selectDiscountItemList(conn, pi);
+		
+		close(conn);
+		
+		return list;
+	}
+
 	
 }
