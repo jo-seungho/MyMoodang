@@ -229,52 +229,52 @@ body #container #main .layout-pagination .pagediv span strong{
 
 .typeWrapper{
      display: flex;
-    border-top:5px solid lightgray; 
+    border-top:5px solid lightgray;
     display: flex;
-    align-items: center; 
+    align-items: center;
     margin-bottom: 20px;
     padding-top: 15px;
 }
 
 .oneCategory{
-    font-size: 18px; 
+    font-size: 18px;
     margin-right: 30px;
 }
 
 .categorySelect {
-    font-size: 15px; 
-    top: 0px; 
+    font-size: 15px;
+    top: 0px;
     width: 250px;
 }
 
 .oneTitle{
-    display: flex; 
-    border-top:2px solid rgb(188, 183, 183); 
+    display: flex;
+    border-top:2px solid rgb(188, 183, 183);
     margin-top: 10px;
     padding-top: 20px;
 }
 
 .oneTitle > p {
-    margin-right:30px; 
-    font-size: 18px; 
+    margin-right:30px;
+    font-size: 18px;
 }
 
 .oneTitle > input{
-   width:680px; 
+   width:680px;
    height: 25px;
 }
 
 .oneContent{
-    display: flex; 
-    margin-top: 10px; 
+    display: flex;
+    margin-top: 10px;
     border-top:2px solid rgb(188, 183, 183);
-     padding-top: 25px; 
-     border-bottom: 5px solid lightgray; 
+     padding-top: 25px;
+     border-bottom: 5px solid lightgray;
      padding-bottom: 25px;
 }
 
 .oneContent p{
-    margin-right:30px; 
+    margin-right:30px;
     font-size: 18px;
 }
 .oneContent textarea {
@@ -283,23 +283,24 @@ body #container #main .layout-pagination .pagediv span strong{
 }
 
 #dbtn{
-     border: 1px solid black; 
-     border-radius: 5px; 
+     border: 1px solid rgb(254,116,119);
+     border-radius: 5px;
      width:700px;
-     height: 30px;  
-     background-color: #fefefe; 
-     color: #040404;  
+     height: 30px;
+     background-color: rgb(254,116,119);
+     color: white;
+     font-weight: ;
      margin: auto;
-    display: block; 
-    position: relative; 
+    display: block;
+    position: relative;
     top:20px;
 }
 
 .typeWrapper{
-    display: flex; 
-    border-top:5px solid lightgray; 
     display: flex;
-    align-items: center; 
+    border-top:5px solid lightgray;
+    display: flex;
+    align-items: center;
     margin-bottom: 20px;
     padding-top: 15px;
 }

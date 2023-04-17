@@ -46,7 +46,7 @@
             <a  class="item after join" href="/enrollForm.me">회원가입</a>
           </li>
           <li class="link">
-            <a class="item after login_none" href="/login.me">로그인</a>
+            <a class="item after login_none" href="/loginForm.me">로그인</a>
             <a class="item login login_check grade_comm">
               <span class="ico_grade grade0">일반</span>
               <span class="txt">
@@ -97,7 +97,7 @@
                 <a href="../main/faq.html" class="list_item">자주하는 질문</a>
               </li>
               <li class="list">
-                <a href="../main/oneonone.html" class="list_item">1:1 문의</a>
+                <a href="/list.in" class="list_item">1:1 문의</a>
               </li>
             </ul>
           </li>
@@ -240,7 +240,7 @@
               <span class="emph">배송지를 등록</span>하고<br />
               <span class="txt">구매가능한 상품을 확인하세요!</span>
               <div class="group_button">
-                <button type="button" class="btn login" href="login.me">로그인</button>
+                <button type="button" class="btn login" href="/loginForm.me">로그인</button>
                 <button type="button" class="btn search_address">
                   <span class="ico"></span>
                   주소검색

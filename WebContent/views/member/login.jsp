@@ -43,9 +43,9 @@
                                     <input type="password" name="password" size="20" tabindex="2" placeholder="비밀번호 입력">
                                     <div class="checkbox_save">
                                         <div class="login_search">
-                                            <a href="/findId.me" class="link">아이디 찾기</a> <!-- 2023-04-17 아이디 찾기 주소 연결 -->
+                                            <a href="/findIdForm.me" class="link">아이디 찾기</a> <!-- 2023-04-17 아이디 찾기 주소 연결 -->
                                             <span class="bar"></span>
-                                            <a href="find_pwd.html" class="link">비밀번호 찾기</a>
+                                            <a href="/findPwdForm.me" class="link">비밀번호 찾기</a>
                                         </div>
                                     </div>
                                     <button type="button" onclick="check_input()" class="btn_type1">

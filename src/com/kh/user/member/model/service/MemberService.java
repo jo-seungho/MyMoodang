@@ -89,7 +89,7 @@ public class MemberService {
 	}
 
 	/**
-	 * 회원가입 시 회원정보, 주소를 입력하는 메소드
+	 * 회원가입 시 회원정보, 주소를 입력하는 메소드 2023-04-16 김서영
 	 *
 	 * @param m
 	 * @param addr
@@ -131,18 +131,51 @@ public class MemberService {
 		return result1 * result2;
 
 	}
-	
+
 	/* 로그인한 회원 본인 2023.04.17 이지환 */
-	
-	 public ArrayList<ShippingAddress> selectShippingAddressList(int memberNo) {
-	        Connection conn = JDBCTemplate.getConnection();
-	        
-	        ArrayList<ShippingAddress> list = new MemberDao().selectShippingAddressList(conn, memberNo);
-	        
-	        close(conn);
-	        
-	        return list;
-	    }
-		
+
+	public ArrayList<ShippingAddress> selectShippingAddressList(int memberNo) {
+		Connection conn = JDBCTemplate.getConnection();
+
+		ArrayList<ShippingAddress> list = new MemberDao().selectShippingAddressList(conn, memberNo);
+
+		close(conn);
+
+		return list;
+	}
+
+	/**
+	 * 아이디 찾기 메소드 2023-04-17 김서영
+	 *
+	 * @param m
+	 * @return
+	 */
+	public Member findId(Member m) {
+
+		Connection conn = getConnection();
+
+		Member fi = new MemberDao().findId(conn, m);
+
+		close(conn);
+
+		return fi;
+	}
+
+	/**
+	 * 회원정보 수정 조회용 메소드 2023-04-17 김서영
+	 *
+	 * @param memberId
+	 * @return
+	 */
+	public Member selectMemberInfo(String memberId) {
+
+		Connection conn = getConnection();
+
+		Member m = new MemberDao().selectMemberInfo(conn, memberId);
+
+		close(conn);
+
+		return m;
+	}
 
 }

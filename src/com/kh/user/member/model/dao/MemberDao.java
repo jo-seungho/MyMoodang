@@ -29,7 +29,7 @@ public class MemberDao {
 
 	}
 
-//    ---------------------------------- 어드민 부분 -------------------------
+//  ---------------------------------- 어드민 부분 -------------------------
 	/*
 	 * 어드민 회원관리 페이지에서 회원 리스트 불러오는 메소드 2023-04-14 최명진
 	 *
@@ -170,12 +170,9 @@ public class MemberDao {
 
 	}
 
-
-//  ---------------------------------- 회원 부분 -------------------------
-
-
-	/** 가입하는 회원의 회원번호 조회용 메소드
-	 * 2023-04-14 김서영
+	/**
+	 * 가입하는 회원의 회원번호 조회용 메소드 2023-04-14 김서영
+	 *
 	 * @param conn
 	 * @return
 	 */
@@ -313,43 +310,120 @@ public class MemberDao {
 
 		return result;
 	}
-	
+
+	/**
+	 * 아이디 찾기 메소드 2023-04-17 김서영
+	 *
+	 * @param conn
+	 * @param m
+	 * @return
+	 */
+	public Member findId(Connection conn, Member m) {
+
+		Member fi = new Member();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		String sql = prop.getProperty("findId");
+
+		try {
+			int i = 0;
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(++i, m.getName());
+			pstmt.setString(++i, m.getPhone());
+
+			rset = pstmt.executeQuery();
+
+			while (rset.next()) {
+				fi.setName(rset.getString("NAME"));
+				fi.setMemberId(rset.getString("MEMBER_ID"));
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return fi;
+	}
+
+	/**
+	 * 회원정보 수정 시 정보 조회용 메소드 2023-04-17 김서영
+	 *
+	 * @param conn
+	 * @param memberId
+	 * @return
+	 */
+	public Member selectMemberInfo(Connection conn, String memberId) {
+
+		Member m = new Member();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		String sql = prop.getProperty("selectMemberInfo");
+
+		try {
+			int i = 0;
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(++i, memberId);
+
+			rset = pstmt.executeQuery();
+
+			while (rset.next()) {
+				m.setMemberId(rset.getString("MEMBER_ID"));
+				m.setEmail(rset.getString("EMAIL"));
+				m.setName(rset.getString("NAME"));
+				m.setGender(rset.getString("GENDER"));
+				m.setBirthDate(rset.getString("BIRTH_DATE"));
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+
+		return m;
+	}
+
 	/* 2023.04.17 이지환 */
 	public ArrayList<ShippingAddress> selectShippingAddressList(Connection conn, int memberNo) {
-		 
-		 PreparedStatement pstmt = null;
-	     ResultSet rset = null;
-	     ArrayList<ShippingAddress> shippingAddressList = new ArrayList<>();
-	     
-	     String sql = prop.getProperty("selectShippingAddress");
-	     try {
-				pstmt = conn.prepareStatement(sql);
-				pstmt.setInt(1, memberNo);
-				
-				rset = pstmt.executeQuery();
-				
-				while (rset.next()) {
-					ShippingAddress sa = new ShippingAddress();
-					sa.setShipNo(rset.getInt("SHIP_NO"));
-					sa.setShipAddr(rset.getString("SHIP_ADDR"));
-					sa.setShipAddrInfo(rset.getString("SHIP_ADDR_INFO"));
-					sa.setPhone(rset.getString("PHONE"));
-					sa.setShipName(rset.getString("SHIP_NAME"));
-					sa.setMemberNo(rset.getInt("MEMBER_NO"));
-					sa.setZipcode(rset.getString("ZIPCODE"));
-					shippingAddressList.add(sa);
-				}
-				
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} finally {
-				JDBCTemplate.close(rset);
-				JDBCTemplate.close(pstmt);
+
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<ShippingAddress> shippingAddressList = new ArrayList<>();
+
+		String sql = prop.getProperty("selectShippingAddress");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memberNo);
+
+			rset = pstmt.executeQuery();
+
+			while (rset.next()) {
+				ShippingAddress sa = new ShippingAddress();
+				sa.setShipNo(rset.getInt("SHIP_NO"));
+				sa.setShipAddr(rset.getString("SHIP_ADDR"));
+				sa.setShipAddrInfo(rset.getString("SHIP_ADDR_INFO"));
+				sa.setPhone(rset.getString("PHONE"));
+				sa.setShipName(rset.getString("SHIP_NAME"));
+				sa.setMemberNo(rset.getInt("MEMBER_NO"));
+				sa.setZipcode(rset.getString("ZIPCODE"));
+				shippingAddressList.add(sa);
 			}
-			
-			return shippingAddressList;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
 		}
-	     
-		
-	
+
+		return shippingAddressList;
+	}
+
 }

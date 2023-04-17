@@ -228,39 +228,39 @@ body #container #main .layout-pagination .pagediv span strong{
 }
 
 .n1{
-    width: 80px; 
+    width: 80px;
     font-weight: 900;
 }
 .n2{
     width:300px;
-    position:relative; 
-    left:10px; 
+    position:relative;
+    left:10px;
     font-weight: 900;
 }
 .n3{
     width:900px;
     position:relative;
-    left:50px; 
+    left:50px;
     font-weight: 900;
 }
 
 .n4{
-    width:400px; 
+    width:400px;
     position:relative;
-    left:85px; 
+    left:85px;
     font-weight: 900;
 }
 
 .n5{
-    
+
     width:500px;
-    position:relative; 
-    left:30px; 
+    position:relative;
+    left:30px;
     font-weight: 900;
 }
 
 .s1{
-     width:40px;  
+     width:40px;
      font-weight: 500;
 }
 
@@ -276,9 +276,9 @@ body #container #main .layout-pagination .pagediv span strong{
 
 .s4{
     width:100px;
-    position:relative; 
-    left:-75px; 
-    color:#cb2b2b; 
+    position:relative;
+    left:-75px;
+    color:#cb2b2b;
     font-weight: 500;
 }
 
@@ -287,28 +287,28 @@ body #container #main .layout-pagination .pagediv span strong{
     font-weight: 500;
 }
 .s6{
-    width:120px; 
+    width:120px;
     font-weight: 500;
 }
- 
+
 #md{
-    border-radius:8px; 
-    border:none; 
+    border-radius:5px;
+    border:none;
     width:90px;
-    height:40px; 
-    float: right; 
-    background-color:gray; 
-    color:white; 
-    font-size:medium; 
+    height:40px;
+    float: right;
+    background-color:rgb(254,116,119);
+    color:white;
+    font-size:medium;
     font-weight:500;
 }
 .b1{
-     width:40px;  
+     width:40px;
      font-weight: 500;
 }
 
 .b2{
-    width:190px; 
+    width:190px;
     font-weight: 500;
 }
 
@@ -319,9 +319,9 @@ body #container #main .layout-pagination .pagediv span strong{
 
 .b4{
     width:100px;
-    position:relative; 
-    left:-60px; 
-    color:#cb2b2b; 
+    position:relative;
+    left:-60px;
+    color:#cb2b2b;
     font-weight: 500;
 }
 .b5{
@@ -343,47 +343,47 @@ body #container #main .layout-pagination .pagediv span strong{
 }
 
 .d4{
-    color: red; 
-    font-size: large; 
-    font-weight: 600; 
-    position:relative; 
+    color: red;
+    font-size: large;
+    font-weight: 600;
+    position:relative;
     left: 110px;
 }
 
 .d5{
-    font-size: medium; 
-    font-weight: 500; 
+    font-size: medium;
+    font-weight: 500;
     position:relative;
     left:120px;
 }
 
 .d6{
-     font-size: medium; 
-     font-weight: 500; 
+     font-size: medium;
+     font-weight: 500;
      position:relative;
      left:135px;
 }
 #bs1{
-     border-spacing: 20px; 
-     border-top: 1.2px solid lightgray; 
+     border-spacing: 20px;
+     border-top: 1.2px solid lightgray;
      font-size: medium;
     border-bottom: 1.5px solid lightgray;
 }
 
 #sd1{
-     border-spacing: 20px; 
-     border-top: 1px solid lightgray; 
-     font-size: medium; 
+     border-spacing: 20px;
+     border-top: 1px solid lightgray;
+     font-size: medium;
      border-bottom: 1px solid lightgray;
 }
 
 #nb1{
      border-top: 5px solid lightgray;
-     font-size: large; 
-     font-weight: 900; 
-     border-radius: 5px; 
-     border-spacing: 20px; 
-     border-collapse: separate; 
+     font-size: large;
+     font-weight: 900;
+     border-radius: 5px;
+     border-spacing: 20px;
+     border-collapse: separate;
 }
 
 #one-section{

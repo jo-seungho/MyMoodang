@@ -1,5 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.kh.common.model.vo.PageInfo,
+				 java.util.ArrayList,
+				 com.kh.user.board.inquiry.model.vo.Inquiry" %>
+
+<%
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	ArrayList<Inquiry> list = (ArrayList<Inquiry>)request.getAttribute("list");
+
+	int currentPage = pi.getCurrentPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	int maxPage = pi.getMaxPage();
+%>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -43,7 +57,7 @@
                               </li>
                           </ul>
                       </div>
-                    
+
                   </div>
                   <div id="viewOrderList" class="page_section section_orderlist">
                       <div class="head_aticle">
@@ -54,25 +68,26 @@
                               </span>
                           </h2>
                       </div>
-                      
-                  
+
+
                       <form action="" method="">
                         <input id="md" type="button" value="문의 등록">
                       </form>
                       <!-- 1 : 1 문의 페이지 시작 -->
                       <div id="one-section" >
 
-                        
-                        <table id="nb1" align="center">
-                          
-                            <tr>
-                              <th class="n1">번호</th>
-                              <th class="n2">카테고리</th>
-                              <th class="n3">제목</th>
-                              <th class="n4">작성자</th>
-                              <th class="n5">작성일</th>
-                            </tr>
 
+                        <table id="nb1" align="center">
+
+                        	<thead>
+	                            <tr>
+	                              <th class="n1">번호</th>
+	                              <th class="n2">카테고리</th>
+	                              <th class="n3">제목</th>
+	                              <th class="n4">작성자</th>
+	                              <th class="n5">작성일</th>
+	                            </tr>
+							</thead>
                         </table>
 
                         <table id="sd1" align="center">
@@ -100,7 +115,7 @@
                         <div class="d1">
                           <!--<span style="color: red; font-size: large; font-weight: 600;">A.</span>-->
                           <span class="d2">아니 언제 와요 빨리 좀 보내줘요
-                          
+
                         </span>
                         </div>
 
@@ -119,7 +134,7 @@
                           <div class="pagediv">
                               <a href="#viewOrderList" class="layout-pagination-button layout-pagination-first-page">맨 처음 페이지로 가기</a>
                               <a href="#viewOrderList" class="layout-pagination-button layout-pagination-prev-page">이전 페이지로 가기</a>
-                              <span> 
+                              <span>
                                   <strong class="layout-pagination-button layout-pagination-number __active" style="height: 32px;">
                                       1
                                   </strong>
@@ -128,20 +143,20 @@
                               <a href="#viewOrderList" class="layout-pagination-button layout-pagination-last-page">맨 끝 페이지로 가기</a>
                           </div>
                       </div>
-                      
-                        
+
+
                        </div>
-                          
-                      </div>             
+
+                      </div>
             </div>
-  
+
           </div>
-  
+
         </div>
-  
+
     </div>
-    
+
     <!-- 1:1 페이지 영역 끝 -->
-	<%@ include file="../common/footer.jsp" %> 
+	<%@ include file="../common/footer.jsp" %>
   </body>
 </html>
