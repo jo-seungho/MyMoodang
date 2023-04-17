@@ -1,5 +1,6 @@
 package com.kh.common.model.vo;
 
+
 public class PageInfo {
 
     private int listCount;		// 현재 총 게시글 수
@@ -10,11 +11,9 @@ public class PageInfo {
     private int startPage;		// 현재 페이지에 하단에 보여질 페이징 바의 시작 수 => 18페이지라면 11, 28페이지라면 21
     private int endPage;		// 현재 페이지에 하단에 보여질 페이징 바의 끝 수 => 18페이지라면 20, 28페이지라면 30
    
-    
-   
     public PageInfo() {}
-
-    public PageInfo(int listCount, int currentPage, int pageLimit, int boardLimit, int maxPage, int startPage, int endPage) {
+    
+	public PageInfo(int listCount, int currentPage, int pageLimit, int boardLimit, int maxPage, int startPage, int endPage) {
         super();
         this.listCount = listCount;
         this.currentPage = currentPage;
@@ -81,15 +80,13 @@ public class PageInfo {
 	public void setEndPage(int endPage) {
 		this.endPage = endPage;
 	}
-	
-	
+
 	@Override
 	public String toString() {
 		return "PageInfo [listCount=" + listCount + ", currentPage=" + currentPage + ", pageLimit=" + pageLimit
 				+ ", boardLimit=" + boardLimit + ", maxPage=" + maxPage + ", startPage=" + startPage + ", endPage="
 				+ endPage + "]";
-	}   
-    
-    
+	}
+	
 
 }

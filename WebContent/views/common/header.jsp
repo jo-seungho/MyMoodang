@@ -117,7 +117,7 @@
         <h2 class="blind">메뉴</h2>
         <ul class="gnb_menu">
           <li class="list gnb_main">
-            <a href="/itemList.it?currentPage=1" class="link">
+            <a href="/itemList.it?currentPage=1&category=전체" class="link">
               <span class="ico"></span>
               <!-- ico는 css에서 bg url로 처리 -->
               <span class="txt">전체 카테고리</span>
@@ -201,17 +201,17 @@
             </div>
           </li>
           <li class="list">
-            <a href="#" class="link">
+            <a href="/newItemList.it?currentPage=1" class="link">
               <span class="txt">신상품</span>
             </a>
           </li>
           <li class="list">
-            <a href="#" class="link">
+            <a href="/discountItemList.it?currentPage=1" class="link">
               <span class="txt">할인</span>
             </a>
           </li>
           <li class="list">
-            <a href="#" class="link">
+            <a href="/bestItemList.it?currentPage=1" class="link">
               <span class="txt">베스트</span>
             </a>
           </li>

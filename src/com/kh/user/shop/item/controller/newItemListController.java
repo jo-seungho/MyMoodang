@@ -1,6 +1,4 @@
 package com.kh.user.shop.item.controller;
-// 2023-04-15 
-// 조승호
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -14,18 +12,18 @@ import javax.servlet.http.HttpServletResponse;
 import com.kh.common.model.vo.PageInfo;
 import com.kh.user.shop.item.model.service.ItemService;
 import com.kh.user.shop.item.model.vo.Item;
-
+// 2023-04-17 조승호
 /**
- * Servlet implementation class itemListController
+ * Servlet implementation class bestItemList
  */
-@WebServlet("/itemList.it")
-public class itemListController extends HttpServlet {
+@WebServlet("/newItemList.it")
+public class newItemListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public itemListController() {
+    public newItemListController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,8 +32,6 @@ public class itemListController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			
-		request.setCharacterEncoding("UTF-8");
 		
 		int listCount; 		// 현재 총 게시글의 갯수
 		int currentPage; 	// 현재 페이지 (즉, 사용자가 요청하는 페이지)
@@ -44,10 +40,8 @@ public class itemListController extends HttpServlet {
 		int maxPage; 		// 가장 마지막 페이지가 몇 번째 페이지인지 (즉, 총 페이지 수)
 		int startPage; 		// 페이지 하단에 보여질 페이징바의 시작수
 		int endPage; 		// 페이지 하단에 보여질 페이징바의 끝수
-		String category = request.getParameter("category");
-		request.setAttribute("category", category);
 		
-		listCount = new ItemService().selectListCountUser(category);
+		listCount = new ItemService().selectListCount();
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		// * pageLimit : 페이지 하단에 보여질 페이징바의 페이지 최대 갯수
 		pageLimit = 10;
@@ -69,16 +63,15 @@ public class itemListController extends HttpServlet {
 				  boardLimit, maxPage, startPage, endPage);
 		
 		 
-		 ArrayList<Item> list = new ItemService().selectItemList(pi, category);
+		 ArrayList<Item> list = new ItemService().selectNewItemList(pi);
 		 
+		 String category = request.getParameter("category");
 		 // System.out.println(category);
 		 
 		 request.setAttribute("pi", pi);
 		 request.setAttribute("list", list);
-		 
 		
-		request.getRequestDispatcher("views/shop/itemList.jsp").forward(request, response);
-		
+		request.getRequestDispatcher("views/shop/newItemList.jsp").forward(request, response);
 		
 	}
 
