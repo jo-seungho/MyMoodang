@@ -6,8 +6,14 @@
 	<entry key="selectListCount">
 		SELECT COUNT(*) COUNT FROM ITEM
 	</entry>
+	
+	<entry key="selectListSale">
+		SELECT COUNT(*) COUNT FROM ITEM
+		WHERE ITEM_STATUS = ?
+	</entry>
+	
 
-	<entry key="selectItemListAd">
+	<entry key="selectItemList">
 		SELECT *
 		FROM (
 		SELECT ROWNUM RNUM,
@@ -27,25 +33,23 @@
 		)
 		WHERE RNUM BETWEEN ? AND ?
 	</entry>
-
-	<entry key="selectItemList">
+	
+	<entry key="selectSaleItemList">
 		SELECT *
 		FROM (
 		SELECT ROWNUM RNUM,
 		A.*
 		FROM (
-        SELECT ITEM_CODE
+		SELECT ITEM_CODE
 		, TO_CHAR(ITEM_DATE, 'YY/MM/DD HH:MI:SS') ITEM_DATE
-        , ITEM_CATEGORY
 		, ITEM_IMAGE
 		, ITEM_NAME
-        , ITEM_TEXT
 		, ITEM_STOCK
 		, ITEM_PRICE
-		, ITEM_HITS
 		, ITEM_STATUS
 		FROM ITEM
 		LEFT JOIN ITEM_IMG ON (ITEM_IMG_CODE = ITEM_CODE)
+		WHERE ITEM_STATUS = ?
 		ORDER BY ITEM_DATE DESC
 		) A
 		)

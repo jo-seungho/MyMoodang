@@ -5,11 +5,10 @@
 <%
 	PageInfo pi = (PageInfo) request.getAttribute("pi");
 	ArrayList<Item> list = (ArrayList<Item>) request.getAttribute("list");
-
-	int currentPage = pi.getCurrentPage();
-	int startPage = pi.getStartPage();
-	int endPage = pi.getEndPage();
-	int maxPage = pi.getMaxPage();
+int currentPage = pi.getCurrentPage();
+int startPage = pi.getStartPage();
+int endPage = pi.getEndPage();
+int maxPage = pi.getMaxPage();
 %>
 
 
@@ -75,7 +74,7 @@
 										<div class="item">
 											<div class="thumb">
 												<a
-													href="/item.detail?bno=<%= i.getItemCode() %>"
+													href="/itemDetail.it?bno=<%= i.getItemCode() %>"
 													class="img"
 													style="background-image: url(https://img-cf.kurly.com/shop/data/goods/1567574126435l0.jpg);">
 													<img src="<%= i.getItemImg() %>"
@@ -91,7 +90,7 @@
 												</div>
 											</div>
 
-											<a href="/item.detail?bno=<%= i.getItemCode() %>" class="info"> 
+											<a href="/itemDetail.it?bno=<%= i.getItemCode() %>" class="info"> 
 											<span class="name"> <%= i.getItemName() %> </span> 
 											<span class="cost"> <span class="price"><%= i.getItemPrice() %></span> 
 											<input type="hidden" id="product_cost1" value=1300> 
@@ -117,7 +116,7 @@
 						<div class="layout-pagination">
 							<div class="pagediv">
 								<% if(currentPage != 1) { %>
-								<a href="/itemList.it?currentPage=<%= startPage %>"
+								<a href="/itemList.total?currentPage=<%= startPage %>"
 									class="layout-pagination-button layout-pagination-first-page">맨 처음 페이지로 가기
 								</a> 
 								<a href="/itemList.total?currentPage=<%= currentPage - 1 %>" class="layout-pagination-button layout-pagination-prev-page">
@@ -133,7 +132,7 @@
 								<% } %>
 								<% for(int p = startPage; p <= endPage; p++) { %>
 									<% if(p != currentPage) { %>
-								<a href="/itemList.it?currentPage=<%= p %>"> 
+								<a href="/itemList.total?currentPage=<%= p %>"> 
 									<span> 
 										<strong class="layout-pagination-button layout-pagination-number __active"><%= p %></strong>
 									</span>
@@ -146,10 +145,10 @@
 									<% } %>
 								<% } %>
 								<% if(currentPage != maxPage) { %>
-								 <a href="/itemList.it?currentPage=<%= currentPage + 1 %>" class="layout-pagination-button layout-pagination-next-page">
+								 <a href="/itemList.total?currentPage=<%= currentPage + 1 %>" class="layout-pagination-button layout-pagination-next-page">
 								 다음 페이지로 가기
 								 </a> 
-								 <a href="/itemList.it?currentPage=<%= endPage %>" class="layout-pagination-button layout-pagination-last-page">
+								 <a href="/itemList.total?currentPage=<%= endPage %>" class="layout-pagination-button layout-pagination-last-page">
 								 맨끝 페이지로 가기
 								 </a>
 								 <% } else { %>
@@ -219,9 +218,8 @@
 		</div>
 		<script>
 			$(function() {
-
-				$(".info").click(function() {
-					location.href = "/item.it";
+				$(".thumb").click(function() {
+					location.href = "/itemDetail.it";
 				});
 			});
 		</script>
