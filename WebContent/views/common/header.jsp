@@ -9,8 +9,8 @@
 	String alertMsg = (String)request.getAttribute("alertMsg");
 
 	String errorMsg = (String)request.getAttribute("errorMsg");
-	
-	
+
+
 %>
 
 <!DOCTYPE html>
@@ -46,7 +46,7 @@
             <a  class="item after join" href="/enrollForm.me">회원가입</a>
           </li>
           <li class="link">
-            <a class="item after login_none">로그인</a>
+            <a class="item after login_none" href="/login.me">로그인</a>
             <a class="item login login_check grade_comm">
               <span class="ico_grade grade0">일반</span>
               <span class="txt">
@@ -240,7 +240,7 @@
               <span class="emph">배송지를 등록</span>하고<br />
               <span class="txt">구매가능한 상품을 확인하세요!</span>
               <div class="group_button">
-                <button type="button" class="btn login">로그인</button>
+                <button type="button" class="btn login" href="login.me">로그인</button>
                 <button type="button" class="btn search_address">
                   <span class="ico"></span>
                   주소검색
