@@ -1,4 +1,4 @@
-package com.kh.user.board.notice.model.vo;
+package com.kh.admin.board.notice.model.vo;
 // 2023/04/14
 
 // 소현아
@@ -35,23 +35,10 @@ public class Notice {
 		this.createDate = createDate;
 		
 	}
-	
-	// 공지사항  조회수 생성자
-	public Notice(int noticeNo, String noticeTitle, String noticeContent, String createDate, int views) {
-		super();
-		this.noticeNo = noticeNo;
-		this.noticeTitle = noticeTitle;
-		this.noticeContent = noticeContent;
-		this.createDate = createDate;
-		this.views = views;
-	}
-	
-	
 
 	public int getNoticeNo() {
 		return noticeNo;
 	}
-
 
 	public void setNoticeNo(int noticeNo) {
 		this.noticeNo = noticeNo;
