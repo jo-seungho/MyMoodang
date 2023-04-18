@@ -38,4 +38,22 @@
 
 	</entry>
 
+	<!--  1:1 문의 등록용 쿼리문 / 2023-04-18 김서영 -->
+	<entry key="insertInquiry">
+		INSERT INTO INQUIRY (INQ_NO
+                           , TITLE
+                           , DESCRIPTION
+                           , DATE_CREATE
+                           , INQUIRY_TYPE
+                           , MEMBER_NO
+                           , DELETE_STATUS)
+                    VALUES (SEQ_INQ.NEXTVAL
+                           , ?
+                           , ?
+                           , SYSDATE
+                           , ?
+                           , ?
+                           , 'Y')
+	</entry>
+
 </properties>

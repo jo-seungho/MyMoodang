@@ -124,4 +124,41 @@ public class InquiryDao {
 
 		return list;
 	}
+
+
+
+
+	/**
+	 * 1:1 문의 작성 용 메소드
+	 * => 회원가입 된 회원의 번호 추가 해야 함!!
+	 * 2023-04-18 김서영
+	 * @param conn
+	 * @param in
+	 * @return
+	 */
+	public int insertInquiry(Connection conn, Inquiry in) {
+
+		int result = 0;
+		PreparedStatement pstmt = null;
+
+		String sql = prop.getProperty("insertInquiry");
+
+		try {
+			int i = 0;
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(++i, in.getTitle());
+			pstmt.setString(++i, in.getDescription());
+			pstmt.setString(++i, in.getInquiryType());
+			pstmt.setInt(++i, 6);
+
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
 }

@@ -31,6 +31,25 @@ public class Inquiry {
 	}
 
 
+
+
+
+
+	/**
+	 * 1:1 문의 등록용 생성자
+	 * 2023-04-18 김서영
+	 * @param title
+	 * @param description
+	 * @param inquiryType
+	 */
+	public Inquiry(String title, String description, String inquiryType) {
+		super();
+		this.title = title;
+		this.description = description;
+		this.inquiryType = inquiryType;
+	}
+
+
 	public int getInqNo() {
 		return inqNo;
 	}

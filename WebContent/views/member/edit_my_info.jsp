@@ -209,7 +209,7 @@
 
                                 추가적으로 로그인한 회원의 아이디도 같이 넘기기 (hidden)
                          -->
-                         <input type="hidden" name="userId" value="<%= userId %>">
+                         <input type="hidden" name="userId" value="">
                          <table id="modal_pwd">
                              <tr>
                                  <td>현재 비밀번호</td>
