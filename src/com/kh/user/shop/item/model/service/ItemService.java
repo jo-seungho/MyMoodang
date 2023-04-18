@@ -19,16 +19,16 @@ public class ItemService {
 	/**
 	 * 상품 상세보기에서 조회수 증가
      * 2023-04-16 이태화
-	 * @param itemcode
+	 * @param bno
 	 * @param conn
 	 * @return
 	 */
 	
-	public int increaseCount(int itemcode) {
+	public int increaseCount(int bno) {
 		
 		Connection conn = getConnection();
 
-		int result = new ItemDao().increaseCount(conn, itemcode);
+		int result = new ItemDao().increaseCount(conn, bno);
 
 		if(result > 0) {
 			commit(conn);
@@ -44,14 +44,14 @@ public class ItemService {
 	/**
 	 * 상품 상세보기
 	 * 2023-04-16 이태화
-	 * @param itemcode
+	 * @param bno
 	 * @param conn
 	 * @return
 	 */
-	public Item selectItem(int itemcode) {
+	public Item selectItem(int bno) {
 		Connection conn = getConnection();
 
-		Item i = new ItemDao().selectItem(conn, itemcode);
+		Item i = new ItemDao().selectItem(conn, bno);
 
 		close(conn);
 
@@ -61,19 +61,36 @@ public class ItemService {
 	/**
 	 * 상품 상세보기에서 이미지 조회
 	 * 2023-04-16 이태화
-	 * @param itemcode
+	 * @param bno
 	 * @param conn
 	 * @return
 	 */
-	public ArrayList<Attachment> selelctAttachmentList(int itemcode) {
+	public ArrayList<Attachment> selelctAttachmentList(int bno) {
 		Connection conn = getConnection();
 		
-		ArrayList<Attachment> list = new ItemDao().selectAttachmentList(conn, itemcode);
+		ArrayList<Attachment> list = new ItemDao().selectAttachmentList(conn, bno);
 		
 		close(conn);
 		
 		return list;
 	}
+	
+	/**
+     * 상품 상세보기에서 같은 카테고리 조회
+     * 2023-04-18 이태화
+     * @param category
+     * @return
+     */
+	public ArrayList<Attachment> selelctAttachmentCategory(String category) {
+		Connection conn = getConnection();
+		
+		ArrayList<Attachment> list = new ItemDao().selelctAttachmentCategory(conn, category);
+		
+		close(conn);
+		
+		return list;
+	}
+	
 
 	
 	

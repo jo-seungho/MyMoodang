@@ -6,64 +6,110 @@ public class Attachment {
      * 2023-04-16 이태화
      */
     
+//	ITEM_IMG_NO	NUMBER
 //	ITEM_IMG_CODE	NUMBER
-//	ITEM_IMG_T_F	VARCHAR2(1 BYTE)
-//	ITEM_IMAGE	VARCHAR2(300 BYTE)
-//	ITEM_IMG_DELETE_T_F	VARCHAR2(1 BYTE)
+//	ITEM_IMG_LEVEL	NUMBER
+//	ITEM_IMG_PATH	VARCHAR2(1000 BYTE)
+//	ITEM_IMG_STATUS	VARCHAR2(1 BYTE)
 
-    private int itemImgCode;
-    private String itemImgTF;
-    private String itemImage;
-    private String itemImgDeleteTF;
-    
-    public Attachment() {
-        super();
-    }
 
-    public Attachment(int itemImgCode, String itemImgTF, String itemImage, String itemImgDeleteTF) {
-        super();
-        this.itemImgCode = itemImgCode;
-        this.itemImgTF = itemImgTF;
-        this.itemImage = itemImage;
-        this.itemImgDeleteTF = itemImgDeleteTF;
-    }
+     private int itemImgNo;
+     private int itemImgCode;
+     private int itemImgLevel;
+     private String itemImgPath;
+     private String itemImgStatus;
+     private String itemName; // 사용자용 상세페이지에서 관련 제품들의 이름을 가져오기 위해 필드생성
+     private int itemPrice;  // 사용자용 상세페이지에서 관련 제품들의 정상가격을 가져오기 위해 필드생성
+     private int discountPrice; // 사용자용 상세페이지에서 관련 제품들의 할인가격을 가져오기 위해 필드생성 
+     
+     public Attachment() { }
 
-    public int getItemImgCode() {
-        return itemImgCode;
-    }
+	public Attachment(int itemImgNo, int itemImgCode, int itemImgLevel, String itemImgPath, String itemImgStatus,
+			String itemName, int itemPrice, int discountPrice) {
+		super();
+		this.itemImgNo = itemImgNo;
+		this.itemImgCode = itemImgCode;
+		this.itemImgLevel = itemImgLevel;
+		this.itemImgPath = itemImgPath;
+		this.itemImgStatus = itemImgStatus;
+		this.itemName = itemName;
+		this.itemPrice = itemPrice;
+		this.discountPrice = discountPrice;
+	}
 
-    public void setItemImgCode(int itemImgCode) {
-        this.itemImgCode = itemImgCode;
-    }
+	public int getItemImgNo() {
+		return itemImgNo;
+	}
 
-    public String getItemImgTF() {
-        return itemImgTF;
-    }
+	public void setItemImgNo(int itemImgNo) {
+		this.itemImgNo = itemImgNo;
+	}
 
-    public void setItemImgTF(String itemImgTF) {
-        this.itemImgTF = itemImgTF;
-    }
+	public int getItemImgCode() {
+		return itemImgCode;
+	}
 
-    public String getItemImage() {
-        return itemImage;
-    }
+	public void setItemImgCode(int itemImgCode) {
+		this.itemImgCode = itemImgCode;
+	}
 
-    public void setItemImage(String itemImage) {
-        this.itemImage = itemImage;
-    }
+	public int getItemImgLevel() {
+		return itemImgLevel;
+	}
 
-    public String getItemImgDeleteTF() {
-        return itemImgDeleteTF;
-    }
+	public void setItemImgLevel(int itemImgLevel) {
+		this.itemImgLevel = itemImgLevel;
+	}
 
-    public void setItemImgDeleteTF(String itemImgDeleteTF) {
-        this.itemImgDeleteTF = itemImgDeleteTF;
-    }
+	public String getItemImgPath() {
+		return itemImgPath;
+	}
 
-    @Override
-    public String toString() {
-        return "Attachment [itemImgCode=" + itemImgCode + ", itemImgTF=" + itemImgTF + ", itemImage=" + itemImage
-                + ", itemImgDeleteTF=" + itemImgDeleteTF + "]";
-    }
+	public void setItemImgPath(String itemImgPath) {
+		this.itemImgPath = itemImgPath;
+	}
+
+	public String getItemImgStatus() {
+		return itemImgStatus;
+	}
+
+	public void setItemImgStatus(String itemImgStatus) {
+		this.itemImgStatus = itemImgStatus;
+	}
+
+	public String getItemName() {
+		return itemName;
+	}
+
+	public void setItemName(String itemName) {
+		this.itemName = itemName;
+	}
+
+	public int getItemPrice() {
+		return itemPrice;
+	}
+
+	public void setItemPrice(int itemPrice) {
+		this.itemPrice = itemPrice;
+	}
+
+	public int getDiscountPrice() {
+		return discountPrice;
+	}
+
+	public void setDiscountPrice(int discountPrice) {
+		this.discountPrice = discountPrice;
+	}
+
+	@Override
+	public String toString() {
+		return "Attachment [itemImgNo=" + itemImgNo + ", itemImgCode=" + itemImgCode + ", itemImgLevel=" + itemImgLevel
+				+ ", itemImgPath=" + itemImgPath + ", itemImgStatus=" + itemImgStatus + ", itemName=" + itemName
+				+ ", itemPrice=" + itemPrice + ", discountPrice=" + discountPrice + "]";
+	}
+	
 
 }
+
+
+	

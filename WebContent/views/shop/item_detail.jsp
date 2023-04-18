@@ -6,6 +6,8 @@
 <%
     Item i = (Item)request.getAttribute("i");
     ArrayList<Attachment> list = (ArrayList<Attachment>)request.getAttribute("list");
+    ArrayList<Attachment> clist = (ArrayList<Attachment>)request.getAttribute("clist");
+    String category = i.getItemCategory(); 
 %>
 
 
@@ -46,25 +48,24 @@
                                 <div id="sectionView">
                                     <div class="inner_view">
                                         <div class="thumb" style="background-image: url(https://res.kurly.com/mobile/img/1808/img_none_x2.png);">
-                                            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXcAAAHnCAQAAADpr9U2AAABeUlEQVR42u3BMQEAAADCoPVPbQ0PoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALg0lPQAATTM2xoAAAAASUVORK5CYII=" alt="상품 대표 이미지" class="bg">
+                                            <img src="<%= i.getItemImg() %>" alt="상품 대표 이미지" class="bg">
             
                                         </div>
                                         <p class="goods_name">
                                             <span class="btn_share">
                                                 <button id="btnShare">공유하기</button>
                                             </span>
-                                            <strong class="name">[상품명] 데이터 넣는곳</strong>
-                                            <span class="short_desc">[한줄소개] 데이터 넣는곳</span>
+                                            <strong class="name"><%= i.getItemName() %></strong>
                                         </p>
                                         <p class="goods_price">
                                             <span class="position">
                                                 <span class="dc">
                                                     <span class="dc_price">
-                                                        가격 데이터 넣는곳
-                                                        <input type="hidden" value=0>  <!-- 여기 벨류에다가 가격데이터 넣어줘야댐-->
+                                                        <del><%= i.getItemPrice() %></del>
+                                                        <input type="hidden" value="<%= i.getDiscountPrice() %>">  <!-- 여기 벨류에다가 가격데이터 넣어줘야댐-->
                                                         
                                                     </span>
-                                                    <span class="won">원</span>
+                                                    <span class="won"><%= i.getDiscountPrice() %> 원</span>
                                                 </span>
                                                 
                                             </span>
@@ -81,19 +82,19 @@
                                         <div class="goods_info">
                                             <dl class="list fst">
                                                 <dt class="tit">정상가</dt>
-                                                <dd class="desc">판매단위 데이터 넣는곳</dd>
+                                                <dd class="desc"><%= i.getItemPrice() %></dd>
                                             </dl>
                                             <dl class="list">
                                                 <dt class="tit">할인가 </dt>
-                                                <dd class="desc">할인가격 데이터 넣는곳</dd>
+                                                <dd class="desc"><%= i.getDiscountPrice() %></dd>
                                             </dl>
                                             <dl class="list">
                                                 <dt class="tit">할인율</dt>
-                                                <dd class="desc">할인율 데이터 넣는곳</dd>
+                                                <dd class="desc"><%= i.getItemDiscount() %>%</dd>
                                             </dl>
                                             <dl class="list">
                                                 <dt class="tit">카테고리</dt>
-                                                <dd class="desc">카테고리 데이터 넣는곳</dd>
+                                                <dd class="desc"><%= i.getItemCategory() %></dd>
                                             </dl>
 
        
@@ -125,7 +126,7 @@
                                                         <div class="price">
                                                             <strong class="tit">총 상품금액 :</strong>
                                                             <span class="sum">
-                                                                <span class="num">1,300</span>
+                                                                <span class="num"><%= i.getDiscountPrice() %></span>
                                                                 <span class="won">원</span>
                                                             </span>
                                                         </div>
@@ -151,6 +152,7 @@
                                     </div>
                                 </div>
                             </div>
+                            
                             <div class="layout-wrapper goods-view-area">
                                 <div class="goods-add-product">
                                     <h3 class="goods-add-product-title">
@@ -165,95 +167,35 @@
                                         </button>
                                         <div class="goods-add-product-list-wrapper" style="height:320px;">
                                             <ul class="goods-add-product-list __slide-mover" style="left: 0px;">
-                                                <li class="goods-add-product-item __slide-item">
-                                                    <div class="goods-add-product-item-figure">
-                                                        <a href="#" target="_blank">
-                                                            <img src="https://res.kurly.com/mobile/img/1808/img_none_x2.png" class="goods-add-product-item-image">
-                                                        </a>
-                                                    </div>
-                                                    <div class="goods-add-product-item-content">
-                                                        <div class="goods-add-product-item-content-wrapper">
-                                                            <p class="goods-add-product-item-name">같은 카테코리 이미지 나오게하는 곳</p>
-                                                            <p class="goods-add-product-item-price">0원</p>
-                                                        </div>
-                                                    </div>
-                                                </li>
-            
-                                                <li class="goods-add-product-item __slide-item">
-                                                    <div class="goods-add-product-item-figure">
-                                                        <a href="#" target="_blank">
-                                                            <img src="https://res.kurly.com/mobile/img/1808/img_none_x2.png" class="goods-add-product-item-image">
-                                                        </a>
-                                                    </div>
-                                                    <div class="goods-add-product-item-content">
-                                                        <div class="goods-add-product-item-content-wrapper">
-                                                            <p class="goods-add-product-item-name">같은 카테코리 이미지 나오게하는 곳</p>
-                                                            <p class="goods-add-product-item-price">0원</p>
-                                                        </div>
-                                                    </div>
-                                                </li>
-            
-                                                <li class="goods-add-product-item __slide-item">
-                                                    <div class="goods-add-product-item-figure">
-                                                        <a href="#" target="_blank">
-                                                            <img src="https://res.kurly.com/mobile/img/1808/img_none_x2.png" class="goods-add-product-item-image">
-                                                        </a>
-                                                    </div>
-                                                    <div class="goods-add-product-item-content">
-                                                        <div class="goods-add-product-item-content-wrapper">
-                                                            <p class="goods-add-product-item-name">같은 카테코리 이미지 나오게하는 곳</p>
-                                                            <p class="goods-add-product-item-price">0원</p>
-                                                        </div>
-                                                    </div>
-                                                </li>
-            
-                                                <li class="goods-add-product-item __slide-item">
-                                                    <div class="goods-add-product-item-figure">
-                                                        <a href="#" target="_blank">
-                                                            <img src="https://res.kurly.com/mobile/img/1808/img_none_x2.png" class="goods-add-product-item-image">
-                                                        </a>
-                                                    </div>
-                                                    <div class="goods-add-product-item-content">
-                                                        <div class="goods-add-product-item-content-wrapper">
-                                                            <p class="goods-add-product-item-name">같은 카테코리 이미지 나오게하는 곳</p>
-                                                            <p class="goods-add-product-item-price">0원</p>
-                                                        </div>
-                                                    </div>
-                                                </li>
-            
-                                                <li class="goods-add-product-item __slide-item">
-                                                    <div class="goods-add-product-item-figure">
-                                                        <a href="#" target="_blank">
-                                                            <img src="https://res.kurly.com/mobile/img/1808/img_none_x2.png" class="goods-add-product-item-image">
-                                                        </a>
-                                                    </div>
-                                                    <div class="goods-add-product-item-content">
-                                                        <div class="goods-add-product-item-content-wrapper">
-                                                            <p class="goods-add-product-item-name">같은 카테코리 이미지 나오게하는 곳</p>
-                                                            <p class="goods-add-product-item-price">0원</p>
-                                                        </div>
-                                                    </div>
-                                                </li>
-            
-                                                <li class="goods-add-product-item __slide-item">
-                                                    <div class="goods-add-product-item-figure">
-                                                        <a href="#" target="_blank">
-                                                            <img src="https://res.kurly.com/mobile/img/1808/img_none_x2.png" class="goods-add-product-item-image">
-                                                        </a>
-                                                    </div>
-                                                    <div class="goods-add-product-item-content">
-                                                        <div class="goods-add-product-item-content-wrapper">
-                                                            <p class="goods-add-product-item-name">같은 카테코리 이미지 나오게하는 곳</p>
-                                                            <p class="goods-add-product-item-price">0원</p>
-                                                        </div>
-                                                    </div>
-                                                </li>
-            
+
+                                            
                                                 
+                                                
+                                            	<%  for(Attachment a : clist) { %>
+                                                <li class="goods-add-product-item __slide-item">
+                                                    <div class="goods-add-product-item-figure">
+                                                        <a href="#" target="_blank">
+                                                            <img src="<%= a.getItemImgPath() %>" class="goods-add-product-item-image">
+                                                        </a>
+                                                    </div>
+                                                    <div class="goods-add-product-item-content">
+                                                        <div class="goods-add-product-item-content-wrapper">
+                                                            <p class="goods-add-product-item-name"><%= a.getItemName() %></p>
+                                                            <div class="category_item" align="center" style="font-size: 21px;">
+                                                            <span class="goods-add-product-item-price2"><del><%= a.getItemPrice() %></del>원&nbsp;&nbsp;</span>
+                                                            <span class="goods-add-product-item-discountprice2"><%= a.getDiscountPrice() %>원</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <% } %>
+  
+                                               
                                             </ul>
                                         </div>
                                     </div>
                                 </div>
+                              </div>
             
                                 <div class="goods-view-infomation detail_wrap_outer" id="goods-view-infomation">
                                     <ul class="goods-view-infomation-tab-group">
@@ -271,7 +213,7 @@
                                         </li>
                                         <li class="goods-view-infomation-tab qna-show">
                                             <a href="#goods-qna" class="goods-view-infomation-tab-anchor">
-                                                상품문의
+                                                1 : 1 문의
                                                 <span>(0)</span>
             
                                             </a>
@@ -281,17 +223,17 @@
                                         <div class="goods_wrap">
                                             <div class="goods_intro">
                                                 <div class="pic">
-                                                    <img src="https://res.kurly.com/mobile/img/1808/img_none_x2.png" style="width:1010px; height:671px;">
+                                                    <img src="<%= i.getItemImg() %>" style="width:1010px; height:671px;">
                                                 </div>
                                                 <div class="context last">
                                                     <h3>
                                                         <small>
-                                                            제목 부연설명
+                                                            <%= i.getItemName() %>
                                                         </small>
-                                                        제목
+                                                        <%= i.getItemText() %>
                                                     </h3>
                                                     <p class="words">
-                                                        샬라샬라 설명
+                                                        <img src="<%= i.getItemImg() %>" style="width:1010px; height:671px;">
                                                     </p>
             
                                                 </div>
@@ -314,7 +256,7 @@
                                             </a>
                                         </li>
                                         <li class="goods-view-infomation-tab">
-                                            <a href="#goods-qna" class="goods-view-infomation-tab-anchor">상품문의
+                                            <a href="#goods-qna" class="goods-view-infomation-tab-anchor">1 : 1 문의
                                                 <span>(0)</span>
                                             </a>
                                         </li>
@@ -343,7 +285,7 @@
                                             </a>
                                         </li>
                                         <li class="goods-view-infomation-tab">
-                                            <a href="#goods-qna" class="goods-view-infomation-tab-anchor">상품문의
+                                            <a href="#goods-qna" class="goods-view-infomation-tab-anchor">1 : 1 문의
                                                 <span>(0)</span>
                                             </a>
                                         </li>
@@ -357,10 +299,6 @@
                         </div>
             
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
      <!-- 상품 상세페이지 끝-->
 
       <%@ include file="../common/footer.jsp" %>
