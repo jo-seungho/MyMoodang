@@ -216,7 +216,7 @@
             </a>
           </li>
           <li class="list">
-            <a href="#" class="link">
+            <a href="/noticelist.no?currentPage=1" class="link">
               <span class="txt">이벤트</span>
             </a>
           </li>

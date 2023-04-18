@@ -1,9 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.ArrayList, com.kh.user.board.notice.model.vo.Notice"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, com.kh.user.board.notice.model.vo.Notice, com.kh.common.model.vo.PageInfo"%>
     
-    <%
-    	ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("list");
-    %>
+   
+<%
+	// 필요한 데이터들 뽑기
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+    ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("list");
+
+	// 자주 쓰일법한 변수들 셋팅
+	int currentPage = pi.getCurrentPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	int maxPage = pi.getMaxPage();
+%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -119,7 +128,44 @@
       </div>    
     <!-- 자주하는질문 페이지 영역 끝 -->
     
+	    <script>
+	    $('.item').on('click', function() {
+	        var nno = $(this).find('.notice_num').text();
+			
+			location.href = "/noticedetail.no?nno=" + nno;
+	        
+	    });
+	
+	    </script>
+	    
     
+    <!-- 페이징 바  -->
+    	<div align="center" class="paging-area">
+
+			<% if(currentPage != 1) { %>
+				<button onclick="location.href = '//noticelist.no?currentPage=<%= currentPage - 1 %>';">
+					&lt;
+				</button>
+			<% } %>
+		
+			<% for(int p = startPage; p <= endPage; p++) { %>
+				<% if(p != currentPage) { %>
+					<button onclick="location.href = '//noticelist.no?currentPage=<%= p %>';">
+						<%= p %>
+					</button>
+				<% } else { %>
+					<!-- 현재 내가 보고있는 페이지일 경우에는 클릭이 안되게끔 -->
+					<button disabled><%= p %></button>
+				<% } %>
+			<% } %>
+			
+			<% if(currentPage != maxPage) { %>
+				<button onclick="location.href = '//noticelist.no?currentPage=<%= currentPage + 1 %>';">
+					&gt;
+				</button>
+			<% } %>
+
+		</div>
 
        <%@ include file="../common/footer.jsp" %>
 
