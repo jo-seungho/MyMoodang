@@ -523,5 +523,116 @@ public class ItemDao {
 	}
 
 
+	/**
+	 * 2023-04-18 조승호
+	 * 메인페이지 탑 슬라이드 리스트
+	 * @param conn
+	 * @return
+	 */
+	public ArrayList<Item> discountList(Connection conn) {
+		
+		ArrayList<Item> list = new ArrayList<>();
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("mainDiscountList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Item(
+						rset.getInt("ITEM_CODE")
+					  , rset.getString("ITEM_CATEGORY")	
+					  , rset.getString("ITEM_DATE")	
+					  , rset.getInt("ORIGINALPRICE")
+					  , rset.getInt("DISCOUNTPRICE")
+					  , rset.getString("ITEM_NAME")
+					  , rset.getString("ITEM_TEXT")
+					  , rset.getInt("ITEM_DISCOUNT")
+					  ));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+
+	public ArrayList<Item> newList(Connection conn) {
+		
+		ArrayList<Item> list = new ArrayList<>();
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("newList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Item(
+						rset.getInt("ITEM_CODE")
+					  , rset.getString("ITEM_CATEGORY")	
+					  , rset.getString("ITEM_DATE")	
+					  , rset.getInt("ORIGINALPRICE")
+					  , rset.getInt("DISCOUNTPRICE")
+					  , rset.getString("ITEM_NAME")
+					  , rset.getString("ITEM_TEXT")
+					  , rset.getInt("ITEM_DISCOUNT")
+					  ));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+
+	public ArrayList<Item> bestList(Connection conn) {
+		
+		ArrayList<Item> list = new ArrayList<>();
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("bestList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Item(
+						rset.getInt("ITEM_CODE")
+					  , rset.getString("ITEM_CATEGORY")	
+					  , rset.getString("ITEM_DATE")	
+					  , rset.getInt("ORIGINALPRICE")
+					  , rset.getInt("DISCOUNTPRICE")
+					  , rset.getString("ITEM_NAME")
+					  , rset.getString("ITEM_TEXT")
+					  , rset.getInt("ITEM_DISCOUNT")
+					  ));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+
 }
 

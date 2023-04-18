@@ -213,5 +213,53 @@ public class ItemService {
 		return list;
 	}
 
+	/**
+	 * 2023-04-18 조승호
+	 * 메인페이지 탑 슬라이드 리스트
+	 * @return
+	 */
+	public ArrayList<Item> discountList() {
+		
+		Connection conn = getConnection();
+		
+		ArrayList<Item> list = new ItemDao().discountList(conn);
+		
+		close(conn);
+		
+		return list;
+	}
+
+	/**
+	 * 2023-04-18 조승호
+	 * 메인페이지 탑 배너
+	 * @return
+	 */
+	public ArrayList<Item> newList() {
+		
+		Connection conn = getConnection();
+		
+		ArrayList<Item> list = new ItemDao().newList(conn);
+		
+		close(conn);
+		
+		return list;
+	}
+
+	/**
+	 * 2023-04-18 조승호
+	 * 메인페이지 바텀 슬라이드 리스트
+	 * @return
+	 */
+	public ArrayList<Item> bestList() {
+		
+		Connection conn = getConnection();
+		
+		ArrayList<Item> list = new ItemDao().bestList(conn);
+		
+		close(conn);
+		
+		return list;
+	}
+
 	
 }

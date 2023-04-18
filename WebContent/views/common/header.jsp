@@ -106,7 +106,7 @@
       </div>
       <div class="header_logo">
         <h1 class="logo">
-          <a href="/views/main/main.jsp" class="link_main">
+          <a href="/main" class="link_main">
             <span class="gnb_logo_container"></span>
             <img src="/resources/img/logo.png" alt="마켓컬리 로고" class="logo_img" />
           </a>

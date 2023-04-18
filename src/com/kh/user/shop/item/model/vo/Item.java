@@ -75,6 +75,20 @@ public class Item {
 
 
 
+	public Item(int itemCode, String itemCategory, String itemDate, int itemPrice, int discountPrice, String itemName, String itemText,
+			int itemDiscount) {
+		super();
+		this.itemCode = itemCode;
+		this.itemCategory = itemCategory;
+		this.itemDate = itemDate;
+		this.itemPrice = itemPrice;
+		this.discountPrice = discountPrice;
+		this.itemName = itemName;
+		this.itemText = itemText;
+		this.itemDiscount = itemDiscount;
+	}
+
+
 	public int getItemCode() {
 		return itemCode;
 	}
