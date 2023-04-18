@@ -15,7 +15,7 @@ window.addEventListener('DOMContentLoaded', function () {
 	  
 	  let setCategory = sessionStorage.setItem('category', params.get('category'));
 	  let getCategory = sessionStorage.getItem('category');
-	  console.log(getCategory);
+	  // console.log(getCategory);
 	  
 	  if(getCategory == '전체') {
 		  $(".totalList").addClass('on');
