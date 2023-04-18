@@ -17,8 +17,8 @@
 
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 
-    <script src="../js/common/header.js"></script>
-    <script src="../js/shop/payment.js"></script>
+    <script src="/resources/js/common/header.js"></script>
+    <script src="/resources/js/shop/payment.js"></script>
 
     <title>장바구니</title>
   </head>

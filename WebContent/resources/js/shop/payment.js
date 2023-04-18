@@ -66,17 +66,17 @@ $(function () {
     $('.plus').click(function () { //count up
         // let price = $(this).parents('.price').find('.selling').text().split('\n')[0];
         let price1 = $(this).parents('.price').find('.selling1').val();
-        console.log(price1, "price1");
+        // console.log(price1, "price1");
         var n = $('.plus').index(this);
         var num = $(".num:eq(" + n + ")").val();
-        console.log(num, "num")
+        // console.log(num, "num")
 
         if (num == 1) {
-            console.log("1")
+            // console.log("1")
             $(this).parents('.price').find('.selling').text(parseInt(price1) + parseInt(price1) + ' 원')
         }
         if (num > 1) {
-            console.log("2")
+            // console.log("2")
             $(this).parents('.price').find('.selling').text(parseInt(price1) * (parseInt(num) + 1) + ' 원')
 
         }
@@ -89,7 +89,7 @@ $(function () {
         var n = $('.minus').index(this);
         var num = $(".num:eq(" + n + ")").val();
         if (num != 1) {
-            console.log(num)
+            // console.log(num)
             $(this).parents('.price').find('.selling').text(parseInt(price) - parseInt(price1) + ' 원')
             num = $(".num:eq(" + n + ")").val(num * 1 - 1);
         }
