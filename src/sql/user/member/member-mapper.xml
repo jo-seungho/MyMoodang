@@ -86,6 +86,14 @@
 	        WHERE MEMBER_NO = ?
         </entry>
 
+		<!-- 개인 회원의 로그인 기능 / 2023-04-18 이지환 -->
+		<entry key="loginUser">
+			 SELECT * FROM MEMBER
+			 	WHERE MEMBER_ID = ?
+			 	 AND PASSWORD = ?
+			 	 AND STATUS = 'Y'
+		</entry>
+		
 </properties>
 
 

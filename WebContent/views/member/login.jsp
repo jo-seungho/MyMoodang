@@ -1,3 +1,5 @@
+<!-- 2023-04-18 / 아이디 입력 칸의 name 및 로그인 매핑값 수정 / 이지환 -->
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <html>
@@ -36,10 +38,10 @@
                         <h3 class="tit_login">로그인</h3>
                         <div class="write_form">
                             <div class="write_view login_view">
-                                <form method="post" name="login_form" id="form"  action="login_ok.html">
+                                <form method="post" name="login_form" id="form"  action="/loginForm.me">
                                     <input type="hidden" name="returnUrl" value="">
                                     <input type="hidden" name="close" value>
-                                    <input type="text" name="m_id" size="20" tabindex="1" value placeholder="아이디 입력">
+                                    <input type="text" name="memberId" size="20" tabindex="1" value placeholder="아이디 입력">
                                     <input type="password" name="password" size="20" tabindex="2" placeholder="비밀번호 입력">
                                     <div class="checkbox_save">
                                         <div class="login_search">
@@ -48,7 +50,7 @@
                                             <a href="/findPwdForm.me" class="link">비밀번호 찾기</a>
                                         </div>
                                     </div>
-                                    <button type="button" onclick="check_input()" class="btn_type1">
+                                    <button type="submit"  onclick="check_input()" class="btn_type1">
                                         <span class="txt_type">로그인</span>
                                     </button>
                                 </form>
@@ -74,7 +76,7 @@
 
 
 
-        <script>
+       <!--  <script>
 
             var id = "test"
             var pw = "test"
@@ -98,9 +100,9 @@
                     history.go(0);
                     return;
                 }
-                document.login_form.submit();
+                return true;
 
             }
-        </script>
+        </script> -->
     </body>
 </html>
