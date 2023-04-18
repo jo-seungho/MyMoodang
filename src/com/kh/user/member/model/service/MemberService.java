@@ -178,4 +178,22 @@ public class MemberService {
 		return m;
 	}
 
+	/**
+	 * 로그인 기능 2023-04-18 이지환
+	 * 로그인 요청 기능
+	 * @param m
+	 * @return
+	 */
+	public Member loginUser(Member m) {
+		
+	
+		Connection conn = JDBCTemplate.getConnection();
+		
+		Member loginUser =  new MemberDao().loginUser(conn, m);
+
+		close(conn);
+		
+	
+		return loginUser;
+	}
 }
