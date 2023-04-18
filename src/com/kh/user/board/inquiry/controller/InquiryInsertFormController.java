@@ -1,29 +1,27 @@
-package com.kh.user.shop.cart.controller;
+// 2023-04-18 김서영
+// 1:1 문의 작성 폼 연결
+
+
+package com.kh.user.board.inquiry.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import com.kh.user.member.model.vo.Member;
-import com.kh.user.member.model.vo.ShippingAddress;
 
 /**
- * Servlet implementation class DeliberyList
+ * Servlet implementation class InquiryInsertController
  */
-@WebServlet("/delibery_List.do")
-public class DeliberyList extends HttpServlet {
+@WebServlet("/insertForm.in")
+public class InquiryInsertFormController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DeliberyList() {
+    public InquiryInsertFormController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,17 +30,7 @@ public class DeliberyList extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 
-		HttpSession session = request.getSession();
-		 Member member = (Member)session.getAttribute("member");
-		 
-		 ArrayList<ShippingAddress> shippingAddressList = ShippingAddress.findShippingAddressByMemberNo(member.getMemberNo());
-		ArrayList<Member> member = new ArrayList<>();
-		
-	    for(Member member : memberList) {
-	        ShippingAddress delivery = ShippingAddress.findDeliveryByMemberNo(member.getMemberNo());
-	        deliveryList.add(delivery);
-	    }
+		request.getRequestDispatcher("views/board/oneoneList.jsp").forward(request, response);   // 1:1 문의 작성 폼 화면으로 포워딩
 	}
 
 	/**
