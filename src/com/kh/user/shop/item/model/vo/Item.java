@@ -75,8 +75,13 @@ public class Item {
 
 
 
+	/**
+     * 메인 페이지 리스트용 생성자
+     * 2023-04-18 조승호
+     * @return
+     */
 	public Item(int itemCode, String itemCategory, String itemDate, int itemPrice, int discountPrice, String itemName, String itemText,
-			int itemDiscount) {
+			int itemDiscount, String itemImg) {
 		super();
 		this.itemCode = itemCode;
 		this.itemCategory = itemCategory;
@@ -86,6 +91,7 @@ public class Item {
 		this.itemName = itemName;
 		this.itemText = itemText;
 		this.itemDiscount = itemDiscount;
+		this.itemImg = itemImg;
 	}
 
 

@@ -6,7 +6,7 @@
 	ArrayList<Item> discountList = (ArrayList<Item>) request.getAttribute("discountList");
 	ArrayList<Item> newList = (ArrayList<Item>) request.getAttribute("newList");
 	ArrayList<Item> bestList = (ArrayList<Item>) request.getAttribute("bestList");
-
+	int ranking = 1;
 	String category = (String)request.getAttribute("category");
 	
 %>    
@@ -126,7 +126,7 @@
                             
                             		<% for(Item ni : newList) { %>
 		                            	<li>
-		                                    <li data-index="1">
+		                                    <li data-index="1" style="padding-bottom: 70px;">
 		                                        <a class="thumb_goods">
 		                                            <img src="<%= ni.getItemImg() %>" alt="상품이미지" class="thumb"
 		                                            style="background-image: url('');">
@@ -135,10 +135,13 @@
 		                                        <div class="info_goods">
 		                                            <div class="inner_info">
 		                                                <span class="name">
-		                                                    <a class="txt"><%= ni.getItemName() %></a>
+		                                                    <a class="txt" style="font-size: x-large; font-weight: 700;"><%= ni.getItemName() %></a>
 		                                                </span>
 		                                                <span class="desc"> 
-		                                                    <a class="txt"><%= ni.getItemText() %></a>
+		                                                    <a class="txt" style="font-size: initial;"><%= ni.getItemText() %></a>
+		                                                </span>
+		                                                <span class="desc" style="font-size: x-large; font-weight: 600;" >
+		                                                	<%= ni.getItemPrice() %>원
 		                                                </span>
 		                                            </div>
 		                                        </div>
@@ -172,11 +175,11 @@
 									<% if(bestList.isEmpty()) { %>
 										<div class="item">등록된 상품이 없습니다.</div>
 									<% } else { %>	
-									
+										
 										<% for(Item bi : bestList) { %>
 										 <li>
+										 <h1><i style="color: red; text-shadow: 2px -7px 8px orange;">TOP </i><%= ranking %></h1>
 	                                        <a class="slideLinkTag" href="../path.html">
-	                                            <img class="discountImg" src="https://img-cf.kurly.com/shop/data/my_icon/icon_save_10.png">
 	                                            <img src="<%= bi.getItemImg() %>" style="width: 90%; height: 310px;">
 	                                              <div class="slideText-area">
 	                                                <span class="name">
@@ -188,6 +191,7 @@
 	                                            </div>
 	                                        </a>
 	                                    </li>
+	                                    <% ranking++; %>
 										<% } %>
 									<% } %>
                                 </ul>

@@ -126,7 +126,7 @@
               <ul class="menu">
                 <li class="current">
                   <!-- hover나 active시 current가 옮겨가도록 설정해야 함 -->
-                  <a href="#" class="main_item">
+                  <a href="/itemList.it?currentPage=1&category=제로음료" class="main_item">
                     <span class="ico">
                       <img src="https://img-cf.kurly.com/shop/data/category/icon_newyear_inactive_pc@2x.1609722514.png" alt="" class="ico off" />
                       <img src="https://img-cf.kurly.com/shop/data/category/icon_newyear_active_pc@2x.1609722514.png" alt="" class="ico on" />
@@ -140,7 +140,7 @@
                     <!-- tit: text + ico -->
                   </a>
 
-                  <a href="#" class="main_item">
+                  <a href="/itemList.it?currentPage=1&category=무가당" class="main_item">
                     <span class="ico">
                       <img src="https://img-cf.kurly.com/shop/data/category/icon_newyear_inactive_pc@2x.1609722514.png" alt="" class="ico off" />
                       <img src="https://img-cf.kurly.com/shop/data/category/icon_newyear_active_pc@2x.1609722514.png" alt="" class="ico on" />
@@ -155,7 +155,7 @@
                     <!-- tit: text + ico -->
                   </a>
 
-                  <a href="#" class="main_item">
+                  <a href="/itemList.it?currentPage=1&category=단백질" class="main_item">
                     <span class="ico">
                       <img src="https://img-cf.kurly.com/shop/data/category/icon_newyear_inactive_pc@2x.1609722514.png" alt="" class="ico off" />
                       <img src="https://img-cf.kurly.com/shop/data/category/icon_newyear_active_pc@2x.1609722514.png" alt="" class="ico on" />
@@ -169,7 +169,7 @@
                     <!-- tit: text + ico -->
                   </a>
 
-                  <a href="#" class="main_item">
+                  <a href="/itemList.it?currentPage=1&category=도시락" class="main_item">
                     <span class="ico">
                       <img src="https://img-cf.kurly.com/shop/data/category/icon_newyear_inactive_pc@2x.1609722514.png" alt="" class="ico off" />
                       <img src="https://img-cf.kurly.com/shop/data/category/icon_newyear_active_pc@2x.1609722514.png" alt="" class="ico on" />
@@ -183,7 +183,7 @@
                     <!-- tit: text + ico -->
                   </a>
 
-                  <a href="#" class="main_item">
+                  <a href="/itemList.it?currentPage=1&category=기타" class="main_item">
                     <span class="ico">
                       <img src="https://img-cf.kurly.com/shop/data/category/icon_newyear_inactive_pc@2x.1609722514.png" alt="" class="ico off" />
                       <img src="https://img-cf.kurly.com/shop/data/category/icon_newyear_active_pc@2x.1609722514.png" alt="" class="ico on" />

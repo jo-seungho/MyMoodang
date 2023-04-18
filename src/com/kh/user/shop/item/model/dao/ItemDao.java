@@ -551,6 +551,7 @@ public class ItemDao {
 					  , rset.getString("ITEM_NAME")
 					  , rset.getString("ITEM_TEXT")
 					  , rset.getInt("ITEM_DISCOUNT")
+					  , rset.getString("ITEM_IMG_PATH")
 					  ));
 			}
 			
@@ -586,6 +587,7 @@ public class ItemDao {
 					  , rset.getString("ITEM_NAME")
 					  , rset.getString("ITEM_TEXT")
 					  , rset.getInt("ITEM_DISCOUNT")
+					  , rset.getString("ITEM_IMG_PATH")
 					  ));
 			}
 			
@@ -621,6 +623,7 @@ public class ItemDao {
 					  , rset.getString("ITEM_NAME")
 					  , rset.getString("ITEM_TEXT")
 					  , rset.getInt("ITEM_DISCOUNT")
+					  , rset.getString("ITEM_IMG_PATH")
 					  ));
 			}
 			

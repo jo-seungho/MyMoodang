@@ -218,7 +218,7 @@
 /* main_event 안에 main_type2가 있는 것 */
 .main_event .list_goods {
     overflow: hidden;
-    height: 538px;    
+    height: 950px;    
 }
 
 .main_type2 .list_goods {
