@@ -1,9 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="com.kh.user.board.inquiry.model.vo.Inquiry" %>
+
+<%
+	Inquiry in = (Inquiry)request.getAttribute("in");
+%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8" />
+<meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <!-- header css -->
@@ -15,13 +20,17 @@
 
 
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script defer src="/resources/js/common/header.js"></script>
-<script defer src="/resources/js/board/oneoneList.js"></script>
+<script src="/resources/js/common/header.js"></script>
+<script src="/resources/js/board/oneoneList.js"></script>
+<script src="/resources/js/board/oneUpdateForm.js"></script>
 
-<title>1 : 1 문의 글 작성</title>
+<title>1:1 문의 글 수정</title>
 </head>
 <body>
+
 	<%@ include file="../common/header.jsp"%>
+
+	<input type="hidden" id="ino" name="ino" value="<%= in.getInqNo() %>">
 
 	<!-- 1 : 1 문의 글 작성 영역 시작 -->
 	<div id="container">
@@ -37,8 +46,9 @@
 								<li class="one"><a href="/list.in">1 : 1 문의 </a></li>
 							</ul>
 						</div>
-
 					</div>
+
+
 					<div id="viewOrderList" class="page_section section_orderlist">
 						<div class="head_aticle">
 							<h2 class="tit">
@@ -48,13 +58,12 @@
 						</div>
 
 						<!-- 1 : 1 문의 글 작성 페이지 시작 -->
-						<form id="one-section" style="margin-top: 50px;" action="/insert.in" method="POST">
-
+						<form id="one-section">
 
 							<div class="typeWrapper">
 								<p class="oneCategory">유형*</p>	<br><br><br>
 								<select id="inType" name="inquiryType" class="categorySelect">
-									<option disabled selected>문의 유형을 선택해 주세요.</option>
+									<option disabled selected><%= in.getInquiryType() %></option>
 									<option >주문/결제/반품/교환 문의</option>
 									<option>이벤트/쿠폰 문의</option>
 									<option>상품 문의</option>
@@ -65,30 +74,16 @@
 
 							<div class="oneTitle">
 								<p>제목*</p> <br><br><br>
-								<input type="text" id="in_title" name="tltle" placeholder="제목을 입력해주세요.">
+								<input type="text" id="in_title" name="tltle" placeholder="제목을 입력해주세요." value="<%= in.getTitle() %>">
 							</div>
 
 							<div class="oneContent">
 								<p>내용*</p>
-								<textarea id="in_content" name="content" cols="30" rows="10" placeholder="내용을 입력해주세요."></textarea>
+								<textarea id="in_content" name="content" cols="30" rows="10" placeholder="내용을 입력해주세요."><%= in.getDescription() %></textarea>
 							</div>
 
-							<button type="submit" id="dbtn" onclick="return inquiryInsert_btn();">등록</button>
+							<button type="button" id="dbtn" onclick="inquiryUpdate_btn();">등록</button>
 						</form>
 					</div>
-				</div>
-			</div>
-
-		</div>
-
-	</div>
-
-
-
-	<!-- 1:1 페이지 영역 끝 -->
-
-	<%@ include file="../common/footer.jsp"%>
-
-
 </body>
 </html>

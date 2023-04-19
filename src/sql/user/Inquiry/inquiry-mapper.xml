@@ -4,6 +4,15 @@
 
 <properties>
 
+<!-- 2023-04-18 김서영 / 작성한 문의 사항 정보 조회용 쿼리문 -->
+	<entry key="selectInquiry">
+		SELECT *
+		  FROM INQUIRY
+		 WHERE INQ_NO = ?
+    	   AND DELETE_STATUS = 'Y'
+	</entry>
+
+
 <!--  2023-04-17 김서영 / 리스트 갯수 조회용 쿼리문 -->
 	<entry key="selectListCount">
 		SELECT COUNT(*) CNT
@@ -54,6 +63,17 @@
                            , ?
                            , ?
                            , 'Y')
+	</entry>
+
+
+<!--  1:1 문의 수정용 쿼리문 / 2023-04-18 김서영 -->
+	<entry key="updateInquiry">
+		UPDATE INQUIRY
+    	   SET INQUIRY_TYPE = ?
+       		 , TITLE = ?
+      		 , DESCRIPTION = ?
+     	     , DATE_CREATE = SYSDATE
+		 WHERE INQ_NO = ?
 	</entry>
 
 </properties>

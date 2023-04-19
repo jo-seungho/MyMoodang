@@ -1,6 +1,6 @@
 window.addEventListener('DOMContentLoaded', function () {
   //a = $('.search_keyword').val();
-  $('.inp_search').val(a);
+  $('.inp_search').val();
 
   $('.top_event_close').click(function () {
     $('#top_event').slideUp(200);

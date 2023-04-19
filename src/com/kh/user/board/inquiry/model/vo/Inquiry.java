@@ -36,14 +36,16 @@ public class Inquiry {
 
 
 	/**
-	 * 1:1 문의 등록용 생성자
+	 * 1:1 문의 등록용 / 수정용 생성자
 	 * 2023-04-18 김서영
 	 * @param title
 	 * @param description
 	 * @param inquiryType
 	 */
-	public Inquiry(String title, String description, String inquiryType) {
+	public Inquiry(int inqNo, String title, String description, String inquiryType) {
 		super();
+
+		this.inqNo = inqNo;
 		this.title = title;
 		this.description = description;
 		this.inquiryType = inquiryType;

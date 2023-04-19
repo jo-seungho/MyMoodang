@@ -351,12 +351,12 @@ body #container #main .layout-pagination .pagediv span strong{
     flex-direction: row;
 } */
 
-#sd1_q1 {
+.sd1_q1 {
     text-align: center;
     line-height: 10px;
     cursor: pointer;
 }
 
-#sd1_q2 {
+.sd1_q2 {
     display: none;
 }

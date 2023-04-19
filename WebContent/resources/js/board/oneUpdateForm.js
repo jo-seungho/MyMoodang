@@ -1,14 +1,18 @@
 /**
- *
+ *  1:1 문의 수정 js 파일
+ * 2023-04-18 김서영
  */
+
 $( document ).ready(function() {
     console.log( "ready!" );
 });
 
-function inquiryInsert_btn() {
+function inquiryUpdate_btn() {
+
 	let $type = $("#inType");
 	let $title = $("#in_title");
 	let $content = $("#in_content");
+	let $ino = $("#ino");
 
 // 문의 유형 선택 했는지 검사
 	if($type.val() == null) {
@@ -29,14 +33,16 @@ function inquiryInsert_btn() {
 		return false;
 	}
 
+
 	var data = {type : $type.val()
 			  , title : $title.val()
-			  , content : $content.val()};
+			  , content : $content.val()
+			  , ino : $ino.val()};
 
 	console.log(data);
 
 	$.ajax({
-			url : "insert.in"
+			url : "/update.in"
 		  , type : "post"
 		  , data : data
 		  , success : function(result) {

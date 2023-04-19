@@ -161,4 +161,86 @@ public class InquiryDao {
 		}
 		return result;
 	}
+
+
+	/**
+	 * 작성한 문의글 상세 조회용 메소드
+	 * 2023-04-18 김서영
+	 * @param conn
+	 * @param in
+	 * @return
+	 */
+	public Inquiry selectInquiry(Connection conn, int ino) {
+		Inquiry inAll = new Inquiry();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		String sql = prop.getProperty("selectInquiry");
+
+		try {
+			int i = 0;
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setInt(++i, ino);
+
+			rset = pstmt.executeQuery();
+
+			while(rset.next()) {
+				inAll = new Inquiry(rset.getInt("INQ_NO")
+								  , rset.getString("TITLE")
+								  , rset.getString("DESCRIPTION")
+								  , rset.getString("DATE_CREATE")
+								  , rset.getString("INQUIRY_TYPE")
+								  , rset.getString("REPLY_CONTENTS")
+								  , rset.getString("REPLY_DATE")
+								  , rset.getInt("MEMBER_NO"));
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return inAll;
+	}
+
+
+	/**
+	 * 1:1 문의 수정 용 메소드
+	 * => 회원가입 된 회원의 번호 추가 해야 함!!
+	 * 2023-04-18 김서영
+	 * @param conn
+	 * @param in
+	 * @return
+	 */
+	public int updateInquiry(Connection conn, Inquiry in) {
+
+		int result = 0;
+		PreparedStatement pstmt = null;
+
+		String sql = prop.getProperty("updateInquiry");
+
+		try {
+			int i = 0;
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(++i, in.getInquiryType());
+			pstmt.setString(++i, in.getTitle());
+			pstmt.setString(++i, in.getDescription());
+			pstmt.setInt(++i, in.getInqNo());
+
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+
+
 }

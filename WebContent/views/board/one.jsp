@@ -35,9 +35,8 @@
 <link rel="stylesheet" href="/resources/css/common/footer.css">
 
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script defer src="/resources/js/header.js"></script>
-<script defer src="/resources/js/board/one.js"></script>
-
+<script src="/resources/js/common/header.js"></script>
+<script src="/resources/js/board/one.js"></script>
 <title>1 : 1 문의</title>
 </head>
 <body>
@@ -95,7 +94,7 @@
 									<% } else { %>
 
 										<% for(Inquiry in : list) { %>
-											<tr id="sd1_q1">
+											<tr class="sd1_q1">
 												<th class="s1"><%= in.getInqNo() %></th>
 												<th class="s3"><%= in.getTitle() %></th>
 												<th class="s5"><%= in.getDateCreate() %></th>
@@ -107,22 +106,22 @@
 												<% } %>
 											</tr>
 
-											<tr id="sd1_q2">
+											<tr class="sd1_q2">
 												<td></td>
-												<td colspan="2"><pre class="text1"><%= in.getDescription() %></pre>
+												<td colspan="2"><pre class="text1" style="overflow:visible"><%= in.getDescription() %></pre>
 												</td>
-												<td align="center"><span> <a href="">수정</a>&nbsp;|
+												<td align="center"><span> <a href="javascript:update_form('<%= in.getInqNo() %>');" id="update_form">수정</a>&nbsp;|
 														<a href="">삭제</a>
 												</span></td>
 											</tr>
 
 
-											<tr id="sd1_a">
+											<tr>
 												<td colspan="5">
 													<div class="d3">
 
 													<% if(in.getReplyContents() != null) { %>
-														<pre class="text2">
+														<pre class="text2 sd1_q2">
 					                                    <span>
 					                                      안녕하세요. <br>
 					                                      대한민국 1등 건강쇼핑몰 마이무당입니다.
@@ -134,6 +133,7 @@
 					                                    <span id="replyDate"><%= in.getReplyDate() %></span>
 					                                  </pre>
 													<% } %>
+													</div>
 												</td>
 											</tr>
 									<!--  for 문 끝 -->
