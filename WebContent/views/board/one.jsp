@@ -9,10 +9,13 @@
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	ArrayList<Inquiry> list = (ArrayList<Inquiry>)request.getAttribute("list");
 
+
 	int currentPage = pi.getCurrentPage();
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage();
 	int maxPage = pi.getMaxPage();
+
+
 %>
 <!--  jsp 변환 / 2023-04-18 김서영 -->
 <!DOCTYPE html>
@@ -40,9 +43,9 @@
 <title>1 : 1 문의</title>
 </head>
 <body>
-	<!-- 규칙:
-    축약형(link, emph, gnb 등)을 먼저 사용)
-    alt로 적절한 대체 텍스트 제공, 너무 긴 경우 공통클래스 blind로 제공-->
+
+
+
 	<%@ include file="../common/header.jsp"%>
 	<!-- 1 : 1 문의 영역 시작 -->
 	<div id="container">
@@ -111,7 +114,7 @@
 												<td colspan="2"><pre class="text1" style="overflow:visible"><%= in.getDescription() %></pre>
 												</td>
 												<td align="center"><span> <a href="javascript:update_form('<%= in.getInqNo() %>');" id="update_form">수정</a>&nbsp;|
-														<a href="">삭제</a>
+														<a href="javascript:delete_in('<%= in.getInqNo() %>');">삭제</a>
 												</span></td>
 											</tr>
 
@@ -179,6 +182,8 @@
 		</div>
 
 	</div>
+
+
 
 	<!-- 1:1 페이지 영역 끝 -->
 	<%@ include file="../common/footer.jsp"%>

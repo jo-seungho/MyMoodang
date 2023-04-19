@@ -123,4 +123,27 @@ public class InquiryService {
 
 
 
+	/**
+	 * 1:1 문의 삭제용 메소드
+	 * 2023-04-19 김서영
+	 * @param ino
+	 * @return
+	 */
+	public int deleteInquiry(int ino) {
+
+		Connection conn = getConnection();
+
+		int result = new InquiryDao().deleteInquiry(conn, ino);
+
+//		System.out.println("서비스임" + result);
+		if(result > 0) {  // 삭제 성공
+			commit(conn);
+		} else { // 삭제 실패
+			rollback(conn);
+		}
+
+		return ino;
+	}
+
+
 }

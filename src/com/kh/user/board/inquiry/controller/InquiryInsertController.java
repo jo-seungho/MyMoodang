@@ -35,11 +35,12 @@ public class InquiryInsertController extends HttpServlet {
 
 		// 로그인 기능 구현 이후, 로그인유저의 아이디, 유저번호 뽑아내어야 함
 
+		int inqNo = Integer.parseInt(request.getParameter("ino"));
 		String inquiryType = request.getParameter("type");
 		String title = request.getParameter("title");
 		String description = request.getParameter("content");
 
-		Inquiry in = new Inquiry(title, description, inquiryType);
+		Inquiry in = new Inquiry(inqNo, title, description, inquiryType);
 
 		System.out.println(in);
 

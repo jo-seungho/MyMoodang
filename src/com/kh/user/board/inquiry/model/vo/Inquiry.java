@@ -12,10 +12,26 @@ public class Inquiry {
 	private String inquiryType;     // 문의유형
 	private String replyContents;   // 답변내용
 	private String replyDate;       // 답변일
+	private String deleteStatus;
 	private int memberNo;           // 회원번호
 
 
 	public Inquiry() {}
+
+
+	public Inquiry(int inqNo, String title, String description, String dateCreate, String inquiryType, String replyContents, String replyDate, String deleteStatus, int memberNo) {
+		super();
+		this.inqNo = inqNo;
+		this.title = title;
+		this.description = description;
+		this.dateCreate = dateCreate;
+		this.inquiryType = inquiryType;
+		this.replyContents = replyContents;
+		this.replyDate = replyDate;
+		this.deleteStatus = deleteStatus;
+		this.memberNo = memberNo;
+	}
+
 
 
 	public Inquiry(int inqNo, String title, String description, String dateCreate, String inquiryType, String replyContents, String replyDate, int memberNo) {
@@ -29,7 +45,6 @@ public class Inquiry {
 		this.replyDate = replyDate;
 		this.memberNo = memberNo;
 	}
-
 
 
 
@@ -50,6 +65,7 @@ public class Inquiry {
 		this.description = description;
 		this.inquiryType = inquiryType;
 	}
+
 
 
 	public int getInqNo() {
@@ -122,6 +138,15 @@ public class Inquiry {
 	}
 
 
+	public int getDeleteStatus() {
+		return memberNo;
+	}
+
+
+	public void setDeleteStatus(int memberNo) {
+		this.memberNo = memberNo;
+	}
+
 	public int getMemberNo() {
 		return memberNo;
 	}
@@ -135,12 +160,7 @@ public class Inquiry {
 	@Override
 	public String toString() {
 		return "Inquiry [inqNo=" + inqNo + ", title=" + title + ", description=" + description + ", dateCreate=" + dateCreate + ", inquiryType=" + inquiryType + ", replyContents=" + replyContents
-				+ ", replyDate=" + replyDate + ", memberNo=" + memberNo + "]";
+				+ ", replyDate=" + replyDate + ", deleteStatus=" + deleteStatus + ", memberNo=" + memberNo + "]";
 	}
-
-
-
-
-
 
 }

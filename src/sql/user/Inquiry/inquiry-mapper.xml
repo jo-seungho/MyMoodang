@@ -27,7 +27,7 @@
 		SELECT *
 		  FROM (
           		 SELECT ROWNUM RNUM
-                       , I.*
+                       , S.*
               	   FROM (SELECT INQ_NO
                               , INQUIRY_TYPE
                               , TITLE
@@ -41,7 +41,7 @@
                          WHERE I.DELETE_STATUS = 'Y'
                            AND MEMBER_NO = 6
                          ORDER BY DATE_CREATE DESC
-                       ) I
+                       ) S
               )
 		  WHERE RNUM BETWEEN ? AND ?
 
@@ -73,6 +73,13 @@
        		 , TITLE = ?
       		 , DESCRIPTION = ?
      	     , DATE_CREATE = SYSDATE
+		 WHERE INQ_NO = ?
+	</entry>
+
+<!--  1:1 문의 삭제용 쿼리문 / 2023-04-19 김서영  -->
+	<entry key="deleteInquiry">
+		UPDATE INQUIRY
+   		   SET DELETE_STATUS = 'N'
 		 WHERE INQ_NO = ?
 	</entry>
 

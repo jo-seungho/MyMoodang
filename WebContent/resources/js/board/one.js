@@ -8,6 +8,12 @@ function update_form(ino) {
 	location.href = "/updateForm.in?ino=" + ino;
 }
 
+function delete_in(ino) {
+	console.log(ino);
+	location.href = "/delete.in?ino=" + ino;
+}
+
+
 $(function() {
     $(".sd1_q1").click(function() {
         let $q2 = $(this).next();

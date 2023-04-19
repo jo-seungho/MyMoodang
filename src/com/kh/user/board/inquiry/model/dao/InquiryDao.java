@@ -94,8 +94,8 @@ public class InquiryDao {
 			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
 			int endRow = startRow + pi.getBoardLimit() - 1;
 
-			System.out.println(startRow);
-			System.out.println(endRow);
+//			System.out.println(startRow);
+//			System.out.println(endRow);
 
 			pstmt.setInt(++i, startRow);
 			pstmt.setInt(++i, endRow);
@@ -105,14 +105,16 @@ public class InquiryDao {
 			while(rset.next()) {
 				Inquiry in = new Inquiry();
 				in.setInqNo(rset.getInt("INQ_NO"));
-				in.setInquiryType(rset.getString("INQUIRY_TYPE"));
 				in.setTitle(rset.getString("TITLE"));
-				in.setDateCreate(rset.getString("DATE_CREATE"));
 				in.setDescription(rset.getString("DESCRIPTION"));
+				in.setDateCreate(rset.getString("DATE_CREATE"));
+				in.setInquiryType(rset.getString("INQUIRY_TYPE"));
 				in.setReplyContents(rset.getString("REPLY_CONTENTS"));
 				in.setReplyDate(rset.getString("REPLY_DATE"));
 
 				list.add(in);
+
+				System.out.println("뭐가 담겼니" + in);
 			}
 
 		} catch (SQLException e) {
@@ -241,6 +243,41 @@ public class InquiryDao {
 		return result;
 	}
 
+
+
+	/**
+	 * 1:1 문의 삭제용 메소드
+	 * 2023-04-19 김서영
+	 * @param conn
+	 * @param ino
+	 * @return
+	 */
+	public int deleteInquiry(Connection conn, int ino) {
+
+		int result = 0;
+		PreparedStatement pstmt = null;
+
+//		System.out.println("쿼리 실행 전" + result);
+		String sql = prop.getProperty("deleteInquiry");
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setInt(1, ino);
+
+			result = pstmt.executeUpdate();
+
+//			System.out.println("삭제나와" + result);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+
+//		System.out.println("삭제됐는가!!!" + result);
+		return result;
+	}
 
 
 }
