@@ -136,4 +136,21 @@ public class ItemService {
 		return list;
 	}
 
+	public int deleteItem(int code, String status) {
+		
+		Connection conn = getConnection();
+		
+		int result = new ItemDao().deleteItem(conn, code, status);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+
 }

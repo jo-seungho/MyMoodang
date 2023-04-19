@@ -7,7 +7,7 @@
 
 <%
 	Member loginUser = (Member)session.getAttribute("loginUser");
-
+	
 	String alertMsg = (String)request.getAttribute("alertMsg");
 
 	String errorMsg = (String)request.getAttribute("errorMsg");
@@ -64,26 +64,9 @@
                 <span class="sir">님</span>
               </span>
             </a>
-           
 
-           	<script>
+          </li>
 
-            	let msg = '<%= alertMsg == null ? "" : alertMsg %>';
-            	if(msg != null && msg.length > 0) {
-            		alert(msg);
-            	}
-
-            	//----------------------------------------------------
-            	let emsg = '<%= errorMsg == null ? "" : errorMsg %>';
-            	if(emsg != null && emsg.length > 0) {
-            		alert(emsg);
-            	}
-            </script>
-
-	
-	
-        <!-- 2023-04-19 / 삭제 / 이지환 -->
-        <%--  </li>
           <li class="link">
             <a href="" class="item service">고객센터</a>
             <!-- 고객센터 hover 시 sub_menu 등장 -->
@@ -99,6 +82,7 @@
               </li>
             </ul>
           </li>
+          
          </ul>
         --%>
          
@@ -110,8 +94,7 @@
         <!-- 2023-04-19 / 로그인 후 상단바 코드 수정 및 css 부여 / 이지환 -->
 		<% if(loginUser != null) { %>
 		<ul class="sign_menu">
-          
-          
+
           <li class="link">
             <a href="" class="item service" id="loginAf_hover">
             	<b class="join"><%= loginUser.getName() %>님</b>
@@ -134,7 +117,6 @@
           </li>
          
          
-        <% } %>
         <!-- 2023-04-18 / 로그인 시 우측 상단 바뀌는 영역 종료 / 이지환 -->
         
 		 <li class="link">
@@ -153,6 +135,7 @@
             </ul>
           </li>
 		</ul>
+        <% } %>
 	
       </div>
       <div class="header_logo">
@@ -312,6 +295,20 @@
 
     <script>
     	$.noConflict();
+    	// $(document).ready(function(){
+    		
+    		
+    	//  });
+    	        let msg = '<%= alertMsg == null ? "" : alertMsg %>';
+            	if(msg != null && msg.length > 0) {
+            		alert(msg);
+            	}
+
+            	//----------------------------------------------------
+            	let emsg = '<%= errorMsg == null ? "" : errorMsg %>';
+            	if(emsg != null && emsg.length > 0) {
+            		alert(emsg);
+            	}
     </script>
   </body>
 </html>

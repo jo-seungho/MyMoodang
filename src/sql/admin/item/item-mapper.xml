@@ -143,5 +143,10 @@
 		AND ITEM_STATUS = 'Y'
 
 	</entry>
+	
+	<entry key="deleteItem">
+	UPDATE ITEM 
+	SET ITEM_STATUS = ?
+	</entry>
 
 </properties>
