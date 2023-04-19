@@ -250,7 +250,9 @@ import="com.kh.admin.shop.item.model.vo.*, java.util.ArrayList" %>
                               <button type="submit" id="btn" class="btn">상품수정</button>
                             </div>
                             <div class="col-auto">
+                            <a href="/itemDelete.ad?code=<%= it.getItemCode() %>?status=<%=it.getItemStatus()%>">
                               <button type="button" id="btn" class="btn">상품삭제</button>
+                              </a>
                             </div>
                             <div class="col-auto">
                               <a href="/itemList.ad?page=1&category=a">
