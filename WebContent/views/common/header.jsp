@@ -84,11 +84,7 @@
           </li>
           
          </ul>
-        --%>
-         
-            
         <% } %>
-     
       
         <!-- .sign_menu -->
         <!-- 2023-04-19 / 로그인 후 상단바 코드 수정 및 css 부여 / 이지환 -->
@@ -284,10 +280,15 @@
           </div>
 
           <div class="cart_count">
-            <!-- bg url 아이콘 추가 -->
-            <a href="#" class="btn_cart">
+            <% if(loginUser != null) { %>
+            <a href="/cart" class="btn_cart">
               <span class="blind">장바구니</span>
             </a>
+            <% } else { %>
+            <a href="loginForm.me" class="btn_cart">
+              <span class="blind">장바구니</span>
+            </a>
+            <% } %>
           </div>
         </ul>
       </div>
