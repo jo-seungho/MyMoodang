@@ -72,16 +72,16 @@
                             <table style="padding: 30px;">
                                 <tr>
                                     <th style="font-weight: 800;">아이디(이메일)</th>
-                                    <td><input type="text" class="form-control" value="young0914" readonly></td>
+                                    <td><input type="text" id="memberId" class="form-control" value="young0914" readonly></td>
                                 </tr>
                                 <tr>
                                     <th style="font-weight: 800;">비밀번호 확인</th>
                                     <td>
-                                        <input type="password" class="form-control" placeholder="비밀번호">
+                                        <input type="password" id="pwdCheck" class="form-control" placeholder="비밀번호">
                                     </td>
                                 </tr>
                                     <td colspan="2" align="center">
-                                        <input type="submit" value="확인" id="pwd_check_sub" >
+                                    	<button type="button" id="pwd_check_sub" onclick="validate();">확인</button>
                                     </td>
                                 </tr>
                             </table>
