@@ -1,7 +1,7 @@
+<!-- 2023-04-19 코드 주석 처리 및 로그인 전/후 로 header 부분의 우측 상단 메뉴바 다르게 수정 / 이지환 */ 	 -->    
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!-- 2023-04-19 코드 주석 처리 및 로그인 전/후 로 header 부분의 우측 상단 메뉴바 다르게 수정 / 이지환 */ 
-	 -->    
 
 <%@ page import="com.kh.user.member.model.vo.Member" %>
 
@@ -105,10 +105,19 @@
                 <a href="#" class="list_item">주문내역</a>
               </li>
               <li class="list">
+                <a href="#" class="list_item">찜한상품</a>
+              </li>
+              <li class="list">
                 <a href="#" class="list_item">배송지 관리</a>
               </li>
               <li class="list">
-                <a href="#" class="list_item">개인 정보 수정</a>
+                <a href="#" class="list_item">리뷰 관리</a>
+              </li>
+              <li class="list">
+                <a href="#" class="list_item">쿠폰</a>
+              </li>
+              <li class="list">
+                <a href="#" class="list_item">내 정보수정</a>
               </li>
             </ul>
           </li>
