@@ -235,6 +235,7 @@ public class MemberDao {
 				m.setMemberId(rset.getString("MEMBER_ID"));
 				m.setEmail(rset.getString("EMAIL"));
 				m.setName(rset.getString("NAME"));
+				m.setPhone(rset.getString("PHONE"));
 				m.setGender(rset.getString("GENDER"));
 				m.setBirthDate(rset.getString("BIRTH_DATE"));
 			}
@@ -292,28 +293,28 @@ public class MemberDao {
 	 * @return
 	 */
 	public Member loginUser(Connection conn, Member m) {
-			
+
 			// 로그인 하려면 어떤 게 필요할까 고민하자.
 			// => SELECT문이 필요함 => ResultSet 객체 (unique 제약조건 때문에 단일행 조회) => Member 가공
-			
+
 			// 1. 필요한 변수 먼저 셋팅
 			Member loginUser = null;
-			
+
 			PreparedStatement pstmt = null;
 			ResultSet rset = null;
-			
-			
+
+
 			// 실행할 쿼리문까지 변수로 담음
 			String sql = prop.getProperty("loginUser");
-			
+
 			 try {
 			        pstmt = conn.prepareStatement(sql);
 			        pstmt.setString(1, m.getMemberId());
 			        pstmt.setString(2, m.getPassword());
-			        
+
 			        rset = pstmt.executeQuery();
-			        
-			        
+
+
 			   if (rset.next()) {
 						loginUser = new Member(rset.getInt("MEMBER_NO")
 									 , rset.getString("MEMBER_ID")
@@ -329,7 +330,7 @@ public class MemberDao {
 									 , rset.getInt("TOTAL_MONEY")
 									 , rset.getString("GRADE_NO"));
 					}
-					
+
 			    } catch (SQLException e) {
 			        e.printStackTrace();
 			    } finally {
@@ -337,7 +338,7 @@ public class MemberDao {
 			        JDBCTemplate.close(pstmt);
 			    }
 			    return loginUser;
-			
+
 		}
 
 

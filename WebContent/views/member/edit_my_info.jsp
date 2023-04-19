@@ -40,80 +40,59 @@
         <%@ include file="../common/header.jsp" %>
 
 
+	<%
+		String memberId = loginUser.getMemberId();
+		String email = loginUser.getEmail();
+		String password = loginUser.getPassword();
+		String name = loginUser.getName();
+
+
+		String phone = (loginUser.getPhone() == null) ? "" : loginUser.getPhone();
+		String gender = (loginUser.getGender() == null) ? "" : loginUser.getGender();
+		String birthDate = (loginUser.getBirthDate() == null) ? "" : loginUser.getBirthDate();
+	%>
 
 
   <!-- 내용 영역 시작 - 내 정보 수정-->
 
-    <div id="content">
+    <div id="content" >
         <div class="main_page_aticle">
             <div class="form">
                 <h3 class="main_title">내 정보 수정</h3><br><br>
                 <div class="boder_btom"></div>
 
-                <form action="" method="POST">
+                <form action="/update.me" method="POST">
                     <div class="row mb-3" id="font_size">
                         <div class="col-sm-6 id_bell_f"> <br>
                             <span class="member_name">
-                                <label>아이디(이메일) </label>
+                                <label>아이디<span class="star">*</span></label>
                             </span>
                             <span class="member_content">
-                                <input type="text" name="memberId" class="width300 form-control" id="loginId" placeholder="예) stopeatting@mymudang.com">&nbsp;&nbsp;
-                            </span>
-                        </div>
-                    </div>
-<!--
-                    <div class="row mb-3" id="font_size">
-                        <div class="col-sm-6 pw_bell_f">
-                            <span class="member_name">
-                                <label>현재 비밀번호 </label>
-                            </span>
-                            <span class="member_content">
-                                <input type="password" name="password" class="form-control inpt_pw check_pw" id="submit_check_pw" placeholder="비밀번호를 입력해주세요">
-                                <p class="txt_guide">
-                                    <span class="pw_txt_case1 pw_bell_s ">10자 이상 입력</span>
-                                    <span class="pw_txt_case2 pw_bell_t ">영문/숫자/특수문자 (- 제외) 조합해주세요</span>
-                                </p>
+                                <input type="text" name="memberId" class="width300 form-control" id="loginId" value="<%= memberId %>" readonly>&nbsp;&nbsp;
                             </span>
                         </div>
                     </div>
 
-                    <div class="row mb-3" id="font_size">
-                        <div class="col-sm-6 pw2_bell_f">
+					<div class="row mb-3" id="font_size">
+                        <div class="col-sm-6 id_bell_f"> <br>
                             <span class="member_name">
-                                <label class="col-sm-2 col-form-label">새 비밀번호 </label>
+                                <label>이메일<span class="star">*</span></label>
                             </span>
                             <span class="member_content">
-                                <input type="password" name="pwCheck" class="form-control inpt_pw2 check_pw" id="submit_check_pw2" placeholder="비밀번호를 한번 더 입력해주세요">
-                                <p class="txt_guide">
-                                    <span class="pw2_txt_case1  pw2_bell_s">동일한 비밀번호를 입력해주세요</span>
-                                </p>
+                                <input type="email" name="email" class="width300 form-control" id="email" value="<%= email %>" required>&nbsp;&nbsp;
                             </span>
                         </div>
                     </div>
 
-                    <div class="row mb-3" id="font_size">
-                        <div class="col-sm-6 pw2_bell_f">
-                            <span class="member_name">
-                                <label class="col-sm-2 col-form-label">새 비밀번호확인 </label>
-                            </span>
-                            <span class="member_content">
-                                <input type="password" name="pwCheck" class="form-control inpt_pw2 check_pw" id="submit_check_pw2" placeholder="비밀번호를 한번 더 입력해주세요">
-                                <p class="txt_guide">
-                                    <span class="pw2_txt_case1  pw2_bell_s">동일한 비밀번호를 입력해주세요</span>
-                                </p>
-                            </span>
-                        </div>
-                    </div>
 
--->
 
                     <div class="row mb-3" id="font_size">
                         <div class="col-sm-6">
                             <span class="member_name">
-                                <label class="col-sm-2 col-form-label">이름 </label>
+                                <label class="col-sm-2 col-form-label">이름 <span class="star">*</span></label>
                             </span>
                             <span class="member_content">
-                                <input type="text" name="userName" class="form-control" id="submit_check_name" placeholder="이름을 입력해주세요">
+                                <input type="text" name="userName" class="form-control" id="submit_check_name" value="<%= name %>" required>
                             </span>
                         </div>
                     </div>
@@ -124,27 +103,10 @@
                                 <label class="col-sm-2 col-form-label">휴대폰 </label>
                             </span>
                             <span class="member_content">
-                                <input type="text" name="phone_number" class="form-control" id="submit_check_phone" placeholder="숫자만 입력해주세요">
+                                <input type="text" name="phone_number" class="form-control" id="submit_check_phone" value="<%= phone %>">
                             </span>
                         </div>
                     </div>
-
-                    <div class="row mb-3" id="font_size">
-                        <span class="member_name">
-                            <label class="col-sm-2 col-form-label">주소 </label>
-                        </span>
-                        <span class="member_content">
-                          <input type="text" name="zipCode" class="form-control width100 text_disabled" readonly="readonly" placeholder="우편번호">
-                          <input type="text" name="shipAddr" class="form-control width309 text_disabled" readonly="readonly" placeholder="주소">
-                          <button type="button" id="juso" class="btn-outline-primary width100"><span id="adressNo">주소 검색</span></button>
-                        </span>
-                    </div>
-                    <div class="row mb-3" id="font_size">
-                      <span class="member_name"></span>
-                      <span class="member_content">
-                        <input type="text" name="shipAddrInfo" class="form-control" placeholder="상세주소">
-                      </span>
-                  </div>
 
                     <div class="row mb-3" id="font_size">
                         <div class="col-sm-6">

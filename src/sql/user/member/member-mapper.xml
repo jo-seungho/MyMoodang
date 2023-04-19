@@ -66,22 +66,23 @@
 
 <!-- 2023-04-17 김서영 / 회원정보 수정 시 정보 조회용 쿼리문 -->
 	<entry key="selectMemberInfo">
-	    SELECT MEMBER_ID
-	         , EMAIL
-	         , NAME
-	         , GENDER
-	         , BIRTH_DATE
-	      FROM MEMBER
-	     WHERE MEMBER_ID = ?
+		SELECT MEMBER_ID
+		     , EMAIL
+		     , NAME
+		     , PHONE
+		     , GENDER
+		     , BIRTH_DATE
+		  FROM MEMBER
+		 WHERE MEMBER_ID = ?
 
 	</entry>
 
 
-        
+
         <!-- 개인 회원의 배송지 조회용 쿼리문 2023.04.17 이지환 -->
-        
-        <entry key="selectShippingAddress">     
-	        SELECT 
+
+        <entry key="selectShippingAddress">
+	        SELECT
 	        FROM SHIPPING_ADDRESS
 	        WHERE MEMBER_NO = ?
         </entry>
@@ -93,7 +94,7 @@
 			 	 AND PASSWORD = ?
 			 	 AND STATUS = 'Y'
 		</entry>
-		
+
 </properties>
 
 
