@@ -107,7 +107,7 @@
               </a>
               <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                 <nav class="sb-sidenav-menu-nested nav">
-                  <a class="nav-link" href="notice.html">공지사항 관리</a>
+                  <a class="nav-link" href="/noticelist.ad">공지사항 관리</a>
                   <a class="nav-link" href="inquiry.html">1:1 문의 관리</a>
                   <a class="nav-link" href="review.html">리뷰 관리</a>
                 </nav>

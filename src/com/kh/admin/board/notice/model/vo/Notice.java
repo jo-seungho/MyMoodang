@@ -27,13 +27,21 @@ public class Notice {
 	}
 
 	//공지사항 리스트 조회용 생성자
-	public Notice(int noticeNo, String noticeTitle, int views, String createDate) {
+	public Notice(int noticeNo, String noticeTitle,  String createDate) {
 		super();
 		this.noticeNo = noticeNo;
 		this.noticeTitle = noticeTitle;
-		this.views = views;
 		this.createDate = createDate;
+
 		
+	}
+
+	public Notice(int noticeNo, String noticeTitle, String noticeContent, String createDate) {
+		super();
+		this.noticeNo = noticeNo;
+		this.noticeTitle = noticeTitle;
+		this.noticeContent = noticeContent;
+		this.createDate = createDate;
 	}
 
 	public int getNoticeNo() {

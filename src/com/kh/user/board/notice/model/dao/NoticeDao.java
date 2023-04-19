@@ -133,6 +133,12 @@ public class NoticeDao {
 
 	}
 	
+	/**
+	 * 공지사항 상세리스트 조회수 메소드 
+	 * 2023-04-18 소현아
+	 * @param conn
+	 * @return
+	 */
 public int increaseCount(Connection conn, int noticeNo) {
 		
 		// UPDATE 문	=> int (처리된 행의 갯수)
@@ -166,6 +172,12 @@ public int increaseCount(Connection conn, int noticeNo) {
 		return result;
 	}
 	
+	/**
+	 * 공지사항 상세리스트 조회용 메소드 
+	 * 2023-04-18 소현아
+	 * @param conn
+	 * @return
+	 */
 	public Notice selectNotice(Connection conn, int noticeNo) {
 		
 		// SELECT 문 => ResultSet (단일행 조회) => Board
@@ -176,7 +188,7 @@ public int increaseCount(Connection conn, int noticeNo) {
 		ResultSet rset = null;
 		
 		// 실행할 쿼리문
-		String sql = prop.getProperty("selectBoard");
+		String sql = prop.getProperty("selectNotice");
 		
 		try {
 			// 2. PreparedStatement 객체 생성

@@ -78,11 +78,10 @@ a {
     display: none;
 }
 
-.notice_view .info dl dt,
-.notice_view .info dl dd {
+.notice_detail_num,.notice_detail_date,.notice_detail_view {
     display: inline-block;
     font-size: 1.4rem;
-    
+
 }
 
 
@@ -125,6 +124,5 @@ a {
     cursor: pointer;
     color : black;
 }
-
 
 

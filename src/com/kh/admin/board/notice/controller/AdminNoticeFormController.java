@@ -1,29 +1,26 @@
-package com.kh.user.shop.cart.controller;
+package com.kh.admin.board.notice.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import com.kh.user.member.model.vo.Member;
-import com.kh.user.member.model.vo.ShippingAddress;
+import com.kh.admin.board.notice.model.service.NoticeService;
+import com.kh.admin.board.notice.model.vo.Notice;
 
 /**
- * Servlet implementation class DeliberyList
+ * Servlet implementation class AdminNoticeFormController
  */
-@WebServlet("/delibery_List.do")
-public class DeliberyList extends HttpServlet {
+@WebServlet("/noticeForm.ad")
+public class AdminNoticeFormController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DeliberyList() {
+    public AdminNoticeFormController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,17 +29,15 @@ public class DeliberyList extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 
-		HttpSession session = request.getSession();
-		 Member member = (Member)session.getAttribute("member");
-		 
-		 ArrayList<ShippingAddress> shippingAddressList = ShippingAddress.findShippingAddressByMemberNo(member.getMemberNo());
-		ArrayList<Member> member = new ArrayList<>();
 		
-	    for(Member member : memberList) {
-	        ShippingAddress delivery = ShippingAddress.findDeliveryByMemberNo(member.getMemberNo());
-	        deliveryList.add(delivery);
-	    }
+		int noticeNo = Integer.parseInt(request.getParameter("nno"));
+		
+		Notice n = new NoticeService().selectNotice(noticeNo);
+		
+		request.setAttribute("n", n);
+		
+		request.getRequestDispatcher("views/admin/notice_detail.jsp").forward(request, response);
+		
 	}
 
 	/**
