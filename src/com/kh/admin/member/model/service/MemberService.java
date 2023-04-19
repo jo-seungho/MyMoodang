@@ -10,9 +10,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.kh.common.JDBCTemplate;
-import com.kh.user.member.model.dao.MemberDao;
-import com.kh.user.member.model.vo.Member;
-import com.kh.user.member.model.vo.ShippingAddress;
+import com.kh.admin.member.model.dao.MemberDao;
+import com.kh.admin.member.model.vo.Member;
+import com.kh.admin.member.model.vo.ShippingAddress;
 
 public class MemberService {
 

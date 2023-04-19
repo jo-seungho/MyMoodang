@@ -14,17 +14,18 @@ import com.kh.admin.shop.item.model.vo.Item;
 import com.kh.admin.shop.item.model.vo.ItemImg;
 
 
-@WebServlet("/itemDetail.ad")
-public class ItemDetailController extends HttpServlet {
+@WebServlet("/upItemForm.ad")
+public class itemUpdateFormController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 
-    public ItemDetailController() {
-        super();
+    public itemUpdateFormController() {
+
     }
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		int itemCode = Integer.parseInt(request.getParameter("code"));
 		
 		ItemService iService = new ItemService();
@@ -32,21 +33,15 @@ public class ItemDetailController extends HttpServlet {
 		Item item = iService.selectItem(itemCode);
 		ArrayList<ItemImg> list = iService.selectImgList(itemCode);
 		
+		request.setAttribute("list", list);
+		request.setAttribute("item", item);
 		
-		if(item != null) {
-			
-			request.setAttribute("item", item);
-			request.setAttribute("list", list);
-			
-			request.getRequestDispatcher("views/admin/item_detail.jsp").forward(request, response);
-		}
-		
-		
+		request.getRequestDispatcher("views/admin/item_update.jsp").forward(request, response);
 	}
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+
 		doGet(request, response);
 	}
 

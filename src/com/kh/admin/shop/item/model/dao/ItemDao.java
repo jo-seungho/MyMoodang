@@ -47,9 +47,10 @@ public class ItemDao {
             
             if(rset.next()) {
                 i = new Item();
+                i.setItemCode(rset.getInt("ITEM_CODE"));
                 i.setItem_hits(rset.getInt("ITEM_HITS"));
                 i.setItemCategory(rset.getString("ITEM_CATEGORY"));
-                i.setItemDiscount(rset.getInt("ITEM_DISCOUNT"));
+                i.setItemDiscount(rset.getDouble("ITEM_DISCOUNT"));
                 i.setItemImg(rset.getString("ITEM_IMG_PATH"));
                 i.setItemName(rset.getString("ITEM_NAME"));
                 i.setItemPrice(rset.getInt("ITEM_PRICE"));
@@ -57,6 +58,7 @@ public class ItemDao {
                 i.setItemDate(rset.getString("ITEM_DATE"));
                 i.setItemText(rset.getString("ITEM_TEXT"));
                 i.setDiscountPrice(rset.getInt("DISCOUNT_PRICE"));
+                i.setItemStatus(rset.getString("ITEM_STATUS"));
                
             }
             
@@ -290,6 +292,67 @@ public class ItemDao {
 		}
 
 		return result;
+	}
+
+
+	public int updateItem(Connection conn, int itemCode) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateItem");
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, itemCode);
+
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+
+		return result;
+	}
+
+
+	public ArrayList<ItemImg> selectImgList(Connection conn, int itemCode) {
+		
+		ArrayList<ItemImg> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		// 2. 쿼리문 작성
+		String sql = prop.getProperty("selectImgList");
+
+		// 3. 쿼리문 실행
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setInt(1, itemCode);
+
+			rset = pstmt.executeQuery();
+
+			while (rset.next()) {
+				
+				ItemImg i = new ItemImg();
+				
+				i.setItemImgNo(rset.getInt("ITEM_IMG_NO"));
+				i.setItemImgCode(rset.getInt("ITEM_IMG_CODE"));
+				i.setItemImgLevel(rset.getInt("ITEM_IMG_LEVEL"));
+				i.setItemImgPath(rset.getString("ITEM_IMG_PATH"));
+				i.setItemImg(rset.getString("ITEM_IMG_PATH"));
+				
+				list.add(i);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return list;
 	}
  
 
