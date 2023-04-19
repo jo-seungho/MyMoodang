@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.kh.user.shop.item.model.service.ItemService;
 import com.kh.user.shop.item.model.vo.Attachment;
 import com.kh.user.shop.item.model.vo.Item;
+import com.kh.user.shop.review.model.vo.Review;
 
 /**
  * Servlet implementation class itemDetailController
@@ -46,6 +47,8 @@ public class itemDetailController extends HttpServlet {
 
 		if(result > 0) { // 조회수 증가 성공 시 상품 상세보기 페이지로 이동
 			
+			//--------------------------------------------------------------------------------------
+			
 			// 상품 상세보기용 서비스 호출
 			Item i = new ItemService().selectItem(bno);
 
@@ -55,13 +58,22 @@ public class itemDetailController extends HttpServlet {
 			
 			ArrayList<Attachment> clist = new ItemService().selelctAttachmentCategory(category);
 			
-			
-			
+			//--------------------------------------------------------------------------------------
+
+			// 리뷰 리스트 서비스 호출
+
+			 ArrayList<Review> rlist = new ItemService().selectReviewList(bno);
+			 
+
+	
+	
 
 			// 응답데이터 전달용 request 객체에 저장
 			request.setAttribute("i", i);
 			request.setAttribute("list", list);
 			request.setAttribute("clist", clist);
+			request.setAttribute("rlist", rlist);
+			
 
 		} else { // 조회수 증가 실패 시 에러페이지로 이동
 			request.setAttribute("", "");
