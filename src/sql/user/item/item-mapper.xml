@@ -11,7 +11,8 @@
 
 	<entry key="selectItem">
 	SELECT
-      ITEM_NAME
+	   ITEM_CODE
+      ,ITEM_NAME
       ,ITEM_PRICE
       ,ROUND(ITEM_PRICE * (1-ITEM_DISCOUNT),-1) as DISCOUNT_PRICE
       ,ITEM_DISCOUNT
@@ -36,6 +37,22 @@
 		FROM ITEM_IMG
 		WHERE ITEM_IMG_NO = ?
 
+	</entry>
+	
+	<entry key="selectReviewList">
+	SELECT REVIEW_NO
+	 , TITLE
+	 , CONTENT
+     , TO_CHAR(WRITE_DATE, 'YY/MM/DD HH:MI:SS') WRITE_DATE
+     , STAR_POINT
+     , ORDER_NO
+     , ITEM.ITEM_CODE
+ 	FROM REVIEW 
+	JOIN ITEM ON REVIEW.REVIEW_NO = ITEM.ITEM_CODE
+    WHERE DELETE_STATUS = 'Y'
+    AND REVIEW_NO = ?
+ 	ORDER BY WRITE_DATE DESC
+	
 	</entry>
 
 	<entry key="selectListCount">

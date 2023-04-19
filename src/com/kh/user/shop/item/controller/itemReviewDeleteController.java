@@ -1,29 +1,26 @@
-package com.kh.user.shop.cart.controller;
+package com.kh.user.shop.item.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import com.kh.user.member.model.vo.Member;
-import com.kh.user.member.model.vo.ShippingAddress;
+import com.kh.user.shop.review.model.service.itemReviewService;
 
 /**
- * Servlet implementation class DeliberyList
+ * Servlet implementation class itemReviewDeleteController
  */
-@WebServlet("/delibery_List.do")
-public class DeliberyList extends HttpServlet {
+@WebServlet("/itemReviewDel.it")
+public class itemReviewDeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DeliberyList() {
+    public itemReviewDeleteController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,17 +29,20 @@ public class DeliberyList extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 
-		HttpSession session = request.getSession();
-		 Member member = (Member)session.getAttribute("member");
-		 
-		 ArrayList<ShippingAddress> shippingAddressList = ShippingAddress.findShippingAddressByMemberNo(member.getMemberNo());
-		ArrayList<Member> member = new ArrayList<>();
 		
-	    for(Member member : memberList) {
-	        ShippingAddress delivery = ShippingAddress.findDeliveryByMemberNo(member.getMemberNo());
-	        deliveryList.add(delivery);
-	    }
+		int bno = Integer.parseInt(request.getParameter("bno"));
+
+		int result = new itemReviewService().deleteReview(bno);
+		
+
+		if(result > 0) {
+			request.getSession().setAttribute("alertMsg", "성공적으로 게시글이 삭제되었습니다.");
+			response.sendRedirect(request.getContextPath() + "/itemDetail.it?" + bno);
+		} else {
+			request.setAttribute("msg", "리뷰 삭제에 실패하였습니다.");
+			request.getRequestDispatcher("").forward(request, response);
+		}
+
 	}
 
 	/**

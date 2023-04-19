@@ -12,6 +12,8 @@ import com.kh.common.model.vo.PageInfo;
 import com.kh.user.shop.item.model.dao.ItemDao;
 import com.kh.user.shop.item.model.vo.Attachment;
 import com.kh.user.shop.item.model.vo.Item;
+import com.kh.user.shop.review.model.dao.itemReviewDao;
+import com.kh.user.shop.review.model.vo.Review;
 
 
 public class ItemService {
@@ -90,6 +92,18 @@ public class ItemService {
 		
 		return list;
 	}
+
+	public ArrayList<Review> selectReviewList(int bno) {
+		
+		Connection conn = getConnection();
+		
+		ArrayList<Review> list = new ItemDao().selectReviewList(conn, bno);
+		
+		close(conn);
+		
+		return list;
+	}
+
 	
 
 	
