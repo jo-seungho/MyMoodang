@@ -8,12 +8,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet("/itemForm.ad")
-public class ItemFormController extends HttpServlet {
+@WebServlet("/inItemForm.ad")
+public class itemInsertFormController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 
-    public ItemFormController() {
+    public itemInsertFormController() {
     }
 
 

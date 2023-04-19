@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -11,12 +10,10 @@
     <title>관리자 페이지</title>
 
     <!-- jquery 및 라이브러리 -->
-    
-    <link rel="stylesheet" href="/resources/css/shop/item_management.css">
-    <link rel="stylesheet" href="/resources/css/shop/item_manage_insert.css">
-    <link rel="stylesheet" href="/resources/css/shop/item_manage_detail.css">
 
-
+    <link rel="stylesheet" href="/resources/css/shop/item_management.css" />
+    <link rel="stylesheet" href="/resources/css/shop/item_manage_insert.css" />
+    <link rel="stylesheet" href="/resources/css/shop/item_manage_detail.css" />
   </head>
 
   <style>
@@ -33,7 +30,7 @@
   </style>
 
   <body class="sb-nav-fixed">
-  <%@ include file="sidebar.jsp" %>
+    <%@ include file="sidebar.jsp" %>
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
       <!-- Navbar Brand-->
       <a class="navbar-brand ps-3" href="index.html">
@@ -117,8 +114,7 @@
                 <div id="img_view">
                   <label for="titleImg" style="margin-bottom: 10px">* 대표 이미지</label>
                   <div class="col">
-                    <img id="img1" name="img1" src="/resources/img/noimage.png" class="img-thumbnail" style="width: 500px; height: 300px" />
-                    <input type="file" id="file1" name="file1" class="form-control" onchange="loadImg(this, 1);" required style="margin-top: 20px; margin-bottom: 20px" />
+                    <img id="titleImg" name="img1" src="/resources/img/noimage.png" class="img-thumbnail" style="width: 500px; height: 300px" />
                   </div>
 
                   <div class="col form-floating mb-4">
@@ -139,7 +135,7 @@
                     <label for="floatingTextarea2">상품 상세설명</label>
 
                     <div class="col form-floating mb-3">
-                      <input type="number" class="form-control" name="itemDiscount"/>
+                      <input type="number" class="form-control" name="itemDiscount" />
                       <label for="floatingPassword">할인율 (%)</label>
                     </div>
 
@@ -161,7 +157,9 @@
                     </div>
 
                     <!-- 추가 사진 3개 -->
+                    <div class="file-area">
                     <div class="form-group">
+                    <input type="file" id="file1" name="file1" class="form-control" onchange="loadImg(this, 1);" required style="margin-top: 20px; margin-bottom: 20px" />
                       <label class="col image">상품 이미지1</label>
                       <input type="file" id="file2" name="file2" class="form-control" onchange="loadImg(this, 2);" />
                     </div>
@@ -176,10 +174,13 @@
                       <input type="file" id="file4" name="file4" class="form-control" onchange="loadImg(this, 4);" />
                     </div>
                     <br />
-                    <img id="img2" name="img2" src="/resources/img/noimage.png" class="img-thumbnail" style="width: 200px; height: 200px" />
-                    <img id="img3" name="img3" src="/resources/img/noimage.png" class="img-thumbnail" style="width: 200px; height: 200px" />
-                    <img id="img4" name="img4" src="/resources/img/noimage.png" class="img-thumbnail" style="width: 200px; height: 200px" />
-
+                    
+                    </div>
+                    
+                    <img id="detailImg1" name="img2" src="/resources/img/noimage.png" class="img-thumbnail" style="width: 200px; height: 200px" />
+                    <img id="detailImg2" name="img3" src="/resources/img/noimage.png" class="img-thumbnail" style="width: 200px; height: 200px" />
+                    <img id="detailImg3" name="img4" src="/resources/img/noimage.png" class="img-thumbnail" style="width: 200px; height: 200px" />
+                    
                     <div class="insert-form">
                       <button type="submit" class="btn btn-primary" id="addBtn" style="font-size: larger">추가</button>
                       <a href="/itemList.ad?page=1&category=a" class="btn btn-primary" id="listBtn" style="font-size: larger">목록</a>
@@ -196,53 +197,93 @@
     </div>
 
     <script>
+    
+    $(function () {
+        $('.file-area').hide();
+
+        // 각 자리에 맞는 이미지 태그를 클릭했을 경우
+        // input type="file" 요소가 클릭되게끔 처리하기
+        $('#titleImg').click(function () {
+          $('#file1').click();
+        });
+        $('#detailImg1').click(function () {
+          $('#file2').click();
+        });
+        $('#detailImg2').click(function () {
+          $('#file3').click();
+        });
+        $('#detailImg3').click(function () {
+          $('#file4').click();
+        });
+      });
       // class img-thumbnail 에 첨부파일 이미지 띄우기
       //이미지 파일이 아니면 업로드 안되게 하기
 
-      function loadImg(input, num) {
-        if (input.files && input.files[0]) {
-          // 파일 유효성 검사: 이미지 파일 체크
-          if (!input.files[0].type.match('image.*')) {
-            alert('이미지 파일만 업로드 가능합니다.');
-            // 파일 선택 초기화
-            input.value = '';
-            // 이미지 초기화
-            $('#img' + num).attr('src', '/resources/img/noimage.png');
-            return;
-          }
+      function loadImg(inputFile, num) {
+        
+    	let fileExtension = inputFile.files[0].name.split('.').pop().toLowerCase();
+    	let allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+    	if (!allowedExtensions.includes(fileExtension)) {
+    	    alert('이미지 파일을 제외하고 첨부할 수 없습니다.');
+    	    inputFile.value = ''; // Clear the file input
+    	    return;
+    	  }
+    	  
+        if (inputFile.files.length == 1) {
+          // 선택된 파일을 읽어들여서 그 영역에 맞는 곳에 미리보기
+          // 파일을 읽어들일 FileReader 객체 생성
+          let reader = new FileReader(); //생성자 함수
 
-          var reader = new FileReader();
+          // FileReader 객체에서 제공하는 파일을 읽어들이는 메소드 호출
+          // 단, 어느 파일을 읽어들일 건지 매개변수로 제시해야함
+          // => 우리가 읽어들일 파일은 inputFile.files[0]에 저장되어 있음
+          reader.readAsDataURL(inputFile.files[0]);
+          //해당 파일을 읽어들이는 순간 해당 그 파일만의 고유한 url 주소가 부여됨
+          //이 url 주소를 img 태그의 src 속성에 지정하면 미리보기 가능
 
-          // num에 따라 해당하는 이미지 요소의 src 속성 업데이트
+          // 파일 읽기가 완료되었을 때 실행하게끔 처리
           reader.onload = function (e) {
-            $('#img' + num).attr('src', e.target.result);
-          };
+            // e 의 target.result 에 각 파일의 url 주소가 담겨있음
+            // e.target == this == reader
+            switch (num) {
+              case 1:
+                $('#titleImg').attr('src', e.target.result);
+                break;
+              case 2:
+                $('#detailImg1').attr('src', e.target.result);
+                break;
+              case 3:
+                $('#detailImg2').attr('src', e.target.result);
+                break;
+              case 4:
+                $('#detailImg3').attr('src', e.target.result);
+                break;
 
-          reader.readAsDataURL(input.files[0]);
+              default:
+                break;
+            }
+          };
         } else {
-          // 파일 선택 초기화
-          input.value = '';
-          // 이미지 초기화
-          $('#img' + num).attr('src', '/resources/img/noimage.png');
+          // 파일이 선택되지 않았을 때
+          switch (num) {
+            case 1:
+              $('#titleImg').attr('src', null);
+              break;
+            case 2:
+              $('#detailImg1').attr('src', null);
+              break;
+            case 3:
+              $('#detailImg2').attr('src', null);
+              break;
+            case 4:
+              $('#detailImg3').attr('src', null);
+              break;
+
+            default:
+              break;
+          }
         }
       }
-
-      // #img 클릭하면 파일 업로드 하기
-      $('#img1').click(function () {
-        $('#titleImg').click();
-      });
-
-      $('#img2').click(function () {
-        $('#titleImg').click();
-      });
-
-      $('#img3').click(function () {
-        $('#titleImg').click();
-      });
-
-      $('#img4').click(function () {
-        $('#titleImg').click();
-      });
 
       //숫자 외에 입력 못하게 하기
       $("#myForm input[type='number']").on('input', function () {

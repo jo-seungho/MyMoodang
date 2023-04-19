@@ -122,7 +122,7 @@
                 </div>
 
                 <div>
-                  <a class="item_registration" href="/itemForm.ad">
+                  <a class="item_registration" href="/inItemForm.ad">
                     <button type="button" id="btn" class="btn">상품추가</button>
                   </a>
                   <form role="search">
