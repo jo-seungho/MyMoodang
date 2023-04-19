@@ -38,7 +38,9 @@
                         <h3 class="tit_login">로그인</h3>
                         <div class="write_form">
                             <div class="write_view login_view">
-                                <form method="post" name="login_form" id="form"  action="/loginForm.me">
+                            
+                            	<!-- 2023-04-18 로그인 매핑 수정 이지환 -->
+                                <form method="post" name="login_form" id="form"  action="/login.me">
                                     <input type="hidden" name="returnUrl" value="">
                                     <input type="hidden" name="close" value>
                                     <input type="text" name="memberId" size="20" tabindex="1" value placeholder="아이디 입력">
