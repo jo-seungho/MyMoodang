@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 2023-04-19 / 세션 유효기간 5시간으로 설정 / 이지환 -->
+
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
 <!--   <display-name>MyMoodang</display-name>
   <welcome-file-list>
@@ -16,5 +19,7 @@
     <url-pattern>*.ad</url-pattern>
 </filter-mapping> -->
 
-
+ <session-config>
+             <session-timeout>300</session-timeout>
+      </session-config>
 </web-app>

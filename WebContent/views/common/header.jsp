@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!-- 2023-04-19 코드 주석 처리 및 
+<!-- 2023-04-19 코드 주석 처리 및 로그인 전/후 로 header 부분의 우측 상단 메뉴바 다르게 수정 / 이지환 */ 
 	 -->    
 
 <%@ page import="com.kh.user.member.model.vo.Member" %>
