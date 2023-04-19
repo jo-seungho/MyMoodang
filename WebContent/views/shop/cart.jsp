@@ -222,33 +222,38 @@
 							주문 내역 상세에서 직접 주문취소가 가능합니다.
 						</span> <span class="txt"> <span class="ico">·</span>‘입금확인’ 이후
 							상태에는 고객센터로 문의해주세요.
-
+								
 						</span>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<input id="userName" type="hidden" value="<%= loginUser.getName() %>">
+
 	
 	<script>
-	$(document).ready(function() {
-		console.log()
-		$.ajax({
+	 $(document).ready(function() {
+		 
+		 $.ajax({
 			url: "cart",
-			type: "post",
-			data: {
-				userName: $("#userName").val()
-				},
+			type: "get",
 			success: function(res) {
-				console.log("GOOD");
+				console.log(res);
+				console.log("GO");
 			},
-			error: function(err) {
-				console.log("WHY???");
-			},
-		})
-	})
-	
+			error: function(err){
+				console.log(err);
+				console.log("FUCK");
+			}
+			 
+			 
+			 
+		 })
+		 
+		 
+		 
+		 
+	 })
 	</script>
 	
 </body>

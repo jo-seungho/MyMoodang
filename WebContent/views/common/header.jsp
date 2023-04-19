@@ -46,7 +46,6 @@
         <a href="#" class="bnr_delivery">
           <img src="/resources/img/image.gif" alt="서울, 경기, 인천 샛별배송, 수도권 이외 지역 택배배송" class="bnr_delivery_img" />
         </a>
-        
         <!-- 2023-04-18 / 로그인 전 우측 상단 바 / 이지환 -->
            <% if(loginUser == null) { %>
         <ul class="sign_menu">
@@ -279,7 +278,7 @@
             </div>
           </div>
 
-          <div class="cart_count">
+          <div id="goCart" class="cart_count">
             <% if(loginUser != null) { %>
             <a href="/cart" class="btn_cart">
               <span class="blind">장바구니</span>
@@ -288,6 +287,7 @@
             <a href="loginForm.me" class="btn_cart">
               <span class="blind">장바구니</span>
             </a>
+		     
             <% } %>
           </div>
         </ul>
@@ -295,21 +295,19 @@
     </div>
 
     <script>
-    	$.noConflict();
-    	// $(document).ready(function(){
-    		
-    		
-    	//  });
-    	        let msg = '<%= alertMsg == null ? "" : alertMsg %>';
-            	if(msg != null && msg.length > 0) {
-            		alert(msg);
-            	}
 
-            	//----------------------------------------------------
-            	let emsg = '<%= errorMsg == null ? "" : errorMsg %>';
-            	if(emsg != null && emsg.length > 0) {
-            		alert(emsg);
-            	}
+  	        let msg = '<%= alertMsg == null ? "" : alertMsg %>';
+          	if(msg != null && msg.length > 0) {
+          		alert(msg);
+          	}
+
+          	//----------------------------------------------------
+          	let emsg = '<%= errorMsg == null ? "" : errorMsg %>';
+          	if(emsg != null && emsg.length > 0) {
+          		alert(emsg);
+          	}
+          	
+    	$.noConflict();
     </script>
   </body>
 </html>

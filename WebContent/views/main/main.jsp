@@ -114,6 +114,7 @@
                             <!-- 아이콘 있는 버전, h3에 링크 있음 -->
                                 <a href="/newItemList.it?currentPage=1" class="name">
                                     <span class="ico">따끈 따끈 신상품</span>
+                                    
                                 </a>
                             </h3>
                         </div>
