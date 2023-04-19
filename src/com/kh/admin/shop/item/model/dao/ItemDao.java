@@ -59,6 +59,8 @@ public class ItemDao {
                 i.setItemText(rset.getString("ITEM_TEXT"));
                 i.setDiscountPrice(rset.getInt("DISCOUNT_PRICE"));
                 i.setItemStatus(rset.getString("ITEM_STATUS"));
+                
+                i.setImgName(rset.getString("ITEM_IMG_PATH"));
                
             }
             

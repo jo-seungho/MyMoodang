@@ -1,8 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="com.kh.admin.shop.item.model.vo.*, java.util.ArrayList"%>
 <!DOCTYPE html>
-<% ArrayList<ItemImg>
-  list = (ArrayList<ItemImg
-    >) request.getAttribute("list"); Item i = (Item) request.getAttribute("item"); String category = i.getItemCategory(); %>
+<% 
+		ArrayList<ItemImg> list = (ArrayList<ItemImg>) request.getAttribute("list");
+		Item i = (Item) request.getAttribute("item"); 
+		String category = i.getItemCategory(); 
+
+%>
     <html lang="en">
       <head>
         <meta charset="utf-8" />
@@ -127,8 +130,8 @@
                   <form method="POST" action="/itemUpdate.ad" enctype="multipart/form-data">
                     <div class="col">
                       <img id="titleImg" src=" <%= i.getItemImg() %> " class="img-thumbnail" style="width: 500px; height: 300px" />
-                    </div>
-                    <label for="titleImg" style="margin-bottom: 10px" id="img0"><%= list.get(0).getItemImg() %></label>
+                    </div>													
+                    <label for="titleImg" style="margin-bottom: 10px" id="img0"><%= i.getImgName() %></label>
 
                     <div class="col form-floating mb-4"><input type="text" class="form-control" name="name" value="<%=i.getItemName()%>" /> <label for="floatingInput">* 상품명</label></div>
                     <div class="col form-floating mb-3"><input type="number" class="form-control" name="stock" value="<%=i.getItemStock()%>" /> <label for="floatingPassword">* 수량(재고)</label></div>
@@ -156,22 +159,24 @@
 
                     <div class="col form-floating mb-3">
                       <select class="form-select" id="category" name="category">
-                        <option value="1">제로음료</option>
-                        <option value="2">단백질</option>
-                        <option value="3">무가당</option>
+                        <option value="1" <% if (i.getItemCategory().equals("제로음료")) out.print("selected"); %>>제로음료</option>
+                        <option value="2" <% if (i.getItemCategory().equals("단백질")) out.print("selected"); %>>단백질</option>
+                        <option value="3" <% if (i.getItemCategory().equals("무가당")) out.print("selected"); %>>무가당</option>
                       </select>
                       <label for="floatingSelect">* 카테고리</label>
                     </div>
 
                     <div>
-                      <img id="detailImg1" src="" class="img-thumbnail" style="width: 200px; height: 200px" />
-                      <img id="detailImg2" src="" class="img-thumbnail" style="width: 200px; height: 200px" />
-                      <img id="detailImg3" src="" class="img-thumbnail" style="width: 200px; height: 200px" />
+                      <img id=detailImg1 src="" class="img-thumbnail" style="width: 200px; height: 200px" />
+                      <img id=detailImg2 src="" class="img-thumbnail" style="width: 200px; height: 200px" />
+                      <img id=detailImg3 src="" class="img-thumbnail" style="width: 200px; height: 200px" />
                     </div>
 
                     <div class="row">
+                    <% if(!list.isEmpty()) { %>
                       <% for(int j = 1; j < list.size(); j++) { %>
-                      <p class="col" id="img<%=j%>" style="font-size: 13px"><%= list.get(j).getItemImg() %></p>
+                      <p class="div" id="img<%=j%>" style="font-size: 13px"><%= list.get(j).getItemImg() %></p>
+                      <% } %>
                       <% } %>
                     </div>
 
@@ -181,7 +186,18 @@
                       <input type="file" id="file3" name="file3" onchange="loadImg(this, 3);" />
                       <input type="file" id="file4" name="file4" onchange="loadImg(this, 4);" />
                     </div>
-
+                    
+                    	<input type="hidden" name="code" value=<%= i.getItemCode() %> />
+                    
+                    <%
+					    for (int j = 0; j < Math.min(list.size(), 3); j++) {
+					    	
+					%>
+					    <input type="hidden" name="names<%= j+1 %>" value="<%= list.get(j).getItemImg() %>">
+					    
+					<%
+					    }
+					%>
                     <div class="insert-form">
                       <button class="btn btn-primary" id="addBtn" style="margin-top: 40px; font-size: larger">수정</button>
                       <a href="/itemDetail.ad?code=<%=i.getItemCode()%>" class="btn btn-primary" id="listBtn" style="margin-top: 40px; font-size: larger">목록</a> <a href="/itemDelete.ad?code=<%=i.getItemCode()%>" class="btn btn-primary" id="listBtn" style="margin-top: 40px; font-size: larger">삭제</a>

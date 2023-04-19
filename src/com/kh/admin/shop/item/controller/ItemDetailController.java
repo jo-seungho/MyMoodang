@@ -20,7 +20,6 @@ public class ItemDetailController extends HttpServlet {
        
 
     public ItemDetailController() {
-        super();
     }
 
 

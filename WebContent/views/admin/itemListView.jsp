@@ -117,7 +117,7 @@
                   <div class="col btn-hover">
                     <button class="btn" id="btn1">전체 <span class="list-btn"><%= pi.getTotalCount() %></span></button>
                     <button class="btn" id="btn2">판매 <span class="list-btn"><%= pi.getSaleCount() %></span></button>
-                    <button class="btn" id="btn3">품절 <span class="list-btn"><%= pi.getSoldCount() %></span></button>
+                    <button class="btn" id="btn3">판매중지 <span class="list-btn"><%= pi.getSoldCount() %></span></button>
                   </div>
                 </div>
 

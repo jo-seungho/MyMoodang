@@ -58,14 +58,6 @@
       <body class="sb-nav-fixed">
         <%@ include file="sidebar.jsp"%>
 
-        <script>
-          function deleteBtn() {
-            if (confirm('정말 삭제하시겠습니까?')) {
-              location.href = '/main';
-            }
-          }
-        </script>
-
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
           <!-- Navbar Brand-->
           <a class="navbar-brand ps-3" href="index.html">
@@ -242,9 +234,15 @@
                                 <div class="col-auto">
                                   <button type="submit" id="btn" class="btn">상품수정</button>
                                 </div>
+                                <% if(it.getItemStatus().equals("Y")) { %>
                                 <div class="col-auto">
-                                  <button type="button" id="btn dbtn" class="btn" onclick="deleteBtn">상품삭제</button>
+                                  <button type="button" id="btn" class="btn dbtn">판매중지</button>
                                 </div>
+                                <% } else { %>
+                                <div class="col-auto">
+                                  <button type="button" id="btn" class="btn ubtn">판매재개</button>
+                                </div>
+                                <% } %>
                                 <div class="col-auto">
                                   <a href="/itemList.ad?page=1&category=a">
                                     <button type="button" id="btn" class="btn">상품목록</button>
@@ -348,7 +346,7 @@
                         <div class="goods_wrap">
                           <div class="goods_intro">
                             <div class="pic">
-                              <img <% if(list.size() < 2) { % />
+                              <img <% if(list.size() < 2) { %>
                               src="<%= noImage %>" <% } else { %> src="<%= list.get(1).getItemImgPath() %>" <% } %> style="width: 1010px; height: 671px" />
                             </div>
                             <div class="context last">
@@ -402,6 +400,18 @@
         </div>
 
         <script>
+          $('.dbtn').click(function () {
+            if (confirm('정말 판매중지 시키겠습니까?')) {
+              location.href = '/itemDelete.ad?code=<%=it.getItemCode()%>&status=N';
+            }
+          });
+          
+          $('.ubtn').click(function () {
+              if (confirm('정말 판매재개 시키겠습니까?')) {
+                location.href = '/itemDelete.ad?code=<%=it.getItemCode()%>&status=Y';
+              }
+            });
+
           var isHeartClicked = false;
           var isAnimating = false; // 애니메이션 중 여부를 나타내는 변수
 
@@ -448,5 +458,6 @@
         </script>
       </body>
     </html>
+    >
   </ItemImg></ItemImg
 >
