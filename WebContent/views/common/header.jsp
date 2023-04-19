@@ -1,10 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!-- 20234-04-18 / 
-	request.getAttrubute(로그인유저) -> session 형식으로 변경
-	, class=sub 에 해당하는 코드 삭제, 로그인, 로그아웃 기능 구현
-	로그인 전 후로 header영역 우측 상단의 메뉴들이 바뀌게끔 수정 /
-	이지환
+<!-- 2023-04-19 코드 주석 처리 및 
 	 -->    
 
 <%@ page import="com.kh.user.member.model.vo.Member" %>
@@ -86,8 +82,8 @@
 
 	
 	
-            
-          </li>
+        <!-- 2023-04-19 / 삭제 / 이지환 -->
+        <%--  </li>
           <li class="link">
             <a href="" class="item service">고객센터</a>
             <!-- 고객센터 hover 시 sub_menu 등장 -->
@@ -104,24 +100,24 @@
             </ul>
           </li>
          </ul>
-          
+        --%>
+         
             
         <% } %>
      
       
         <!-- .sign_menu -->
-        <!-- 2023-04-18 / 로그인 후 우측 상단 바 / 이지환 -->
+        <!-- 2023-04-19 / 로그인 후 상단바 코드 수정 및 css 부여 / 이지환 -->
 		<% if(loginUser != null) { %>
 		<ul class="sign_menu">
-          <!--login class 추가-->
+          
           
           <li class="link">
-            <a href="" class="item service">
+            <a href="" class="item service" id="loginAf_hover">
             	<b class="join"><%= loginUser.getName() %>님</b>
             	 환영합니다.
             </a>
-            <!-- 2023-04-18 / 서브 메뉴 버튼 식으로 마우스를 갖다대면 나오게끔 하고 싶음 / 이지환 -->
-            <ul class="sub_menu">
+            <ul class="sub_menu" id="loginAf_menu">
               <li class="list">
                 <a href="#" class="list_item">주문내역</a>
               </li>
@@ -161,7 +157,7 @@
       </div>
       <div class="header_logo">
         <h1 class="logo">
-          <a href="/views/main/main.jsp" class="link_main">
+          <a href="/main" class="link_main">
             <span class="gnb_logo_container"></span>
             <img src="/resources/img/logo.png" alt="마켓컬리 로고" class="logo_img" />
           </a>

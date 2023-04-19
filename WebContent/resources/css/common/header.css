@@ -1,4 +1,5 @@
 /* common.css : header, footer 메인 페이지 */
+/* 2023-04-19 / 로그인 후 우측 상단 드롭다운 css및 위치 및 효과 추가 / 이지환 */
 
 @charset "utf-8";
 
@@ -306,6 +307,28 @@ input::placeholder {
   background-image: url(https://res.kurly.com/pc/ico/1908/ico_down_8x5.png);
   width: 8px;
   height: 5px;
+}
+
+#loginAf_hover:hover+#loginAf_menu {
+  display: block;
+  z-index: 1000;
+}
+
+.sign_menu #loginAf_menu:hover {
+  display: block;
+  z-index: 1000;
+}
+
+.sign_menu #loginAf_menu {
+  display: none;
+  position: absolute;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  width: 100px;
+  top: 34px;
+  right: 150px;
+  padding: 8px;
+  line-height: 25px;
 }
 
 .sign_menu .link:last-child:hover .sub_menu {
