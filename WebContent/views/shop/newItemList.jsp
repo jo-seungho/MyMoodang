@@ -51,9 +51,10 @@
 						<div class="ico_cate">
 							<span class="ico" style="display: block;"> <img
 								src="/resources/img/logo.png" alt="카테고리 아이콘">
-							</span> <span class="tit">전체보기</span>
+							</span> <span class="tit">신상품</span>
 						</div>
 
+					<!--
 						<ul class="list">
 							<li name="cate_gory"><a class="on">전체보기</a></li>
 							<li name="cate_gory"><a class=>제로음료</a></li>
@@ -62,6 +63,8 @@
 							<li name="cate_gory"><a class=>도시락</a></li>
 							<li name="cate_gory"><a class=>기타</a></li>
 						</ul>
+					  -->
+
 					</div>
 				</div>
 				<!-- 카테고리 메뉴바 끝 -->

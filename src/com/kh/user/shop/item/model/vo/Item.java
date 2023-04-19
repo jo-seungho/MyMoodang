@@ -15,11 +15,12 @@ public class Item {
 	private int itemDiscount;
 	private String itemImg;
 	private String itemStatus;
+	private int discountPrice; // 상품할인가격추가
+	
 	
 	public Item() { }
-	
-	
-	
+
+
 	public Item(int itemCode, String itemCategory, String itemDate, String itemName, int itemStock, int itemPrice,
 			String itemText, String itemImg, String itemStatus) {
 		super();
@@ -34,8 +35,25 @@ public class Item {
 		this.itemStatus = itemStatus;
 	}
 	
-	
     /**
+     * 상품 상세페이지 조회용
+     * 2023-04-17 이태화
+     * @return
+     */
+    public Item(String itemCategory, String itemName, int itemPrice, String itemText, int itemDiscount, String itemImg,
+			int discountPrice) {
+		super();
+		this.itemCategory = itemCategory;
+		this.itemName = itemName;
+		this.itemPrice = itemPrice;
+		this.itemText = itemText;
+		this.itemDiscount = itemDiscount;
+		this.itemImg = itemImg;
+		this.discountPrice = discountPrice;
+	}
+
+
+	/**
      * 전체 상품 리스트 조회용 생성자
      * 2023-04-16 조승호
      * @return
@@ -55,6 +73,26 @@ public class Item {
 		this.itemStatus = itemStatus;
 	}
 
+
+
+	/**
+     * 메인 페이지 리스트용 생성자
+     * 2023-04-18 조승호
+     * @return
+     */
+	public Item(int itemCode, String itemCategory, String itemDate, int itemPrice, int discountPrice, String itemName, String itemText,
+			int itemDiscount, String itemImg) {
+		super();
+		this.itemCode = itemCode;
+		this.itemCategory = itemCategory;
+		this.itemDate = itemDate;
+		this.itemPrice = itemPrice;
+		this.discountPrice = discountPrice;
+		this.itemName = itemName;
+		this.itemText = itemText;
+		this.itemDiscount = itemDiscount;
+		this.itemImg = itemImg;
+	}
 
 
 	public int getItemCode() {
@@ -144,14 +182,31 @@ public class Item {
 	public void setItemStatus(String itemStatus) {
 		this.itemStatus = itemStatus;
 	}
+	
+	
+
+	public int getDiscountPrice() {
+		return discountPrice;
+	}
+
+
+	public void setDiscountPrice(int discountPrice) {
+		this.discountPrice = discountPrice;
+	}
+
 
 	@Override
 	public String toString() {
 		return "Item [itemCode=" + itemCode + ", itemCategory=" + itemCategory + ", itemDate=" + itemDate
 				+ ", itemName=" + itemName + ", itemStock=" + itemStock + ", itemPrice=" + itemPrice + ", item_hits="
 				+ item_hits + ", itemText=" + itemText + ", itemDiscount=" + itemDiscount + ", itemImg=" + itemImg
-				+ ", itemStatus=" + itemStatus + "]";
+				+ ", itemStatus=" + itemStatus + ", discountPrice=" + discountPrice + "]";
 	}
+
+
+	
+	
+	
 
 
 

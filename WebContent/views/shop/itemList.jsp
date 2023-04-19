@@ -44,13 +44,13 @@
 								</span> <span class="tit">전체보기</span>
 							</div>
 
-							<ul class="list">
-								<li name="cate_gory"><a class="on" href="/itemList.it?currentPage=1&category=전체">전체보기</a></li>
-								<li name="cate_gory"><a href="/itemList.it?currentPage=1&category=제로음료" class=>제로음료</a></li>
-								<li name="cate_gory"><a href="/itemList.it?currentPage=1&category=무가당" class=>무가당</a></li>
-								<li name="cate_gory"><a href="/itemList.it?currentPage=1&category=단백질" class=>단백질</a></li>
-								<li name="cate_gory"><a href="/itemList.it?currentPage=1&category=도시락" class=>도시락</a></li>
-								<li name="cate_gory"><a href="/itemList.it?currentPage=1&category=기타" class=>기타</a></li>
+							<ul id="colorTest" class="list">
+								<li name="cate_gory"><a class="totalList on" href="/itemList.it?currentPage=1&category=전체">전체보기</a></li>
+								<li name="cate_gory"><a class="zeroDrink" href="/itemList.it?currentPage=1&category=제로음료" class=>제로음료</a></li>
+								<li name="cate_gory"><a class="zeroSugar" href="/itemList.it?currentPage=1&category=무가당" class=>무가당</a></li>
+								<li name="cate_gory"><a class="protein" href="/itemList.it?currentPage=1&category=단백질" class=>단백질</a></li>
+								<li name="cate_gory"><a class="bentto" href="/itemList.it?currentPage=1&category=도시락" class=>도시락</a></li>
+								<li name="cate_gory"><a class="etcList" href="/itemList.it?currentPage=1&category=기타" class=>기타</a></li>
 							</ul>
 						</div>
 					</div>
@@ -95,7 +95,8 @@
 												</div>
 											</div>
 
-											<a href="/itemDetail.it?bno=<%= i.getItemCode() %>" class="info"> 
+											<a href="/itemDetail.it?bno=<%= i.getItemCode() %>" class=""> 
+											<!-- 주소 연결 이슈로 bno 클래스 임시로 삭제해뒀습니다.  - 조승호 -->
 											<span class="name"> <%= i.getItemName() %> </span> 
 											<span class="cost"> <span class="price"><%= i.getItemPrice() %></span> 
 											<input type="hidden" id="product_cost1" value=1300> 
@@ -227,18 +228,21 @@
 				</form>
 			</div>
 		</div>
+		<!-- 		
 		<script>
 
-		/*
-			//$(function() {
+		
+			$(function() {
 
 				$(".info").click(function() {
 					location.href = "/item.it";
 
 				});
 			});
-		*/
-		</script>
+		
+		</script> 
+		-->
+
 
 
 

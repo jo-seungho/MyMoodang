@@ -1,5 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, com.kh.user.shop.item.model.vo.Item"%>
+<%-- 2023-04-18 조승호 --%>
+<%
+
+	ArrayList<Item> discountList = (ArrayList<Item>) request.getAttribute("discountList");
+	ArrayList<Item> newList = (ArrayList<Item>) request.getAttribute("newList");
+	ArrayList<Item> bestList = (ArrayList<Item>) request.getAttribute("bestList");
+	int ranking = 1;
+	String category = (String)request.getAttribute("category");
+	
+%>    
     
 <!DOCTYPE html>
 <html lang="en">
@@ -65,147 +75,81 @@
 
                         <!-- 탑 슬라이터 구역 -->
                                 <ul id="slideUlTag" class="autoplay">
-                                    <li>
+ 
+ 									<% if(discountList.isEmpty()) { %>
+ 										<div class="item">등록된 상품이 없습니다.</div>
+ 									<% } else { %>
+ 										
+ 										<% for(Item di : discountList) { %>
+ 									<li>
                                         <a class="slideLinkTag" href="../path.html">
                                             <img class="discountImg" src="https://img-cf.kurly.com/shop/data/my_icon/icon_save_10.png">
-                                            <img src="/resources/img/상품1.jpg" style="width: 90%; height: 310px;">
+                                            <img src="<%= di.getItemImg() %>" style="width: 90%; height: 310px;">
                                               <div class="slideText-area">
                                                 <span class="name">
-                                                    <h3 class="slideTitle-text">[똠양꿍] 기똥찬 타이 카레</h3>
+                                                    <h3 class="slideTitle-text" style="font-weight: 800"><%= di.getItemName() %></h3>
+                                                    <h4 class="slideTitle-text"><%= di.getItemText() %></h4>
                                                  </span>
-                                                <span class="slidePrice">10,800원</span>
-                                                <span class="slideCost">12,000원</span>
+                                                <span class="slidePrice"><%= di.getDiscountPrice() %>원</span>
+                                                <span class="slideCost"><%= di.getItemPrice() %>원</span>
                                             </div>
                                         </a>
                                     </li>
-                                    <li>
-                                        <a class="slideLinkTag" href="../path.html">
-                                            <img class="discountImg" src="https://img-cf.kurly.com/shop/data/my_icon/icon_save_10.png">
-                                            <img src="/resources/img/상품2.jpg" style="width: 90%; height: 310px;">
-                                              <div class="slideText-area">
-                                                <span class="name">
-                                                    <h3 class="slideTitle-text">[똠양꿍] 기똥찬 타이 카레</h3>
-                                                 </span>
-                                                <span class="slidePrice">10,800원</span>
-                                                <span class="slideCost">12,000원</span>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="slideLinkTag" href="../path.html">
-                                            <img class="discountImg" src="https://img-cf.kurly.com/shop/data/my_icon/icon_save_10.png">
-                                            <img src="/resources/img/상품3.jpg" style="width: 90%; height: 310px;">
-                                              <div class="slideText-area">
-                                                <span class="name">
-                                                    <h3 class="slideTitle-text">[똠양꿍] 기똥찬 타이 카레</h3>
-                                                 </span>
-                                                <span class="slidePrice">10,800원</span>
-                                                <span class="slideCost">12,000원</span>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="slideLinkTag" href="../path.html">
-                                            <img class="discountImg" src="https://img-cf.kurly.com/shop/data/my_icon/icon_save_10.png">
-                                            <img src="/resources/img/상품4.jpg" style="width: 90%; height: 310px;">
-                                              <div class="slideText-area">
-                                                <span class="name">
-                                                    <h3 class="slideTitle-text">[똠양꿍] 기똥찬 타이 카레</h3>
-                                                 </span>
-                                                <span class="slidePrice">10,800원</span>
-                                                <span class="slideCost">12,000원</span>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="slideLinkTag" href="../path.html">
-                                            <img class="discountImg" src="https://img-cf.kurly.com/shop/data/my_icon/icon_save_10.png">
-                                            <img src="/resources/img/상품5.jpg" style="width: 90%; height: 310px;">
-                                              <div class="slideText-area">
-                                                <span class="name">
-                                                    <h3 class="slideTitle-text">[똠양꿍] 기똥찬 타이 카레</h3>
-                                                 </span>
-                                                <span class="slidePrice">10,800원</span>
-                                                <span class="slideCost">12,000원</span>
-                                            </div>
-                                        </a>
-                                    </li>
+ 										<% } %>
+ 										
+ 									<% } %>
+ 
                                 </ul>
                         <!-- 탑 슬라이더 구역 -->
-                        
                     </div>
                 </div>
                 <!-- 여기까지 슬라이더 전체 영역 -->
 
+				<%-- 탑 배너 --%>
                 <!-- 본문 게시글 시작 -->
                 <div class="main_type2 bg">
                     <div class="main_event">
                         <div class="tit_goods">
                             <h3 class="tit">
                             <!-- 아이콘 있는 버전, h3에 링크 있음 -->
-                                <a href="#" class="name">
+                                <a href="/newItemList.it?currentPage=1" class="name">
                                     <span class="ico">따끈 따끈 신상품</span>
                                 </a>
                             </h3>
                         </div>
                         <div class="list_goods">
                             <ul data-title="이벤트 소식" data-section="event" class="list_goods_ul">
-                                <li>
-                                    <li data-index="1">
-                                        <a class="thumb_goods">
-                                            <img src="/resources/img/과일1.jpg" alt="상품이미지" class="thumb"
-                                            style="background-image: url('');">
-                                            <!-- 상품 이미지 임시값임. src는 데이터로 받아오기 -->
-                                        </a>
-                                        <div class="info_goods">
-                                            <div class="inner_info">
-                                                <span class="name">
-                                                    <a class="txt">망고는 매잉고</a>
-                                                </span>
-                                                <span class="desc"> 
-                                                    <a class="txt">미리미리 쟁여두세요!</a>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </li>
-                                <li>
-                                    <li data-index="2">
-                                        <a class="thumb_goods">
-                                            <img src="/resources/img/과일2.jpg" alt="상품이미지" class="thumb"
-                                            style="background-image: url('');">
-                                            <!-- 상품 이미지 임시값임. src는 데이터로 받아오기 -->
-                                        </a>
-                                        <div class="info_goods">
-                                            <div class="inner_info">
-                                                <span class="name">
-                                                    <a class="txt">귤은 뀰!</a>
-                                                </span>
-                                                <span class="desc"> 
-                                                    <a class="txt">한라봉 아님</a>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </li>
-                                <li>
-                                    <li data-index="3">
-                                        <a class="thumb_goods">
-                                            <img src="/resources/img/과일3.jpg" alt="상품이미지" class="thumb"
-                                            style="background-image: url('');">
-                                            <!-- 상품 이미지 임시값임. src는 데이터로 받아오기 -->
-                                        </a>
-                                        <div class="info_goods">
-                                            <div class="inner_info">
-                                                <span class="name">
-                                                </span>
-                                                <span class="desc"> 
-                                                    <a class="txt">나만의 힐링타임</a>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </li>
+                            
+                            	<% if(newList.isEmpty()) { %>
+                            		<div class="item">등록된 상품이 없습니다.</div>
+                            	<% } else {%>
+                            
+                            		<% for(Item ni : newList) { %>
+		                            	<li>
+		                                    <li data-index="1" style="padding-bottom: 70px;">
+		                                        <a class="thumb_goods">
+		                                            <img src="<%= ni.getItemImg() %>" alt="상품이미지" class="thumb"
+		                                            style="background-image: url('');">
+		                                            <!-- 상품 이미지 임시값임. src는 데이터로 받아오기 -->
+		                                        </a>
+		                                        <div class="info_goods">
+		                                            <div class="inner_info">
+		                                                <span class="name">
+		                                                    <a class="txt" style="font-size: x-large; font-weight: 700;"><%= ni.getItemName() %></a>
+		                                                </span>
+		                                                <span class="desc"> 
+		                                                    <a class="txt" style="font-size: initial;"><%= ni.getItemText() %></a>
+		                                                </span>
+		                                                <span class="desc" style="font-size: x-large; font-weight: 600;" >
+		                                                	<%= ni.getItemPrice() %>원
+		                                                </span>
+		                                            </div>
+		                                        </div>
+		                                    </li>
+                            		<% } %>
+                            		
+                            	<% } %>
+                            
                             </ul>
                         </div>
                     </div>
@@ -226,81 +170,41 @@
                             </h3>
                         </div>
 
-                        <!-- 탑 슬라이터 구역 -->
+                        <!-- 바텀 슬라이터 구역 -->
                                 <ul id="slideUlTag" class="autoplay">
-                                    <li>
-                                        <a class="slideLinkTag" href="../path.html">
-                                            <img class="discountImg" src="">
-                                            <img src="/resources/img/상품1.jpg" style="width: 90%; height: 310px;">
-                                              <div class="slideText-area">
-                                                <span class="name">
-                                                    <h3 class="slideTitle-text">[똠양꿍] 기똥찬 타이 카레</h3>
-                                                 </span>
-                                                <span class="slidePrice">10,800원</span>
-                                                <span class="slideCost">12,000원</span>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="slideLinkTag" href="../path.html">
-                                            <img class="discountImg" src="https://img-cf.kurly.com/shop/data/my_icon/icon_save_10.png">
-                                            <img src="/resources/img/상품2.jpg" style="width: 90%; height: 310px;">
-                                              <div class="slideText-area">
-                                                <span class="name">
-                                                    <h3 class="slideTitle-text">[똠양꿍] 기똥찬 타이 카레</h3>
-                                                 </span>
-                                                <span class="slidePrice">10,800원</span>
-                                                <span class="slideCost">12,000원</span>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="slideLinkTag" href="../path.html">
-                                            <img class="discountImg" src="https://img-cf.kurly.com/shop/data/my_icon/icon_save_10.png">
-                                            <img src="/resources/img/상품3.jpg" style="width: 90%; height: 310px;">
-                                              <div class="slideText-area">
-                                                <span class="name">
-                                                    <h3 class="slideTitle-text">[똠양꿍] 기똥찬 타이 카레</h3>
-                                                 </span>
-                                                <span class="slidePrice">10,800원</span>
-                                                <span class="slideCost">12,000원</span>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="slideLinkTag" href="../path.html">
-                                            <img class="discountImg" src="https://img-cf.kurly.com/shop/data/my_icon/icon_save_10.png">
-                                            <img src="/resources/img/상품4.jpg" style="width: 90%; height: 310px;">
-                                              <div class="slideText-area">
-                                                <span class="name">
-                                                    <h3 class="slideTitle-text">[똠양꿍] 기똥찬 타이 카레</h3>
-                                                 </span>
-                                                <span class="slidePrice">10,800원</span>
-                                                <span class="slideCost">12,000원</span>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="slideLinkTag" href="../path.html">
-                                            <img class="discountImg" src="https://img-cf.kurly.com/shop/data/my_icon/icon_save_10.png">
-                                            <img src="/resources/img/상품5.jpg" style="width: 90%; height: 310px;">
-                                              <div class="slideText-area">
-                                                <span class="name">
-                                                    <h3 class="slideTitle-text">[똠양꿍] 기똥찬 타이 카레</h3>
-                                                 </span>
-                                                <span class="slidePrice">10,800원</span>
-                                                <span class="slideCost">12,000원</span>
-                                            </div>
-                                        </a>
-                                    </li>
+									<% if(bestList.isEmpty()) { %>
+										<div class="item">등록된 상품이 없습니다.</div>
+									<% } else { %>	
+										
+										<% for(Item bi : bestList) { %>
+										 <li>
+										 <h1><i style="color: red; text-shadow: 2px -7px 8px orange;">TOP </i><%= ranking %></h1>
+	                                        <a class="slideLinkTag" href="../path.html">
+	                                            <img src="<%= bi.getItemImg() %>" style="width: 90%; height: 310px;">
+	                                              <div class="slideText-area">
+	                                                <span class="name">
+                                                    <h3 class="slideTitle-text" style="font-weight: 800"><%= bi.getItemName() %></h3>
+                                                    <h4 class="slideTitle-text"><%= bi.getItemText() %></h4>
+	                                                 </span>
+	                                                <span class="slidePrice"><%= bi.getDiscountPrice() %>원</span>
+	                                                <span class="slideCost"><%= bi.getItemPrice() %>원</span>
+	                                            </div>
+	                                        </a>
+	                                    </li>
+	                                    <% ranking++; %>
+										<% } %>
+									<% } %>
                                 </ul>
-                        <!-- 탑 슬라이더 구역 -->
+                        <!-- 바텀 슬라이더 구역 -->
                         
                     </div>
                 </div>
                 <!-- 여기까지 슬라이더 전체 영역 -->
     
                 <!-- 본문 게시글 시작 -->
+                
+                <%-- 
+                
                 <div class="main_type2 bg">
                     <div class="main_event">
                         <div class="tit_goods">
@@ -373,9 +277,10 @@
                         </div>
                     </div>
                 </div>
+                --%>
                 <!-- 본문 게시글 끝 -->
                 
-                <div style="height: 40px; background-color: rgba(254, 116, 119, 0.241); line-height: 40px;">
+                <div style="height: 40px; background-color: rgba(254, 116, 119, 0.241); line-height: 40px; margin-top: 100px;">
                     <div style="display: flex; justify-content: center;">
                         <h3>공지사항 : </h3>
                         <p>배가 고파요..</p>
@@ -402,6 +307,7 @@
                 nextArrow : "<button type='button' class='slick-next'></button>", 
                 slide: 'li'
             })
+
         });
        
       $.noConflict();

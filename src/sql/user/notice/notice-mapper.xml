@@ -2,16 +2,49 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 
+	<entry key="selectListCount">
+		SELECT COUNT(*) COUNT
+		  FROM NOTICE
+		 WHERE DELETE_STATUS = 'N'
+		   
+	</entry>
+	
+
 	<entry key="selectNoticeList">
-			SELECT NOTICE_NO
-			     , NOTICE_TITLE
-			     , TO_CHAR(CREATE_DATE, 'YY/MM/DD HH:MI:SS') CREATE_DATE
-			     , VIEWS
-              FROM NOTICE 
-              ORDER BY CREATE_DATE DESC
+		
+			SELECT * 
+		 	 FROM (
+		      SELECT ROWNUM RNUM
+		         , A.*
+		      FROM (SELECT NOTICE_NO
+		                 , NOTICE_TITLE
+                         , VIEWS
+		                 , CREATE_DATE
+		              FROM NOTICE 
+		             WHERE DELETE_STATUS = 'N'
+		             ORDER BY CREATE_DATE DESC
+		            ) A
+		        )
+		 WHERE RNUM BETWEEN ? AND ?
 	</entry>
 
-
+	
+	<entry key="increaseCount">
+	UPDATE NOTICE
+		   SET VIEWS = VIEWS + 1
+		 WHERE NOTICE_NO = ?
+	</entry>
+	
+	<entry key="selectBoard">
+		SELECT NOTICE_NO
+		     , NOTICE_TITLE
+		     , NOTICE_CONTENT
+		     , CREATE_DATE
+		     , VIEWS
+		  FROM NOTICE 
+		 WHERE NOTICE_NO = ?
+	</entry>
+	
 
 </properties>
 

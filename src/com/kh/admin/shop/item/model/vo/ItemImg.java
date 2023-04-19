@@ -7,7 +7,16 @@ public class ItemImg {
 	private String itemImgPath;
 	private String itemImgStatus;
 	private int itemImgCode;
+	private String itemImg;
 	
+	public String getItemImg() {
+		return itemImg;
+	}
+
+	public void setItemImg(String itemImg) {
+		this.itemImg = itemImg.substring(itemImg.lastIndexOf("/") + 1);
+	}
+
 	public ItemImg() {}
 	
 	public ItemImg(int itemImgNo, int itemImgLevel, String itemImgPath, String itemImgStatus, int itemImgCode) {

@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
-import com.kh.user.member.model.service.MemberService;
-import com.kh.user.member.model.vo.Member;
+import com.kh.admin.member.model.vo.Member;
+import com.kh.admin.member.model.service.MemberService;
 
 
 @WebServlet("/selectMember.ad")

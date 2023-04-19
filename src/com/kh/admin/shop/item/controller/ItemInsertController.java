@@ -68,7 +68,7 @@ public class ItemInsertController extends HttpServlet {
 			i.setItemPrice(itemPrice);
 
 			i.setItemText(itemText);
-			i.setItemDiscount(itemDiscount);
+			i.setItemDiscount(itemDiscount * 0.01);
 			i.setItemStatus(itemStatus);
 			i.setItemCategory(itemCategory);
 

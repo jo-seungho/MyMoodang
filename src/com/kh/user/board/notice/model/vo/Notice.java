@@ -27,17 +27,31 @@ public class Notice {
 	}
 
 	//공지사항 리스트 조회용 생성자
-	public Notice(int noticeNo, String noticeTitle, String createDate, int views) {
+	public Notice(int noticeNo, String noticeTitle, int views, String createDate) {
 		super();
 		this.noticeNo = noticeNo;
 		this.noticeTitle = noticeTitle;
+		this.views = views;
+		this.createDate = createDate;
+		
+	}
+	
+	// 공지사항  조회수 생성자
+	public Notice(int noticeNo, String noticeTitle, String noticeContent, String createDate, int views) {
+		super();
+		this.noticeNo = noticeNo;
+		this.noticeTitle = noticeTitle;
+		this.noticeContent = noticeContent;
 		this.createDate = createDate;
 		this.views = views;
 	}
+	
+	
 
 	public int getNoticeNo() {
 		return noticeNo;
 	}
+
 
 	public void setNoticeNo(int noticeNo) {
 		this.noticeNo = noticeNo;

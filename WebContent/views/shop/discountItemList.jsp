@@ -51,7 +51,7 @@
 						<div class="ico_cate">
 							<span class="ico" style="display: block;"> <img
 								src="/resources/img/logo.png" alt="카테고리 아이콘">
-							</span> <span class="tit">전체보기</span>
+							</span> <span class="tit">할인</span>
 						</div>
 
 						<ul class="list">

@@ -1,30 +1,24 @@
-package com.kh.user.shop.cart.controller;
+/* 2023-04-18 / 로그아웃컨트롤러 / 이지환 */
+package com.kh.user.member.controller;
 
 import java.io.IOException;
-import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import com.kh.user.shop.cart.model.service.CartService;
-import com.kh.user.shop.cart.model.vo.Cart;
-
 
 /**
- * Servlet implementation class CartController
+ * Servlet implementation class LogoutController
  */
-@WebServlet("/cartList.ca")
-public class CartController extends HttpServlet {
+@WebServlet("/logout.me")
+public class LogoutController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+       
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CartController() {
+    public LogoutController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,25 +27,13 @@ public class CartController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-
-		HttpSession session = request.getSession();
-		System.out.println("나는 셀렉트 성공");
-
-		int userNo = (int) session.getAttribute("userNo");
-		System.out.println("userNO: "+userNo);
-
-		// List<Cart> list = CartService.selectAll(userNo);
-		// request.setAttribute("list", list);
-
-
-
-
-
-
-
-
-
+		
+		request.getSession().invalidate();
+		
+		// url 재요청방식으로 메인페이지로 이동시키기
+		
+		response.sendRedirect("/");
+	
 	}
 
 	/**

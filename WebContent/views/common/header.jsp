@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<!-- 20234-04-18 / 
+	request.getAttrubute(로그인유저) -> session 형식으로 변경
+	, class=sub 에 해당하는 코드 삭제, 로그인, 로그아웃 기능 구현
+	로그인 전 후로 header영역 우측 상단의 메뉴들이 바뀌게끔 수정 /
+	이지환
+	 -->    
 
 <%@ page import="com.kh.user.member.model.vo.Member" %>
 
@@ -34,14 +40,22 @@
     <!-- 규칙:
     축약형(link, emph, gnb 등)을 먼저 사용)
     alt로 적절한 대체 텍스트 제공, 너무 긴 경우 공통클래스 blind로 제공-->
+    
+
+    <!--  -->
+   
     <div id="header">
       <div class="user_menu">
         <!-- bnr = banner -->
         <a href="#" class="bnr_delivery">
           <img src="/resources/img/image.gif" alt="서울, 경기, 인천 샛별배송, 수도권 이외 지역 택배배송" class="bnr_delivery_img" />
         </a>
+        
+        <!-- 2023-04-18 / 로그인 전 우측 상단 바 / 이지환 -->
+           <% if(loginUser == null) { %>
         <ul class="sign_menu">
           <!--login class 추가-->
+          
           <li class="link">
             <a  class="item after join" href="/enrollForm.me">회원가입</a>
           </li>
@@ -54,6 +68,7 @@
                 <span class="sir">님</span>
               </span>
             </a>
+           
 
            	<script>
 
@@ -69,22 +84,9 @@
             	}
             </script>
 
-
-
-            <ul class="sub">
-              <li class="list">
-                <a href="#" class="list_item">주문 내역</a>
-              </li>
-              <li class="list">
-                <a href="#" class="list_item">배송지 관리</a>
-              </li>
-              <li class="list">
-                <a href="#" class="list_item">개인 정보 수정</a>
-              </li>
-              <li class="list">
-                <a href="#" class="list_item">로그아웃</a>
-              </li>
-            </ul>
+	
+	
+            
           </li>
           <li class="link">
             <a href="" class="item service">고객센터</a>
@@ -101,8 +103,61 @@
               </li>
             </ul>
           </li>
-        </ul>
+         </ul>
+          
+            
+        <% } %>
+     
+      
         <!-- .sign_menu -->
+        <!-- 2023-04-18 / 로그인 후 우측 상단 바 / 이지환 -->
+		<% if(loginUser != null) { %>
+		<ul class="sign_menu">
+          <!--login class 추가-->
+          
+          <li class="link">
+            <a href="" class="item service">
+            	<b class="join"><%= loginUser.getName() %>님</b>
+            	 환영합니다.
+            </a>
+            <!-- 2023-04-18 / 서브 메뉴 버튼 식으로 마우스를 갖다대면 나오게끔 하고 싶음 / 이지환 -->
+            <ul class="sub_menu">
+              <li class="list">
+                <a href="#" class="list_item">주문내역</a>
+              </li>
+              <li class="list">
+                <a href="#" class="list_item">배송지 관리</a>
+              </li>
+              <li class="list">
+                <a href="#" class="list_item">개인 정보 수정</a>
+              </li>
+            </ul>
+          </li>
+          <li class="link">
+            <a href="/logout.me" class="item after login_none">로그아웃</a>
+          </li>
+         
+         
+        <% } %>
+        <!-- 2023-04-18 / 로그인 시 우측 상단 바뀌는 영역 종료 / 이지환 -->
+        
+		 <li class="link">
+            <a href="" class="item service">고객센터</a>
+            <!-- 고객센터 hover 시 sub_menu 등장 -->
+            <ul class="sub_menu">
+              <li class="list">
+                <a href="../main/notice.html" class="list_item">공지사항</a>
+              </li>
+              <li class="list">
+                <a href="../main/faq.html" class="list_item">자주하는 질문</a>
+              </li>
+              <li class="list">
+                <a href="/list.in" class="list_item">1:1 문의</a>
+              </li>
+            </ul>
+          </li>
+		</ul>
+	
       </div>
       <div class="header_logo">
         <h1 class="logo">
@@ -126,7 +181,7 @@
               <ul class="menu">
                 <li class="current">
                   <!-- hover나 active시 current가 옮겨가도록 설정해야 함 -->
-                  <a href="#" class="main_item">
+                  <a href="/itemList.it?currentPage=1&category=제로음료" class="main_item">
                     <span class="ico">
                       <img src="https://img-cf.kurly.com/shop/data/category/icon_newyear_inactive_pc@2x.1609722514.png" alt="" class="ico off" />
                       <img src="https://img-cf.kurly.com/shop/data/category/icon_newyear_active_pc@2x.1609722514.png" alt="" class="ico on" />
@@ -140,7 +195,7 @@
                     <!-- tit: text + ico -->
                   </a>
 
-                  <a href="#" class="main_item">
+                  <a href="/itemList.it?currentPage=1&category=무가당" class="main_item">
                     <span class="ico">
                       <img src="https://img-cf.kurly.com/shop/data/category/icon_newyear_inactive_pc@2x.1609722514.png" alt="" class="ico off" />
                       <img src="https://img-cf.kurly.com/shop/data/category/icon_newyear_active_pc@2x.1609722514.png" alt="" class="ico on" />
@@ -155,7 +210,7 @@
                     <!-- tit: text + ico -->
                   </a>
 
-                  <a href="#" class="main_item">
+                  <a href="/itemList.it?currentPage=1&category=단백질" class="main_item">
                     <span class="ico">
                       <img src="https://img-cf.kurly.com/shop/data/category/icon_newyear_inactive_pc@2x.1609722514.png" alt="" class="ico off" />
                       <img src="https://img-cf.kurly.com/shop/data/category/icon_newyear_active_pc@2x.1609722514.png" alt="" class="ico on" />
@@ -169,7 +224,7 @@
                     <!-- tit: text + ico -->
                   </a>
 
-                  <a href="#" class="main_item">
+                  <a href="/itemList.it?currentPage=1&category=도시락" class="main_item">
                     <span class="ico">
                       <img src="https://img-cf.kurly.com/shop/data/category/icon_newyear_inactive_pc@2x.1609722514.png" alt="" class="ico off" />
                       <img src="https://img-cf.kurly.com/shop/data/category/icon_newyear_active_pc@2x.1609722514.png" alt="" class="ico on" />
@@ -183,7 +238,7 @@
                     <!-- tit: text + ico -->
                   </a>
 
-                  <a href="#" class="main_item">
+                  <a href="/itemList.it?currentPage=1&category=기타" class="main_item">
                     <span class="ico">
                       <img src="https://img-cf.kurly.com/shop/data/category/icon_newyear_inactive_pc@2x.1609722514.png" alt="" class="ico off" />
                       <img src="https://img-cf.kurly.com/shop/data/category/icon_newyear_active_pc@2x.1609722514.png" alt="" class="ico on" />
@@ -216,7 +271,7 @@
             </a>
           </li>
           <li class="list">
-            <a href="#" class="link">
+            <a href="/noticelist.no?currentPage=1" class="link">
               <span class="txt">이벤트</span>
             </a>
           </li>

@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.common.JDBCTemplate;
-import com.kh.user.member.model.vo.Member;
-import com.kh.user.member.model.vo.ShippingAddress;
+import com.kh.admin.member.model.vo.Member;
+import com.kh.admin.member.model.vo.ShippingAddress;
 
 public class MemberDao {
 
@@ -19,7 +19,7 @@ public class MemberDao {
 
 	public MemberDao() {
 
-		String fileName = MemberDao.class.getResource("/sql/user/admin/member-mapper.xml").getPath();
+		String fileName = MemberDao.class.getResource("/sql/admin/member/member-mapper.xml").getPath();
 
 		try {
 			prop.loadFromXML(new FileInputStream(fileName));
