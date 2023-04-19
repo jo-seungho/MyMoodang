@@ -142,4 +142,20 @@ public class MemberService {
 
 		return loginUser;
 	}
+	
+	/**
+	 * 2023.04.19 / 내 배송지 목록 조회/ 이지환
+	 * @param memberNo
+	 * @return
+	 */
+	public ArrayList<ShippingAddress> manageMyShippingAddressList(int memberNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		// 내 배송지 목록 조회
+		ArrayList<ShippingAddress> shippingAddressList = new MemberDao().selectShippingAddressList(conn, memberNo);
+
+		close(conn);
+
+		return shippingAddressList;
+	}
 }
