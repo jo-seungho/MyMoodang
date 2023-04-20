@@ -25,10 +25,10 @@ public class ItemDeleteController extends HttpServlet {
 		int result = new ItemService().deleteItem(code, status);
 		
 		if(result > 0) { // 삭제 성공
-			request.getSession().setAttribute("alertMsg", "성공적으로 게시글이 삭제되었습니다.");
+			request.getSession().setAttribute("alertMsg", "상품 상태가 수정되었습니다.");
 			response.sendRedirect("/itemList.ad?page=1&category=a");
 		} else {
-			request.setAttribute("alertMsg", "게시글 삭제에 실패했습니다.");
+			request.getSession().setAttribute("alertMsg", "상품 상태 수정에 실패했습니다.");
 			response.sendRedirect("/itemList.ad?page=1&category=a");
 		}
 	}

@@ -180,7 +180,7 @@
 		</div>
 		<div id="cartPut">
 			<div class="cart_option cart_type3" style="opacity: 1;">
-				<form action="" method="POST" id="contactsForm">
+				<form action="cart" method="post" id="contactsForm">
 					<div class="inner_option">
 						<div class="in_option">
 							<div class="list_goods">
@@ -192,7 +192,7 @@
 												type="text" readonly="readonly" name="count" value=1
 												class="inp">
 												<div style="display: none;">
-													<input type="hidden" class="count_num">1
+													<input id="countValue" name="countValue" type="hidden" class="count_num">1
 												</div>
 												<button type="button" class="btn up on">수량올리기</button>
 											</span> <span class="price"> <span class="dc_price"></span>
@@ -220,7 +220,8 @@
 							<span class="btn_type2">
 								<button type="button" class="txt_type">취소</button>
 							</span> <span class="btn_type1">
-								<button type="submit" value="3" class="txt_type">장바구니
+							
+								<button type="button" value="3" class="txt_type">장바구니
 									담기</button>
 							</span>
 						</div>
@@ -228,26 +229,18 @@
 				</form>
 			</div>
 		</div>
-		<!-- 		
-		<script>
-
-		
-			$(function() {
-
-				$(".info").click(function() {
-					location.href = "/item.it";
-
-				});
-			});
-		
-		</script> 
-		-->
-
-
-
-
+			
 
 		<%@ include file="../common/footer.jsp"%>
+		
+		<script>
+		// $(document).ready(function() {
+			function test1() {
+				let aa = document.getElementById("countValue").innerText;
+				console.log(aa);
+			}
+		// });
+		</script>
 	</div>
 </body>
 </html>

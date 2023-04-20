@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" 
-    import="java.util.ArrayList, com.kh.user.shop.item.model.vo.*"
+    import="java.util.ArrayList, com.kh.user.shop.item.model.vo.*, com.kh.user.shop.review.model.vo.Review"
     %>
 
 <%
     Item i = (Item)request.getAttribute("i");
     ArrayList<Attachment> list = (ArrayList<Attachment>)request.getAttribute("list");
     ArrayList<Attachment> clist = (ArrayList<Attachment>)request.getAttribute("clist");
-    String category = i.getItemCategory(); 
+    ArrayList<Review> rlist = (ArrayList<Review>)request.getAttribute("rlist");
+    String category = i.getItemCategory();
 %>
 
 
@@ -24,14 +25,92 @@
     <link rel="stylesheet" href="/resources/css/common/reset.css" />
     <link rel="stylesheet" href="/resources/css/board/faq.css">
     <link rel="stylesheet" href="/resources/css/shop/item_detail.css">
+    <link rel="stylesheet" href="/resources/css/board/item_review_common.css">
+    <link rel="stylesheet" href="/resources/css/board/item_review_reset.css">
+    <link rel="stylesheet" href="/resources/css/board/item_review.css">
+    <link rel="stylesheet" href="/resources/css/board/mymoodang_order_list.css">
+    <link rel="stylesheet" href="/resources/css/common/reset.css" />
+    <link rel="stylesheet" href="/resources/css/common/header.css" />
+    <link rel="stylesheet" href="/resources/css/common/footer.css" />
+    <link rel="stylesheet" href="/resources/css/member/edit_my_info_pw_check.css" />
 
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 
     <script defer src="/resources/js/common/header.js"></script>
 
     <script src="/resources/js/shop/item_detail.js"></script>
+    <script src="/resources/js/board/item_review_common.js"></script>
+    <script src="/resources/js/board/item_review_my.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script defer src="/resources/js/common/header.js"></script>
 
     <title>상품상세페이지</title>
+      <style>
+            /* 테이블 스타일 */
+            table {
+              width: 45%;
+              border-collapse: collapse;
+              font-size: 16px;
+              margin: auto;
+             
+            }
+            th, td {
+              padding: 12px;
+              text-align: left;
+              border-bottom: 1px solid #ddd;
+              text-align: center;
+            }
+            th {
+              background-color: #f8f8f8;
+              color: #333;
+              font-weight: bold;
+              cursor: pointer;
+            
+            }
+            tr:hover {
+              background-color: #f9f9f9;
+            }
+          
+            /* 게시물 내용 토글 스타일 */
+            .content {
+              display: none;
+            }
+            .content td {
+              background-color: #f9f9f9;
+              padding: 20px;
+            }
+          
+            /* 게시물 제목 클릭 시 커서 스타일 변경 */
+            .post td[onclick]:hover {
+              color: #007bff;
+              text-decoration: underline;
+              cursor: pointer;
+            }
+    
+            table tbody tr td:nth-child(3){
+                color: red;
+		            }
+		            .content {
+		    background-color: #f5f5f5;
+		    border-bottom: 1px solid #ddd;
+		  }
+		  .content p {
+		    margin: 10px;
+		  }
+		  .content button {
+		    float: right;
+		    margin: 5px;
+		    padding: 5px;
+		    background-color: lightgray;
+		    color: black;
+		    border: none;
+		    cursor: pointer;
+		    font-size : 15px;
+		  }
+		  .content button:hover {
+		    background-color: red;
+		  }
+          </style>
   </head>
   <body>
     <!-- 규칙:
@@ -60,12 +139,16 @@
                                         <p class="goods_price">
                                             <span class="position">
                                                 <span class="dc">
-                                                    <span class="dc_price">
-                                                        <del><%= i.getItemPrice() %></del>
-                                                        <input type="hidden" value="<%= i.getDiscountPrice() %>">  <!-- 여기 벨류에다가 가격데이터 넣어줘야댐-->
+                                                    <span>
+                                                        <span class="discount" style="font-size: 22px; font-weight: 400; color: red;">30<!--<%= i.getItemDiscount() %>-->%&nbsp</span>
+                                                    
+                                                    </span>
+                                                    <span class="dc_price" style="font-size: 15px; font-weight: 400; color: red;">
+                                                        <del style="font-size: 18px; font-weight: 400; color: lightgray;"><%= i.getDiscountPrice() %>원 </del>
+                                                        <input type="hidden" value="<%= i.getDiscountPrice() %>">
                                                         
                                                     </span>
-                                                    <span class="won"><%= i.getDiscountPrice() %> 원</span>
+                                                    <span class="won" style="font-size: 22px; margin-top: 10%;">&nbsp<b><%= i.getDiscountPrice() %>원</b></span>
                                                 </span>
                                                 
                                             </span>
@@ -124,10 +207,10 @@
                                                     </div>
                                                     <div class="total">
                                                         <div class="price">
-                                                            <strong class="tit">총 상품금액 :</strong>
+                                                            <strong class="tit">총 상품금액 : </strong>
                                                             <span class="sum">
                                                                 <span class="num"><%= i.getDiscountPrice() %></span>
-                                                                <span class="won">원</span>
+                                                                <span class="won"></span>
                                                             </span>
                                                         </div>
                                                         <p class="txt_point">
@@ -180,9 +263,9 @@
                                                     </div>
                                                     <div class="goods-add-product-item-content">
                                                         <div class="goods-add-product-item-content-wrapper">
-                                                            <p class="goods-add-product-item-name"><%= a.getItemName() %></p>
+                                                            <p class="goods-add-product-item-name" style="font-size: 18px;" align="center"><%= a.getItemName() %></p>
                                                             <div class="category_item" align="center" style="font-size: 21px;">
-                                                            <span class="goods-add-product-item-price2"><del><%= a.getItemPrice() %></del>원&nbsp;&nbsp;</span>
+                                                            <span class="goods-add-product-item-price2"><del style="font-size: 22px; font-weight: 400; color: red;"><%= a.getItemPrice() %>원</del>&nbsp;&nbsp;&nbsp;&nbsp;</span>
                                                             <span class="goods-add-product-item-discountprice2"><%= a.getDiscountPrice() %>원</span>
                                                             </div>
                                                         </div>
@@ -197,8 +280,8 @@
                                 </div>
                               </div>
             
-                                <div class="goods-view-infomation detail_wrap_outer" id="goods-view-infomation">
-                                    <ul class="goods-view-infomation-tab-group">
+                                <div class="goods-view-infomation detail_wrap_outer" id="goods-view-infomation" >
+                                    <ul class="goods-view-infomation-tab-group" style="display: flex; align-content: stretch; justify-content: center; ">
                                         <li class="goods-view-infomation-tab">
                                             <a href="#goods-description" class="goods-view-infomation-tab-anchor __active">상품설명</a>
                                         </li>
@@ -207,7 +290,7 @@
                                         </li>
                                         <li class="goods-view-infomation-tab">
                                             <a href="#goods-review" class="goods-view-infomation-tab-anchor">
-                                                고객후기
+                                                고객리뷰
                                                 <span class="count_review">(0)</span>
                                             </a>
                                         </li>
@@ -242,7 +325,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                    <ul class="goods-view-infomation-tab-group">
+                                <ul class="goods-view-infomation-tab-group" style="display: flex; align-content: stretch; justify-content: center; ">
                                         <li class="goods-view-infomation-tab">
                                             <a href="#goods-description" class="goods-view-infomation-tab-anchor">상품설명</a>
                                         </li>
@@ -251,7 +334,7 @@
                                         </li>
                                         <li class="goods-view-infomation-tab">
                                             <a href="#goods-review" class="goods-view-infomation-tab-anchor">
-                                                고객후기
+                                                고객리뷰
                                                 <span class="count_review">(0)</span>
                                             </a>
                                         </li>
@@ -268,9 +351,10 @@
                                             </p>
                                         </div>
                                     </div>
+                                    
 
                                         <div class="happy_center fst">
-                                    <ul class="goods-view-infomation-tab-group">
+                                            <ul class="goods-view-infomation-tab-group" style="display: flex; align-content: stretch; justify-content: center; ">
                                         <li class="goods-view-infomation-tab">
                                             <a href="#goods-description" class="goods-view-infomation-tab-anchor">상품설명</a>
                                         </li>
@@ -280,7 +364,7 @@
 
                                         <li class="goods-view-infomation-tab">
                                             <a href="#goods-review" class="goods-view-infomation-tab-anchor __active">
-                                                고객후기
+                                                고객리뷰
                                                 <span class="count_review">(0)</span>
                                             </a>
                                         </li>
@@ -290,16 +374,143 @@
                                             </a>
                                         </li>
                                     </ul>
-                                    <div class="goods-view-infomation-content" id="goods-review"> <!-- 아래 주소창에 good_review_list.html url 넣어주면 됩니당-->
-                                        <iframe src="" id="inreview" frameborder="0" class="goods-view-infomation-board" height="733"></iframe>
+                                    <div class="goods-view-infomation-content" id="goods-review"> 
+                                   		<br>
+									<table>
+								        <thead>
+								          <tr>
+								            <th onclick="sortTable(0)" width="100px">번호</th>
+								            <th onclick="sortTable(1)" width="135px">작성일</th>
+								            <th onclick="sortTable(2)" width="120px">별점</th>
+								            <th onclick="sortTable(3)">제목</th>
+								            <th onclick="sortTable(4)"width="100px">작성자</th>
+								          </tr>
+								        </thead>
+								        <tbody>
+								    <% for(Review r : rlist){ %>
+								      <tr class="post">
+								        <td><%= r.getReviewNo()%></td>
+								        <td><%= r.getWriteDate()%></td>
+								        <td><%= r.getStarPoint()%></td>
+								        <td onclick="toggleContent(<%= r.getReviewNo()%>)" style="cursor: pointer;"><%= r.getTitle()%></td>
+								        <td>유저1</td>
+								      </tr>
+								      <tr class="content" id="content<%= r.getReviewNo()%>" style="display:none;">
+								        <td colspan="6">
+								          <p><%= r.getContent()%></p>
+								          <a href = "/itemReviewDel.it?bno=<%= r.getReviewNo() %>" type="button" >수정</a> &nbsp
+        								  <a href = "/itemReviewDel.it?bno=<%= r.getReviewNo() %>" type="button" >삭제</a> 
+        								
+								        </td>
+								      </tr>
+								    <%} %>
+								  </tbody>
+								      </table>
+                                    
+												
+
+					
                                     </div>
                                     
                                 </div>
                             </div>
                         </div>
-            
-                    </div>
-     <!-- 상품 상세페이지 끝-->
+    
+                    <script>
+                   <%--      $(function() {
+                            selectReviewList();
+                        });
+
+                        // 리뷰 조회 요청용 ajax
+                        function selectReviewList() {
+                            $.ajax({
+                                url: "itemReviewList.it",
+                                type: "get",
+                                data: { bno: <%= i.getItemCode() %> },
+                                	
+                                success: function(result) {
+                                	
+                                	//console.log(result);
+
+                                	let sum = "";
+                                	
+
+                                     for(let i in result) {
+
+                                        sum += "<tr>"
+                                            + "<td>" + result[i].title + "</td>"
+                                            + "<td>" + result[i].content + "</td>"
+                                            + "<td>" + result[i].writeDate + "</td>"
+                                            + "<td>" + result[i].starPoint + "</td>"
+                                            + "</tr>";
+                                            
+                                        $("#goods-review tbody").html(result);
+                                    } 
+                               
+                                },
+                                error: function() {
+                                    alert("리뷰 조회 실패");
+                                }
+                            });
+                        } --%>
+                        
+                        function toggleContent(reviewNo) {
+                    	    var contentRow = document.getElementById("content" + reviewNo);
+                    	    if (contentRow.style.display === "none") {
+                    	      contentRow.style.display = "table-row";
+                    	    } else {
+                    	      contentRow.style.display = "none";
+                    	    }
+                    	  }
+                    
+                      function sortTable(columnIndex) {
+                        var table, rows, switching, i, x, y, shouldSwitch;
+                        table = document.getElementsByTagName("table")[0];
+                        switching = true;
+                        while (switching) {
+                          switching = false;
+                          rows = table.getElementsByTagName("tr");
+                          for (i = 1; i < (rows.length - 1); i++) {
+                            shouldSwitch = false;
+                            x = rows[i].getElementsByTagName("td")[columnIndex];
+                            y = rows[i + 1].getElementsByTagName("td")[columnIndex];
+                            if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                              shouldSwitch = true;
+                              break;
+                            }
+                          }
+                          if (shouldSwitch) {
+                            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                            switching = true;
+                          }
+                        }
+                      }
+                    
+                      function displayStars(rating) {
+                        let stars = "";
+                        for (let i = 1; i <= 5; i++) {
+                          if (i <= rating) {
+                            stars += "&#9733;"; // Full star
+                          } else {
+                            stars += "&#9734;"; // Empty star
+                          }
+                        }
+                        return stars;
+                      }
+                    
+                      // Get all the rows with class "post"
+                      let postRows = document.querySelectorAll(".post");
+                    
+                      // Loop through each post row and update the "별점" column with stars
+                      postRows.forEach(function(row) {
+                        let rating = parseInt(row.querySelector("td:nth-child(3)").innerText);
+                        let stars = displayStars(rating);
+                        row.querySelector("td:nth-child(3)").innerHTML = stars;
+                      });
+                    </script>
+                    
+                    
+
 
       <%@ include file="../common/footer.jsp" %>
    

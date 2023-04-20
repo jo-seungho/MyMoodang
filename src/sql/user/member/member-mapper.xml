@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<!-- 개인 회원의 배송지 조회용 쿼리문 수정함 / 2023.04.19 이지환 -->
+
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 
@@ -78,15 +81,6 @@
 	</entry>
 
 
-
-        <!-- 개인 회원의 배송지 조회용 쿼리문 2023.04.17 이지환 -->
-
-        <entry key="selectShippingAddress">
-	        SELECT
-	        FROM SHIPPING_ADDRESS
-	        WHERE MEMBER_NO = ?
-        </entry>
-
 		<!-- 개인 회원의 로그인 기능 / 2023-04-18 이지환 -->
 		<entry key="loginUser">
 			 SELECT * FROM MEMBER
@@ -95,8 +89,18 @@
 			 	 AND STATUS = 'Y'
 		</entry>
 
-</properties>
+		
+		<!-- 개인 회원의 배송지 조회용 쿼리문 수정함 / 2023.04.19 이지환 -->
+        
+        <entry key="selectShippingAddressList">     
+	        SELECT *
+	        FROM SHIPPING_ADDRESS
+	        WHERE MEMBER_NO = ?
+        </entry>
+		
 
+
+</properties>
 
 
 

@@ -1,4 +1,6 @@
-<!-- 2023-04-19 코드 주석 처리 및 로그인 전/후 로 header 부분의 우측 상단 메뉴바 다르게 수정 / 이지환 */ 	 -->
+
+<!-- 2023-04-19 코드 주석 처리 및 로그인 전/후 로 header 부분의 우측 상단 메뉴바 다르게 수정 및 header 부분에 배송지 관리 url 매핑 / 이지환 */ 	 -->    
+
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -9,10 +11,7 @@
 	Member loginUser = (Member)session.getAttribute("loginUser");
 
 	String alertMsg = (String)request.getAttribute("alertMsg");
-
 	String errorMsg = (String)request.getAttribute("errorMsg");
-
-
 %>
 
 <!DOCTYPE html>
@@ -46,6 +45,7 @@
         <a href="#" class="bnr_delivery">
           <img src="/resources/img/image.gif" alt="서울, 경기, 인천 샛별배송, 수도권 이외 지역 택배배송" class="bnr_delivery_img" />
         </a>
+
 
         <!-- 2023-04-18 / 로그인 전 우측 상단 바 / 이지환 -->
            <% if(loginUser == null) { %>
@@ -85,10 +85,8 @@
 
          </ul>
 
-
-
         <% } %>
-
+      
 
         <!-- .sign_menu -->
         <!-- 2023-04-19 / 로그인 후 상단바 코드 수정 및 css 부여 / 이지환 -->
@@ -108,7 +106,7 @@
                 <a href="#" class="list_item">찜한상품</a>
               </li>
               <li class="list">
-                <a href="#" class="list_item">배송지 관리</a>
+                <a href="/deliveryList.do" class="list_item">배송지 관리</a>
               </li>
               <li class="list">
                 <a href="#" class="list_item">리뷰 관리</a>
@@ -293,32 +291,35 @@
             </div>
           </div>
 
-          <div class="cart_count">
-            <!-- bg url 아이콘 추가 -->
-            <a href="#" class="btn_cart">
+          <div id="goCart" class="cart_count">
+            <% if(loginUser != null) { %>
+            <a href="/cart" class="btn_cart">
               <span class="blind">장바구니</span>
             </a>
+            <% } else { %>
+            <a href="loginForm.me" class="btn_cart">
+              <span class="blind">장바구니</span>
+            </a>
+		     
+            <% } %>
           </div>
         </ul>
       </div>
     </div>
 
     <script>
+  	        let msg = '<%= alertMsg == null ? "" : alertMsg %>';
+          	if(msg != null && msg.length > 0) {
+          		alert(msg);
+          	}
+          	//----------------------------------------------------
+          	let emsg = '<%= errorMsg == null ? "" : errorMsg %>';
+          	if(emsg != null && emsg.length > 0) {
+          		alert(emsg);
+          	}
+          	
     	$.noConflict();
-    	// $(document).ready(function(){
 
-
-    	//  });
-    	        let msg = '<%= alertMsg == null ? "" : alertMsg %>';
-            	if(msg != null && msg.length > 0) {
-            		alert(msg);
-            	}
-
-            	//----------------------------------------------------
-            	let emsg = '<%= errorMsg == null ? "" : errorMsg %>';
-            	if(emsg != null && emsg.length > 0) {
-            		alert(emsg);
-            	}
     </script>
   </body>
 </html>
