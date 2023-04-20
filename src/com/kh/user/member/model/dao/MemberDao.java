@@ -249,42 +249,6 @@ public class MemberDao {
 		return m;
 	}
 
-	/* 2023.04.17 이지환 */
-	public ArrayList<ShippingAddress> selectShippingAddressList(Connection conn, int memberNo) {
-
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		ArrayList<ShippingAddress> shippingAddressList = new ArrayList<>();
-
-		String sql = prop.getProperty("selectShippingAddress");
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, memberNo);
-
-			rset = pstmt.executeQuery();
-
-			while (rset.next()) {
-				ShippingAddress sa = new ShippingAddress();
-				sa.setShipNo(rset.getInt("SHIP_NO"));
-				sa.setShipAddr(rset.getString("SHIP_ADDR"));
-				sa.setShipAddrInfo(rset.getString("SHIP_ADDR_INFO"));
-				sa.setPhone(rset.getString("PHONE"));
-				sa.setShipName(rset.getString("SHIP_NAME"));
-				sa.setMemberNo(rset.getInt("MEMBER_NO"));
-				sa.setZipcode(rset.getString("ZIPCODE"));
-				shippingAddressList.add(sa);
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			JDBCTemplate.close(rset);
-			JDBCTemplate.close(pstmt);
-		}
-
-		return shippingAddressList;
-	}
-
 	/**
 	 * 2023-04-18 로그인 기능 이지환
 	 * @param conn
@@ -339,6 +303,46 @@ public class MemberDao {
 			    return loginUser;
 			
 		}
+	
+	/**
+	 * 2023.04.19 / 내 배송지 관리 중 내 배송지 목록 조회 / 이지환
+	 * @param conn
+	 * @param memberNo
+	 * @return
+	 */
+	public ArrayList<ShippingAddress> selectShippingAddressList(Connection conn, int memberNo) {
+
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<ShippingAddress> shippingAddressList = new ArrayList<>();
+
+		String sql = prop.getProperty("selectShippingAddressList");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memberNo);
+
+			rset = pstmt.executeQuery();
+
+			while (rset.next()) {
+                ShippingAddress shippingAddress = new ShippingAddress();
+                shippingAddress.setShipNo(rset.getInt("SHIP_NO"));
+                shippingAddress.setShipAddr(rset.getString("SHIP_ADDR"));
+                shippingAddress.setShipAddrInfo(rset.getString("SHIP_ADDR_INFO"));
+                shippingAddress.setPhone(rset.getString("PHONE"));
+                shippingAddress.setShipName(rset.getString("SHIP_NAME"));
+                shippingAddress.setMemberNo(rset.getInt("MEMBER_NO"));
+                shippingAddress.setZipcode(rset.getString("ZIPCODE"));
+                shippingAddressList.add(shippingAddress);
+            }
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+
+		return shippingAddressList;
+	}
 
 
 

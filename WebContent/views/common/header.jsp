@@ -1,4 +1,4 @@
-<!-- 2023-04-19 코드 주석 처리 및 로그인 전/후 로 header 부분의 우측 상단 메뉴바 다르게 수정 / 이지환 */ 	 -->    
+<!-- 2023-04-19 코드 주석 처리 및 로그인 전/후 로 header 부분의 우측 상단 메뉴바 다르게 수정 및 header 부분에 배송지 관리 url 매핑 / 이지환 */ 	 -->    
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -9,10 +9,7 @@
 	Member loginUser = (Member)session.getAttribute("loginUser");
 	
 	String alertMsg = (String)request.getAttribute("alertMsg");
-
 	String errorMsg = (String)request.getAttribute("errorMsg");
-
-
 %>
 
 <!DOCTYPE html>
@@ -103,7 +100,7 @@
                 <a href="#" class="list_item">찜한상품</a>
               </li>
               <li class="list">
-                <a href="#" class="list_item">배송지 관리</a>
+                <a href="/deliveryList.do" class="list_item">배송지 관리</a>
               </li>
               <li class="list">
                 <a href="#" class="list_item">리뷰 관리</a>
@@ -304,12 +301,10 @@
     </div>
 
     <script>
-
   	        let msg = '<%= alertMsg == null ? "" : alertMsg %>';
           	if(msg != null && msg.length > 0) {
           		alert(msg);
           	}
-
           	//----------------------------------------------------
           	let emsg = '<%= errorMsg == null ? "" : errorMsg %>';
           	if(emsg != null && emsg.length > 0) {
