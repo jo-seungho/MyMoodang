@@ -50,6 +50,17 @@ public class OrderService {
 
 		return list;
 	}
+	
+	// 모든 주문목록 조회에서 검색을 진행한 경우
+	public ArrayList<Order> selectSearchAllOrderList(AdminPageInfo pi, String search, String value) {
+		Connection conn = getConnection();
+
+		ArrayList<Order> list = new OrderDao().selectSearchAllOrderList(conn, pi, search, value);
+
+		close(conn);
+
+		return list;
+	}
 
 	// 주문 상태에 따른 조회용
 	public ArrayList<Order> selectStatusOrderList(AdminPageInfo pi, String category) {
@@ -57,6 +68,18 @@ public class OrderService {
 		Connection conn = getConnection();
 
 		ArrayList<Order> list = new OrderDao().selectStatusOrderList(conn, pi, category);
+
+		close(conn);
+
+		return list;
+	}
+	
+	// 주문 상태에 따른 조회용 검색기능
+	public ArrayList<Order> searchStatusOrderList(AdminPageInfo pi, String category, String search, String value) {
+		
+		Connection conn = getConnection();
+
+		ArrayList<Order> list = new OrderDao().selectStatusOrderList(conn, pi, category, search, value);
 
 		close(conn);
 
@@ -79,5 +102,7 @@ public class OrderService {
 		
 		return o;
 	}
+
+	
 
 }

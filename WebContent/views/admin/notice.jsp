@@ -1,49 +1,53 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-
     pageEncoding="UTF-8" import="java.util.ArrayList, com.kh.admin.board.notice.model.vo.Notice, com.kh.common.model.vo.PageInfo"%>
 <%
 	// 필요한 데이터들 뽑기
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
     ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("list");
-
 	// 자주 쓰일법한 변수들 셋팅
 	int currentPage = pi.getCurrentPage();
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage();
 	int maxPage = pi.getMaxPage();
 %>
-
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>관리자 페이지</title>
 
-<%@ include file="common2.jsp"%>
-<title>관리자 페이지</title>
+  </head>
 
-</head>
+  <style>
+    #btn {
+      background-color: #fe7477;
+      color: white;
+      border: 1px solid white;
+      float: right;
+      margin-left: 10px;
+      margin-bottom: 10px;
+    }
+    /* 고유한 */
+  </style>
 
-<style>
-#btn {
-	background-color: #fe7477;
-	color: white;
-	border: 1px solid white;
-	float: right;
-	margin-left: 10px;
-	margin-bottom: 10px;
-}
-</style>
+  <body class="sb-nav-fixed">
+  <%@ include file="sidebar.jsp" %>
+ 
 
+      <div id="layoutSidenav_content">
+        <main>
+          <div class="container px-6 white">
+            <h2>공지사항 관리</h2>
+            <hr />
+            <!-- 
+            <div style="height: 60px"><button type="button" id="btn" class="btn">글쓰기</button></div> -->
 
-<body class="sb-nav-fixed">
-	<%@ include file="sidebar.jsp"%>
-
-	<div id="layoutSidenav_content">
-		<main>
-			<div class="container px-6 white">
-				<h2>공지사항 관리</h2>
-				<hr />
             <div>
-              <button type="button" id="btn" class="btn">글쓰기</button>
+              <button type="button" id="btn" class="btn" onclick="NoticeEnrollForm()">글쓰기</button>
               <form role="search">
                 <button type="submit" id="btn" class="btn">검색하기</button>
                 <input type="search" class="form-control" placeholder="" aria-label="Search" style="width: 30%; float: right" />
@@ -69,18 +73,17 @@
               </tbody>
             </table>
             <br />
-            
-            <div align="center" class="paging-area">
+			 <div align="center" class="paging-area">
 
 			<% if(currentPage != 1) { %>
-				<button onclick="location.href = '//noticelist.ad?currentPage=<%= currentPage - 1 %>';">
+				<button onclick="location.href = '/noticelist.ad?currentPage=<%= currentPage - 1 %>';">
 					&lt;
 				</button>
 			<% } %>
 		
 			<% for(int p = startPage; p <= endPage; p++) { %>
 				<% if(p != currentPage) { %>
-					<button onclick="location.href = '//noticelist.ad?currentPage=<%= p %>';">
+					<button onclick="location.href = '/noticelist.ad?currentPage=<%= p %>';">
 						<%= p %>
 					</button>
 				<% } else { %>
@@ -90,19 +93,20 @@
 			<% } %>
 			
 			<% if(currentPage != maxPage) { %>
-				<button onclick="location.href = '//noticelist.ad?currentPage=<%= currentPage + 1 %>';">
+				<button onclick="location.href = '/noticelist.ad?currentPage=<%= currentPage + 1 %>';">
 					&gt;
 				</button>
 			<% } %>
 
-			</div>
+		</div>
+          
           </div>
           <br />
         </main>
       </div>
-  </body>
-  
-  <script>
+
+    <!-- td 클릭시 notice_detail.html로 이동 -->
+    <script>
       $(document).ready(function () {
         $("tbody tr").click(function () {
         	
@@ -110,6 +114,15 @@
           location.href = "/noticeForm.ad?nno="+nno;
         });
       });
+      
+      function NoticeEnrollForm(){
+    	  location.href = "/noticeEnrollForm.ad?currentPage=1";
+      }
     </script>
-    
+    <!-- <script src="assets/demo/chart-area-demo.js">
+    </script>
+    <script src="assets/demo/chart-bar-demo.js"></script>
+    -->
+   
+  </body>
 </html>
