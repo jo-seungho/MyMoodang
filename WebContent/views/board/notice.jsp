@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.ArrayList, com.kh.user.board.notice.model.vo.Notice, com.kh.common.model.vo.PageInfo"%>
-    
+    pageEncoding="UTF-8" import="java.util.ArrayList, com.kh.user.board.notice.model.vo.Notice, com.kh.common.model.vo.PageInfo"%>   
    
 <%
 	// 필요한 데이터들 뽑기
@@ -50,7 +49,7 @@
                                         <div class="inner_sub">
                                             <ul class="list_menu">
                                                 <li class="on">
-                                                    <a href="#">공지사항</a>
+                                                    <a href="/noticelist.no?currentPage=1">공지사항</a>
                                                 </li>
                                                 <li>
                                                     <a href="#">자주하는 질문</a>
@@ -103,21 +102,60 @@
 	                              </div>  
                          	<%} %> 
                             </div>
-                         	
-                         	
+                         	    <br />
+								 <div align="center" class="paging-area">
+								 
+		                          <div class="layout-pagination">
+		                            <div class="pagediv">
+							
+										<% if(currentPage != 1) { %>
+										
+											<a href="/noticelist.no?currentPage=<%= currentPage - 1 %>" class="layout-pagination-button layout-pagination-prev-page">이전 페이지로 가기</a>
+
+										<% } %>
+									
+										<span>
+										<% for(int p = startPage; p <= endPage; p++) { %>
+										
+											<% if(p != currentPage) { %>
+											
+												<strong onclick="location.href = '/noticelist.no?currentPage=<%= p %>';" class="layout-pagination-button layout-pagination-number __active" style="height: 32px;">
+													<%= p %>
+												</strong>
+											<% } else { %>
+												<!-- 현재 내가 보고있는 페이지일 경우에는 클릭이 안되게끔 -->
+												
+												<!-- <strong disabled><%= p %></strong>-->
+											<% } %>
+										<% } %>
+										</span>
+										
+										<% if(currentPage != maxPage) { %>
+										
+                                			<a href="/noticelist.no?currentPage=<%= currentPage + 1 %>" class="layout-pagination-button layout-pagination-next-page">다음 페이지로 가기</a>
+										<% } %>
+										
+										</div>
+									</div>
+					
+							</div>
+							
+                         <!-- 	
                           <div class="layout-pagination">
                             <div class="pagediv">
-                                <a href="#viewOrderList" class="layout-pagination-button layout-pagination-first-page">맨 처음 페이지로 가기</a>
                                 <a href="#viewOrderList" class="layout-pagination-button layout-pagination-prev-page">이전 페이지로 가기</a>
                                 <span> 
                                     <strong class="layout-pagination-button layout-pagination-number __active" style="height: 32px;">
                                         1
                                     </strong>
+                                    <strong class="layout-pagination-button layout-pagination-number __active" style="height: 32px;">
+                                        2
+                                    </strong>
                                 </span>
                                 <a href="#viewOrderList" class="layout-pagination-button layout-pagination-next-page">다음 페이지로 가기</a>
-                                <a href="#viewOrderList" class="layout-pagination-button layout-pagination-last-page">맨 끝 페이지로 가기</a>
                             </div>
                         </div>
+                        -->
                         <!-- 공지사항 끝 -->
 
                           
@@ -139,33 +177,7 @@
 	    </script>
 	    
     
-    <!-- 페이징 바  -->
-    	<div align="center" class="paging-area">
 
-			<% if(currentPage != 1) { %>
-				<button onclick="location.href = '//noticelist.no?currentPage=<%= currentPage - 1 %>';">
-					&lt;
-				</button>
-			<% } %>
-		
-			<% for(int p = startPage; p <= endPage; p++) { %>
-				<% if(p != currentPage) { %>
-					<button onclick="location.href = '//noticelist.no?currentPage=<%= p %>';">
-						<%= p %>
-					</button>
-				<% } else { %>
-					<!-- 현재 내가 보고있는 페이지일 경우에는 클릭이 안되게끔 -->
-					<button disabled><%= p %></button>
-				<% } %>
-			<% } %>
-			
-			<% if(currentPage != maxPage) { %>
-				<button onclick="location.href = '//noticelist.no?currentPage=<%= currentPage + 1 %>';">
-					&gt;
-				</button>
-			<% } %>
-
-		</div>
 
        <%@ include file="../common/footer.jsp" %>
 

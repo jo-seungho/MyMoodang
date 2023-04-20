@@ -128,7 +128,9 @@
             <h2>공지사항 수정</h2>
             <hr />
 
-            <form action="/noticedetail.ad" method="post">
+            <form action="/noticeUpdate.ad" method="post">
+            <input type="hidden" name="nno" value="<%=n.getNoticeNo()%>">
+            
               <div class="row center">
                 <div class="col">제목</div>
                 <div class="col-xl-6"><input text class="form-control col-xl-6" name="title" value="<%=n.getNoticeTitle() %>" /></div>
@@ -138,21 +140,27 @@
               <hr />
               <textarea class="form-control col-sm-5"  rows="15" name="content"><%=n.getNoticeContent() %></textarea>
               <div class="btns">
-                <button id="btn" class="btn">삭제</button>
+                <button id="btn" class="btn" onclick="Noticedelete();" type="button">삭제</button>
+                
                 <button id="btn" class="btn" type="submit">수정</button>
-                <button id="btn" class="btn">목록</button>
+                <button id="btn" class="btn" onclick="NoticeList();" type="button">목록</button>
               </div>
             </form>
           </div>
         </main>
       </div>
     </div>
-
+    
     <!-- <script src="assets/demo/chart-area-demo.js"></script>
     <script src="assets/demo/chart-bar-demo.js"></script> -->
     <script>
+    	function NoticeList() {
+    		location.href = "/noticelist.ad?currentPage=1";
+    	};	
     	
-    
+    	function Noticedelete(){
+    		location.href = "/noticedelete.ad?nno="+<%=n.getNoticeNo()%>;
+    	};
     </script>
   </body>
 </html>

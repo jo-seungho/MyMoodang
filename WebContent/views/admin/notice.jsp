@@ -118,7 +118,7 @@
             <div style="height: 60px"><button type="button" id="btn" class="btn">글쓰기</button></div> -->
 
             <div>
-              <button type="button" id="btn" class="btn">글쓰기</button>
+              <button type="button" id="btn" class="btn" onclick="NoticeEnrollForm()">글쓰기</button>
               <form role="search">
                 <button type="submit" id="btn" class="btn">검색하기</button>
                 <input type="search" class="form-control" placeholder="" aria-label="Search" style="width: 30%; float: right" />
@@ -144,16 +144,33 @@
               </tbody>
             </table>
             <br />
+			 <div align="center" class="paging-area">
 
-            <div class="pagination">
-              <a href="#">&lt;</a>
-              <a class="active" href="#">1</a>
-              <a href="#">2</a>
-              <a href="#">3</a>
-              <a href="#">4</a>
-              <a href="#">5</a>
-              <a href="#">&gt;</a>
-            </div>
+			<% if(currentPage != 1) { %>
+				<button onclick="location.href = '/noticelist.ad?currentPage=<%= currentPage - 1 %>';">
+					&lt;
+				</button>
+			<% } %>
+		
+			<% for(int p = startPage; p <= endPage; p++) { %>
+				<% if(p != currentPage) { %>
+					<button onclick="location.href = '/noticelist.ad?currentPage=<%= p %>';">
+						<%= p %>
+					</button>
+				<% } else { %>
+					<!-- 현재 내가 보고있는 페이지일 경우에는 클릭이 안되게끔 -->
+					<button disabled><%= p %></button>
+				<% } %>
+			<% } %>
+			
+			<% if(currentPage != maxPage) { %>
+				<button onclick="location.href = '/noticelist.ad?currentPage=<%= currentPage + 1 %>';">
+					&gt;
+				</button>
+			<% } %>
+
+		</div>
+          
           </div>
           <br />
         </main>
@@ -169,36 +186,15 @@
           location.href = "/noticeForm.ad?nno="+nno;
         });
       });
+      
+      function NoticeEnrollForm(){
+    	  location.href = "/noticeEnrollForm.ad?currentPage=1";
+      }
     </script>
     <!-- <script src="assets/demo/chart-area-demo.js">
     </script>
     <script src="assets/demo/chart-bar-demo.js"></script>
     -->
-    <div align="center" class="paging-area">
-
-			<% if(currentPage != 1) { %>
-				<button onclick="location.href = '//noticelist.ad?currentPage=<%= currentPage - 1 %>';">
-					&lt;
-				</button>
-			<% } %>
-		
-			<% for(int p = startPage; p <= endPage; p++) { %>
-				<% if(p != currentPage) { %>
-					<button onclick="location.href = '//noticelist.ad?currentPage=<%= p %>';">
-						<%= p %>
-					</button>
-				<% } else { %>
-					<!-- 현재 내가 보고있는 페이지일 경우에는 클릭이 안되게끔 -->
-					<button disabled><%= p %></button>
-				<% } %>
-			<% } %>
-			
-			<% if(currentPage != maxPage) { %>
-				<button onclick="location.href = '//noticelist.ad?currentPage=<%= currentPage + 1 %>';">
-					&gt;
-				</button>
-			<% } %>
-
-		</div>
+   
   </body>
 </html>

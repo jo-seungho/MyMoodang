@@ -30,9 +30,7 @@
             alert(order_id + '번 주문의 배송상태가 수정되었습니다.');
           });
 
-          $('#btn').click(function () {
-            location.href = 'order_write.html';
-          });
+         
       });
 
       

@@ -107,7 +107,7 @@
               </a>
               <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                 <nav class="sb-sidenav-menu-nested nav">
-                  <a class="nav-link" href="/noticelist.ad">공지사항 관리</a>
+                  <a class="nav-link" href="/noticelist.ad?currentPage=1">공지사항 관리</a>
                   <a class="nav-link" href="inquiry.html">1:1 문의 관리</a>
                   <a class="nav-link" href="review.html">리뷰 관리</a>
                 </nav>
@@ -125,12 +125,14 @@
             <h2>공지사항 작성</h2>
             <hr />
 
-            <form action="insert.no" method="POST">
+            <form action="/noticeInsert.ad" method="post">
+            
+            
               <div class="row center">
-                <div class="col-xl-12"><input text class="form-control col-xl-6" value="" placeholder="제목을 입력해주세요" /></div>
+                <div class="col-xl-12"><input type="text" name="title" class="form-control col-xl-6" value="" placeholder="제목을 입력해주세요" /></div>
               </div>
               <br />
-              <textarea id="summernote"></textarea>
+              <textarea id="summernote" name="content"></textarea>
               <div class="btns">
                 <button id="btn" class="btn" type="reset">취소</button>
                 <button id="btn" class="btn" type="submit">작성</button>
