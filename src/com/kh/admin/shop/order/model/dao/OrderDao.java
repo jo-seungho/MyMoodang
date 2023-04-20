@@ -132,6 +132,7 @@ public class OrderDao {
 		ArrayList<Order> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
+		
 
 		// 2. 쿼리문 작성
 		String sql = prop.getProperty("selectStatusOrderList");

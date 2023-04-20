@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="com.kh.admin.shop.item.model.vo.*, java.util.ArrayList"%>
-<!DOCTYPE html>
 <% 
 		ArrayList<ItemImg> list = (ArrayList<ItemImg>) request.getAttribute("list");
 		Item i = (Item) request.getAttribute("item"); 
 		String category = i.getItemCategory(); 
 
 %>
-    <html lang="en">
+<!DOCTYPE html>
+   <html lang="en">
       <head>
       	<%@ include file="common2.jsp" %>
         <title>관리자 페이지</title>

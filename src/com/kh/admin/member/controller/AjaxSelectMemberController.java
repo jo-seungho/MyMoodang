@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
-import com.kh.admin.member.model.vo.Member;
+import com.kh.admin.member.model.vo.AdMember;
 import com.kh.admin.member.model.service.MemberService;
 
 
@@ -26,7 +26,7 @@ public class AjaxSelectMemberController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int id = Integer.parseInt(request.getParameter("userNo"));
 		
-		Member m = new MemberService().selectMemberAd(id);
+		AdMember m = new MemberService().selectMemberAd(id);
 		
 		response.setContentType("application/json; charset=UTF-8");
 		

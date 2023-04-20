@@ -1,7 +1,6 @@
 package com.kh.admin.shop.order.model.service;
 
-import static com.kh.common.JDBCTemplate.close;
-import static com.kh.common.JDBCTemplate.getConnection;
+import static com.kh.common.JDBCTemplate.*;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -11,6 +10,7 @@ import com.kh.admin.shop.item.model.dao.ItemDao;
 import com.kh.admin.shop.item.model.vo.Item;
 import com.kh.admin.shop.order.model.dao.OrderDao;
 import com.kh.admin.shop.order.model.vo.Order;
+import com.kh.common.JDBCTemplate;
 
 //2023-04-19 최명진 관리자 주문관리 페이지 서비스
 public class OrderService {
@@ -68,6 +68,12 @@ public class OrderService {
 		Connection conn = getConnection();
 		
 		Order o = new OrderDao().updateOrderStatus(conn, orderNo, status);
+		
+		if(o!= null) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
 		
 		close(conn);
 		
