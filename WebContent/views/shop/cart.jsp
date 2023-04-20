@@ -1,28 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="EUC-KR" import="java.util.ArrayList, com.kh.user.shop.cart.model.vo.Cart"%>
-	
-<% 
+
+<%
 	ArrayList<Cart> list = (ArrayList<Cart>) request.getAttribute("list");
-%>	
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<!-- header css -->
 
-<link rel="stylesheet" href="/resources/css/common/reset.css" />
-<link rel="stylesheet" href="/resources/css/common/header.css" />
+	<!-- 중복되는 헤더, 푸터, 리셋 css & 제이쿼리 & 헤더 js 담은 common.jsp / 2023-04-20 김서영 -->
+	<%@ include file="../common/common.jsp"%>
+
 <link rel="stylesheet" href="/resources/css/shop/list.bundle.css">
 <link rel="stylesheet" href="/resources/css/shop/payment_order.css">
 <link rel="stylesheet" href="/resources/css/shop/cart1.css">
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-
-<script src="/resources/js/common/header.js"></script>
 <script src="/resources/js/shop/payment.js"></script>
 
 <title>장바구니</title>
@@ -45,7 +41,7 @@
 					<div class="inner_select">
 						<label class="check"> <input type="checkbox"
 							name="checkAll" class="checkAll" onclick="sel_all(this)">
-							<span class="ico"></span>전체선택 
+							<span class="ico"></span>전체선택
 						</label> <a href="#none" class="btn_delete">선택삭제</a>
 					</div>
 				</div>
@@ -58,14 +54,14 @@
 							onclick="dropup()">접기 / 펼치기</button>
 
 					</div>
-					
-					
+
+
 					<ul class="list" id='dropup_list'>
-						
+
 						<% if(list.isEmpty()) { %>
 							<div class="noData">등록된 상품이 없습니다.</div>
 						<% } else { %>
-						
+
 							<% for(Cart c : list) { %>
 							<li>
 								<!-- 상품 목록 중 1. 추가/삭제될 목록임. -->
@@ -77,7 +73,7 @@
 										data-item-no="65810" data-item-parent-no="65810"> <span
 										class="ico"></span>
 									</label>
-	
+
 									<div class="name">
 										<div class="inner_name">
 											<a href="#" class="package "><%= c.getItemName() %></a>
@@ -116,7 +112,7 @@
 									</div>
 								</div>
 							</li>
-						  <% } %>	
+						  <% } %>
 						<% } %>
 
 
@@ -188,14 +184,14 @@
 							주문 내역 상세에서 직접 주문취소가 가능합니다.
 						</span> <span class="txt"> <span class="ico">·</span>‘입금확인’ 이후
 							상태에는 고객센터로 문의해주세요.
-								
+
 						</span>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<!-- 
+	<!--
 		<script>
 		let sumMoney = 0;
 		$('.in_price').each(function() {
@@ -204,19 +200,19 @@
 		});
 		console.log(sumMoney);
 		$('.countMoney').text(sumMoney);
-		
+
 		$('.plusAdd').click(function() {
-			
+
 			$('.countMoney').text(sumMoney);
 		})
-	</script> 
+	</script>
 	 -->
 	<script>
 	$(document).on('click', '.plusAdd', function() {
 		  var $input = $(this).prev('.num');
 		  var currentValue = parseInt($input.val());
 		  var totalPrice = parseInt($(this).closest('.price').find('.totalMoney').val());
-		  
+
 		  console.log($input)
 		  console.log(currentValue)
 		  console.log(totalPrice)
@@ -247,6 +243,6 @@
 
 	</script>
 
-	
+
 </body>
 </html>

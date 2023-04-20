@@ -6,27 +6,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>마이무당  - 상품리뷰</title>
+
+        <!-- 중복되는 헤더, 푸터, 리셋 css & 제이쿼리 & 헤더 js 담은 common.jsp / 2023-04-20 김서영 -->
+	<%@ include file="../common/common.jsp"%>
+
     <link rel="stylesheet" href="/resources/css/board/item_review_common.css">
     <link rel="stylesheet" href="/resources/css/board/item_review_reset.css">
     <link rel="stylesheet" href="/resources/css/board/item_review.css">
     <link rel="stylesheet" href="/resources/css/board/mymoodang_order_list.css">
-    <link rel="stylesheet" href="/resources/css/common/reset.css" />
-    <link rel="stylesheet" href="/resources/css/common/header.css" />
-    <link rel="stylesheet" href="/resources/css/common/footer.css" />
     <link rel="stylesheet" href="/resources/css/member/edit_my_info_pw_check.css" />
-    
-    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+
     <script src="/resources/js/board/item_review_common.js"></script>
     <script src="/resources/js/board/item_review_my.js"></script>
     <script src="/resources/js/shop/item_review_mymoodang.js"></script>
-    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <script defer src="/resources/js/common/header.js"></script>
 </head>
 <body>
-
 			<%@ include file="../common/header.jsp" %>
-			
-			
+
     <div id="container">
         <div id="main">
             <div id="content">
@@ -34,7 +30,7 @@
                     <h2 class="blind">마이페이지</h2>
                     <div class="mypagetop_user">
                         <div class="inner_mypagetop">
-                            
+
                             <div class="grade_user">
                                 <div class="grade">
                                     <span class="blind">등급</span>
@@ -86,17 +82,17 @@
                                 <li class="user_kurlypass">
                                     <div class="link">
                                         <div class="tit">
-                                          
+
                                         </div>
                                         <a href="#" class="info info_link">
-                          
+
                                             <img src="https://res.kurly.com/pc/service/common/1905/ico_arrow_56x56.png" alt="자세히 보기">
                                         </a>
                                     </div>
                                 </li>
                             </ul>
                         </div>
-                        
+
                         </a>
                     </div>
                 </div>
@@ -133,11 +129,11 @@
                             </ul>
                         </div>
                     </div>
-               
-                    
+
+
                     <div class="page_section section_review">
                         <div class="head_aticle">
-                            <h2 class="tit">리뷰 관리</h2>  
+                            <h2 class="tit">리뷰 관리</h2>
                         </div>
 
                         <div id="reviewView">
@@ -145,11 +141,11 @@
                                 <p>
                                     <b>리뷰 작성 시 사진리뷰 100원, 글리뷰 50원을 적립해드립니다.</b>
                                 </p>
-                                - 퍼플, 더퍼플은 
-                                <b>2배</b> 
+                                - 퍼플, 더퍼플은
+                                <b>2배</b>
                                 	적립 (사진 200원, 글 100원)
                                 <br>
-                                - 주간 베스트 리뷰로 선정 시 
+                                - 주간 베스트 리뷰로 선정 시
                                 <b>5,000원</b>
                                 	을 추가 적립
                                 <br>
@@ -172,9 +168,9 @@
                                 </li>
                             </ul>
                         </div>
-                        
-                        
-                        
+
+
+
 						<!-- 작성가능 리뷰 -->
                         <div id="viewBeforeList" class="before_view" style="display:block;">
                             <ul class="list_before">
@@ -183,9 +179,9 @@
                                 </li>
                             </ul>
                         </div>
-						
-						
-						
+
+
+
 						<!-- 작성완료 리뷰 -->
                         <div id="viewAfterList" class="after_view" style="display:none;">
                             <ul class="list_after">
@@ -236,10 +232,6 @@
                                     </div>
                                 </li>
 
-                                
-                                
-
-                                
                             </ul>
                         </div>
                     </div>
@@ -249,9 +241,9 @@
             </div>
         </div>
     </div>
-    
+
    <br><br><br><br><br>    <br><br><br><br><br>    <br><br><br><br><br>    <br><br><br><br><br>    <br><br><br><br><br>    <br><br><br><br><br>    <br><br><br><br><br>    <br><br><br><br><br>    <br><br><br><br><br>    <br><br><br><br><br>    <br><br><br><br><br>
-    
+
     <%@ include file="../common/footer.jsp" %>
 </body>
 </html>

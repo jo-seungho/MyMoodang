@@ -6,28 +6,23 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- header css -->
-    <link rel="stylesheet" href="../css/footer.css">
-    <link rel="stylesheet" href="../css/reset.css">
-    <link rel="stylesheet" href="../css/header.css">
+
+	<!-- 중복되는 헤더, 푸터, 리셋 css & 제이쿼리 & 헤더 js 담은 common.jsp / 2023-04-20 김서영 -->
+	<%@ include file="../common/common.jsp"%>
+
     <link rel="stylesheet" href="/resources/css/board/faq.css">
     <link rel="stylesheet" href="/resources/css/board//review-insert.css">
     <link rel="stylesheet" href="../img/image.gif">
 
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <script src="../js/header.js"></script>
     <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-   
     <script src="../js/review-insert.js"></script>
 
     <title>후기 작성</title>
-    
-   
+
+
   </head>
   <body>
-    <!-- 규칙:
-    축약형(link, emph, gnb 등)을 먼저 사용)
-    alt로 적절한 대체 텍스트 제공, 너무 긴 경우 공통클래스 blind로 제공-->
 
       <%@ include file="../common/header.jsp" %>
     <div id="Container-Wrapper">
@@ -68,10 +63,10 @@
                     <div class="page_section section_destination">
                         <div class="head_aticle">
                             <h2 class="tit-reivew">
-                               
+
                                 <span id="title-info" class="tit_sub">후기 작성</span>
                             </h2>
-                            
+
                         </div>
 
                         <div id="tblParent" class="type_select">
@@ -98,7 +93,7 @@
                                             <input type="text" id="title-InputArea" placeholder="제목을 입력하세요" required>
                                         </td>
                                     </tr>
-                                    
+
                                     <tr>
                                         <td class="rev-content">후기 작성</td>
                                         <td id="inputReview-content">
@@ -110,7 +105,7 @@
                                         <td id="rev-inputImage">
                                           <div align="left">
                                             <input type="file" name="image" id="image-file" style="display: none;">
-                                            
+
                                               <!-- 사진 업로드용 버튼 --><button id="uploadImg-B">
                                                 <b>+</b>
                                               </button>
@@ -129,7 +124,7 @@
                                       <td id="insert-sp">별점</td>
                                       <td id="insert-spTd">
                                         <div id="guide-insertSp" align="right">별점을 입력해주세요(숫자만 가능)
-                                          <input type="number" id="input-starPoint" placeholder="별점 입력 ex) 4" required> 
+                                          <input type="number" id="input-starPoint" placeholder="별점 입력 ex) 4" required>
                                         </div>
                                       </td>
                                     </tr>
@@ -150,11 +145,6 @@
                           <!-- 후기 작성 테이블 구역 끝 -->
 
 
-                       
-        
-
-
-    
-<%@ include file="../common/footer.jsp" %>
+	<%@ include file="../common/footer.jsp" %>
   </body>
 </html>

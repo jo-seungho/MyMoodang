@@ -6,16 +6,12 @@
 <meta charset="UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<!-- header css -->
 
-<link rel="stylesheet" href="/resources/css/common/reset.css" />
-<link rel="stylesheet" href="/resources/css/common/header.css" />
+	<!-- 중복되는 헤더, 푸터, 리셋 css & 제이쿼리 & 헤더 js 담은 common.jsp / 2023-04-20 김서영 -->
+	<%@ include file="../common/common.jsp"%>
+
 <link rel="stylesheet" href="/resources/css/board/onelist.css">
-<link rel="stylesheet" href="/resources/css/common/footer.css">
 
-
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script defer src="/resources/js/common/header.js"></script>
 <script defer src="/resources/js/board/oneoneList.js"></script>
 
 <title>1 : 1 문의 글 작성</title>
@@ -78,12 +74,8 @@
 					</div>
 				</div>
 			</div>
-
 		</div>
-
 	</div>
-
-
 
 	<!-- 1:1 페이지 영역 끝 -->
 

@@ -8,6 +8,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+	<!-- 중복되는 헤더, 푸터, 리셋 css & 제이쿼리 & 헤더 js 담은 common.jsp / 2023-04-20 김서영 -->
+	<%@ include file="../common/common.jsp"%>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <!-- Popper JS -->
@@ -15,19 +17,11 @@
     <!-- Latest compiled JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- header css -->
-    <link rel="stylesheet" href="/resources/css/common/reset.css">
-    <link rel="stylesheet" href="/resources/css/common/header.css">
     <link rel="stylesheet" href="/resources/css/member/join.css">
     <link rel="stylesheet" href="/resources/css/member/edit_my_info.css">
 
-    <script src="/resources/js/common/header.js"></script>
     <script src="/resources/js/member/join.js"></script>
     <script src="/resources/js/member/edit_my_info.js"></script>
-
-
-
-
 
 
     <title>내 정보 수정</title>
