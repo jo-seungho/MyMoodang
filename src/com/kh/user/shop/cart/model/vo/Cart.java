@@ -13,13 +13,14 @@ public class Cart {
 	private int memberNo;				//	회원번호
 	private int itemCode;				//	상품코드
 	private String itemName;			//  상품 이름
+	private String imgPath;				//  상품 이미지
 	
 	public Cart() { }
 	
 	
 
 	public Cart(int cartNo, int cartStock, int price, int discountPrice, int totalPrice, int totalDiscountPrice,
-			int difference, int memberNo, String itemName) {
+			int difference, int memberNo, String itemName, String imgPath) {
 		super();
 		this.cartNo = cartNo;
 		this.cartStock = cartStock;
@@ -30,11 +31,12 @@ public class Cart {
 		this.difference = difference;
 		this.memberNo = memberNo;
 		this.itemName = itemName;
+		this.imgPath = imgPath;
 	}
 
 
 	public Cart(int cartNo, int cartStock, int price, int discountPrice, int totalPrice, int totalDiscountPrice,
-			int difference, int memberNo, int itemCode, String itemName) {
+			int difference, int memberNo, int itemCode, String itemName, String imgPath) {
 		super();
 		this.cartNo = cartNo;
 		this.cartStock = cartStock;
@@ -46,6 +48,7 @@ public class Cart {
 		this.memberNo = memberNo;
 		this.itemCode = itemCode;
 		this.itemName = itemName;
+		this.imgPath = imgPath;
 	}
 
 	public int getCartNo() {
@@ -128,12 +131,25 @@ public class Cart {
 		this.itemName = itemName;
 	}
 
+
+	public String getImgPath() {
+		return imgPath;
+	}
+
+
+
+	public void setImgPath(String imgPath) {
+		this.imgPath = imgPath;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Cart [cartNo=" + cartNo + ", cartStock=" + cartStock + ", price=" + price + ", discountPrice="
 				+ discountPrice + ", totalPrice=" + totalPrice + ", totalDiscountPrice=" + totalDiscountPrice
 				+ ", difference=" + difference + ", memberNo=" + memberNo + ", itemCode=" + itemCode + ", itemName="
-				+ itemName + "]";
+				+ itemName + ", imgPath=" + imgPath + "]";
 	}
+
 	
 }

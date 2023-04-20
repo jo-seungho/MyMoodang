@@ -1,6 +1,6 @@
 // 배송지추가에 쓰일 api : problem 
 window.addEventListener('DOMContentLoaded', function () {
-
+	
     const juso = document.querySelector('#juso');
     const user_address = document.querySelector('#addrMain');
     const user_detail_address = document.querySelector('#addrSub');
@@ -72,16 +72,13 @@ $(function () {
         // console.log(num, "num")
 
         if (num == 1) {
-            // console.log("1")
             $(this).parents('.price').find('.selling').text(parseInt(price1) + parseInt(price1) + ' 원')
         }
         if (num > 1) {
-            // console.log("2")
             $(this).parents('.price').find('.selling').text(parseInt(price1) * (parseInt(num) + 1) + ' 원')
-
         }
         num = $(".num:eq(" + n + ")").val(num * 1 + 1);
-
+        
     });
     $('.minus').click(function () {  // count down..
         let price = $(this).parents('.price').find('.selling').text().split('\n')[0];
@@ -164,6 +161,24 @@ function dropup() { /* 접기 / 펼치기 */
 
 
 $(document).ready(function () { /* 체크박스 선택후 삭제하기 */
+	
+	// 전체 금액 호출용
+//	$(document).ready(function() {
+//		 
+//		 $.ajax({
+//			url: "cart",
+//			type: "post",
+//			success: function(res) {
+//				console.log("GO");
+//			},
+//			error: function(err){
+//				console.log(err);
+//				console.log("FUCK");
+//			}
+//			 
+//		 })
+//	})
+//	
     $('.btn_delete').click(function () {
 
         // 현재 체크된 체크박스의 li 정보 얻기
