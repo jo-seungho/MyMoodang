@@ -1,3 +1,32 @@
+$(function() {
+
+	let gender = "<%= gender %>";
+
+	$("input[type=radio").each(function() {
+		if(gender.search($(this).val()) != -1) {
+			$(this).attr("checked", true);
+		}
+	})
+});
+
+
+function updateInfo() {
+
+	let $id = $("#loginId");
+	let $email = $("#email");
+	let $name = $("#submit_check_name");
+	let $phone = $("#submit_check_phone");
+	let $gender = $("input[type=radio]");
+	let $year = $("#birth_year");
+	let $month = $("#birth_month");
+	let $day = $("#birth_day")
+
+
+
+	var data = { }
+
+
+
 // 비밀번호 일치 여부를 검사 (유효성 검사)
 function validatePwd() {
 

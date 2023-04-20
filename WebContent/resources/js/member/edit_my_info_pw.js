@@ -1,3 +1,8 @@
+$( document ).ready(function() {
+    console.log( "ready!" );
+});
+
+
 function validate() {
 	let $id = $("#memberId");
 	let $pwd = $("#pwdCheck");

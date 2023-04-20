@@ -14,8 +14,8 @@
     <link rel="stylesheet" href="/resources/css/member/edit_my_info_pw_check.css" />
 
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <script defer src="/resources/js/common/header.js"></script>
-    <script defer src="/resources/js/member/edit_my_info_pw.js"></script>
+    <script src="/resources/js/common/header.js"></script>
+    <script src="/resources/js/member/edit_my_info_pw.js"></script>
 
 </head>
 <body>
@@ -54,7 +54,7 @@
                                     <a href="#">쿠폰</a>
                                 </li>
                                 <li class="on">
-                                    <a href="../main/edit_my_info_pw_check.html">내 정보 수정</a>
+                                    <a href="/updateCheckPwd.me">내 정보 수정</a>
                                 </li>
                             </ul>
                         </div>
@@ -83,7 +83,7 @@
                                     </td>
                                 </tr>
                                     <td colspan="2" align="center">
-                                    	<button type="button" id="pwd_check_sub" onclick="validate();">확인</button>
+                                    	<button type="submit" id="pwd_check_sub" onclick="validate();">확인</button>
                                     </td>
                                 </tr>
                             </table>

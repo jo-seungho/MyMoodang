@@ -7,6 +7,14 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <!-- Popper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
     <!-- header css -->
     <link rel="stylesheet" href="/resources/css/common/reset.css">
     <link rel="stylesheet" href="/resources/css/common/header.css">
@@ -17,14 +25,6 @@
     <script src="/resources/js/member/join.js"></script>
     <script src="/resources/js/member/edit_my_info.js"></script>
 
-
-
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-    <!-- Popper JS -->
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <!-- Latest compiled JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
 
 
@@ -50,6 +50,17 @@
 		String phone = (loginUser.getPhone() == null) ? "" : loginUser.getPhone();
 		String gender = (loginUser.getGender() == null) ? "" : loginUser.getGender();
 		String birthDate = (loginUser.getBirthDate() == null) ? "" : loginUser.getBirthDate();
+
+		String year = "";
+		String month = "";
+		String day = "";
+
+
+		if(birthDate != "") {
+			year = birthDate.substring(0, 4);
+			month = birthDate.substring(4, 6);
+			day = birthDate.substring(6);
+		}
 	%>
 
 
@@ -61,7 +72,7 @@
                 <h3 class="main_title">내 정보 수정</h3><br><br>
                 <div class="boder_btom"></div>
 
-                <form action="/update.me" method="POST">
+                <form action="/updateInfo.me" method="POST">
                     <div class="row mb-3" id="font_size">
                         <div class="col-sm-6 id_bell_f"> <br>
                             <span class="member_name">
@@ -127,11 +138,11 @@
                                 <label class="col-sm-2 col-form-label">생년월일</label>
                             </span>
                             <span class="member_content">
-                                <input type="text" name="year" class="form-control width100" id="birth_year" pattern="[0-9]*" value="" label="생년월일" size="4" maxlength="4" placeholder="YYYY">
+                                <input type="text" name="year" class="form-control width100" id="birth_year" pattern="[0-9]*" value="<%= year %>" label="생년월일" size="4" maxlength="4" >
                                 <span class="bar"></span>
-                                <input type="text" name="month" class="form-control width100" id="birth_month" pattern="[0-9]*" value="" label="생년월일" size="2" maxlength="2" placeholder="MM">
+                                <input type="text" name="month" class="form-control width100" id="birth_month" pattern="[0-9]*" value="<%= month %>" label="생년월일" size="2" maxlength="2">
                                 <span class="bar"></span>
-                                <input type="text" name="day" class="form-control width100" id="birth_day" pattern="[0-9]*" value="" label="생년월일" size="2" maxlength="2" placeholder="DD">
+                                <input type="text" name="day" class="form-control width100" id="birth_day" pattern="[0-9]*" value="<%= day %>" label="생년월일" size="2" maxlength="2">
                               </span>
                         </div>
 
@@ -139,7 +150,7 @@
 
 
                     <div id="edit_form_btn" align="center">
-                        <button type="submit" id="edit_info_btn" >수정하기</button> &nbsp;
+                        <button type="button" id="edit_info_btn" onclick="updateInfo();">수정하기</button> &nbsp;
                         <button type="button" id="edit_pwd_btn" data-toggle="modal" data-target="#updatePwdForm">비밀번호 변경</button> &nbsp;
                         <button type="button" id="delete_info_btn" data-toggle="modal" data-target="#deleteForm">회원탈퇴</button>
                      </div>
