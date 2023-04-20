@@ -64,31 +64,65 @@ window.addEventListener('DOMContentLoaded', function () {
 
 $(function () {
     $('.plus').click(function () { //count up
-        // let price = $(this).parents('.price').find('.selling').text().split('\n')[0];
+    	
+    	// 가격 찾는 선택자들
+   	    // var $countMoney = $(this).closest('.goods').find('.countMoney');
+    	// var $totalMoney = $(this).closest('.goods').find('.totalMoney');
+    	  var quantity = parseInt($(this).siblings('.num').val());
+    	  var $selling1 = $(this).closest('.goods').find('.selling1');
+    	  var price = parseInt($selling1.val());
+    	  var totalPrice = quantity * price;
+    	  
+    	  var $noDis = $(this).closest('.goods').find('.noDis');
+    	  var noDiscount = parseInt($noDis.val());
+    	  var disTotal = quantity * noDiscount;
+
+    	  var totalPrices = parseInt($('.countMoney').text())
+    	  console.log(totalPrices += price)
+    	  var noDisC = parseInt($('.noDiscount').text());
+    	  
+    	  
+    	
+    	// 상품 하나의 가격을 찾는 변수
         let price1 = $(this).parents('.price').find('.selling1').val();
-        // console.log(price1, "price1");
+        // 상품 수량
         var n = $('.plus').index(this);
+        // 상품의 갯수 표시용 변수
         var num = $(".num:eq(" + n + ")").val();
-        // console.log(num, "num")
 
         if (num == 1) {
             $(this).parents('.price').find('.selling').text(parseInt(price1) + parseInt(price1) + ' 원')
         }
         if (num > 1) {
             $(this).parents('.price').find('.selling').text(parseInt(price1) * (parseInt(num) + 1) + ' 원')
+            $('.countMoney').text(totalPrices + (price%2));
+    		$('.noDiscount').text(noDisC + noDiscount);
+    		$('.difference').text((noDisC + noDiscount) - (totalPrices + (price%2)));
         }
         num = $(".num:eq(" + n + ")").val(num * 1 + 1);
         
     });
     $('.minus').click(function () {  // count down..
+    	
+    	var $selling9 = $(this).closest('.goods').find('.selling1');
+    	var price9 = parseInt($selling9.val());
+    	var totalPriceM = parseInt($('.countMoney').text())
+    	// console.log(aa += price)
+    	
+    	var $noDis = $(this).closest('.goods').find('.noDis');
+    	var noDiscount = parseInt($noDis.val());
+    	var noDisC = parseInt($('.noDiscount').text());
+    	
         let price = $(this).parents('.price').find('.selling').text().split('\n')[0];
         let price1 = $(this).parents('.price').find('.selling1').val();
         var n = $('.minus').index(this);
         var num = $(".num:eq(" + n + ")").val();
         if (num != 1) {
-            // console.log(num)
             $(this).parents('.price').find('.selling').text(parseInt(price) - parseInt(price1) + ' 원')
             num = $(".num:eq(" + n + ")").val(num * 1 - 1);
+            $('.countMoney').text(totalPriceM - price9);
+            $('.noDiscount').text(noDisC - noDiscount);
+            $('.difference').text((noDisC - noDiscount) - (totalPriceM - price9));
         }
 
     });
@@ -162,23 +196,6 @@ function dropup() { /* 접기 / 펼치기 */
 
 $(document).ready(function () { /* 체크박스 선택후 삭제하기 */
 	
-	// 전체 금액 호출용
-//	$(document).ready(function() {
-//		 
-//		 $.ajax({
-//			url: "cart",
-//			type: "post",
-//			success: function(res) {
-//				console.log("GO");
-//			},
-//			error: function(err){
-//				console.log(err);
-//				console.log("FUCK");
-//			}
-//			 
-//		 })
-//	})
-//	
     $('.btn_delete').click(function () {
 
         // 현재 체크된 체크박스의 li 정보 얻기

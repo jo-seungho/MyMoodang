@@ -324,24 +324,9 @@ window.addEventListener('DOMContentLoaded', function () {
 
 
 
-    // 장바구니 모달에서 바뀐 수량 전달 함수
-     $('.txt_type').click(function(){
-   	  
-        $.ajax({
-          type: "GET",
-           url: "cart",    
-           data: {
-        	   countValue: $("#countValue").text()
-          },
-          success: function (res) {
-        	  
-           },
-           error: function(err) {
-        	   console.log(err)
-        	   console.log("????")
-           }
-         });
-    });
+
+
+     
 
 
     // console.log(window.location.href, "주소값");

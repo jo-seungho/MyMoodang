@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"
 	import="java.util.ArrayList, com.kh.user.shop.item.model.vo.Item, com.kh.common.model.vo.PageInfo"%>
+	
 <%-- 2023-04-16 조승호 --%>
 <%
 	PageInfo pi = (PageInfo) request.getAttribute("pi");
@@ -97,11 +98,15 @@
 												</div>
 											</div>
 
+											<div class="plz" style="visibility: hidden"><%= i.getItemCode() %></div>
 											<a href="/itemDetail.it?bno=<%= i.getItemCode() %>" class="">
 											<!-- 주소 연결 이슈로 bno 클래스 임시로 삭제해뒀습니다.  - 조승호 -->
 											<span class="name"> <%= i.getItemName() %> </span>
-											<span class="cost"> <span class="price"><%= i.getItemPrice() %></span>
-											<input type="hidden" id="product_cost1" value=1300>
+											<span class="cost"> <span class="price"><%= (int)(Math.log10(i.getItemPrice())+1) > 3
+																					  ?  Integer.toString(i.getItemPrice()).replaceAll("\\B(?=(\\d{3})+(?!\\d))", ",")
+																					  : i.getItemPrice()	  
+											%></span>
+											<input type="hidden" id="product_cost1" value="<%= i.getItemPrice() %>">
 											<span class="dodo">원</span>
 											</span> <span class="desc"><%= i.getItemText() %></span>
 											<span class="tag"><%-- 수량이나 날짜 등 필요하면 이 위치에 --%></span>
@@ -206,7 +211,7 @@
 							<div class="total">
 								<div class="price">
 									<strong class="tit">합계</strong> <span class="sum"> <span
-										class="num">1,300</span> <span class="won">원</span>
+										class="num totalPrice">1,300</span> <span class="won">원</span>
 									</span>
 								</div>
 
@@ -223,7 +228,7 @@
 								<button type="button" class="txt_type">취소</button>
 							</span> <span class="btn_type1">
 
-								<button type="button" value="3" class="txt_type">장바구니
+								<button type="button" value="3" class="txt_type goCart">장바구니
 									담기</button>
 							</span>
 						</div>
@@ -235,14 +240,35 @@
 
 		<%@ include file="../common/footer.jsp"%>
 
-		<script>
-		// $(document).ready(function() {
-			function test1() {
-				let aa = document.getElementById("countValue").innerText;
-				console.log(aa);
-			}
-		// });
-		</script>
 	</div>
+	<!--  
+	<script>
+	
+    // 장바구니 모달에서 바뀐 수량 전달 함수 (수정중입니다)
+    
+
+    
+    $('.goCart').click(function(){
+    	
+
+  	  
+       $.ajax({
+         type: "GET",
+          url: "cart",    
+          data: {
+       	   countValue: $("#countValue").text()
+         },
+         success: function (res) {
+
+          },
+          error: function(err) {
+       	   console.log(err)
+       	   console.log("????")
+          }
+        });
+   	});
+	
+	</script>
+-->
 </body>
 </html>
