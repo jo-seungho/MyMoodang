@@ -1,14 +1,14 @@
-<!-- 2023.04.19 / 파일명 delibery_List -> deliveryList 로 수정 및 
+<!-- 2023.04.19 / 파일명 delibery_List -> deliveryList 로 수정 및
 로그인한 회원이 header의 우측 상단의 배송지 관리 클릭 시 내 배송지 목록들이 나오게끔 코드 작성
-스클립틀릿 구문 추가&하드코드들을 소프트코드로 바꿈 
+스클립틀릿 구문 추가&하드코드들을 소프트코드로 바꿈
 수정하기 버튼 클릭 시 수정창 호출되게 작성 예정 */
 / 이지환  -->
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+
 <%@ page import="java.util.ArrayList, com.kh.user.member.model.vo.ShippingAddress" %>
-    
+
 <!-- 2023.04.19 deliveryList.controller 로부터 개인 회원의 배송지 목록 호출 -->
 <%
 	// 조회된 list 를 request 로부터 뽑아내기
@@ -22,13 +22,13 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-    <link rel="stylesheet" href="/resources/css/common/reset.css">
+
+      <!-- 중복되는 헤더, 푸터, 리셋 css & 제이쿼리 & 헤더 js 담은 common.jsp / 2023-04-20 김서영 -->
+	<%@ include file="../common/common.jsp"%>
+
     <link rel="stylesheet" href="/resources/css/board/faq.css">
     <link rel="stylesheet" href="/resources/css/shop/delivery_list.css">
 
-    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <script src="/resources/js/common/header.js"></script>
     <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script src="/resources/js/shop/deliver.js"></script>
 
@@ -54,12 +54,9 @@
     </script>
   </head>
   <body>
-    <!-- 규칙:
-    축약형(link, emph, gnb 등)을 먼저 사용)
-    alt로 적절한 대체 텍스트 제공, 너무 긴 경우 공통클래스 blind로 제공-->
 
       <%@ include file="../common/header.jsp" %>
-      
+
     <div id="Container-Wrapper">
     <!-- 자주하는질문 페이지 영역 시작 -->
       <div id="container">
@@ -98,9 +95,9 @@
                     <div class="page_section section_destination">
                         <div class="head_aticle">
                             <h2 class="tit">
-                 <!--              
+                 <!--
 		                               배송지 관리
-		                                
+
 		                                db 회원 배송지 정보
 		                                요걸 불러오려고 하거든요?
 		                                ArrayList<ShippingAdress> = new ArrayList<
@@ -125,8 +122,8 @@
                                         <th class="tit_phone">연락처</th>
                                         <th class="tit_delivery">배송유형</th>
                                         <th class="tit_modify">수정</th>
-                                     <!--  
-											 회원 정보 받는 메소드, 
+                                     <!--
+											 회원 정보 받는 메소드,
 											회원정보를 뽑은 멤버객체에서 회원넘버 외래키를 get 으로뽑아서 그거를 매개변수로 배송지를 불러오는 메서드 만들기
 											memeber 회원정보, ArrayList<배송정보> 이 배송정보를 리퀘스트로 담아서 여기서 뽑으면 됨
                                         =
@@ -177,7 +174,7 @@
                               <div class="pagediv" style="height: 500px;">
                                   <a href="#viewOrderList" class="layout-pagination-button layout-pagination-first-page">맨 처음 페이지로 가기</a>
                                   <a href="#viewOrderList" class="layout-pagination-button layout-pagination-prev-page">이전 페이지로 가기</a>
-                                  <span> 
+                                  <span>
                                       <strong class="layout-pagination-button layout-pagination-number __active" style="height: 32px;">
                                           1
                                       </strong>
@@ -186,17 +183,17 @@
                                   <a href="#viewOrderList" class="layout-pagination-button layout-pagination-last-page">맨 끝 페이지로 가기</a>
                               </div>
                           </div>
-                          
+
                       </div>
                   </div>
               </div>
           </div>
-      </div>    
+      </div>
     <!-- 자주하는질문 페이지 영역 끝 -->
 
       <%@ include file="../common/footer.jsp" %>
-      
+
       </div>
-    </div>  
+    </div>
   </body>
 </html>

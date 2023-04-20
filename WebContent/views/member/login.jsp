@@ -8,29 +8,21 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <link rel="stylesheet" href="/resources/css/common/reset.css">
-        <link rel="stylesheet" href="/resources/css/member/login.css">
-        <link rel="stylesheet" href="/resources/css/common/header.css">
-
-        <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-        <script src="/resources/js/common/header.js"></script>
-        <script src="/resources/js/member/join.js"></script>
-
+	<!-- 중복되는 헤더, 푸터, 리셋 css & 제이쿼리 & 헤더 js 담은 common.jsp / 2023-04-20 김서영 -->
+	<%@ include file="../common/common.jsp"%>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+        <link rel="stylesheet" href="/resources/css/member/login.css">
+        <script src="/resources/js/member/join.js"></script>
+
         <title>로그인</title>
-
     </head>
-
     <body>
 <!-- jsp 변환 / 2023-04-14 / 김서영 -->
 
 	<%@ include file="../common/header.jsp" %>
 
-
         <div id="container" class="container">
-
-
 
             <div id="main">
                 <div id="content">
@@ -38,7 +30,7 @@
                         <h3 class="tit_login">로그인</h3>
                         <div class="write_form">
                             <div class="write_view login_view">
-                            
+
                             	<!-- 2023-04-18 로그인 매핑 수정 이지환 -->
                                 <form method="post" name="login_form" id="form"  action="/login.me">
                                     <input type="hidden" name="returnUrl" value="">
@@ -68,14 +60,7 @@
 
             </div>
 
-
-
-
-
-
         </div>
-
-
 
 
        <!--  <script>

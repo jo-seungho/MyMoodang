@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" 
+    pageEncoding="UTF-8"
     import="java.util.ArrayList, com.kh.user.shop.item.model.vo.*, com.kh.user.shop.review.model.vo.Review"
     %>
 
@@ -10,39 +10,28 @@
     ArrayList<Review> rlist = (ArrayList<Review>)request.getAttribute("rlist");
     String category = i.getItemCategory();
 %>
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- header css -->
 
-    <link rel="stylesheet" href="/resources/css/common/reset.css" />
+    <!-- 중복되는 헤더, 푸터, 리셋 css & 제이쿼리 & 헤더 js 담은 common.jsp / 2023-04-20 김서영 -->
+	<%@ include file="../common/common.jsp"%>
+
     <link rel="stylesheet" href="/resources/css/board/faq.css">
     <link rel="stylesheet" href="/resources/css/shop/item_detail.css">
     <link rel="stylesheet" href="/resources/css/board/item_review_common.css">
     <link rel="stylesheet" href="/resources/css/board/item_review_reset.css">
     <link rel="stylesheet" href="/resources/css/board/item_review.css">
     <link rel="stylesheet" href="/resources/css/board/mymoodang_order_list.css">
-    <link rel="stylesheet" href="/resources/css/common/reset.css" />
-    <link rel="stylesheet" href="/resources/css/common/header.css" />
-    <link rel="stylesheet" href="/resources/css/common/footer.css" />
     <link rel="stylesheet" href="/resources/css/member/edit_my_info_pw_check.css" />
-
-    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-
-    <script defer src="/resources/js/common/header.js"></script>
 
     <script src="/resources/js/shop/item_detail.js"></script>
     <script src="/resources/js/board/item_review_common.js"></script>
     <script src="/resources/js/board/item_review_my.js"></script>
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <script defer src="/resources/js/common/header.js"></script>
 
     <title>상품상세페이지</title>
       <style>
@@ -52,7 +41,7 @@
               border-collapse: collapse;
               font-size: 16px;
               margin: auto;
-             
+
             }
             th, td {
               padding: 12px;
@@ -65,12 +54,12 @@
               color: #333;
               font-weight: bold;
               cursor: pointer;
-            
+
             }
             tr:hover {
               background-color: #f9f9f9;
             }
-          
+
             /* 게시물 내용 토글 스타일 */
             .content {
               display: none;
@@ -79,14 +68,14 @@
               background-color: #f9f9f9;
               padding: 20px;
             }
-          
+
             /* 게시물 제목 클릭 시 커서 스타일 변경 */
             .post td[onclick]:hover {
               color: #007bff;
               text-decoration: underline;
               cursor: pointer;
             }
-    
+
             table tbody tr td:nth-child(3){
                 color: red;
 		            }
@@ -113,14 +102,11 @@
           </style>
   </head>
   <body>
-    <!-- 규칙:
-    축약형(link, emph, gnb 등)을 먼저 사용)
-    alt로 적절한 대체 텍스트 제공, 너무 긴 경우 공통클래스 blind로 제공-->
 
       <%@ include file="../common/header.jsp" %>
-      
+
             <!-- 상품 상세페이지 시작-->
-        
+
                     <div id="main">
                         <div id="content" style="opacity: 1;">
                             <div class="section_view">
@@ -128,7 +114,7 @@
                                     <div class="inner_view">
                                         <div class="thumb" style="background-image: url(https://res.kurly.com/mobile/img/1808/img_none_x2.png);">
                                             <img src="<%= i.getItemImg() %>" alt="상품 대표 이미지" class="bg">
-            
+
                                         </div>
                                         <p class="goods_name">
                                             <span class="btn_share">
@@ -141,16 +127,16 @@
                                                 <span class="dc">
                                                     <span>
                                                         <span class="discount" style="font-size: 22px; font-weight: 400; color: red;">30<!--<%= i.getItemDiscount() %>-->%&nbsp</span>
-                                                    
+
                                                     </span>
                                                     <span class="dc_price" style="font-size: 15px; font-weight: 400; color: red;">
                                                         <del style="font-size: 18px; font-weight: 400; color: lightgray;"><%= i.getDiscountPrice() %>원 </del>
                                                         <input type="hidden" value="<%= i.getDiscountPrice() %>">
-                                                        
+
                                                     </span>
                                                     <span class="won" style="font-size: 22px; margin-top: 10%;">&nbsp<b><%= i.getDiscountPrice() %>원</b></span>
                                                 </span>
-                                                
+
                                             </span>
                                             <span>
                                                 <span class="txt_benefit">
@@ -180,11 +166,11 @@
                                                 <dd class="desc"><%= i.getItemCategory() %></dd>
                                             </dl>
 
-       
+
                                         </div>
                                     </div>
                                 </div>
-            
+
                                 <div id="cartPut">
                                     <div class="cart_option cart_type2">
                                         <form action="">
@@ -200,7 +186,7 @@
                                                                         <input type="number" readonly="readonly" value = 1 class="inp">
                                                                         <button  type="button" class="btn up on">수량올리기</button>
                                                                     </span>
-                                                                
+
                                                                 </div>
                                                             </li>
                                                         </ul>
@@ -235,7 +221,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="layout-wrapper goods-view-area">
                                 <div class="goods-add-product">
                                     <h3 class="goods-add-product-title">
@@ -251,9 +237,9 @@
                                         <div class="goods-add-product-list-wrapper" style="height:320px;">
                                             <ul class="goods-add-product-list __slide-mover" style="left: 0px;">
 
-                                            
-                                                
-                                                
+
+
+
                                             	<%  for(Attachment a : clist) { %>
                                                 <li class="goods-add-product-item __slide-item">
                                                     <div class="goods-add-product-item-figure">
@@ -272,14 +258,14 @@
                                                     </div>
                                                 </li>
                                                 <% } %>
-  
-                                               
+
+
                                             </ul>
                                         </div>
                                     </div>
                                 </div>
                               </div>
-            
+
                                 <div class="goods-view-infomation detail_wrap_outer" id="goods-view-infomation" >
                                     <ul class="goods-view-infomation-tab-group" style="display: flex; align-content: stretch; justify-content: center; ">
                                         <li class="goods-view-infomation-tab">
@@ -298,7 +284,7 @@
                                             <a href="#goods-qna" class="goods-view-infomation-tab-anchor">
                                                 1 : 1 문의
                                                 <span>(0)</span>
-            
+
                                             </a>
                                         </li>
                                     </ul>
@@ -318,10 +304,10 @@
                                                     <p class="words">
                                                         <img src="<%= i.getItemImg() %>" style="width:1010px; height:671px;">
                                                     </p>
-            
+
                                                 </div>
-                                            </div>  
-                                            
+                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -351,7 +337,7 @@
                                             </p>
                                         </div>
                                     </div>
-                                    
+
 
                                         <div class="happy_center fst">
                                             <ul class="goods-view-infomation-tab-group" style="display: flex; align-content: stretch; justify-content: center; ">
@@ -374,7 +360,7 @@
                                             </a>
                                         </li>
                                     </ul>
-                                    <div class="goods-view-infomation-content" id="goods-review"> 
+                                    <div class="goods-view-infomation-content" id="goods-review">
                                    		<br>
 									<table>
 								        <thead>
@@ -399,23 +385,23 @@
 								        <td colspan="6">
 								          <p><%= r.getContent()%></p>
 								          <a href = "/itemReviewDel.it?bno=<%= r.getReviewNo() %>" type="button" >수정</a> &nbsp
-        								  <a href = "/itemReviewDel.it?bno=<%= r.getReviewNo() %>" type="button" >삭제</a> 
-        								
+        								  <a href = "/itemReviewDel.it?bno=<%= r.getReviewNo() %>" type="button" >삭제</a>
+
 								        </td>
 								      </tr>
 								    <%} %>
 								  </tbody>
 								      </table>
-                                    
-												
 
-					
+
+
+
                                     </div>
-                                    
+
                                 </div>
                             </div>
                         </div>
-    
+
                     <script>
                    <%--      $(function() {
                             selectReviewList();
@@ -427,13 +413,13 @@
                                 url: "itemReviewList.it",
                                 type: "get",
                                 data: { bno: <%= i.getItemCode() %> },
-                                	
+
                                 success: function(result) {
-                                	
+
                                 	//console.log(result);
 
                                 	let sum = "";
-                                	
+
 
                                      for(let i in result) {
 
@@ -443,17 +429,17 @@
                                             + "<td>" + result[i].writeDate + "</td>"
                                             + "<td>" + result[i].starPoint + "</td>"
                                             + "</tr>";
-                                            
+
                                         $("#goods-review tbody").html(result);
-                                    } 
-                               
+                                    }
+
                                 },
                                 error: function() {
                                     alert("리뷰 조회 실패");
                                 }
                             });
                         } --%>
-                        
+
                         function toggleContent(reviewNo) {
                     	    var contentRow = document.getElementById("content" + reviewNo);
                     	    if (contentRow.style.display === "none") {
@@ -462,7 +448,7 @@
                     	      contentRow.style.display = "none";
                     	    }
                     	  }
-                    
+
                       function sortTable(columnIndex) {
                         var table, rows, switching, i, x, y, shouldSwitch;
                         table = document.getElementsByTagName("table")[0];
@@ -485,7 +471,7 @@
                           }
                         }
                       }
-                    
+
                       function displayStars(rating) {
                         let stars = "";
                         for (let i = 1; i <= 5; i++) {
@@ -497,10 +483,10 @@
                         }
                         return stars;
                       }
-                    
+
                       // Get all the rows with class "post"
                       let postRows = document.querySelectorAll(".post");
-                    
+
                       // Loop through each post row and update the "별점" column with stars
                       postRows.forEach(function(row) {
                         let rating = parseInt(row.querySelector("td:nth-child(3)").innerText);
@@ -508,12 +494,8 @@
                         row.querySelector("td:nth-child(3)").innerHTML = stars;
                       });
                     </script>
-                    
-                    
-
 
       <%@ include file="../common/footer.jsp" %>
-   
 
   </body>
 </html>

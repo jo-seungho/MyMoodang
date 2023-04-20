@@ -15,17 +15,19 @@
 
 %>
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="/resources/css/shop/itemList.css" />
 
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <!-- 중복되는 헤더, 푸터, 리셋 css & 제이쿼리 & 헤더 js 담은 common.jsp / 2023-04-20 김서영 -->
+	<%@ include file="../common/common.jsp"%>
+
+<link rel="stylesheet" href="/resources/css/shop/itemList.css" />
 <script src="/resources/js/shop/itemList.js"></script>
+
 <title>상품 리스트</title>
 </head>
 <body>
@@ -85,7 +87,7 @@
 													<img src="<%= i.getItemImg() %>"
 													onerror="this.src='https://res.kurly.com/mobile/img/1808/img_none_x2.png'"
 													width="308" height="396">
-												</a> 
+												</a>
 
 												<div class="group_btn">
 													<button type="button" name="chk" value="여기다가 프로덕트 아이디 적어주삼"
@@ -95,13 +97,13 @@
 												</div>
 											</div>
 
-											<a href="/itemDetail.it?bno=<%= i.getItemCode() %>" class=""> 
+											<a href="/itemDetail.it?bno=<%= i.getItemCode() %>" class="">
 											<!-- 주소 연결 이슈로 bno 클래스 임시로 삭제해뒀습니다.  - 조승호 -->
-											<span class="name"> <%= i.getItemName() %> </span> 
-											<span class="cost"> <span class="price"><%= i.getItemPrice() %></span> 
-											<input type="hidden" id="product_cost1" value=1300> 
+											<span class="name"> <%= i.getItemName() %> </span>
+											<span class="cost"> <span class="price"><%= i.getItemPrice() %></span>
+											<input type="hidden" id="product_cost1" value=1300>
 											<span class="dodo">원</span>
-											</span> <span class="desc"><%= i.getItemText() %></span> 
+											</span> <span class="desc"><%= i.getItemText() %></span>
 											<span class="tag"><%-- 수량이나 날짜 등 필요하면 이 위치에 --%></span>
 											</a>
 										</div>
@@ -126,29 +128,29 @@
 								<a href="/itemList.it?currentPage=<%= startPage %>&category=${category}"
 
 									class="layout-pagination-button layout-pagination-first-page">맨 처음 페이지로 가기
-								</a> 
+								</a>
 								<a href="/itemList.total?currentPage=<%= currentPage - 1 %>&category=${category}" class="layout-pagination-button layout-pagination-prev-page">
 									이전 페이지로 가기
-								</a> 
+								</a>
 								<% } else {%>
 								<a href="javascript:void(0)"
 									class="layout-pagination-button layout-pagination-first-page">맨 처음 페이지로 가기
-								</a> 
+								</a>
 								<a href="javascript:void(0)" class="layout-pagination-button layout-pagination-prev-page">
 									이전 페이지로 가기
-								</a> 
+								</a>
 								<% } %>
 								<% for(int p = startPage; p <= endPage; p++) { %>
 									<% if(p != currentPage) { %>
 
-								<a href="/itemList.it?currentPage=<%= p %>&category=${category}"> 
+								<a href="/itemList.it?currentPage=<%= p %>&category=${category}">
 
-									<span> 
+									<span>
 										<strong class="layout-pagination-button layout-pagination-number __active"><%= p %></strong>
 									</span>
-								</a> 
+								</a>
 									<% } else { %>
-									<span> 
+									<span>
 										<strong class="layout-pagination-button layout-pagination-number __active"
 										style="background-color: #fbb6b6;"><%= p %></strong>
 									</span>
@@ -158,7 +160,7 @@
 
 								 <a href="/itemList.it?currentPage=<%= currentPage + 1 %>&category=${category}" class="layout-pagination-button layout-pagination-next-page">
 								 다음 페이지로 가기
-								 </a> 
+								 </a>
 								 <a href="/itemList.it?currentPage=<%= endPage %>&category=${category}" class="layout-pagination-button layout-pagination-last-page">
 
 								 맨끝 페이지로 가기
@@ -169,7 +171,7 @@
 								</a>
 								<a href="javascript:void(0)" class="layout-pagination-button layout-pagination-last-page">
 								 맨끝 페이지로 가기
-								 </a>								 
+								 </a>
 								 <% } %>
 
 							</div>
@@ -220,7 +222,7 @@
 							<span class="btn_type2">
 								<button type="button" class="txt_type">취소</button>
 							</span> <span class="btn_type1">
-							
+
 								<button type="button" value="3" class="txt_type">장바구니
 									담기</button>
 							</span>
@@ -229,10 +231,10 @@
 				</form>
 			</div>
 		</div>
-			
+
 
 		<%@ include file="../common/footer.jsp"%>
-		
+
 		<script>
 		// $(document).ready(function() {
 			function test1() {

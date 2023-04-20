@@ -1,13 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.ArrayList, 
+    pageEncoding="UTF-8" import="java.util.ArrayList,
     com.kh.user.shop.review.model.vo.Review "%>
-<% 
-
-
-	ArrayList<Review> rlist = (ArrayList<Review>)request.getAttribute("rlist"); 
-
+<%
+	ArrayList<Review> rlist = (ArrayList<Review>)request.getAttribute("rlist");
 %>
-
 
     <!DOCTYPE html>
     <html lang="en">
@@ -23,7 +19,7 @@
               border-collapse: collapse;
               font-size: 16px;
               margin: auto;
-             
+
             }
             th, td {
               padding: 12px;
@@ -36,12 +32,12 @@
               color: #333;
               font-weight: bold;
               cursor: pointer;
-            
+
             }
             tr:hover {
               background-color: #f9f9f9;
             }
-          
+
             /* 게시물 내용 토글 스타일 */
             .content {
               display: none;
@@ -50,14 +46,14 @@
               background-color: #f9f9f9;
               padding: 20px;
             }
-          
+
             /* 게시물 제목 클릭 시 커서 스타일 변경 */
             .post td[onclick]:hover {
               color: #007bff;
               text-decoration: underline;
               cursor: pointer;
             }
-    
+
             table tbody tr td:nth-child(3){
                 color: red;
             }
@@ -102,7 +98,7 @@
     	      contentRow.style.display = "none";
     	    }
     	  }
-    
+
       function sortTable(columnIndex) {
         var table, rows, switching, i, x, y, shouldSwitch;
         table = document.getElementsByTagName("table")[0];
@@ -125,7 +121,7 @@
           }
         }
       }
-    
+
       function displayStars(rating) {
         let stars = "";
         for (let i = 1; i <= 5; i++) {
@@ -137,10 +133,10 @@
         }
         return stars;
       }
-    
+
       // Get all the rows with class "post"
       let postRows = document.querySelectorAll(".post");
-    
+
       // Loop through each post row and update the "별점" column with stars
       postRows.forEach(function(row) {
         let rating = parseInt(row.querySelector("td:nth-child(3)").innerText);
@@ -148,6 +144,6 @@
         row.querySelector("td:nth-child(3)").innerHTML = stars;
       });
     </script>
-        
+
     </body>
     </html>

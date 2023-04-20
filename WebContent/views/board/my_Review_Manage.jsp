@@ -6,22 +6,18 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- header css -->
 
-    <link rel="stylesheet" href="../css/reset.css" />
-    <link rel="stylesheet" href="../css/header.css" />
-    <link rel="stylesheet" href="../css/footer.css">
+	<!-- 중복되는 헤더, 푸터, 리셋 css & 제이쿼리 & 헤더 js 담은 common.jsp / 2023-04-20 김서영 -->
+	<%@ include file="../common/common.jsp"%>
+
     <link rel="stylesheet" href="/resources/css/board/faq.css">
     <link rel="stylesheet" href="/resources/css/board/notice.css">
     <link rel="stylesheet" href="/resources/css/board/my_Review_Manage.css">
     <title>내 리뷰 관리</title>
-    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-
-    <script src="/resources/js/header.js"></script>
 
     <style>
-     
-        
+
+
 .myRev-deContent {
             border : 1px solid lightgray;
             display: flex;
@@ -40,33 +36,33 @@
           width: 140px;
         }
 
-        
+
     </style>
     <title>내리뷰곤리</title>
     <script>
-      
+
         $(function() {
 
             $(".item").click(function() {
 
                 let $detailCon = $(this).next();
 
-          
+
                 if($detailCon.css("display") == "none") {
-                   
+
                     $(this).siblings(".myRev-deContent").slideUp(1000);
 
                     // 보여지게끔
                     $detailCon.slideDown(1000); // 시간 부여가 가능
                 } else {
 
-                 
+
                     $detailCon.slideUp(1000); // 시간 부여가 가능
                 }
             });
 
         });
-    
+
     </script>
   </head>
   <body>
@@ -74,7 +70,7 @@
     축약형(link, emph, gnb 등)을 먼저 사용)
     alt로 적절한 대체 텍스트 제공, 너무 긴 경우 공통클래스 blind로 제공-->
 		<%@ include file="../common/header.jsp" %>
-    
+
 
               <!--  사이드바 영역 시작 -->
              <div id="Container-Wrapper">
@@ -86,7 +82,7 @@
                                         <h2 class="tit_snb">고객센터</h2>
                                         <div class="inner_sub">
                                             <ul class="list_menu">
-                                                <li class="on">  
+                                                <li class="on">
                                                   <a href="#" style="color: gray;">주문내역</a>
                                                 </li>
                                                 <li>
@@ -107,12 +103,12 @@
                                             </ul>
                                         </div>
 
-                                        
+
                                     </div>
                      <!--  사이드바 영역 끝 -->
 
 
-                    <!-- 내 리뷰관리 페이지 시작 -->              
+                    <!-- 내 리뷰관리 페이지 시작 -->
                       <div id="viewOrderList" class="page_section section_orderlist">
                           <div class="head_aticle">
                               <h2 class="tit">
@@ -130,7 +126,7 @@
                               <div class="order_num">주문번호</div>
                               <div class="review_title">제목</div>
                               <div class="productSp">별점</div>
-                              <!-- 내용은 div 누르면 나오게 
+                              <!-- 내용은 div 누르면 나오게
 
                               <div class="rev-content">내용</div>
                               -->
@@ -158,11 +154,11 @@
                                     배송도 빠르고 무엇보다 너무 맛있어요..ㅠㅠ
                                     Q. 다른곳보다 가격이 저렴해서 조아여~~~
                                 </div>
-                           
+
                               </div>
                             </div>
 
-                            
+
                             <div class="item">
                               <div class="product-img">구매한 이미지</div>
                               <div class="order_num">1241241</div>
@@ -192,7 +188,7 @@
                               <div class="productSp">4</div>
                               <div class="review-Date">2023-04-02</div>
 
-                              
+
                             </div>
                             <div class="myRev-deContent" style="display: flex;">
                               <div class="my_img">
@@ -211,12 +207,12 @@
                             </div>
                         </div>
 
-                      
+
                       </div>
                   </div>
               </div>
           </div>
-      </div>    
+      </div>
     <!-- 자주하는질문 페이지 영역 끝 -->
 
      <%@ include file="../common/footer.jsp" %>

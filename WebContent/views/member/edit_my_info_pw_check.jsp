@@ -8,21 +8,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>내정보수정_비밀번호확인</title>
 
-    <link rel="stylesheet" href="/resources/css/common/reset.css" />
-    <link rel="stylesheet" href="/resources/css/common/header.css" />
-    <link rel="stylesheet" href="/resources/css/common/footer.css" />
+	<!-- 중복되는 헤더, 푸터, 리셋 css & 제이쿼리 & 헤더 js 담은 common.jsp / 2023-04-20 김서영 -->
+	<%@ include file="../common/common.jsp"%>
+
     <link rel="stylesheet" href="/resources/css/member/edit_my_info_pw_check.css" />
 
-    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <script src="/resources/js/common/header.js"></script>
     <script src="/resources/js/member/edit_my_info_pw.js"></script>
 
 </head>
 <body>
 <!-- jsp 변환 / 2023-04-14 / 김서영 -->
-    <!-- 헤더 시작 -->
     <%@ include file="../common/header.jsp" %>
-    <!-- 헤더 끝 -->
 
     <%
     	String memberId = loginUser.getMemberId();
@@ -95,8 +91,6 @@
             </div>
         </div>
     </div>
-
-
 
 </body>
 </html>

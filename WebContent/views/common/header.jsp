@@ -1,5 +1,5 @@
-
-<!-- 2023-04-19 코드 주석 처리 및 로그인 전/후 로 header 부분의 우측 상단 메뉴바 다르게 수정 및 header 부분에 배송지 관리 url 매핑 / 이지환 */ 	 -->    
+<!-- html 파일이 여러번 호출되지 않도록 중복 제거 작업 / 2023-04-20 김서영 -->
+<!-- 2023-04-19 코드 주석 처리 및 로그인 전/후 로 header 부분의 우측 상단 메뉴바 다르게 수정 및 header 부분에 배송지 관리 url 매핑 / 이지환 */ 	 -->
 
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -14,30 +14,6 @@
 	String errorMsg = (String)request.getAttribute("errorMsg");
 %>
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- header css -->
-
-    <link rel="stylesheet" href="/resources/css/common/reset.css">
-    <link rel="stylesheet" href="/resources/css/common/header.css">
-
-    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-
-    <script src="/resources/js/common/header.js"></script>
-
-    <title>header</title>
-  </head>
-  <body>
-    <!-- 규칙:
-    축약형(link, emph, gnb 등)을 먼저 사용)
-    alt로 적절한 대체 텍스트 제공, 너무 긴 경우 공통클래스 blind로 제공-->
-
-
-    <!--  -->
 
     <div id="header">
       <div class="user_menu">
@@ -86,7 +62,7 @@
          </ul>
 
         <% } %>
-      
+
 
         <!-- .sign_menu -->
         <!-- 2023-04-19 / 로그인 후 상단바 코드 수정 및 css 부여 / 이지환 -->
@@ -300,7 +276,7 @@
             <a href="loginForm.me" class="btn_cart">
               <span class="blind">장바구니</span>
             </a>
-		     
+
             <% } %>
           </div>
         </ul>
@@ -317,8 +293,7 @@
           	if(emsg != null && emsg.length > 0) {
           		alert(emsg);
           	}
-          	
-    	$.noConflict();
+
 
     </script>
   </body>
