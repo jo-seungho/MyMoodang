@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"
-	import="com.kh.admin.member.model.vo.Member, java.util.ArrayList"%>
+	import="com.kh.admin.member.model.vo.AdMember, java.util.ArrayList"%>
 <%
-	ArrayList<Member> list = (ArrayList<Member>) request.getAttribute("list");
+	ArrayList<AdMember> list = (ArrayList<AdMember>) request.getAttribute("list");
 %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,7 +44,7 @@
 					</thead>
 					<tbody>
 						<%
-							for (Member m : list) {
+							for (AdMember m : list) {
 						%>
 						<tr>
 							<td><%=m.getMemberNo()%></td>
@@ -61,7 +62,6 @@
 			</div>
 			<br />
 		</main>
-	</div>
 	</div>
 
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
@@ -189,7 +189,5 @@
 			$(this).parents('.input-group').find('#status').val(text);
 		});
 	</script>
-	<!-- <script src="assets/demo/chart-area-demo.js"></script>
-    <script src="assets/demo/chart-bar-demo.js"></script> -->
 </body>
 </html>

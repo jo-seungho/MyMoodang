@@ -3,6 +3,7 @@
 <%
 
 	Notice n = (Notice)request.getAttribute("n");
+	System.out.println(n);
 	
 %>
 <!DOCTYPE html>
@@ -71,12 +72,5 @@
           </div>
         </main>
       </div>
-
-    <!-- <script src="assets/demo/chart-area-demo.js"></script>
-    <script src="assets/demo/chart-bar-demo.js"></script> -->
-    <script>
-    	
-    
-    </script>
   </body>
 </html>

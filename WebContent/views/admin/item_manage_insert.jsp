@@ -2,11 +2,12 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  	<%@ include file="common2.jsp" %>
+  	
     <title>관리자 페이지</title>
 
 
-
+	<%@ include file="common2.jsp" %>
+	
     <link rel="stylesheet" href="/resources/css/shop/item_management.css" />
     <link rel="stylesheet" href="/resources/css/shop/item_manage_insert.css" />
     <link rel="stylesheet" href="/resources/css/shop/item_manage_detail.css" />
@@ -21,8 +22,6 @@
       margin-left: 10px;
       margin-bottom: 10px;
     }
-
-    /* 고유한 */
   </style>
 
  

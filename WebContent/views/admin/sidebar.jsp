@@ -54,7 +54,7 @@
 						<div class="sb-nav-link-icon">
 							<i class="fa fa-fw fa-gift"></i>
 						</div> 상품 관리
-					</a> <a class="nav-link" href="/order.ad?page=1&category=A">
+					</a> <a class="nav-link" href="/orderList.ad">
 						<div class="sb-nav-link-icon">
 							<i class="fas fa-shopping-cart"></i>
 						</div> 주문 관리
@@ -75,7 +75,7 @@
 					<div class="collapse" id="collapseLayouts"
 						aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
 						<nav class="sb-sidenav-menu-nested nav">
-							<a class="nav-link" href="noticeList.ad">공지사항 관리</a> <a
+							<a class="nav-link" href="noticelist.ad?currentPage=1">공지사항 관리</a> <a
 								class="nav-link" href="inquiry.html">1:1 문의 관리</a> <a
 								class="nav-link" href="review.html">리뷰 관리</a>
 						</nav>

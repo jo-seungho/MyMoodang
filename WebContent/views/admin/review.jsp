@@ -31,9 +31,7 @@
           <div class="container px-6 white">
             <h2>상품 리뷰 관리</h2>
             <hr />
-            <!-- 
-            <div style="height: 60px"><button type="button" id="btn" class="btn">글쓰기</button></div> -->
-
+            
             <div>
               <button type="button" id="btn" class="btn">글쓰기</button>
               <form role="search">

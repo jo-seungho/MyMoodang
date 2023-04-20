@@ -31,9 +31,6 @@
 	margin-left: 10px;
 	margin-bottom: 10px;
 }
-
-
-/* 고유한 */
 </style>
 
 
@@ -72,37 +69,8 @@
               </tbody>
             </table>
             <br />
-
-            <div class="pagination">
-              <a href="#">&lt;</a>
-              <a class="active" href="#">1</a>
-              <a href="#">2</a>
-              <a href="#">3</a>
-              <a href="#">4</a>
-              <a href="#">5</a>
-              <a href="#">&gt;</a>
-            </div>
-          </div>
-          <br />
-        </main>
-      </div>
-    </div>
-
-    <!-- td 클릭시 notice_detail.html로 이동 -->
-    <script>
-      $(document).ready(function () {
-        $("tbody tr").click(function () {
-        	
-        	let nno = $(this).children().eq(0).text();
-          location.href = "/noticeForm.ad?nno="+nno;
-        });
-      });
-    </script>
-    <!-- <script src="assets/demo/chart-area-demo.js">
-    </script>
-    <script src="assets/demo/chart-bar-demo.js"></script>
-    -->
-    <div align="center" class="paging-area">
+            
+            <div align="center" class="paging-area">
 
 			<% if(currentPage != 1) { %>
 				<button onclick="location.href = '//noticelist.ad?currentPage=<%= currentPage - 1 %>';">
@@ -127,6 +95,21 @@
 				</button>
 			<% } %>
 
-		</div>
+			</div>
+          </div>
+          <br />
+        </main>
+      </div>
   </body>
+  
+  <script>
+      $(document).ready(function () {
+        $("tbody tr").click(function () {
+        	
+        	let nno = $(this).children().eq(0).text();
+          location.href = "/noticeForm.ad?nno="+nno;
+        });
+      });
+    </script>
+    
 </html>
