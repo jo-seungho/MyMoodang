@@ -36,11 +36,8 @@ public class NoticeDao {
 	 * @param conn
 	 * @return
 	 */
-public int selectListCount(Connection conn) {
-		
-		// SELECT 문 => ResultSet (1행 1열, 단일값, 숫자값) => int
-		
-		// 1. 필요한 변수들 먼저 셋팅
+	public int selectListCount(Connection conn) {
+	
 		int listCount = 0;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -49,15 +46,10 @@ public int selectListCount(Connection conn) {
 		String sql = prop.getProperty("selectListCount");
 		
 		try {
-			// 2. PreparedStatement 객체 생성
 			pstmt = conn.prepareStatement(sql);
 			
-			
-			
-			// 3_2. 쿼리문 실행 후 결과 받기
 			rset = pstmt.executeQuery();
 			
-			// 4. 조회된 결과를 변수로 가공하기
 			if(rset.next()) {
 				
 				listCount = rset.getInt("COUNT"); // 별칭으로도 데이터 뽑기 가능
@@ -67,12 +59,11 @@ public int selectListCount(Connection conn) {
 			e.printStackTrace();
 		} finally {
 			
-			// 5. 자원 반납 (생성 순서의 역순)
 			close(rset);
 			close(pstmt);
 		}
 		
-		// 6. 결과 반환
+
 		return listCount;
 	}
 	
@@ -85,7 +76,7 @@ public int selectListCount(Connection conn) {
 	 */
 	public ArrayList<Notice> selectNoticeList(Connection conn, PageInfo pi) {
 
-		// 필요한 변수셋팅해주고
+	
 		ArrayList<Notice> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -118,7 +109,6 @@ public int selectListCount(Connection conn) {
 
 			close(rset);
 			close(pstmt);
-
 		}
 
 		return list;
@@ -133,9 +123,6 @@ public int selectListCount(Connection conn) {
 	 */
 	public Notice selectNotice(Connection conn, int noticeNo) {
 		
-		// SELECT 문 => ResultSet (단일행 조회) => Board
-		
-		// 1. 필요한 변수들 먼저 셋팅
 		Notice n = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -176,7 +163,7 @@ public int selectListCount(Connection conn) {
 	}
 
 	/**
-	 * 관리자 공지사항 수정용 메소드 
+	 * 관리자 공지사항 업데이트 메소드 
 	 * 2023-04-19 소현아
 	 * @param conn
 	 * @return
@@ -196,7 +183,6 @@ public int selectListCount(Connection conn) {
 			pstmt.setString(2, n.getNoticeContent());
 			pstmt.setInt(3, n.getNoticeNo());
 			
-			System.out.println(n.getNoticeTitle());
 			result = pstmt.executeUpdate();
 					
 			} catch (SQLException e) {
@@ -208,7 +194,69 @@ public int selectListCount(Connection conn) {
 		
 	}
 	
-
+	/**
+	 * 관리자 공지사항 삭제 메소드
+	 * 2023-04-20 소현아
+	 * @return
+	 */
+	public int deleteNotice(Connection conn, int noticeNo) {
+		
+	
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("deleteNotice");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, noticeNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	/**
+	 * 관리자 공지사항 작성용 메소드
+	 * 2023-04-20 소현아
+	 * @return
+	 */
+	public int insertNotice(Connection conn, Notice n) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("insertNotice");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, n.getNoticeTitle());
+			pstmt.setString(2, n.getNoticeContent());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
 	
 	
 }
+	
+	
+

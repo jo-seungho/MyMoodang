@@ -3,15 +3,16 @@
 <properties>
 
 	<entry key="selectListCount">
+	<!-- 관리자 관리자 공지사항 리스트 조회수 쿼리문 / 2023-04-18 소현아  -->
 		SELECT COUNT(*) COUNT
 		  FROM NOTICE
-		 WHERE DELETE_STATUS = 'N'
+		 WHERE DELETE_STATUS = 'Y'
 		   
 	</entry>
 	
 
 	<entry key="selectNoticeList">
-		
+	<!-- 관리자 관리자 공지사항 리스트 조회용 쿼리문  / 2023-04-19 소현아  -->	
 			SELECT * 
 		 	 FROM (
 		      SELECT ROWNUM RNUM
@@ -20,27 +21,52 @@
 		                 , NOTICE_TITLE
 		                 , CREATE_DATE
 		              FROM NOTICE 
-		             WHERE DELETE_STATUS = 'N'
-		             ORDER BY CREATE_DATE DESC
+		             WHERE DELETE_STATUS = 'Y'
+		             ORDER BY CREATE_DATE DESC, NOTICE_NO DESC
 		            ) A
+		            
 		        )
 		 WHERE RNUM BETWEEN ? AND ?
 	</entry>
 	
 	<entry key="selectNotice">
+	<!-- 관리자 공지사항 수정용 쿼리문 / 2023-04-18 소현아 -->
 		SELECT NOTICE_NO
 		     , NOTICE_TITLE
 		     , NOTICE_CONTENT
 		     , CREATE_DATE
 		  FROM NOTICE 
 		 WHERE NOTICE_NO = ?
+		   AND DELETE_STATUS = 'Y'
 	</entry>
 	
 	<entry key="updateNotice">
+	<!-- 관리자 공지사항 업데이트 쿼리문 / 2023-04-19 소현아 -->
 			UPDATE NOTICE
 		  	   SET NOTICE_TITLE = ?
 		    	 , NOTICE_CONTENT = ?
 		 	 WHERE NOTICE_NO = ?
 	</entry>
+	
+	<entry key="deleteNotice">
+	<!-- 관리자 공지사항 삭제 쿼리문 / 2023-04-20 소현아 -->
+	    UPDATE NOTICE
+		   SET DELETE_STATUS = 'N'
+		 WHERE NOTICE_NO = ?
+	</entry>
+	
+	<entry key="insertNotice">
+	<!-- 관리자 공지사항 작성용 쿼리문 / 2023-04-20 소현아 -->
+		INSERT INTO NOTICE(NOTICE_NO
+		                 , NOTICE_TITLE
+		                 , NOTICE_CONTENT
+		                 , DELETE_STATUS)
+		            VALUES(SEQ_NNO.NEXTVAL
+		                 , ?
+		                 , ?
+		                 , 'Y')
+	</entry>
+	
+	
 </properties>
 

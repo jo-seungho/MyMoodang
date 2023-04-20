@@ -23,7 +23,7 @@ public class NoticeService {
 
 		int listCount = new NoticeDao().selectListCount(conn);
 
-		JDBCTemplate.close(conn);
+		close(conn);
 
 		return listCount;
 
@@ -83,25 +83,69 @@ public class NoticeService {
 	public int updateNotice(Notice n) {
 		
 		Connection conn = getConnection();
-				
-	    // 2_1. BOARD UPDATE 하는 요청 먼저 실행
+
 		int result = new NoticeDao().updateNotice(conn, n);
 				
-			
-		// 3. 트랜잭션 처리
 		if(result > 0 ) { // 둘 다 성공할 경우만 commit
 			commit(conn);
 		} else { // 하나라도 실패할 경우 rollback
 			rollback(conn);
 		}
 				
-		// 4. Connection 반납
 		close(conn);
-				
-		// 5. 결과 반환
+			
 		return result;
 	}
 	
+	/**
+	 * 관리자 공지사항 삭제 메소드
+	 * 2023-04-20 소현아
+	 * @return
+	 */
+	public int deleteNotice(int noticeNo) {
+		
+		
+		Connection conn = getConnection();
+		
+		int result = new NoticeDao().deleteNotice(conn, noticeNo);
+		
+		if(result > 0) { 
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
 	
-
+	/**
+	 * 관리자 공지사항 작성용 메소드
+	 * 2023-04-20 소현아
+	 * @return
+	 */
+	public int insertNotice(Notice n) {
+		
+		Connection conn = getConnection();
+		
+		int result = new NoticeDao().insertNotice(conn, n);
+		
+		if(result > 0) {
+			
+			commit(conn);
+		}else {
+			
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+		
+	}
+	
+	
 }
+	
+	

@@ -42,7 +42,7 @@ String category = request.getParameter("category");
 						    배송준비중 <span class="list-btn"><%= pi.getSaleCount() %></span>
 						</button>
 						<button class="btn<%= category.equals("C") ? " underline" : "" %>" id="btn3">
-						    배송중 <span class="list-btn"><%= pi.getSaleCount() %></span>
+						    배송중 <span class="list-btn"><%= pi.getSoldCount() %></span>
 						</button>
 						<button class="btn<%= category.equals("D") ? " underline" : "" %>" id="btn4">
 						    배송완료 <span class="list-btn"><%= pi.getCompleteCount() %></span>
@@ -55,20 +55,18 @@ String category = request.getParameter("category");
 				<div class="row">
 				<div class="col-12">
 					<button type="button" id="btn" class="btn">글쓰기</button>
-					<form action="/order.ad">
 					
-						<button type="submit" id="btn" class="btn" onsubmit="checkSearch();">검색하기</button>
+						<button type="button" id="btn" class="btn searchBtn">검색하기</button>
 				
 						<input type="hidden" name="page" value="<%= currentPage %>">
 						<input type="hidden" name="category" value="<%= category %>">
-						<input type="search" name="search" id="searchText" class="form-control" placeholder="검색어를 입력하세요"
+						<input type="search" name="search" class="form-control" placeholder="검색어를 입력하세요" required
 							style="width: 30%; float: right" />
 							
 						<select class="form-select-sm select-forms" name="value">
 						  <option value="MEMBER_ID">주문자 ID</option>
 						  <option value="SHIPPING_ADDR">배송주소</option>
 						</select>
-					</form>
 					</div>
 				</div>
 				<table class="table table-hover center">
@@ -189,6 +187,16 @@ String category = request.getParameter("category");
 			
 			$(document).ready(function() {
 				
+				$('.searchBtn').click(function() {
+				    var search = $('input[name="search"]').val();
+				    var value = $('select[name="value"]').val();
+				    var page = $('input[name="page"]').val();
+				    var category = $('input[name="category"]').val();
+
+				    handleButtonClick(page, category, search, value);
+				
+				
+				
 				$('.pagination a').click(function(e) {
 			        e.preventDefault(); // 기본 이벤트 방지
 			        
@@ -231,12 +239,12 @@ String category = request.getParameter("category");
 						},
 						success : function(data) {
 							alert('주문상태가 변경되었습니다.');
-							window.onload();
+							window.location.reload();
 						},
 					});
 				});
 	
-				function handleButtonClick(page, category) {
+				function handleButtonClick(page, category, search, value) {
 				    $('.btn').removeClass('underline');
 				    
 				    $(this).addClass('underline');
@@ -246,7 +254,9 @@ String category = request.getParameter("category");
 				        type: 'get',
 				        data: {
 				            page: page,
-				            category: category
+				            category: category,
+				            search : search,
+				            value : value
 				        },
 				        success: function(list) {
 				            $('main').html(list);
@@ -270,18 +280,7 @@ String category = request.getParameter("category");
 				    handleButtonClick.call(this, '1', 'D');
 				});
 			});
-			
-			function checkSearch() {
-				  var searchInput = document.getElementById("searchText");
-				  if (searchInput.value == "") {
-				    alert("Please enter a search query");
-				    return false; // prevent form submission
-				  }
-				  return true; // allow form submission
-				}
-
-			//검색어 입력안하면 경고창 띄우기
-			
+						
 						
 			</script>
 </body>

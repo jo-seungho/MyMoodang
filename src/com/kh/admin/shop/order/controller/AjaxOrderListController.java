@@ -45,7 +45,6 @@ public class AjaxOrderListController extends HttpServlet {
 		int readyCount = new OrderService().selectOrderStatusCount("배송준비중");
 		int shipCount = new OrderService().selectOrderStatusCount("배송중");
 		int completeCount = new OrderService().selectOrderStatusCount("배송완료");
-//		int listCount = new OrderService().selectListCount(searchKeyword);
 
 		AdminPageInfo pi = null;
 

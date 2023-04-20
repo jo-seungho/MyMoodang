@@ -30,8 +30,7 @@
 		, ITEM_STATUS
 		FROM ITEM
 		LEFT JOIN ITEM_IMG ON (ITEM_IMG_CODE = ITEM_CODE)
-		WHERE ITEM_IMG_LEVEL
-		= 1
+		WHERE ITEM_IMG_LEVEL = 1
 		ORDER BY ITEM_DATE
 		DESC
 		) A
@@ -148,8 +147,7 @@
 	SET ITEM_STATUS = ?
 	WHERE ITEM_CODE = ?
 	</entry>
-<<<<<<< HEAD
-=======
+
 	
 	<entry key="updateItemImg">
 	INSERT INTO ITEM_IMG(ITEM_IMG_NO
@@ -164,6 +162,5 @@
 		?,
 		?)
 	</entry>
->>>>>>> 196596e3cbd8f6632136ab98d2504c8253a658f8
 
 </properties>

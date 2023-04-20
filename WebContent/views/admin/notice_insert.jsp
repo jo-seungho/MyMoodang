@@ -3,16 +3,20 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
     <title>관리자 페이지</title>
 
-	<%@ include file="common2.jsp" %>
     <!-- include summernote css/js -->
+    
+    <script src="https://code.jquery.com/jquery-3.6.4.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
     <script src="/resources/js/common/summernote-ko-KR.js"></script>
     <script src="/resources/js/common/summernote-ko-KR.min.js"></script>
-    
   </head>
 
   <style>
@@ -23,18 +27,15 @@
       float: right;
       margin-right: 4px;
     }
-
     /* 자체적인 css */
     .row {
       float: none;
       margin: 0 auto;
     }
-
     /* col과 input text 라인 맞춰주기 */
     .col {
       line-height: 35px;
     }
-
     .btns {
       height: 100%;
       margin-top: 15px;
@@ -43,6 +44,7 @@
 
   <body class="sb-nav-fixed">
   	<%@ include file="sidebar.jsp" %>
+    
 
       <div id="layoutSidenav_content">
         <main style="height: 100%">
@@ -51,12 +53,14 @@
             <h2>공지사항 작성</h2>
             <hr />
 
-            <form action="insert.no" method="POST">
+            <form action="/noticeInsert.ad" method="post">
+            
+            
               <div class="row center">
-                <div class="col-xl-12"><input text class="form-control col-xl-6" value="" placeholder="제목을 입력해주세요" /></div>
+                <div class="col-xl-12"><input type="text" name="title" class="form-control col-xl-6" value="" placeholder="제목을 입력해주세요" /></div>
               </div>
               <br />
-              <textarea id="summernote"></textarea>
+              <textarea id="summernote" name="content"></textarea>
               <div class="btns">
                 <button id="btn" class="btn" type="reset">취소</button>
                 <button id="btn" class="btn" type="submit">작성</button>
@@ -90,6 +94,7 @@
             });
           });
           
+          $.noConflict();
         </script>
       </div>
 

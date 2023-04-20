@@ -1,6 +1,7 @@
 package com.kh.admin.shop.order.model.dao;
 
 import static com.kh.common.JDBCTemplate.close;
+import static com.kh.common.JDBCTemplate.getConnection;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -126,6 +127,47 @@ public class OrderDao {
 
 		return list;
 	}
+	
+	//모든 검색결과에 대한 서치리스트
+	public ArrayList<Order> selectSearchAllOrderList(Connection conn, AdminPageInfo pi, String search, String value) {
+		ArrayList<Order> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		// 2. 쿼리문 작성
+		String sql = prop.getProperty("selectSearchAllOrderList");
+
+		// 3. 쿼리문 실행
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
+
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+
+			rset = pstmt.executeQuery();
+
+			while (rset.next()) {
+
+				list.add(new Order(rset.getInt("ORDER_NO"),
+						rset.getString("MEMBER_ID"),rset.getInt("PAYMENT_AMOUNT"),
+						rset.getString("ORDER_DATE"),rset.getString("SHIP_ADDR"),
+						rset.getString("ORDER_STATUS")
+						));
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return list;
+	}
+	
 
 	public ArrayList<Order> selectStatusOrderList(Connection conn, AdminPageInfo pi, String category) {
 
@@ -202,5 +244,10 @@ public class OrderDao {
 		
 		return o;
 	}
+
+
+
+	
+	
 
 }
