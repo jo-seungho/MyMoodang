@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.common.model.vo.PageInfo;
-import com.kh.user.board.inquiry.model.vo.Inquiry;
+import com.kh.admin.board.inquiry.model.vo.Inquiry;
 
 
 public class InquiryDao {

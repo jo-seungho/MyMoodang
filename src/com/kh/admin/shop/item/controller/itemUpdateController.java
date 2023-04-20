@@ -29,32 +29,12 @@ public class itemUpdateController extends HttpServlet {
 
 	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		request.setCharacterEncoding("UTF-8");
 		
-		if (ServletFileUpload.isMultipartContent(request)) {
-			
-			int maxSize = 1024 * 1024 * 10;
-			
-			String savePath = request.getSession().getServletContext().getRealPath("/resources/item_upfiles/");
-			
-			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8",
-					new MyFileRenamePolicy());
-			
-			ArrayList<ItemImg> list = new ArrayList<ItemImg>();
-			
-			for (int i = 1; i <= 4; i++) {
-				String key = "file" + i;
-				if (multiRequest.getOriginalFileName(key) != null) {
-					ItemImg img = new ItemImg();
-				}
-			}
 		}
-		
-		//1. ==null인 경우 (사진안바꿈. 그대로 유지) else { 사진 한개라도 바뀜. 반복문으로 각 사진의 이름을 구해옴.
-		// multiRequest.getOriginalFileName(key) != null) 을 통해 
-	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

@@ -117,7 +117,6 @@
 		JOIN ITEM_IMG ON
 		ITEM_CODE = ITEM_IMG_CODE
 		WHERE ITEM_CODE = ?
-		AND ITEM_STATUS = 'Y'
 	</entry>
 
 	<entry key="updateItem">
@@ -147,6 +146,21 @@
 	<entry key="deleteItem">
 	UPDATE ITEM 
 	SET ITEM_STATUS = ?
+	WHERE ITEM_CODE = ?
+	</entry>
+	
+	<entry key="updateItemImg">
+	INSERT INTO ITEM_IMG(ITEM_IMG_NO
+		, ITEM_IMG_CODE
+		,
+		ITEM_IMG_LEVEL
+		, ITEM_IMG_PATH)
+
+		VALUES(
+		SEQ_IIMGNO.NEXTVAL,
+		?,
+		?,
+		?)
 	</entry>
 
 </properties>
