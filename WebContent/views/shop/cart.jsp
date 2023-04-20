@@ -86,9 +86,16 @@
 											<!-- 이미지자리 ^-->
 											<div class="price">
 												<div class="in_price">
-													<input class="selling1" type="hidden" value="<%= c.getPrice() %>">
-													<span class="selling"><%= c.getTotalPrice() %> <span class="won">원</span>
-													<input class="totalMoney" type="hidden" value="<%= c.getTotalPrice() %>">
+													<input class="noDis" type="hidden" value="<%= c.getPrice() %>">
+													<input class="noDisTotal" type="hidden" value="<%= c.getTotalPrice() %>">
+													<input class="selling1" type="hidden" value="<%= c.getDiscountPrice() %>">
+													<span class="selling">
+													<%= (int)(Math.log10(c.getTotalDiscountPrice())+1) > 3
+																					  ?  Integer.toString(c.getTotalDiscountPrice()).replaceAll("\\B(?=(\\d{3})+(?!\\d))", ",")
+																					  : c.getTotalDiscountPrice()%>
+													
+													 <span class="won">원</span>
+													<input class="totalMoney" type="hidden" value="<%= c.getTotalDiscountPrice() %>">
 													</span>
 													<p class="noti"></p>
 												</div>
@@ -141,7 +148,7 @@
 						<dl class="amount">
 							<dt class="tit">상품금액</dt>
 							<dd class="price">
-								<span class="num">6,000</span>
+								<span class="num noDiscount"></span>
 								<!-- product price here-->
 								<span class="won">원</span>
 							</dd>
@@ -149,13 +156,13 @@
 						<dl class="amount">
 							<dt class="tit">상품할인금액</dt>
 							<dd class="price">
-								<span class="num">0</span> <span class="won">원</span>
+								<span class="num difference">0</span> <span class="won">원</span>
 							</dd>
 						</dl>
 						<dl class="amount">
 							<dt class="tit">배송비</dt>
 							<dd class="price">
-								<span class="num">0</span> <span class="won">원</span>
+								<span class="num">3,000</span> <span class="won">원</span>
 							</dd>
 						</dl>
 						<dl class="amount lst">
@@ -191,58 +198,24 @@
 			</div>
 		</div>
 	</div>
-	<!--
 		<script>
+		// 최조 랜더링시 총액 보여주는 용도
+		
+		// 할인된 총 금액 담을 변수
 		let sumMoney = 0;
+		// 원가 총 금액 담을 변수
+		let sumNoDis = 0;
 		$('.in_price').each(function() {
 		  var totalMoneyVal = $(this).find('.totalMoney').val();
-		  sumMoney += Number(totalMoneyVal)
+		  var noDisMoney = $(this).find('.noDisTotal').val();
+		  sumMoney += Number(totalMoneyVal);
+		  sumNoDis += Number(noDisMoney)
 		});
 		console.log(sumMoney);
 		$('.countMoney').text(sumMoney);
-
-		$('.plusAdd').click(function() {
-
-			$('.countMoney').text(sumMoney);
-		})
+		$('.noDiscount').text(sumNoDis);
+		$('.difference').text(sumNoDis - sumMoney);
+		
 	</script>
-	 -->
-	<script>
-	$(document).on('click', '.plusAdd', function() {
-		  var $input = $(this).prev('.num');
-		  var currentValue = parseInt($input.val());
-		  var totalPrice = parseInt($(this).closest('.price').find('.totalMoney').val());
-
-		  console.log($input)
-		  console.log(currentValue)
-		  console.log(totalPrice)
-
-		  // input 값과 totalPrice 값 업데이트
-		  // $input.val(currentValue + 1);
-		  $(this).closest('.price').find('.totalMoney').val(totalPrice + parseInt($(this).closest('.price').find('.selling1').val()));
-		});
-
-		$(document).on('click', '.minus', function() {
-		  var $input = $(this).next('.num');
-		  var currentValue = parseInt($input.val());
-		  var totalPrice = parseInt($(this).closest('.price').find('.totalMoney').val());
-
-		  // input 값과 totalPrice 값 업데이트
-		  if(currentValue > 1) {
-		    $input.val(currentValue - 1);
-		    $(this).closest('.price').find('.totalMoney').val(totalPrice - parseInt($(this).closest('.price').find('.selling1').val()));
-		  }
-		});
-
-		// 페이지 로드시 초기값 설정
-		$('.totalMoney').each(function() {
-		  var totalPrice = parseInt($(this).val());
-		  var currentValue = parseInt($(this).closest('.price').find('.num').val());
-		  $(this).closest('.price').find('.num').val(currentValue);
-		});
-
-	</script>
-
-
 </body>
 </html>
