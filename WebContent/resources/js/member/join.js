@@ -105,7 +105,7 @@ function validate() {
 			if(result.success == 'Y') { // 가입 성공
 				alert(result.message);
 				console.log("성공");
-				location.href = "/";
+				location.href = "/main";
 			} else { // 가입 실패
 				alert(result.message);
 				console.log("실패");

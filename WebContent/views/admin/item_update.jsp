@@ -1,20 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="com.kh.admin.shop.item.model.vo.*, java.util.ArrayList"%>
+<% 
+		ArrayList<ItemImg> list = (ArrayList<ItemImg>) request.getAttribute("list");
+		Item i = (Item) request.getAttribute("item"); 
+		String category = i.getItemCategory(); 
+
+%>
 <!DOCTYPE html>
-<% ArrayList<ItemImg>
-  list = (ArrayList<ItemImg
-    >) request.getAttribute("list"); Item i = (Item) request.getAttribute("item"); String category = i.getItemCategory(); %>
-    <html lang="en">
+   <html lang="en">
       <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
+      	<%@ include file="common2.jsp" %>
         <title>관리자 페이지</title>
-
-        <!-- jquery 및 라이브러리 -->
-
-        <!-- 커스텀 js css -->
       </head>
 
       <style>
@@ -37,85 +32,7 @@
 
       <body class="sb-nav-fixed">
         <%@ include file="sidebar.jsp"%>
-        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-          <!-- Navbar Brand-->
-          <a class="navbar-brand ps-3" href="index.html">
-            <div><i class="fas fa-bug" style="color: red"></i><b>&nbsp; MY MOODANG</b></div>
-          </a>
-          <!-- Sidebar Toggle-->
-          <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!">
-            <i class="fas fa-bars"></i>
-          </button>
-          <!-- Navbar Search-->
-          <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-            <div class="input-group"></div>
-          </form>
-          <!-- Navbar-->
-          <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
-              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#!">Logout</a></li>
-              </ul>
-            </li>
-          </ul>
-        </nav>
-        <div id="layoutSidenav">
-          <div id="layoutSidenav_nav">
-            <nav class="sb-sidenav accordion sb-sidenav-dark --bs-blue" id="sidenavAccordion">
-              <div class="sb-sidenav-menu">
-                <div class="nav">
-                  <div class="text-center">
-                    <img src="/resources/img/logo.png" class="rounded logo" alt="로고" />
-                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                      <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">관리자</a>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                          <li><a class="dropdown-item" href="#!">로그아웃</a></li>
-                        </ul>
-                      </li>
-                    </ul>
-                  </div>
-                  <a class="nav-link" href="main.html">
-                    <div class="sb-nav-link-icon">
-                      <i class="fas fa-home"></i>
-                    </div>
-                    메인 / 통계
-                  </a>
-                  <a class="nav-link" href="item.html">
-                    <div class="sb-nav-link-icon">
-                      <i class="fa fa-fw fa-gift"></i>
-                    </div>
-                    상품 관리
-                  </a>
-                  <a class="nav-link" href="order.html">
-                    <div class="sb-nav-link-icon">
-                      <i class="fas fa-shopping-cart"></i>
-                    </div>
-                    주문 관리
-                  </a>
-                  <a class="nav-link" href="member.html">
-                    <div class="sb-nav-link-icon">
-                      <i class="fas fa-chart-area"></i>
-                    </div>
-                    회원 관리
-                  </a>
-                  <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                    <div class="sb-nav-link-icon">
-                      <i class="fas fa-list"></i>
-                    </div>
-                    게시판 관리
-                    <div class="sb-sidenav-collapse-arrow">
-                      <i class="fas fa-angle-down"></i>
-                    </div>
-                  </a>
-                  <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                    <nav class="sb-sidenav-menu-nested nav"><a class="nav-link" href="notice.html">공지사항 관리</a> <a class="nav-link" href="inquiry.html">1:1 문의 관리</a> <a class="nav-link" href="review.html">리뷰 관리</a></nav>
-                  </div>
-                </div>
-              </div>
-            </nav>
-          </div>
+        
 
           <div id="layoutSidenav_content">
             <div class="container px-6 white">
@@ -127,8 +44,8 @@
                   <form method="POST" action="/itemUpdate.ad" enctype="multipart/form-data">
                     <div class="col">
                       <img id="titleImg" src=" <%= i.getItemImg() %> " class="img-thumbnail" style="width: 500px; height: 300px" />
-                    </div>
-                    <label for="titleImg" style="margin-bottom: 10px" id="img0"><%= list.get(0).getItemImg() %></label>
+                    </div>													
+                    <label for="titleImg" style="margin-bottom: 10px" id="img0"><%= i.getImgName() %></label>
 
                     <div class="col form-floating mb-4"><input type="text" class="form-control" name="name" value="<%=i.getItemName()%>" /> <label for="floatingInput">* 상품명</label></div>
                     <div class="col form-floating mb-3"><input type="number" class="form-control" name="stock" value="<%=i.getItemStock()%>" /> <label for="floatingPassword">* 수량(재고)</label></div>
@@ -156,22 +73,24 @@
 
                     <div class="col form-floating mb-3">
                       <select class="form-select" id="category" name="category">
-                        <option value="1">제로음료</option>
-                        <option value="2">단백질</option>
-                        <option value="3">무가당</option>
+                        <option value="1" <% if (i.getItemCategory().equals("제로음료")) out.print("selected"); %>>제로음료</option>
+                        <option value="2" <% if (i.getItemCategory().equals("단백질")) out.print("selected"); %>>단백질</option>
+                        <option value="3" <% if (i.getItemCategory().equals("무가당")) out.print("selected"); %>>무가당</option>
                       </select>
                       <label for="floatingSelect">* 카테고리</label>
                     </div>
 
                     <div>
-                      <img id="detailImg1" src="" class="img-thumbnail" style="width: 200px; height: 200px" />
-                      <img id="detailImg2" src="" class="img-thumbnail" style="width: 200px; height: 200px" />
-                      <img id="detailImg3" src="" class="img-thumbnail" style="width: 200px; height: 200px" />
+                      <img id=detailImg1 src="" class="img-thumbnail" style="width: 200px; height: 200px" />
+                      <img id=detailImg2 src="" class="img-thumbnail" style="width: 200px; height: 200px" />
+                      <img id=detailImg3 src="" class="img-thumbnail" style="width: 200px; height: 200px" />
                     </div>
 
                     <div class="row">
+                    <% if(!list.isEmpty()) { %>
                       <% for(int j = 1; j < list.size(); j++) { %>
-                      <p class="col" id="img<%=j%>" style="font-size: 13px"><%= list.get(j).getItemImg() %></p>
+                      <p class="div" id="img<%=j%>" style="font-size: 13px"><%= list.get(j).getItemImg() %></p>
+                      <% } %>
                       <% } %>
                     </div>
 
@@ -181,7 +100,13 @@
                       <input type="file" id="file3" name="file3" onchange="loadImg(this, 3);" />
                       <input type="file" id="file4" name="file4" onchange="loadImg(this, 4);" />
                     </div>
-
+                    
+                    	<input type="hidden" name="code" value=<%= i.getItemCode() %> />
+                    
+                    <% for (int j = 0; j < Math.min(list.size(), 3); j++) { %>
+					    <input type="hidden" name="names<%= j+1 %>" value="<%= list.get(j).getItemImg() %>">
+					    
+					<% } %>
                     <div class="insert-form">
                       <button class="btn btn-primary" id="addBtn" style="margin-top: 40px; font-size: larger">수정</button>
                       <a href="/itemDetail.ad?code=<%=i.getItemCode()%>" class="btn btn-primary" id="listBtn" style="margin-top: 40px; font-size: larger">목록</a> <a href="/itemDelete.ad?code=<%=i.getItemCode()%>" class="btn btn-primary" id="listBtn" style="margin-top: 40px; font-size: larger">삭제</a>
@@ -193,7 +118,6 @@
               </div>
             </div>
           </div>
-        </div>
 
         <!-- layoutSidenav_content -->
 
@@ -322,5 +246,3 @@
     -->
       </body>
     </html>
-  </ItemImg>
-</ItemImg>

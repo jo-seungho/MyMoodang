@@ -9,7 +9,7 @@ window.addEventListener('DOMContentLoaded', function () {
 //	console.log(urlParams.get("category"));
 
   $(document).ready(function () {
-
+	  
 	  // 파라미터 값을 가져옴
 	  const params = new URLSearchParams(location.search);
 	  
@@ -316,39 +316,6 @@ window.addEventListener('DOMContentLoaded', function () {
 
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     $('.name_select').click(function () {
       $(".checked").toggle(function () {
         $('.name_select').css('color', '#5f0080');
@@ -358,52 +325,14 @@ window.addEventListener('DOMContentLoaded', function () {
 
 
 
-    // $('.btn_type1 .txt_type').click(function(){
 
-
-
-
-    //     product_name = $('#cartPut .list_goods .name');
-    //     console.log(product_name.text());
-
-    //     $.ajax({
-    //       type: "GET",
-    //       url: "./id_check?id="+product_name,    //해당 url로 데이터를 넘김
-    //       data: {
-    //         'username': $('#cartPut .list_goods .name').text()
-    //       },
-    //       datatype: 'json',
-    //       success: function (data) {
-    //         console.log(data['overlap']);
-    //         if (data['overlap'] == "fail") {
-    //           console.log('성공');
-    //           return;
-    //         } else {
-    //           console.log('성공');
-    //           return;
-    //         }
-    //       }
-    //     });
-    // });
-
-
-
-
-
-
-
+     
 
 
     // console.log(window.location.href, "주소값");
 
 
-
-
-
-
-
   });
-
 
 
 });

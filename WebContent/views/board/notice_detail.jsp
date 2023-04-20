@@ -11,20 +11,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- header css -->
 
-    <link rel="stylesheet" href="../css/reset.css" />
-    <link rel="stylesheet" href="../css/header.css" />
-    <link rel="stylesheet" href="/resources/css/board/notice_detail.css">
-    <link rel="stylesheet" href="../css/footer.css">
+	<!-- 중복되는 헤더, 푸터, 리셋 css & 제이쿼리 & 헤더 js 담은 common.jsp / 2023-04-20 김서영 -->
+	<%@ include file="../common/common.jsp"%>
 
-    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <script defer src="../js/header.js"></script>
+    <link rel="stylesheet" href="/resources/css/board/notice_detail.css">
 
     <title>공지사항상세</title>
   </head>
   <body>
- 
+
 		<%@ include file="../common/header.jsp" %>
-		
+
                     <!-- 공지사항 페이지 시작 -->
 
           <div class="notice_detail">
@@ -32,8 +29,8 @@
              <div class="notice_detail_title">
                <p>마이무당의 새로운 소식들과 유용한 정보들을 한곳에서 확인하세요.</p>
              </div>
-             
-             		
+
+
              		<br><br>
 
 
@@ -55,21 +52,16 @@
                  </div>
                  <div class="cont" align="left"><%=n.getNoticeContent() %></div>
 
-                 
+
              </div>
             </div>
            </div>
 
              <br><br>
 
-                           
-
-
-
-
                         <!-- 공지사항 끝 -->
 <%@ include file="../common/footer.jsp" %>
 
-                       
+
   </body>
 </html>

@@ -29,147 +29,6 @@ public class MemberDao {
 
 	}
 
-//  ---------------------------------- 어드민 부분 -------------------------
-	/*
-	 * 어드민 회원관리 페이지에서 회원 리스트 불러오는 메소드 2023-04-14 최명진
-	 *
-	 * @param selectMemberList
-	 *
-	 * @return
-	 */
-	public ArrayList<Member> selectMemberListAd(Connection conn) {
-
-		ArrayList<Member> list = new ArrayList<Member>();
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-
-		String sql = prop.getProperty("selectMemberListAd");
-
-		try {
-			pstmt = conn.prepareStatement(sql);
-			rset = pstmt.executeQuery();
-
-			while (rset.next()) {
-				Member m = new Member();
-				m.setMemberNo(rset.getInt("MEMBER_NO"));
-				m.setMemberId(rset.getString("MEMBER_ID"));
-				m.setPassword(rset.getString("PASSWORD"));
-				m.setName(rset.getString("NAME"));
-				m.setBirthDate(rset.getString("BIRTH_DATE"));
-				m.setGender(rset.getString("GENDER"));
-				m.setEmail(rset.getString("EMAIL"));
-				m.setPhone(rset.getString("PHONE"));
-				m.setEnrollDate(rset.getString("ENROLL_DATE"));
-				m.setModifyDate(rset.getString("MODIFY_DATE"));
-				m.setStatus(rset.getString("STATUS"));
-				m.setTotalMoney(rset.getInt("TOTAL_MONEY"));
-				m.setGradeNo(rset.getString("GRADE_NAME"));
-
-				list.add(m);
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				rset.close();
-				pstmt.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-
-		return list;
-	}
-
-	/**
-	 * 어드민 상세조회에서 회원 정보 변경하는 메소드 2023-04-14 최명진
-	 *
-	 * @param m
-	 * @return
-	 */
-	public int updateMemberAd(Connection conn, Member m) {
-
-		int result = 0;
-
-		PreparedStatement pstmt = null;
-
-		String sql = prop.getProperty("updateMemberAd");
-
-		try {
-			pstmt = conn.prepareStatement(sql);
-
-			pstmt.setString(1, m.getGradeNo());
-			pstmt.setString(2, m.getStatus());
-			pstmt.setInt(3, m.getMemberNo());
-
-			result = pstmt.executeUpdate();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				pstmt.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-
-		return result;
-	}
-
-	/*
-	 * 어드민 회원관리 페이지에서 회원 상세 정보 불러오는 메소드 2023-04-14 최명진
-	 *
-	 * @param selectMemberList
-	 *
-	 * @return
-	 */
-	public Member selectMemberAd(Connection conn, int id) {
-
-		Member m = null;
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-
-		String sql = prop.getProperty("selectMemberAd");
-
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, id);
-			rset = pstmt.executeQuery();
-
-			if (rset.next()) {
-				m = new Member();
-				m.setMemberNo(rset.getInt("MEMBER_NO"));
-				m.setMemberId(rset.getString("MEMBER_ID"));
-				m.setPassword(rset.getString("PASSWORD"));
-				m.setName(rset.getString("NAME"));
-				m.setBirthDate(rset.getString("BIRTH_DATE"));
-				m.setGender(rset.getString("GENDER"));
-				m.setEmail(rset.getString("EMAIL"));
-				m.setPhone(rset.getString("PHONE"));
-				m.setEnrollDate(rset.getString("ENROLL_DATE"));
-				m.setModifyDate(rset.getString("MODIFY_DATE"));
-				m.setStatus(rset.getString("STATUS"));
-				m.setTotalMoney(rset.getInt("TOTAL_MONEY"));
-				m.setGradeNo(rset.getString("GRADE_NAME"));
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				rset.close();
-				pstmt.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-
-		return m;
-
-	}
-
 	/**
 	 * 가입하는 회원의 회원번호 조회용 메소드 2023-04-14 김서영
 	 *
@@ -376,6 +235,7 @@ public class MemberDao {
 				m.setMemberId(rset.getString("MEMBER_ID"));
 				m.setEmail(rset.getString("EMAIL"));
 				m.setName(rset.getString("NAME"));
+				m.setPhone(rset.getString("PHONE"));
 				m.setGender(rset.getString("GENDER"));
 				m.setBirthDate(rset.getString("BIRTH_DATE"));
 			}
@@ -390,42 +250,6 @@ public class MemberDao {
 		return m;
 	}
 
-	/* 2023.04.17 이지환 */
-	public ArrayList<ShippingAddress> selectShippingAddressList(Connection conn, int memberNo) {
-
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		ArrayList<ShippingAddress> shippingAddressList = new ArrayList<>();
-
-		String sql = prop.getProperty("selectShippingAddress");
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, memberNo);
-
-			rset = pstmt.executeQuery();
-
-			while (rset.next()) {
-				ShippingAddress sa = new ShippingAddress();
-				sa.setShipNo(rset.getInt("SHIP_NO"));
-				sa.setShipAddr(rset.getString("SHIP_ADDR"));
-				sa.setShipAddrInfo(rset.getString("SHIP_ADDR_INFO"));
-				sa.setPhone(rset.getString("PHONE"));
-				sa.setShipName(rset.getString("SHIP_NAME"));
-				sa.setMemberNo(rset.getInt("MEMBER_NO"));
-				sa.setZipcode(rset.getString("ZIPCODE"));
-				shippingAddressList.add(sa);
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			JDBCTemplate.close(rset);
-			JDBCTemplate.close(pstmt);
-		}
-
-		return shippingAddressList;
-	}
-
 	/**
 	 * 2023-04-18 로그인 기능 이지환
 	 * @param conn
@@ -433,28 +257,28 @@ public class MemberDao {
 	 * @return
 	 */
 	public Member loginUser(Connection conn, Member m) {
-			
+
 			// 로그인 하려면 어떤 게 필요할까 고민하자.
 			// => SELECT문이 필요함 => ResultSet 객체 (unique 제약조건 때문에 단일행 조회) => Member 가공
-			
+
 			// 1. 필요한 변수 먼저 셋팅
 			Member loginUser = null;
-			
+
 			PreparedStatement pstmt = null;
 			ResultSet rset = null;
-			
-			
+
+
 			// 실행할 쿼리문까지 변수로 담음
 			String sql = prop.getProperty("loginUser");
-			
+
 			 try {
 			        pstmt = conn.prepareStatement(sql);
 			        pstmt.setString(1, m.getMemberId());
 			        pstmt.setString(2, m.getPassword());
-			        
+
 			        rset = pstmt.executeQuery();
-			        
-			        
+
+
 			   if (rset.next()) {
 						loginUser = new Member(rset.getInt("MEMBER_NO")
 									 , rset.getString("MEMBER_ID")
@@ -470,7 +294,7 @@ public class MemberDao {
 									 , rset.getInt("TOTAL_MONEY")
 									 , rset.getString("GRADE_NO"));
 					}
-					
+
 			    } catch (SQLException e) {
 			        e.printStackTrace();
 			    } finally {
@@ -478,8 +302,48 @@ public class MemberDao {
 			        JDBCTemplate.close(pstmt);
 			    }
 			    return loginUser;
-			
+
 		}
+	
+	/**
+	 * 2023.04.19 / 내 배송지 관리 중 내 배송지 목록 조회 / 이지환
+	 * @param conn
+	 * @param memberNo
+	 * @return
+	 */
+	public ArrayList<ShippingAddress> selectShippingAddressList(Connection conn, int memberNo) {
+
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<ShippingAddress> shippingAddressList = new ArrayList<>();
+
+		String sql = prop.getProperty("selectShippingAddressList");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memberNo);
+
+			rset = pstmt.executeQuery();
+
+			while (rset.next()) {
+                ShippingAddress shippingAddress = new ShippingAddress();
+                shippingAddress.setShipNo(rset.getInt("SHIP_NO"));
+                shippingAddress.setShipAddr(rset.getString("SHIP_ADDR"));
+                shippingAddress.setShipAddrInfo(rset.getString("SHIP_ADDR_INFO"));
+                shippingAddress.setPhone(rset.getString("PHONE"));
+                shippingAddress.setShipName(rset.getString("SHIP_NAME"));
+                shippingAddress.setMemberNo(rset.getInt("MEMBER_NO"));
+                shippingAddress.setZipcode(rset.getString("ZIPCODE"));
+                shippingAddressList.add(shippingAddress);
+            }
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+
+		return shippingAddressList;
+	}
 
 
 

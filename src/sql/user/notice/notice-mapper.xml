@@ -35,7 +35,7 @@
 		 WHERE NOTICE_NO = ?
 	</entry>
 	
-	<entry key="selectBoard">
+	<entry key="selectNotice">
 		SELECT NOTICE_NO
 		     , NOTICE_TITLE
 		     , NOTICE_CONTENT

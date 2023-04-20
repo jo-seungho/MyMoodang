@@ -19,6 +19,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>베스트 상품 게시판</title>
 
+	<!-- 중복되는 헤더, 푸터, 리셋 css & 제이쿼리 & 헤더 js 담은 common.jsp / 2023-04-20 김서영 -->
+	<%@ include file="../common/common.jsp"%>
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <link rel="stylesheet" href="/resources/css/shop/best_item_list.css" />
@@ -111,7 +114,7 @@
 													<img src="<%= i.getItemImg() %>"
 													onerror="this.src='https://res.kurly.com/mobile/img/1808/img_none_x2.png'"
 													width="308" height="396">
-												</a> 
+												</a>
 
 												<div class="group_btn">
 													<button type="button" name="chk" value="여기다가 프로덕트 아이디 적어주삼"
@@ -121,12 +124,12 @@
 												</div>
 											</div>
 
-											<a href="/item.detail?bno=<%= i.getItemCode() %>" class="info"> 
-											<span class="name"> <%= i.getItemName() %> </span> 
-											<span class="cost"> <span class="price"><%= i.getItemPrice() %></span> 
-											<input type="hidden" id="product_cost1" value=1300> 
+											<a href="/item.detail?bno=<%= i.getItemCode() %>" class="info">
+											<span class="name"> <%= i.getItemName() %> </span>
+											<span class="cost"> <span class="price"><%= i.getItemPrice() %></span>
+											<input type="hidden" id="product_cost1" value=1300>
 											<span class="dodo">원</span>
-											</span> <span class="desc"><%= i.getItemText() %></span> 
+											</span> <span class="desc"><%= i.getItemText() %></span>
 											<span class="tag"><%-- 수량이나 날짜 등 필요하면 이 위치에 --%></span>
 											</a>
 										</div>
@@ -141,16 +144,7 @@
 						</div>
 					</div>
 				</div>
-
-
-
 			</div>
-
-
-
-
-
-
 			<div id="viewOrderList" class="page_section section_orderlist">
 
 				<div id="viewOrderList" class="page_section section_orderlist">
@@ -164,27 +158,27 @@
 								<% if(currentPage != 1) { %>
 								<a href="/bestItemList.it?currentPage=<%= startPage %>"
 									class="layout-pagination-button layout-pagination-first-page">맨 처음 페이지로 가기
-								</a> 
+								</a>
 								<a href="/bestItemList.it?currentPage=<%= currentPage - 1 %>" class="layout-pagination-button layout-pagination-prev-page">
 									이전 페이지로 가기
-								</a> 
+								</a>
 								<% } else {%>
 								<a href="javascript:void(0)"
 									class="layout-pagination-button layout-pagination-first-page">맨 처음 페이지로 가기
-								</a> 
+								</a>
 								<a href="javascript:void(0)" class="layout-pagination-button layout-pagination-prev-page">
 									이전 페이지로 가기
-								</a> 
+								</a>
 								<% } %>
 								<% for(int p = startPage; p <= endPage; p++) { %>
 									<% if(p != currentPage) { %>
-								<a href="/bestItemList.it?currentPage=<%= p %>"> 
-									<span> 
+								<a href="/bestItemList.it?currentPage=<%= p %>">
+									<span>
 										<strong class="layout-pagination-button layout-pagination-number __active"><%= p %></strong>
 									</span>
-								</a> 
+								</a>
 									<% } else { %>
-									<span> 
+									<span>
 										<strong class="layout-pagination-button layout-pagination-number __active"
 										style="background-color: #fbb6b6;"><%= p %></strong>
 									</span>
@@ -193,7 +187,7 @@
 								<% if(currentPage != maxPage) { %>
 								 <a href="/bestItemList.it?currentPage=<%= currentPage + 1 %>" class="layout-pagination-button layout-pagination-next-page">
 								 다음 페이지로 가기
-								 </a> 
+								 </a>
 								 <a href="/bestItemList.it?currentPage=<%= endPage %>" class="layout-pagination-button layout-pagination-last-page">
 								 맨끝 페이지로 가기
 								 </a>
@@ -203,13 +197,11 @@
 								</a>
 								<a href="javascript:void(0)" class="layout-pagination-button layout-pagination-last-page">
 								 맨끝 페이지로 가기
-								 </a>								 
+								 </a>
 								 <% } %>
 
 							</div>
 						</div>
-
-
 					</div>
 				</div>
 			</div>
@@ -270,10 +262,6 @@
 
 
 	<%@ include file="../common/footer.jsp"%>
-
-	<script>
-	$.noConflict();
-	</script>
 
 </body>
 </html>

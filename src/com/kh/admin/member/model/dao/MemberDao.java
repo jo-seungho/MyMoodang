@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.common.JDBCTemplate;
-import com.kh.admin.member.model.vo.Member;
+import com.kh.admin.member.model.vo.AdMember;
 import com.kh.admin.member.model.vo.ShippingAddress;
 
 public class MemberDao {
@@ -37,9 +37,9 @@ public class MemberDao {
 	 *
 	 * @return
 	 */
-	public ArrayList<Member> selectMemberListAd(Connection conn) {
+	public ArrayList<AdMember> selectMemberListAd(Connection conn) {
 
-		ArrayList<Member> list = new ArrayList<Member>();
+		ArrayList<AdMember> list = new ArrayList<AdMember>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
@@ -50,7 +50,7 @@ public class MemberDao {
 			rset = pstmt.executeQuery();
 
 			while (rset.next()) {
-				Member m = new Member();
+				AdMember m = new AdMember();
 				m.setMemberNo(rset.getInt("MEMBER_NO"));
 				m.setMemberId(rset.getString("MEMBER_ID"));
 				m.setPassword(rset.getString("PASSWORD"));
@@ -88,7 +88,7 @@ public class MemberDao {
 	 * @param m
 	 * @return
 	 */
-	public int updateMemberAd(Connection conn, Member m) {
+	public int updateMemberAd(Connection conn, AdMember m) {
 
 		int result = 0;
 
@@ -125,9 +125,9 @@ public class MemberDao {
 	 *
 	 * @return
 	 */
-	public Member selectMemberAd(Connection conn, int id) {
+	public AdMember selectMemberAd(Connection conn, int id) {
 
-		Member m = null;
+		AdMember m = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
@@ -139,7 +139,7 @@ public class MemberDao {
 			rset = pstmt.executeQuery();
 
 			if (rset.next()) {
-				m = new Member();
+				m = new AdMember();
 				m.setMemberNo(rset.getInt("MEMBER_NO"));
 				m.setMemberId(rset.getString("MEMBER_ID"));
 				m.setPassword(rset.getString("PASSWORD"));
@@ -251,7 +251,7 @@ public class MemberDao {
 	 * @param m
 	 * @return
 	 */
-	public int insertMember(Connection conn, Member m) {
+	public int insertMember(Connection conn, AdMember m) {
 
 		int result = 0;
 		PreparedStatement pstmt = null;

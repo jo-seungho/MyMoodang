@@ -9,10 +9,13 @@
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	ArrayList<Inquiry> list = (ArrayList<Inquiry>)request.getAttribute("list");
 
+
 	int currentPage = pi.getCurrentPage();
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage();
 	int maxPage = pi.getMaxPage();
+
+
 %>
 <!--  jsp 변환 / 2023-04-18 김서영 -->
 <!DOCTYPE html>
@@ -29,22 +32,21 @@
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 
-<link rel="stylesheet" href="/resources/css/common/reset.css" />
-<link rel="stylesheet" href="/resources/css/common/header.css" />
-<link rel="stylesheet" href="/resources/css/board//one.css">
-<link rel="stylesheet" href="/resources/css/common/footer.css">
+	<!-- 중복되는 헤더, 푸터, 리셋 css & 제이쿼리 & 헤더 js 담은 common.jsp / 2023-04-20 김서영 -->
+	<%@ include file="../common/common.jsp"%>
 
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script defer src="/resources/js/header.js"></script>
-<script defer src="/resources/js/board/one.js"></script>
+<link rel="stylesheet" href="/resources/css/board/one.css">
+<script src="/resources/js/board/one.js"></script>
 
 <title>1 : 1 문의</title>
 </head>
 <body>
-	<!-- 규칙:
-    축약형(link, emph, gnb 등)을 먼저 사용)
-    alt로 적절한 대체 텍스트 제공, 너무 긴 경우 공통클래스 blind로 제공-->
+
+
+
 	<%@ include file="../common/header.jsp"%>
+
+
 	<!-- 1 : 1 문의 영역 시작 -->
 	<div id="container">
 		<div id="main">
@@ -95,7 +97,7 @@
 									<% } else { %>
 
 										<% for(Inquiry in : list) { %>
-											<tr id="sd1_q1">
+											<tr class="sd1_q1">
 												<th class="s1"><%= in.getInqNo() %></th>
 												<th class="s3"><%= in.getTitle() %></th>
 												<th class="s5"><%= in.getDateCreate() %></th>
@@ -107,22 +109,22 @@
 												<% } %>
 											</tr>
 
-											<tr id="sd1_q2">
+											<tr class="sd1_q2">
 												<td></td>
-												<td colspan="2"><pre class="text1"><%= in.getDescription() %></pre>
+												<td colspan="2"><pre class="text1" style="overflow:visible"><%= in.getDescription() %></pre>
 												</td>
-												<td align="center"><span> <a href="">수정</a>&nbsp;|
-														<a href="">삭제</a>
+												<td align="center"><span> <a href="javascript:update_form('<%= in.getInqNo() %>');" id="update_form">수정</a>&nbsp;|
+														<a href="javascript:delete_in('<%= in.getInqNo() %>');">삭제</a>
 												</span></td>
 											</tr>
 
 
-											<tr id="sd1_a">
+											<tr>
 												<td colspan="5">
 													<div class="d3">
 
 													<% if(in.getReplyContents() != null) { %>
-														<pre class="text2">
+														<pre class="text2 sd1_q2">
 					                                    <span>
 					                                      안녕하세요. <br>
 					                                      대한민국 1등 건강쇼핑몰 마이무당입니다.
@@ -134,6 +136,7 @@
 					                                    <span id="replyDate"><%= in.getReplyDate() %></span>
 					                                  </pre>
 													<% } %>
+													</div>
 												</td>
 											</tr>
 									<!--  for 문 끝 -->
@@ -179,7 +182,6 @@
 		</div>
 
 	</div>
-
 	<!-- 1:1 페이지 영역 끝 -->
 	<%@ include file="../common/footer.jsp"%>
 </body>

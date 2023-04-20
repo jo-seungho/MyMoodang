@@ -1,6 +1,3 @@
-
-/* 2023.04.18 / 로그인 기능 / 이지환 */
-
 package com.kh.user.member.controller;
 
 import java.io.IOException;
@@ -17,23 +14,23 @@ import com.kh.user.member.model.vo.Member;
 /**
  * Servlet implementation class MemberLoginController
  */
-@WebServlet("/loginForm.me")
+@WebServlet("/login.me")
 public class MemberLoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+       
     /**
      * @see HttpServlet#HttpServlet()
      */
     public MemberLoginController() {
         super();
+        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		request.setCharacterEncoding("UTF-8");
+request.setCharacterEncoding("UTF-8");
 		
 		String memberId = request.getParameter("memberId");
 		String password = request.getParameter("password");
@@ -58,15 +55,17 @@ public class MemberLoginController extends HttpServlet {
 				session.setAttribute("loginUser", loginMember);
 				
 				session.setAttribute("alertMsg", "성공적으로 로그인이 되었습니다.");
-				response.sendRedirect("/");
-			}
-			
 				
+				// 2023-04-19 url매핑값 " / " 에서 " /main " 으로 수정 이지환
+				response.sendRedirect("/main");
+			}
 	}
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

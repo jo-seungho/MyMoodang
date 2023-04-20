@@ -6,12 +6,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>비밀번호 찾기</title>
-    <link rel="stylesheet" href="/resources/css/common/reset.css">
-    <link rel="stylesheet" href="/resources/css/common/header.css">
-    <link rel="stylesheet" href="/resources/css/common/footer.css">
+
+    <!-- 중복되는 헤더, 푸터, 리셋 css & 제이쿼리 & 헤더 js 담은 common.jsp / 2023-04-20 김서영 -->
+	<%@ include file="../common/common.jsp"%>
+
     <link rel="stylesheet" href="/resources/css/member/login.css">
-
-
 </head>
 <body>
 <!-- jsp 변환 / 2023-04-14 / 김서영 -->
@@ -42,9 +41,6 @@
             </div>
         </div>
     </div>
-
-
-
 
         </div>
 

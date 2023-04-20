@@ -59,6 +59,8 @@ public class ItemDao {
                 i.setItemText(rset.getString("ITEM_TEXT"));
                 i.setDiscountPrice(rset.getInt("DISCOUNT_PRICE"));
                 i.setItemStatus(rset.getString("ITEM_STATUS"));
+                
+                i.setImgName(rset.getString("ITEM_IMG_PATH"));
                
             }
             
@@ -354,6 +356,29 @@ public class ItemDao {
 
 		return list;
 	}
+
+
+	public int deleteItem(Connection conn, int code, String status) {
+
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteItem");
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, status);
+			pstmt.setInt(2, code);
+
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+
+		return result;
+	}
+	
  
 
 }

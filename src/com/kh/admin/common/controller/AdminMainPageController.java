@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.user.member.model.vo.Member;
+
 
 @WebServlet("/main.ad")
 public class AdminMainPageController extends HttpServlet {
@@ -19,7 +21,6 @@ public class AdminMainPageController extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		request.getRequestDispatcher("/views/admin/main.jsp").forward(request, response);
 	}
 
@@ -30,3 +31,5 @@ public class AdminMainPageController extends HttpServlet {
 	}
 
 }
+
+	

@@ -18,7 +18,6 @@
 		         , A.*
 		      FROM (SELECT NOTICE_NO
 		                 , NOTICE_TITLE
-                         , VIEWS
 		                 , CREATE_DATE
 		              FROM NOTICE 
 		             WHERE DELETE_STATUS = 'N'
@@ -27,6 +26,21 @@
 		        )
 		 WHERE RNUM BETWEEN ? AND ?
 	</entry>
-
+	
+	<entry key="selectNotice">
+		SELECT NOTICE_NO
+		     , NOTICE_TITLE
+		     , NOTICE_CONTENT
+		     , CREATE_DATE
+		  FROM NOTICE 
+		 WHERE NOTICE_NO = ?
+	</entry>
+	
+	<entry key="updateNotice">
+			UPDATE NOTICE
+		  	   SET NOTICE_TITLE = ?
+		    	 , NOTICE_CONTENT = ?
+		 	 WHERE NOTICE_NO = ?
+	</entry>
 </properties>
 

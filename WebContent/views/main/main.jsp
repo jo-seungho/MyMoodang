@@ -8,23 +8,25 @@
 	ArrayList<Item> bestList = (ArrayList<Item>) request.getAttribute("bestList");
 	int ranking = 1;
 	String category = (String)request.getAttribute("category");
-	
-%>    
-    
+
+%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  	<!-- 중복되는 헤더, 푸터, 리셋 css & 제이쿼리 & 헤더 js 담은 common.jsp / 2023-04-20 김서영 -->
+	<%@ include file="../common/common.jsp"%>
+
   <title>MyMoodang</title>
 
   <link rel="stylesheet" href="/resources/css/common/mainContent.css">
 
-  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script> 
+<script src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
@@ -32,33 +34,28 @@
 <!-- 폰트 어썸 -->
 <script src="https://kit.fontawesome.com/bbeda4c5cf.js" crossorigin="anonymous"></script>
 
-
-  <script src="/resources/js/common/header.js"></script> 
   <script src="/resources/js/common/mainPage.js"></script>
-  
+
 </head>
 <body>
 <body>
-<!-- 규칙:
-    축약형(link, emph, gnb 등)을 먼저 사용)
-    alt로 적절한 대체 텍스트 제공, 너무 긴 경우 공통클래스 blind로 제공-->
-    
-    
+
+
     <div id="wrap">
    <%@ include file="../common/header.jsp" %>
      <!-- id="visual" -->
         <div id="main">
             <div id="contents" class="page_aticle">
-               
-    
+
+
                 <div class="top_btn">
                     <button id="go-top" alt="맨 위로가기" style="display: none;"></button>
                 </div>
-    
-                
-                
-                
-                
+
+
+
+
+
                 <!-- 여기서 부터 슬라이더 전체 영역 -->
                 <div class="main_type1">
                 <!-- type1:  -->
@@ -75,11 +72,11 @@
 
                         <!-- 탑 슬라이터 구역 -->
                                 <ul id="slideUlTag" class="autoplay">
- 
+
  									<% if(discountList.isEmpty()) { %>
  										<div class="item">등록된 상품이 없습니다.</div>
  									<% } else { %>
- 										
+
  										<% for(Item di : discountList) { %>
  									<li>
                                         <a class="slideLinkTag" href="../path.html">
@@ -96,9 +93,9 @@
                                         </a>
                                     </li>
  										<% } %>
- 										
+
  									<% } %>
- 
+
                                 </ul>
                         <!-- 탑 슬라이더 구역 -->
                     </div>
@@ -114,16 +111,17 @@
                             <!-- 아이콘 있는 버전, h3에 링크 있음 -->
                                 <a href="/newItemList.it?currentPage=1" class="name">
                                     <span class="ico">따끈 따끈 신상품</span>
+
                                 </a>
                             </h3>
                         </div>
                         <div class="list_goods">
                             <ul data-title="이벤트 소식" data-section="event" class="list_goods_ul">
-                            
+
                             	<% if(newList.isEmpty()) { %>
                             		<div class="item">등록된 상품이 없습니다.</div>
                             	<% } else {%>
-                            
+
                             		<% for(Item ni : newList) { %>
 		                            	<li>
 		                                    <li data-index="1" style="padding-bottom: 70px;">
@@ -137,7 +135,7 @@
 		                                                <span class="name">
 		                                                    <a class="txt" style="font-size: x-large; font-weight: 700;"><%= ni.getItemName() %></a>
 		                                                </span>
-		                                                <span class="desc"> 
+		                                                <span class="desc">
 		                                                    <a class="txt" style="font-size: initial;"><%= ni.getItemText() %></a>
 		                                                </span>
 		                                                <span class="desc" style="font-size: x-large; font-weight: 600;" >
@@ -147,15 +145,15 @@
 		                                        </div>
 		                                    </li>
                             		<% } %>
-                            		
+
                             	<% } %>
-                            
+
                             </ul>
                         </div>
                     </div>
                 </div>
                 <!-- 본문 게시글 끝 -->
-    
+
                 <!-- 여기서 부터 슬라이더 전체 영역 -->
                 <div class="main_type1">
                 <!-- type1:  -->
@@ -174,8 +172,8 @@
                                 <ul id="slideUlTag" class="autoplay">
 									<% if(bestList.isEmpty()) { %>
 										<div class="item">등록된 상품이 없습니다.</div>
-									<% } else { %>	
-										
+									<% } else { %>
+
 										<% for(Item bi : bestList) { %>
 										 <li>
 										 <h1><i style="color: red; text-shadow: 2px -7px 8px orange;">TOP </i><%= ranking %></h1>
@@ -196,15 +194,15 @@
 									<% } %>
                                 </ul>
                         <!-- 바텀 슬라이더 구역 -->
-                        
+
                     </div>
                 </div>
                 <!-- 여기까지 슬라이더 전체 영역 -->
-    
+
                 <!-- 본문 게시글 시작 -->
-                
-                <%-- 
-                
+
+                <%--
+
                 <div class="main_type2 bg">
                     <div class="main_event">
                         <div class="tit_goods">
@@ -229,7 +227,7 @@
                                                 <span class="name">
                                                     <a class="txt">망고는 매잉고</a>
                                                 </span>
-                                                <span class="desc"> 
+                                                <span class="desc">
                                                     <a class="txt">미리미리 쟁여두세요!</a>
                                                 </span>
                                             </div>
@@ -248,7 +246,7 @@
                                                 <span class="name">
                                                     <a class="txt">귤은 뀰!</a>
                                                 </span>
-                                                <span class="desc"> 
+                                                <span class="desc">
                                                     <a class="txt">한라봉 아님</a>
                                                 </span>
                                             </div>
@@ -266,7 +264,7 @@
                                             <div class="inner_info">
                                                 <span class="name">
                                                 </span>
-                                                <span class="desc"> 
+                                                <span class="desc">
                                                     <a class="txt">나만의 힐링타임</a>
                                                 </span>
                                             </div>
@@ -279,7 +277,7 @@
                 </div>
                 --%>
                 <!-- 본문 게시글 끝 -->
-                
+
                 <div style="height: 40px; background-color: rgba(254, 116, 119, 0.241); line-height: 40px; margin-top: 100px;">
                     <div style="display: flex; justify-content: center;">
                         <h3>공지사항 : </h3>
@@ -287,9 +285,9 @@
                     </div>
                 </div>
             </div>
-            
+
         </div>
-        
+
 	 		<%@ include file="../common/footer.jsp" %>
        </div>
 
@@ -303,14 +301,12 @@
                 autoplay: true,
                 autoplaySpeed: 2000,
                 draggable: true,
-                prevArrow : "<button type='button' class='slick-prev'></button>", 
-                nextArrow : "<button type='button' class='slick-next'></button>", 
+                prevArrow : "<button type='button' class='slick-prev'></button>",
+                nextArrow : "<button type='button' class='slick-next'></button>",
                 slide: 'li'
             })
 
         });
-       
-      $.noConflict();
 
     </script>
 </body>
