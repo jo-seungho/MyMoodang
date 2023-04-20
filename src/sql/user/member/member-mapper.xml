@@ -60,7 +60,7 @@
 <!-- 2023-04-17 김서영 / 아이디 찾기-->
 	<entry key="findId">
 	    SELECT NAME
-	           , MEMBER_ID
+	         , MEMBER_ID
 	      FROM MEMBER
 	     WHERE NAME = ?
 	         AND PHONE = ?
@@ -69,12 +69,7 @@
 
 <!-- 2023-04-17 김서영 / 회원정보 수정 시 정보 조회용 쿼리문 -->
 	<entry key="selectMemberInfo">
-		SELECT MEMBER_ID
-		     , EMAIL
-		     , NAME
-		     , PHONE
-		     , GENDER
-		     , BIRTH_DATE
+		SELECT *
 		  FROM MEMBER
 		 WHERE MEMBER_ID = ?
 
@@ -89,15 +84,38 @@
 			 	 AND STATUS = 'Y'
 		</entry>
 
-		
+
 		<!-- 개인 회원의 배송지 조회용 쿼리문 수정함 / 2023.04.19 이지환 -->
-        
-        <entry key="selectShippingAddressList">     
+
+        <entry key="selectShippingAddressList">
 	        SELECT *
 	        FROM SHIPPING_ADDRESS
 	        WHERE MEMBER_NO = ?
         </entry>
-		
+
+<!-- 회원정보 (기본 정보) 업데이트용 쿼리문 / 2023-04-20 김서영 -->
+		<entry key="updateInfoMember">
+			 UPDATE MEMBER
+			    SET NAME = ?
+			      , BIRTH_DATE = ?
+			      , GENDER = ?
+			      , EMAIL = ?
+			      , PHONE = ?
+			      , ENROLL_DATE = SYSDATE
+			  WHERE MEMBER_ID = ?
+		</entry>
+
+
+<!--  회원정보 (비밀번호) 업데이트용 쿼리문 / 2023-04-20 김서영 -->
+		<entry key="updatePwdMember">
+			UPDATE MEMBER
+			   SET PASSWORD = ?
+			     , ENROLL_DATE = SYSDATE
+			 WHERE MEMBER_ID = ?
+			   AND PASSWORD = ?
+		</entry>
+
+
 
 
 </properties>

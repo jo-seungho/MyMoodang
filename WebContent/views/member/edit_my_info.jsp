@@ -9,7 +9,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 	<!-- 중복되는 헤더, 푸터, 리셋 css & 제이쿼리 & 헤더 js 담은 common.jsp / 2023-04-20 김서영 -->
-	<%@ include file="../common/common.jsp"%>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <!-- Popper JS -->
@@ -17,6 +16,7 @@
     <!-- Latest compiled JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
+	<%@ include file="../common/common.jsp"%>
     <link rel="stylesheet" href="/resources/css/member/join.css">
     <link rel="stylesheet" href="/resources/css/member/edit_my_info.css">
 
@@ -48,7 +48,6 @@
 		String year = "";
 		String month = "";
 		String day = "";
-
 
 		if(birthDate != "") {
 			year = birthDate.substring(0, 4);
@@ -181,13 +180,13 @@
                              <tr>
                                  <td>현재 비밀번호</td>
                                  <td>
-                                     <input type="password" name="userPwd" required>
+                                     <input type="password" name="userPwd" id="userPwd" required>
                                  </td>
                              </tr>
                              <tr>
                                  <td>새 비밀번호</td>
                                  <td>
-                                     <input type="password" name="updatePwd" required>
+                                     <input type="password" name="updatePwd" id="updatePwd" required>
                                  </td>
                              </tr>
                              <tr>
