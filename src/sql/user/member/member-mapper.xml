@@ -69,19 +69,17 @@
 
 <!-- 2023-04-17 김서영 / 회원정보 수정 시 정보 조회용 쿼리문 -->
 	<entry key="selectMemberInfo">
-	    SELECT MEMBER_ID
-	         , EMAIL
-	         , NAME
-	         , GENDER
-	         , BIRTH_DATE
-	      FROM MEMBER
-	     WHERE MEMBER_ID = ?
+		SELECT MEMBER_ID
+		     , EMAIL
+		     , NAME
+		     , PHONE
+		     , GENDER
+		     , BIRTH_DATE
+		  FROM MEMBER
+		 WHERE MEMBER_ID = ?
 
 	</entry>
 
-
-        
-        
 
 		<!-- 개인 회원의 로그인 기능 / 2023-04-18 이지환 -->
 		<entry key="loginUser">
@@ -90,6 +88,7 @@
 			 	 AND PASSWORD = ?
 			 	 AND STATUS = 'Y'
 		</entry>
+
 		
 		<!-- 개인 회원의 배송지 조회용 쿼리문 수정함 / 2023.04.19 이지환 -->
         
@@ -99,8 +98,9 @@
 	        WHERE MEMBER_NO = ?
         </entry>
 		
-</properties>
 
+
+</properties>
 
 
 
