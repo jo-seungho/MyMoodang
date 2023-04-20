@@ -1,22 +1,15 @@
+<!-- 2023-04-19 코드 주석 처리 및 로그인 전/후 로 header 부분의 우측 상단 메뉴바 다르게 수정 및 header 부분에 배송지 관리 url 매핑 / 이지환 */ 	 -->    
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!-- 20234-04-18 / 
-	request.getAttrubute(로그인유저) -> session 형식으로 변경
-	, class=sub 에 해당하는 코드 삭제, 로그인, 로그아웃 기능 구현
-	로그인 전 후로 header영역 우측 상단의 메뉴들이 바뀌게끔 수정 /
-	이지환
-	 -->    
 
 <%@ page import="com.kh.user.member.model.vo.Member" %>
 
 <%
 	Member loginUser = (Member)session.getAttribute("loginUser");
-
+	
 	String alertMsg = (String)request.getAttribute("alertMsg");
-
 	String errorMsg = (String)request.getAttribute("errorMsg");
-
-
 %>
 
 <!DOCTYPE html>
@@ -50,7 +43,6 @@
         <a href="#" class="bnr_delivery">
           <img src="/resources/img/image.gif" alt="서울, 경기, 인천 샛별배송, 수도권 이외 지역 택배배송" class="bnr_delivery_img" />
         </a>
-        
         <!-- 2023-04-18 / 로그인 전 우측 상단 바 / 이지환 -->
            <% if(loginUser == null) { %>
         <ul class="sign_menu">
@@ -68,26 +60,9 @@
                 <span class="sir">님</span>
               </span>
             </a>
-           
 
-           	<script>
-
-            	let msg = '<%= alertMsg == null ? "" : alertMsg %>';
-            	if(msg != null && msg.length > 0) {
-            		alert(msg);
-            	}
-
-            	//----------------------------------------------------
-            	let emsg = '<%= errorMsg == null ? "" : errorMsg %>';
-            	if(emsg != null && emsg.length > 0) {
-            		alert(emsg);
-            	}
-            </script>
-
-	
-	
-            
           </li>
+
           <li class="link">
             <a href="" class="item service">고객센터</a>
             <!-- 고객센터 hover 시 sub_menu 등장 -->
@@ -103,33 +78,38 @@
               </li>
             </ul>
           </li>
-         </ul>
           
-            
+         </ul>
         <% } %>
-     
       
         <!-- .sign_menu -->
-        <!-- 2023-04-18 / 로그인 후 우측 상단 바 / 이지환 -->
+        <!-- 2023-04-19 / 로그인 후 상단바 코드 수정 및 css 부여 / 이지환 -->
 		<% if(loginUser != null) { %>
 		<ul class="sign_menu">
-          <!--login class 추가-->
-          
+
           <li class="link">
-            <a href="" class="item service">
+            <a href="" class="item service" id="loginAf_hover">
             	<b class="join"><%= loginUser.getName() %>님</b>
             	 환영합니다.
             </a>
-            <!-- 2023-04-18 / 서브 메뉴 버튼 식으로 마우스를 갖다대면 나오게끔 하고 싶음 / 이지환 -->
-            <ul class="sub_menu">
+            <ul class="sub_menu" id="loginAf_menu">
               <li class="list">
                 <a href="#" class="list_item">주문내역</a>
               </li>
               <li class="list">
-                <a href="#" class="list_item">배송지 관리</a>
+                <a href="#" class="list_item">찜한상품</a>
               </li>
               <li class="list">
-                <a href="#" class="list_item">개인 정보 수정</a>
+                <a href="/deliveryList.do" class="list_item">배송지 관리</a>
+              </li>
+              <li class="list">
+                <a href="#" class="list_item">리뷰 관리</a>
+              </li>
+              <li class="list">
+                <a href="#" class="list_item">쿠폰</a>
+              </li>
+              <li class="list">
+                <a href="#" class="list_item">내 정보수정</a>
               </li>
             </ul>
           </li>
@@ -138,7 +118,6 @@
           </li>
          
          
-        <% } %>
         <!-- 2023-04-18 / 로그인 시 우측 상단 바뀌는 영역 종료 / 이지환 -->
         
 		 <li class="link">
@@ -157,11 +136,12 @@
             </ul>
           </li>
 		</ul>
+        <% } %>
 	
       </div>
       <div class="header_logo">
         <h1 class="logo">
-          <a href="/views/main/main.jsp" class="link_main">
+          <a href="/main" class="link_main">
             <span class="gnb_logo_container"></span>
             <img src="/resources/img/logo.png" alt="마켓컬리 로고" class="logo_img" />
           </a>
@@ -304,17 +284,33 @@
             </div>
           </div>
 
-          <div class="cart_count">
-            <!-- bg url 아이콘 추가 -->
-            <a href="#" class="btn_cart">
+          <div id="goCart" class="cart_count">
+            <% if(loginUser != null) { %>
+            <a href="/cart" class="btn_cart">
               <span class="blind">장바구니</span>
             </a>
+            <% } else { %>
+            <a href="loginForm.me" class="btn_cart">
+              <span class="blind">장바구니</span>
+            </a>
+		     
+            <% } %>
           </div>
         </ul>
       </div>
     </div>
 
     <script>
+  	        let msg = '<%= alertMsg == null ? "" : alertMsg %>';
+          	if(msg != null && msg.length > 0) {
+          		alert(msg);
+          	}
+          	//----------------------------------------------------
+          	let emsg = '<%= errorMsg == null ? "" : errorMsg %>';
+          	if(emsg != null && emsg.length > 0) {
+          		alert(emsg);
+          	}
+          	
     	$.noConflict();
     </script>
   </body>

@@ -94,8 +94,8 @@ public class InquiryDao {
 			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
 			int endRow = startRow + pi.getBoardLimit() - 1;
 
-			System.out.println(startRow);
-			System.out.println(endRow);
+//			System.out.println(startRow);
+//			System.out.println(endRow);
 
 			pstmt.setInt(++i, startRow);
 			pstmt.setInt(++i, endRow);
@@ -105,14 +105,16 @@ public class InquiryDao {
 			while(rset.next()) {
 				Inquiry in = new Inquiry();
 				in.setInqNo(rset.getInt("INQ_NO"));
-				in.setInquiryType(rset.getString("INQUIRY_TYPE"));
 				in.setTitle(rset.getString("TITLE"));
-				in.setDateCreate(rset.getString("DATE_CREATE"));
 				in.setDescription(rset.getString("DESCRIPTION"));
+				in.setDateCreate(rset.getString("DATE_CREATE"));
+				in.setInquiryType(rset.getString("INQUIRY_TYPE"));
 				in.setReplyContents(rset.getString("REPLY_CONTENTS"));
 				in.setReplyDate(rset.getString("REPLY_DATE"));
 
 				list.add(in);
+
+				System.out.println("뭐가 담겼니" + in);
 			}
 
 		} catch (SQLException e) {
@@ -161,4 +163,121 @@ public class InquiryDao {
 		}
 		return result;
 	}
+
+
+	/**
+	 * 작성한 문의글 상세 조회용 메소드
+	 * 2023-04-18 김서영
+	 * @param conn
+	 * @param in
+	 * @return
+	 */
+	public Inquiry selectInquiry(Connection conn, int ino) {
+		Inquiry inAll = new Inquiry();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		String sql = prop.getProperty("selectInquiry");
+
+		try {
+			int i = 0;
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setInt(++i, ino);
+
+			rset = pstmt.executeQuery();
+
+			while(rset.next()) {
+				inAll = new Inquiry(rset.getInt("INQ_NO")
+								  , rset.getString("TITLE")
+								  , rset.getString("DESCRIPTION")
+								  , rset.getString("DATE_CREATE")
+								  , rset.getString("INQUIRY_TYPE")
+								  , rset.getString("REPLY_CONTENTS")
+								  , rset.getString("REPLY_DATE")
+								  , rset.getInt("MEMBER_NO"));
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return inAll;
+	}
+
+
+	/**
+	 * 1:1 문의 수정 용 메소드
+	 * => 회원가입 된 회원의 번호 추가 해야 함!!
+	 * 2023-04-18 김서영
+	 * @param conn
+	 * @param in
+	 * @return
+	 */
+	public int updateInquiry(Connection conn, Inquiry in) {
+
+		int result = 0;
+		PreparedStatement pstmt = null;
+
+		String sql = prop.getProperty("updateInquiry");
+
+		try {
+			int i = 0;
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(++i, in.getInquiryType());
+			pstmt.setString(++i, in.getTitle());
+			pstmt.setString(++i, in.getDescription());
+			pstmt.setInt(++i, in.getInqNo());
+
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+
+
+	/**
+	 * 1:1 문의 삭제용 메소드
+	 * 2023-04-19 김서영
+	 * @param conn
+	 * @param ino
+	 * @return
+	 */
+	public int deleteInquiry(Connection conn, int ino) {
+
+		int result = 0;
+		PreparedStatement pstmt = null;
+
+//		System.out.println("쿼리 실행 전" + result);
+		String sql = prop.getProperty("deleteInquiry");
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setInt(1, ino);
+
+			result = pstmt.executeUpdate();
+
+//			System.out.println("삭제나와" + result);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+
+//		System.out.println("삭제됐는가!!!" + result);
+		return result;
+	}
+
+
 }

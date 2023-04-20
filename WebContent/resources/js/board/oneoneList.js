@@ -44,7 +44,7 @@ function inquiryInsert_btn() {
 			if(result.success == "Y") {
 			  console.log("1:1문의 등록 성공!")
 			  alert(result.message);
-			  location.href = "/";
+			  location.href = "/list.in";
 			} else {
 				console.log("1:1문의 등록 실패")
 				alert(result.message);

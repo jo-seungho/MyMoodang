@@ -34,7 +34,7 @@
 							<ul class="list_menu">
 								<li class="on"><a href="#">공지사항</a></li>
 								<li><a href="#">자주하는 질문</a></li>
-								<li class="one"><a href="#">1 : 1 문의 </a></li>
+								<li class="one"><a href="/list.in">1 : 1 문의 </a></li>
 							</ul>
 						</div>
 

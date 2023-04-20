@@ -9,7 +9,6 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import com.kh.common.model.vo.PageInfo;
-import com.kh.user.board.inquiry.model.dao.InquiryDao;
 import com.kh.user.board.notice.model.dao.NoticeDao;
 import com.kh.user.board.notice.model.vo.Notice;
 
@@ -24,7 +23,7 @@ public class NoticeService {
 
 		Connection conn = getConnection();
 
-		int listCount = new InquiryDao().selectListCount(conn);
+		int listCount = new NoticeDao().selectListCount(conn);
 
 		close(conn);
 

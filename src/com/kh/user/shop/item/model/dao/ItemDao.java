@@ -1,6 +1,6 @@
 package com.kh.user.shop.item.model.dao;
 
-import static com.kh.common.JDBCTemplate.*;
+import static com.kh.common.JDBCTemplate.close;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -15,6 +15,7 @@ import com.kh.common.JDBCTemplate;
 import com.kh.common.model.vo.PageInfo;
 import com.kh.user.shop.item.model.vo.Attachment;
 import com.kh.user.shop.item.model.vo.Item;
+import com.kh.user.shop.review.model.vo.Review;
 
 public class ItemDao {
 	
@@ -83,6 +84,7 @@ public class ItemDao {
 			if(rset.next()) {
 				i = new Item();
 				
+				i.setItemCode(rset.getInt("ITEM_CODE"));
 				i.setItemCategory(rset.getString("ITEM_CATEGORY"));
 				i.setItemName(rset.getString("ITEM_NAME"));
 				i.setItemPrice(rset.getInt("ITEM_PRICE"));
@@ -184,7 +186,51 @@ public class ItemDao {
 		
 		return list;
 	}
-    
+	public ArrayList<Review> selectReviewList(Connection conn, int bno) {
+
+        // 필요한 변수 셋팅
+        ArrayList<Review> list = new ArrayList<>();
+        PreparedStatement pstmt = null;
+        ResultSet rset = null;
+        
+        // 실행할 쿼리
+        String sql = prop.getProperty("selectReviewList");
+
+        try {
+
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, bno);
+
+            rset = pstmt.executeQuery();
+
+            while (rset.next()) {
+
+            list.add(new Review(rset.getInt("REVIEW_NO"),
+                                rset.getString("TITLE"),
+                                rset.getString("CONTENT"),
+                                rset.getString("WRITE_DATE"),
+                                rset.getInt("STAR_POINT"),
+                                rset.getInt("ORDER_NO"),
+                                rset.getInt("ITEM_CODE")));
+                
+       
+            }
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+
+        } finally {
+
+            close(rset);
+            close(pstmt);
+
+        }
+
+        return list;
+
+    }
+
 
 
     

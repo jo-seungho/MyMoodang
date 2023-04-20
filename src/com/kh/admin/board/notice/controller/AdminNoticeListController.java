@@ -49,15 +49,10 @@ public class AdminNoticeListController extends HttpServlet {
 		// * listCount : 총 게시글 갯수 (삭제된 게시글은 제외하고 카운트)
 		listCount = new NoticeService().selectListCount();
 		
-		// System.out.println(listCount); // 107
-		
 		// * currentPage : 현재페이지 (즉, 사용자가 요청한 페이지)
 		currentPage = Integer.parseInt(request.getParameter("currentPage")); // "1" -> 1
 		
-		// System.out.println(currentPage);
 		
-		// * pageLimit : 페이지 하단에 보여질 페이징바의 페이지 최대 갯수
-		//				 (페이지 목록들을 몇개씩 보여지게 할거냐)
 		pageLimit = 10;
 		boardLimit = 10;
 		

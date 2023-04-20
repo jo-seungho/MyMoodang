@@ -11,7 +11,6 @@
 
   <body class="sb-nav-fixed">
     <%@ include file="sidebar.jsp"%>
-    
 
       <div id="layoutSidenav_content">
         <main style="background-color: #f6fbfd">

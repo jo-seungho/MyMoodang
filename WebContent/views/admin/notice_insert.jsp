@@ -90,7 +90,6 @@
             });
           });
           
-          $.noConflict();
         </script>
       </div>
 
