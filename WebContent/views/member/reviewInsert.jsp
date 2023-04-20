@@ -1,3 +1,7 @@
+<!-- 2023-04-19 리뷰 작성 jsp 예전에 작성한 파일 보내는 용도(경로 잡아줘야 함) 이지환
+
+ -->
+ 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -7,9 +11,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- header css -->
-    <link rel="stylesheet" href="../css/footer.css">
-    <link rel="stylesheet" href="../css/reset.css">
-    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="/resources/css/common/footer.css">
+    <link rel="stylesheet" href="/resources/css/common/reset.css">
+    <link rel="stylesheet" href="resources/css/header.css">
     <link rel="stylesheet" href="/resources/css/board/faq.css">
     <link rel="stylesheet" href="/resources/css/board//review-insert.css">
     <link rel="stylesheet" href="../img/image.gif">
