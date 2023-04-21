@@ -37,6 +37,7 @@ public class InquiryListController extends HttpServlet {
 
 		// 로그인 유저의 회원 번호 조회
 		// => 로그인 기능 구현되면 붙일 예정
+//		String memberId = request.getParameter("memberId");
 
 
 		// 페이징 처리 하기!!

@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.user.member.model.service.MemberService;
-import com.kh.user.member.model.vo.Member;
+import com.kh.admin.member.model.service.MemberService;
+import com.kh.admin.member.model.vo.AdMember;
 
 // 2023-04-14 최명진
 // 회원관리 페이지에서 회원 리스트 불러오는 컨트롤러
@@ -24,7 +24,7 @@ public class AdminMemberListController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		ArrayList<Member> list = new MemberService().selectMemberListAd();
+		ArrayList<AdMember> list = new MemberService().selectMemberListAd();
 
 		request.setAttribute("list", list);
 

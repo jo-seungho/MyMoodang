@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+
+<properties>
+
+	<entry key="selectCartList">
+		
+		SELECT CART_NO
+		     , CART_STOCK
+		     , ITEM_PRICE
+		     , ITEM_PRICE * (1 - ITEM_DISCOUNT) AS DISCOUNTPRICE 
+		     , (ITEM_PRICE * CART_STOCK) AS TOTAL_PRICE
+		     , (ITEM_PRICE * (1 - ITEM_DISCOUNT) * CART_STOCK) AS TOTAL_DISCOUNT_PRICE
+		     , (ITEM_PRICE * CART_STOCK) - (ITEM_PRICE * (1 - ITEM_DISCOUNT) * CART_STOCK)
+		       AS DIFFERENCE_PRICE
+		     , C.MEMBER_NO AS MEMBERNO
+		     , ITEM_NAME
+		     , ITEM_IMG_PATH
+          FROM CART C
+          LEFT JOIN ITEM I
+            ON C.ITEM_CODE = I.ITEM_CODE
+          LEFT JOIN MEMBER M
+            ON C.MEMBER_NO = M.MEMBER_NO
+          LEFT JOIN ITEM_IMG G
+            ON I.ITEM_CODE = ITEM_IMG_CODE 
+		 WHERE C.MEMBER_NO = ?	
+	</entry>
+
+	<entry key="insertCart">
+		INSERT INTO CART (CART_NO, CART_STOCK, PRICE, MEMBER_NO, ITEM_CODE)
+		VALUES (SEQ_CNO.NEXTVAL, ?, ?, 
+	        (SELECT M.MEMBER_NO FROM MEMBER M WHERE M.MEMBER_NO = ? AND ROWNUM = 1), ?)
+	</entry>
+
+
+
+</properties>

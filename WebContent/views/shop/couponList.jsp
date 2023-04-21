@@ -8,19 +8,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>쿠폰 리스트</title>
 
-    <link rel="stylesheet" href="/resources/css/common/reset.css" />
+    <!-- 중복되는 헤더, 푸터, 리셋 css & 제이쿼리 & 헤더 js 담은 common.jsp / 2023-04-20 김서영 -->
+	<%@ include file="../common/common.jsp"%>
+
     <link rel="stylesheet" href="/resources/css/shop/couponList.css" />
-    
-    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <script defer src="../js/header.js"></script>
 
 </head>
 <body>
-	
-	<%@ include file="../common/header.jsp" %>
-	
-  
 
+	<%@ include file="../common/header.jsp" %>
 
     <!-- 사이드 메뉴바 시작 -->
     <div id="container">
@@ -54,12 +50,12 @@
                                 </li>
                             </ul>
                         </div>
-                      
+
                     </div>
-                    <!--  COUPON 영역 시작 --> 
+                    <!--  COUPON 영역 시작 -->
                     <div id="couponList" class="page_section section_couponList">
                       <p class="p1">
-                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; > 전체 등록쿠폰리스트 
+                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; > 전체 등록쿠폰리스트
                          <b>총5개</b>의 쿠폰이 등록되어있습니다
                       </p>
                       <br><br>
@@ -161,13 +157,10 @@
                           </td>
                         </tr>
                       </tbody>
-                     </table>  
-                     
-                     <button type="submit" id="newCP">신규쿠폰등록</button><button type="submit" id="checkD">선택삭제</button>
-                       
-                           
+                     </table>
 
-                            
+                     <button type="submit" id="newCP">신규쿠폰등록</button><button type="submit" id="checkD">선택삭제</button>
+
                     </div>
                     <!-- COUPON 영역 끝 -->
 
@@ -175,12 +168,10 @@
                 </div>
             </div>
         </div>
-    </div>    
-
-        
+    </div>
 
 	<%@ include file="../common/footer.jsp" %>
 
-    
+
 </body>
 </html>

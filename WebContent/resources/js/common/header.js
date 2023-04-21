@@ -1,6 +1,8 @@
 window.addEventListener('DOMContentLoaded', function () {
-  //a = $('.search_keyword').val();
+
+  a = $('.search_keyword').val();
   $('.inp_search').val(a);
+
 
   $('.top_event_close').click(function () {
     $('#top_event').slideUp(200);
@@ -82,3 +84,27 @@ window.addEventListener('DOMContentLoaded', function () {
   });
 
 });
+
+
+// 로그인 한 회원의 1:1문의 정보수정(비밀번호확인) 창으로 이동
+// 2023-04-19 김서영
+function update_me(id) {
+	console.log("로그인 회원의 아이디" + id);
+	location.href = "/updateCheckPwd.me?id=" + id;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

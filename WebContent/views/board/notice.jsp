@@ -20,13 +20,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- header css -->
 
-    <link rel="stylesheet" href="/resources/css/common/reset.css" />
+	<%@ include file="../common/common.jsp"%>
+
+
     <link rel="stylesheet" href="/resources/css/board/faq.css">
     <link rel="stylesheet" href="/resources/css/board/notice.css">
-  
-    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-
-    <script defer src="/resources/js/common/header.js"></script>
 
     <title>공지사항</title>
   </head>

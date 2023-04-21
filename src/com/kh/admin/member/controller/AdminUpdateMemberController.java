@@ -9,9 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.common.model.vo.Converter;
-import com.kh.user.member.model.dao.MemberDao;
-import com.kh.user.member.model.service.MemberService;
-import com.kh.user.member.model.vo.Member;
+import com.kh.admin.member.model.dao.MemberDao;
+import com.kh.admin.member.model.service.MemberService;
+import com.kh.admin.member.model.vo.AdMember;
 
 //2023-04-14 최명진
 //회원상세페이지에서 회원 정보 업데이트
@@ -30,7 +30,7 @@ public class AdminUpdateMemberController extends HttpServlet {
 		String status = request.getParameter("status");
 		String grade = Converter.convert(request.getParameter("grade"));
 
-		Member m = new Member();
+		AdMember m = new AdMember();
 		m.setMemberNo(userNo);
 		m.setStatus(status);
 		m.setGradeNo(grade);

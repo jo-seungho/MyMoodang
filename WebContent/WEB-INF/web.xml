@@ -1,12 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 2023-04-19 / 세션 유효기간 5시간으로 설정 / 이지환 -->
+
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
 <!--   <display-name>MyMoodang</display-name>
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list> -->
 
+<error-page>
+  <error-code>500</error-code>
+  <location>/error500</location>
+</error-page>
+<error-page>
+  <error-code>404</error-code>
+  <location>/error404</location>
+</error-page>
 
- 
+<!-- 어드민 로그인 제약조건 -->
 <!--   <filter>
     <filter-name>AdminFilter</filter-name>
     <filter-class>com.kh.admin.common.filter.AdminFilter</filter-class>
@@ -14,7 +25,9 @@
 <filter-mapping>
     <filter-name>AdminFilter</filter-name>
     <url-pattern>*.ad</url-pattern>
-</filter-mapping> -->
+</filter-mapping>  -->
 
-
+ <session-config>
+             <session-timeout>300</session-timeout>
+      </session-config>
 </web-app>

@@ -1,6 +1,5 @@
 #container, #content{
     position:relative;
-    /* height: 1200px */
 }
 
 .page_aticle button, .page_aticle input, .page_aticle select, .page_aticle * {
@@ -198,7 +197,7 @@ body #container #main .layout-pagination-button:first-child{
 
 .layout-pagination-number:hover, .layout-pagination-number.__active {
     background-color: #f7f7f7;
-    color: #5f0080;
+    color: rgb(254,116,119);
 }
 
 .layout-pagination-number{
@@ -259,38 +258,6 @@ body #container #main .layout-pagination .pagediv span strong{
     font-weight: 900;
 }
 
-.s1{
-     width:40px;
-     font-weight: 500;
-}
-
-.s2{
-     width:190px;
-     font-weight: 500;
-}
-
-.s3{
-    width:350px;
-    font-weight: 500;
-}
-
-.s4{
-    width:100px;
-    position:relative;
-    left:-75px;
-    color:#cb2b2b;
-    font-weight: 500;
-}
-
-.s5{
-    width:120px;
-    font-weight: 500;
-}
-.s6{
-    width:120px;
-    font-weight: 500;
-}
-
 #md{
     border-radius:5px;
     border:none;
@@ -333,36 +300,14 @@ body #container #main .layout-pagination .pagediv span strong{
     margin: 30px 140px;
 }
 
-.d2{
-    font-size: medium;
-     font-weight: 500;
-}
 
 .d3{
     border-top: 1.5px solid lightgray;
+
 }
 
-.d4{
-    color: red;
-    font-size: large;
-    font-weight: 600;
-    position:relative;
-    left: 110px;
-}
 
-.d5{
-    font-size: medium;
-    font-weight: 500;
-    position:relative;
-    left:120px;
-}
 
-.d6{
-     font-size: medium;
-     font-weight: 500;
-     position:relative;
-     left:135px;
-}
 #bs1{
      border-spacing: 20px;
      border-top: 1.2px solid lightgray;
@@ -377,6 +322,10 @@ body #container #main .layout-pagination .pagediv span strong{
      border-bottom: 1px solid lightgray;
 }
 
+#sd1 {
+
+}
+
 #nb1{
      border-top: 5px solid lightgray;
      font-size: large;
@@ -388,4 +337,26 @@ body #container #main .layout-pagination .pagediv span strong{
 
 #one-section{
     margin-top: 50px;
+}
+
+.text1 {
+    margin-left: 90px;
+}
+
+#mmName {
+    text-align: right;
+}
+
+/* #replyDate {
+    flex-direction: row;
+} */
+
+.sd1_q1 {
+    text-align: center;
+    line-height: 10px;
+    cursor: pointer;
+}
+
+.sd1_q2 {
+    display: none;
 }

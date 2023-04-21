@@ -1,3 +1,5 @@
+<!-- 2023-04-18 / 아이디 입력 칸의 name 및 로그인 매핑값 수정 / 이지환 -->
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <html>
@@ -6,29 +8,21 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <link rel="stylesheet" href="/resources/css/common/reset.css">
-        <link rel="stylesheet" href="/resources/css/member/login.css">
-        <link rel="stylesheet" href="/resources/css/common/header.css">
-
-        <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-        <script src="/resources/js/common/header.js"></script>
-        <script src="/resources/js/member/join.js"></script>
-
+	<!-- 중복되는 헤더, 푸터, 리셋 css & 제이쿼리 & 헤더 js 담은 common.jsp / 2023-04-20 김서영 -->
+	<%@ include file="../common/common.jsp"%>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+        <link rel="stylesheet" href="/resources/css/member/login.css">
+        <script src="/resources/js/member/join.js"></script>
+
         <title>로그인</title>
-
     </head>
-
     <body>
 <!-- jsp 변환 / 2023-04-14 / 김서영 -->
 
 	<%@ include file="../common/header.jsp" %>
 
-
         <div id="container" class="container">
-
-
 
             <div id="main">
                 <div id="content">
@@ -36,10 +30,12 @@
                         <h3 class="tit_login">로그인</h3>
                         <div class="write_form">
                             <div class="write_view login_view">
-                                <form method="post" name="login_form" id="form"  action="login_ok.html">
+
+                            	<!-- 2023-04-18 로그인 매핑 수정 이지환 -->
+                                <form method="post" name="login_form" id="form"  action="/login.me">
                                     <input type="hidden" name="returnUrl" value="">
                                     <input type="hidden" name="close" value>
-                                    <input type="text" name="m_id" size="20" tabindex="1" value placeholder="아이디 입력">
+                                    <input type="text" name="memberId" size="20" tabindex="1" value placeholder="아이디 입력">
                                     <input type="password" name="password" size="20" tabindex="2" placeholder="비밀번호 입력">
                                     <div class="checkbox_save">
                                         <div class="login_search">
@@ -48,7 +44,7 @@
                                             <a href="/findPwdForm.me" class="link">비밀번호 찾기</a>
                                         </div>
                                     </div>
-                                    <button type="button" onclick="check_input()" class="btn_type1">
+                                    <button type="submit"  onclick="check_input()" class="btn_type1">
                                         <span class="txt_type">로그인</span>
                                     </button>
                                 </form>
@@ -64,17 +60,10 @@
 
             </div>
 
-
-
-
-
-
         </div>
 
 
-
-
-        <script>
+       <!--  <script>
 
             var id = "test"
             var pw = "test"
@@ -98,9 +87,9 @@
                     history.go(0);
                     return;
                 }
-                document.login_form.submit();
+                return true;
 
             }
-        </script>
+        </script> -->
     </body>
 </html>

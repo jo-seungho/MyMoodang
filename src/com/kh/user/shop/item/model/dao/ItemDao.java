@@ -1,6 +1,6 @@
 package com.kh.user.shop.item.model.dao;
 
-import static com.kh.common.JDBCTemplate.*;
+import static com.kh.common.JDBCTemplate.close;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -15,6 +15,7 @@ import com.kh.common.JDBCTemplate;
 import com.kh.common.model.vo.PageInfo;
 import com.kh.user.shop.item.model.vo.Attachment;
 import com.kh.user.shop.item.model.vo.Item;
+import com.kh.user.shop.review.model.vo.Review;
 
 public class ItemDao {
 	
@@ -36,11 +37,11 @@ public class ItemDao {
 	/**
      * 상품 상세보기에서 조회수 증가
      * 2023-04-16 이태화
-     * @param itemcode
+     * @param bno
 	 * @param conn
      * @return
      */
-    public int increaseCount(Connection conn, int itemcode) {
+    public int increaseCount(Connection conn, int bno) {
         int result = 0;
         PreparedStatement pstmt = null;
 
@@ -48,7 +49,7 @@ public class ItemDao {
         
         try {
             pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, itemcode);
+            pstmt.setInt(1, bno);
             
             result = pstmt.executeUpdate();
             
@@ -63,11 +64,11 @@ public class ItemDao {
 	/**
      * 상품 상세보기
      * 2023-04-16 이태화
-     * @param itemcode
+     * @param bno
 	 * @param conn
      * @return
      */
-    public Item selectItem(Connection conn, int itemcode) {
+    public Item selectItem(Connection conn, int bno) {
         Item i = null;
         PreparedStatement pstmt = null;
         ResultSet rset = null;
@@ -76,14 +77,23 @@ public class ItemDao {
         
         try {
             pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, itemcode);
+            pstmt.setInt(1, bno);
             
             rset = pstmt.executeQuery();
-            
-            if(rset.next()) {
-                i = new Item();
 
-            }
+			if(rset.next()) {
+				i = new Item();
+				
+				i.setItemCode(rset.getInt("ITEM_CODE"));
+				i.setItemCategory(rset.getString("ITEM_CATEGORY"));
+				i.setItemName(rset.getString("ITEM_NAME"));
+				i.setItemPrice(rset.getInt("ITEM_PRICE"));
+				i.setItemText(rset.getString("ITEM_TEXT"));
+				i.setItemDiscount(rset.getInt("ITEM_DISCOUNT"));
+				i.setItemImg(rset.getString("ITEM_IMG_PATH"));
+				i.setDiscountPrice(rset.getInt("DISCOUNT_PRICE"));
+				
+			}
             
         } catch (SQLException e) {
             e.printStackTrace();
@@ -98,11 +108,11 @@ public class ItemDao {
 	/**
      * 상품 상세보기에서 이미지 조회
      * 2023-04-16 이태화
-     * @param itemcode
+     * @param bno
 	 * @param conn
      * @return
      */
-	public ArrayList<Attachment> selectAttachmentList(Connection conn, int itemcode) {
+	public ArrayList<Attachment> selectAttachmentList(Connection conn, int bno) {
 
 		ArrayList<Attachment> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
@@ -112,7 +122,7 @@ public class ItemDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, itemcode);
+			pstmt.setInt(1, bno);
 			
 			rset = pstmt.executeQuery();
 			
@@ -120,7 +130,9 @@ public class ItemDao {
 				Attachment at = new Attachment();
 
 				
-				at.setItemImage(rset.getString("ITEM_IMAGE"));
+				at.setItemImgPath(rset.getString("ITEM_IMG_PATH"));
+				
+				
 				
 			}
 			
@@ -133,6 +145,102 @@ public class ItemDao {
 		
 		return list;
 	}
+	/**
+     * 상품 상세보기에서 같은 카테고리 조회
+     * 2023-04-18 이태화
+     * @param category
+	 * @param conn
+     * @return
+     */
+	public ArrayList<Attachment> selelctAttachmentCategory(Connection conn, String category) {
+		ArrayList<Attachment> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selelctAttachmentCategory");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, category);
+			
+			rset = pstmt.executeQuery();
+
+			while(rset.next()) {
+				Attachment at = new Attachment();
+				
+				at.setItemImgPath(rset.getString("ITEM_IMG_PATH"));
+				at.setItemName(rset.getString("ITEM_NAME"));
+				at.setItemPrice(rset.getInt("ITEM_PRICE"));
+				at.setDiscountPrice(rset.getInt("DISCOUNT_PRICE"));
+				
+				list.add(at);
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+	/**
+     * 상품 리뷰 리스트 조회
+     * 2023-04-19 이태화
+     * @param bno
+     * @param conn
+     * @return
+     */
+
+	public ArrayList<Review> selectReviewList(Connection conn, int bno) {
+
+        // 필요한 변수 셋팅
+        ArrayList<Review> list = new ArrayList<>();
+        PreparedStatement pstmt = null;
+        ResultSet rset = null;
+        
+        // 실행할 쿼리
+        String sql = prop.getProperty("selectReviewList");
+
+        try {
+
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, bno);
+
+            rset = pstmt.executeQuery();
+
+            while (rset.next()) {
+
+            list.add(new Review(rset.getInt("REVIEW_NO"),
+                                rset.getString("TITLE"),
+                                rset.getString("CONTENT"),
+                                rset.getString("WRITE_DATE"),
+                                rset.getInt("STAR_POINT"),
+                                rset.getInt("ORDER_NO"),
+                                rset.getInt("ITEM_CODE")));
+                
+       
+            }
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+
+        } finally {
+
+            close(rset);
+            close(pstmt);
+
+        }
+
+        return list;
+
+    }
+
+
+
     
     
     
@@ -466,6 +574,120 @@ public class ItemDao {
 		
 		return list;	
 	
+	}
+
+
+	/**
+	 * 2023-04-18 조승호
+	 * 메인페이지 탑 슬라이드 리스트
+	 * @param conn
+	 * @return
+	 */
+	public ArrayList<Item> discountList(Connection conn) {
+		
+		ArrayList<Item> list = new ArrayList<>();
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("mainDiscountList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Item(
+						rset.getInt("ITEM_CODE")
+					  , rset.getString("ITEM_CATEGORY")	
+					  , rset.getString("ITEM_DATE")	
+					  , rset.getInt("ORIGINALPRICE")
+					  , rset.getInt("DISCOUNTPRICE")
+					  , rset.getString("ITEM_NAME")
+					  , rset.getString("ITEM_TEXT")
+					  , rset.getInt("ITEM_DISCOUNT")
+					  , rset.getString("ITEM_IMG_PATH")
+					  ));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+
+	public ArrayList<Item> newList(Connection conn) {
+		
+		ArrayList<Item> list = new ArrayList<>();
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("newList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Item(
+						rset.getInt("ITEM_CODE")
+					  , rset.getString("ITEM_CATEGORY")	
+					  , rset.getString("ITEM_DATE")	
+					  , rset.getInt("ORIGINALPRICE")
+					  , rset.getInt("DISCOUNTPRICE")
+					  , rset.getString("ITEM_NAME")
+					  , rset.getString("ITEM_TEXT")
+					  , rset.getInt("ITEM_DISCOUNT")
+					  , rset.getString("ITEM_IMG_PATH")
+					  ));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+
+	public ArrayList<Item> bestList(Connection conn) {
+		
+		ArrayList<Item> list = new ArrayList<>();
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("bestList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Item(
+						rset.getInt("ITEM_CODE")
+					  , rset.getString("ITEM_CATEGORY")	
+					  , rset.getString("ITEM_DATE")	
+					  , rset.getInt("ORIGINALPRICE")
+					  , rset.getInt("DISCOUNTPRICE")
+					  , rset.getString("ITEM_NAME")
+					  , rset.getString("ITEM_TEXT")
+					  , rset.getInt("ITEM_DISCOUNT")
+					  , rset.getString("ITEM_IMG_PATH")
+					  ));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
 	}
 
 

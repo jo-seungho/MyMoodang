@@ -10,9 +10,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.kh.common.JDBCTemplate;
-import com.kh.user.member.model.dao.MemberDao;
-import com.kh.user.member.model.vo.Member;
-import com.kh.user.member.model.vo.ShippingAddress;
+import com.kh.admin.member.model.dao.MemberDao;
+import com.kh.admin.member.model.vo.AdMember;
+import com.kh.admin.member.model.vo.ShippingAddress;
 
 public class MemberService {
 
@@ -24,10 +24,10 @@ public class MemberService {
 	 * @return
 	 */
 
-	public ArrayList<Member> selectMemberListAd() {
+	public ArrayList<AdMember> selectMemberListAd() {
 		Connection conn = getConnection();
 
-		ArrayList<Member> list = new MemberDao().selectMemberListAd(conn);
+		ArrayList<AdMember> list = new MemberDao().selectMemberListAd(conn);
 
 		close(conn);
 
@@ -40,10 +40,10 @@ public class MemberService {
 	 * @param selectMember
 	 * @return
 	 */
-	public Member selectMemberAd(int id) {
+	public AdMember selectMemberAd(int id) {
 		Connection conn = getConnection();
 
-		Member m = new MemberDao().selectMemberAd(conn, id);
+		AdMember m = new MemberDao().selectMemberAd(conn, id);
 
 		close(conn);
 
@@ -72,7 +72,7 @@ public class MemberService {
 	 * @param m
 	 * @return
 	 */
-	public int updateMemberAd(Member m) {
+	public int updateMemberAd(AdMember m) {
 		Connection conn = getConnection();
 
 		int result = new MemberDao().updateMemberAd(conn, m);
@@ -96,7 +96,7 @@ public class MemberService {
 	 * @return
 	 * @throws SQLException
 	 */
-	public int insertMember(Member m, ShippingAddress addr) {
+	public int insertMember(AdMember m, ShippingAddress addr) {
 
 		Connection conn = getConnection();
 

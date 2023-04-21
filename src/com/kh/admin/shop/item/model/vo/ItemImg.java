@@ -7,16 +7,10 @@ public class ItemImg {
 	private String itemImgPath;
 	private String itemImgStatus;
 	private int itemImgCode;
+	private String itemImg;
 	
-	public ItemImg() {}
-	
-	public ItemImg(int itemImgNo, int itemImgLevel, String itemImgPath, String itemImgStatus, int itemImgCode) {
-		super();
-		this.itemImgNo = itemImgNo;
-		this.itemImgLevel = itemImgLevel;
-		this.itemImgPath = itemImgPath;
-		this.itemImgStatus = itemImgStatus;
-		this.itemImgCode = itemImgCode;
+	public ItemImg() {
+		// TODO Auto-generated constructor stub
 	}
 	
 	public int getItemImgNo() {
@@ -49,13 +43,34 @@ public class ItemImg {
 	public void setItemImgCode(int itemImgCode) {
 		this.itemImgCode = itemImgCode;
 	}
-
-	@Override
-	public String toString() {
-		return "ItemImg [itemImgNo=" + itemImgNo + ", itemImgLevel=" + itemImgLevel + ", itemImgPath=" + itemImgPath
-				+ ", itemImgStatus=" + itemImgStatus + ", itemImgCode=" + itemImgCode + "]";
+	public String getItemImg() {
+		return itemImg;
+	}
+	public void setItemImg(String itemImg) {
+		this.itemImg = itemImg;
 	}
 	
 	
-
+	
+	
+	public ItemImg(int itemImgNo, int itemImgLevel, String itemImgPath, String itemImgStatus, int itemImgCode,
+			String itemImg) {
+		super();
+		this.itemImgNo = itemImgNo;
+		this.itemImgLevel = itemImgLevel;
+		this.itemImgPath = itemImgPath;
+		this.itemImgStatus = itemImgStatus;
+		this.itemImgCode = itemImgCode;
+		this.itemImg = itemImg;
+	}
+	
+	
+	@Override
+	public String toString() {
+		return "ItemImg [itemImgNo=" + itemImgNo + ", itemImgLevel=" + itemImgLevel + ", itemImgPath=" + itemImgPath
+				+ ", itemImgStatus=" + itemImgStatus + ", itemImgCode=" + itemImgCode + ", itemImg=" + itemImg + "]";
+	}
+	
+	
+	
 }

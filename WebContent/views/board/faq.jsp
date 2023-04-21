@@ -6,14 +6,10 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- header css -->
-    <link rel="stylesheet" href="../css/footer.css">
-    <link rel="stylesheet" href="../css/reset.css">
-    <link rel="stylesheet" href="../css/header.css">
-    <link rel="stylesheet" href="/resources/css/board/faq.css">
 
-    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <script src="../js/header.js"></script>
+   <%@ include file="../common/common.jsp"%>
+
+    <link rel="stylesheet" href="/resources/css/board/faq.css">
 
     <title>자주하는질문</title>
   </head>
@@ -21,7 +17,7 @@
     <!-- 규칙:
     축약형(link, emph, gnb 등)을 먼저 사용)
     alt로 적절한 대체 텍스트 제공, 너무 긴 경우 공통클래스 blind로 제공-->
-    
+
     <%@ include file="../common/header.jsp" %>
     <!-- 자주하는질문 페이지 영역 시작 -->
       <div id="container">
@@ -68,7 +64,7 @@
                           <!-- 자주하는질문 페이지 시작 -->
                           <div id="faq-section" style="margin-top: 50px;">
                             <table align="center" style="border-top: 5px solid lightgray; font-size: large; font-weight: 900; border-radius: 5px; border-spacing: 20px; border-collapse: separate; box-sizing: border-box;">
-                              
+
                                 <tr>
                                   <th width="80" style="font-weight: 900;">번호</th>
                                   <th width="150" style="font-weight: 900;">카테고리</th>
@@ -103,11 +99,11 @@
                               <span style="color: red; font-size: large; font-weight: 600;">A.</span>
                               <span style="font-size: medium; font-weight: 500;">상품을 주문하신 고객님이 핸드폰 번호를 잘못 입력하신 경우<br><br>
                               주문하지 않은 고객님께 문자가 발송되는 경우가 있으며, <br><br>
-                              지인분께서 고객님께 선물하실 경우에는 수령자 번호로 <br><br> 배송완료 메세지가 발송되므로 선물배송일 가능성도 있습니다. 
+                              지인분께서 고객님께 선물하실 경우에는 수령자 번호로 <br><br> 배송완료 메세지가 발송되므로 선물배송일 가능성도 있습니다.
                             </span>
                             </div>
 
-                            
+
                             <table align="center" style="border-spacing: 20px; border-top: 1px solid lightgray; font-size: medium; border-bottom: 1px solid lightgray;">
                                 <tr>
                                   <th width="80" style="font-weight: 500;">3</th>
@@ -123,7 +119,7 @@
                               전화를 통한 주문 역시 가능합니다.
                             </span>
                             </div>
-                              
+
                           </div>
 
 
@@ -131,7 +127,7 @@
                               <div class="pagediv">
                                   <a href="#viewOrderList" class="layout-pagination-button layout-pagination-first-page">맨 처음 페이지로 가기</a>
                                   <a href="#viewOrderList" class="layout-pagination-button layout-pagination-prev-page">이전 페이지로 가기</a>
-                                  <span> 
+                                  <span>
                                       <strong class="layout-pagination-button layout-pagination-number __active" style="height: 32px;">
                                           1
                                       </strong>
@@ -140,12 +136,12 @@
                                   <a href="#viewOrderList" class="layout-pagination-button layout-pagination-last-page">맨 끝 페이지로 가기</a>
                               </div>
                           </div>
-                          
+
                       </div>
                   </div>
               </div>
           </div>
-      </div>    
+      </div>
     <!-- 자주하는질문 페이지 영역 끝 -->
 
       <%@ include file="../common/footer.jsp" %>

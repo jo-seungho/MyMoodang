@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+
+<properties>
+	<entry key="selectReview">
+        SELECT *
+        FROM REVIEW
+        WHERE ITEM_CODE = ?
+        AND DELETE_STATUS = 'Y'
+	
+	</entry>
+	
+		<entry key="deleteReview">
+		UPDATE REVIEW
+		   SET DELETE_STATUS = 'N'
+		 WHERE REVIEW_NO = ?
+		</entry>
+		
+		
+		<entry key="updateReview">
+		   UPDATE REVIEW
+    	   SET TITLE = ?
+      		 , CONTENT = ?
+             , STAR_POINT = ?
+            WHERE REVIEW_NO = ?
+		</entry>
+		
+		<entry key="insertReview">
+		INSERT INTO REVIEW (REVIEW_NO
+                    ,TITLE
+                    ,CONTENT
+                    ,STAR_POINT
+                    ,WRITE_DATE
+                    ,ORDER_NO
+                    ,ITEM_CODE
+                    ,DELETE_STATUS)
+        VALUES (REVIEW_SEQ.NEXTVAL
+                ,?
+                ,?
+                ,?
+                ,SYSDATE
+                ,1
+                ,1
+                ,'Y')
+		
+		</entry>
+
+
+	
+	
+
+
+</properties>

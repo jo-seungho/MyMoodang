@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"
 	import="java.util.ArrayList, com.kh.user.shop.item.model.vo.Item, com.kh.common.model.vo.PageInfo"%>
+	
 <%-- 2023-04-16 조승호 --%>
 <%
 	PageInfo pi = (PageInfo) request.getAttribute("pi");
@@ -15,17 +16,19 @@
 
 %>
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="/resources/css/shop/itemList.css" />
 
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <!-- 중복되는 헤더, 푸터, 리셋 css & 제이쿼리 & 헤더 js 담은 common.jsp / 2023-04-20 김서영 -->
+	<%@ include file="../common/common.jsp"%>
+
+<link rel="stylesheet" href="/resources/css/shop/itemList.css" />
 <script src="/resources/js/shop/itemList.js"></script>
+
 <title>상품 리스트</title>
 </head>
 <body>
@@ -44,13 +47,13 @@
 								</span> <span class="tit">전체보기</span>
 							</div>
 
-							<ul class="list">
-								<li name="cate_gory"><a class="on" href="/itemList.it?currentPage=1&category=전체">전체보기</a></li>
-								<li name="cate_gory"><a href="/itemList.it?currentPage=1&category=제로음료" class=>제로음료</a></li>
-								<li name="cate_gory"><a href="/itemList.it?currentPage=1&category=무가당" class=>무가당</a></li>
-								<li name="cate_gory"><a href="/itemList.it?currentPage=1&category=단백질" class=>단백질</a></li>
-								<li name="cate_gory"><a href="/itemList.it?currentPage=1&category=도시락" class=>도시락</a></li>
-								<li name="cate_gory"><a href="/itemList.it?currentPage=1&category=기타" class=>기타</a></li>
+							<ul id="colorTest" class="list">
+								<li name="cate_gory"><a class="totalList on" href="/itemList.it?currentPage=1&category=전체">전체보기</a></li>
+								<li name="cate_gory"><a class="zeroDrink" href="/itemList.it?currentPage=1&category=제로음료" class=>제로음료</a></li>
+								<li name="cate_gory"><a class="zeroSugar" href="/itemList.it?currentPage=1&category=무가당" class=>무가당</a></li>
+								<li name="cate_gory"><a class="protein" href="/itemList.it?currentPage=1&category=단백질" class=>단백질</a></li>
+								<li name="cate_gory"><a class="bentto" href="/itemList.it?currentPage=1&category=도시락" class=>도시락</a></li>
+								<li name="cate_gory"><a class="etcList" href="/itemList.it?currentPage=1&category=기타" class=>기타</a></li>
 							</ul>
 						</div>
 					</div>
@@ -85,22 +88,27 @@
 													<img src="<%= i.getItemImg() %>"
 													onerror="this.src='https://res.kurly.com/mobile/img/1808/img_none_x2.png'"
 													width="308" height="396">
-												</a> 
+												</a>
 
 												<div class="group_btn">
-													<button type="button" name="chk" value="여기다가 프로덕트 아이디 적어주삼"
+													<button type="button" name="chk" onclick="showCartModal(<%= i.getItemCode() %>);"
 														class="btn btn_cart">
 														<span class="screen_out">38300</span>
 													</button>
 												</div>
 											</div>
 
-											<a href="/itemDetail.it?bno=<%= i.getItemCode() %>" class="info"> 
-											<span class="name"> <%= i.getItemName() %> </span> 
-											<span class="cost"> <span class="price"><%= i.getItemPrice() %></span> 
-											<input type="hidden" id="product_cost1" value=1300> 
+											<div class="plz" style="visibility: hidden"><%= i.getItemCode() %></div>
+											<a href="/itemDetail.it?bno=<%= i.getItemCode() %>" class="">
+											<!-- 주소 연결 이슈로 bno 클래스 임시로 삭제해뒀습니다.  - 조승호 -->
+											<span class="name"> <%= i.getItemName() %> </span>
+											<span class="cost"> <span class="price"><%= (int)(Math.log10(i.getItemPrice())+1) > 3
+																					  ?  Integer.toString(i.getItemPrice()).replaceAll("\\B(?=(\\d{3})+(?!\\d))", ",")
+																					  : i.getItemPrice()	  
+											%></span>
+											<input type="hidden" id="product_cost1" value="<%= i.getItemPrice() %>">
 											<span class="dodo">원</span>
-											</span> <span class="desc"><%= i.getItemText() %></span> 
+											</span> <span class="desc"><%= i.getItemText() %></span>
 											<span class="tag"><%-- 수량이나 날짜 등 필요하면 이 위치에 --%></span>
 											</a>
 										</div>
@@ -125,29 +133,29 @@
 								<a href="/itemList.it?currentPage=<%= startPage %>&category=${category}"
 
 									class="layout-pagination-button layout-pagination-first-page">맨 처음 페이지로 가기
-								</a> 
+								</a>
 								<a href="/itemList.total?currentPage=<%= currentPage - 1 %>&category=${category}" class="layout-pagination-button layout-pagination-prev-page">
 									이전 페이지로 가기
-								</a> 
+								</a>
 								<% } else {%>
 								<a href="javascript:void(0)"
 									class="layout-pagination-button layout-pagination-first-page">맨 처음 페이지로 가기
-								</a> 
+								</a>
 								<a href="javascript:void(0)" class="layout-pagination-button layout-pagination-prev-page">
 									이전 페이지로 가기
-								</a> 
+								</a>
 								<% } %>
 								<% for(int p = startPage; p <= endPage; p++) { %>
 									<% if(p != currentPage) { %>
 
-								<a href="/itemList.it?currentPage=<%= p %>&category=${category}"> 
+								<a href="/itemList.it?currentPage=<%= p %>&category=${category}">
 
-									<span> 
+									<span>
 										<strong class="layout-pagination-button layout-pagination-number __active"><%= p %></strong>
 									</span>
-								</a> 
+								</a>
 									<% } else { %>
-									<span> 
+									<span>
 										<strong class="layout-pagination-button layout-pagination-number __active"
 										style="background-color: #fbb6b6;"><%= p %></strong>
 									</span>
@@ -157,7 +165,7 @@
 
 								 <a href="/itemList.it?currentPage=<%= currentPage + 1 %>&category=${category}" class="layout-pagination-button layout-pagination-next-page">
 								 다음 페이지로 가기
-								 </a> 
+								 </a>
 								 <a href="/itemList.it?currentPage=<%= endPage %>&category=${category}" class="layout-pagination-button layout-pagination-last-page">
 
 								 맨끝 페이지로 가기
@@ -168,7 +176,7 @@
 								</a>
 								<a href="javascript:void(0)" class="layout-pagination-button layout-pagination-last-page">
 								 맨끝 페이지로 가기
-								 </a>								 
+								 </a>
 								 <% } %>
 
 							</div>
@@ -177,9 +185,11 @@
 				</div>
 			</div>
 		</div>
+		
 		<div id="cartPut">
 			<div class="cart_option cart_type3" style="opacity: 1;">
-				<form action="" method="POST" id="contactsForm">
+				<form action="cart" method="post" id="contactsForm">
+				 <input type="hidden" name="itemCode" value="">
 					<div class="inner_option">
 						<div class="in_option">
 							<div class="list_goods">
@@ -191,10 +201,13 @@
 												type="text" readonly="readonly" name="count" value=1
 												class="inp">
 												<div style="display: none;">
-													<input type="hidden" class="count_num">1
+													<input id="countValue" name="countValue" type="hidden" class="count_num">1
 												</div>
 												<button type="button" class="btn up on">수량올리기</button>
-											</span> <span class="price"> <span class="dc_price"></span>
+											</span> 
+											<span class="price"> 
+												<span class="dc_price"></span>
+												<input type="hidden" class="ttt">
 											</span>
 										</div></li>
 								</ul>
@@ -203,7 +216,7 @@
 							<div class="total">
 								<div class="price">
 									<strong class="tit">합계</strong> <span class="sum"> <span
-										class="num">1,300</span> <span class="won">원</span>
+										class="num totalPrice">1,300</span> <span class="won">원</span>
 									</span>
 								</div>
 
@@ -219,7 +232,8 @@
 							<span class="btn_type2">
 								<button type="button" class="txt_type">취소</button>
 							</span> <span class="btn_type1">
-								<button type="submit" value="3" class="txt_type">장바구니
+
+								<button type="button" value="3" class="txt_type goCart">장바구니
 									담기</button>
 							</span>
 						</div>
@@ -227,23 +241,47 @@
 				</form>
 			</div>
 		</div>
-		<script>
-
-		/*
-			//$(function() {
-
-				$(".info").click(function() {
-					location.href = "/item.it";
-
-				});
-			});
-		*/
-		</script>
-
-
 
 
 		<%@ include file="../common/footer.jsp"%>
+
 	</div>
+	
+	<script>
+		function showCartModal(itemCode) {
+			// 가격남음
+			$("#cartPut input[name=itemCode]").val(itemCode);
+			console.log(itemCode);
+			// console.log($('.total > .totalPrice').text(), 8888)
+			console.log($("#countValue").text());
+			
+		}
+		
+		$('.btn_type1').click(function() {
+			
+			// let itemCodeNo = $('#cartPut input[name=itemCode]').val();
+			let aa = $('.ttt').text()
+			let priceItem = Number(aa.replace(",", ""))
+			
+			$.ajax({
+				
+				url: 'cartList',
+				type: 'post',
+				data: {
+					itemCodeNo: $('#cartPut input[name=itemCode]').val(),
+					countValue: $("#countValue").text(),
+					priceItem: priceItem
+				},
+				success: function(res) {
+					console.log(typeof(priceItem));
+					// console.log(res)
+				},
+				error: function(err) {
+					console.log(err, "err")
+				}
+			})
+			
+		})
+	</script>
 </body>
 </html>

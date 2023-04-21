@@ -1,26 +1,12 @@
+<!-- html 파일이 여러번 호출되지 않도록 중복 제거 작업 / 2023-04-20 김서영 -->
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- footer css -->
-  <link rel="stylesheet" href="/resources/css/common/reset.css">
-  <link rel="stylesheet" href="/resources/css/common/footer.css">
-
-  <!-- CDN -->
-  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-  <!-- 스크립트파일 -->
-  <title>footer</title>
-</head>
-<body>
         <div id="footer">
         <div class="inner_footer">
             <div class="cc_footer">
-            <!-- cc = company calls --> 
+            <!-- cc = company calls -->
                 <h2 class="cc_tit">고객행복센터</h2>
                 <div class="cc_view cc_call">
                     <h3>
@@ -74,7 +60,7 @@
                 <div class="spec_info">
                     법인명 (상호) : 주식회사 마이무당
                     <span class="bar">I</span>
-                    사업자등록번호 : 000-00-0000 
+                    사업자등록번호 : 000-00-0000
                     <a href="#" class="link">사업자정보확인</a><br>
                     통신판매업 : 제 2018-서울강남-00000 호
                     <span class="bar">I</span>
@@ -148,5 +134,3 @@
               </div>
           </div>
       </div>
-</body>
-</html>

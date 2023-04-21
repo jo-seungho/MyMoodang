@@ -1,11 +1,70 @@
 window.addEventListener('DOMContentLoaded', function () {
 
 
-
-
+	// let bb = sessionStorage.setItem('age', params.get('age'));
+	
+	
+//	console.log(tt);
+//	 console.log(window.location.search);
+//	console.log(urlParams.get("category"));
 
   $(document).ready(function () {
-
+	  
+	  // 파라미터 값을 가져옴
+	  const params = new URLSearchParams(location.search);
+	  
+	  let setCategory = sessionStorage.setItem('category', params.get('category'));
+	  let getCategory = sessionStorage.getItem('category');
+	  // console.log(getCategory);
+	  
+	  if(getCategory == '전체') {
+		  $(".totalList").addClass('on');
+		  $(".zeroSugar").removeClass('on');
+		  $(".zeroDrink").removeClass('on');
+		  $(".protein").removeClass('on');
+		  $(".bentto").removeClass('on');
+		  $(".etcList").removeClass('on');
+	  }
+	  if(getCategory == '제로음료') {
+		  $(".zeroDrink").addClass('on');
+		  $(".zeroSugar").removeClass('on');
+		  $(".totalList").removeClass('on');
+		  $(".protein").removeClass('on');
+		  $(".bentto").removeClass('on');
+		  $(".etcList").removeClass('on');
+	  }
+	  if(getCategory == '무가당') {
+		  $(".zeroSugar").addClass('on');
+		  $(".totalList").removeClass('on');
+		  $(".zeroDrink").removeClass('on');
+		  $(".protein").removeClass('on');
+		  $(".bentto").removeClass('on');
+		  $(".etcList").removeClass('on');
+	  }
+	  if(getCategory == '단백질') {
+		  $(".protein").addClass('on');
+		  $(".zeroSugar").removeClass('on');
+		  $(".totalList").removeClass('on');
+		  $(".zeroDrink").removeClass('on');
+		  $(".bentto").removeClass('on');
+		  $(".etcList").removeClass('on');
+	  }
+	  if(getCategory == '도시락') {
+		  $(".bentto").addClass('on');
+		  $(".zeroSugar").removeClass('on');
+		  $(".totalList").removeClass('on');
+		  $(".zeroDrink").removeClass('on');
+		  $(".protein").removeClass('on');
+		  $(".etcList").removeClass('on');
+	  }
+	  if(getCategory == '기타') {
+		  $(".etcList").addClass('on');
+		  $(".zeroSugar").removeClass('on');
+		  $(".totalList").removeClass('on');
+		  $(".zeroDrink").removeClass('on');
+		  $(".protein").removeClass('on');
+		  $(".bentto").removeClass('on');
+	  }
 
     var noBody = $('.noBody');
 
@@ -14,6 +73,7 @@ window.addEventListener('DOMContentLoaded', function () {
     var product_price = [];       //썸네일 가격 변수 리스트
     var product_cost = [];        //상품 수량변경할떄 쓰는 가격 변수 리스트
     var product_id = [];          //상품 아이디값 가져오기
+    var priceTag = [];
 
     for (i = 0; i < $('.list_goods .inner_listgoods ul li').length + 1; i++) {
       product_name[i] = $('li:nth-child(' + i + ') .name').text();    //포문으로 리스트 에다가 값을 대입함
@@ -23,13 +83,9 @@ window.addEventListener('DOMContentLoaded', function () {
       product_cost[i] = $(' li:nth-child(' + i + ') input').val();
 
       product_id[i] = $('li:nth-child(' + i + ') .btn_cart').val();
+      
+      priceTag[i] = $('li:nth-child(' + i + ') .price').text();
     }
-
-
-
-
-
-
 
     function cart_button(i) {                                // 장바구니 버튼 클릭했을떄 수량,적립금 설정함수
       // $('#cartPut').css('display','block');
@@ -38,6 +94,7 @@ window.addEventListener('DOMContentLoaded', function () {
       $('#cartPut .name').text(product_name[i]);      //초기 이름 설정
       $('#cartPut .dc_price').text(product_price[i]);  // 초기 가격설정
       $('#cartPut .num').text(product_price[i]);  // 초기 가격설정
+      $('.ttt').text(priceTag[i]);
 
       $('.count_num').text(i);
 
@@ -45,7 +102,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
       btn_val = product_id[i];
       $('#cartPut .btn_type1 .txt_type').val(btn_val);
-      console.log(btn_val);
+      // console.log(btn_val);
 
 
 
@@ -125,6 +182,32 @@ window.addEventListener('DOMContentLoaded', function () {
 
       });
 
+      
+      $('.btn_type1').click(function () {
+    	  
+    	  // console.log($("#countValue").text());
+    	  // 성공했을 시 모달창 닫기
+          $('#cartPut').hide();
+          // $('.bg_loading').hide();
+
+          noBody.removeClass('noBody_on');
+          ///// 닫기 눌렀으면 원래값으로 초기화 시켜줘야됨 ////
+          number = 1;
+          $('.inp').val(1);
+          $(".num").text(Math.floor(number * cost / 1000) + ',' + number * cost % 1000);
+          $('.emph').text((number * cost) / 20 + '원 적립');
+
+
+        });
+      
+      
+      
+      
+      
+      
+      
+      
+      
       $('.btn_type2').click(function () {
         $('#cartPut').hide();
         $('.bg_loading').hide();
@@ -198,9 +281,9 @@ window.addEventListener('DOMContentLoaded', function () {
 
     $('li[name=cate_gory]').click(function () {                  // li태그에서 name이 cate_gory인걸 클릭했을 때
       var cate_index = $('li[name=cate_gory]').index(this);  // 변수 cate_index에다 , 현재 클릭한 name=category의 인덱스를 저장
-      console.log(cate_index);
-      $(this).css("backgroundColor", "red");
-
+      // console.log(cate_index);	$("#colorTest").children().eq(0).addClass('on');
+      
+      
       for (i = 0; i < $('.inner_lnb ul li').length; i++) {           // li의 갯수만큼 반복해서 on이라는 클래스를 가지고 있는 애를 찾아서 on 삭제
         if ($('.inner_lnb ul li a').hasClass("on") === true) {      // 여기서 on은 글자색 보라색으로 해주는 css클래스요소
           $('.inner_lnb ul li a').removeClass('on');            // 기존에 있던 on은 비활성화 시키고 , 이번에 클릭한 요소에다가 on을 활성화 시키기 위함임
@@ -210,8 +293,16 @@ window.addEventListener('DOMContentLoaded', function () {
 
       var change_bg = $('.inner_lnb ul li:eq(' + cate_index + ') a').innerWidth();  //change_bg라는 변수에다가 방금 클릭한 a태그의 가로길이 값을 저장(막대 바 크기 조절을 위해)
 
-      console.log($('.inner_lnb ul li:eq(' + cate_index + ') a').text());  
-
+      
+      // console.log($('.inner_lnb ul li:eq(' + cate_index + ') a').text());  
+      
+//      function changeColor() {
+//    	  $(this).css("backgroundColor", "red");
+//      }
+//
+//      $(window).on('beforeunload', function() {
+//    	  changeColor();
+//      })
 
       var pos = $('.inner_lnb ul li:eq(' + cate_index + ') a').position()  // 변수 pos에다가 현재 클릭한 a 태그의 위치값 저장
 
@@ -255,39 +346,6 @@ window.addEventListener('DOMContentLoaded', function () {
 
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     $('.name_select').click(function () {
       $(".checked").toggle(function () {
         $('.name_select').css('color', '#5f0080');
@@ -297,54 +355,14 @@ window.addEventListener('DOMContentLoaded', function () {
 
 
 
-    // $('.btn_type1 .txt_type').click(function(){
+
+     
 
 
-
-
-    //     product_name = $('#cartPut .list_goods .name');
-    //     console.log(product_name.text());
-
-    //     $.ajax({
-    //       type: "GET",
-    //       url: "./id_check?id="+product_name,    //해당 url로 데이터를 넘김
-    //       data: {
-    //         'username': $('#cartPut .list_goods .name').text()
-    //       },
-    //       datatype: 'json',
-    //       success: function (data) {
-    //         console.log(data['overlap']);
-    //         if (data['overlap'] == "fail") {
-    //           console.log('성공');
-    //           return;
-    //         } else {
-    //           console.log('성공');
-    //           return;
-    //         }
-    //       }
-    //     });
-    // });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    // console.log(window.location.href, "주소값");
 
 
   });
-
-
-
 
 
 });

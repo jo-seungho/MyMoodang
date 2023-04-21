@@ -66,7 +66,6 @@ public class ItemService {
 		return listCount;
 	}
 
-
 	// 2023-04-16 최명진 어드민 SelectItemList(전체 상품 리스트)
 	public ArrayList<Item> selectItemList(AdminPageInfo pi) {
 		Connection conn = getConnection();
@@ -108,5 +107,53 @@ public class ItemService {
 
 		return result1 * result2;
 	}
+
+	public int updateItem(int itemCode) {
+	
+		Connection conn = getConnection();
+	
+		int result = new ItemDao().updateItem(conn, itemCode);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+
+	public ArrayList<ItemImg> selectImgList(int itemCode) {
+		
+		Connection conn = getConnection();
+
+		ArrayList<ItemImg> list = new ItemDao().selectImgList(conn, itemCode);
+
+		close(conn);
+
+		return list;
+	}
+
+	public int deleteItem(int code, String status) {
+		
+		Connection conn = getConnection();
+		
+		int result = new ItemDao().deleteItem(conn, code, status);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+
+	
+
 
 }
