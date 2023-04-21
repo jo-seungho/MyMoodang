@@ -163,4 +163,22 @@
 		?)
 	</entry>
 
+
+	<entry key="checkFavorite">
+		SELECT COUNT(*) COUNT
+		FROM WISHLIST
+		WHERE ITEM_CODE = ?
+		AND MEMBER_NO = ?
+	</entry>
+
+	<entry key="addFavorite">
+		INSERT INTO WISHLIST VALUES(?, ?)
+	</entry>
+
+	<entry key="deleteFavorite">
+		DELETE FROM WISHLIST
+		WHERE ITEM_CODE = ?
+		AND MEMBER_NO = ?
+	</entry>
+
 </properties>

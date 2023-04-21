@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.admin.member.model.vo.AdMember;
 import com.kh.admin.shop.item.model.service.ItemService;
 import com.kh.admin.shop.item.model.vo.Item;
 import com.kh.admin.shop.item.model.vo.ItemImg;
@@ -31,11 +32,18 @@ public class ItemDetailController extends HttpServlet {
 		Item item = iService.selectItem(itemCode);
 		ArrayList<ItemImg> list = iService.selectImgList(itemCode);
 		
+		AdMember m = (AdMember) request.getSession().getAttribute("adminUser");
+		
+		int memberNo = m.getMemberNo();
+		
+
+		
 		
 		if(item != null) {
 			
 			request.setAttribute("item", item);
 			request.setAttribute("list", list);
+			request.setAttribute("memberNo", memberNo);
 			
 			request.getRequestDispatcher("views/admin/item_detail.jsp").forward(request, response);
 		}

@@ -307,7 +307,7 @@ String category = request.getParameter("category");
 						var orderNo = $('#orderNo').val();
 						$.ajax({
 							url : 'orderDelete.ad',
-							type : 'post',
+							type : 'get',
 							data : {
 								orderNo : orderNo,
 							},
@@ -328,7 +328,7 @@ String category = request.getParameter("category");
 							.val();
 					$.ajax({
 						url : 'orderStatus.ad',
-						type : 'post',
+						type : 'get',
 						data : {
 							orderNo : orderNo,
 							status : status,
@@ -347,7 +347,7 @@ String category = request.getParameter("category");
 				    
 				    $.ajax({
 				        url: 'order.ad',
-				        type: 'post',
+				        type: 'get',
 				        data: {
 				            page: page,
 				            category: category,
@@ -370,7 +370,7 @@ String category = request.getParameter("category");
 				    
 				    $.ajax({
 				        url: 'order.ad',
-				        type: 'post',
+				        type: 'get',
 				        data: {
 				            page: page,
 				            category: category

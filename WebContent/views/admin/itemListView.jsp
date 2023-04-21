@@ -7,6 +7,7 @@
 	int endPage = pi.getEndPage(); 
 	int maxPage = pi.getMaxPage();
 	String category = request.getParameter("category");
+	
 %>
     <!DOCTYPE html>
     <html lang="en">
