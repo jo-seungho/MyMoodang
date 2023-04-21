@@ -186,6 +186,14 @@ public class ItemDao {
 		
 		return list;
 	}
+	/**
+     * 상품 리뷰 리스트 조회
+     * 2023-04-19 이태화
+     * @param bno
+     * @param conn
+     * @return
+     */
+
 	public ArrayList<Review> selectReviewList(Connection conn, int bno) {
 
         // 필요한 변수 셋팅

@@ -92,6 +92,12 @@ public class ItemService {
 		
 		return list;
 	}
+	/**
+     * 상품 리뷰 리스트 조회
+     * 2023-04-19 이태화
+     * @param bno
+     * @return
+     */
 
 	public ArrayList<Review> selectReviewList(int bno) {
 		
