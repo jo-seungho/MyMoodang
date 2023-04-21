@@ -73,6 +73,7 @@ window.addEventListener('DOMContentLoaded', function () {
     var product_price = [];       //썸네일 가격 변수 리스트
     var product_cost = [];        //상품 수량변경할떄 쓰는 가격 변수 리스트
     var product_id = [];          //상품 아이디값 가져오기
+    var priceTag = [];
 
     for (i = 0; i < $('.list_goods .inner_listgoods ul li').length + 1; i++) {
       product_name[i] = $('li:nth-child(' + i + ') .name').text();    //포문으로 리스트 에다가 값을 대입함
@@ -82,6 +83,8 @@ window.addEventListener('DOMContentLoaded', function () {
       product_cost[i] = $(' li:nth-child(' + i + ') input').val();
 
       product_id[i] = $('li:nth-child(' + i + ') .btn_cart').val();
+      
+      priceTag[i] = $('li:nth-child(' + i + ') .price').text();
     }
 
     function cart_button(i) {                                // 장바구니 버튼 클릭했을떄 수량,적립금 설정함수
@@ -91,6 +94,7 @@ window.addEventListener('DOMContentLoaded', function () {
       $('#cartPut .name').text(product_name[i]);      //초기 이름 설정
       $('#cartPut .dc_price').text(product_price[i]);  // 초기 가격설정
       $('#cartPut .num').text(product_price[i]);  // 초기 가격설정
+      $('.ttt').text(priceTag[i]);
 
       $('.count_num').text(i);
 
@@ -178,6 +182,32 @@ window.addEventListener('DOMContentLoaded', function () {
 
       });
 
+      
+      $('.btn_type1').click(function () {
+    	  
+    	  // console.log($("#countValue").text());
+    	  // 성공했을 시 모달창 닫기
+          $('#cartPut').hide();
+          // $('.bg_loading').hide();
+
+          noBody.removeClass('noBody_on');
+          ///// 닫기 눌렀으면 원래값으로 초기화 시켜줘야됨 ////
+          number = 1;
+          $('.inp').val(1);
+          $(".num").text(Math.floor(number * cost / 1000) + ',' + number * cost % 1000);
+          $('.emph').text((number * cost) / 20 + '원 적립');
+
+
+        });
+      
+      
+      
+      
+      
+      
+      
+      
+      
       $('.btn_type2').click(function () {
         $('#cartPut').hide();
         $('.bg_loading').hide();
