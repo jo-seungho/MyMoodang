@@ -27,6 +27,23 @@ public class CartService {
 		return list;
 	}
 
+	public int insertCart(int userNo, int countValue, int priceItem, int itemCodeNo) {
+		
+		Connection conn = getConnection();
+
+		int result = new CartDao().insertBoard(conn, userNo, countValue, priceItem, itemCodeNo);
+
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+ 		close(conn);
+		
+		return result;
+	}
+
 
 
 

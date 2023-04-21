@@ -26,7 +26,11 @@
 		 WHERE C.MEMBER_NO = ?	
 	</entry>
 
-
+	<entry key="insertCart">
+		INSERT INTO CART (CART_NO, CART_STOCK, PRICE, MEMBER_NO, ITEM_CODE)
+		VALUES (SEQ_CNO.NEXTVAL, ?, ?, 
+	        (SELECT M.MEMBER_NO FROM MEMBER M WHERE M.MEMBER_NO = ? AND ROWNUM = 1), ?)
+	</entry>
 
 
 
