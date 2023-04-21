@@ -67,6 +67,39 @@ public class CartDao {
 		return list;
 	}
 
+	/**
+	 * 장바구니 추가
+	 * 2023-04-21 조승호
+	 * @param conn
+	 * @param userNo
+	 * @param countValue
+	 * @param priceItem
+	 * @param itemCodeNo
+	 * @return
+	 */
+	public int insertBoard(Connection conn, int userNo, int countValue, int priceItem, int itemCodeNo) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertCart");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, countValue);
+			pstmt.setInt(2, priceItem);
+			pstmt.setInt(3, userNo);
+			pstmt.setInt(4, itemCodeNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
     
 
 }

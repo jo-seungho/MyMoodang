@@ -91,7 +91,7 @@
 												</a>
 
 												<div class="group_btn">
-													<button type="button" name="chk" value="여기다가 프로덕트 아이디 적어주삼"
+													<button type="button" name="chk" onclick="showCartModal(<%= i.getItemCode() %>);"
 														class="btn btn_cart">
 														<span class="screen_out">38300</span>
 													</button>
@@ -185,9 +185,11 @@
 				</div>
 			</div>
 		</div>
+		
 		<div id="cartPut">
 			<div class="cart_option cart_type3" style="opacity: 1;">
 				<form action="cart" method="post" id="contactsForm">
+				 <input type="hidden" name="itemCode" value="">
 					<div class="inner_option">
 						<div class="in_option">
 							<div class="list_goods">
@@ -202,7 +204,10 @@
 													<input id="countValue" name="countValue" type="hidden" class="count_num">1
 												</div>
 												<button type="button" class="btn up on">수량올리기</button>
-											</span> <span class="price"> <span class="dc_price"></span>
+											</span> 
+											<span class="price"> 
+												<span class="dc_price"></span>
+												<input type="hidden" class="ttt">
 											</span>
 										</div></li>
 								</ul>
@@ -241,34 +246,42 @@
 		<%@ include file="../common/footer.jsp"%>
 
 	</div>
-	<!--  
+	
 	<script>
-	
-    // 장바구니 모달에서 바뀐 수량 전달 함수 (수정중입니다)
-    
-
-    
-    $('.goCart').click(function(){
-    	
-
-  	  
-       $.ajax({
-         type: "GET",
-          url: "cart",    
-          data: {
-       	   countValue: $("#countValue").text()
-         },
-         success: function (res) {
-
-          },
-          error: function(err) {
-       	   console.log(err)
-       	   console.log("????")
-          }
-        });
-   	});
-	
+		function showCartModal(itemCode) {
+			// 가격남음
+			$("#cartPut input[name=itemCode]").val(itemCode);
+			console.log(itemCode);
+			// console.log($('.total > .totalPrice').text(), 8888)
+			console.log($("#countValue").text());
+			
+		}
+		
+		$('.btn_type1').click(function() {
+			
+			// let itemCodeNo = $('#cartPut input[name=itemCode]').val();
+			let aa = $('.ttt').text()
+			let priceItem = Number(aa.replace(",", ""))
+			
+			$.ajax({
+				
+				url: 'cartList',
+				type: 'post',
+				data: {
+					itemCodeNo: $('#cartPut input[name=itemCode]').val(),
+					countValue: $("#countValue").text(),
+					priceItem: priceItem
+				},
+				success: function(res) {
+					console.log(typeof(priceItem));
+					// console.log(res)
+				},
+				error: function(err) {
+					console.log(err, "err")
+				}
+			})
+			
+		})
 	</script>
--->
 </body>
 </html>
