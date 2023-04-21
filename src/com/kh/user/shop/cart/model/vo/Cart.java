@@ -20,7 +20,7 @@ public class Cart {
 	
 
 	public Cart(int cartNo, int cartStock, int price, int discountPrice, int totalPrice, int totalDiscountPrice,
-			int difference, int memberNo, String itemName, String imgPath) {
+			int difference, int memberNo, String itemName, String imgPath, int itemCode) {
 		super();
 		this.cartNo = cartNo;
 		this.cartStock = cartStock;
@@ -32,6 +32,7 @@ public class Cart {
 		this.memberNo = memberNo;
 		this.itemName = itemName;
 		this.imgPath = imgPath;
+		this.itemCode = itemCode;
 	}
 
 
