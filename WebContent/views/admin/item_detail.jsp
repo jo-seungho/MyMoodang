@@ -3,8 +3,8 @@
 	import="com.kh.admin.shop.item.model.vo.*, java.util.ArrayList"%>
 <%
 	Item it = (Item) request.getAttribute("item");
-	ArrayList<ItemImg> list = (ArrayList<ItemImg>) request.getAttribute("list");
-	String noImage = "/resources/img/noimage.png";
+ArrayList<ItemImg> list = (ArrayList<ItemImg>) request.getAttribute("list");
+String noImage = "/resources/img/noimage.png";
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,10 +28,25 @@
 }
 
 #click:hover {
-	cursor : pointer;
+	cursor: pointer;
+}
+
+.hearts {
+	width: 80px;
+	height: 80px;
+	background: url(/resources/img/heart.png) no-repeat;
+	background-position: 0 0;
+	cursor: pointer;
+	transition: background-position 1s steps(28);
+	transition-duration: 0s;
+	margin-left: 500px;
+}
+
+.hearts.is-active {
+	transition-duration: 1s;
+	background-position: -2800px 0;
 }
 </style>
-
 </head>
 
 <body class="sb-nav-fixed">
@@ -50,8 +65,7 @@
 									style="background-image: url(https://res.kurly.com/mobile/img/1808/img_none_x2.png)">
 									<img <%if (it.getItemImg() == null) {%>
 										src="/resources/img/noimage.png" <%} else {%>
-										src="<%=it.getItemImg()%>" <%}%> alt="상품 대표 이미지"
-										class="bg" />
+										src="<%=it.getItemImg()%>" <%}%> alt="상품 대표 이미지" class="bg" />
 								</div>
 								<p class="goods_name">
 									<strong class="name"><%=it.getItemName()%> </strong>
@@ -84,7 +98,8 @@
 									</dl>
 									<dl class="list">
 										<dt class="tit">할인율</dt>
-										<dd class="desc"><%=it.getItemDiscount() * 100%>%</dd>
+										<dd class="desc"><%=it.getItemDiscount() * 100%>%
+										</dd>
 									</dl>
 									<dl class="list">
 										<dt class="tit">카테고리</dt>
@@ -97,8 +112,7 @@
 						<div id="cartPut">
 							<div class="cart_option cart_type2">
 								<form action="/upItemForm.ad">
-									<input type="hidden" name="code"
-										value="<%=it.getItemCode()%>" />
+									<input type="hidden" name="code" value="<%=it.getItemCode()%>" />
 									<div class="inner_option">
 										<div class="in_option">
 											<div class="list_goods">
@@ -120,22 +134,16 @@
 														<span class="num"></span> <span class="won">원</span>
 													</span>
 												</div>
-												<br /> <br />
+												<div class="hearts"></div>
 
 												<p class="txt_point">
-														<span id='click'>
-														<i class="fa-regular fa-heart fa-2xl" style="color: #000000;"></i>
-														</span>
 													<span class="ico">적립</span> <span class="point"> 구매
 														시 <strong class="emph"></strong>
 													</span>
 												</p>
+
 												<strong class="name" style="float: right; margin-left: 20px">
 													<i class="fas fa-eye lg"></i> | <%=it.getItem_hits()%>
-												</strong>
-												
-												<strong class="name" style="float: right">
-													<i class="fa-regular fa-heart"></i> | 3
 												</strong>
 											</div>
 										</div>
@@ -146,15 +154,21 @@
 												<div class="col-auto">
 													<button type="submit" id="btn" class="btn btn2">상품수정</button>
 												</div>
-												<% if (it.getItemStatus().equals("Y")) { %>
+												<%
+													if (it.getItemStatus().equals("Y")) {
+												%>
 												<div class="col-auto">
 													<button type="button" id="btn" class="btn btn2 dbtn">판매중지</button>
 												</div>
-												<% } else { %>
+												<%
+													} else {
+												%>
 												<div class="col-auto">
 													<button type="button" id="btn" class="btn btn2 ubtn">판매재개</button>
 												</div>
-												<% } %>
+												<%
+													}
+												%>
 												<div class="col-auto">
 													<a href="/itemList.ad?page=1&category=a">
 														<button type="button" id="btn" class="btn btn2">상품목록</button>
@@ -291,8 +305,8 @@
 									<div class="goods_intro">
 										<div class="pic">
 											<img <%if (list.size() < 2) {%> src="<%=noImage%>"
-												<%} else {%> src="<%=list.get(1).getItemImgPath()%>"
-												<%}%> style="width: 1010px; height: 671px" />
+												<%} else {%> src="<%=list.get(1).getItemImgPath()%>" <%}%>
+												style="width: 1010px; height: 671px" />
 										</div>
 										<div class="context last">
 											<p class="words"><%=it.getItemText()%></p>
@@ -366,19 +380,91 @@
 	</div>
 
 	<script>
-          $('.dbtn').click(function () {
-            if (confirm('정말 판매 중지 시키겠습니까?')) {
-              location.href = '/itemDelete.ad?code=<%=it.getItemCode()%>&status=N';
-              }
-            });
-          
-          $('.ubtn').click(function () {
-              if (confirm('정말 판매 재개 시키겠습니까?')) {
-                location.href = '/itemDelete.ad?code=<%=it.getItemCode()%>&status=Y';
-                }
-              });
-          
-	</script>
-  </body>
-</html>
+                 $('.dbtn').click(function () {
+                   if (confirm('정말 판매 중지 시키겠습니까?')) {
+                     location.href = '/itemDelete.ad?code=<%=it.getItemCode()%>&status=N';
+                     }
+                   });
 
+                 $('.ubtn').click(function () {
+                     if (confirm('정말 판매 재개 시키겠습니까?')) {
+                       location.href = '/itemDelete.ad?code=<%=it.getItemCode()%>&status=Y';
+                       }
+                     });
+
+                 $(document).ready(function() {
+                	  var code = <%= it.getItemCode() %>;
+                	  var heartIcon = $(".hearts");
+
+                	  checkWishlistStatus(code).then(function(result) {
+                		  console.log(result);
+                	    if (result >= 1) {
+                	      heartIcon.addClass("is-active").css("filter", "");
+                	    } else {
+                	      heartIcon.removeClass("is-active").css("filter", "grayscale(1)");
+                	    }
+                	  });
+
+                	  // Toggle the heart icon and update the wishlist when clicked
+                	  heartIcon.on("click", function() {
+                	    $(this).toggleClass("is-active");
+
+                	    if ($(this).hasClass("is-active")) {
+                	      addToWishlist(code);
+                	      $(this).css("filter", "");
+                	    } else {
+                	      removeFromWishlist(code);
+                	      $(this).css("filter", "grayscale(100%)");
+                	    }
+                	  });
+
+                	  function checkWishlistStatus(code) {
+                	    return new Promise(function(resolve, reject) {
+                	      $.ajax({
+                	        url: "/heart.ad",
+                	        type: "POST",
+                	        data: {
+                	          action: "check",
+                	          code: code
+                	        },
+                	        success: function(response) {
+                	          resolve(response);
+                	        },
+                	        error: function(xhr, status, error) {
+                	          reject(error);
+                	        }
+                	      });
+                	    });
+                	  }
+
+                	  function addToWishlist(code) {
+                	    $.ajax({
+                	      url: "/heart.ad",
+                	      type: "POST",
+                	      data: {
+                	        action: "add",
+                	        code: code
+                	      },
+                	      success: function(response) {
+                	        console.log(response);
+                	      }
+                	    });
+                	  }
+
+                	  function removeFromWishlist(code) {
+                	    $.ajax({
+                	      url: "/heart.ad",
+                	      type: "POST",
+                	      data: {
+                	        action: "remove",
+                	        code: code
+                	      },
+                	      success: function(response) {
+                	        console.log(response);
+                	      }
+                	    });
+                	  }
+                	});
+       </script>
+</body>
+</html>

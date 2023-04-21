@@ -52,7 +52,10 @@ request.setCharacterEncoding("UTF-8");
 				
 				HttpSession session = request.getSession();
 				
+				
 				session.setAttribute("loginUser", loginMember);
+				
+				
 				
 				session.setAttribute("alertMsg", "성공적으로 로그인이 되었습니다.");
 				

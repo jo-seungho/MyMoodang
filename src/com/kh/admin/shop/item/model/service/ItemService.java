@@ -153,6 +153,51 @@ public class ItemService {
 		return result;
 	}
 
+	public int checkFavorite(int code, int mno) {
+		
+		Connection conn = getConnection();
+		
+		int result = new ItemDao().checkFavorite(conn, code, mno);
+		
+		close(conn);
+		
+		return result;
+	}
+
+	public int addFavorite(int code, int mno) {
+		
+		Connection conn = getConnection();
+		
+		int result = new ItemDao().addFavorite(conn, code, mno);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+
+	public int deleteFavorite(int code, int mno) {
+		
+		Connection conn = getConnection();
+		
+		int result = new ItemDao().deleteFavorite(conn, code, mno);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+
 	
 
 
