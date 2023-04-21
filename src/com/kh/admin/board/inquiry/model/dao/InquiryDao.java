@@ -84,12 +84,11 @@ public class InquiryDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 
-			int i = 0;
 			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
 			int endRow = startRow + pi.getBoardLimit() - 1;
 
-			pstmt.setInt(++i, startRow);
-			pstmt.setInt(++i, endRow);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
 
 			rset = pstmt.executeQuery();
 
@@ -110,5 +109,80 @@ public class InquiryDao {
 		}
 
 		return list;
+
 	}
+	
+	/**
+	 * 1:1문의 상세조회 메소드
+	 * 2023-04-21 소현아
+	 * @param conn
+	 * @param inqNo
+	 * @return
+	 */
+	public Inquiry selectInquiry(Connection conn, int inqNo) {
+		
+		Inquiry in = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectInquiryDetail");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1,inqNo);
+			
+			rset=pstmt.executeQuery();
+
+			if(rset.next()) {
+				
+				in = new Inquiry(rset.getString("TITLE")	
+						       , rset.getInt("INQ_NO")
+						       , rset.getString("INQUIRY_TYPE")
+						       , rset.getString("MEMBER_ID")
+						       , rset.getString("DATE_CREATE"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return in;
+	}
+	
+	
+	public int insertInquiry(Connection conn, Inquiry in) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+	    String sql = prop.getProperty("insertInquiry");
+	    
+	    try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1,in.getTitle());
+			pstmt.setString(2,in.getReplyContents());
+			
+			result = pstmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			
+			close(pstmt);
+			
+		}
+	    
+	    return result;
+		
+		
+		
+		
+	}
+	
+	
+	
 }

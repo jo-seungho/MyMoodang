@@ -42,7 +42,6 @@
             <div style="height: 60px"><button type="button" id="btn" class="btn">글쓰기</button></div> -->
 
             <div>
-              <button type="button" id="btn" class="btn">글쓰기</button>
               <form role="search">
                 <button type="submit" id="btn" class="btn">검색하기</button>
                 <input type="search" class="form-control" placeholder="" aria-label="Search" style="width: 30%; float: right" />
@@ -101,6 +100,18 @@
           </div>
           <br />
         </main>
+        
+        <script>
+        $(document).ready(function () {
+            $("tbody tr").click(function () {
+            	
+            	let ino = $(this).children().eq(0).text();
+              location.href = "/inquiryDetail.ad?ino="+ino;
+            });
+          });
+        
+       
+		</script>
       </div>
     <!-- <script src="assets/demo/chart-area-demo.js"></script>
     <script src="assets/demo/chart-bar-demo.js"></script> -->

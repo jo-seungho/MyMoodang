@@ -30,6 +30,15 @@ public class Inquiry {
 		this.memberNo = memberNo;
 	}
 
+	public Inquiry(String title, int inqNo, String inquiryType, String memberId, String dateCreate) {
+		
+		super();
+		this.title = title;
+		this.inqNo = inqNo;
+		this.inquiryType = inquiryType;
+		this.memberId = memberId;
+		this.dateCreate = dateCreate;
+	}
 
 	public Inquiry(int inqNo, String inquiryType,  String memberId, String title, String dateCreate) {
 		super();
@@ -38,8 +47,6 @@ public class Inquiry {
 		this.memberId = memberId;
 		this.title = title;
 		this.dateCreate = dateCreate;
-		
-		
 	}
 
 

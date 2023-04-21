@@ -11,6 +11,7 @@ import com.kh.admin.board.inquiry.model.dao.InquiryDao;
 import com.kh.admin.board.inquiry.model.vo.Inquiry;
 
 
+
 public class InquiryService {
 
 
@@ -47,6 +48,50 @@ public class InquiryService {
 		close(conn);
 
 		return list;
+	}
+	
+	/**
+	 * 1:1문의 상세조회 메소드
+	 * 2023-04-21 소현아
+	 * @param inqNo
+	 * @return
+	 */
+	public Inquiry selectInquiry(int inqNo) {
+		
+		Connection conn = getConnection();
+		
+		Inquiry in = new InquiryDao().selectInquiry(conn, inqNo);
+		
+		close(conn);
+		
+		return in;
+		
+	}
+	
+	/**
+	 * 1:1문의 답변 작성 메소드
+	 * 2023-04-21 소현아
+	 * @param n
+	 * @return
+	 */
+	public int insertInquiry(Inquiry in) {
+		
+		Connection conn = getConnection();
+		
+		int result = new InquiryDao().insertInquiry(conn, in);
+		
+		if(result > 0) {
+			
+			commit(conn);
+		}else {
+			
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+		
 	}
 
 }
