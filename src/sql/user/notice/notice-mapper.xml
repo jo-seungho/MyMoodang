@@ -3,6 +3,7 @@
 <properties>
 
 	<entry key="selectListCount">
+	<!-- 공지사항 리스트 조회수 쿼리문 / 2023-04-18 소현아  -->
 		SELECT COUNT(*) COUNT
 		  FROM NOTICE
 		 WHERE DELETE_STATUS = 'Y'
@@ -11,7 +12,7 @@
 	
 
 	<entry key="selectNoticeList">
-		
+	<!-- 공지사항 리스트 조회용 쿼리문  / 2023-04-19 소현아  -->	
 			SELECT * 
 		 	 FROM (
 		      SELECT ROWNUM RNUM
@@ -30,12 +31,14 @@
 
 	
 	<entry key="increaseCount">
+	<!-- 공지사항 상세보기 조회수 쿼리문  / 2023-04-19 소현아  -->
 	UPDATE NOTICE
 		   SET VIEWS = VIEWS + 1
 		 WHERE NOTICE_NO = ?
 	</entry>
 	
 	<entry key="selectNotice">
+	<!-- 공지사항 상세보기 쿼리문  / 2023-04-19 소현아  -->
 		SELECT NOTICE_NO
 		     , NOTICE_TITLE
 		     , NOTICE_CONTENT
