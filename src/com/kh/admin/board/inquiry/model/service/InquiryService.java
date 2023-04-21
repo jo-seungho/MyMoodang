@@ -7,8 +7,8 @@ import java.util.ArrayList;
 
 import com.kh.common.JDBCTemplate;
 import com.kh.common.model.vo.PageInfo;
-import com.kh.user.board.inquiry.model.dao.InquiryDao;
-import com.kh.user.board.inquiry.model.vo.Inquiry;
+import com.kh.admin.board.inquiry.model.dao.InquiryDao;
+import com.kh.admin.board.inquiry.model.vo.Inquiry;
 
 
 public class InquiryService {

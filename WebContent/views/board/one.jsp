@@ -32,14 +32,12 @@
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 
-<link rel="stylesheet" href="/resources/css/common/reset.css" />
-<link rel="stylesheet" href="/resources/css/common/header.css" />
-<link rel="stylesheet" href="/resources/css/board//one.css">
-<link rel="stylesheet" href="/resources/css/common/footer.css">
+	<!-- 중복되는 헤더, 푸터, 리셋 css & 제이쿼리 & 헤더 js 담은 common.jsp / 2023-04-20 김서영 -->
+	<%@ include file="../common/common.jsp"%>
 
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script src="/resources/js/common/header.js"></script>
+<link rel="stylesheet" href="/resources/css/board/one.css">
 <script src="/resources/js/board/one.js"></script>
+
 <title>1 : 1 문의</title>
 </head>
 <body>
@@ -47,6 +45,8 @@
 
 
 	<%@ include file="../common/header.jsp"%>
+
+
 	<!-- 1 : 1 문의 영역 시작 -->
 	<div id="container">
 		<div id="main">
@@ -182,9 +182,6 @@
 		</div>
 
 	</div>
-
-
-
 	<!-- 1:1 페이지 영역 끝 -->
 	<%@ include file="../common/footer.jsp"%>
 </body>

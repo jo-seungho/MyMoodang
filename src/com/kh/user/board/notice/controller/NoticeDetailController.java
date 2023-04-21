@@ -35,10 +35,7 @@ public class NoticeDetailController extends HttpServlet {
 		
 				// 글번호 뽑기
 				int noticeNo = Integer.parseInt(request.getParameter("nno"));
-				
-				// System.out.println(boardNo);
-				
-				
+	
 				// 1. 조회수 증가
 				int result = new NoticeService().increaseCount(noticeNo);
 				

@@ -8,13 +8,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
-    <link rel="stylesheet" href="/resources/css/common/reset.css">
-    <link rel="stylesheet" href="/resources/css/common/header.css">
-    <link rel="stylesheet" href="/resources/css/common/footer.css">
-    <link rel="stylesheet" href="/resources/css/member/login.css">
+	<%@ include file="../common/common.jsp" %>
 
-    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <script src="/resources/js/common/header.js"></script>
+    <link rel="stylesheet" href="/resources/css/member/login.css">
     <script src="/resources/js/member/find_id11.js"></script>
 
 

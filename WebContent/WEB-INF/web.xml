@@ -8,8 +8,16 @@
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list> -->
 
+<error-page>
+  <error-code>500</error-code>
+  <location>/error500</location>
+</error-page>
+<error-page>
+  <error-code>404</error-code>
+  <location>/error404</location>
+</error-page>
 
- 
+<!-- 어드민 로그인 제약조건 -->
 <!--   <filter>
     <filter-name>AdminFilter</filter-name>
     <filter-class>com.kh.admin.common.filter.AdminFilter</filter-class>
@@ -17,7 +25,7 @@
 <filter-mapping>
     <filter-name>AdminFilter</filter-name>
     <url-pattern>*.ad</url-pattern>
-</filter-mapping> -->
+</filter-mapping>  -->
 
  <session-config>
              <session-timeout>300</session-timeout>

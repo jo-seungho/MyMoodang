@@ -9,12 +9,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>아이디 찾기 성공 화면</title>
-    <link rel="stylesheet" href="/resources/css/common/reset.css">
-    <link rel="stylesheet" href="/resources/css/common/header.css">
-    <link rel="stylesheet" href="/resources/css/common/footer.css">
-    <link rel="stylesheet" href="/resources/css/member/login.css">
 
-    <script src="/resources/js/header.js"></script>
+    <!-- 중복되는 헤더, 푸터, 리셋 css & 제이쿼리 & 헤더 js 담은 common.jsp / 2023-04-20 김서영 -->
+	<%@ include file="../common/common.jsp"%>
+
+    <link rel="stylesheet" href="/resources/css/member/login.css">
 
 </head>
 <body>
@@ -37,7 +36,6 @@
             </div>
         </div>
     </div>
-
 
 
 </body>

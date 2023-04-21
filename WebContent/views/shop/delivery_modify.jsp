@@ -7,15 +7,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>배송지 수정</title>
+
     <link rel="stylesheet" href="/resources/css/common/reset.css">
     <link rel="stylesheet" href="/resources/css/shop/address_search.css">
     <link rel="stylesheet" href="/resources/css/shop/delivery_modify.css">
 
-
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script src="/resources/js/shop/deliver.js"></script>
     <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-   
+
 </head>
 <body>
 
@@ -52,11 +52,11 @@
 
                     <button type="submit" class="btn active" formaction="" >저장</button>
                     <button type="submit" class="btn normal" formaction="" >삭제</button>
-                        
+
                 </div>
             </form>
         </div>
     </div>
-    
+
 </body>
 </html>

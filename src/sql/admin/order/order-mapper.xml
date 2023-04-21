@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+
+<properties>
+
+	<entry key="selectListCount">
+		SELECT COUNT(*) COUNT FROM ORDERS
+	</entry>
+
+	<entry key="selectOrderStatusCount">
+		SELECT COUNT(*) COUNT FROM ORDERS
+		WHERE ORDER_STATUS =
+		?
+	</entry>
+
+
+	<entry key="selectAllOrderList">
+		SELECT *
+		FROM (
+		SELECT ROWNUM RNUM,
+		A.*
+		FROM (
+		SELECT
+		ORDER_NO
+		, MEMBER_ID
+		, PAYMENT_AMOUNT
+		, TO_CHAR(ORDER_DATE, 'YY/MM/DD
+		HH24:MI:SS') ORDER_DATE
+		, SHIP_ADDR
+		, ORDER_STATUS
+		FROM ORDERS
+		JOIN MEMBER
+		USING(MEMBER_NO)
+		JOIN SHIPPING_ADDRESS USING(SHIP_NO)
+		ORDER BY
+		ORDER_DATE DESC
+		) A
+		)
+		WHERE RNUM BETWEEN ? AND ?
+	</entry>
+
+	<entry key="selectStatusOrderList">
+		SELECT *
+		FROM (
+		SELECT ROWNUM RNUM,
+		A.*
+		FROM (
+		SELECT
+		ORDER_NO
+		, MEMBER_ID
+		, PAYMENT_AMOUNT
+		, TO_CHAR(ORDER_DATE, 'YY/MM/DD
+		HH24:MI:SS') ORDER_DATE
+		, SHIP_ADDR
+		, ORDER_STATUS
+		FROM ORDERS
+		JOIN MEMBER
+		USING(MEMBER_NO)
+		JOIN SHIPPING_ADDRESS USING(SHIP_NO)
+		WHERE ORDER_STATUS
+		= ?
+		ORDER BY ORDER_DATE DESC
+		) A
+		)
+		WHERE RNUM BETWEEN ? AND ?
+	</entry>
+
+	<entry key="updateOrderStatus">
+		UPDATE ORDERS
+		SET ORDER_STATUS = ?
+		WHERE ORDER_NO = ?
+	</entry>
+</properties>

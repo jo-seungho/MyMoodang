@@ -1,52 +1,86 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<% String alertMsg = (String)session.getAttribute("alertMsg"); %>
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <title>관리자 페이지</title>
+	pageEncoding="UTF-8"%>
 
-    <!-- jquery 및 라이브러리 -->
-    <script src="https://code.jquery.com/jquery-3.6.4.js" crossorigin="anonymous"></script>
-    <link href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" rel="stylesheet" />
-    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
-    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-    <!-- 커스텀 js css -->
-    
-    <link href="/resources/css/admin/styles.css" rel="stylesheet" />
-    <script src="/resources/js/admin/admin.js"></script>
-    
-    <link href="/resources/css/admin/order.css" rel="stylesheet" />
-        <script src="/resources/js/admin/order.js"></script>
+<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
 
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>     
-        
+	<a class="navbar-brand ps-3" href="/main.ad"><div>
+			<i class="fas fa-bug" style="color: red"></i><b>&nbsp; MY MOODANG</b>
+		</div></a>
 
-  </head>
-  <body>
-    <!-- <script src="assets/demo/chart-area-demo.js"></script>
-    <script src="assets/demo/chart-bar-demo.js"></script> -->
+	<button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0"
+		id="sidebarToggle" href="#!">
+		<i class="fas fa-bars"></i>
+	</button>
 
-    <script>
-          // 자바 변수인 alertMsg 에 담긴 문구를 자바스크립트 alert 로 출력해보기
+	<form
+		class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+		<div class="input-group"></div>
+	</form>
 
-          //script 태그 내에서도 스크립트릿과 같은 jsp 요소 사용 가능
+	<ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+		<li class="nav-item dropdown"><a class="nav-link dropdown-toggle"
+			id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown"
+			aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+			<ul class="dropdown-menu dropdown-menu-end"
+				aria-labelledby="navbarDropdown">
+				<li><a class="dropdown-item" href="#!">Logout</a></li>
+			</ul></li>
+	</ul>
+</nav>
 
-          let msg = '<%= alertMsg %>';
-
-          if (msg != "null") {
-            alert(msg);
-            //알림창을 띄워준 후 session 에 담긴 해당 메세지를 한번 지워줘야지만 깔끔하게 일회성 알람 문구로 활용 가능
-            // => 안그러면 menubar.jsp 가 로딩될때마다 매턴 alert가 뜰것임
-            <% session.removeAttribute("alertMsg"); %>
-          }
-        </script>
-  </body>
-</html>
+<div id="layoutSidenav">
+	<div id="layoutSidenav_nav">
+		<nav class="sb-sidenav accordion sb-sidenav-dark --bs-blue"
+			id="sidenavAccordion">
+			<div class="sb-sidenav-menu">
+				<div class="nav">
+					<div class="text-center">
+						<img src="/resources/img/logo.png" class="rounded logo" alt="로고" />
+						<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+							<li class="nav-item dropdown"><a
+								class="nav-link dropdown-toggle" id="navbarDropdown" href="#"
+								role="button" data-bs-toggle="dropdown" aria-expanded="false">관리자</a>
+								<ul class="dropdown-menu dropdown-menu-end"
+									aria-labelledby="navbarDropdown">
+									<li><a class="dropdown-item" href="#!">로그아웃</a></li>
+								</ul></li>
+						</ul>
+					</div>
+					<a class="nav-link" href="/main.ad">
+						<div class="sb-nav-link-icon">
+							<i class="fas fa-home"></i>
+						</div> 메인 / 통계
+					</a> <a class="nav-link" href="/itemList.ad?page=1&category=A">
+						<div class="sb-nav-link-icon">
+							<i class="fa fa-fw fa-gift"></i>
+						</div> 상품 관리
+					</a> <a class="nav-link" href="/orderList.ad">
+						<div class="sb-nav-link-icon">
+							<i class="fas fa-shopping-cart"></i>
+						</div> 주문 관리
+					</a> <a class="nav-link" href="/listMember.ad">
+						<div class="sb-nav-link-icon">
+							<i class="fas fa-chart-area"></i>
+						</div> 회원 관리
+					</a> <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+						data-bs-target="#collapseLayouts" aria-expanded="false"
+						aria-controls="collapseLayouts">
+						<div class="sb-nav-link-icon">
+							<i class="fas fa-list"></i>
+						</div> 게시판 관리
+						<div class="sb-sidenav-collapse-arrow">
+							<i class="fas fa-angle-down"></i>
+						</div>
+					</a>
+					<div class="collapse" id="collapseLayouts"
+						aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+						<nav class="sb-sidenav-menu-nested nav">
+							<a class="nav-link" href="noticelist.ad?currentPage=1">공지사항 관리</a> <a
+								class="nav-link" href="inquiry.html">1:1 문의 관리</a> <a
+								class="nav-link" href="review.html">리뷰 관리</a>
+						</nav>
+					</div>
+				</div>
+			</div>
+		</nav>
+	</div>

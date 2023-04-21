@@ -8,20 +8,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>내정보수정_비밀번호확인</title>
 
-    <link rel="stylesheet" href="/resources/css/common/reset.css" />
-    <link rel="stylesheet" href="/resources/css/common/header.css" />
-    <link rel="stylesheet" href="/resources/css/common/footer.css" />
+	<!-- 중복되는 헤더, 푸터, 리셋 css & 제이쿼리 & 헤더 js 담은 common.jsp / 2023-04-20 김서영 -->
+	<%@ include file="../common/common.jsp"%>
+
     <link rel="stylesheet" href="/resources/css/member/edit_my_info_pw_check.css" />
 
-    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <script defer src="/resources/js/common/header.js"></script>
+    <script src="/resources/js/member/edit_my_info_pw.js"></script>
 
 </head>
 <body>
 <!-- jsp 변환 / 2023-04-14 / 김서영 -->
-    <!-- 헤더 시작 -->
     <%@ include file="../common/header.jsp" %>
-    <!-- 헤더 끝 -->
+
+    <%
+    	String memberId = loginUser.getMemberId();
+    %>
 
 
     <!-- 사이드 메뉴바 시작 -->
@@ -46,19 +47,16 @@
                                     <a href="#">리뷰 관리</a>
                                 </li>
                                 <li>
-                                    <a href="../main/oneonone.html">1:1 문의</a>
-                                </li>
-                                <li>
                                     <a href="#">쿠폰</a>
                                 </li>
                                 <li class="on">
-                                    <a href="../main/edit_my_info_pw_check.html">내 정보 수정</a>
+                                    <a href="/updateCheckPwd.me">내 정보 수정</a>
                                 </li>
                             </ul>
                         </div>
                     </div>
 
-                    <div id="viewOrderList" class="page_section section_orderlist">
+                    <form id="viewOrderList" class="page_section section_orderlist" action="updateForm.me" method="post">
 
                         <!-- 내 정보 수정 - 비밀번호 확인 영역 시작 -->
                         <div id="pwdCheck-section" style="margin-top: 50px;">
@@ -72,34 +70,27 @@
                             <table style="padding: 30px;">
                                 <tr>
                                     <th style="font-weight: 800;">아이디(이메일)</th>
-                                    <td><input type="text" id="memberId" class="form-control" value="young0914" readonly></td>
+                                    <td><input type="text" id="memberId" name="memberId" class="form-control" value="<%= memberId %>" readonly></td>
                                 </tr>
                                 <tr>
                                     <th style="font-weight: 800;">비밀번호 확인</th>
                                     <td>
-                                        <input type="password" id="pwdCheck" class="form-control" placeholder="비밀번호">
+                                        <input type="password" id="pwdCheck" name="pwdCheck" class="form-control" placeholder="비밀번호">
                                     </td>
                                 </tr>
                                     <td colspan="2" align="center">
-                                    	<button type="button" id="pwd_check_sub" onclick="validate();">확인</button>
+                                    	<button type="submit" id="pwd_check_sub" onclick="validate();">확인</button>
                                     </td>
                                 </tr>
                             </table>
                           </div>
-
-
-
-
                         </div>
+                    </form>
                         <!-- 내 정보 수정 - 비밀번호 확인 영역 끝 -->
-
-                    </div>
                 </div>
             </div>
         </div>
     </div>
-
-
 
 </body>
 </html>

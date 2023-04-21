@@ -728,9 +728,12 @@ progress {
   margin-top: var(--bs-gutter-y);
 }
 
+
 .col {
-  flex: 1 0 0%;
+   flex: 1 0 0%;
+  margin-right: 50px;
 }
+
 
 .row-cols-auto > * {
   flex: 0 0 auto;
@@ -11608,5 +11611,6 @@ body {
 tbody>tr>td:hover {
   cursor: pointer;
 }
+
 
 

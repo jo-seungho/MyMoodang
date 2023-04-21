@@ -16,6 +16,8 @@ public class Item {
 	private String itemImg;
 	private String itemStatus;
 	
+	private String ImgName;
+	
 	private int discountPrice;
 	
 	public Item() { }
@@ -36,6 +38,23 @@ public class Item {
 		this.itemStatus = itemStatus;
 		this.discountPrice = discountPrice;
 	}
+
+	
+	
+	
+	public Item(int itemCode, String itemCategory, String itemName, int itemStock, int itemPrice, String itemText,
+			double itemDiscount, String itemStatus) {
+		super();
+		this.itemCode = itemCode;
+		this.itemCategory = itemCategory;
+		this.itemName = itemName;
+		this.itemStock = itemStock;
+		this.itemPrice = itemPrice;
+		this.itemText = itemText;
+		this.itemDiscount = itemDiscount;
+		this.itemStatus = itemStatus;
+	}
+
 
 	public int getItemCode() {
 		return itemCode;
@@ -99,6 +118,14 @@ public class Item {
 
 	public void setItemText(String itemText) {
 		this.itemText = itemText;
+	}
+
+	public String getImgName() {
+		return ImgName;
+	}
+
+	public void setImgName(String imgName) {
+		ImgName = imgName.substring(imgName.lastIndexOf("/") + 1);
 	}
 
 	public double getItemDiscount() {

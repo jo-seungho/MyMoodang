@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.common.model.vo.PageInfo;
-import com.kh.user.board.inquiry.model.service.InquiryService;
-import com.kh.user.board.inquiry.model.vo.Inquiry;
+import com.kh.admin.board.inquiry.model.service.InquiryService;
+import com.kh.admin.board.inquiry.model.vo.Inquiry;
 
 /**
  * Servlet implementation class InquiryListController

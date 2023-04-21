@@ -272,7 +272,6 @@
 	    resize: none;
 	    height: 250px;
 	  }
-
 		select {
 		  padding: 10px;
 		  font-size: 16px;
@@ -745,30 +744,23 @@
                       
                      
                       
-
                       // 모달창 열기
                     var updateBtn = document.querySelector(".update-btn");
                     var modal = document.getElementById("update-modal");
                     var closeBtn = document.querySelector(".close");
-
-
      
-
                     // 모달창 닫기
                     closeBtn.addEventListener("click", function() {
                     modal.style.display = "none";
                     });
-
                     // 수정 내용 저장
                     var saveBtn = document.querySelector(".save-btn");
                     var updateTitle = document.getElementById("update-title");
                     var updateContent = document.getElementById("update-content");
-
                     document.getElementById("review-register-btn").addEventListener("click", function() {
                    	  var modal = document.getElementById("review-modal");
                    	  modal.style.display = "block";
                    	});
-
                    	// 모달 창 외부를 클릭하면 모달 창을 닫음
                    	window.onclick = function(event) {
                    	  var modalInsert = document.getElementById("review-modal");

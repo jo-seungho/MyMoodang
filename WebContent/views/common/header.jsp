@@ -1,4 +1,6 @@
-<!-- 2023-04-19 코드 주석 처리 및 로그인 전/후 로 header 부분의 우측 상단 메뉴바 다르게 수정 / 이지환 */ 	 -->    
+<!-- html 파일이 여러번 호출되지 않도록 중복 제거 작업 / 2023-04-20 김서영 -->
+<!-- 2023-04-19 코드 주석 처리 및 로그인 전/후 로 header 부분의 우측 상단 메뉴바 다르게 수정 및 header 부분에 배송지 관리 url 매핑 / 이지환 */ 	 -->
+
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -7,50 +9,25 @@
 
 <%
 	Member loginUser = (Member)session.getAttribute("loginUser");
-	
+
 	String alertMsg = (String)request.getAttribute("alertMsg");
-
 	String errorMsg = (String)request.getAttribute("errorMsg");
-
-
 %>
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- header css -->
 
-    <link rel="stylesheet" href="/resources/css/common/reset.css">
-    <link rel="stylesheet" href="/resources/css/common/header.css">
-
-    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-
-    <script src="/resources/js/common/header.js"></script>
-
-    <title>header</title>
-  </head>
-  <body>
-    <!-- 규칙:
-    축약형(link, emph, gnb 등)을 먼저 사용)
-    alt로 적절한 대체 텍스트 제공, 너무 긴 경우 공통클래스 blind로 제공-->
-    
-
-    <!--  -->
-   
     <div id="header">
       <div class="user_menu">
         <!-- bnr = banner -->
         <a href="#" class="bnr_delivery">
           <img src="/resources/img/image.gif" alt="서울, 경기, 인천 샛별배송, 수도권 이외 지역 택배배송" class="bnr_delivery_img" />
         </a>
+
+
         <!-- 2023-04-18 / 로그인 전 우측 상단 바 / 이지환 -->
            <% if(loginUser == null) { %>
         <ul class="sign_menu">
           <!--login class 추가-->
-          
+
           <li class="link">
             <a  class="item after join" href="/enrollForm.me">회원가입</a>
           </li>
@@ -81,10 +58,12 @@
               </li>
             </ul>
           </li>
-          
+
          </ul>
+
         <% } %>
-      
+
+
         <!-- .sign_menu -->
         <!-- 2023-04-19 / 로그인 후 상단바 코드 수정 및 css 부여 / 이지환 -->
 		<% if(loginUser != null) { %>
@@ -103,7 +82,7 @@
                 <a href="#" class="list_item">찜한상품</a>
               </li>
               <li class="list">
-                <a href="#" class="list_item">배송지 관리</a>
+                <a href="/deliveryList.do" class="list_item">배송지 관리</a>
               </li>
               <li class="list">
                 <a href="#" class="list_item">리뷰 관리</a>
@@ -112,17 +91,18 @@
                 <a href="#" class="list_item">쿠폰</a>
               </li>
               <li class="list">
-                <a href="#" class="list_item">내 정보수정</a>
+                <!-- <a href="javascript:update_me('<%= loginUser.getMemberId() %>');" class="list_item">내 정보수정</a> -->
+                <a href="/updateCheckPwd.me" class="list_item">내 정보수정</a>
               </li>
             </ul>
           </li>
           <li class="link">
-            <a href="/logout.me" class="item after login_none">로그아웃</a>
+            <a href="" class="item after login_none">로그아웃</a>
           </li>
-         
-         
+
+
         <!-- 2023-04-18 / 로그인 시 우측 상단 바뀌는 영역 종료 / 이지환 -->
-        
+
 		 <li class="link">
             <a href="" class="item service">고객센터</a>
             <!-- 고객센터 hover 시 sub_menu 등장 -->
@@ -140,7 +120,7 @@
           </li>
 		</ul>
         <% } %>
-	
+
       </div>
       <div class="header_logo">
         <h1 class="logo">
@@ -296,7 +276,7 @@
             <a href="loginForm.me" class="btn_cart">
               <span class="blind">장바구니</span>
             </a>
-		     
+
             <% } %>
           </div>
         </ul>
@@ -304,19 +284,17 @@
     </div>
 
     <script>
-
   	        let msg = '<%= alertMsg == null ? "" : alertMsg %>';
           	if(msg != null && msg.length > 0) {
           		alert(msg);
           	}
-
           	//----------------------------------------------------
           	let emsg = '<%= errorMsg == null ? "" : errorMsg %>';
           	if(emsg != null && emsg.length > 0) {
           		alert(emsg);
           	}
-          	
-    	$.noConflict();
+
+
     </script>
   </body>
 </html>

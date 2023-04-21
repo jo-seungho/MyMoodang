@@ -7,15 +7,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>배송지 추가</title>
- <!--    <link rel="stylesheet" href="../css/reset.css">
-    <link rel="stylesheet" href="../css/footer.css"> -->
+
+	<!-- 중복되는 헤더, 푸터, 리셋 css & 제이쿼리 & 헤더 js 담은 common.jsp / 2023-04-20 김서영 -->
+	<%@ include file="../common/common.jsp"%>
+
     <link rel="stylesheet" href="/resources/css/shop/address_search.css">
-
-
-    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script src="/resources/js/shop/deliver.js"></script>
     <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-   
+
 </head>
 <body>
 
@@ -23,7 +22,7 @@
         <div id="inputForm">
             <form action="" method="post">
                 <div class="modify only_pc">
-                    <p class="tit_result">배송지를 선택해주세요.<br>              
+                    <p class="tit_result">배송지를 선택해주세요.<br>
                         <span class="desc">매일 아침, 고객님의 제품을 문 앞까지 안전하게 보내드릴게요.</span>
                     </p>
                     <div class="field">
@@ -46,8 +45,8 @@
                         <span class="ico"></span>
                         기본 배송지로 저장
                     </label>
-                        
-                        
+
+
                         <!-- db에 반영해야할 요소로 보임.(기본배송지)-->
                         <button type="submit" class="btn active">저장</button>
                         <!-- 저장시 db에 반영됨. 기본배송지 체크 시 반영해야함.-->
@@ -56,7 +55,7 @@
             </form>
         </div>
     </div>
-    
+
 
     <div id="wrapp" style="height:100%;">
     </div>
@@ -67,11 +66,11 @@
 
         function sample3_execDaumPostcode() {
             $('.section_destination').css('display', 'none');
-        
+
             // 현재 scroll 위치를 저장해놓는다.
             var currentScroll = Math.max(document.body.scrollTop, document.documentElement.scrollTop);
             new daum.Postcode({
-                
+
                 oncomplete: function(data) {
                     // 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
 
@@ -104,21 +103,21 @@
                         }
                         // 조합된 참고항목을 해당 필드에 넣는다.
                         // document.getElementById("sample3_extraAddress").value = extraAddr;
-                    
+
                     } else {
                         document.getElementById("addrMain").value = '';
                     }
 
                     // 우편번호와 주소 정보를 해당 필드에 넣는다.
                     // document.getElementById('sample3_postcode').value = data.zonecode;
-                    
+
                     document.getElementById("addrMain").value = addr;
                     $('.section_destination').css('display', 'block');
-                   
-                    
-                 
-                   
-                    
+
+
+
+
+
                     // // 커서를 상세주소 필드로 이동한다.
                     // document.getElementById("sample3_detailAddress").focus();
 
@@ -132,7 +131,7 @@
                 // 우편번호 찾기 화면 크기가 조정되었을때 실행할 코드를 작성하는 부분. iframe을 넣은 element의 높이값을 조정한다.
                 onresize : function(size) {
                     element_wrap.style.height = 866+'px'; // size.height
-                    
+
                 },
                 width : '100%',
                 height : '100%'
@@ -145,11 +144,8 @@
 
         sample3_execDaumPostcode();
 
-       
-
-       
     </script>
-    
+
     <%@ include file="../common/footer.jsp" %>
 </body>
 </html>
