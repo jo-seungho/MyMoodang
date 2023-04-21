@@ -1,6 +1,7 @@
 package com.kh.user.shop.cart.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,17 +12,16 @@ import com.kh.user.member.model.vo.Member;
 import com.kh.user.shop.cart.model.service.CartService;
 
 /**
- * Servlet implementation class InsertCartItem
+ * Servlet implementation class DeleteCartItem
  */
-// 2023-04-23 조승호
-@WebServlet("/cartList")
-public class InsertCartItem extends HttpServlet {
+@WebServlet("/deleteCart")
+public class DeleteCartItem extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public InsertCartItem() {
+    public DeleteCartItem() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,13 +33,11 @@ public class InsertCartItem extends HttpServlet {
 		
 		int userNo = ((Member)request.getSession().getAttribute("loginUser")).getMemberNo();
 		
-		int countValue = Integer.parseInt(request.getParameter("countValue"));
-		 
-		int priceItem = Integer.parseInt(request.getParameter("priceItem"));
+		int itemCode = Integer.parseInt(request.getParameter("itemCode"));
 		
-		int itemCodeNo = Integer.parseInt(request.getParameter("itemCodeNo")); 
-
-		int result = new CartService().insertCart(userNo, countValue, priceItem, itemCodeNo);
+		System.out.println(userNo);
+		System.out.println(itemCode);
+		int result = new CartService().DeleteCartItem(userNo, itemCode);
 		
 	}
 

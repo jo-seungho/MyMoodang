@@ -16,6 +16,7 @@
 		     , C.MEMBER_NO AS MEMBERNO
 		     , ITEM_NAME
 		     , ITEM_IMG_PATH
+		     , C.ITEM_CODE
           FROM CART C
           LEFT JOIN ITEM I
             ON C.ITEM_CODE = I.ITEM_CODE
@@ -32,6 +33,22 @@
 	        (SELECT M.MEMBER_NO FROM MEMBER M WHERE M.MEMBER_NO = ? AND ROWNUM = 1), ?)
 	</entry>
 
+	<entry key="deleteCartItem">
+		DELETE FROM CART
+		WHERE ITEM_CODE IN (
+		    SELECT ITEM_CODE
+		    FROM CART
+		    INNER JOIN MEMBER
+		    ON CART.MEMBER_NO = ? AND ITEM_CODE = ?
+		)	
+	</entry>
 
+	<entry key="countItem">
+		SELECT COUNT(*)
+		FROM CART C
+		INNER JOIN MEMBER M
+		ON C.MEMBER_NO = M.MEMBER_NO
+		WHERE C.MEMBER_NO = ?	
+	</entry>
 
 </properties>

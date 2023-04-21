@@ -168,9 +168,27 @@ function sel_all(selectAll) { /* 전체선택버튼 활성화 */
 }
 
 function del_row(ths) {
+	var itemCodeString = $(ths).parent().find('.itemCodeOne').val();
+	let itemCode = Number(itemCodeString);
     var ths = $(ths);
-
-    ths.parents("li").remove();
+    
+    $.ajax({
+    	
+    	url: 'deleteCart',
+    	type: 'post',
+    	data: {
+    		itemCode : itemCode
+    		},
+    	success: function() {
+    		ths.parents("li").remove();
+    		
+    	},
+    	error: function(err) {
+    		console.log(err);
+    	}
+    })
+    
+    // console.log(itemCode);
 }
 
 

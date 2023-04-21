@@ -80,6 +80,7 @@
 											<div class="info"></div>
 										</div>
 										<div class="goods">
+										  <input type="hidden" class="itemCodeOne" value="<%= c.getItemCode() %>">
 											<a href="#" class="thumb "
 												style="background-image: url(<%= c.getImgPath() %>);">
 												</a>
@@ -211,7 +212,7 @@
 		  sumMoney += Number(totalMoneyVal);
 		  sumNoDis += Number(noDisMoney)
 		});
-		console.log(sumMoney);
+		
 		$('.countMoney').text(sumMoney);
 		$('.noDiscount').text(sumNoDis);
 		$('.difference').text(sumNoDis - sumMoney);

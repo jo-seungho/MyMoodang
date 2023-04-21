@@ -27,6 +27,15 @@ public class CartService {
 		return list;
 	}
 
+	/**
+	 * 장바구니 물품 추가
+	 * 2023-04-21 조승호
+	 * @param userNo
+	 * @param countValue
+	 * @param priceItem
+	 * @param itemCodeNo
+	 * @return
+	 */
 	public int insertCart(int userNo, int countValue, int priceItem, int itemCodeNo) {
 		
 		Connection conn = getConnection();
@@ -40,6 +49,47 @@ public class CartService {
 		}
 		
  		close(conn);
+		
+		return result;
+	}
+
+	/**
+	 * 장바구니 물품 삭제
+	 * 2023-04-21 조승호
+	 * @param userNo
+	 * @param itemCode
+	 * @return
+	 */
+	public int DeleteCartItem(int userNo, int itemCode) {
+		
+		Connection conn = getConnection();
+		
+		int result = new CartDao().DeleteCartItem(conn, userNo, itemCode);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+	
+	/**
+	 * 메인페이지 장바구니 갯수 조회
+	 * 2023-04-21 조승호
+	 * @param userNo
+	 * @return
+	 */
+	public int countItem(int userNo) {
+		
+		Connection conn = getConnection();
+		
+		int result = new CartDao().countItem(conn, userNo);
+		
+		close(conn);
 		
 		return result;
 	}
