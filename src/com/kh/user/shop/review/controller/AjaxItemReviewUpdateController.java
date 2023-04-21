@@ -1,4 +1,4 @@
-package com.kh.user.shop.item.controller;
+package com.kh.user.shop.review.controller;
 
 import java.io.IOException;
 
@@ -8,19 +8,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.kh.user.shop.review.model.service.itemReviewService;
+import com.kh.user.shop.review.model.vo.Review;
 
 /**
- * Servlet implementation class itemReviewDeleteController
+ * Servlet implementation class AjaxItemReviewUpdateController
  */
-@WebServlet("/itemReviewDel.it")
-public class itemReviewDeleteController extends HttpServlet {
+@WebServlet("/AjaxItemReviewUp.re")
+public class AjaxItemReviewUpdateController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public itemReviewDeleteController() {
+    public AjaxItemReviewUpdateController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,20 +32,42 @@ public class itemReviewDeleteController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		// 번호 뽑기
 		int bno = Integer.parseInt(request.getParameter("bno"));
 
-		int result = new itemReviewService().deleteReview(bno);
+		String title = request.getParameter("title");
+		String content = request.getParameter("content");
+
 		
 
+		// 리뷰 수정
+		Review re = new Review(bno, title, content);
+
+		int result = new itemReviewService().updateReview(re);
+
+		String page = "";
+
 		if(result > 0) {
-			request.getSession().setAttribute("alertMsg", "성공적으로 게시글이 삭제되었습니다.");
-			response.sendRedirect(request.getContextPath() + "/itemDetail.it?" + bno);
+			page = "views/user/shop/item/itemReviewUpdate.jsp";
+			request.setAttribute("bno", bno);
 		} else {
-			request.setAttribute("msg", "리뷰 삭제에 실패하였습니다.");
-			request.getRequestDispatcher("").forward(request, response);
+			page = "views/common/errorPage.jsp";
+			request.setAttribute("msg", "리뷰 수정에 실패하였습니다.");
 		}
 
-	}
+		// Gson 을 이용하여 응답 데이터 넘기기
+
+		response.setContentType("application/json; charset=UTF-8");
+
+		new Gson().toJson(result, response.getWriter());
+
+		};
+
+
+		
+
+			
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

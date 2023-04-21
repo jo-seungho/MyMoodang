@@ -14,25 +14,53 @@ import com.kh.user.shop.review.model.vo.Review;
 
 public class itemReviewService {
 
-    public ArrayList<Review> selectReviewList(int bno) {
-
-        // Connection 객체 생성
-        Connection conn = getConnection();
-
-        // Dao 로 Connection 넘기면서 요청 후 결과 받기
-        ArrayList<Review> list = new itemReviewDao().selectReviewList(conn,bno);
-
-        // Connection 반납
-        close(conn);
-
-        // 결과 반환
-        return list;
-       
-    }
-	public int deleteReview(int bno) {
+	public Review selectReview(int rno) {
 		Connection conn = getConnection();
 		
-		int result = new itemReviewDao().deleteReview(conn, bno);
+		Review result = new itemReviewDao().selectReview(conn, rno);
+		
+		close(conn);
+		
+		return result;
+	
+       
+    }
+	public int deleteReview(int rno) {
+		Connection conn = getConnection();
+		
+		int result = new itemReviewDao().deleteReview(conn, rno);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+
+	public int updateReview(Review re) {
+		Connection conn = getConnection();
+		
+		int result = new itemReviewDao().updateReview(conn, re);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+
+	public int insertReview(Review re) {
+		Connection conn = getConnection();
+		
+		int result = new itemReviewDao().insertReview(conn, re);
 		
 		if(result > 0) {
 			commit(conn);

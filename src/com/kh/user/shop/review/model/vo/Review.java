@@ -15,11 +15,50 @@ public class Review {
 		private int orderNo;          //	order_no	number
 		private int itemCode;         //	item_code	number
 		
+		public Review(int reviewNo, String title, String content, String writeDate, int starPoint, int orderNo) {
+			super();
+			this.reviewNo = reviewNo;
+			this.title = title;
+			this.content = content;
+			this.writeDate = writeDate;
+			this.starPoint = starPoint;
+			this.orderNo = orderNo;
+		}
+
+		public Review(int reviewNo, String title, String content, String writeDate, int starPoint, int orderNo,
+				int itemCode) {
+			super();
+			this.reviewNo = reviewNo;
+			this.title = title;
+			this.content = content;
+			this.writeDate = writeDate;
+			this.starPoint = starPoint;
+			this.orderNo = orderNo;
+			this.itemCode = itemCode;
+		}
+
+		public Review(int reviewNo, String title, String content) {
+			super();
+			this.reviewNo = reviewNo;
+			this.title = title;
+			this.content = content;
+		}
+		
+		
 		
 		public Review() {
 			// TODO Auto-generated constructor stub
 		}
 		
+		// 리뷰 수정용 생성자
+		public Review(int reviewNo, String title, String content, int starPoint) {
+			super();
+			this.reviewNo = reviewNo;
+			this.title = title;
+			this.content = content;
+			this.starPoint = starPoint;
+		}
+
 		public int getReviewNo() {
 			return reviewNo;
 		}
@@ -80,37 +119,14 @@ public class Review {
 			this.orderNo = orderNo;
 			this.itemCode = itemCode;
 		}
+		
 		@Override
 		public String toString() {
 			return "Review [reviewNo=" + reviewNo + ", title=" + title + ", content=" + content + ", writeDate="
 					+ writeDate + ", starPoint=" + starPoint + ", filePathName=" + filePathName + ", orderNo=" + orderNo
 					+ ", itemCode=" + itemCode + "]";
 		}
-		public Review(int reviewNo, String title, String content, String writeDate, int starPoint, int orderNo) {
-			super();
-			this.reviewNo = reviewNo;
-			this.title = title;
-			this.content = content;
-			this.writeDate = writeDate;
-			this.starPoint = starPoint;
-			this.orderNo = orderNo;
-		}
-
-		public Review(int reviewNo, String title, String content, String writeDate, int starPoint, int orderNo,
-				int itemCode) {
-			super();
-			this.reviewNo = reviewNo;
-			this.title = title;
-			this.content = content;
-			this.writeDate = writeDate;
-			this.starPoint = starPoint;
-			this.orderNo = orderNo;
-			this.itemCode = itemCode;
-		}
-		
 		
 
-		
-		
 }
 

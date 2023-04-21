@@ -2,19 +2,11 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 
 <properties>
-	<entry key="selectReviewList">
-	SELECT REVIEW_NO
-	 , TITLE
-	 , CONTENT
-     , TO_CHAR(WRITE_DATE, 'YY/MM/DD HH:MI:SS') WRITE_DATE
-     , STAR_POINT
-     , ORDER_NO
-     , ITEM.ITEM_CODE
- 	FROM REVIEW 
-	JOIN ITEM ON REVIEW.REVIEW_NO = ITEM.ITEM_CODE
-    WHERE DELETE_STATUS = 'Y'
-    AND REVIEW_NO = ?
- 	ORDER BY WRITE_DATE DESC
+	<entry key="selectReview">
+        SELECT *
+        FROM REVIEW
+        WHERE ITEM_CODE = ?
+        AND DELETE_STATUS = 'Y'
 	
 	</entry>
 	
@@ -22,6 +14,35 @@
 		UPDATE REVIEW
 		   SET DELETE_STATUS = 'N'
 		 WHERE REVIEW_NO = ?
+		</entry>
+		
+		
+		<entry key="updateReview">
+		   UPDATE REVIEW
+    	   SET TITLE = ?
+      		 , CONTENT = ?
+             , STAR_POINT = ?
+            WHERE REVIEW_NO = ?
+		</entry>
+		
+		<entry key="insertReview">
+		INSERT INTO REVIEW (REVIEW_NO
+                    ,TITLE
+                    ,CONTENT
+                    ,STAR_POINT
+                    ,WRITE_DATE
+                    ,ORDER_NO
+                    ,ITEM_CODE
+                    ,DELETE_STATUS)
+        VALUES (REVIEW_SEQ.NEXTVAL
+                ,?
+                ,?
+                ,?
+                ,SYSDATE
+                ,1
+                ,1
+                ,'Y')
+		
 		</entry>
 
 

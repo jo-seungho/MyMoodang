@@ -9,20 +9,27 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
+import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
+
+import com.kh.admin.shop.item.model.vo.ItemImg;
+import com.kh.common.MyFileRenamePolicy;
+import com.kh.user.shop.item.model.vo.Attachment;
+import com.kh.user.shop.review.model.service.itemReviewService;
 import com.kh.user.shop.review.model.vo.Review;
+import com.oreilly.servlet.MultipartRequest;
+
 
 /**
- * Servlet implementation class itemReviewListController
+ * Servlet implementation class itemReviewUpdateController
  */
-@WebServlet("/itemReviewList.it")
-public class itemReviewListController extends HttpServlet {
+@WebServlet("/itemReviewUp.it")
+public class itemReviewUpdateFormController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public itemReviewListController() {
+    public itemReviewUpdateFormController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,33 +39,20 @@ public class itemReviewListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-//
-//			// 상품번호 뽑기
-//			int bno = Integer.parseInt(request.getParameter("bno"));
-//			
-//			System.out.println(bno);
-//			
-//			
-//			
-//			// 전체 리뷰 리스트 조회 후 조회결과 담기
-//			ArrayList<Review> rlist = new itemReviewListService().selectReviewList(bno);
-//
-//			
-//
-//			// GSON 을 이용하여 응답데이터 넘기기
-//			 response.setContentType("application/json; charset=UTF-8");
-//			 
-//			 new Gson().toJson(rlist, response.getWriter());
+		
+		
+		int bno = Integer.parseInt(request.getParameter("bno"));
+		
+		Review re = new itemReviewService().selectReview(bno);
 
-			 
 
-	
-			// 응답페이지 포워딩
-			// request.setAttribute("rlist", rlist);
-			
-			
+		
+		
+		request.setAttribute("re", re);
 
-			// request.getRequestDispatcher("views/shop/itemReviewList.jsp").forward(request, response);
+		request.getRequestDispatcher("views/user/shop/item/itemReviewUpdate.jsp").forward(request, response);
+
+
 	}
 
 	/**

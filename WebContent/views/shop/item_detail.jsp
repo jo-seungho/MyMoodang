@@ -1,37 +1,55 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"
-    import="java.util.ArrayList, com.kh.user.shop.item.model.vo.*, com.kh.user.shop.review.model.vo.Review"
-    %>
+    pageEncoding="UTF-8" 
+    import="java.util.ArrayList, com.kh.user.shop.item.model.vo.*, com.kh.user.shop.review.model.vo.Review
+    , com.kh.user.member.model.vo.Member"
+%>
 
 <%
     Item i = (Item)request.getAttribute("i");
     ArrayList<Attachment> list = (ArrayList<Attachment>)request.getAttribute("list");
     ArrayList<Attachment> clist = (ArrayList<Attachment>)request.getAttribute("clist");
     ArrayList<Review> rlist = (ArrayList<Review>)request.getAttribute("rlist");
-    String category = i.getItemCategory();
+    
+    Review re = (Review)request.getAttribute("re");
+    
+    
+/*     System.out.println("re : " + re); */
+    
 %>
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- header css -->
 
-    <!-- 중복되는 헤더, 푸터, 리셋 css & 제이쿼리 & 헤더 js 담은 common.jsp / 2023-04-20 김서영 -->
-	<%@ include file="../common/common.jsp"%>
-
+    <link rel="stylesheet" href="/resources/css/common/reset.css" />
     <link rel="stylesheet" href="/resources/css/board/faq.css">
     <link rel="stylesheet" href="/resources/css/shop/item_detail.css">
     <link rel="stylesheet" href="/resources/css/board/item_review_common.css">
     <link rel="stylesheet" href="/resources/css/board/item_review_reset.css">
     <link rel="stylesheet" href="/resources/css/board/item_review.css">
     <link rel="stylesheet" href="/resources/css/board/mymoodang_order_list.css">
+    <link rel="stylesheet" href="/resources/css/common/reset.css" />
+    <link rel="stylesheet" href="/resources/css/common/header.css" />
+    <link rel="stylesheet" href="/resources/css/common/footer.css" />
     <link rel="stylesheet" href="/resources/css/member/edit_my_info_pw_check.css" />
+
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+    <script defer src="/resources/js/common/header.js"></script>
 
     <script src="/resources/js/shop/item_detail.js"></script>
     <script src="/resources/js/board/item_review_common.js"></script>
     <script src="/resources/js/board/item_review_my.js"></script>
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script defer src="/resources/js/common/header.js"></script>
 
     <title>상품상세페이지</title>
       <style>
@@ -41,7 +59,7 @@
               border-collapse: collapse;
               font-size: 16px;
               margin: auto;
-
+             
             }
             th, td {
               padding: 12px;
@@ -54,12 +72,12 @@
               color: #333;
               font-weight: bold;
               cursor: pointer;
-
+            
             }
             tr:hover {
               background-color: #f9f9f9;
             }
-
+          
             /* 게시물 내용 토글 스타일 */
             .content {
               display: none;
@@ -68,14 +86,14 @@
               background-color: #f9f9f9;
               padding: 20px;
             }
-
+          
             /* 게시물 제목 클릭 시 커서 스타일 변경 */
             .post td[onclick]:hover {
               color: #007bff;
               text-decoration: underline;
               cursor: pointer;
             }
-
+    
             table tbody tr td:nth-child(3){
                 color: red;
 		            }
@@ -99,22 +117,204 @@
 		  .content button:hover {
 		    background-color: red;
 		  }
-          </style>
+		  
+          /* 모달 창 스타일 */
+		.modal {
+		  display: none;
+		  position: fixed;
+		  z-index: 1;
+		  left: 0;
+		  top: 0;
+		  width: 100%;
+		  height: 100%;
+		  overflow: auto;
+		  background-color: rgba(0, 0, 0, 0.6);
+		}
+		
+		.modal-content {
+		  background-color: white;
+		  margin: 10% auto;
+		  padding: 100px;
+		  border: 1px solid #888;
+		  width: 50%;
+		  max-width: 600px;
+		  position: relative;
+		  border-radius: 8px;
+		}
+		
+		/* 닫기 버튼 스타일 */
+		.close {
+		  position: absolute;
+		  top: 5px;
+		  right: 10px;
+		  font-size: 30px;
+		  font-weight: bold;
+		  cursor: pointer;
+		}
+		
+		.close:hover,
+		.close:focus {
+		  color: #000;
+		  text-decoration: none;
+		  cursor: pointer;
+		}
+		
+		/* 입력 필드 스타일 */
+		input[type="text"],
+		textarea {
+		  width: 100%;
+		  box-sizing: border-box;
+		  border: none;
+		  border-bottom: 2px solid #ccc;
+		  resize: vertical;
+		  font-size: 13px; /* placeholder 폰트 크기 조정 */
+		}
+		
+		/* 저장 버튼 스타일 */
+		.save-btn {
+		  background-color: lightgray;
+		  color: white;
+		  padding: 12px 20px;
+		  border: none;
+		  border-radius: 4px;
+		  cursor: pointer;
+		  float: right;
+		  margin-top: 5px;
+		}
+		
+		.save-btn:hover {
+		  background-color: red;
+		}
+		
+		input[type="text"],
+		textarea {
+		  width: 100%;
+		  padding: 12px 20px;
+		  margin: 8px 0;
+		  box-sizing: border-box;
+		  border: none;
+		  border-bottom: 2px solid #ccc;
+		  resize: vertical;
+		}
+		
+		/* 제목과 내용 사이 간격 늘리기 */
+		h2 + input[type="text"],
+		h2 + textarea {
+		  margin-top: 16px;
+		}
+		
+		.modal {
+		  display: none;
+		  position: fixed;
+		  z-index: 1;
+		  left: 0;
+		  top: 0;
+		  width: 100%;
+		  height: 100%;
+		  overflow: auto;
+		  background-color: rgba(0,0,0,0.4);
+		}
+		
+		.modal-content {
+		  background-color: #fefefe;
+		  margin: 15% auto;
+		  padding: 20px;
+		  border: 1px solid #888;
+		  width: 100%;
+		}
+		
+		.modal-header h2 {
+		  margin-top: 0;
+		}
+		
+		.close {
+		  color: #aaa;
+		  float: right;
+		  font-size: 28px;
+		  font-weight: bold;
+		}
+		
+		.close:hover,
+		.close:focus {
+		  color: black;
+		  text-decoration: none;
+		  cursor: pointer;
+		}
+		.content {
+		width: 10%;
+		}
+		
+		
+		form {
+		  display: flex;
+		  flex-direction: column;
+		  align-items: center;
+		}
+		
+		 label {
+	    font-weight: bold;
+	    margin-right: 10px;
+	    width: 100px;
+	  }
+		
+	  input[type="text"],
+	  textarea {
+	    padding: 10px;
+	    font-size: 16px;
+	    border: none;
+	    border-radius: 5px;
+	    box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.1);
+	    margin-bottom: 20px;
+	    width: 400px;
+	  }
+				
+	  textarea {
+	    resize: none;
+	    height: 250px;
+	  }
+		select {
+		  padding: 10px;
+		  font-size: 16px;
+		  border: none;
+		  border-radius: 5px;
+		  box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.1);
+		  margin-bottom: 20px;
+		}
+		
+		button[type="submit"] {
+		  padding: 10px;
+		  background-color: #4CAF50;
+		  color: white;
+		  border: none;
+		  border-radius: 5px;
+		  font-size: 16px;
+		  cursor: pointer;
+		}
+		
+		button[type="submit"]:hover {
+		  background-color: #3e8e41;
+		}
+		</style>
+		
+        
   </head>
   <body>
+    <!-- 규칙:
+    축약형(link, emph, gnb 등)을 먼저 사용)
+    alt로 적절한 대체 텍스트 제공, 너무 긴 경우 공통클래스 blind로 제공-->
 
       <%@ include file="../common/header.jsp" %>
-
+      
             <!-- 상품 상세페이지 시작-->
-
+        
                     <div id="main">
                         <div id="content" style="opacity: 1;">
                             <div class="section_view">
                                 <div id="sectionView">
                                     <div class="inner_view">
                                         <div class="thumb" style="background-image: url(https://res.kurly.com/mobile/img/1808/img_none_x2.png);">
-                                            <img src="<%= i.getItemImg() %>" alt="상품 대표 이미지" class="bg">
-
+                                            <img src="<%= i.getItemImg() %>" alt="상품 대표 이미지" class="bg"> 
+            
                                         </div>
                                         <p class="goods_name">
                                             <span class="btn_share">
@@ -127,16 +327,16 @@
                                                 <span class="dc">
                                                     <span>
                                                         <span class="discount" style="font-size: 22px; font-weight: 400; color: red;">30<!--<%= i.getItemDiscount() %>-->%&nbsp</span>
-
+                                                    
                                                     </span>
                                                     <span class="dc_price" style="font-size: 15px; font-weight: 400; color: red;">
                                                         <del style="font-size: 18px; font-weight: 400; color: lightgray;"><%= i.getDiscountPrice() %>원 </del>
                                                         <input type="hidden" value="<%= i.getDiscountPrice() %>">
-
+                                                        
                                                     </span>
                                                     <span class="won" style="font-size: 22px; margin-top: 10%;">&nbsp<b><%= i.getDiscountPrice() %>원</b></span>
                                                 </span>
-
+                                                
                                             </span>
                                             <span>
                                                 <span class="txt_benefit">
@@ -166,11 +366,11 @@
                                                 <dd class="desc"><%= i.getItemCategory() %></dd>
                                             </dl>
 
-
+       
                                         </div>
                                     </div>
                                 </div>
-
+            
                                 <div id="cartPut">
                                     <div class="cart_option cart_type2">
                                         <form action="">
@@ -186,7 +386,7 @@
                                                                         <input type="number" readonly="readonly" value = 1 class="inp">
                                                                         <button  type="button" class="btn up on">수량올리기</button>
                                                                     </span>
-
+                                                                
                                                                 </div>
                                                             </li>
                                                         </ul>
@@ -221,7 +421,7 @@
                                     </div>
                                 </div>
                             </div>
-
+                            
                             <div class="layout-wrapper goods-view-area">
                                 <div class="goods-add-product">
                                     <h3 class="goods-add-product-title">
@@ -236,10 +436,11 @@
                                         </button>
                                         <div class="goods-add-product-list-wrapper" style="height:320px;">
                                             <ul class="goods-add-product-list __slide-mover" style="left: 0px;">
+                                            
+                                            
+                                            
 
-
-
-
+                                            
                                             	<%  for(Attachment a : clist) { %>
                                                 <li class="goods-add-product-item __slide-item">
                                                     <div class="goods-add-product-item-figure">
@@ -258,14 +459,14 @@
                                                     </div>
                                                 </li>
                                                 <% } %>
-
-
+  
+                                               
                                             </ul>
                                         </div>
                                     </div>
                                 </div>
                               </div>
-
+            
                                 <div class="goods-view-infomation detail_wrap_outer" id="goods-view-infomation" >
                                     <ul class="goods-view-infomation-tab-group" style="display: flex; align-content: stretch; justify-content: center; ">
                                         <li class="goods-view-infomation-tab">
@@ -284,7 +485,7 @@
                                             <a href="#goods-qna" class="goods-view-infomation-tab-anchor">
                                                 1 : 1 문의
                                                 <span>(0)</span>
-
+            
                                             </a>
                                         </li>
                                     </ul>
@@ -304,10 +505,10 @@
                                                     <p class="words">
                                                         <img src="<%= i.getItemImg() %>" style="width:1010px; height:671px;">
                                                     </p>
-
+            
                                                 </div>
-                                            </div>
-
+                                            </div>  
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -337,7 +538,7 @@
                                             </p>
                                         </div>
                                     </div>
-
+                                    
 
                                         <div class="happy_center fst">
                                             <ul class="goods-view-infomation-tab-group" style="display: flex; align-content: stretch; justify-content: center; ">
@@ -360,86 +561,129 @@
                                             </a>
                                         </li>
                                     </ul>
-                                    <div class="goods-view-infomation-content" id="goods-review">
+                                    
+                                    
+                                    <div class="goods-view-infomation-content" id="goods-review"> 
                                    		<br>
 									<table>
 								        <thead>
+								<%--         <% if(loginUser != null) { %> --%>
+								            <tr>
+										      <th colspan="1">
+										        <button id="review-register-btn" class="reviewbtn" style="text-align: center; font-size: large;">리뷰 등록</button>
+										      </th>
+										    </tr>
+										 <%--    <% } %> --%>
+										    <br><br>
+									
 								          <tr>
 								            <th onclick="sortTable(0)" width="100px">번호</th>
 								            <th onclick="sortTable(1)" width="135px">작성일</th>
 								            <th onclick="sortTable(2)" width="120px">별점</th>
 								            <th onclick="sortTable(3)">제목</th>
 								            <th onclick="sortTable(4)"width="100px">작성자</th>
+
 								          </tr>
 								        </thead>
 								        <tbody>
-								    <% for(Review r : rlist){ %>
-								      <tr class="post">
-								        <td><%= r.getReviewNo()%></td>
-								        <td><%= r.getWriteDate()%></td>
-								        <td><%= r.getStarPoint()%></td>
-								        <td onclick="toggleContent(<%= r.getReviewNo()%>)" style="cursor: pointer;"><%= r.getTitle()%></td>
-								        <td>유저1</td>
-								      </tr>
-								      <tr class="content" id="content<%= r.getReviewNo()%>" style="display:none;">
-								        <td colspan="6">
-								          <p><%= r.getContent()%></p>
-								          <a href = "/itemReviewDel.it?bno=<%= r.getReviewNo() %>" type="button" >수정</a> &nbsp
-        								  <a href = "/itemReviewDel.it?bno=<%= r.getReviewNo() %>" type="button" >삭제</a>
-
-								        </td>
-								      </tr>
-								    <%} %>
+								                                              
+									<% if(rlist.isEmpty()) { %>
+											<tr>
+											<td colspan="5">조회된 1:1 문의 리스트가 없습니다.</td>
+											</tr>
+									<% } else { %>
+									    <% for(Review r : rlist){ %>
+									      <tr class="post">
+									        <td><%= r.getReviewNo()%></td>
+									        <td><%= r.getWriteDate()%></td>
+									        <td><%= r.getStarPoint()%></td>
+									        <td onclick="toggleContent(<%= r.getReviewNo()%>)" style="cursor: pointer;"><%= r.getTitle()%></td>
+									        <td>유저1</td>
+									      </tr>
+									      <tr class="content" id="content<%= r.getReviewNo()%>" style="display:none;">
+									        <td colspan="6">
+									          <p><%= r.getContent()%></p>
+	        								  <button><a href = "/itemReviewDel.it?rno=<%= r.getReviewNo() %>&bno=<%= i.getItemCode() %>" type="button" class=delete>삭제</a></button> 
+	        								  <button type="button" class="update-btn">수정</button>
+									        </td>
+									      </tr>
+									    <%} %>
+								    
+								   <%} %>
+								    
 								  </tbody>
 								      </table>
-
-
-
-
+								      
+								  <!-- 모달 창 -->
+							
+							
+									<!--  리뷰 수정용 폼 -->
+                                <div id="update-modal" class="modal">
+                                    <div class="modal-content">
+                                    <span class="close">&times;</span>
+                                    <h2 align="center">리뷰 수정</h2>
+                                    <br><br><br>
+                                    <h2>제목 수정</h2>
+                                    <input type="text" id="update-title" >
+                                    <h2>내용 수정</h2>
+                                    <textarea  id="update-content" ></textarea>
+                                    <button type="button" class="save-btn">저장</button>
                                     </div>
+                                </div>
+                                
+                                
+                                <div id="review-modal" class="modal">
+								  <div class="modal-content">
+								    <div class="modal-header">
+								      <span class="close"></span>
+								      <h2 align="center">리뷰 등록</h2>
+								      <br>
+								    </div>
+								    <div class="modal-body">
+								    
+								    
+								      <!-- 리뷰 등록 폼 -->
+							<form action="/itemReviewIn.it" method="post">
+							  <div>
+							    <label for="title">제목:</label>
+							    <input type="text" id="title" name="title">
+							  </div>
+							  
+							  <div>
+							    <label for="contentinsert">내용:</label>
+							    <textarea id="contentinsert" name="contentinsert"></textarea>
+							  </div>
+							  
+							  <div>
+							    <label for="starpoint">별점:</label>
+							    <select id="starpoint" name="starpoint">
+							      <option value="1">1</option>
+							      <option value="2">2</option>
+							      <option value="3">3</option>
+							      <option value="4">4</option>
+							      <option value="5">5</option>
+							    </select>
+							  </div>
+				<%-- 		  <input type="hidden" name="rno" id="rno" value="<%= re.getReviewNo() %>"> --%>
+						  
+							  <input type="hidden" name="bno" id="bno" value="<%= i.getItemCode() %>">   
+							  <div id="modal">
+							    <button type="submit" id="close-btn">등록</button>
+							  </div>
+							</form>                       
+                                
+                                    
+												
 
+					
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
+    
                     <script>
-                   <%--      $(function() {
-                            selectReviewList();
-                        });
-
-                        // 리뷰 조회 요청용 ajax
-                        function selectReviewList() {
-                            $.ajax({
-                                url: "itemReviewList.it",
-                                type: "get",
-                                data: { bno: <%= i.getItemCode() %> },
-
-                                success: function(result) {
-
-                                	//console.log(result);
-
-                                	let sum = "";
-
-
-                                     for(let i in result) {
-
-                                        sum += "<tr>"
-                                            + "<td>" + result[i].title + "</td>"
-                                            + "<td>" + result[i].content + "</td>"
-                                            + "<td>" + result[i].writeDate + "</td>"
-                                            + "<td>" + result[i].starPoint + "</td>"
-                                            + "</tr>";
-
-                                        $("#goods-review tbody").html(result);
-                                    }
-
-                                },
-                                error: function() {
-                                    alert("리뷰 조회 실패");
-                                }
-                            });
-                        } --%>
-
+     
+                  	  //-----------------------토글 js----------------------------------
                         function toggleContent(reviewNo) {
                     	    var contentRow = document.getElementById("content" + reviewNo);
                     	    if (contentRow.style.display === "none") {
@@ -448,7 +692,7 @@
                     	      contentRow.style.display = "none";
                     	    }
                     	  }
-
+                      //-----------------------별 js----------------------------------
                       function sortTable(columnIndex) {
                         var table, rows, switching, i, x, y, shouldSwitch;
                         table = document.getElementsByTagName("table")[0];
@@ -471,31 +715,70 @@
                           }
                         }
                       }
-
+                    
                       function displayStars(rating) {
                         let stars = "";
                         for (let i = 1; i <= 5; i++) {
                           if (i <= rating) {
-                            stars += "&#9733;"; // Full star
+                            stars += "&#9733;"; 
                           } else {
-                            stars += "&#9734;"; // Empty star
+                            stars += "&#9734;"; 
                           }
                         }
                         return stars;
                       }
-
-                      // Get all the rows with class "post"
+                    
+                      //-----------------------별 js----------------------------------
+                      
+                      
+                      
+             
                       let postRows = document.querySelectorAll(".post");
-
-                      // Loop through each post row and update the "별점" column with stars
+                    
+          
                       postRows.forEach(function(row) {
                         let rating = parseInt(row.querySelector("td:nth-child(3)").innerText);
                         let stars = displayStars(rating);
                         row.querySelector("td:nth-child(3)").innerHTML = stars;
                       });
+                      
+                     
+                      
+                      // 모달창 열기
+                    var updateBtn = document.querySelector(".update-btn");
+                    var modal = document.getElementById("update-modal");
+                    var closeBtn = document.querySelector(".close");
+     
+                    // 모달창 닫기
+                    closeBtn.addEventListener("click", function() {
+                    modal.style.display = "none";
+                    });
+                    // 수정 내용 저장
+                    var saveBtn = document.querySelector(".save-btn");
+                    var updateTitle = document.getElementById("update-title");
+                    var updateContent = document.getElementById("update-content");
+                    document.getElementById("review-register-btn").addEventListener("click", function() {
+                   	  var modal = document.getElementById("review-modal");
+                   	  modal.style.display = "block";
+                   	});
+                   	// 모달 창 외부를 클릭하면 모달 창을 닫음
+                   	window.onclick = function(event) {
+                   	  var modalInsert = document.getElementById("review-modal");
+                   	  if (event.target == modalInsert) {
+                   		modalInsert.style.display = "none";
+                   	  }
+                   	}
+                   	
+                   	
+					       
+                    		
                     </script>
+                    
+                    
+
 
       <%@ include file="../common/footer.jsp" %>
+   
 
   </body>
 </html>
