@@ -3,10 +3,20 @@
 
 <properties>
 	<entry key="selectReview">
-        SELECT *
-        FROM REVIEW
-        WHERE ITEM_CODE = ?
-        AND DELETE_STATUS = 'Y'
+SELECT REVIEW_NO
+        ,TITLE
+        ,CONTENT
+        ,WRITE_DATE
+        ,STAR_POINT
+        ,FILE_PATH_NAME
+        ,ORDER_NO
+        ,ITEM_CODE
+        ,DELETE_STATUS
+        ,MEMBER_NO
+		FROM REVIEW
+		JOIN MEMBER  ON (MEMBER_NO = REVIEW_NO)
+		WHERE ITEM_CODE = ?
+		AND DELETE_STATUS = 'Y'
 	
 	</entry>
 	
@@ -31,16 +41,16 @@
                     ,CONTENT
                     ,STAR_POINT
                     ,WRITE_DATE
-                    ,ORDER_NO
                     ,ITEM_CODE
+                    ,MEMBER_NO
                     ,DELETE_STATUS)
-        VALUES (REVIEW_SEQ.NEXTVAL
-                ,?
+        VALUES (SEQ_RNO.NEXTVAL
+                ,?                
                 ,?
                 ,?
                 ,SYSDATE
-                ,1
-                ,1
+                ,?
+                ,?
                 ,'Y')
 		
 		</entry>

@@ -208,21 +208,32 @@ public class ItemDao {
 
             pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, bno);
-
+            System.out.println(bno);
+            
             rset = pstmt.executeQuery();
 
             while (rset.next()) {
 
-            list.add(new Review(rset.getInt("REVIEW_NO"),
-                                rset.getString("TITLE"),
-                                rset.getString("CONTENT"),
-                                rset.getString("WRITE_DATE"),
-                                rset.getInt("STAR_POINT"),
-                                rset.getInt("ORDER_NO"),
-                                rset.getInt("ITEM_CODE")));
+
+
+				Review re = new Review();
+
+				re.setReviewNo(rset.getInt("REVIEW_NO"));
+				re.setTitle(rset.getString("TITLE"));
+				re.setContent(rset.getString("CONTENT"));
+				re.setWriteDate(rset.getString("WRITE_DATE"));
+				re.setStarPoint(rset.getInt("STAR_POINT"));
+				re.setItemCode(rset.getInt("ITEM_CODE"));
+				re.setMemberNo(rset.getInt("MEMBER_NO"));
+				re.setMemberId(rset.getString("MEMBER_ID"));
+
+				list.add(re);
+
+				System.out.println(rset.getString("TITLE"));
                 
        
             }
+      
 
         } catch (SQLException e) {
 
