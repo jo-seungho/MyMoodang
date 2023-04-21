@@ -26,6 +26,19 @@ public class OrderService {
 
 		return listCount;
 	}
+	
+	//모든 주문목록 검색 카운트 조회용
+	public int selectSearchAllCount(String value, String keyword) {
+
+		Connection conn = getConnection();
+
+		int listCount = new OrderDao().selectSearchAllCount(conn, value, keyword);
+
+		close(conn);
+
+		return listCount;
+	}
+	
 
 	// 주문상태에 따른 숫자 조회용
 	public int selectOrderStatusCount(String category) {
@@ -51,17 +64,19 @@ public class OrderService {
 		return list;
 	}
 	
-	// 모든 주문목록 조회에서 검색을 진행한 경우
-	public ArrayList<Order> selectSearchAllOrderList(AdminPageInfo pi, String search, String value) {
+	// 모든 주문목록에 대한 검색기록 조회
+	public ArrayList<Order> selectSearchAllOrderList(AdminPageInfo pi, String value, String keyword) {
+
 		Connection conn = getConnection();
 
-		ArrayList<Order> list = new OrderDao().selectSearchAllOrderList(conn, pi, search, value);
+		ArrayList<Order> list = new OrderDao().selectSearchAllOrderList(conn, pi, value, keyword);
 
 		close(conn);
 
 		return list;
 	}
-
+	
+	
 	// 주문 상태에 따른 조회용
 	public ArrayList<Order> selectStatusOrderList(AdminPageInfo pi, String category) {
 
@@ -74,18 +89,7 @@ public class OrderService {
 		return list;
 	}
 	
-	// 주문 상태에 따른 조회용 검색기능
-	public ArrayList<Order> searchStatusOrderList(AdminPageInfo pi, String category, String search, String value) {
-		
-		Connection conn = getConnection();
-
-		ArrayList<Order> list = new OrderDao().selectStatusOrderList(conn, pi, category, search, value);
-
-		close(conn);
-
-		return list;
-	}
-
+	//업데이트 조회
 	public Order updateOrderStatus(int orderNo, String status) {
 		
 		Connection conn = getConnection();
@@ -102,6 +106,20 @@ public class OrderService {
 		
 		return o;
 	}
+
+	//상품 한개 조회
+	public Order selectOrder(int id) {
+		
+		Connection conn = getConnection();
+		
+		Order o = new OrderDao().selectOrder(conn, id);
+		
+		close(conn);
+		
+		return o;
+	}
+
+	
 
 	
 

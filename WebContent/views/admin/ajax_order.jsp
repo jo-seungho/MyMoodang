@@ -18,6 +18,8 @@ String category = request.getParameter("category");
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.6.4.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 
 <style>
 .select-forms {
@@ -182,21 +184,94 @@ String category = request.getParameter("category");
 			</div>
 			<br />
 			
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModal" aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="myModal">주문 내역 조회</h5>
+					<button class="btn-close" type="button" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<form action="" method="post">
+					<div class="modal-body">
+						<!-- Hidden field to send the action to the server -->
+
+						<div class="input-group mb-3">
+							<span class="input-group-text" id="spanId">&nbsp;&nbsp;ID&nbsp;&nbsp;</span>
+							<input type="text" class="form-control" id="memberId"
+								placeholder="아이디" aria-label="memberId" aria-describedby="memberId"
+								readonly /> <span class="input-group-text" id="spanNo">주문번호</span>
+							<input type="text" class="form-control" id="orderNo" name="orderNo"
+								placeholder="주문번호" aria-label="orderNo" aria-describedby="orderNo"
+								readonly />
+						</div>
+
+						<div class="input-group mb-3">
+							<span class="input-group-text" id="spanName">번호</span> <input
+								type="text" class="form-control" id="phone" placeholder="휴대폰 번호"
+								aria-label="userName" aria-describedby="userName" readonly /> <span
+								class="input-group-text" id="spanName">주문날짜</span> <input
+								type="text" class="form-control" id="orderDate"
+								placeholder="주문날짜" aria-label="orderDate"
+								aria-describedby="orderDate" readonly />
+						</div>
+						<div class="input-group mb-3">
+							<span class="input-group-text" id="spanName">주소</span> <input
+								type="text" class="form-control" id="shipAddr" placeholder="주소"
+								aria-label="shipAddr" aria-describedby="shipAddr"
+								readonly /> 
+						</div>
+
+	
+						<div class="input-group mb-3">
+						
+						<img src="/resources/img/닭가슴살샐러드3.jpg" style="width : 150px; height : 150px;">
+							<span class="input-group-text" id="spanItem">주문 상품</span>
+							<input type="text" class="form-control" id="itemList"
+									aria-label="text" readonly />
+									
+						</div>
+						
+						
+						
+						
+						<div class="input-group mb-3">
+							<span class="input-group-text" id="spanPay">결제금액</span>
+							<input type="text" class="form-control" id="pay"
+								placeholder="결제금액" aria-label="pay" aria-describedby="pay"
+								value="" readonly />
+						</div>
+						
+
+						
+						<div class="input-group mb-3">
+							<span class="input-group-text" id="spanItem">요청 사항</span>
+							<input type="text" class="form-control" id="request"
+									aria-label="text" readonly />
+						</div>
+						
+						
+					</div>
+
+					<div class="modal-footer">
+						<button class="btn btn-secondary" type="button"
+							data-bs-dismiss="modal">닫기</button>
+						<button class="btn btn-danger deleteBtn" type="button" style="margin-bottom : 4px;">삭제</button>
+					</div>
+				</form>
+			</div>
+		</div>
+		</div>
+
+	
+			
 			
 			<script>
 			
 			$(document).ready(function() {
 				
-				$('.searchBtn').click(function() {
-				    var search = $('input[name="search"]').val();
-				    var value = $('select[name="value"]').val();
-				    var page = $('input[name="page"]').val();
-				    var category = $('input[name="category"]').val();
-
-				    handleButtonClick(page, category, search, value);
-				
-				
-				
+								
 				$('.pagination a').click(function(e) {
 			        e.preventDefault(); // 기본 이벤트 방지
 			        
@@ -210,9 +285,6 @@ String category = request.getParameter("category");
 			            return param.split('=')[0] === 'category';
 			        }).split('=')[1];
 			        
-			        // 브라우저 URL 변경
-			       
-			        
 			        // 페이지 로드
 			        handleButtonClick(page, category);
 			    });
@@ -223,6 +295,30 @@ String category = request.getParameter("category");
 			            loadPage(event.state.page);
 			        }
 			    };
+			    
+			    
+			    
+			    
+			    $('.deleteBtn').click(function() {
+
+					confirm('정말 삭제하시겠습니까?');
+
+					if (confirm) {
+						var orderNo = $('#orderNo').val();
+						$.ajax({
+							url : 'orderDelete.ad',
+							type : 'post',
+							data : {
+								orderNo : orderNo,
+							},
+							success : function(data) {
+								alert('주문이 삭제되었습니다.');
+								window.location.reload();
+							},
+						});
+					}
+				});
+			    
 			
 				
 				$('.modi').click(function() {
@@ -244,14 +340,14 @@ String category = request.getParameter("category");
 					});
 				});
 	
-				function handleButtonClick(page, category, search, value) {
+				 function handleButtonClicked(page, category, search, value) {
 				    $('.btn').removeClass('underline');
 				    
 				    $(this).addClass('underline');
 				    
 				    $.ajax({
 				        url: 'order.ad',
-				        type: 'get',
+				        type: 'post',
 				        data: {
 				            page: page,
 				            category: category,
@@ -265,6 +361,27 @@ String category = request.getParameter("category");
 				            console.log('댓글리스트 조회용 ajax 통신 실패');
 				        },
 				    });
+				} 
+				
+				function handleButtonClick(page, category) {
+				    $('.btn').removeClass('underline');
+				    
+				    $(this).addClass('underline');
+				    
+				    $.ajax({
+				        url: 'order.ad',
+				        type: 'post',
+				        data: {
+				            page: page,
+				            category: category
+				        },
+				        success: function(list) {
+				            $('main').html(list);
+				        },
+				        error: function() {
+				            console.log('댓글리스트 조회용 ajax 통신 실패');
+				        },
+				    }); 
 				}
 
 				$('#btn1').click(function() {
@@ -278,10 +395,67 @@ String category = request.getParameter("category");
 				});
 				$('#btn4').click(function() {
 				    handleButtonClick.call(this, '1', 'D');
+					});
+				
+				
+				 $('.searchBtn').click(function() {
+				    var search = $('input[name="search"]').val();
+				    var value = $('select[name="value"]').val();
+				    var page = $('input[name="page"]').val();
+				    var category = $('input[name="category"]').val();
+
+				    handleButtonClicked(page, category, search, value);
 				});
-			});
-						
-						
+				 
+				 
+				 
+				 
+				 $('tbody').on('click', 'td', function() {
+						var getOrderNo = $(this).closest('tr').find('td:eq(0)').text();
+						$.ajax({
+							url : 'selectOrder.ad',
+							type : 'get',
+							data : {
+								orderNo : getOrderNo
+							},
+
+							success : function(result) {
+								console.log(result);
+								if (result != null) {
+									console.log(result);
+									//모달에게 값을 전달
+									$('#orderNo').val(result.orderNo);
+									$('#memberId').val(result.memberId);
+									$('#itemList').val(result.itemList);
+									$('#request').val(result.request);
+									$('#phone').val(result.phone);
+									$('#orderDate').val(result.orderDate.replace(/\t+/g, " "));
+									$('#orderstatus').val(result.orderStatus);
+									$('#pay').val(result.paymentAmount + '원');
+									$('#shipAddr').val(result.shipAddr); 
+									
+
+									$('#myModal').modal('show');
+								}
+							},
+							error : function(e) {
+								alert('회원을 조회할 수 없습니다');
+							},
+						});
+					});
+				 
+				 
+				//dropdown-menu에 있는 값 가져와서 input에 넣기
+					$('.drop1 li a').click(function() {
+						var text = $(this).text();
+						$(this).parents('.input-group').find('#orderstatus').val(text);
+					});
+				 
+				 
+				 
+				
+				
+				});	
 			</script>
 </body>
 </html>

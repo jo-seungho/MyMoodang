@@ -5,7 +5,7 @@
 	<entry key="selectListCount">
 		SELECT COUNT(*) COUNT
 		  FROM NOTICE
-		 WHERE DELETE_STATUS = 'N'
+		 WHERE DELETE_STATUS = 'Y'
 		   
 	</entry>
 	
@@ -21,7 +21,7 @@
                          , VIEWS
 		                 , CREATE_DATE
 		              FROM NOTICE 
-		             WHERE DELETE_STATUS = 'N'
+		             WHERE DELETE_STATUS = 'Y'
 		             ORDER BY CREATE_DATE DESC
 		            ) A
 		        )
@@ -47,4 +47,3 @@
 	
 
 </properties>
-

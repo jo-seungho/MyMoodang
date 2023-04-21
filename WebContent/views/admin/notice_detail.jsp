@@ -1,25 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.ArrayList, com.kh.admin.board.notice.model.vo.Notice, com.kh.common.model.vo.PageInfo"%>
+    pageEncoding="UTF-8" import="com.kh.admin.board.notice.model.vo.Notice"%>
 <%
-	// 필요한 데이터들 뽑기
-	PageInfo pi = (PageInfo)request.getAttribute("pi");
-    ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("list");
-	// 자주 쓰일법한 변수들 셋팅
-	int currentPage = pi.getCurrentPage();
-	int startPage = pi.getStartPage();
-	int endPage = pi.getEndPage();
-	int maxPage = pi.getMaxPage();
+	Notice n = (Notice)request.getAttribute("n");
+	
 %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
+    <%@ include file="common2.jsp"%>
     <title>관리자 페이지</title>
 
+    
   </head>
 
   <style>
@@ -28,101 +19,69 @@
       color: white;
       border: 1px solid white;
       float: right;
-      margin-left: 10px;
-      margin-bottom: 10px;
+      margin-right: 4px;
     }
-    /* 고유한 */
+    /* 자체적인 css */
+    .row {
+      float: none;
+      margin: 0 auto;
+    }
+    /* col과 input text 라인 맞춰주기 */
+    .col {
+      line-height: 35px;
+    }
+    .form-control {
+      resize: none;
+    }
+    .btns {
+      height: 100%;
+      margin-top: 15px;
+    }
   </style>
 
   <body class="sb-nav-fixed">
-  <%@ include file="sidebar.jsp" %>
-   
+  	<%@ include file="sidebar.jsp" %>
 
       <div id="layoutSidenav_content">
-        <main>
+        <main style="height: 100%">
           <div class="container px-6 white">
-            <h2>공지사항 관리</h2>
-            <hr />
-            <!-- 
-            <div style="height: 60px"><button type="button" id="btn" class="btn">글쓰기</button></div> -->
-
-            <div>
-              <button type="button" id="btn" class="btn" onclick="NoticeEnrollForm()">글쓰기</button>
-              <form role="search">
-                <button type="submit" id="btn" class="btn">검색하기</button>
-                <input type="search" class="form-control" placeholder="" aria-label="Search" style="width: 30%; float: right" />
-              </form>
-            </div>
-            <table class="table table-hover center">
-              <thead>
-                <tr>
-                  <th colspan="0.1">글 번호</th>
-                  <th colspan="1">제목</th>
-                  <th colspan="1">작성일</th>
-                </tr>
-              </thead>
-              <tbody>
-              <%for(Notice n : list){ %>
-                <tr>
-                  <td><%=n.getNoticeNo() %></td>
-                  <td><%=n.getNoticeTitle() %></td>
-                  <td><%=n.getCreateDate() %></td>
-                </tr>
-                <%} %>
-               
-              </tbody>
-            </table>
             <br />
-			 <div align="center" class="paging-area">
+            <h2>공지사항 수정</h2>
+            <hr />
 
-			<% if(currentPage != 1) { %>
-				<button onclick="location.href = '/noticelist.ad?currentPage=<%= currentPage - 1 %>';">
-					&lt;
-				</button>
-			<% } %>
-		
-			<% for(int p = startPage; p <= endPage; p++) { %>
-				<% if(p != currentPage) { %>
-					<button onclick="location.href = '/noticelist.ad?currentPage=<%= p %>';">
-						<%= p %>
-					</button>
-				<% } else { %>
-					<!-- 현재 내가 보고있는 페이지일 경우에는 클릭이 안되게끔 -->
-					<button disabled><%= p %></button>
-				<% } %>
-			<% } %>
-			
-			<% if(currentPage != maxPage) { %>
-				<button onclick="location.href = '/noticelist.ad?currentPage=<%= currentPage + 1 %>';">
-					&gt;
-				</button>
-			<% } %>
-
-		</div>
-          
+            <form action="/noticeUpdate.ad" method="post">
+            <input type="hidden" name="nno" value="<%=n.getNoticeNo()%>">
+            
+              <div class="row center">
+                <div class="col">제목</div>
+                <div class="col-xl-6"><input text class="form-control col-xl-6" name="title" value="<%=n.getNoticeTitle() %>" /></div>
+                <div class="col">작성일</div>
+                <div class="col-xl-2"><%=n.getCreateDate() %></div>
+              </div>
+              <hr />
+              <textarea class="form-control col-sm-5"  rows="15" name="content"><%=n.getNoticeContent() %></textarea>
+              <div class="btns">
+                <button id="btn" class="btn" onclick="Noticedelete();" type="button">삭제</button>
+                
+                <button id="btn" class="btn" type="submit">수정</button>
+                <button id="btn" class="btn" onclick="NoticeList();" type="button">목록</button>
+              </div>
+            </form>
           </div>
-          <br />
         </main>
       </div>
-
-    <!-- td 클릭시 notice_detail.html로 이동 -->
+    </div>
+    
+    <!-- <script src="assets/demo/chart-area-demo.js"></script>
+    <script src="assets/demo/chart-bar-demo.js"></script> -->
     <script>
-      $(document).ready(function () {
-        $("tbody tr").click(function () {
-        	
-        	let nno = $(this).children().eq(0).text();
-          location.href = "/noticeForm.ad?nno="+nno;
-        });
-      });
-      
-      function NoticeEnrollForm(){
-    	  location.href = "/noticeEnrollForm.ad?currentPage=1";
-      }
+    	function NoticeList() {
+    		location.href = "/noticelist.ad?currentPage=1";
+    	};	
+    	
+    	function Noticedelete(){
+    		location.href = "/noticedelete.ad?nno="+<%=n.getNoticeNo()%>;
+    	};
     </script>
-    <!-- <script src="assets/demo/chart-area-demo.js">
-    </script>
-    <script src="assets/demo/chart-bar-demo.js"></script>
-    -->
-   
   </body>
 </html>

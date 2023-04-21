@@ -24,7 +24,6 @@ public class AjaxOrderUpdateController extends HttpServlet {
 
 		int orderNo = Integer.parseInt(request.getParameter("orderNo"));
 		String status = request.getParameter("status");
-
 		Order o = new OrderService().updateOrderStatus(orderNo, status);
 
 		response.setContentType("application/json; charset=UTF-8");
