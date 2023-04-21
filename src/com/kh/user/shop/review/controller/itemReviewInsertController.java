@@ -7,7 +7,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.kh.user.member.model.vo.Member;
 import com.kh.user.shop.review.model.service.itemReviewService;
 import com.kh.user.shop.review.model.vo.Review;
 
@@ -34,26 +36,37 @@ public class itemReviewInsertController extends HttpServlet {
 			throws ServletException, IOException {
 		
 		request.setCharacterEncoding("UTF-8");
-
-		int mno = 1;
-		//int rno = Integer.parseInt(request.getParameter("rno"));
 		
+		
+		
+		// 로그인한 회원 정보 가져오기
+		HttpSession session = request.getSession();
+	    Member loginUser = (Member) session.getAttribute("loginUser");
+	    int mno = loginUser.getMemberNo();
+	    
+	
 	
 		
-		int bno = Integer.parseInt(request.getParameter("bno"));
+
 		
 		String title = request.getParameter("title");
 		String content = request.getParameter("contentinsert");
 		int starPoint = Integer.parseInt(request.getParameter("starpoint"));
+//		int MemberNo = Integer.parseInt(request.getParameter("MemberNo"));
+		int MemberNo = mno;
+		System.out.println("--------------------------");
+		System.out.println(MemberNo);
+		int bno = Integer.parseInt(request.getParameter("bno"));
+		System.out.println(bno);
+		System.out.println(title);
 		
-		Review re = new Review(mno, title, content, starPoint);
-		
+		Review re = new Review(title, content, starPoint, bno, MemberNo);
 
 		
 
 		int result = new itemReviewService().insertReview(re);
 		
-
+		System.out.println(result);
 		
 		
 		request.setAttribute("re",re);

@@ -29,41 +29,41 @@ public class itemReviewDao {
 
     }
     
-    public Review selectReview(Connection conn, int rno) {
-
-        Review r = null;
-        PreparedStatement pstmt = null;
-        ResultSet rset = null;
-
-        String sql = prop.getProperty("selectReview");
-
-        try {
-            pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, rno);
-
-            rset = pstmt.executeQuery();
-
-            if(rset.next()) {
-                r = new Review(rset.getInt("REVIEW_NO"),
-                        rset.getString("TITLE"),
-                        rset.getString("CONTENT"),
-                        rset.getString("WRITE_DATE"),
-                        rset.getInt("STAR_POINT"),
-                        rset.getString("FILE_PATH_NAME"),
-                        rset.getInt("ORDER_NO"),
-                        rset.getInt("ITEM_CODE"));
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            close(rset);
-            close(pstmt);
-        }
-
-        return r;
-
-    }
+//    public Review selectReview(Connection conn, int rno) {
+//
+//        Review r = null;
+//        PreparedStatement pstmt = null;
+//        ResultSet rset = null;
+//
+//        String sql = prop.getProperty("selectReview");
+//
+//        try {
+//            pstmt = conn.prepareStatement(sql);
+//            pstmt.setInt(1, rno);
+//
+//            rset = pstmt.executeQuery();
+//
+//            if(rset.next()) {
+//                r = new Review(rset.getInt("REVIEW_NO"),
+//                        rset.getString("TITLE"),
+//                        rset.getString("CONTENT"),
+//                        rset.getString("WRITE_DATE"),
+//                        rset.getInt("STAR_POINT"),
+//                        rset.getString("FILE_PATH_NAME"),
+//                        rset.getInt("ORDER_NO"),
+//                        rset.getInt("ITEM_CODE"));
+//            }
+//
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        } finally {
+//            close(rset);
+//            close(pstmt);
+//        }
+//
+//        return r;
+//
+//    }
     
 	public int deleteReview(Connection conn, int rno) {
 		int result = 0;
@@ -120,11 +120,16 @@ public class itemReviewDao {
 
         try{
             pstmt = conn.prepareStatement(sql);
+            
             pstmt.setString(1, re.getTitle());
             pstmt.setString(2, re.getContent());
             pstmt.setInt(3, re.getStarPoint());
+            pstmt.setInt(4,re.getItemCode());
+            pstmt.setInt(5,re.getMemberNo());
             
-
+            System.out.println("***************");
+            System.out.println(re.getItemCode());
+            System.out.println(re.getMemberNo());
             result = pstmt.executeUpdate();
 
         }   catch (SQLException e) {

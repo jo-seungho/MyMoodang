@@ -14,17 +14,17 @@ import com.kh.user.shop.review.model.vo.Review;
 
 public class itemReviewService {
 
-	public Review selectReview(int rno) {
-		Connection conn = getConnection();
-		
-		Review result = new itemReviewDao().selectReview(conn, rno);
-		
-		close(conn);
-		
-		return result;
+//	public Review selectReview(int rno) {
+//		Connection conn = getConnection();
+//		
+//		Review result = new itemReviewDao().selectReview(conn, rno);
+//		
+//		close(conn);
+//		
+//		return result;
 	
        
-    }
+    //}
 	public int deleteReview(int rno) {
 		Connection conn = getConnection();
 		

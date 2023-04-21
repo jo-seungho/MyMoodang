@@ -567,18 +567,18 @@
                                    		<br>
 									<table>
 								        <thead>
-								<%--         <% if(loginUser != null) { %> --%>
+								        <%  if(loginUser != null) { %> 
 								            <tr>
 										      <th colspan="1">
 										        <button id="review-register-btn" class="reviewbtn" style="text-align: center; font-size: large;">리뷰 등록</button>
 										      </th>
 										    </tr>
-										 <%--    <% } %> --%>
+										   <% } %> 
 										    <br><br>
 									
 								          <tr>
 								            <th onclick="sortTable(0)" width="100px">번호</th>
-								            <th onclick="sortTable(1)" width="135px">작성일</th>
+								            <th onclick="sortTable(1)" width="95px">작성일</th>
 								            <th onclick="sortTable(2)" width="120px">별점</th>
 								            <th onclick="sortTable(3)">제목</th>
 								            <th onclick="sortTable(4)"width="100px">작성자</th>
@@ -598,7 +598,7 @@
 									        <td><%= r.getWriteDate()%></td>
 									        <td><%= r.getStarPoint()%></td>
 									        <td onclick="toggleContent(<%= r.getReviewNo()%>)" style="cursor: pointer;"><%= r.getTitle()%></td>
-									        <td>유저1</td>
+									        <td><%= r.getMemberId()%></td>
 									      </tr>
 									      <tr class="content" id="content<%= r.getReviewNo()%>" style="display:none;">
 									        <td colspan="6">
@@ -613,6 +613,8 @@
 								    
 								  </tbody>
 								      </table>
+								      
+								      
 								      
 								  <!-- 모달 창 -->
 							
@@ -642,8 +644,11 @@
 								    <div class="modal-body">
 								    
 								    
-								      <!-- 리뷰 등록 폼 -->
+								  <!-- 리뷰 등록 폼 -->
 							<form action="/itemReviewIn.it" method="post">
+                
+                		<input type="hidden" name="userNo" value="<%= 1%>">
+							
 							  <div>
 							    <label for="title">제목:</label>
 							    <input type="text" id="title" name="title">
