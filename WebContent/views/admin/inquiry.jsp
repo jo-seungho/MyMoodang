@@ -1,5 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, com.kh.admin.board.inquiry.model.vo.Inquiry, com.kh.common.model.vo.PageInfo" %>
+
+<%
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	ArrayList<Inquiry> list = (ArrayList<Inquiry>)request.getAttribute("list");
+
+	int currentPage = pi.getCurrentPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	int maxPage = pi.getMaxPage();
+%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -86,9 +96,9 @@
               </a>
               <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                 <nav class="sb-sidenav-menu-nested nav">
-                  <a class="nav-link" href="notice.html">공지사항 관리</a>
-                  <a class="nav-link" href="inquiry.html">1:1 문의 관리</a>
-                  <a class="nav-link" href="review.html">리뷰 관리</a>
+                  <a class="nav-link" href="/noticelist.ad?currentPage=1">공지사항 관리</a>
+                  <a class="nav-link" href="/inquiryList.ad?currentPage=1">1:1 문의 관리</a>
+                  <a class="nav-link" href="/reviewList.ad?/currentPage=1">리뷰 관리</a>
                 </nav>
               </div>
             </div>
@@ -123,26 +133,45 @@
                 </tr>
               </thead>
               <tbody>
+              <%for(Inquiry in : list){ %>
                 <tr>
-                  <td>1</td>
-                  <td>상품문의</td>
-                  <td>hyuna95</td>
-                  <td>언제 입고되나요?</td>
-                  <td>2023-03-24 06:18:21</td>
+                  <td><%=in.getInqNo() %></td>
+                  <td><%=in.getInquiryType() %></td>
+                  <td><%=in.getMemberId() %></td>
+                  <td><%=in.getTitle() %></td>
+                  <td><%=in.getDateCreate() %></td>
                 </tr>
+                <%} %>
               </tbody>
             </table>
             <br />
-
-            <div class="pagination">
-              <a href="#">&lt;</a>
-              <a href="#">1</a>
-              <a class="active" href="#">2</a>
-              <a href="#">3</a>
-              <a href="#">4</a>
-              <a href="#">5</a>
-              <a href="#">&gt;</a>
-            </div>
+			<div align="center" class="paging-area">
+	
+				<% if(currentPage != 1) { %>
+					<button onclick="location.href = '/noticelist.ad?currentPage=<%= currentPage - 1 %>';">
+						&lt;
+					</button>
+				<% } %>
+			
+				<% for(int p = startPage; p <= endPage; p++) { %>
+					<% if(p != currentPage) { %>
+						<button onclick="location.href = '/noticelist.ad?currentPage=<%= p %>';">
+							<%= p %>
+						</button>
+					<% } else { %>
+						<!-- 현재 내가 보고있는 페이지일 경우에는 클릭이 안되게끔 -->
+						<button disabled><%= p %></button>
+					<% } %>
+				<% } %>
+				
+				<% if(currentPage != maxPage) { %>
+					<button onclick="location.href = '/noticelist.ad?currentPage=<%= currentPage + 1 %>';">
+						&gt;
+					</button>
+				<% } %>
+	
+			</div>
+           
           </div>
           <br />
         </main>

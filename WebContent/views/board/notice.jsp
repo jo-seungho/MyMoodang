@@ -108,11 +108,9 @@
 		                          <div class="layout-pagination">
 		                            <div class="pagediv">
 							
-										<% if(currentPage != 1) { %>
 										
 											<a href="/noticelist.no?currentPage=<%= currentPage - 1 %>" class="layout-pagination-button layout-pagination-prev-page">이전 페이지로 가기</a>
 
-										<% } %>
 									
 										<span>
 										<% for(int p = startPage; p <= endPage; p++) { %>
@@ -125,15 +123,12 @@
 											<% } else { %>
 												<!-- 현재 내가 보고있는 페이지일 경우에는 클릭이 안되게끔 -->
 												
-												<!-- <strong disabled><%= p %></strong>-->
+												<strong class="layout-pagination-button layout-pagination-number __active" style="height: 32px; background-color: lightgray; "><%= p %></strong>
 											<% } %>
 										<% } %>
 										</span>
-										
-										<% if(currentPage != maxPage) { %>
-										
+
                                 			<a href="/noticelist.no?currentPage=<%= currentPage + 1 %>" class="layout-pagination-button layout-pagination-next-page">다음 페이지로 가기</a>
-										<% } %>
 										
 										</div>
 									</div>

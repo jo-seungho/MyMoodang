@@ -1,5 +1,5 @@
 // 1:1문의 리스트 조회용 컨트롤러
-// 2023-04-17 김서영
+// 2023-04-21 김서영
 
 package com.kh.admin.board.inquiry.controller;
 
@@ -12,14 +12,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.admin.board.inquiry.model.service.InquiryService;
+import com.kh.admin.board.inquiry.model.vo.Inquiry;
 import com.kh.common.model.vo.PageInfo;
-import com.kh.user.board.inquiry.model.service.InquiryService;
-import com.kh.user.board.inquiry.model.vo.Inquiry;
 
 /**
  * Servlet implementation class InquiryListController
  */
-@WebServlet("/list.ad")
+@WebServlet("/inquiryList.ad")
 public class AdminInquiryListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -76,14 +76,13 @@ public class AdminInquiryListController extends HttpServlet {
 
 		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
 
-		ArrayList<Inquiry> list = new InquiryService().selectList(pi);
+		ArrayList<Inquiry> list = new InquiryService().selectInquiryList(pi);
 
 		request.setAttribute("pi", pi);
 		request.setAttribute("list", list);
 
-//		list.stream().forEach(System.out::println);
 
-		request.getRequestDispatcher("views/board/one.jsp").forward(request, response);
+		request.getRequestDispatcher("views/admin/inquiry.jsp").forward(request, response);
 
 	}
 
