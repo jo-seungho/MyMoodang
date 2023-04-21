@@ -1,5 +1,5 @@
 // 1:1문의 리스트 조회용 컨트롤러
-// 2023-04-21 김서영
+// 2023-04-21 소현아
 
 package com.kh.admin.board.inquiry.controller;
 
@@ -55,24 +55,18 @@ public class AdminInquiryListController extends HttpServlet {
 
 		listCount = new InquiryService().selectListCount();
 
-//		System.out.println(request.getParameter("currentPage") + "현재페이지");
 		currentPage = Integer.parseInt((request.getParameter("currentPage") == null ? "1" : request.getParameter("currentPage")));
-//		System.out.println(currentPage + "두재페이지");
 
 		pageLimit = 10;
 		boardLimit = 10;
 
 		maxPage = (int)Math.ceil((double)listCount/boardLimit);
 
-//		System.out.println(maxPage);
 
 		startPage = (currentPage - 1) / pageLimit * pageLimit + 1;
 
-//		System.out.println(startPage);
 
 		endPage = startPage + pageLimit - 1;
-
-//		System.out.println(endPage);
 
 		if(endPage > maxPage) {
 			endPage = maxPage;
