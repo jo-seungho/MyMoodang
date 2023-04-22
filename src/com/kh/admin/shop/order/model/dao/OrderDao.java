@@ -30,7 +30,13 @@ public class OrderDao {
 			e.printStackTrace();
 		}
 	}
-
+	
+	/**
+	 * 전체게시글 갯수 조회
+	 * 2023-04-22 최명진
+	 * @param conn
+	 * @return
+	 */
 	public int selectListCount(Connection conn) {
 
 		int listCount = 0;
@@ -59,6 +65,13 @@ public class OrderDao {
 		return listCount;
 	}
 
+	/**
+	 * 카테고리에 따른 주문 갯수 조회
+	 * 2023-04-21 최명진
+	 * @param conn
+	 * @param category
+	 * @return
+	 */
 	public int selectOrderStatusCount(Connection conn, String category) {
 
 		int listCount = 0;
@@ -88,6 +101,13 @@ public class OrderDao {
 		return listCount;
 	}
 
+	/**
+	 * 모든 주문내역 조회
+	 * 2023-04-21 최명진
+	 * @param conn
+	 * @param pi
+	 * @return
+	 */
 	public ArrayList<Order> selectAllOrderList(Connection conn, AdminPageInfo pi) {
 
 		ArrayList<Order> list = new ArrayList<>();
@@ -127,7 +147,15 @@ public class OrderDao {
 		return list;
 	}
 
-	// 모든 검색결과에 대한 서치리스트
+	/**
+	 * 모든 검색결과에 대한 주문내역 리스트
+	 * 2023-04-21 최명진
+	 * @param conn
+	 * @param pi
+	 * @param search
+	 * @param value
+	 * @return
+	 */
 	public ArrayList<Order> selectSearchAllOrderList(Connection conn, AdminPageInfo pi, String search, String value) {
 		ArrayList<Order> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
@@ -173,6 +201,14 @@ public class OrderDao {
 		return list;
 	}
 
+	/**
+	 * 카테고리를 통한 주문내역 조회
+	 * 2023-04-21 최명진
+	 * @param conn
+	 * @param pi
+	 * @param category
+	 * @return
+	 */
 	public ArrayList<Order> selectStatusOrderList(Connection conn, AdminPageInfo pi, String category) {
 
 		ArrayList<Order> list = new ArrayList<>();
@@ -211,7 +247,14 @@ public class OrderDao {
 		return list;
 	}
 
-	// 회원의 배송상태를 업데이트
+	/**
+	 * 회원 배송상태 업데이트
+	 * 2023-04-21 최명진
+	 * @param conn
+	 * @param orderNo
+	 * @param status
+	 * @return
+	 */
 	public Order updateOrderStatus(Connection conn, int orderNo, String status) {
 
 		Order o = null;
@@ -245,6 +288,14 @@ public class OrderDao {
 		return o;
 	}
 
+	/**
+	 * 검색결과에 따른 목록 개수 조회
+	 * 2023-04-21 최명진
+	 * @param conn
+	 * @param value
+	 * @param keyword
+	 * @return
+	 */
 	public int selectSearchAllCount(Connection conn, String value, String keyword) {
 		int listCount = 0;
 		PreparedStatement pstmt = null;
@@ -278,6 +329,13 @@ public class OrderDao {
 		return listCount;
 	}
 
+	/**
+	 * 주문내역 1개 상세조회
+	 * 2023-042-21 최명진
+	 * @param conn
+	 * @param id
+	 * @return
+	 */
 	public Order selectOrder(Connection conn, int id) {
 		
 		Order o = null;

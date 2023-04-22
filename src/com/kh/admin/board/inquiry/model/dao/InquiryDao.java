@@ -182,6 +182,77 @@ public class InquiryDao {
 		
 		
 	}
+
+	/**
+	 * 답변완료 게시글 구하기
+	 * 2023-04-22 최명진
+	 * @param conn
+	 * @return
+	 */
+	public int selectInquiryCount(Connection conn) {
+		
+		int listCount = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		String sql = prop.getProperty("selectInquiryCount");
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			rset = pstmt.executeQuery();	
+
+			if(rset.next()) {
+				listCount = rset.getInt("COUNT(*)");
+			}
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return listCount;
+
+	}
+
+	/**
+	 * 답변 미완료 게시글 구하기
+	 * 2023-04-22 최명진
+	 * @param conn
+	 * @return
+	 */
+	public int selectNotInquiryCount(Connection conn) {
+		
+		int listCount = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		String sql = prop.getProperty("selectNotInquiryCount");
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			rset = pstmt.executeQuery();	
+
+			if(rset.next()) {
+				listCount = rset.getInt("COUNT(*)");
+			}
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return listCount;
+
+
+	}
 	
 	
 	

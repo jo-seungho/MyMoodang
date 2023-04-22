@@ -17,7 +17,10 @@ import com.kh.admin.shop.order.model.vo.Order;
 public class AjaxSelectOrderController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-
+	/**
+	 * AJAX를 이용한 상세 주문내역 조회
+	 * 2023-04-22 최명진
+	 */
     public AjaxSelectOrderController() {}
 
 

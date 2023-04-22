@@ -12,27 +12,24 @@
     <!DOCTYPE html>
     <html lang="en">
       <head>
-        <title>관리자 페이지</title>
+        <title>상품 관리</title>
         <%@ include file="common2.jsp" %>
         <link rel="stylesheet" href="/resources/css/shop/item_management.css" />
-      </head>
-
-      <style>
-        #btn {
+<style>
+#btn {
           background-color: #fe7477;
           color: white;
           border: 1px solid white;
           float: right;
           margin-left: 10px;
           margin-bottom: 10px;
-        }
-
-        /* 고유한 */
-      </style>
+}
+        
+</style>
+      </head>
 
         <%@ include file="sidebar.jsp" %>
         
-
           <div id="layoutSidenav_content">
             <main>
               <div class="container px-6 white">

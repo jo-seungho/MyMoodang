@@ -3,50 +3,21 @@
 	import="com.kh.admin.shop.item.model.vo.*, java.util.ArrayList"%>
 <%
 	Item it = (Item) request.getAttribute("item");
-ArrayList<ItemImg> list = (ArrayList<ItemImg>) request.getAttribute("list");
-String noImage = "/resources/img/noimage.png";
+	ArrayList<ItemImg> list = (ArrayList<ItemImg>) request.getAttribute("list");
+	String noImage = "/resources/img/noimage.png";
 %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>상품상세페이지</title>
+<title><%= it.getItemName() %></title>
 
 <%@ include file="common2.jsp"%>
 
-<link rel="stylesheet" href="/resources/css/admin/itemdetailAd.css" />
+<link rel="stylesheet" href="/resources/css/admin/item_detail.css" />
 
 <script src="/resources/js/shop/item_detail.js"></script>
 <script src="/resources/js/common/header.js"></script>
 
-<style>
-.btn2 {
-	background-color: #fe7477;
-	color: white;
-	border: 1px solid white;
-	float: right;
-	margin-bottom: 10px;
-}
-
-#click:hover {
-	cursor: pointer;
-}
-
-.hearts {
-	width: 80px;
-	height: 80px;
-	background: url(/resources/img/heart.png) no-repeat;
-	background-position: 0 0;
-	cursor: pointer;
-	transition: background-position 1s steps(28);
-	transition-duration: 0s;
-	margin-left: 500px;
-}
-
-.hearts.is-active {
-	transition-duration: 1s;
-	background-position: -2800px 0;
-}
-</style>
 </head>
 
 <body class="sb-nav-fixed">
@@ -63,9 +34,9 @@ String noImage = "/resources/img/noimage.png";
 							<div class="inner_view">
 								<div class="thumb"
 									style="background-image: url(https://res.kurly.com/mobile/img/1808/img_none_x2.png)">
-									<img <%if (it.getItemImg() == null) {%>
-										src="/resources/img/noimage.png" <%} else {%>
-										src="<%=it.getItemImg()%>" <%}%> alt="상품 대표 이미지" class="bg" />
+									<img <% if (it.getItemImg() == null) { %>
+										src="/resources/img/noimage.png" <% } else { %>
+										src="<%= it.getItemImg()%>" <% } %> alt="상품 대표 이미지" class="bg" />
 								</div>
 								<p class="goods_name">
 									<strong class="name"><%=it.getItemName()%> </strong>
@@ -404,66 +375,65 @@ String noImage = "/resources/img/noimage.png";
                 	      heartIcon.removeClass("is-active").css("filter", "grayscale(1)");
                 	    }
                 	  });
-
-                	  // Toggle the heart icon and update the wishlist when clicked
+                	  
                 	  heartIcon.on("click", function() {
-                	    $(this).toggleClass("is-active");
+                  	    $(this).toggleClass("is-active");
 
-                	    if ($(this).hasClass("is-active")) {
-                	      addToWishlist(code);
-                	      $(this).css("filter", "");
-                	    } else {
-                	      removeFromWishlist(code);
-                	      $(this).css("filter", "grayscale(100%)");
-                	    }
-                	  });
+                  	    if ($(this).hasClass("is-active")) {
+                  	      addToWishlist(code);
+                  	      $(this).css("filter", "");
+                  	    } else {
+                  	      removeFromWishlist(code);
+                  	      $(this).css("filter", "grayscale(100%)");
+                  	    }
+                  	  });
 
-                	  function checkWishlistStatus(code) {
-                	    return new Promise(function(resolve, reject) {
-                	      $.ajax({
-                	        url: "/heart.ad",
-                	        type: "POST",
-                	        data: {
-                	          action: "check",
-                	          code: code
-                	        },
-                	        success: function(response) {
-                	          resolve(response);
-                	        },
-                	        error: function(xhr, status, error) {
-                	          reject(error);
-                	        }
-                	      });
-                	    });
-                	  }
+                  	  function checkWishlistStatus(code) {
+                  	    return new Promise(function(resolve, reject) {
+                  	      $.ajax({
+                  	        url: "/heart.ad",
+                  	        type: "POST",
+                  	        data: {
+                  	          action: "check",
+                  	          code: code
+                  	        },
+                  	        success: function(response) {
+                  	          resolve(response);
+                  	        },
+                  	        error: function(xhr, status, error) {
+                  	          reject(error);
+                  	        }
+                  	      });
+                  	    });
+                  	  }
 
-                	  function addToWishlist(code) {
-                	    $.ajax({
-                	      url: "/heart.ad",
-                	      type: "POST",
-                	      data: {
-                	        action: "add",
-                	        code: code
-                	      },
-                	      success: function(response) {
-                	        console.log(response);
-                	      }
-                	    });
-                	  }
+                  	  function addToWishlist(code) {
+                  	    $.ajax({
+                  	      url: "/heart.ad",
+                  	      type: "POST",
+                  	      data: {
+                  	        action: "add",
+                  	        code: code
+                  	      },
+                  	      success: function(response) {
+                  	        console.log(response);
+                  	      }
+                  	    });
+                  	  }
 
-                	  function removeFromWishlist(code) {
-                	    $.ajax({
-                	      url: "/heart.ad",
-                	      type: "POST",
-                	      data: {
-                	        action: "remove",
-                	        code: code
-                	      },
-                	      success: function(response) {
-                	        console.log(response);
-                	      }
-                	    });
-                	  }
+                  	  function removeFromWishlist(code) {
+                  	    $.ajax({
+                  	      url: "/heart.ad",
+                  	      type: "POST",
+                  	      data: {
+                  	        action: "remove",
+                  	        code: code
+                  	      },
+                  	      success: function(response) {
+                  	        console.log(response);
+                  	      }
+                  	    });
+                  	  }
                 	});
        </script>
 </body>

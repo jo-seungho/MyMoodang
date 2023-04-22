@@ -1,46 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="com.kh.admin.board.inquiry.model.vo.Inquiry"%> 
-<%
-	Inquiry in = (Inquiry)request.getAttribute("in");
-	
-%>
+<% Inquiry in = (Inquiry)request.getAttribute("in"); %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <%@ include file="common2.jsp" %>
-    <title>관리자 페이지</title>
+    <link href="/resources/css/admin/inquiry_detail.css" rel="stylesheet" />
+    <title><%= in.getTitle() %></title>
 
   </head>
-
-  <style>
-    #btn {
-      background-color: #fe7477;
-      color: white;
-      border: 1px solid white;
-      float: right;
-      margin-right: 4px;
-    }
-
-    /* 자체적인 css */
-    .row {
-      float: none;
-      margin: 0 auto;
-    }
-
-    /* col과 input text 라인 맞춰주기 */
-    .col {
-      line-height: 35px;
-    }
-
-    .form-control {
-      resize: none;
-    }
-
-    .btns {
-      height: 100%;
-      margin-top: 15px;
-    }
-  </style>
 
   <body class="sb-nav-fixed">
   	<%@ include file="sidebar.jsp" %>
@@ -90,12 +58,8 @@
         
         function inquiry(){
       	  location.href = "/inquiryList.ad?currentPage=1";
-      	  
         </script>
         
       </div>
-
-    <!-- <script src="assets/demo/chart-area-demo.js"></script>
-    <script src="assets/demo/chart-bar-demo.js"></script> -->
   </body>
 </html>

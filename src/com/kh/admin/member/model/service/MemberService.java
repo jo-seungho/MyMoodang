@@ -51,22 +51,6 @@ public class MemberService {
 	}
 
 	/**
-	 * 아이디 중복 체크 메소드 2023-04-14 김서영
-	 *
-	 * @param checkId
-	 * @return
-	 */
-	public int idCheck(String checkId) {
-		Connection conn = getConnection();
-
-		int count = new MemberDao().idCheck(conn, checkId);
-
-		JDBCTemplate.close(conn);
-
-		return count;
-	}
-
-	/**
 	 * 어드민이 회원 상세정보 수정 2023-04-14 최명진
 	 *
 	 * @param m
@@ -88,48 +72,37 @@ public class MemberService {
 		return result;
 	}
 
+	
 	/**
-	 * 회원가입 시 회원정보, 주소를 입력하는 메소드
-	 *
-	 * @param m
-	 * @param addr
+	 * 모든멤버 카운트 구해오는 메소드
+	 * 2023-04-22 최명진
 	 * @return
-	 * @throws SQLException
 	 */
-	public int insertMember(AdMember m, ShippingAddress addr) {
-
+	public int selectAllmemberCount() {
+		
 		Connection conn = getConnection();
-
-		try {
-			conn.setAutoCommit(false);
-		} catch (SQLException e) {
-		}
-
-		int memberNo = new MemberDao().selectMemberNo(conn);
-		m.setMemberNo(memberNo);
-
-		int result1 = new MemberDao().insertMember(conn, m);
-
-		addr.setMemberNo(memberNo);
-		addr.setPhone(m.getPhone());
-
-		int result2 = 0;
-
-		if (result1 > 0) { // 회원정보 추가가 된 상황
-			// 주소도 등록해야 함 (멤버 번호 받아야 하므로 => 핸드폰 번호가 똑같은 멤버의 번호 가져오기)
-			result2 = new MemberDao().insertMemberAddr(conn, addr);
-		}
-
-		if (result1 > 0 && result2 > 0) {
-			commit(conn);
-		} else {
-			rollback(conn);
-		}
-
+		
+		int result = new MemberDao().selectAllmemberCount(conn);
+		
 		close(conn);
+		
+		return result;
+	}
 
-		return result1 * result2;
-
+	/**
+	 * 사용자가 구매한 총 매출 구해오는 메소드
+	 * 2023-04-22 최명진
+	 * @return
+	 */
+	public int selectTotalMoney() {
+		
+		Connection conn = getConnection();
+		
+		int result = new MemberDao().selectTotalMoney(conn);
+		
+		close(conn);
+		
+		return result;
 	}
 
 }

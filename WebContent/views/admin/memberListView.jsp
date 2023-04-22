@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>관리자 페이지</title>
+<title>회원 관리</title>
 <%@ include file="common2.jsp"%>
 
 <style>

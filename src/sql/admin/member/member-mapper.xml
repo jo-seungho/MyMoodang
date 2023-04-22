@@ -51,49 +51,20 @@
 		WHERE MEMBER_NO = ?
 		</entry>
 
-		<!-- 회원가입할 회원의 번호를 조회하는 쿼리문 / 2023-04-15 김서영  -->
-		<entry key="selectMemberNo">
-			SELECT SEQ_MNO.NEXTVAL AS MEMBER_NO
-			FROM DUAL
-		</entry>
+        <!-- 모든 멤버 조회 / 2023-04-22 최명진 -->
+        <entry key="selectAllmemberCount">
 
-		<!-- 회원가입용 (회원 정보 추가) 쿼리문 / 2023-04-15 김서영  -->
-        <entry key="insertMember">
-        	INSERT INTO MEMBER (MEMBER_NO
-                               , MEMBER_ID
-                               , PASSWORD
-                               , NAME
-                               , BIRTH_DATE
-                               , GENDER
-                               , EMAIL
-                               , PHONE
-                               , ENROLL_DATE)
-                     VALUES (?
-                           , ?
-                           , ?
-                           , ?
-                           , ?
-                           , ?
-                           , ?
-                           , ?
-                           , SYSDATE)
+        SELECT COUNT(*)
+        FROM MEMBER
         </entry>
 
-        <!-- 회원가입하는 회원의 주소 추가용 쿼리문 -->
-        <entry key="insertMemberAddr">
-        	INSERT INTO SHIPPING_ADDRESS (SHIP_NO
-                                        , SHIP_ADDR
-                                        , SHIP_ADDR_INFO
-                                        , PHONE
-                                        , ZIPCODE
-                                        , MEMBER_NO)
-                                  VALUES (SEQ_SHIP_NO.NEXTVAL
-                                        , ?
-                                        , ?
-                                        , ?
-                                        , ?
-                                        , ?)
+        <entry key="selectTotalMoney">
+
+        SELECT SUM(TOTAL_MONEY)
+        FROM MEMBER
         </entry>
+        
+        
 
 </properties>
 

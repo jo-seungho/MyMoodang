@@ -15,7 +15,7 @@
   <head>
 
     <%@ include file="common2.jsp"%>
-    <title>관리자 페이지</title>
+    <title>공지사항 관리</title>
 
   </head>
 
