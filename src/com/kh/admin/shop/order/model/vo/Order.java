@@ -13,7 +13,7 @@ public class Order {
 	private String request; //요청사항
 	private String phone; //전화번호
 //	private String trackNo; // 운송장번호
-//	private String paymentNo; //결제번혼데 String으로 되어있어 ㅡㅡ
+//	private String paymentNo; //결제번혼데 String으로 되어있어 ..
 	
 	public Order() {
 		// TODO Auto-generated constructor stub

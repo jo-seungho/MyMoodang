@@ -21,7 +21,11 @@ public class AjaxOrderListController extends HttpServlet {
 
 	public AjaxOrderListController() {
 	}
-
+	
+	/**
+	 * AJAX를 이용한 주문내역 조회페이지
+	 * 2023-04-22 최명진
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 

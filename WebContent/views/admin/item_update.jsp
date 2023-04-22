@@ -3,13 +3,12 @@
 		ArrayList<ItemImg> list = (ArrayList<ItemImg>) request.getAttribute("list");
 		Item i = (Item) request.getAttribute("item"); 
 		String category = i.getItemCategory(); 
-
 %>
 <!DOCTYPE html>
    <html lang="en">
       <head>
       	<%@ include file="common2.jsp" %>
-        <title>관리자 페이지</title>
+        <title><%= i.getItemName() %></title>
       </head>
 
       <style>

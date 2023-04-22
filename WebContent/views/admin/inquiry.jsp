@@ -14,8 +14,7 @@
 <html lang="en">
   <head>
   	<%@ include file="common2.jsp" %>
-    <title>관리자 페이지</title>
-
+    <title>1:1 문의 관리</title>
   </head>
 
   <style>
@@ -38,8 +37,6 @@
           <div class="container px-6 white">
             <h2>1대1 문의 관리</h2>
             <hr />
-            <!-- 
-            <div style="height: 60px"><button type="button" id="btn" class="btn">글쓰기</button></div> -->
 
             <div>
               <form role="search">
@@ -58,7 +55,7 @@
                 </tr>
               </thead>
               <tbody>
-              <%for(Inquiry in : list){ %>
+              <% for(Inquiry in : list) { %>
                 <tr>
                   <td><%=in.getInqNo() %></td>
                   <td><%=in.getInquiryType() %></td>
@@ -66,7 +63,7 @@
                   <td><%=in.getTitle() %></td>
                   <td><%=in.getDateCreate() %></td>
                 </tr>
-                <%} %>
+                <% } %>
               </tbody>
             </table>
             <br />
@@ -109,11 +106,7 @@
               location.href = "/inquiryDetail.ad?ino="+ino;
             });
           });
-        
-       
 		</script>
       </div>
-    <!-- <script src="assets/demo/chart-area-demo.js"></script>
-    <script src="assets/demo/chart-bar-demo.js"></script> -->
   </body>
 </html>

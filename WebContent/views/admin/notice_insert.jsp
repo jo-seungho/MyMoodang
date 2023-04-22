@@ -6,12 +6,35 @@
     <%@ include file="common2.jsp"%>
     <title>관리자 페이지</title>
 
-    <!-- include summernote css/js -->
-    
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
     <script src="/resources/js/common/summernote-ko-KR.js"></script>
     <script src="/resources/js/common/summernote-ko-KR.min.js"></script>
+    
+    
+    
+    
+    <script type="text/javascript">
+        /* summernote에서 이미지 업로드시 실행할 함수 */
+	 	function sendFile(file, editor) {
+            // 파일 전송을 위한 폼생성
+	 		data = new FormData();
+	 	    data.append("uploadFile", file);
+	 	    $.ajax({ // ajax를 통해 파일 업로드 처리
+	 	        data : data,
+	 	        type : "POST",
+	 	        url : "/uploadFile",
+	 	        cache : false,
+	 	        contentType : false,
+	 	        processData : false,
+	 	        success : function(data) { // 처리가 성공할 경우
+                    // 에디터에 이미지 출력
+	 	        	$(editor).summernote('editor.insertImage', data.url);
+	 	        }
+	 	    });
+	 	}
+	</script>
+    
   </head>
 
   <style>
@@ -86,14 +109,16 @@
               ],
               fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', '맑은 고딕', '궁서', '굴림체', '굴림', '돋움체', '바탕체'],
               fontSizes: ['8', '9', '10', '11', '12', '14', '16', '18', '20', '22', '24', '28', '30', '36', '50', '72'],
+              
+              callbacks: { // 콜백을 사용
+                  // 이미지를 업로드할 경우 이벤트를 발생
+				    onImageUpload: function(files, editor, welEditable) {
+					    sendFile(files[0], this);
+					}
+              }
             });
           });
-          
-          $.noConflict();
         </script>
       </div>
-
-    <!-- <script src="assets/demo/chart-area-demo.js"></script>
-    <script src="assets/demo/chart-bar-demo.js"></script> -->
   </body>
 </html>

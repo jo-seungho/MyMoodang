@@ -48,7 +48,12 @@ public class ItemService {
 		// 5. 결과 반환
 		return listCount;
 	}
-
+	
+	/**
+	 * 2023-04-16 최명진 판매/판매중지 상품 갯수
+	 * @param category
+	 * @return
+	 */
 	public int selectListSale(String category) {
 
 		// 1. Connection 객체 생성
@@ -108,6 +113,11 @@ public class ItemService {
 		return result1 * result2;
 	}
 
+	/**
+	 * 2023-04-17 최명진 관리자 상품 업데이트
+	 * @param itemCode
+	 * @return
+	 */
 	public int updateItem(int itemCode) {
 	
 		Connection conn = getConnection();
@@ -125,6 +135,12 @@ public class ItemService {
 		return result;
 	}
 
+	/**
+	 * 상품 이미지 조회
+	 * 2023-04-17 최명진
+	 * @param itemCode
+	 * @return
+	 */
 	public ArrayList<ItemImg> selectImgList(int itemCode) {
 		
 		Connection conn = getConnection();
@@ -136,6 +152,13 @@ public class ItemService {
 		return list;
 	}
 
+	/**
+	 * 상품 판매중지
+	 * 2023-04-17 최명진
+	 * @param code
+	 * @param status
+	 * @return
+	 */
 	public int deleteItem(int code, String status) {
 		
 		Connection conn = getConnection();
@@ -153,6 +176,13 @@ public class ItemService {
 		return result;
 	}
 
+	/**
+	 * 찜목록 체크
+	 * 2023-04-22 최명진
+	 * @param code
+	 * @param mno
+	 * @return
+	 */
 	public int checkFavorite(int code, int mno) {
 		
 		Connection conn = getConnection();
@@ -164,6 +194,13 @@ public class ItemService {
 		return result;
 	}
 
+	/**
+	 * 찜목록 추가
+	 * 2023-04-22 최명진
+	 * @param code
+	 * @param mno
+	 * @return
+	 */
 	public int addFavorite(int code, int mno) {
 		
 		Connection conn = getConnection();
@@ -181,6 +218,13 @@ public class ItemService {
 		return result;
 	}
 
+	/**
+	 * 찜목록 삭제
+	 * 2023-04-22 최명진
+	 * @param code
+	 * @param mno
+	 * @return
+	 */
 	public int deleteFavorite(int code, int mno) {
 		
 		Connection conn = getConnection();

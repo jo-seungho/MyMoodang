@@ -1,0 +1,29 @@
+@charset "UTF-8";
+
+#btn {
+	background-color: #fe7477;
+	color: white;
+	border: 1px solid white;
+	float: right;
+	margin-right: 4px;
+}
+
+/* 자체적인 css */
+.row {
+	float: none;
+	margin: 0 auto;
+}
+
+/* col과 input text 라인 맞춰주기 */
+.col {
+	line-height: 35px;
+}
+
+.form-control {
+	resize: none;
+}
+
+.btns {
+	height: 100%;
+	margin-top: 15px;
+}

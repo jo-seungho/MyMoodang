@@ -53,4 +53,14 @@
 		                 , 'Y')
 		</entry>
 
+		<entry key="selectInquiryCount">
+		SELECT COUNT(*) FROM INQUIRY
+		WHERE REPLY_CONTENTS IS NOT NULL
+		</entry>
+
+		<entry key="selectNotInquiryCount">
+		SELECT COUNT(*) FROM INQUIRY
+		WHERE REPLY_CONTENTS IS NULL
+		</entry>
+
 </properties>
