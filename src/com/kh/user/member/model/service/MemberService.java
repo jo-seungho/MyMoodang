@@ -142,7 +142,7 @@ public class MemberService {
 
 		return loginUser;
 	}
-	
+
 	/**
 	 * 2023.04.19 / 내 배송지 목록 조회/ 이지환
 	 * @param memberNo
@@ -150,7 +150,7 @@ public class MemberService {
 	 */
 	public ArrayList<ShippingAddress> manageMyShippingAddressList(int memberNo) {
 		Connection conn = JDBCTemplate.getConnection();
-		
+
 		// 내 배송지 목록 조회
 		ArrayList<ShippingAddress> shippingAddressList = new MemberDao().selectShippingAddressList(conn, memberNo);
 
@@ -158,4 +158,75 @@ public class MemberService {
 
 		return shippingAddressList;
 	}
+
+
+
+	/**
+	 * * 회원 정보 수정(기본정보 수정) 용 메소드
+	 * 2023-04-20 김서영
+	 * @param m
+	 * @return
+	 */
+	public int updateInfoMember(Member m) {
+
+		Connection conn = JDBCTemplate.getConnection();
+
+		int result = new MemberDao().updateInfoMember(conn, m);
+
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+
+		return result;
+	}
+
+
+
+	/**
+	 * 회원 비밀번호 수정 용 메소드
+	 * 2023-04-20 김서영
+	 * @param m
+	 * @param upPwd
+	 * @return
+	 */
+	public boolean updatePwdMember(Member m, String upPwd) {
+
+		Connection conn = JDBCTemplate.getConnection();
+
+		boolean result = new MemberDao().updatePwdMember(conn, m, upPwd);
+
+		System.out.println("서비스" + upPwd);
+		if(result = true) {  // 비밀번호 수정 성공
+			commit(conn);
+		} else {  // 비밀번호 수정 실
+			rollback(conn);
+		}
+		close(conn);
+
+		return result;
+	}
+
+
+	public int deleteMember(Member m) {
+		Connection conn = JDBCTemplate.getConnection();
+
+		int result = new MemberDao().deleteMember(conn, m);
+
+//		System.out.println("서비스 : " + result);
+
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+
+		return result;
+	}
+
+
+
 }

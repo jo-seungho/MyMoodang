@@ -12,13 +12,13 @@ public class Inquiry {
 	private String inquiryType;     // 문의유형
 	private String replyContents;   // 답변내용
 	private String replyDate;       // 답변일
-	private int memberNo;           // 회원번호
-
+	private String memberNo;           // 회원번호
+	private String memberId;           // 회원 아이디
 
 	public Inquiry() {}
 
 
-	public Inquiry(int inqNo, String title, String description, String dateCreate, String inquiryType, String replyContents, String replyDate, int memberNo) {
+	public Inquiry(int inqNo, String title, String description, String dateCreate, String inquiryType, String replyContents, String replyDate, String memberNo) {
 		super();
 		this.inqNo = inqNo;
 		this.title = title;
@@ -28,6 +28,35 @@ public class Inquiry {
 		this.replyContents = replyContents;
 		this.replyDate = replyDate;
 		this.memberNo = memberNo;
+	}
+
+	public Inquiry(String title, int inqNo, String inquiryType, String memberId, String dateCreate) {
+		
+		super();
+		this.title = title;
+		this.inqNo = inqNo;
+		this.inquiryType = inquiryType;
+		this.memberId = memberId;
+		this.dateCreate = dateCreate;
+	}
+
+	public Inquiry(int inqNo, String inquiryType,  String memberId, String title, String dateCreate) {
+		super();
+		this.inqNo = inqNo;
+		this.inquiryType = inquiryType;
+		this.memberId = memberId;
+		this.title = title;
+		this.dateCreate = dateCreate;
+	}
+
+
+	public String getMemberId() {
+		return memberId;
+	}
+
+
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
 	}
 
 
@@ -101,21 +130,25 @@ public class Inquiry {
 	}
 
 
-	public int getMemberNo() {
+	public String getMemberNo() {
 		return memberNo;
 	}
 
 
-	public void setMemberNo(int memberNo) {
+	public void setMemberNo(String memberNo) {
 		this.memberNo = memberNo;
 	}
 
 
 	@Override
 	public String toString() {
-		return "Inquiry [inqNo=" + inqNo + ", title=" + title + ", description=" + description + ", dateCreate=" + dateCreate + ", inquiryType=" + inquiryType + ", replyContents=" + replyContents
-				+ ", replyDate=" + replyDate + ", memberNo=" + memberNo + "]";
+		return "Inquiry [inqNo=" + inqNo + ", title=" + title + ", description=" + description + ", dateCreate="
+				+ dateCreate + ", inquiryType=" + inquiryType + ", replyContents=" + replyContents + ", replyDate="
+				+ replyDate + ", memberNo=" + memberNo + ", memberId=" + memberId + "]";
 	}
+
+
+
 
 
 

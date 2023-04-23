@@ -44,11 +44,6 @@ public class CartController extends HttpServlet {
 		// response.setContentType("application/json; charset=UTF-8");
 		// Gson gson = new Gson();
 		
-		String countValue = request.getParameter("countValue");
-		// System.out.println(countValue);  바뀐 수량 값
-		
-		
-		
 		request.getRequestDispatcher("/views/shop/cart.jsp").forward(request, response);
 	}
 

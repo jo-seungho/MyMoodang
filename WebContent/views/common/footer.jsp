@@ -3,6 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+	
         <div id="footer">
         <div class="inner_footer">
             <div class="cc_footer">
@@ -129,6 +130,7 @@
                       <p class="txt">
                           고객님의 안전거래를 위해 현금 등으로 결제 시 저희 쇼핑몰에서 가입한<br>
                           토스 페이먼츠 구매안전(에스크로) 서비스를 이용하실 수 있습니다.
+                          
                       </p>
                   </a>
               </div>

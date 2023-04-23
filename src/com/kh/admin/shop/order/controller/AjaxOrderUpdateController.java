@@ -19,12 +19,15 @@ public class AjaxOrderUpdateController extends HttpServlet {
 	public AjaxOrderUpdateController() {
 	}
 
+	/**
+	 * AJAX를 이용한 주문내역 업데이트 페이지
+	 * 2023-04-22 최명진
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		int orderNo = Integer.parseInt(request.getParameter("orderNo"));
 		String status = request.getParameter("status");
-
 		Order o = new OrderService().updateOrderStatus(orderNo, status);
 
 		response.setContentType("application/json; charset=UTF-8");

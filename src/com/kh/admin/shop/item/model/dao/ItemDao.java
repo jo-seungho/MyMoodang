@@ -1,6 +1,6 @@
 package com.kh.admin.shop.item.model.dao;
 
-import static com.kh.common.JDBCTemplate.*;
+	import static com.kh.common.JDBCTemplate.*;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -113,7 +113,13 @@ public class ItemDao {
 				return listCount;
 			}
     
-    
+    /**
+     * 판매 상품 리스트 조회
+     * 2023-04-17 최명진
+     * @param conn
+     * @param category
+     * @return
+     */
 	public int selectListSale(Connection conn, String category) {
 		int listCount = 0;
 		PreparedStatement pstmt = null;
@@ -197,7 +203,14 @@ public class ItemDao {
 
 	}
 	
-	
+	/**
+	 * 판매중인 상품 조회
+	 * 2023-04-18 최명진
+	 * @param conn
+	 * @param pi
+	 * @param category
+	 * @return
+	 */
 	public ArrayList<Item> selectSaleItemList(Connection conn, PageInfo pi, String category) {
 		ArrayList<Item> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
@@ -244,7 +257,14 @@ public class ItemDao {
 		return list;
 
 	}
-
+	
+	/**
+	 * 상품 추가 메소드
+	 * 2023-04-22 최명진
+	 * @param conn
+	 * @param i
+	 * @return
+	 */
 	public int insertItem(Connection conn, Item i) {
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -269,7 +289,14 @@ public class ItemDao {
 
 		return result;
 	}
-
+	
+	/**
+	 * 이미지 데이터베이스에 저장
+	 * 2023-04-19 최명진
+	 * @param conn
+	 * @param list
+	 * @return
+	 */
 	public int insertItemImg(Connection conn, ArrayList<ItemImg> list) {
 		int result = 1;
 		// insert를 반복해서 진행 = > 하나라도 실패 할 경우 실패처리
@@ -296,7 +323,13 @@ public class ItemDao {
 		return result;
 	}
 
-
+	/**
+	 * 아이템 업데이트 
+	 * 2023-04-19 최명진
+	 * @param conn
+	 * @param itemCode
+	 * @return
+	 */
 	public int updateItem(Connection conn, int itemCode) {
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -316,7 +349,13 @@ public class ItemDao {
 		return result;
 	}
 
-
+	/**
+	 * 여러장 이미지 불러오기
+	 * 2023-04-20 최명진
+	 * @param conn
+	 * @param itemCode
+	 * @return
+	 */
 	public ArrayList<ItemImg> selectImgList(Connection conn, int itemCode) {
 		
 		ArrayList<ItemImg> list = new ArrayList<>();
@@ -358,6 +397,14 @@ public class ItemDao {
 	}
 
 
+	/**
+	 * 아이템 판매중지
+	 * 2023-04-20 최명진
+	 * @param conn
+	 * @param code
+	 * @param status
+	 * @return
+	 */
 	public int deleteItem(Connection conn, int code, String status) {
 
 		int result = 0;
@@ -378,6 +425,108 @@ public class ItemDao {
 
 		return result;
 	}
+
+	/**
+	 * 찜목록 상태 확인
+	 * 2023-04-21 최명진
+	 * @param conn
+	 * @param code
+	 * @param mno
+	 * @return
+	 */
+	public int checkFavorite(Connection conn, int code, int mno) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("checkFavorite");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, code);
+			pstmt.setInt(2, mno);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+
+				result = rset.getInt("COUNT");
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	/**
+	 * 찜목록 추가
+	 * 2023-04-21 최명진
+	 * @param conn
+	 * @param code
+	 * @param mno
+	 * @return
+	 */
+	public int addFavorite(Connection conn, int code, int mno) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("addFavorite");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, code);
+			pstmt.setInt(2, mno);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	/**
+	 * 찜목록 삭제
+	 * 2023-04-21 최명진
+	 * @param conn
+	 * @param code
+	 * @param mno
+	 * @return
+	 */
+	public int deleteFavorite(Connection conn, int code, int mno) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("deleteFavorite");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, code);
+			pstmt.setInt(2, mno);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+
+	
 	
  
 

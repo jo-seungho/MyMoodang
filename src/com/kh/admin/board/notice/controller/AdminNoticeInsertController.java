@@ -54,8 +54,8 @@ public class AdminNoticeInsertController extends HttpServlet {
 			
 		} else { // 실패 => 에러페이지 응답
 			
-			request.setAttribute("errorMsg", "공지사항 등록 실패");
-			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+			request.setAttribute("alertMsg", "공지사항 등록 실패");
+			request.getRequestDispatcher("/noticelist.ad?currentPage=1").forward(request, response);
 		}
 	}
 

@@ -232,12 +232,19 @@ public class MemberDao {
 			rset = pstmt.executeQuery();
 
 			while (rset.next()) {
+				m.setMemberNo(rset.getInt("MEMBER_NO"));
 				m.setMemberId(rset.getString("MEMBER_ID"));
-				m.setEmail(rset.getString("EMAIL"));
+				m.setPassword(rset.getString("PASSWORD"));
 				m.setName(rset.getString("NAME"));
-				m.setPhone(rset.getString("PHONE"));
-				m.setGender(rset.getString("GENDER"));
 				m.setBirthDate(rset.getString("BIRTH_DATE"));
+				m.setGender(rset.getString("GENDER"));
+				m.setEmail(rset.getString("EMAIL"));
+				m.setPhone(rset.getString("PHONE"));
+				m.setEnrollDate(rset.getString("ENROLL_DATE"));
+				m.setModifyDate(rset.getString("MODIFY_DATE"));
+				m.setStatus(rset.getString("STATUS"));
+				m.setTotalMoney(rset.getInt("TOTAL_MONEY"));
+				m.setGradeNo(rset.getString("GRADE_NO"));
 			}
 
 		} catch (SQLException e) {
@@ -256,6 +263,14 @@ public class MemberDao {
 	 * @param m
 	 * @return
 	 */
+	/**
+	 * 2023-04-23 조승호
+	 * 수정 : 장바구니 수량조회 추가
+	 * @param conn
+	 * @param m
+	 * @return
+	 */
+	
 	public Member loginUser(Connection conn, Member m) {
 
 			// 로그인 하려면 어떤 게 필요할까 고민하자.
@@ -274,13 +289,15 @@ public class MemberDao {
 			 try {
 			        pstmt = conn.prepareStatement(sql);
 			        pstmt.setString(1, m.getMemberId());
-			        pstmt.setString(2, m.getPassword());
+			        pstmt.setString(2, m.getMemberId());
+			        pstmt.setString(3, m.getPassword());
 
 			        rset = pstmt.executeQuery();
 
 
 			   if (rset.next()) {
-						loginUser = new Member(rset.getInt("MEMBER_NO")
+						loginUser = new Member(rset.getInt("CART_COUNT")
+									 , rset.getInt("MEMBER_NO")
 									 , rset.getString("MEMBER_ID")
 									 , rset.getString("PASSWORD")
 									 , rset.getString("NAME")
@@ -294,7 +311,7 @@ public class MemberDao {
 									 , rset.getInt("TOTAL_MONEY")
 									 , rset.getString("GRADE_NO"));
 					}
-
+			   	
 			    } catch (SQLException e) {
 			        e.printStackTrace();
 			    } finally {
@@ -304,7 +321,7 @@ public class MemberDao {
 			    return loginUser;
 
 		}
-	
+
 	/**
 	 * 2023.04.19 / 내 배송지 관리 중 내 배송지 목록 조회 / 이지환
 	 * @param conn
@@ -345,6 +362,97 @@ public class MemberDao {
 		return shippingAddressList;
 	}
 
+	/**
+	 * 회원 정보 수정(기본정보 수정) 용 메소드
+	 * 2023-04-20 김서영
+	 * @param conn
+	 * @param m
+	 * @return
+	 */
+	public int updateInfoMember(Connection conn, Member m) {
+
+		int result = 0;
+		PreparedStatement pstmt = null;
+
+		String sql = prop.getProperty("updateInfoMember");
+
+		try {
+			int i = 0;
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(++i, m.getName());
+			pstmt.setString(++i, m.getBirthDate());
+			pstmt.setString(++i, m.getGender());
+			pstmt.setString(++i, m.getEmail());
+			pstmt.setString(++i, m.getPhone());
+			pstmt.setString(++i, m.getMemberId());
+
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+	/**
+	 * 회원 비밀번호 수정 용 메소드
+	 * 2023-04-20 김서영
+	 * @param conn
+	 * @param m
+	 * @param upPwd
+	 * @return
+	 */
+	public boolean updatePwdMember(Connection conn, Member m, String upPwd) {
+
+		int result = 0;
+		PreparedStatement pstmt = null;
+
+		String sql = prop.getProperty("updatePwdMember");
+
+		try {
+			int i = 0;
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(++i, upPwd);
+			pstmt.setString(++i, m.getMemberId());
+			pstmt.setString(++i, m.getPassword());
+
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return (result > 0);
+	}
 
 
+	public int deleteMember(Connection conn, Member m) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+
+		String sql = prop.getProperty("deleteMember");
+
+		try {
+			int i = 0;
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(++i, m.getMemberId());
+			pstmt.setString(++i, m.getPassword());
+
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+
+//		System.out.println("dao : " + result);
+		return result;
+	}
 }

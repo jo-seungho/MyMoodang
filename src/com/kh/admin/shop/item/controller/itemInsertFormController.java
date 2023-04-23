@@ -19,6 +19,7 @@ public class itemInsertFormController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		
 		request.getRequestDispatcher("/views/admin/item_manage_insert.jsp").forward(request, response);
 	}
 

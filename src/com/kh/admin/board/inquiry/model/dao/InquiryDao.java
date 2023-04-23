@@ -21,7 +21,7 @@ public class InquiryDao {
 
 	public InquiryDao() {
 
-		String fileName = InquiryDao.class.getResource("/sql/admin/Inquiry/inquiry-mapper.xml").getPath();
+		String fileName = InquiryDao.class.getResource("/sql/admin/inquiry/inquiry-mapper.xml").getPath();
 
 		try {
 			prop.loadFromXML(new FileInputStream(fileName));
@@ -30,13 +30,9 @@ public class InquiryDao {
 		}
 	}
 
-
-
-
-
 	/**
-	 * 로그인 유저의 1:1문의 리스트 조회 용 메소드
-	 * 2023-04-17 김서영
+	 * 1:1문의 리스트 조회수 메소드
+	 * 2023-04-21 소현아
 	 * @param conn
 	 * @return
 	 */
@@ -49,15 +45,13 @@ public class InquiryDao {
 		String sql =prop.getProperty("selectListCount");
 
 		try {
-			int i = 0;
-			pstmt = conn.prepareStatement(sql);
-
-			pstmt.setInt(++i, 6);   // 로그인 기능이 구현되지 않았으므로 임시로 6번 회원만의 리스트 조회함
+			
+			pstmt = conn.prepareStatement(sql); 
 
 			rset = pstmt.executeQuery();
 
 			if(rset.next()) {
-				listCount = rset.getInt("CNT");
+				listCount = rset.getInt("COUNT");
 			}
 
 		} catch (SQLException e) {
@@ -74,45 +68,37 @@ public class InquiryDao {
 
 	/**
 	 * 1:1 문의 리스트 조회용 메소드
-	 * 2023-04-17 김서영
+	 * 2023-04-21 소현아
 	 * @param conn
 	 * @param pi
 	 * @return
 	 */
-	public ArrayList<Inquiry> selectList(Connection conn, PageInfo pi) {
-
+	public ArrayList<Inquiry> selectInquiryList(Connection conn, PageInfo pi) {
+		
 		ArrayList<Inquiry> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
-		String sql = prop.getProperty("selectList");
+		String sql = prop.getProperty("selectInquiryList");
 
 		try {
 			pstmt = conn.prepareStatement(sql);
 
-			int i = 0;
 			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
 			int endRow = startRow + pi.getBoardLimit() - 1;
 
-			System.out.println(startRow);
-			System.out.println(endRow);
-
-			pstmt.setInt(++i, startRow);
-			pstmt.setInt(++i, endRow);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
 
 			rset = pstmt.executeQuery();
 
 			while(rset.next()) {
-				Inquiry in = new Inquiry();
-				in.setInqNo(rset.getInt("INQ_NO"));
-				in.setInquiryType(rset.getString("INQUIRY_TYPE"));
-				in.setTitle(rset.getString("TITLE"));
-				in.setDateCreate(rset.getString("DATE_CREATE"));
-				in.setDescription(rset.getString("DESCRIPTION"));
-				in.setReplyContents(rset.getString("REPLY_CONTENTS"));
-				in.setReplyDate(rset.getString("REPLY_DATE"));
+				 list.add(new Inquiry(rset.getInt("INQ_NO")
+						        , rset.getString("INQUIRY_TYPE")
+						        , rset.getString("MEMBER_ID")
+						        , rset.getString("TITLE")
+						        , rset.getString("DATE_CREATE")));
 
-				list.add(in);
 			}
 
 		} catch (SQLException e) {
@@ -123,5 +109,151 @@ public class InquiryDao {
 		}
 
 		return list;
+
 	}
+	
+	/**
+	 * 1:1문의 상세조회 메소드
+	 * 2023-04-21 소현아
+	 * @param conn
+	 * @param inqNo
+	 * @return
+	 */
+	public Inquiry selectInquiry(Connection conn, int inqNo) {
+		
+		Inquiry in = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectInquiryDetail");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1,inqNo);
+			
+			rset=pstmt.executeQuery();
+
+			if(rset.next()) {
+				
+				in = new Inquiry(rset.getString("TITLE")	
+						       , rset.getInt("INQ_NO")
+						       , rset.getString("INQUIRY_TYPE")
+						       , rset.getString("MEMBER_ID")
+						       , rset.getString("DATE_CREATE"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return in;
+	}
+	
+	
+	public int insertInquiry(Connection conn, Inquiry in) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+	    String sql = prop.getProperty("insertInquiry");
+	    
+	    try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1,in.getTitle());
+			pstmt.setString(2,in.getReplyContents());
+			
+			result = pstmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			
+			close(pstmt);
+			
+		}
+	    
+	    return result;
+		
+		
+		
+		
+	}
+
+	/**
+	 * 답변완료 게시글 구하기
+	 * 2023-04-22 최명진
+	 * @param conn
+	 * @return
+	 */
+	public int selectInquiryCount(Connection conn) {
+		
+		int listCount = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		String sql = prop.getProperty("selectInquiryCount");
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			rset = pstmt.executeQuery();	
+
+			if(rset.next()) {
+				listCount = rset.getInt("COUNT(*)");
+			}
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return listCount;
+
+	}
+
+	/**
+	 * 답변 미완료 게시글 구하기
+	 * 2023-04-22 최명진
+	 * @param conn
+	 * @return
+	 */
+	public int selectNotInquiryCount(Connection conn) {
+		
+		int listCount = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		String sql = prop.getProperty("selectNotInquiryCount");
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			rset = pstmt.executeQuery();	
+
+			if(rset.next()) {
+				listCount = rset.getInt("COUNT(*)");
+			}
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return listCount;
+
+
+	}
+	
+	
+	
 }

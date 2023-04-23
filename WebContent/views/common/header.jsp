@@ -1,5 +1,6 @@
 <!-- html 파일이 여러번 호출되지 않도록 중복 제거 작업 / 2023-04-20 김서영 -->
 <!-- 2023-04-19 코드 주석 처리 및 로그인 전/후 로 header 부분의 우측 상단 메뉴바 다르게 수정 및 header 부분에 배송지 관리 url 매핑 / 이지환 */ 	 -->
+<!--  2023.04.23 / 로그아웃 url 매핑값 다시 작성 / 이지환 -->
 
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -10,7 +11,7 @@
 <%
 	Member loginUser = (Member)session.getAttribute("loginUser");
 
-	String alertMsg = (String)request.getAttribute("alertMsg");
+	String alertMsg = (String)session.getAttribute("alertMsg");
 	String errorMsg = (String)request.getAttribute("errorMsg");
 %>
 
@@ -48,10 +49,10 @@
             <!-- 고객센터 hover 시 sub_menu 등장 -->
             <ul class="sub_menu">
               <li class="list">
-                <a href="../main/notice.html" class="list_item">공지사항</a>
+                <a href="/noticelist.no?currentPage=1" class="list_item">공지사항</a>
               </li>
               <li class="list">
-                <a href="../main/faq.html" class="list_item">자주하는 질문</a>
+                <a href="/faq" class="list_item">자주하는 질문</a>
               </li>
               <li class="list">
                 <a href="/list.in" class="list_item">1:1 문의</a>
@@ -76,10 +77,10 @@
             </a>
             <ul class="sub_menu" id="loginAf_menu">
               <li class="list">
-                <a href="#" class="list_item">주문내역</a>
+                <a href="/orderComplete" class="list_item">주문내역</a>
               </li>
               <li class="list">
-                <a href="#" class="list_item">찜한상품</a>
+                <a href="wishList.wi" class="list_item">찜한상품</a>
               </li>
               <li class="list">
                 <a href="/deliveryList.do" class="list_item">배송지 관리</a>
@@ -97,21 +98,21 @@
             </ul>
           </li>
           <li class="link">
-            <a href="" class="item after login_none">로그아웃</a>
+            <a href="/logout.me" class="item after login_none">로그아웃</a>
           </li>
 
 
         <!-- 2023-04-18 / 로그인 시 우측 상단 바뀌는 영역 종료 / 이지환 -->
 
 		 <li class="link">
-            <a href="" class="item service">고객센터</a>
+            <a href="/noticelist.no" class="item service">고객센터</a>
             <!-- 고객센터 hover 시 sub_menu 등장 -->
             <ul class="sub_menu">
               <li class="list">
-                <a href="../main/notice.html" class="list_item">공지사항</a>
+                <a href="/noticelist.no" class="list_item">공지사항</a>
               </li>
               <li class="list">
-                <a href="../main/faq.html" class="list_item">자주하는 질문</a>
+                <a href="faq" class="list_item">자주하는 질문</a>
               </li>
               <li class="list">
                 <a href="/list.in" class="list_item">1:1 문의</a>
@@ -268,11 +269,12 @@
           <div id="goCart" class="cart_count">
             <% if(loginUser != null) { %>
             <a href="/cart" class="btn_cart">
+              <div class="itemCount"></div>	
               <span class="blind">장바구니</span>
             </a>
             <% } else { %>
             <a href="loginForm.me" class="btn_cart">
-              <span class="blind">장바구니</span>
+              <span class="blind">비로그인</span>
             </a>
 
             <% } %>
@@ -282,14 +284,35 @@
     </div>
 
     <script>
+    
+    	$(document).ready(function() {
+    		
+    		$.ajax({
+    			
+    			url: "count",
+    			type: "get",
+    			success: function(res) {
+    				$('.itemCount').text(res);
+    			},
+    			error: function(err) {
+    				console.log(err);
+    			}
+    			
+    		})
+    		
+    		
+    		console.log($('.itemCount').text())
   	        let msg = '<%= alertMsg == null ? "" : alertMsg %>';
           	if(msg != null && msg.length > 0) {
           		alert(msg);
+          		<% session.removeAttribute("alertMsg"); %>
           	}
+          	
           	//----------------------------------------------------
           	let emsg = '<%= errorMsg == null ? "" : errorMsg %>';
           	if(emsg != null && emsg.length > 0) {
           		alert(emsg);
+          		
           	}
          
 			// 상품 전체 검색 기능 
@@ -301,6 +324,6 @@
 				location.href="itemList.it?currentPage=1&category=전체&keyword="+keyword;
 			
 		}
+
+    	})
     </script>
-  </body>
-</html>

@@ -16,7 +16,7 @@
 
     <link rel="stylesheet" href="/resources/css/board/notice_detail.css">
 
-    <title>공지사항상세</title>
+    <title>공지사항 상세</title>
   </head>
   <body>
 
@@ -37,7 +37,7 @@
              <div class="board_view_wrap">
                <div class="notice_view">
                  <div class="title" align="left">
-                   	마이무당만의 철학을 알려드립니다!
+                   	<%= n.getNoticeTitle() %>
                  </div>
                  <div class="info" align="left">
                    <dl>

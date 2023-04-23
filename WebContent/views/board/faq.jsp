@@ -28,18 +28,16 @@
                           <h2 class="tit_snb">고객센터</h2>
                           <div class="inner_sub">
                               <ul class="list_menu">
+                                  <li>
+                                      <a href="noticelist.no">공지사항</a>
+                                  </li>
                                   <li class="on">
-                                      <a href="#">공지사항</a>
+                                      <a href="/faq">자주하는 질문</a>
                                   </li>
-                                  <li>
-                                      <a href="#">자주하는 질문</a>
-                                  </li>
-                                  <li>
-                                      <a href="#">상품 후기</a>
-                                  </li>
+                                  <li><a href="list.in">1 : 1 문의 </a></li>
                               </ul>
                           </div>
-                          <a href="#" class="link_inquire">
+                          <a href="/list.in" class="link_inquire">
                               <span class="emph">도움이 필요하신가요?</span>
                               1:1 문의하기
                           </a>
@@ -53,14 +51,7 @@
                                   </span>
                               </h2>
                           </div>
-                          <!-- 드롭다운구역 시작-->
-                          <select name="" id="drop-section">
-                            <option value="">제목</option>
-                            <option value="">글 번호</option>
-                            <option value="">카테고리</option>
-                          </select>
-                          <!-- 드롭다운구역 끝 -->
-
+                          
                           <!-- 자주하는질문 페이지 시작 -->
                           <div id="faq-section" style="margin-top: 50px;">
                             <table align="center" style="border-top: 5px solid lightgray; font-size: large; font-weight: 900; border-radius: 5px; border-spacing: 20px; border-collapse: separate; box-sizing: border-box;">
@@ -119,10 +110,28 @@
                               전화를 통한 주문 역시 가능합니다.
                             </span>
                             </div>
+                            
+                            <table align="center" style="border-spacing: 20px; border-top: 1px solid lightgray; font-size: medium; border-bottom: 1px solid lightgray;">
+                                <tr>
+                                  <th width="80" style="font-weight: 500;">4</th>
+                                  <th width="150" style="font-weight: 500;">쿠폰/적립금</th>
+                                  <th width="600" style="font-weight: 500;">지급 쿠폰은 어떻게 사용할 수 있나요?</th>
+                                </tr>
+                            </table>
+
+                            <div style="margin: 30px 140px;">
+                              <span style="color: red; font-size: large; font-weight: 600;">A.</span>
+                              <span style="font-size: medium; font-weight: 500;">저희 마이무당은 고객 여러분의 편의를 위해<br><br>
+                              다양한 플랫폼에서 서비스를 제공하고있으며,<br><br>
+                              현재 쿠폰 및 적립금 서비스는 준비중에 있습니다.
+                            </span>
+                            </div>
+                            
+                            
 
                           </div>
 
-
+							<br><br><br>
                           <div class="layout-pagination">
                               <div class="pagediv">
                                   <a href="#viewOrderList" class="layout-pagination-button layout-pagination-first-page">맨 처음 페이지로 가기</a>

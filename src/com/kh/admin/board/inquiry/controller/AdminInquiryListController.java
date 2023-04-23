@@ -1,5 +1,5 @@
 // 1:1문의 리스트 조회용 컨트롤러
-// 2023-04-17 김서영
+// 2023-04-21 소현아
 
 package com.kh.admin.board.inquiry.controller;
 
@@ -12,14 +12,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.common.model.vo.PageInfo;
 import com.kh.admin.board.inquiry.model.service.InquiryService;
 import com.kh.admin.board.inquiry.model.vo.Inquiry;
+import com.kh.common.model.vo.PageInfo;
+
+import com.kh.admin.board.inquiry.model.service.InquiryService;
+import com.kh.admin.board.inquiry.model.vo.Inquiry;
+
 
 /**
  * Servlet implementation class InquiryListController
  */
-@WebServlet("/list.ad")
+@WebServlet("/inquiryList.ad")
 public class AdminInquiryListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -51,24 +55,18 @@ public class AdminInquiryListController extends HttpServlet {
 
 		listCount = new InquiryService().selectListCount();
 
-//		System.out.println(request.getParameter("currentPage") + "현재페이지");
 		currentPage = Integer.parseInt((request.getParameter("currentPage") == null ? "1" : request.getParameter("currentPage")));
-//		System.out.println(currentPage + "두재페이지");
 
 		pageLimit = 10;
 		boardLimit = 10;
 
 		maxPage = (int)Math.ceil((double)listCount/boardLimit);
 
-//		System.out.println(maxPage);
 
 		startPage = (currentPage - 1) / pageLimit * pageLimit + 1;
 
-//		System.out.println(startPage);
 
 		endPage = startPage + pageLimit - 1;
-
-//		System.out.println(endPage);
 
 		if(endPage > maxPage) {
 			endPage = maxPage;
@@ -76,14 +74,13 @@ public class AdminInquiryListController extends HttpServlet {
 
 		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
 
-		ArrayList<Inquiry> list = new InquiryService().selectList(pi);
+		ArrayList<Inquiry> list = new InquiryService().selectInquiryList(pi);
 
 		request.setAttribute("pi", pi);
 		request.setAttribute("list", list);
 
-//		list.stream().forEach(System.out::println);
 
-		request.getRequestDispatcher("views/board/one.jsp").forward(request, response);
+		request.getRequestDispatcher("views/admin/inquiry.jsp").forward(request, response);
 
 	}
 

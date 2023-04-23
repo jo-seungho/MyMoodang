@@ -2,6 +2,8 @@ package com.kh.admin.shop.order.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,79 +21,89 @@ public class AjaxOrderListController extends HttpServlet {
 
 	public AjaxOrderListController() {
 	}
-
+	
+	/**
+	 * AJAX를 이용한 주문내역 조회페이지
+	 * 2023-04-22 최명진
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		int listCount = new OrderService().selectListCount();
-		int currentPage = Integer.parseInt(request.getParameter("page"));
-		
-		String search = request.getParameter("search");
+		OrderService orderService = new OrderService();
+		int listCount = orderService.selectListCount();
+		int readyCount = orderService.selectOrderStatusCount("배송준비중");
+		int shipCount = orderService.selectOrderStatusCount("배송중");
+		int completeCount = orderService.selectOrderStatusCount("배송완료");
+
+		// Get parameters from the request
+		int currentPage = Integer.parseInt((request.getParameter("page") == null ? "1" : request.getParameter("page")));
+
+		String category = request.getParameter("category") == null ? "A" : request.getParameter("category");
 		String value = request.getParameter("value");
-		
-		ArrayList<Order> list = null;
+		String search = request.getParameter("search");
 
-		String category = request.getParameter("category");
+	
+		// Map category codes to status names
+		Map<String, String> categoryMap = new HashMap<>();
+		categoryMap.put(null, null);
+		categoryMap.put("B", "배송준비중");
+		categoryMap.put("C", "배송중");
+		categoryMap.put("D", "배송완료");
 
-		if (category.equals("B"))
-			category = "배송준비중";
-
-		if (category.equals("C"))
-			category = "배송중";
-
-		if (category.equals("D"))
-			category = "배송완료";
-
-		int readyCount = new OrderService().selectOrderStatusCount("배송준비중");
-		int shipCount = new OrderService().selectOrderStatusCount("배송중");
-		int completeCount = new OrderService().selectOrderStatusCount("배송완료");
-
-		AdminPageInfo pi = null;
-
-		if (category.equals("A")) {
-			pi = calculatePage(listCount, currentPage, listCount, readyCount, shipCount, completeCount);
-			list = new OrderService().selectAllOrderList(pi);
-		} else if (category.equals("배송준비중")) {
-			pi = calculatePage(readyCount, currentPage, listCount, readyCount, shipCount, completeCount);
-			list = new OrderService().selectStatusOrderList(pi, category);
-		} else if (category.equals("배송중")) {
-			pi = calculatePage(shipCount, currentPage, listCount, readyCount, shipCount, completeCount);
-			list = new OrderService().selectStatusOrderList(pi, category);
-		} else if (category.equals("배송완료")) {
-			pi = calculatePage(completeCount, currentPage, listCount, readyCount, shipCount, completeCount);
-			list = new OrderService().selectStatusOrderList(pi, category);
+		// Calculate page information based on category
+		AdminPageInfo pi;
+		if (categoryMap.containsKey(category)) {
+		    String status = categoryMap.get(category);
+		    pi = calculatePage(status, currentPage, listCount, readyCount, shipCount, completeCount);
+		    ArrayList<Order> list = orderService.selectStatusOrderList(pi, status);
+		    request.setAttribute("list", list);
+		} else {
+			
+			if(value != null && search != null) {
+				listCount = orderService.selectSearchAllCount(value, search);
+				pi = calculatePage(null, currentPage, listCount, readyCount, shipCount, completeCount);
+				ArrayList<Order> list = orderService.selectSearchAllOrderList(pi, value, search);
+			    request.setAttribute("list", list);
+			} else {
+		    pi = calculatePage(null, currentPage, listCount, readyCount, shipCount, completeCount);
+		    ArrayList<Order> list = orderService.selectAllOrderList(pi);
+		    request.setAttribute("list", list);
+			}
 		}
 
+		// Set attributes and forward to JSP
 		request.setAttribute("pi", pi);
-		request.setAttribute("list", list);
-
 		request.getRequestDispatcher("views/admin/ajax_order.jsp").forward(request, response);
-
+		
+		
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
 
-		doGet(request, response);
-	}
+		// Calculate page information
+		public AdminPageInfo calculatePage(String status, int currentPage, int listCount, int readyCount, int shipCount,
+		                                   int completeCount) {
+		    int pageLimit = 10;
+		    int boardLimit = 10;
 
-	public AdminPageInfo calculatePage(int currentCount, int currentPage, int totalCount, int readyCount, int shipCount,
-			int completeCount) {
-		int pageLimit = 10;
+		    int currentCount;
+		    if (status == null) {
+		        currentCount = listCount;
+		    } else if (status.equals("배송준비중")) {
+		        currentCount = readyCount;
+		    } else if (status.equals("배송중")) {
+		        currentCount = shipCount;
+		    } else {
+		        currentCount = completeCount;
+		    }
 
-		int boardLimit = 10;
+		    int maxPage = (int) Math.ceil((double) currentCount / boardLimit);
+		    int startPage = (currentPage - 1) / pageLimit * pageLimit + 1;
+		    int endPage = startPage + pageLimit - 1;
+		    if (endPage > maxPage) {
+		        endPage = maxPage;
+		    }
 
-		int maxPage = (int) Math.ceil((double) currentCount / boardLimit);
-
-		int startPage = (currentPage - 1) / pageLimit * pageLimit + 1;
-
-		int endPage = startPage + pageLimit - 1;
-
-		if (endPage > maxPage) {
-			endPage = maxPage;
+		    return new AdminPageInfo(currentCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage,
+		            listCount, readyCount, shipCount, completeCount);
 		}
-
-		return new AdminPageInfo(currentCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage,
-				totalCount, readyCount, shipCount, completeCount);
-	}
 }

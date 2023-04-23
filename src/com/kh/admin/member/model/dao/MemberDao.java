@@ -29,7 +29,6 @@ public class MemberDao {
 
 	}
 
-//    ---------------------------------- 어드민 부분 -------------------------
 	/*
 	 * 어드민 회원관리 페이지에서 회원 리스트 불러오는 메소드 2023-04-14 최명진
 	 *
@@ -171,146 +170,78 @@ public class MemberDao {
 	}
 
 
-//  ---------------------------------- 회원 부분 -------------------------
-
-
-	/** 가입하는 회원의 회원번호 조회용 메소드
-	 * 2023-04-14 김서영
-	 * @param conn
+	/**
+	 * 모든 멤버 수 구하는 메소드
+	 * 2023-04-22 최명진
 	 * @return
 	 */
-	public int selectMemberNo(Connection conn) {
-		int memberNo = 0;
+	public int selectAllmemberCount(Connection conn) {
+		
+		int result = 0;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-
-		String sql = prop.getProperty("selectMemberNo");
-
+		
+		String sql = prop.getProperty("selectAllmemberCount");
+		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rset = pstmt.executeQuery();
-
-			if (rset.next()) {
-				memberNo = rset.getInt("MEMBER_NO");
+			
+			if(rset.next()) {
+				result = rset.getInt("COUNT(*)");
 			}
+			
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			try {
 				rset.close();
 				pstmt.close();
-			} catch (Exception e) {
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
-
-		return memberNo;
-	}
-
-	/**
-	 * 아이디 중복 체크 메소드 2023/04/14 김서영
-	 *
-	 * @param conn
-	 * @param checkEmail
-	 * @return
-	 */
-	public int idCheck(Connection conn, String checkId) {
-
-		int count = 0;
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-
-		String sql = prop.getProperty("idCheck");
-
-		try {
-			pstmt = conn.prepareStatement(sql);
-
-			pstmt.setString(1, checkId);
-
-			rset = pstmt.executeQuery();
-
-			if (rset.next()) {
-				count = rset.getInt("CNT");
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			JDBCTemplate.close(rset);
-			JDBCTemplate.close(pstmt);
-		}
-
-		return count;
-
-	}
-
-	/**
-	 * 회원가입 (회원정보 추가) 메소드 2023-04-15 김서영
-	 *
-	 * @param conn
-	 * @param m
-	 * @return
-	 */
-	public int insertMember(Connection conn, AdMember m) {
-
-		int result = 0;
-		PreparedStatement pstmt = null;
-
-		String sql = prop.getProperty("insertMember");
-
-		try {
-			int i = 0;
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(++i, m.getMemberNo());
-			pstmt.setString(++i, m.getMemberId());
-			pstmt.setString(++i, m.getPassword());
-			pstmt.setString(++i, m.getName());
-			pstmt.setString(++i, m.getBirthDate());
-			pstmt.setString(++i, m.getGender());
-			pstmt.setString(++i, m.getEmail());
-			pstmt.setString(++i, m.getPhone());
-
-			result = pstmt.executeUpdate();
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			JDBCTemplate.close(pstmt);
-		}
+		
 		return result;
 	}
 
+	
 	/**
-	 * 회원가입용 (주소정보 추가) 메소드 2023-04-15 김서영
-	 *
-	 * @param conn
-	 * @param addr
+	 * 모든 멤버가 구매한 총 매출 수 구하는 메소드
+	 * 2023-04-22 최명진
 	 * @return
 	 */
-	public int insertMemberAddr(Connection conn, ShippingAddress addr) {
+	public int selectTotalMoney(Connection conn) {
+		
 		int result = 0;
 		PreparedStatement pstmt = null;
-
-		String sql = prop.getProperty("insertMemberAddr");
-
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectTotalMoney");
+		
 		try {
-			int i = 0;
 			pstmt = conn.prepareStatement(sql);
-
-			pstmt.setString(++i, addr.getShipAddr());
-			pstmt.setString(++i, addr.getShipAddrInfo());
-			pstmt.setString(++i, addr.getPhone());
-			pstmt.setString(++i, addr.getZipcode());
-			pstmt.setInt(++i, addr.getMemberNo());
-
-			result = pstmt.executeUpdate();
-
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getInt("SUM(TOTAL_MONEY)");
+			}
+			
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			JDBCTemplate.close(pstmt);
+			try {
+				rset.close();
+				pstmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-
+		
 		return result;
 	}
 }

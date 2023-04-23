@@ -79,6 +79,7 @@ $(function () {
 
     	  var totalPrices = parseInt($('.countMoney').text())
     	  console.log(totalPrices += price)
+    	  // console.log(totalPrices += price)
     	  var noDisC = parseInt($('.noDiscount').text());
     	  
     	  
@@ -168,9 +169,27 @@ function sel_all(selectAll) { /* 전체선택버튼 활성화 */
 }
 
 function del_row(ths) {
+	var itemCodeString = $(ths).parent().find('.itemCodeOne').val();
+	let itemCode = Number(itemCodeString);
     var ths = $(ths);
-
-    ths.parents("li").remove();
+    
+    $.ajax({
+    	url: 'deleteCart',
+    	type: 'post',
+    	data: {
+    		itemCode : itemCode
+    		},
+    	success: function(res) {
+    		location.reload();
+    		ths.parents("li").remove();
+    		 $(window).prop("location", location.href);
+    	},
+    	error: function(err) {
+    		console.log(err);
+    	}
+    })
+    
+    // console.log(itemCode);
 }
 
 
