@@ -56,9 +56,9 @@
 						<h2 class="tit_snb">고객센터</h2>
 						<div class="inner_sub">
 							<ul class="list_menu">
-								<li class="on"><a href="#">공지사항</a></li>
-								<li><a href="#">자주하는 질문</a></li>
-								<li class="one"><a href="#">1 : 1 문의 </a></li>
+								<li><a href="/noticelist.no">공지사항</a></li>
+								<li><a href="/faq">자주하는 질문</a></li>
+								<li class="one on"><a href="/list.in">1 : 1 문의 </a></li>
 							</ul>
 						</div>
 
@@ -180,7 +180,7 @@
 			</div>
 
 		</div>
-
+	
 	</div>
 	<!-- 1:1 페이지 영역 끝 -->
 	<%@ include file="../common/footer.jsp"%>

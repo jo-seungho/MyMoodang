@@ -172,7 +172,7 @@
 
             // Apply underline effect when clicking btn1, and remove underline effect for btn2 and btn3
             $('#btn1').click(function () {
-              location.href = '/itemList.ad?page=1&category=a';
+              location.href = '/itemList.ad';
             });
 
             // Apply underline effect when clicking btn2, and remove underline effect for btn1 and btn3

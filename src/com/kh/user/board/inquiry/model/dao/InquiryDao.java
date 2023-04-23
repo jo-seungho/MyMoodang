@@ -114,7 +114,6 @@ public class InquiryDao {
 
 				list.add(in);
 
-				System.out.println("뭐가 담겼니" + in);
 			}
 
 		} catch (SQLException e) {

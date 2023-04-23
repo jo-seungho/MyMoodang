@@ -10,7 +10,7 @@
 <%
 	Member loginUser = (Member)session.getAttribute("loginUser");
 
-	String alertMsg = (String)request.getAttribute("alertMsg");
+	String alertMsg = (String)session.getAttribute("alertMsg");
 	String errorMsg = (String)request.getAttribute("errorMsg");
 %>
 
@@ -48,10 +48,10 @@
             <!-- 고객센터 hover 시 sub_menu 등장 -->
             <ul class="sub_menu">
               <li class="list">
-                <a href="../main/notice.html" class="list_item">공지사항</a>
+                <a href="/noticelist.no?currentPage=1" class="list_item">공지사항</a>
               </li>
               <li class="list">
-                <a href="../main/faq.html" class="list_item">자주하는 질문</a>
+                <a href="/faq" class="list_item">자주하는 질문</a>
               </li>
               <li class="list">
                 <a href="/list.in" class="list_item">1:1 문의</a>
@@ -79,7 +79,7 @@
                 <a href="#" class="list_item">주문내역</a>
               </li>
               <li class="list">
-                <a href="#" class="list_item">찜한상품</a>
+                <a href="wishList.wi" class="list_item">찜한상품</a>
               </li>
               <li class="list">
                 <a href="/deliveryList.do" class="list_item">배송지 관리</a>
@@ -104,14 +104,14 @@
         <!-- 2023-04-18 / 로그인 시 우측 상단 바뀌는 영역 종료 / 이지환 -->
 
 		 <li class="link">
-            <a href="" class="item service">고객센터</a>
+            <a href="/noticelist.no" class="item service">고객센터</a>
             <!-- 고객센터 hover 시 sub_menu 등장 -->
             <ul class="sub_menu">
               <li class="list">
-                <a href="../main/notice.html" class="list_item">공지사항</a>
+                <a href="/noticelist.no" class="list_item">공지사항</a>
               </li>
               <li class="list">
-                <a href="../main/faq.html" class="list_item">자주하는 질문</a>
+                <a href="faq" class="list_item">자주하는 질문</a>
               </li>
               <li class="list">
                 <a href="/list.in" class="list_item">1:1 문의</a>
@@ -291,11 +291,14 @@
   	        let msg = '<%= alertMsg == null ? "" : alertMsg %>';
           	if(msg != null && msg.length > 0) {
           		alert(msg);
+          		<% session.removeAttribute("alertMsg"); %>
           	}
+          	
           	//----------------------------------------------------
           	let emsg = '<%= errorMsg == null ? "" : errorMsg %>';
           	if(emsg != null && emsg.length > 0) {
           		alert(emsg);
+          		
           	}
           	
           	if(isLoginCheck()) {
