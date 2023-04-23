@@ -76,7 +76,7 @@
             </a>
             <ul class="sub_menu" id="loginAf_menu">
               <li class="list">
-                <a href="#" class="list_item">주문내역</a>
+                <a href="/orderComplete" class="list_item">주문내역</a>
               </li>
               <li class="list">
                 <a href="wishList.wi" class="list_item">찜한상품</a>
@@ -270,7 +270,7 @@
           <div id="goCart" class="cart_count">
             <% if(loginUser != null) { %>
             <a href="/cart" class="btn_cart">
-              <div class="itemCount"><%= loginUser.getCartCount() %></div>	
+              <div class="itemCount"></div>	
               <span class="blind">장바구니</span>
             </a>
             <% } else { %>
@@ -287,6 +287,21 @@
     <script>
     
     	$(document).ready(function() {
+    		
+    		$.ajax({
+    			
+    			url: "count",
+    			type: "get",
+    			success: function(res) {
+    				$('.itemCount').text(res);
+    			},
+    			error: function(err) {
+    				console.log(err);
+    			}
+    			
+    		})
+    		
+    		
     		console.log($('.itemCount').text())
   	        let msg = '<%= alertMsg == null ? "" : alertMsg %>';
           	if(msg != null && msg.length > 0) {

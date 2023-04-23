@@ -4,6 +4,7 @@
 <%
 	ArrayList<Cart> list = (ArrayList<Cart>) request.getAttribute("list");
 %>
+<!-- 2023-04-23 조승호 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -203,6 +204,20 @@
 		</div>
 	</div>
 		<script>
+		
+		$.ajax({
+			
+			url: "count",
+			type: "get",
+			success: function(res) {
+				$('.itemCount').text(res);
+			},
+			error: function(err) {
+				console.log(err);
+			}
+			
+		})
+		
 		// 최조 랜더링시 총액 보여주는 용도
 		
 		// 할인된 총 금액 담을 변수
@@ -224,7 +239,7 @@
 			let countMoney = $('.countMoney').text();
 			let itemList = $('.package').text()
 			let userName = $('.join').text()
-			let oderAddress = $('.totalprice').text();
+			let orderAddress = $('.totalprice').text();
 			console.log($('.join').text());
 			
 			IMP.init('imp68338217');
@@ -238,7 +253,7 @@
 			    buyer_email : 'test888@test.do',
 			    buyer_name : userName,
 			    buyer_tel : '010-1234-5678',
-			    buyer_addr : oderAddress,
+			    buyer_addr : orderAddress,
 			    buyer_postcode : '123-456'
 			}, function(rsp) {
 				console.log(rsp);
@@ -248,7 +263,7 @@
 			        msg += '상점 거래ID : ' + rsp.merchant_uid;
 			        msg += '결제 금액 : ' + rsp.paid_amount;
 			        msg += '카드 승인번호 : ' + rsp.apply_num;
-			        // location.href = '주문내역페이지로 이동';
+			        // location.href = '/orderComplete';
 			    } else {
 			    	 var msg = '결제에 실패하였습니다.';
 			         msg += '에러내용 : ' + rsp.error_msg;
@@ -256,8 +271,7 @@
 			    alert(msg);
 			});
 		}
-		
-		
+
 	</script>
 </body>
 </html>
