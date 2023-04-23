@@ -97,7 +97,7 @@
             </ul>
           </li>
           <li class="link">
-            <a href="" class="item after login_none">로그아웃</a>
+            <a href="/logout.me" class="item after login_none">로그아웃</a>
           </li>
 
 
@@ -320,5 +320,3 @@
 			}
     	})
     </script>
-  </body>
-</html>

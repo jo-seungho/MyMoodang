@@ -38,7 +38,7 @@ public class MemberUpdateFormController extends HttpServlet {
 
 		Member m = new MemberService().selectMemberInfo(memberId);
 
-		System.out.println("로그인 한 사람 나와라" + m);
+//		System.out.println("로그인 한 사람 나와라" + m);
 
 		request.getRequestDispatcher("views/member/edit_my_info.jsp").forward(request, response);
 
