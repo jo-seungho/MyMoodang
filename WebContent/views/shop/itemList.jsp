@@ -274,6 +274,18 @@
 				},
 				success: function(res) {
 					alert('물품을 장바구니에 담았습니다!');
+					$.ajax({
+						
+						url: "count",
+						type: "get",
+						success: function(res) {
+							$('.itemCount').text(res);
+						},
+						error: function(err) {
+							console.log(err);
+						}
+						
+					})
 					// console.log(res)
 				},
 				error: function(err) {

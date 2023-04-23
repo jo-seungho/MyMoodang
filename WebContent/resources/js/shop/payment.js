@@ -174,16 +174,15 @@ function del_row(ths) {
     var ths = $(ths);
     
     $.ajax({
-    	
     	url: 'deleteCart',
     	type: 'post',
     	data: {
     		itemCode : itemCode
     		},
     	success: function(res) {
+    		location.reload();
     		ths.parents("li").remove();
     		 $(window).prop("location", location.href);
-    		location.reload();
     	},
     	error: function(err) {
     		console.log(err);
