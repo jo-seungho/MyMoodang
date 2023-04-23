@@ -270,7 +270,7 @@
           <div id="goCart" class="cart_count">
             <% if(loginUser != null) { %>
             <a href="/cart" class="btn_cart">
-              <div class="itemCount">19</div>	
+              <div class="itemCount"><%= loginUser.getCartCount() %></div>	
               <span class="blind">장바구니</span>
             </a>
             <% } else { %>
@@ -297,27 +297,6 @@
           	if(emsg != null && emsg.length > 0) {
           		alert(emsg);
           	}
-          	
-          	if(isLoginCheck()) {
-          	
-				$.ajax({
-					url: 'count',
-					type: 'get',
-					sucess: function(result) {
-						console.log("GOOD")
-						$('.itemCount').text(result);
-					},
-					error: function(err){
-						console.log(err);
-					}
-				})
-          	}
-			function isLoginCheck() {
-				
-				let aa = $('.blind').text();
-				if (!aa.includes("비로그인")) return true;
-				
-			}
     	})
     </script>
   </body>

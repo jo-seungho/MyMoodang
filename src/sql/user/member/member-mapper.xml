@@ -82,11 +82,18 @@
 
 
 		<!-- 개인 회원의 로그인 기능 / 2023-04-18 이지환 -->
+		<!-- 2023-04-23 조승호 수정 : CART 수량 조회 추가 -->
 		<entry key="loginUser">
-			 SELECT * FROM MEMBER
-			 	WHERE MEMBER_ID = ?
-			 	 AND PASSWORD = ?
-			 	 AND STATUS = 'Y'
+			SELECT (SELECT COUNT(*)
+			        FROM CART C
+			        INNER JOIN MEMBER M
+			        ON C.MEMBER_NO = M.MEMBER_NO
+			        WHERE M.MEMBER_ID = ?) AS CART_COUNT,
+			       M.*
+			FROM MEMBER M
+			WHERE M.MEMBER_ID = ?
+			AND M.PASSWORD = ?
+			AND M.STATUS = 'Y'
 		</entry>
 
 		

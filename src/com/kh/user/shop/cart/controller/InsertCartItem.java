@@ -1,6 +1,8 @@
 package com.kh.user.shop.cart.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -40,6 +42,12 @@ public class InsertCartItem extends HttpServlet {
 		int itemCodeNo = Integer.parseInt(request.getParameter("itemCodeNo")); 
 
 		int result = new CartService().insertCart(userNo, countValue, priceItem, itemCodeNo);
+		
+		response.setContentType("application/json; charset=UTF-8");
+		
+		PrintWriter out = response.getWriter();
+		
+		out.print(result);
 		
 	}
 

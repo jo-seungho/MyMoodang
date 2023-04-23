@@ -41,7 +41,6 @@ public class CountCartList extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		
 		out.print(result);
-		System.out.println(result);
 	}
 
 	/**

@@ -256,6 +256,14 @@ public class MemberDao {
 	 * @param m
 	 * @return
 	 */
+	/**
+	 * 2023-04-23 조승호
+	 * 수정 : 장바구니 수량조회 추가
+	 * @param conn
+	 * @param m
+	 * @return
+	 */
+	
 	public Member loginUser(Connection conn, Member m) {
 
 			// 로그인 하려면 어떤 게 필요할까 고민하자.
@@ -274,13 +282,15 @@ public class MemberDao {
 			 try {
 			        pstmt = conn.prepareStatement(sql);
 			        pstmt.setString(1, m.getMemberId());
-			        pstmt.setString(2, m.getPassword());
+			        pstmt.setString(2, m.getMemberId());
+			        pstmt.setString(3, m.getPassword());
 
 			        rset = pstmt.executeQuery();
 
 
 			   if (rset.next()) {
-						loginUser = new Member(rset.getInt("MEMBER_NO")
+						loginUser = new Member(rset.getInt("CART_COUNT")
+									 , rset.getInt("MEMBER_NO")
 									 , rset.getString("MEMBER_ID")
 									 , rset.getString("PASSWORD")
 									 , rset.getString("NAME")
@@ -294,7 +304,7 @@ public class MemberDao {
 									 , rset.getInt("TOTAL_MONEY")
 									 , rset.getString("GRADE_NO"));
 					}
-
+			   	
 			    } catch (SQLException e) {
 			        e.printStackTrace();
 			    } finally {
