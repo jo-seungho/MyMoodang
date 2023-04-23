@@ -11,6 +11,9 @@
 	<!-- 중복되는 헤더, 푸터, 리셋 css & 제이쿼리 & 헤더 js 담은 common.jsp / 2023-04-20 김서영 -->
 	<%@ include file="../common/common.jsp"%>
 
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
@@ -91,8 +94,8 @@
                                 <label class="col-sm-2 col-form-label">이메일 <span id=ico>*</span></label>
                             </span>
                             <span class="member_content">
-                                <input type="email" name="email" class="form-control" id="loginId" placeholder="예) stopeatting@mymudang.com">&nbsp;&nbsp;
-                                <button type="button" class="btn-outline-primary width100" data-toggle="modal" data-target="#email_confirm">이메일 인증</button>
+                                <input type="email" name="email" class="form-control" id="loginId" placeholder="이메일 인증이 필요합니다." readonly required>&nbsp;&nbsp;
+                                <button type="button" class="btn-outline-primary width100" data-toggle="modal" data-target="#email_confirm" >이메일 인증</button>
                             </span>
                         </div>
                     </div>
@@ -217,7 +220,7 @@
 
                 <!-- Modal body -->
                 <div class="modal-body" align="center">
-                    <form action="/updatePwd.me" method="post">
+                    <form action="" method="post">
                         <!--
                                 비밀번호 변경 시 고려할 사항
                                 현재 비밀번호, 변경할 비밀번호, 변경할 비밀번호 재입력
@@ -227,22 +230,26 @@
                          <input type="hidden" name="userId" value="">
                          <table id="modal_confirm">
                              <tr>
-                                 <td style="font-weight: 700;">아이디(이메일)</td>
+                                 <td style="font-weight: 700;">이메일</td>
                                  <td>
-                                    <input type="text" placeholder="입력한 아이디" readonly>
+                                    <input type="text" id="email" name="email" placeholder="예) stopeating@mymudang.com" required>
                                  </td>
                                  <td style="width: 150px;">
-                                    <button type="button">인증 메일 보내기</button>
+                                    <button type="button" onclick="sendEmail();">인증 메일 보내기</button>
                                  </td>
                              </tr>
                              <tr>
-                                 <td style="font-weight: 700;">새 비밀번호</td>
+                                 <td style="font-weight: 700;">인증 번호</td>
                                  <td>
-                                    <input type="password" name="updatePwd" required> <br><br>
+                                    <input type="password" id="authCheckNum" name="authCheckNum" required> <br>
                                  </td>
                                  <td>
-                                    <button>인증</button>
+                                    <button type="button" id="authBtn" >인증</button>
                                  </td>
+                             </tr>
+                             <tr>
+                             	<td></td>
+                             	<td colspan="2"><span id="result"></span></td>
                              </tr>
                              <tr>
                                 <td></td>
@@ -252,7 +259,7 @@
 
                          <br>
 
-                         <button type="submit" class="btn btn-secondary btn-block" id="confirm_btn1" onclick="return validateEmail();">인증완료</button>
+                         <button type="button" class="btn btn-secondary btn-block" id="confirm_btn1" onclick="validateEmail();">인증완료</button>
                       </form>
 
                 </div>
