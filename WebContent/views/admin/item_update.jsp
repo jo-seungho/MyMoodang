@@ -1,7 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="com.kh.admin.shop.item.model.vo.*, java.util.ArrayList"%>
 <% 
 		ArrayList<ItemImg> list = (ArrayList<ItemImg>) request.getAttribute("list");
-		Item i = (Item) request.getAttribute("item"); 
+		Item i = (Item) request.getAttribute("item");
+		
+		String img = (String) request.getAttribute("img");
+		String imgName = (String) request.getAttribute("imgName");
+		
 		String category = i.getItemCategory(); 
 %>
 <!DOCTYPE html>
@@ -72,25 +76,19 @@
 
                     <div class="col form-floating mb-3">
                       <select class="form-select" id="category" name="category">
-                        <option value="1" <% if (i.getItemCategory().equals("제로음료")) out.print("selected"); %>>제로음료</option>
-                        <option value="2" <% if (i.getItemCategory().equals("단백질")) out.print("selected"); %>>단백질</option>
-                        <option value="3" <% if (i.getItemCategory().equals("무가당")) out.print("selected"); %>>무가당</option>
+                        <option value="제로음료" <% if (i.getItemCategory().equals("제로음료")) out.print("selected"); %>>제로음료</option>
+                        <option value="단백질" <% if (i.getItemCategory().equals("단백질")) out.print("selected"); %>>단백질</option>
+                        <option value="무가당" <% if (i.getItemCategory().equals("무가당")) out.print("selected"); %>>무가당</option>
                       </select>
                       <label for="floatingSelect">* 카테고리</label>
                     </div>
 
-                    <div>
-                      <img id=detailImg1 src="" class="img-thumbnail" style="width: 200px; height: 200px" />
-                      <img id=detailImg2 src="" class="img-thumbnail" style="width: 200px; height: 200px" />
-                      <img id=detailImg3 src="" class="img-thumbnail" style="width: 200px; height: 200px" />
+                    <div id="col-auto">
+                      <%= img %>
                     </div>
 
                     <div class="row">
-                    <% if(!list.isEmpty()) { %>
-                      <% for(int j = 1; j < list.size(); j++) { %>
-                      <p class="div" id="img<%=j%>" style="font-size: 13px"><%= list.get(j).getItemImg() %></p>
-                      <% } %>
-                      <% } %>
+                    <%= imgName %>
                     </div>
 
                     <div id="file-area">
@@ -99,11 +97,11 @@
                       <input type="file" id="file3" name="file3" onchange="loadImg(this, 3);" />
                       <input type="file" id="file4" name="file4" onchange="loadImg(this, 4);" />
                     </div>
-                    
+                    	<input type="hidden" name="fileName" value=<%= i.getImgName() %> />
                     	<input type="hidden" name="code" value=<%= i.getItemCode() %> />
                     
                     <% for (int j = 0; j < Math.min(list.size(), 3); j++) { %>
-					    <input type="hidden" name="names<%= j+1 %>" value="<%= list.get(j).getItemImg() %>">
+					    <input type="hidden" name="names" value="<%= list.get(j).getItemImg() %>">
 					    
 					<% } %>
                     <div class="insert-form">
@@ -121,6 +119,11 @@
         <!-- layoutSidenav_content -->
 
         <script>
+        	
+        	  
+          	
+        
+      
           $(function () {
             $('#file-area').hide();
 
@@ -138,6 +141,7 @@
             $('#detailImg3').click(function () {
               $('#file4').click();
             });
+            
           });
 
           function loadImg(inputFile, num) {
