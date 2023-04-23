@@ -42,12 +42,15 @@
 			<div class="cart_item ">
 
 				<div class="cart_select">
+				<%-- 
 					<div class="inner_select">
 						<label class="check"> <input type="checkbox"
 							name="checkAll" class="checkAll" onclick="sel_all(this)">
 							<span class="ico"></span>전체선택
 						</label> <a href="#none" class="btn_delete">선택삭제</a>
 					</div>
+				--%>
+
 				</div>
 				<div class="box cold">
 					<div class="tit_box">
@@ -70,13 +73,16 @@
 							<li>
 								<!-- 상품 목록 중 1. 추가/삭제될 목록임. -->
 								<div class="item">
+								<%-- 
 									<label class="check" for="chkItem1"> <!-- 개당 체크박스 --> <input
 										onclick='check_sel_all(this)' type="checkbox" id="chkItem1"
 										name="checkOne" class="checkOne"
 										data-item-id="c7b3a4e1-4517-416c-9b3e-d41c0e7592f2"
 										data-item-no="65810" data-item-parent-no="65810"> <span
 										class="ico"></span>
-									</label>
+									</label>								
+								--%>
+
 
 									<div class="name">
 										<div class="inner_name">
