@@ -50,7 +50,8 @@ public class AdminNoticeListController extends HttpServlet {
 		listCount = new NoticeService().selectListCount();
 		
 		// * currentPage : 현재페이지 (즉, 사용자가 요청한 페이지)
-		currentPage = Integer.parseInt(request.getParameter("currentPage")); 
+		currentPage = Integer.parseInt((request.getParameter("currentPage") == null ? "1" : request.getParameter("currentPage")));
+
 		
 		
 		pageLimit = 10;

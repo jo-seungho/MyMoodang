@@ -67,10 +67,6 @@ public class Member {
 		this.phone = phone;
 	}
 
-
-
-
-
 	/**
 	 * 아이디 찾기 용 생성자
 	 * 2023-04-17 김서영
@@ -83,6 +79,7 @@ public class Member {
 		this.phone = phone;
 	}
 
+<<<<<<< HEAD
 	
 	public int getCartCount() {
 		return cartCount;
@@ -91,6 +88,31 @@ public class Member {
 	public void setCartCount(int cartCount) {
 		this.cartCount = cartCount;
 	}
+=======
+
+
+	/**
+	 * 정보 수정용 생성자
+	 * 2023-04-20 김서영
+	 * @param memberId
+	 * @param name
+	 * @param birthDate
+	 * @param gender
+	 * @param email
+	 * @param phone
+	 */
+	public Member(String memberId, String name, String birthDate, String gender, String email, String phone) {
+		super();
+		this.memberId = memberId;
+		this.name = name;
+		this.birthDate = birthDate;
+		this.gender = gender;
+		this.email = email;
+		this.phone = phone;
+	}
+
+
+>>>>>>> 1135ef4ccae5b10561ae3827f8923b940fe3efc7
 
 	public int getMemberNo() {
 		return memberNo;

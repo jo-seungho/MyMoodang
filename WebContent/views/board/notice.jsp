@@ -47,10 +47,10 @@
                                         <div class="inner_sub">
                                             <ul class="list_menu">
                                                 <li class="on">
-                                                    <a href="/noticelist.no?currentPage=1">공지사항</a>
+                                                    <a href="/noticelist.no">공지사항</a>
                                                 </li>
                                                 <li>
-                                                    <a href="#">자주하는 질문</a>
+                                                    <a href="/faq">자주하는 질문</a>
                                                 </li>
                                                 <li>
                                                     <a href="#">상품 후기</a>

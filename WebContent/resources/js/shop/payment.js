@@ -78,6 +78,7 @@ $(function () {
     	  var disTotal = quantity * noDiscount;
 
     	  var totalPrices = parseInt($('.countMoney').text())
+    	  console.log(totalPrices += price)
     	  // console.log(totalPrices += price)
     	  var noDisC = parseInt($('.noDiscount').text());
     	  

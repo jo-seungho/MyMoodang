@@ -18,6 +18,8 @@
 <html>
 <head>
 
+
+
 <script src="https://code.jquery.com/jquery-3.6.4.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -27,6 +29,8 @@
 	height: 37px;
 	margin-right: 5px;
 }
+
+
 </style>
 </head>
 <body>

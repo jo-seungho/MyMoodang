@@ -1,4 +1,4 @@
-// 내정보 수정용 컨트롤러
+// 비밀번호 수정용 컨트롤러
 // 2023-04-20 김서영
 
 package com.kh.user.member.controller;
@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 import com.kh.user.member.model.service.MemberService;
@@ -17,48 +18,53 @@ import com.kh.user.member.model.vo.Member;
 import com.kh.user.member.model.vo.MemberRessult;
 
 /**
- * Servlet implementation class AjaxMemberUpdateInfoController
+ * Servlet implementation class AjaxMemberUpdatePwdController
  */
-@WebServlet("/updateInfo.me")
-public class AjaxMemberUpdateInfoController extends HttpServlet {
+@WebServlet("/updatePwd.me")
+public class AjaxMemberUpdatePwdController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AjaxMemberUpdateInfoController() {
+    public AjaxMemberUpdatePwdController() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String oldPwd = request.getParameter("oldPwd");
+		String upPwd = request.getParameter("upPwd");
 
-		String memberId = request.getParameter("memberId");
-		String name = request.getParameter("name");
-		String birthDate = request.getParameter("year") + request.getParameter("month") + request.getParameter("day");
-		String gender = request.getParameter("gender");
-		String email = request.getParameter("email");
-		String phone = request.getParameter("phone");
+		// 로그인한 유저의 아이디 가져오기
+		HttpSession session = request.getSession();
+		String memberId = ((Member)session.getAttribute("loginUser")).getMemberId();
 
-		Member m = new Member(memberId, name, birthDate, gender, email, phone);
-//		System.out.println("값이 들어갔는가" + m);
+		Member m = new MemberService().selectMemberInfo(memberId);
 
-		int result = new MemberService().updateInfoMember(m);
+		System.out.println("m : " + m);
+		System.out.println("upPwd : " + upPwd);
+
+		// 서비스단 보내기
+		boolean result = new MemberService().updatePwdMember(m, upPwd);
+
+		System.out.println("컨트롤러 결과 : " + result);
 
 		MemberRessult mr = new MemberRessult();
 
-		if(result > 0) { // 성공
+		if(result = true) { //비밀번호 수정 성공
 
-			Member newMem = new Member(m.getMemberId(), m.getName(), m.getBirthDate(), m.getGender(), m.getEmail(), m.getPhone());
+			m.setPassword(upPwd);
 
-			mr.setMessage(m.getName() + "님의 정보가 성공적으로 수정 되었습니다.");
+			mr.setMessage(m.getName() + "님의 비밀번호가 성공적으로 수정 되었습니다.");
 			mr.setSuccess("Y");
 			mr.setMemberId(memberId);
-		} else { // 실패
-			mr.setMessage(m.getName() + "님의 정보수정에 실패하였습니다.");
+			mr.setMemberNo(m.getMemberNo());
+
+		} else {   // 비밀번호 수정 실패
+			mr.setMessage(m.getName() + "님의 비밀번호 수정에 실패하였습니다.");
 			mr.setSuccess("N");
 		}
 		response.setContentType("application/json; charset=UTF-8");

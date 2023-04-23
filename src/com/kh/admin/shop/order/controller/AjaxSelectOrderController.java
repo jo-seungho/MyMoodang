@@ -28,6 +28,7 @@ public class AjaxSelectOrderController extends HttpServlet {
 		
 		int id = Integer.parseInt(request.getParameter("orderNo"));
 		
+		
 		Order o = new OrderService().selectOrder(id);
 		
 		response.setContentType("application/json; charset=UTF-8");

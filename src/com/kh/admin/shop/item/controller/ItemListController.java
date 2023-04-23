@@ -31,11 +31,15 @@ public class ItemListController extends HttpServlet {
 			throws ServletException, IOException {
 
 		int listCount = new ItemService().selectListCount();
-		int currentPage = Integer.parseInt(request.getParameter("page"));
+		int currentPage = Integer.parseInt((request.getParameter("page") == null ? "1" : request.getParameter("page")));
 
+		String category = request.getParameter("category");
+		category = category == null ? "A" : category.toUpperCase();
+		
+		
 		ArrayList<Item> list = null;
 
-		String category = request.getParameter("category").toUpperCase();
+		
 
 		int saleCount = new ItemService().selectListSale("Y");
 		int soldCount = new ItemService().selectListSale("N");

@@ -65,11 +65,20 @@ window.addEventListener('DOMContentLoaded', function () {
 
     $(window).scroll(function () {
       var scrollTop = $(document).scrollTop();
+      var stopAt = 950;
       if (scrollTop < 60) {
         scrollTop = 60;
       }
       $(".snb_my").stop();
       $(".snb_my").animate({ "top": scrollTop });
+      
+      
+//      if (scrollTop >= stopAt) {
+//  	    $(".snb_my").stop().css({ top: stopAt });
+//  	  } else {
+//  	    $(".snb_my").stop().animate({ top: scrollTop });
+//  	  }
+//    });
     });
 
     $(window).scroll(function () {
@@ -79,6 +88,11 @@ window.addEventListener('DOMContentLoaded', function () {
       }
       $(".inner_result").stop();
       $(".inner_result").animate({ "top": scrollTop });
+      
+      
+      
+      
+      
     });
 
   });
