@@ -251,9 +251,9 @@
 		function showCartModal(itemCode) {
 			// 가격남음
 			$("#cartPut input[name=itemCode]").val(itemCode);
-			console.log(itemCode);
+			// console.log(itemCode);
 			// console.log($('.total > .totalPrice').text(), 8888)
-			console.log($("#countValue").text());
+			// console.log($("#countValue").text());
 			
 		}
 		

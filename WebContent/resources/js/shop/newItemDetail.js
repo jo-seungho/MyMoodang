@@ -19,6 +19,7 @@ window.addEventListener('DOMContentLoaded', function() {
             quantity--;
             if (quantity >= 0) {
                 $('.inp').val(quantity);
+                $(".count_num").text(quantity);
                 $('.num').text(formatPrice(quantity * cost) + '원');
                 reserveAmount = (quantity * cost) / 20;
                 $('.emph, .emphh').text(formatPrice(reserveAmount) + ' 원 적립');
@@ -30,6 +31,7 @@ window.addEventListener('DOMContentLoaded', function() {
         $('.up').click(function() {
             quantity++;
             $('.inp').val(quantity);
+            $(".count_num").text(quantity);
             $('.num').text(formatPrice(quantity * cost) + '원');
             reserveAmount = (quantity * cost) / 20;
             $('.emph, .emphh').text(formatPrice(reserveAmount) + ' 원 적립');
@@ -90,5 +92,6 @@ window.addEventListener('DOMContentLoaded', function() {
         return str;
 
     }
+    
 
 });

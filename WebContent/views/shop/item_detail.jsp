@@ -34,6 +34,9 @@
 
     <script src="/resources/js/board/item_review_common.js"></script>
     <script src="/resources/js/board/item_review_my.js"></script>
+    
+    <%-- 결제용 API 2023-04-23 조승호--%>
+	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 
     <title>상품상세페이지</title>
       <style>
@@ -93,7 +96,7 @@
                                         </div>
                                         <p class="goods_name">
                                             
-                                            <strong class="name"><%= i.getItemName() %></strong>
+                                            <strong class="name itemName"><%= i.getItemName() %></strong>
                                         </p>
                                         <p class="goods_price">
                                             <span class="position">
@@ -109,7 +112,7 @@
                                                     </span>
                                                     <span class="dc_price" style="font-size: 15px; font-weight: 400; color: red;">
                                                     <span class="won" style="font-size: 22px; margin-top: 10%;">&nbsp;<b><%= i.getDiscountPrice() %>원</b></span>
-                                                	<input type="hidden" value="<%= i.getDiscountPrice() %>">
+                                                	<input class="priceItem" type="hidden" value="<%= i.getDiscountPrice() %>">
                                                 	</span>
                                                 </span>
                                                 
@@ -147,7 +150,7 @@
             
                                 <div id="cartPut">
                                     <div class="cart_option cart_type2">
-                                        <form action="">
+                                        <form>
                                             <div class="inner_option">
                                                 <div class="in_option">
                                                     <div class="list_goods">
@@ -158,6 +161,9 @@
                                                                     <span class="count">
                                                                         <button type="button" class="btn down on">수량내리기</button>
                                                                         <input type="number" readonly="readonly" value = 1 class="inp">
+																		<div style="display: none;">
+																			<input id="countValue" name="countValue" type="hidden" class="count_num">1
+																		</div>                                                                        
                                                                         <button  type="button" class="btn up on">수량올리기</button>
                                                                     </span>
                                                                 
@@ -187,10 +193,10 @@
                                                 </div>
                                                 <div class="group_btn off">
                                                     <span class="btn">
-                                                        <button type="button" class="btn btn2">구매하기</button>
+                                                        <button onclick="orderPay()" type="button" class="btn btn2">구매하기</button>
                                                     </span>
                                                     <span class="btn">
-                                                        <button type="submit" class="btn btn2">장바구니 담기</button>
+                                                        <button type="button" class="btn btn2 insertCart">장바구니 담기</button>
                                                     </span>
                                                 </div>
                                             </div>
@@ -509,7 +515,84 @@
                   	      }
                   	    });
                   	  }
+                  	  
+                  	  
+                     	// 장바구니 담기 2023-04-23 조승호
+                     	$('.insertCart').click(function() {
+                     		
+                     		let priceItem = $('.priceItem').val();
+
+                     		$.ajax({
+                     			
+                     			url: "cartList",
+                     			type: "post",
+                     			data: {
+                					itemCodeNo: code,
+                					countValue: $("#countValue").text(),
+                					priceItem: priceItem
+                     			},
+                     			success: function(res) {
+                     				console.log(res);
+                					alert('물품을 장바구니에 담았습니다!');
+                					$.ajax({
+                						
+                						url: "count",
+                						type: "get",
+                						success: function(res) {
+                							$('.itemCount').text(res);
+                						},
+                						error: function(err) {
+                							console.log(err);
+                						}
+                						
+                					})
+                     			},
+                     			error: function(err) {
+                     				
+                     			}
+                     		})
+
+                     	})
+
                 	});    	
+                   	
+                   	
+                 	// 구매하기 2023-04-23 조승호
+                	function orderPay(){
+                		let userName = $('.join').text()
+                		let countMoney = parseInt($('.goods_price input').val()) * parseInt($("#countValue").text());
+                		let item = $('.itemName').text()
+                		console.log($('.join').text());
+                		
+                		IMP.init('imp68338217');
+                		IMP.request_pay({
+                		    pg : 'kakao',
+                		    pay_method : 'card',
+                		    merchant_uid : 'merchant_' + new Date().getTime(),
+                		    name : item , //결제창에서 보여질 이름
+                		    amount : countMoney,
+                		    buyer_email : 'test888@test.do',
+                		    buyer_name : userName,
+                		    buyer_tel : '010-1234-5678',
+                		    // buyer_addr : orderAddress,
+                		    buyer_postcode : '123-456'
+                		}, function(rsp) {
+                			console.log(rsp);
+                		    if ( rsp.success ) {
+                		    	var msg = '결제가 완료되었습니다.';
+                		        msg += '고유ID : ' + rsp.imp_uid;
+                		        msg += '상점 거래ID : ' + rsp.merchant_uid;
+                		        msg += '결제 금액 : ' + rsp.paid_amount;
+                		        msg += '카드 승인번호 : ' + rsp.apply_num;
+                		        // location.href = '/orderComplete';
+                		    } else {
+                		    	 var msg = '결제에 실패하였습니다.';
+                		         msg += '에러내용 : ' + rsp.error_msg;
+                		    }
+                		    alert(msg);
+                		});
+                	}
+
                     </script>
                     
 
