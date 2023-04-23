@@ -21,6 +21,9 @@
 	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 <script src="/resources/js/shop/payment.js"></script>
 
+<%-- 결제용 API --%>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+
 <title>장바구니</title>
 </head>
 <body>
@@ -182,7 +185,7 @@
 					</div>
 					<!-- 계산 필요 . -->
 					<div class="btn_submit">
-						<button type="submit" class="btn active orderBtn">주문하기</button>
+						<button type="button" onclick="oderPay()" class="btn active orderBtn">주문하기</button>
 						<!-- 결제 페이지로 이동 -->
 					</div>
 					<div class="notice">
@@ -216,6 +219,44 @@
 		$('.countMoney').text(sumMoney);
 		$('.noDiscount').text(sumNoDis);
 		$('.difference').text(sumNoDis - sumMoney);
+		
+		function oderPay(){
+			let countMoney = $('.countMoney').text();
+			let itemList = $('.package').text()
+			let userName = $('.join').text()
+			let oderAddress = $('.totalprice').text();
+			console.log($('.join').text());
+			
+			IMP.init('imp68338217');
+			IMP.request_pay({
+			    pg : 'kakao',
+			    pay_method : 'card',
+			    merchant_uid : 'merchant_' + new Date().getTime(),
+			    name : itemList , //결제창에서 보여질 이름
+			    // amount : countMoney, //실제 결제되는 가격
+			    amount : 100, // 테스트를 위한 임시 금액
+			    buyer_email : 'test888@test.do',
+			    buyer_name : userName,
+			    buyer_tel : '010-1234-5678',
+			    buyer_addr : oderAddress,
+			    buyer_postcode : '123-456'
+			}, function(rsp) {
+				console.log(rsp);
+			    if ( rsp.success ) {
+			    	var msg = '결제가 완료되었습니다.';
+			        msg += '고유ID : ' + rsp.imp_uid;
+			        msg += '상점 거래ID : ' + rsp.merchant_uid;
+			        msg += '결제 금액 : ' + rsp.paid_amount;
+			        msg += '카드 승인번호 : ' + rsp.apply_num;
+			        // location.href = '주문내역페이지로 이동';
+			    } else {
+			    	 var msg = '결제에 실패하였습니다.';
+			         msg += '에러내용 : ' + rsp.error_msg;
+			    }
+			    alert(msg);
+			});
+		}
+		
 		
 	</script>
 </body>

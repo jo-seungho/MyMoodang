@@ -272,7 +272,7 @@
 					countValue: $("#countValue").text(),
 					priceItem: priceItem
 				},
-				success: function() {
+				success: function(res) {
 					alert('물품을 장바구니에 담았습니다!');
 					// console.log(res)
 				},

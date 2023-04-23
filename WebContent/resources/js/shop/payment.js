@@ -79,6 +79,7 @@ $(function () {
 
     	  var totalPrices = parseInt($('.countMoney').text())
     	  console.log(totalPrices += price)
+    	  // console.log(totalPrices += price)
     	  var noDisC = parseInt($('.noDiscount').text());
     	  
     	  
@@ -179,9 +180,10 @@ function del_row(ths) {
     	data: {
     		itemCode : itemCode
     		},
-    	success: function() {
+    	success: function(res) {
     		ths.parents("li").remove();
-    		
+    		 $(window).prop("location", location.href);
+    		location.reload();
     	},
     	error: function(err) {
     		console.log(err);

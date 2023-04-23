@@ -42,6 +42,7 @@ request.setCharacterEncoding("UTF-8");
 		
 		Member loginMember = new MemberService().loginUser(m);
 		
+		
 		if(loginMember == null) { // 로그인 실패 => 에러페이지로 포워딩함
 			request.setAttribute("errorMsg", "로그인에 실패하였습니다.");
 		

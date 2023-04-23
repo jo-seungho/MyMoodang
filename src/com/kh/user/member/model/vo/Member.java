@@ -4,6 +4,8 @@ import com.kh.common.model.vo.Converter;
 
 public class Member {
 // 2023-04-13 김서영
+// 2023-04-23 조승호 수정 : cartCount 추가
+	private int cartCount;
 	private int memberNo;
 	private String memberId;
 	private String password;
@@ -22,10 +24,11 @@ public class Member {
 
 	}
 
-	public Member(int memberNo, String memberId, String password, String name, String birthDate, String gender,
+	public Member(int cartCount, int memberNo, String memberId, String password, String name, String birthDate, String gender,
 			String email, String phone, String enrollDate, String modifyDate, String status, int totalMoney,
 			String gradeNo) {
 		super();
+		this.cartCount = cartCount;
 		this.memberNo = memberNo;
 		this.memberId = memberId;
 		this.password = password;
@@ -76,6 +79,16 @@ public class Member {
 		this.phone = phone;
 	}
 
+<<<<<<< HEAD
+	
+	public int getCartCount() {
+		return cartCount;
+	}
+
+	public void setCartCount(int cartCount) {
+		this.cartCount = cartCount;
+	}
+=======
 
 
 	/**
@@ -99,6 +112,7 @@ public class Member {
 	}
 
 
+>>>>>>> 1135ef4ccae5b10561ae3827f8923b940fe3efc7
 
 	public int getMemberNo() {
 		return memberNo;
@@ -207,10 +221,11 @@ public class Member {
 
 	@Override
 	public String toString() {
-		return "Member [memberNo=" + memberNo + ", memberId=" + memberId + ", password=" + password + ", name=" + name
-				+ ", birthDate=" + birthDate + ", gender=" + gender + ", email=" + email + ", phone=" + phone
-				+ ", enrollDate=" + enrollDate + ", modifyDate=" + modifyDate + ", status=" + status + ", totalMoney="
-				+ totalMoney + ", gradeNo=" + gradeNo + "]";
+		return "Member [cartCount=" + cartCount + ", memberNo=" + memberNo + ", memberId=" + memberId + ", password="
+				+ password + ", name=" + name + ", birthDate=" + birthDate + ", gender=" + gender + ", email=" + email
+				+ ", phone=" + phone + ", enrollDate=" + enrollDate + ", modifyDate=" + modifyDate + ", status="
+				+ status + ", totalMoney=" + totalMoney + ", gradeNo=" + gradeNo + "]";
 	}
+
 
 }
