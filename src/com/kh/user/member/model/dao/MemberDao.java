@@ -387,6 +387,14 @@ public class MemberDao {
 		return result;
 	}
 
+	/**
+	 * 회원 비밀번호 수정 용 메소드
+	 * 2023-04-20 김서영
+	 * @param conn
+	 * @param m
+	 * @param upPwd
+	 * @return
+	 */
 	public boolean updatePwdMember(Connection conn, Member m, String upPwd) {
 
 		int result = 0;
@@ -413,4 +421,28 @@ public class MemberDao {
 	}
 
 
+	public int deleteMember(Connection conn, Member m) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+
+		String sql = prop.getProperty("deleteMember");
+
+		try {
+			int i = 0;
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(++i, m.getMemberId());
+			pstmt.setString(++i, m.getPassword());
+
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+
+//		System.out.println("dao : " + result);
+		return result;
+	}
 }

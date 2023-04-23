@@ -185,12 +185,20 @@ public class MemberService {
 
 
 
+	/**
+	 * 회원 비밀번호 수정 용 메소드
+	 * 2023-04-20 김서영
+	 * @param m
+	 * @param upPwd
+	 * @return
+	 */
 	public boolean updatePwdMember(Member m, String upPwd) {
 
 		Connection conn = JDBCTemplate.getConnection();
 
 		boolean result = new MemberDao().updatePwdMember(conn, m, upPwd);
 
+		System.out.println("서비스" + upPwd);
 		if(result = true) {  // 비밀번호 수정 성공
 			commit(conn);
 		} else {  // 비밀번호 수정 실
@@ -200,4 +208,25 @@ public class MemberService {
 
 		return result;
 	}
+
+
+	public int deleteMember(Member m) {
+		Connection conn = JDBCTemplate.getConnection();
+
+		int result = new MemberDao().deleteMember(conn, m);
+
+//		System.out.println("서비스 : " + result);
+
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+
+		return result;
+	}
+
+
+
 }

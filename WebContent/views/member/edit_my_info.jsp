@@ -8,21 +8,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-	<!-- 중복되는 헤더, 푸터, 리셋 css & 제이쿼리 & 헤더 js 담은 common.jsp / 2023-04-20 김서영 -->
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <!-- Popper JS -->
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <!-- Latest compiled JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
+	<!-- 중복되는 헤더, 푸터, 리셋 css & 제이쿼리 & 헤더 js 담은 common.jsp / 2023-04-20 김서영 -->
 	<%@ include file="../common/common.jsp"%>
+
     <link rel="stylesheet" href="/resources/css/member/join.css">
     <link rel="stylesheet" href="/resources/css/member/edit_my_info.css">
 
     <script src="/resources/js/member/join.js"></script>
     <script src="/resources/js/member/edit_my_info.js"></script>
-
 
     <title>내 정보 수정</title>
 </head>
@@ -199,7 +198,7 @@
 
                          <br>
 
-                         <button type="submit" class="btn btn-secondary btn-block" id="edit_pwd_btn1" onclick="return validatePwd();">비밀번호 변경</button>
+                         <button type="submit" class="btn btn-secondary btn-block" id="edit_pwd_btn1" onclick="validatePwd();">비밀번호 변경</button>
                       </form>
 
 
@@ -232,7 +231,7 @@
                          정말로 탈퇴하시겠습니까? <br><br>
                    </b>
 
-                   <form action="" method="post">
+                   <form action="/delete.me" method="post">
 
                            <table id="modal_del1">
                                <tr>
@@ -246,7 +245,7 @@
 
                            <br>
 
-                           <button type="submit" id="delete_info_btn1"  class="btn btn-danger btn-block">회원탈퇴</button>
+                           <button type="button" id="delete_info_btn1"  class="btn btn-danger btn-block" onclick="deleteMember('<%= memberId %>');">회원탈퇴</button>
                    </form>
 
                 </div>

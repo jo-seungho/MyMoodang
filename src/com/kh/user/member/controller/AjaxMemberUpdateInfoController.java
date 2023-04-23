@@ -44,7 +44,7 @@ public class AjaxMemberUpdateInfoController extends HttpServlet {
 		String phone = request.getParameter("phone");
 
 		Member m = new Member(memberId, name, birthDate, gender, email, phone);
-		System.out.println("값이 들어갔는가" + m);
+//		System.out.println("값이 들어갔는가" + m);
 
 		int result = new MemberService().updateInfoMember(m);
 

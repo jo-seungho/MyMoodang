@@ -98,6 +98,8 @@ public class Member {
 		this.phone = phone;
 	}
 
+
+
 	public int getMemberNo() {
 		return memberNo;
 	}

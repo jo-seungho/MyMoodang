@@ -101,7 +101,7 @@
 			      , GENDER = ?
 			      , EMAIL = ?
 			      , PHONE = ?
-			      , ENROLL_DATE = SYSDATE
+			      , MODIFY_DATE = SYSDATE
 			  WHERE MEMBER_ID = ?
 		</entry>
 
@@ -110,11 +110,19 @@
 		<entry key="updatePwdMember">
 			UPDATE MEMBER
 			   SET PASSWORD = ?
-			     , ENROLL_DATE = SYSDATE
+			     , MODIFY_DATE = SYSDATE
 			 WHERE MEMBER_ID = ?
 			   AND PASSWORD = ?
 		</entry>
 
+<!--  회원 탈퇴용 쿼리문 / 2023-04-20 김서영 -->
+		<entry key="deleteMember">
+			UPDATE MEMBER
+    		   SET MODIFY_DATE = SYSDATE
+       			 , STATUS = 'N'
+			 WHERE MEMBER_ID = ?
+   			   AND PASSWORD = ?
+		</entry>
 
 
 
