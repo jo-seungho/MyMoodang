@@ -192,7 +192,7 @@
 					</div>
 					<!-- 계산 필요 . -->
 					<div class="btn_submit">
-						<button type="button" onclick="oderPay()" class="btn active orderBtn">주문하기</button>
+						<button type="button" onclick="orderPay()" class="btn active orderBtn">주문하기</button>
 						<!-- 결제 페이지로 이동 -->
 					</div>
 					<div class="notice">
@@ -241,12 +241,12 @@
 		$('.noDiscount').text(sumNoDis);
 		$('.difference').text(sumNoDis - sumMoney);
 		
-		function oderPay(){
+		function orderPay(){
 			let countMoney = $('.countMoney').text();
 			let itemList = $('.package').text()
 			let userName = $('.join').text()
 			let orderAddress = $('.totalprice').text();
-			console.log($('.join').text());
+			// console.log($('.join').text());
 			
 			IMP.init('imp68338217');
 			IMP.request_pay({
@@ -254,8 +254,8 @@
 			    pay_method : 'card',
 			    merchant_uid : 'merchant_' + new Date().getTime(),
 			    name : itemList , //결제창에서 보여질 이름
-			    // amount : countMoney, //실제 결제되는 가격
-			    amount : 100, // 테스트를 위한 임시 금액
+			    amount : countMoney, //실제 결제되는 가격
+			    // amount : 100, // 테스트를 위한 임시 금액
 			    buyer_email : 'test888@test.do',
 			    buyer_name : userName,
 			    buyer_tel : '010-1234-5678',
