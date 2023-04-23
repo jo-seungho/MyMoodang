@@ -131,7 +131,9 @@
 		LEFT JOIN ITEM_IMG ON (ITEM_IMG_CODE = ITEM_CODE)
 		WHERE ITEM_STATUS = 'Y'
 		 AND (ITEM_CATEGORY = ? OR ? = '전체') 
+		 AND ITEM_NAME LIKE '%' || ? || '%' <!-- 상품 전체 키워드 검색 추가 -->
 		ORDER BY ITEM_DATE DESC
+		<!-- 필터에 따라 가격, 신상품 등 구현 예정-->
 		) A
 		)
 		WHERE RNUM BETWEEN ? AND ?

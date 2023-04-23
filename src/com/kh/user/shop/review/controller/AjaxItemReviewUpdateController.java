@@ -7,8 +7,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
+import com.kh.user.member.model.vo.Member;
 import com.kh.user.shop.review.model.service.itemReviewService;
 import com.kh.user.shop.review.model.vo.Review;
 
@@ -32,31 +34,39 @@ public class AjaxItemReviewUpdateController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		// 번호 뽑기
+		
+		// 로그인한 회원 정보 가져오기
+//		HttpSession session = request.getSession();
+//	    Member loginUser = (Member) session.getAttribute("loginUser");
+//	    int mno = loginUser.getMemberNo();
+		
+		// 상품번호 뽑기
 		int bno = Integer.parseInt(request.getParameter("bno"));
-
-		String title = request.getParameter("title");
+		// 수정할 값
+		//String title = request.getParameter("title");
 		String content = request.getParameter("content");
+		//int starPoint = Integer.parseInt(request.getParameter("starpoint"));
 
 		
 
-		// 리뷰 수정
-		Review re = new Review(bno, title, content);
+		Review re = new Review();
+		re.setReviewNo(bno);
+		re.setContent(content);
 
 		int result = new itemReviewService().updateReview(re);
 
-		String page = "";
-
-		if(result > 0) {
-			page = "views/user/shop/item/itemReviewUpdate.jsp";
-			request.setAttribute("bno", bno);
-		} else {
-			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "리뷰 수정에 실패하였습니다.");
+		
+		if(result > 0) { 
+			 request.getSession().setAttribute("alertMsg", "리뷰 수정에 성공했습니다.");
+		 }
+		 	
+		 
+		else {
+			 request.setAttribute("msg", "리뷰 수정에 실패하였습니다.");
 		}
 
-		// Gson 을 이용하여 응답 데이터 넘기기
 
+		// Gson 을 이용하여 응답 데이터 넘기기
 		response.setContentType("application/json; charset=UTF-8");
 
 		new Gson().toJson(result, response.getWriter());

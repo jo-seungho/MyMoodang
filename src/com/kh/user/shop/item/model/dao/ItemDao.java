@@ -69,7 +69,7 @@ public class ItemDao {
      * @return
      */
     public Item selectItem(Connection conn, int bno) {
-        Item i = null;
+        Item i = null;	//보따리 형태 선언(보따리 주문)
         PreparedStatement pstmt = null;
         ResultSet rset = null;
         
@@ -82,8 +82,9 @@ public class ItemDao {
             rset = pstmt.executeQuery();
 
 			if(rset.next()) {
-				i = new Item();
+				i = new Item();//새 보따리 준비  보따리를 펼친다.
 				
+				//보따리에 물건 담기
 				i.setItemCode(rset.getInt("ITEM_CODE"));
 				i.setItemCategory(rset.getString("ITEM_CATEGORY"));
 				i.setItemName(rset.getString("ITEM_NAME"));
@@ -390,7 +391,7 @@ public class ItemDao {
      * @param pi
      * @return
      */
-	public ArrayList<Item> selectItemList(Connection conn, PageInfo pi, String category) {
+	public ArrayList<Item> selectItemList(Connection conn, PageInfo pi, String category, String keyword) {
 		
 		ArrayList<Item> list = new ArrayList<>();
 		ResultSet rset = null;
@@ -405,8 +406,9 @@ public class ItemDao {
 			
 			pstmt.setString(1, category);
 			pstmt.setString(2, category);
-			pstmt.setInt(3, startRow);
-			pstmt.setInt(4, endRow);
+			pstmt.setString(3, keyword);
+			pstmt.setInt(4, startRow);
+			pstmt.setInt(5, endRow);
 			
 			rset = pstmt.executeQuery();
 			
