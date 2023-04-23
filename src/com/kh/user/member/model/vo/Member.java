@@ -79,7 +79,6 @@ public class Member {
 		this.phone = phone;
 	}
 
-<<<<<<< HEAD
 	
 	public int getCartCount() {
 		return cartCount;
@@ -88,7 +87,7 @@ public class Member {
 	public void setCartCount(int cartCount) {
 		this.cartCount = cartCount;
 	}
-=======
+
 
 
 	/**
@@ -112,7 +111,6 @@ public class Member {
 	}
 
 
->>>>>>> 1135ef4ccae5b10561ae3827f8923b940fe3efc7
 
 	public int getMemberNo() {
 		return memberNo;
