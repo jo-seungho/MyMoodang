@@ -1,3 +1,6 @@
+// 이메일 인증 전송용 서비스
+// 2023-04-23 김서영
+
 package com.kh.user.member.model.service;
 
 import java.util.Properties;
