@@ -1,5 +1,6 @@
 <!-- html 파일이 여러번 호출되지 않도록 중복 제거 작업 / 2023-04-20 김서영 -->
 <!-- 2023-04-19 코드 주석 처리 및 로그인 전/후 로 header 부분의 우측 상단 메뉴바 다르게 수정 및 header 부분에 배송지 관리 url 매핑 / 이지환 */ 	 -->
+<!--  2023.04.23 / 로그아웃 url 매핑값 다시 작성 / 이지환 -->
 
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -97,7 +98,7 @@
             </ul>
           </li>
           <li class="link">
-            <a href="" class="item after login_none">로그아웃</a>
+            <a href="/logout.me" class="item after login_none">로그아웃</a>
           </li>
 
 
