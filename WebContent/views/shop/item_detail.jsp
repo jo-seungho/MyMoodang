@@ -10,11 +10,7 @@
     ArrayList<Attachment> clist = (ArrayList<Attachment>)request.getAttribute("clist");
     ArrayList<Review> rlist = (ArrayList<Review>)request.getAttribute("rlist");
     
-    Review re = (Review)request.getAttribute("re");
-    
-    
-/*     System.out.println("re : " + re); */
-    
+    Review re = (Review)request.getAttribute("re");  
 %>
 
 <!DOCTYPE html>
@@ -28,10 +24,14 @@
 
     <link rel="stylesheet" href="/resources/css/shop/item_detail.css">
     <link rel="stylesheet" href="/resources/css/shop/item_review_detail.css">
+
+    <script defer src="/resources/js/shop/itemReview.js"></script>
+
     <!-- 위에 작성한 코드에서 푸터를 부수는 코드가 존재함 -->
 
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"></script>
     <script src="/resources/js/shop/newItemDetail.js"></script>
+
     <script src="/resources/js/board/item_review_common.js"></script>
     <script src="/resources/js/board/item_review_my.js"></script>
 
@@ -68,6 +68,7 @@
 		}
 
 		</style>
+
 		
         
   </head>
@@ -77,7 +78,7 @@
       <%@ include file="../common/header.jsp" %>
       
             <!-- 상품 상세페이지 시작-->
-        
+
                     <div id="main">
                         <div id="content" style="opacity: 1;">
                             <div class="section_view">
@@ -320,16 +321,19 @@
                                       <a href="#goods-image" class="goods-view-infomation-tab-anchor">상품이미지</a>
                                   </li>
 
+
                                   <li class="goods-view-infomation-tab">
                                       <a href="#goods-review" class="goods-view-infomation-tab-anchor __active">
                                           고객리뷰
                                           <span class="count_review">(0)</span>
                                       </a>
                                   </li>
+
                               </ul>
                                     
                                     
                                     <div class="goods-view-infomation-content" id="goods-review"> 
+
                              		<br>
 							<table>
 						        <thead>
@@ -382,28 +386,11 @@
 		    
 							  </tbody>
 							      </table>
+
 								      
-								      
-								      
+			      
+			      
 								  <!-- 모달 창 -->
-							
-							
-									<!--  리뷰 수정용 폼 -->
-                                <div id="update-modal" class="modal">
-                                    <div class="modal-content">
-                                    <span class="close">&times;</span>
-                                    <h2 align="center">리뷰 수정</h2>
-                                    <br><br><br>
-                                    <h2>제목 수정</h2>
-                                    <input type="text" id="update-title" >
-                                    <h2>내용 수정</h2>
-                                    <textarea  id="update-content" ></textarea>
-                                    <button type="button" class="save-btn">저장</button>
-                                    </div>
-                                </div>
-                                
-                                
-                                <<!-- 모달 창 -->
 
                
                            
@@ -525,7 +512,7 @@
                 	});    	
                     </script>
                     
-                    
+
 
 
       <%@ include file="../common/footer.jsp" %>

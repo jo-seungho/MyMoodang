@@ -94,10 +94,8 @@ public class itemReviewDao {
 
         try{
             pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, re.getTitle());
-            pstmt.setString(2, re.getContent());
-            pstmt.setInt(3, re.getStarPoint());
-            pstmt.setInt(4, re.getReviewNo());
+            pstmt.setString(1, re.getContent());
+            pstmt.setInt(2, re.getReviewNo());
 
             result = pstmt.executeUpdate();
         } catch (SQLException e) {
@@ -127,9 +125,7 @@ public class itemReviewDao {
             pstmt.setInt(4,re.getItemCode());
             pstmt.setInt(5,re.getMemberNo());
             
-            System.out.println("***************");
-            System.out.println(re.getItemCode());
-            System.out.println(re.getMemberNo());
+
             result = pstmt.executeUpdate();
 
         }   catch (SQLException e) {

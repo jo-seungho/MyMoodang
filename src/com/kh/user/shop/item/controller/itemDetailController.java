@@ -36,7 +36,6 @@ public class itemDetailController extends HttpServlet {
 		
 		
 		
-
 		// 상품을 클릭 했을 때 상품번호를 받아와서 상품 상세보기 페이지로 이동
 		int bno = Integer.parseInt(request.getParameter("bno"));
 		

@@ -52,13 +52,10 @@ public class itemReviewInsertController extends HttpServlet {
 		String title = request.getParameter("title");
 		String content = request.getParameter("contentinsert");
 		int starPoint = Integer.parseInt(request.getParameter("starpoint"));
-//		int MemberNo = Integer.parseInt(request.getParameter("MemberNo"));
 		int MemberNo = mno;
-		System.out.println("--------------------------");
-		System.out.println(MemberNo);
+
 		int bno = Integer.parseInt(request.getParameter("bno"));
-		System.out.println(bno);
-		System.out.println(title);
+
 		
 		Review re = new Review(title, content, starPoint, bno, MemberNo);
 
@@ -66,7 +63,6 @@ public class itemReviewInsertController extends HttpServlet {
 
 		int result = new itemReviewService().insertReview(re);
 		
-		System.out.println(result);
 		
 		
 		request.setAttribute("re",re);

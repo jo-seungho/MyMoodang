@@ -174,11 +174,11 @@ public class ItemService {
 	 * 전체 상품 리스트
 	 * @return
 	 */
-	public ArrayList<Item> selectItemList(PageInfo pi, String category) {
+	public ArrayList<Item> selectItemList(PageInfo pi, String category, String keyword) {
 		
 		Connection conn = getConnection();
 		
-		ArrayList<Item> list = new ItemDao().selectItemList(conn, pi, category);
+		ArrayList<Item> list = new ItemDao().selectItemList(conn, pi, category, keyword);
 		
 		close(conn);
 		

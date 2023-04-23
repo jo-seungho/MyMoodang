@@ -69,11 +69,9 @@ public class Review {
 		}
 		
 		
-
 		public int getReviewNo() {
 			return reviewNo;
 		}
-
 
 
 		public void setReviewNo(int reviewNo) {

@@ -241,13 +241,11 @@
           </li>
 
           <div class="gnb_search">
-            <form action="">
               <input type="text" id="keyword" value="건강 기원 새해맞이 보양식 레시피" title="검색어입력" class="inp_search" />
-              <input type="image" src="https://res.kurly.com/pc/service/common/1908/ico_search_x2.png" class="btn_search" />
+              <input type="image" src="https://res.kurly.com/pc/service/common/1908/ico_search_x2.png" class="btn_search" onclick="javascript:itemSearch()"/>
               <div class="init">
                 <button type="button" id="search_init" class="btn_delete">검색어 삭제하기</button>
               </div>
-            </form>
           </div>
 
           <div class="location_login">
@@ -316,5 +314,16 @@
           		alert(emsg);
           		
           	}
+         
+			// 상품 전체 검색 기능 
+			// 2023-04-23
+			// 이태화
+			function itemSearch() {
+				var keyword = $("#keyword").val();
+				alert(keyword);
+				location.href="itemList.it?currentPage=1&category=전체&keyword="+keyword;
+			
+		}
+
     	})
     </script>
