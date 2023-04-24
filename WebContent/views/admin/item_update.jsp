@@ -3,10 +3,8 @@
 		ArrayList<ItemImg> list = (ArrayList<ItemImg>) request.getAttribute("list");
 		Item i = (Item) request.getAttribute("item");
 		
-		String img = (String) request.getAttribute("img");
-		String imgName = (String) request.getAttribute("imgName");
-		
 		String category = i.getItemCategory(); 
+		
 %>
 <!DOCTYPE html>
    <html lang="en">
@@ -64,11 +62,11 @@
                     <div class="col form-floating mb-3">
                       <select class="form-select" name="status">
                         <% if (i.getItemStatus().equals("Y")) { %>
-                        <option value="1" selected>판매중</option>
-                        <option value="2">판매중지</option>
+                        <option value="Y" selected>판매중</option>
+                        <option value="N">판매중지</option>
                         <% } else { %>
-                        <option value="1">판매중</option>
-                        <option value="2" selected>판매중지</option>
+                        <option value="Y">판매중</option>
+                        <option value="2N" selected>판매중지</option>
                         <% } %>
                       </select>
                       <label for="floatingSelect">* 판매 상태</label>
@@ -83,12 +81,49 @@
                       <label for="floatingSelect">* 카테고리</label>
                     </div>
 
-                    <div id="col-auto">
-                      <%= img %>
+                    <div id="titleImg">
+                    <% if(list.size() == 4) { %>
+                    <img id=detailImg1 src="<%= list.get(1).getItemImgPath() %>" class="img-thumbnail" style="width: 200px; height: 200px" />
+                    <p id="img1"><%= list.get(1).getItemImg() %></p>
+                    <img id=detailImg2 src="<%= list.get(2).getItemImgPath() %>" class="img-thumbnail" style="width: 200px; height: 200px" />
+                    <p id="img2"><%= list.get(2).getItemImg() %></p>
+                    <img id=detailImg3 src="<%= list.get(3).getItemImgPath() %>" class="img-thumbnail" style="width: 200px; height: 200px" />
+                    <p id="img3"><%= list.get(3).getItemImg() %></p>
+                    <% for(int j = 0; j<4; j++) { %>
+                    	<input type="hidden" name="name<%= j+1 %>" value="<%= list.get(j).getItemImg() %>">
+                    <%} } else if(list.size() == 3) {%>
+                    <img id=detailImg1 src="<%= list.get(1).getItemImgPath() %>" class="img-thumbnail" style="width: 200px; height: 200px" />
+                    <p id="img1"><%= list.get(1).getItemImg() %></p>
+                    <img id=detailImg2 src="<%= list.get(2).getItemImgPath() %>" class="img-thumbnail" style="width: 200px; height: 200px" />
+                    <p id="img2"><%= list.get(2).getItemImg() %></p>
+                    <img id=detailImg3 src="" class="img-thumbnail" style="width: 200px; height: 200px" />
+                    <p id="img3">3</p>
+                    <% for(int j = 0; j<3; j++) { %>
+                    	<input type="hidden" name="name<%= j+1 %>" value="<%= list.get(j).getItemImg() %>">
+                    <% } } else if(list.size() == 2) { %>
+                    <img id=detailImg1 src="<%= list.get(1).getItemImgPath() %>" class="img-thumbnail" style="width: 200px; height: 200px" />
+                    <p id="img1"><%= list.get(1).getItemImg() %></p>
+                    <img id=detailImg2 src="" class="img-thumbnail" style="width: 200px; height: 200px" />
+                    <p id="img2"><%= list.get(2).getItemImg() %></p>
+                    <img id=detailImg3 src="" class="img-thumbnail" style="width: 200px; height: 200px" />
+                    <p id="img3">3</p>
+                    <% for(int j = 0; j<2; j++)  { %>
+                    	<input type="hidden" name="name<%= j+1 %>" value="<%= list.get(j).getItemImg() %>">
+                    <% } } else if(list.size() == 1) { %>
+                    <img id=detailImg1 src="" class="img-thumbnail" style="width: 200px; height: 200px" />
+                    <p id="img1">1</p>
+                    <img id=detailImg2 src="" class="img-thumbnail" style="width: 200px; height: 200px" />
+                    <p id="img2">2</p>
+                    <img id=detailImg3 src="" class="img-thumbnail" style="width: 200px; height: 200px" />
+                    <p id="img3">3</p>
+                    <% for(int j = 0; j<1; j++) { %>
+                    	<input type="hidden" name="name<%= j+1 %>" value="<%= list.get(j).getItemImg() %>">
+                    <%  } } %>
+                    
+                    
                     </div>
 
                     <div class="row">
-                    <%= imgName %>
                     </div>
 
                     <div id="file-area">
@@ -100,10 +135,6 @@
                     	<input type="hidden" name="fileName" value=<%= i.getImgName() %> />
                     	<input type="hidden" name="code" value=<%= i.getItemCode() %> />
                     
-                    <% for (int j = 0; j < Math.min(list.size(), 3); j++) { %>
-					    <input type="hidden" name="names" value="<%= list.get(j).getItemImg() %>">
-					    
-					<% } %>
                     <div class="insert-form">
                       <button class="btn btn-primary" id="addBtn" style="margin-top: 40px; font-size: larger">수정</button>
                       <a href="/itemDetail.ad?code=<%=i.getItemCode()%>" class="btn btn-primary" id="listBtn" style="margin-top: 40px; font-size: larger">목록</a> <a href="/itemDelete.ad?code=<%=i.getItemCode()%>" class="btn btn-primary" id="listBtn" style="margin-top: 40px; font-size: larger">삭제</a>

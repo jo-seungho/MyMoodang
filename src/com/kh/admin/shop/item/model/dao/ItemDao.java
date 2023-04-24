@@ -1,6 +1,6 @@
 package com.kh.admin.shop.item.model.dao;
 
-	import static com.kh.common.JDBCTemplate.*;
+import static com.kh.common.JDBCTemplate.*;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -31,7 +31,7 @@ public class ItemDao {
 		}
 	}
 
-
+	/** */
     public Item selectItem(Connection conn, int itemCode) {
         Item i = null;
         PreparedStatement pstmt = null;
@@ -113,13 +113,7 @@ public class ItemDao {
 				return listCount;
 			}
     
-    /**
-     * 판매 상품 리스트 조회
-     * 2023-04-17 최명진
-     * @param conn
-     * @param category
-     * @return
-     */
+    
 	public int selectListSale(Connection conn, String category) {
 		int listCount = 0;
 		PreparedStatement pstmt = null;
@@ -203,14 +197,7 @@ public class ItemDao {
 
 	}
 	
-	/**
-	 * 판매중인 상품 조회
-	 * 2023-04-18 최명진
-	 * @param conn
-	 * @param pi
-	 * @param category
-	 * @return
-	 */
+	
 	public ArrayList<Item> selectSaleItemList(Connection conn, PageInfo pi, String category) {
 		ArrayList<Item> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
@@ -257,14 +244,7 @@ public class ItemDao {
 		return list;
 
 	}
-	
-	/**
-	 * 상품 추가 메소드
-	 * 2023-04-22 최명진
-	 * @param conn
-	 * @param i
-	 * @return
-	 */
+
 	public int insertItem(Connection conn, Item i) {
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -290,13 +270,6 @@ public class ItemDao {
 		return result;
 	}
 	
-	/**
-	 * 이미지 데이터베이스에 저장
-	 * 2023-04-19 최명진
-	 * @param conn
-	 * @param list
-	 * @return
-	 */
 	public int insertItemImg(Connection conn, ArrayList<ItemImg> list) {
 		int result = 1;
 		// insert를 반복해서 진행 = > 하나라도 실패 할 경우 실패처리
@@ -322,24 +295,26 @@ public class ItemDao {
 
 		return result;
 	}
+	
 
-	/**
-	 * 아이템 업데이트 
-	 * 2023-04-19 최명진
-	 * @param conn
-	 * @param itemCode
-	 * @return
-	 */
-	public int updateItem(Connection conn, int itemCode) {
-		int result = 0;
+	public int insertItemImgCode(Connection conn, ArrayList<ItemImg> list, int code) {
+		int result = 1;
+		// insert를 반복해서 진행 = > 하나라도 실패 할 경우 실패처리
+		// result 를 애초에 1로 셋팅해두고 누적 곱을 구할 예정
+
 		PreparedStatement pstmt = null;
-		String sql = prop.getProperty("updateItem");
+		String sql = prop.getProperty("insertItemImgCode");
 
 		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, itemCode);
 
-			result = pstmt.executeUpdate();
+			for (ItemImg im : list) {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, code);
+				pstmt.setInt(2, im.getItemImgLevel());
+				pstmt.setString(3, im.getItemImgPath());
+
+				result *= pstmt.executeUpdate();
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -349,13 +324,37 @@ public class ItemDao {
 		return result;
 	}
 
-	/**
-	 * 여러장 이미지 불러오기
-	 * 2023-04-20 최명진
-	 * @param conn
-	 * @param itemCode
-	 * @return
-	 */
+
+	public int updateItem(Connection conn, int itemCode, Item i) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateItem");
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, i.getItemCategory());
+			pstmt.setString(2, i.getItemName());
+			pstmt.setInt(3, i.getItemStock());
+			pstmt.setInt(4, i.getItemPrice());
+			pstmt.setString(5, i.getItemText());
+			pstmt.setDouble(6, i.getItemDiscount());
+			pstmt.setString(7, i.getItemStatus());
+			pstmt.setInt(8, itemCode);
+
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+
+
+
+		return result;
+	}
+
+
 	public ArrayList<ItemImg> selectImgList(Connection conn, int itemCode) {
 		
 		ArrayList<ItemImg> list = new ArrayList<>();
@@ -397,14 +396,6 @@ public class ItemDao {
 	}
 
 
-	/**
-	 * 아이템 판매중지
-	 * 2023-04-20 최명진
-	 * @param conn
-	 * @param code
-	 * @param status
-	 * @return
-	 */
 	public int deleteItem(Connection conn, int code, String status) {
 
 		int result = 0;
@@ -426,14 +417,6 @@ public class ItemDao {
 		return result;
 	}
 
-	/**
-	 * 찜목록 상태 확인
-	 * 2023-04-21 최명진
-	 * @param conn
-	 * @param code
-	 * @param mno
-	 * @return
-	 */
 	public int checkFavorite(Connection conn, int code, int mno) {
 		
 		int result = 0;
@@ -465,14 +448,6 @@ public class ItemDao {
 		return result;
 	}
 
-	/**
-	 * 찜목록 추가
-	 * 2023-04-21 최명진
-	 * @param conn
-	 * @param code
-	 * @param mno
-	 * @return
-	 */
 	public int addFavorite(Connection conn, int code, int mno) {
 		
 		int result = 0;
@@ -495,14 +470,7 @@ public class ItemDao {
 		return result;
 	}
 
-	/**
-	 * 찜목록 삭제
-	 * 2023-04-21 최명진
-	 * @param conn
-	 * @param code
-	 * @param mno
-	 * @return
-	 */
+
 	public int deleteFavorite(Connection conn, int code, int mno) {
 		
 		int result = 0;
@@ -516,6 +484,31 @@ public class ItemDao {
 			pstmt.setInt(2, mno);
 			
 			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int updateItemImg(Connection conn, int itemCode, ArrayList<ItemImg> list) {
+		
+		int result = 1;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateItemImg");
+		
+		try {
+			
+			for(ItemImg im : list) {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, im.getItemImgPath());
+				pstmt.setInt(2, im.getItemImgLevel());
+				pstmt.setInt(3, itemCode);
+				
+				result *= pstmt.executeUpdate();
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
