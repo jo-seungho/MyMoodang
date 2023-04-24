@@ -95,14 +95,14 @@ public class ItemService {
 	}
 
 	// 2023-04-17 최명진 관리자 상품 추가 및 이미지 삽입
-	public int insertItem(Item i, ArrayList<ItemImg> list) {
+	public int insertItem(Item i, ItemImg at) {
 		Connection conn = getConnection();
 
 		int result1 = new ItemDao().insertItem(conn, i);
 
 		// Attachment Insert 요청
 		// 무조건 적어도 1번은 insert가 되야함
-		int result2 = new ItemDao().insertItemImg(conn, list);
+		int result2 = new ItemDao().insertItemImg(conn, at);
 
 		if (result1 > 0 && result2 > 0) {
 			commit(conn);
@@ -116,31 +116,28 @@ public class ItemService {
 
 	/**
 	 * 2023-04-17 최명진 관리자 상품 업데이트
+	 * 
 	 * @param itemCode
 	 * @return
 	 */
-	public int updateItem(int itemCode, Item i, ArrayList<ItemImg> list) {
-	
-		 Connection conn = getConnection();
-		    int result1 = new ItemDao().updateItem(conn, itemCode, i);
-		    int result2 = 1;
-		    for (ItemImg at : list) {
-		        if (at != null) {
-		            if (at.getItemImgNo() != 0) {
-		                result2 = new ItemDao().updateItemImg(conn, itemCode, list);
-		            } else {
-		                result2 = new ItemDao().insertItemImgCode(conn, list, itemCode);
-		            }
-		        }
-		    }
-		    if (result1 > 0 && result2 > 0) {
-		        commit(conn);
-		    } else {
-		        rollback(conn);
-		    }
-		    close(conn);
-		    return result1 * result2;
+	public int updateItem(int itemCode, ItemImg at, Item it) {
+
+		Connection conn = getConnection();
+		int result1 = new ItemDao().updateItem(conn, itemCode, it);
+		int result2 = 1;
+		
+		if (at != null) {
+			result2 = new ItemDao().updateItemImg(conn, itemCode, at);
 		}
+		
+		if (result1 > 0 && result2 > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result1 * result2;
+	}
 
 	/**
 	 * 상품 이미지 조회 2023-04-17 최명진

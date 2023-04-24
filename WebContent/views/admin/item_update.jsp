@@ -10,8 +10,11 @@
    <html lang="en">
       <head>
       	<%@ include file="common2.jsp" %>
+      	<%@ include file="summernote.jsp"%>
         <title><%= i.getItemName() %></title>
+       
       </head>
+      
 
       <style>
         #btn {
@@ -53,9 +56,8 @@
                     <div class="col form-floating mb-3"><input type="number" class="form-control" name="price" value="<%=i.getItemPrice()%>" /> <label for="floatingPassword">* 판매 가격</label></div>
 
                     <div class="col form-floating mb-3">
-                      <textarea class="form-control" name="text" style="height: 200px; resize: none; margin-bottom: 15px"><%=i.getItemText()%></textarea>
-                      <label for="floatingTextarea2">상품 상세설명</label>
-                    </div>
+                    <textarea id="summernote" name="content" required><%= i.getItemText() %></textarea>
+                  	</div>  
 
                     <div class="col form-floating mb-3"><input type="number" class="form-control" value="<%=i.getItemDiscount() * 100%>" name="discount" /> <label for="floatingPassword">할인율 (%)</label></div>
 
@@ -74,51 +76,17 @@
 
                     <div class="col form-floating mb-3">
                       <select class="form-select" id="category" name="category">
-                        <option value="제로음료" <% if (i.getItemCategory().equals("제로음료")) out.print("selected"); %>>제로음료</option>
-                        <option value="단백질" <% if (i.getItemCategory().equals("단백질")) out.print("selected"); %>>단백질</option>
+                        <option value="제로음료" <% if (i.getItemCategory().equals("제로음료")) out.print("selected"); %>>제로음료</option>                       
                         <option value="무가당" <% if (i.getItemCategory().equals("무가당")) out.print("selected"); %>>무가당</option>
+                        <option value="단백질" <% if (i.getItemCategory().equals("단백질")) out.print("selected"); %>>단백질</option>
+                        <option value="도시락" <% if (i.getItemCategory().equals("도시락")) out.print("selected"); %>>도시락</option>
+                        <option value="기타" <% if (i.getItemCategory().equals("기타")) out.print("selected"); %>>기타</option>
                       </select>
                       <label for="floatingSelect">* 카테고리</label>
                     </div>
 
                     <div id="titleImg">
-                    <% if(list.size() == 4) { %>
-                    <img id=detailImg1 src="<%= list.get(1).getItemImgPath() %>" class="img-thumbnail" style="width: 200px; height: 200px" />
-                    <p id="img1"><%= list.get(1).getItemImg() %></p>
-                    <img id=detailImg2 src="<%= list.get(2).getItemImgPath() %>" class="img-thumbnail" style="width: 200px; height: 200px" />
-                    <p id="img2"><%= list.get(2).getItemImg() %></p>
-                    <img id=detailImg3 src="<%= list.get(3).getItemImgPath() %>" class="img-thumbnail" style="width: 200px; height: 200px" />
-                    <p id="img3"><%= list.get(3).getItemImg() %></p>
-                    <% for(int j = 0; j<4; j++) { %>
-                    	<input type="hidden" name="name<%= j+1 %>" value="<%= list.get(j).getItemImg() %>">
-                    <%} } else if(list.size() == 3) {%>
-                    <img id=detailImg1 src="<%= list.get(1).getItemImgPath() %>" class="img-thumbnail" style="width: 200px; height: 200px" />
-                    <p id="img1"><%= list.get(1).getItemImg() %></p>
-                    <img id=detailImg2 src="<%= list.get(2).getItemImgPath() %>" class="img-thumbnail" style="width: 200px; height: 200px" />
-                    <p id="img2"><%= list.get(2).getItemImg() %></p>
-                    <img id=detailImg3 src="" class="img-thumbnail" style="width: 200px; height: 200px" />
-                    <p id="img3">3</p>
-                    <% for(int j = 0; j<3; j++) { %>
-                    	<input type="hidden" name="name<%= j+1 %>" value="<%= list.get(j).getItemImg() %>">
-                    <% } } else if(list.size() == 2) { %>
-                    <img id=detailImg1 src="<%= list.get(1).getItemImgPath() %>" class="img-thumbnail" style="width: 200px; height: 200px" />
-                    <p id="img1"><%= list.get(1).getItemImg() %></p>
-                    <img id=detailImg2 src="" class="img-thumbnail" style="width: 200px; height: 200px" />
-                    <p id="img2"><%= list.get(2).getItemImg() %></p>
-                    <img id=detailImg3 src="" class="img-thumbnail" style="width: 200px; height: 200px" />
-                    <p id="img3">3</p>
-                    <% for(int j = 0; j<2; j++)  { %>
-                    	<input type="hidden" name="name<%= j+1 %>" value="<%= list.get(j).getItemImg() %>">
-                    <% } } else if(list.size() == 1) { %>
-                    <img id=detailImg1 src="" class="img-thumbnail" style="width: 200px; height: 200px" />
-                    <p id="img1">1</p>
-                    <img id=detailImg2 src="" class="img-thumbnail" style="width: 200px; height: 200px" />
-                    <p id="img2">2</p>
-                    <img id=detailImg3 src="" class="img-thumbnail" style="width: 200px; height: 200px" />
-                    <p id="img3">3</p>
-                    <% for(int j = 0; j<1; j++) { %>
-                    	<input type="hidden" name="name<%= j+1 %>" value="<%= list.get(j).getItemImg() %>">
-                    <%  } } %>
+                    
                     
                     
                     </div>
@@ -128,9 +96,6 @@
 
                     <div id="file-area">
                       <input type="file" id="file1" name="file1" onchange="loadImg(this, 1);" />
-                      <input type="file" id="file2" name="file2" onchange="loadImg(this, 2);" />
-                      <input type="file" id="file3" name="file3" onchange="loadImg(this, 3);" />
-                      <input type="file" id="file4" name="file4" onchange="loadImg(this, 4);" />
                     </div>
                     	<input type="hidden" name="fileName" value=<%= i.getImgName() %> />
                     	<input type="hidden" name="code" value=<%= i.getItemCode() %> />
@@ -150,30 +115,9 @@
         <!-- layoutSidenav_content -->
 
         <script>
-        	
-        	  
-          	
-        
-      
-          $(function () {
-            $('#file-area').hide();
 
-            // 각 자리에 맞는 이미지 태그를 클릭했을 경우
-            // input type="file" 요소가 클릭되게끔 처리하기
-            $('#titleImg').click(function () {
-              $('#file1').click();
-            });
-            $('#detailImg1').click(function () {
-              $('#file2').click();
-            });
-            $('#detailImg2').click(function () {
-              $('#file3').click();
-            });
-            $('#detailImg3').click(function () {
-              $('#file4').click();
-            });
-            
-          });
+      
+   
 
           function loadImg(inputFile, num) {
             // inputFile = 현재 변화가 생긴 input type="file" 요소 객체
@@ -208,18 +152,6 @@
                     $('#titleImg').attr('src', e.target.result);
                     $('#img0').text(inputFile.files[0].name);
                     break;
-                  case 2:
-                    $('#detailImg1').attr('src', e.target.result);
-                    $('#img1').text(inputFile.files[0].name);
-                    break;
-                  case 3:
-                    $('#detailImg2').attr('src', e.target.result);
-                    $('#img2').text(inputFile.files[0].name);
-                    break;
-                  case 4:
-                    $('#detailImg3').attr('src', e.target.result);
-                    $('#img3').text(inputFile.files[0].name);
-                    break;
 
                   default:
                     break;
@@ -230,18 +162,6 @@
               switch (num) {
                 case 1:
                   $('#titleImg').attr('src', null);
-                  $('#titleImg').text('');
-                  break;
-                case 2:
-                  $('#detailImg1').attr('src', null);
-                  $('#titleImg').text('');
-                  break;
-                case 3:
-                  $('#detailImg2').attr('src', null);
-                  $('#titleImg').text('');
-                  break;
-                case 4:
-                  $('#detailImg3').attr('src', null);
                   $('#titleImg').text('');
                   break;
 
@@ -274,9 +194,7 @@
             $(this).val(numericValue);
           });
         </script>
-        <!-- <script src="assets/demo/chart-area-demo.js">
-    </script>
-    <script src="assets/demo/chart-bar-demo.js"></script>
-    -->
+        
+        <script src="/resources/js/admin/note.js"></script>
       </body>
     </html>

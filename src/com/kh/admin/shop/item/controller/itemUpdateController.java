@@ -40,8 +40,6 @@ public class itemUpdateController extends HttpServlet {
 
 		if (ServletFileUpload.isMultipartContent(request)) {
 			// 1_1. 전송 파일 용량 제한 : 10Mbyte로 제한한다면
-			ArrayList<ItemImg> originList = new ArrayList<ItemImg>();
-			
 			int maxSize = 1024 * 1024 * 10;
 
 			// 1_3. 파일 저장 경로(resources/thumbnail_upfiles)
@@ -54,12 +52,11 @@ public class itemUpdateController extends HttpServlet {
 			String name = multiRequest.getParameter("name");
 			int stock = Integer.parseInt(multiRequest.getParameter("stock"));
 			int price = Integer.parseInt(multiRequest.getParameter("price"));
-			String text = multiRequest.getParameter("text");
+			String text = multiRequest.getParameter("content");
 			double discount = Double.parseDouble(multiRequest.getParameter("discount"))*0.01;
 			String status = multiRequest.getParameter("status");
 			String category = multiRequest.getParameter("category");
 			
-			ArrayList<ItemImg> list = new ArrayList<ItemImg>();
 			Item it = new Item();
 			
 			it.setItemName(name);
@@ -70,42 +67,39 @@ public class itemUpdateController extends HttpServlet {
 			it.setItemStatus(status);
 			it.setItemCategory(category);
 			
+			String key = "file1";
 			
-			for (int i = 1; i <= 4; i++) {
-	            String fileKey = "file" + i;
-	            String nameKey = "name" + i;
-	            String originalFileName = multiRequest.getOriginalFileName(fileKey);
-	            if (originalFileName == null) {
-	                continue; // 파일 업로드 안한 경우 건너뜀
-	            }
-	            String fileSystemName = multiRequest.getFilesystemName(fileKey);
-	            File uploadedFile = new File(savePath + fileSystemName);
-	            if (!uploadedFile.exists()) {
-	                continue; // 업로드된 파일이 존재하지 않는 경우 건너뜀
-	            }
-	            String originalFileNames = multiRequest.getParameter(nameKey);
-	            File originalFile = new File(savePath + originalFileNames);
-	            if (originalFile.exists()) {
-	                originalFile.delete(); // 기존 파일 삭제
-	            }
-
-	            ItemImg itemImg = new ItemImg();
-	            itemImg.setItemImgPath(uploadedFile.getAbsolutePath());
-	            itemImg.setItemImgLevel(i == 1 ? 1 : 2);
-	            itemImg.setItemImgCode(code);
-	            list.add(itemImg);
-	            
-	            
-	            System.out.println(originalFileName);
-	            System.out.println(originalFileNames);
-	            System.out.println(itemImg);
-	        }
+			ItemImg at = null;
 			
+			if (multiRequest.getOriginalFileName(key) != null) {
+				// 첨부파일이 있을 경우
+				// Attachment 객체를 생성하여 파일 정보를 담는다.
+				at = new ItemImg();
 
-//			int result = new ItemService().updateItem(code, it, list);
+				at.setItemImgPath("/resources/item_upfiles/" + multiRequest.getFilesystemName(key));
+							
+				at.setItemImgLevel(1);
+				
+			}
+			
+			int result = new ItemService().updateItem(code, at, it);
+			
+			
+			if (result > 0) { // 성공
+
+				request.getSession().setAttribute("alertMsg", "상품 수정 성공");
+
+				response.sendRedirect("/itemList.ad?page=1&category=a");
+
+			} else {
+
+				request.getSession().setAttribute("alertMsg", "상품 수정 실패");
+
+				response.sendRedirect("/itemList.ad?page=1&category=a");
+			}
 		}
-
 	}
+
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
