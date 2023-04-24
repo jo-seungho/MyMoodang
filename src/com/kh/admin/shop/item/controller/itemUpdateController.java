@@ -37,37 +37,75 @@ public class itemUpdateController extends HttpServlet {
 
 		request.setCharacterEncoding("UTF-8");
 		
-		
-		int maxSize = 1024 * 1024 * 10;
 
-		// 1_3. 파일 저장 경로(resources/thumbnail_upfiles)
-		String savePath = request.getSession().getServletContext().getRealPath("/resources/item_upfiles/");
+		if (ServletFileUpload.isMultipartContent(request)) {
+			// 1_1. 전송 파일 용량 제한 : 10Mbyte로 제한한다면
+			ArrayList<ItemImg> originList = new ArrayList<ItemImg>();
+			
+			int maxSize = 1024 * 1024 * 10;
 
-		MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8",
-				new MyFileRenamePolicy());
-		
-		String[] fileNamed = multiRequest.getParameterValues("names");
-		int code = Integer.parseInt(multiRequest.getParameter("code"));
-		
-		ArrayList<ItemImg> list = new ItemService().selectImgList(code);
-		
-		
-//		for(ItemImg img : list) {
-//			System.out.println(img.getItemImgPath().substring(img.getItemImgPath().lastIndexOf("/") + 1));
-//		}
-		
-		 Enumeration<String> fileNames = multiRequest.getFileNames();
-	        while (fileNames.hasMoreElements()) {
-	        	String fileName = fileNames.nextElement();
-	        	 String originalFileName = multiRequest.getOriginalFileName(fileName);
-	             String fileSystemName = multiRequest.getFilesystemName(fileName);
-	             String contentType = multiRequest.getContentType(fileName);
-//	             File file = multiRequest.getFile(fileName); 파일을 올리는 메소드임
-	        	
-	        	System.out.println("있었던 파일 이름 : " + fileNamed);
+			// 1_3. 파일 저장 경로(resources/thumbnail_upfiles)
+			String savePath = request.getSession().getServletContext().getRealPath("/resources/item_upfiles/");
+
+			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8",
+					new MyFileRenamePolicy());
+
+			int code = Integer.parseInt(multiRequest.getParameter("code"));
+			String name = multiRequest.getParameter("name");
+			int stock = Integer.parseInt(multiRequest.getParameter("stock"));
+			int price = Integer.parseInt(multiRequest.getParameter("price"));
+			String text = multiRequest.getParameter("text");
+			double discount = Double.parseDouble(multiRequest.getParameter("discount"))*0.01;
+			String status = multiRequest.getParameter("status");
+			String category = multiRequest.getParameter("category");
+			
+			ArrayList<ItemImg> list = new ArrayList<ItemImg>();
+			Item it = new Item();
+			
+			it.setItemName(name);
+			it.setItemStock(stock);
+			it.setItemPrice(price);
+			it.setItemText(text);
+			it.setItemDiscount(discount);
+			it.setItemStatus(status);
+			it.setItemCategory(category);
+			
+			
+			for (int i = 1; i <= 4; i++) {
+	            String fileKey = "file" + i;
+	            String nameKey = "name" + i;
+	            String originalFileName = multiRequest.getOriginalFileName(fileKey);
+	            if (originalFileName == null) {
+	                continue; // 파일 업로드 안한 경우 건너뜀
+	            }
+	            String fileSystemName = multiRequest.getFilesystemName(fileKey);
+	            File uploadedFile = new File(savePath + fileSystemName);
+	            if (!uploadedFile.exists()) {
+	                continue; // 업로드된 파일이 존재하지 않는 경우 건너뜀
+	            }
+	            String originalFileNames = multiRequest.getParameter(nameKey);
+	            File originalFile = new File(savePath + originalFileNames);
+	            if (originalFile.exists()) {
+	                originalFile.delete(); // 기존 파일 삭제
+	            }
+
+	            ItemImg itemImg = new ItemImg();
+	            itemImg.setItemImgPath(uploadedFile.getAbsolutePath());
+	            itemImg.setItemImgLevel(i == 1 ? 1 : 2);
+	            itemImg.setItemImgCode(code);
+	            list.add(itemImg);
+	            
+	            
+	            System.out.println(originalFileName);
+	            System.out.println(originalFileNames);
+	            System.out.println(itemImg);
 	        }
-		
+			
+
+//			int result = new ItemService().updateItem(code, it, list);
 		}
+
+	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

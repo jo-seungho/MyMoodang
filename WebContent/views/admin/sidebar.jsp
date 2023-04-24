@@ -40,7 +40,7 @@
 						<div class="sb-nav-link-icon">
 							<i class="fas fa-home"></i>
 						</div> 메인 / 통계
-					</a> <a class="nav-link" href="/itemList.ad">
+					</a> <a class="nav-link" href="/itemList.ad?category=a">
 						<div class="sb-nav-link-icon">
 							<i class="fa fa-fw fa-gift"></i>
 						</div> 상품 관리
