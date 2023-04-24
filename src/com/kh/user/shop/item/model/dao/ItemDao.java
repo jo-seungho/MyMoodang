@@ -396,7 +396,11 @@ public class ItemDao {
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("selectItemList");
 		
-		//필터에 따른 정렬 구분
+	    /**
+	     * 상품 필터 기능
+	     * 2023-04-25 이태화
+	     */
+		//--------필터에 따른 정렬 구분------------------------------------
 		if(filter.equals("1")) {	//낮은가격
 			sql += prop.getProperty("selectItemList_lowPrice");
 		} 
@@ -412,6 +416,7 @@ public class ItemDao {
 		else if( filter.equals("전체")) {	//전체보기
 			sql += prop.getProperty("selectItemList_all");
 		}
+		//----------------------------------------------------------
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -450,8 +455,8 @@ public class ItemDao {
 		}
 		
 		return list;
-	}
-
+	 }
+	
     /**
      * 인기 리스트 조회
      * 2023-04-17 조승호
@@ -718,6 +723,54 @@ public class ItemDao {
 		return list;
 	}
 
+	public ArrayList<Item> selectItemListSearch(Connection conn, PageInfo pi, String category, String keyword) {
+		
+		ArrayList<Item> list = new ArrayList<>();
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("selectItemListSearch");
+		
+		
+		try {
+		pstmt = conn.prepareStatement(sql);
+			
+		int startRow = (pi.getCurrentPage() -1) * pi.getBoardLimit() + 1;
+		int endRow = pi.getCurrentPage() * pi.getBoardLimit();
+		
+		
+		pstmt.setString(1, category);
+		pstmt.setString(2, category);
+		pstmt.setString(3, keyword);
+		pstmt.setInt(4, startRow);
+		pstmt.setInt(5, endRow);
+		
+		rset = pstmt.executeQuery();
+		
+		while(rset.next()) {
+			list.add(new Item(
+					  rset.getInt("ITEM_CODE")
+					, rset.getString("ITEM_DATE")
+					, rset.getString("ITEM_CATEGORY")
+					, rset.getString("ITEM_IMG_PATH")
+					, rset.getString("ITEM_NAME")
+					, rset.getString("ITEM_TEXT")
+					, rset.getInt("ITEM_STOCK")
+					, rset.getInt("ITEM_PRICE")
+					, rset.getInt("ITEM_HITS")
+					, rset.getString("ITEM_STATUS")
+					));
+		}
+		
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		close(rset);
+		close(pstmt);
+	}
+	
+	return list;
+ 
 
+	}
 }
 

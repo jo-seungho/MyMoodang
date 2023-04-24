@@ -281,5 +281,16 @@ public class ItemService {
 		return list;
 	}
 
+	public ArrayList<Item> selectItemListSearch(PageInfo pi, String category, String keyword) {
+		
+		Connection conn = getConnection();
+		
+		ArrayList<Item> list = new ItemDao().selectItemListSearch(conn, pi, category,keyword);
+		
+		close(conn);
+		
+		return list;
+	}
+
 	
 }

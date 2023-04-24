@@ -286,61 +286,48 @@
 
     <script>
 
+    
+	// 상품 전체 검색 기능 
+	// 2023-04-23
+	// 이태화
+		function itemSearch() {
+		    var keyword = document.getElementById("keyword").value;
+		    location.href="itemList.se?currentPage=1&category=전체&keyword="+keyword;
 
-    	$(document).ready(function() {
+			
+		    }
+			
+		$("#keyword").on('keyup', function(e) {
+		    if (e.keyCode === 13) { // 엔터키
+		        e.preventDefault();
+		        itemSearch();
+		    }
+		});
 
-    		$.ajax({
-
-    			url: "count",
-    			type: "get",
-    			success: function(res) {
-    				$('.itemCount').text(res);
-    			},
-    			error: function(err) {
-    				console.log(err);
-    			}
-
-    		})
-
-
-    		console.log($('.itemCount').text())
-  	        let msg = '<%= alertMsg == null ? "" : alertMsg %>';
-          	if(msg != null && msg.length > 0) {
-          		alert(msg);
-          		<% session.removeAttribute("alertMsg"); %>
-          	}
-
-          	//----------------------------------------------------
-          	let emsg = '<%= errorMsg == null ? "" : errorMsg %>';
-          	if(emsg != null && emsg.length > 0) {
-          		alert(emsg);
-
-          	}
-
-
-			// 상품 전체 검색 기능
-			// 2023-04-23
-			// 이태화
-			function itemSearch() {
-				var keyword = $("#keyword").val();
-				alert(keyword);
-				location.href="itemList.it?currentPage=1&category=전체&keyword="+keyword;
-
-			}
-
-    	})
-
-
-
-
-
-			function itemSearchOnEnter(event) {
-				  if (event.keyCode === 13) {
-				    itemSearch();
-				  }
-
-				$("#keyword").on("keypress", itemSearchOnEnter);
-			}
-
-
+	//-------------------------------------------------------------------------------------
+		
+		$(document).ready(function() {
+	    $.ajax({
+	        url: "count",
+	        type: "get",
+	        success: function(res) {
+	            $('.itemCount').text(res);
+	        },
+	        error: function(err) {
+	            console.log(err);
+	        }
+	    });
+	    
+	    let msg = '<%= alertMsg == null ? "" : alertMsg %>';
+	    if(msg != null && msg.length > 0) {
+	        alert(msg);
+	        <% session.removeAttribute("alertMsg"); %>
+	    }
+	
+	    let emsg = '<%= errorMsg == null ? "" : errorMsg %>';
+	    if(emsg != null && emsg.length > 0) {
+	        alert(emsg);
+	    }
+		});
+    
     </script>
