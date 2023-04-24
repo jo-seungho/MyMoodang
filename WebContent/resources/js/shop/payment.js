@@ -93,6 +93,9 @@ $(function () {
 
         if (num == 1) {
             $(this).parents('.price').find('.selling').text(parseInt(price1) + parseInt(price1) + ' 원')
+            $('.countMoney').text(totalPrices + (price%2));
+    		$('.noDiscount').text(noDisC + noDiscount);
+    		$('.difference').text((noDisC + noDiscount) - (totalPrices + (price%2)));
         }
         if (num > 1) {
             $(this).parents('.price').find('.selling').text(parseInt(price1) * (parseInt(num) + 1) + ' 원')
@@ -190,39 +193,39 @@ $(function () {
 
 
 
-function sel_all(selectAll) { /* 전체선택버튼 활성화 */
-    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-    
-    let sumMoney = 0;
-    // 원가 총 금액 담을 변수
-    let sumNoDis = 0;
-    $('.in_price').each(function() {
-    	var totalMoneyVal = $(this).find('.totalMoney').val();
-    	var noDisMoney = $(this).find('.noDisTotal').val();
-    	sumMoney += Number(totalMoneyVal);
-    	sumNoDis += Number(noDisMoney)
-    });
-    
-    $('.countMoney').text(sumMoney);
-    $('.noDiscount').text(sumNoDis);
-    $('.difference').text(sumNoDis - sumMoney);
-
-    checkboxes.forEach((checkbox) => {
-        if (selectAll.checked) {
-        	checkbox.checked = selectAll.checked
-        } else {
-        	checkbox.checked = selectAll.unChecked
-        	$('.countMoney').text(0);
-        	$('.noDiscount').text(0);
-        	$('.difference').text(0);
-
-        }
-    });
-    
-	
-    
-    
-}
+//function sel_all(selectAll) { /* 전체선택버튼 활성화 */
+//    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+//    
+//    let sumMoney = 0;
+//    // 원가 총 금액 담을 변수
+//    let sumNoDis = 0;
+//    $('.in_price').each(function() {
+//    	var totalMoneyVal = $(this).find('.totalMoney').val();
+//    	var noDisMoney = $(this).find('.noDisTotal').val();
+//    	sumMoney += Number(totalMoneyVal);
+//    	sumNoDis += Number(noDisMoney)
+//    });
+//    
+//    $('.countMoney').text(sumMoney);
+//    $('.noDiscount').text(sumNoDis);
+//    $('.difference').text(sumNoDis - sumMoney);
+//
+//    checkboxes.forEach((checkbox) => {
+//        if (selectAll.checked) {
+//        	checkbox.checked = selectAll.checked
+//        } else {
+//        	checkbox.checked = selectAll.unChecked
+//        	$('.countMoney').text(0);
+//        	$('.noDiscount').text(0);
+//        	$('.difference').text(0);
+//
+//        }
+//    });
+//    
+//	
+//    
+//    
+//}
 
 function del_row(ths) {
 	var itemCodeString = $(ths).parent().find('.itemCodeOne').val();
