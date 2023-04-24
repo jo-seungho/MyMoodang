@@ -354,7 +354,7 @@
 							
 						          <tr>
 						            <th onclick="sortTable(0)" width="100px">번호</th>
-						            <th onclick="sortTable(1)" width="70px">작성일</th>
+						            <th onclick="sortTable(1)" width="100px">작성일</th>
 						            <th onclick="sortTable(2)" width="120px">별점</th>
 						            <th onclick="sortTable(3)">제목</th>
 						            <th onclick="sortTable(4)"width="100px">작성자</th>

@@ -47,7 +47,7 @@
 								</span> <span class="tit">전체보기</span>
 							</div>
 							<ul id="colorTest" class="list">
-								<li name="allprice"><a class="allprice" href="#">전체보기</a></li>
+								
 								<li name="lowprice"><a class="lowprice" href="#" class=>낮은가격순</a></li>
 								<li name="highprice"><a class="highprice" href="#" class=>높은가격순</a></li>
 								<li name="dateprice"><a class="dateprice" href="#" class=>등록일순</a></li>
