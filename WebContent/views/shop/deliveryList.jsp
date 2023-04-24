@@ -4,17 +4,24 @@
 수정하기 버튼 클릭 시 수정창 호출되게 작성 예정 */
 / 이지환  -->
 
+<!-- 2023.04.23 이지환 
+	popUp_change function의 매개변수에 shipNo 추가,
+	수정하기 버튼의  팝업 function 안에 
+	/*	<%-- 		(<%= shipAddress.getShipNo() %>) 스클립틀릿 구문 추가 --%>
+-->
+
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
 <%@ page import="java.util.ArrayList, com.kh.user.member.model.vo.ShippingAddress" %>
 
 <!-- 2023.04.19 deliveryList.controller 로부터 개인 회원의 배송지 목록 호출 -->
-<%
-	// 조회된 list 를 request 로부터 뽑아내기
+<% // 조회된 list 를 request 로부터 뽑아내기
 	ArrayList<ShippingAddress> list = (ArrayList<ShippingAddress>)request.getAttribute("list");
 %>
-<%  ShippingAddress l = (ShippingAddress)request.getAttribute("l");%>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -43,14 +50,28 @@
             window.open(url, name, option);
         }
 
-        function popup_change(){    //수정
+        function popup_change(shipNo){    //수정
             var popupX = (window.screen.width / 2) - (530 / 2);   // 팝업창을 가운데 띄우기 위한거
             var popupY = (window.screen.height / 2) - (510 / 2);
-            var url = "delivery_modify.html";        // var url = "product_modify/"+ id;
+            var url = "http://localhost:8082/updateForm.de?shipNo=" + shipNo;        // var url = "product_modify/"+ id;
             var name = "popup";
             var option = "width = 530, height = 510, top = " + popupY + " , left = " + popupX + " , location = no"
             window.open(url, name, option);
         }
+        
+        <% if(session.getAttribute("alertMsg") != null && (boolean)session.getAttribute("isSuccess")){ %>
+        alert("<%= session.getAttribute("alertMsg") %>");
+        
+        <% session.removeAttribute("alertMsg"); %>
+
+        
+        <%-- 2023.04.24 / 팝업창을 닫고, 부모창 기준으로 새로 고침한다( opener.location.reload() ) / 이지환 --%>
+        window.close();
+        opener.location.reload();
+
+
+    <% } %>
+
     </script>
   </head>
   <body>
@@ -155,7 +176,7 @@
 								                    </span>
 								                </td>
 								                <td>
-								                    <button type="button" class="ico modify" onclick="popup_change()">
+								                    <button type="button" class="ico modify" onclick="popup_change(<%= shipAddress.getShipNo() %>)">
 								                        수정하기
 								                    </button>
 								                </td>

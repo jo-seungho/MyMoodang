@@ -176,8 +176,45 @@ $(document).ready(function () {
   });
 
 
+/*
+  function popup_close() { 
+		$.ajax({
+		        type: "POST",
+		        url: "/update.de",
+		        data: $("#inputForm form").serialize(),
+		        success: function(result) {
+		            if (result.isSuccess) {
+		                alert("성공적으로 배송지 정보가 수정되었습니다.");
+		                location.reload(); // 새로고침
+		            } else {
+		                alert("배송지 정보 수정에 실패했습니다.");
+		            }
+		        },
+		        error: function(xhr, status, error) {
+		            alert("에러 발생");
+		        }
+		    });
+		} 
+		*/
+		
+  /*
+  $.ajax({
+      type : "GET",
+      url : "/update",
+      dataType : "text",
+      error : function() {
+        alert('통신실패!!');
+        clearInterval(playTimer);
+      },
+      success : function(data) {
+        //alert(data);
+        $('#업데이트할 대상').html(data);
+      }
 
-
+    });
+  }
+  */
+  
 
 
 
