@@ -92,7 +92,7 @@
                                     <br>
                                         <div class="thumb" style="background-image: url(https://res.kurly.com/mobile/img/1808/img_none_x2.png);">
                                             <img src="<%= i.getItemImg() %>" alt="상품 대표 이미지" class="bg" style="height : 438px;"> 
-            
+            								
                                         </div>
                                         <p class="goods_name">
                                             
@@ -102,7 +102,7 @@
                                             <span class="position">
                                                 <span class="dc">
                                                     <span>
-                                                        <span class="discount" style="font-size: 22px; font-weight: 400; color: red;">30<!--<%= i.getItemDiscount() %>-->%&nbsp;</span>
+                                                        <span class="discount" style="font-size: 22px; font-weight: 400; color: red;"><%= (Double.toString(i.getItemDiscount() *100)).substring(0,2) %>%&nbsp;</span>
                                                     
                                                     </span>
                                                     <span style="font-size: 15px; font-weight: 400; color: red;">
@@ -111,8 +111,8 @@
                                                         
                                                     </span>
                                                     <span class="dc_price" style="font-size: 15px; font-weight: 400; color: red;">
-                                                    <span class="won" style="font-size: 22px; margin-top: 10%;">&nbsp;<b><%= i.getDiscountPrice() %>원</b></span>
-                                                	<input class="priceItem" type="hidden" value="<%= i.getDiscountPrice() %>">
+                                                    <span class="won" style="font-size: 22px; margin-top: 10%;">&nbsp;<b><%= i.getDiscountPrice()%></b></span>
+                                                	<input class="priceItem" type="hidden" value="<%= i.getDiscountPrice()%>">
                                                 	</span>
                                                 </span>
                                                 
@@ -138,7 +138,7 @@
                                             </dl>
                                             <dl class="list">
                                                 <dt class="tit">할인율</dt>
-                                                <dd class="desc"><%= i.getItemDiscount() %>%</dd>
+                                                <dd class="desc"><%= (Double.toString(i.getItemDiscount() *100)).substring(0,2) %>%</dd>
                                             </dl>
                                             <dl class="list">
                                                 <dt class="tit">카테고리</dt>
