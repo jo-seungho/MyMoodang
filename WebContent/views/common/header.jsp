@@ -324,21 +324,20 @@
 				alert(keyword);
 				location.href="itemList.it?currentPage=1&category=전체&keyword="+keyword;
 
-		}
+			}
 
     	})
 
-          	
-          	
 
-		
+
+
+
 			function itemSearchOnEnter(event) {
 				  if (event.keyCode === 13) {
 				    itemSearch();
 				  }
-				}
 
 				$("#keyword").on("keypress", itemSearchOnEnter);
-        }
+			}
 
     </script>
