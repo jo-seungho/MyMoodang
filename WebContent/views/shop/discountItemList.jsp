@@ -76,15 +76,15 @@
 				<div class="banner_wrapper">
 					<div class="slider">
 						<div class="imgs">
-							<img src="/resources/img/배너1.jpg" align="center">
+							<img src="/resources/img/banner1.png" align="center">
 						</div>
 
 						<div class="imgs">
-							<img src="/resources/img/배너2.jpg" align="center">
+							<img src="/resources/img/banner6.png" align="center">
 						</div>
 
 						<div class="imgs">
-							<img src="/resources/img/배너3.jpg" align="center">
+							<img src="/resources/img/banner7.png" align="center">
 						</div>
 					</div>
 				</div>

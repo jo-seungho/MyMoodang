@@ -54,9 +54,11 @@
                     <div class="col form-floating mb-4"><input type="text" class="form-control" name="name" value="<%=i.getItemName()%>" /> <label for="floatingInput">* 상품명</label></div>
                     <div class="col form-floating mb-3"><input type="number" class="form-control" name="stock" value="<%=i.getItemStock()%>" /> <label for="floatingPassword">* 수량(재고)</label></div>
                     <div class="col form-floating mb-3"><input type="number" class="form-control" name="price" value="<%=i.getItemPrice()%>" /> <label for="floatingPassword">* 판매 가격</label></div>
+					
+					<div class="col form-floating mb-4"><input type="text" class="form-control" name="text" value="<%=i.getItemText()%>" /> <label for="floatingInput">* 상품설명</label></div>
 
                     <div class="col form-floating mb-3">
-                    <textarea id="summernote" name="content" required><%= i.getItemText() %></textarea>
+                    <textarea id="summernote" name="content" required><%= i.getDescription() %></textarea>
                   	</div>  
 
                     <div class="col form-floating mb-3"><input type="number" class="form-control" value="<%=i.getItemDiscount() * 100%>" name="discount" /> <label for="floatingPassword">할인율 (%)</label></div>

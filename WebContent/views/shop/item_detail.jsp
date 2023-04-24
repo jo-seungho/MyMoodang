@@ -262,9 +262,7 @@
                                   <li class="goods-view-infomation-tab">
                                       <a href="#goods-description" class="goods-view-infomation-tab-anchor __active">상품설명</a>
                                   </li>
-                                  <li class="goods-view-infomation-tab">
-                                      <a href="#goods-image" class="goods-view-infomation-tab-anchor">상품이미지</a>
-                                  </li>
+                                  
                                   <li class="goods-view-infomation-tab">
                                       <a href="#goods-review" class="goods-view-infomation-tab-anchor">
                                           고객리뷰
@@ -276,7 +274,6 @@
                                   <div class="goods_wrap">
                                       <div class="goods_intro">
                                           <div class="pic">
-                                              <img src="<%= i.getItemImg() %>" style="width:1010px; height:671px;">
                                           </div>
                                           <div class="context last">
                                               <h3>
@@ -285,9 +282,10 @@
                                                   </small>
                                                   <%= i.getItemText() %>
                                               </h3>
-                                              <p class="words">
-                                                  <img src="<%= i.getItemImg() %>" style="width:1010px; height:671px;">
-                                              </p>
+                                              <br><br>
+                                              <div style="text-align:center;">
+                                              <%= i.getDescription() %>
+                                              </div>
       
                                           </div>
                                       </div>  
@@ -295,27 +293,7 @@
                                   </div>
                               </div>
                           	</div>
-                                <ul class="goods-view-infomation-tab-group" style="display: flex; align-content: stretch; justify-content: center; ">
-                                  <li class="goods-view-infomation-tab">
-                                      <a href="#goods-description" class="goods-view-infomation-tab-anchor">상품설명</a>
-                                  </li>
-                                  <li class="goods-view-infomation-tab">
-                                      <a href="#goods-image" class="goods-view-infomation-tab-anchor __active">상품이미지</a>
-                                  </li>
-                                  <li class="goods-view-infomation-tab">
-                                      <a href="#goods-review" class="goods-view-infomation-tab-anchor">
-                                          고객리뷰
-                                          <span class="count_review">(0)</span>
-                                      </a>
-                                  </li>
-                              </ul>
-                              <div class="goods-view-infomation-content" id="goods-image">
-                                  <div id="goods_pi">
-                                      <p class="pic">
-                                          <img src="">
-                                      </p>
-                                  </div>
-                              </div>
+                                
                                     
 
                                         <div class="happy_center fst">
@@ -323,11 +301,7 @@
                                   <li class="goods-view-infomation-tab">
                                       <a href="#goods-description" class="goods-view-infomation-tab-anchor">상품설명</a>
                                   </li>
-                                  <li class="goods-view-infomation-tab">
-                                      <a href="#goods-image" class="goods-view-infomation-tab-anchor">상품이미지</a>
-                                  </li>
-
-
+                                 
                                   <li class="goods-view-infomation-tab">
                                       <a href="#goods-review" class="goods-view-infomation-tab-anchor __active">
                                           고객리뷰

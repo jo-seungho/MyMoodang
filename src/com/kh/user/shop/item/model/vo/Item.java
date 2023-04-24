@@ -16,8 +16,12 @@ public class Item {
 	private String itemImg;
 	private String itemStatus;
 	private int discountPrice; // 상품할인가격추가
+	private String description; // 상품 설명
 	
 	
+
+
+
 	public Item() { }
 
 
@@ -59,7 +63,7 @@ public class Item {
      * @return
      */
 	public Item(int itemCode, String itemDate, String itemCategory, String itemImg, String itemName
-			, String itemText, int itemStock, int itemPrice, int item_hits, String itemStatus) {
+			, String itemText, int itemStock, int itemPrice, int item_hits, String itemStatus, String description) {
 		super();
 		this.itemCode = itemCode;
 		this.itemDate = itemDate;
@@ -71,6 +75,7 @@ public class Item {
 		this.itemPrice = itemPrice;
 		this.item_hits = item_hits;
 		this.itemStatus = itemStatus;
+		this.description = description;
 	}
 
 
@@ -81,7 +86,7 @@ public class Item {
      * @return
      */
 	public Item(int itemCode, String itemCategory, String itemDate, int itemPrice, int discountPrice, String itemName, String itemText,
-			double itemDiscount, String itemImg) {
+			double itemDiscount, String itemImg, String description) {
 		super();
 		this.itemCode = itemCode;
 		this.itemCategory = itemCategory;
@@ -92,6 +97,7 @@ public class Item {
 		this.itemText = itemText;
 		this.itemDiscount = itemDiscount;
 		this.itemImg = itemImg;
+		this.description = description;
 	}
 
 
@@ -192,6 +198,15 @@ public class Item {
 
 	public void setDiscountPrice(int discountPrice) {
 		this.discountPrice = discountPrice;
+	}
+	
+	public String getDescription() {
+		return description;
+	}
+
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 

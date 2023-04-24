@@ -52,7 +52,8 @@ public class itemUpdateController extends HttpServlet {
 			String name = multiRequest.getParameter("name");
 			int stock = Integer.parseInt(multiRequest.getParameter("stock"));
 			int price = Integer.parseInt(multiRequest.getParameter("price"));
-			String text = multiRequest.getParameter("content");
+			String text = multiRequest.getParameter("text");
+			String content = multiRequest.getParameter("content");
 			double discount = Double.parseDouble(multiRequest.getParameter("discount"))*0.01;
 			String status = multiRequest.getParameter("status");
 			String category = multiRequest.getParameter("category");
@@ -63,6 +64,7 @@ public class itemUpdateController extends HttpServlet {
 			it.setItemStock(stock);
 			it.setItemPrice(price);
 			it.setItemText(text);
+			it.setDescription(content);
 			it.setItemDiscount(discount);
 			it.setItemStatus(status);
 			it.setItemCategory(category);

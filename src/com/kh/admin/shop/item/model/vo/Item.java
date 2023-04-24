@@ -16,6 +16,8 @@ public class Item {
 	private String itemImg;
 	private String itemStatus;
 	
+	private String description;
+	
 	private String ImgName;
 	
 	private int discountPrice;
@@ -158,6 +160,14 @@ public class Item {
 
 	public void setDiscountPrice(int discountPrice) {
 		this.discountPrice = discountPrice;
+	}
+	
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	@Override
