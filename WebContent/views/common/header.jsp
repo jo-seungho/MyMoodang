@@ -316,7 +316,7 @@
 	            console.log(err);
 	        }
 	    });
-	    console.log($('.itemCount').text())
+	    
 	    let msg = '<%= alertMsg == null ? "" : alertMsg %>';
 	    if(msg != null && msg.length > 0) {
 	        alert(msg);
