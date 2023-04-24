@@ -94,7 +94,9 @@ public class itemReviewDao {
 
         try{
             pstmt = conn.prepareStatement(sql);
+            //pstmt.setString(1, re.getTitle());
             pstmt.setString(1, re.getContent());
+            //pstmt.setInt(3, re.getStarPoint());
             pstmt.setInt(2, re.getReviewNo());
 
             result = pstmt.executeUpdate();

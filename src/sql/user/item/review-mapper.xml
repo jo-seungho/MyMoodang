@@ -51,14 +51,10 @@
 		<entry key="updateReview">
 		   UPDATE REVIEW
     	   SET 
-<!--     	   	TITLE = ? -->
-      		  CONTENT = ?
-<!--              , STAR_POINT = ? -->
-            WHERE REVIEW_NO = ? <!-- 상품 코드로 조건을 걸어야할지
-            						 리뷰 코드로 조건을 걸어야할지 의문
-            						 리뷰 수정은 제목과, 내용, 별점만 수정하면 되는데
-            						 상품코드와 회원번호도 같이 쿼리 문에 넣어야하는지 -->
-            
+<!--     	      TITLE = ?  -->
+      		CONTENT = ?
+<!--            ,STAR_POINT = ?  -->
+            WHERE REVIEW_NO = ?
             
 		</entry>
 

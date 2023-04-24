@@ -209,7 +209,6 @@ public class ItemDao {
 
             pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, bno);
-            System.out.println(bno);
             
             rset = pstmt.executeQuery();
 
@@ -229,8 +228,6 @@ public class ItemDao {
 				re.setMemberId(rset.getString("MEMBER_ID"));
 
 				list.add(re);
-
-				System.out.println(rset.getString("TITLE"));
                 
        
             }
