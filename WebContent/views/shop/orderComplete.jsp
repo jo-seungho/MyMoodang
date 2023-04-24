@@ -1,5 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import="java.util.ArrayList,java.util.Arrays, com.kh.user.shop.order.model.vo.Order"%>
+<%
+	ArrayList<Order> list = (ArrayList<Order>)request.getAttribute("list");
+	
+	int[] orderNos = new int[list.size()];
+	int index = 0;
+	int totalPrice = 0;
+	String uid = "";
+	String name = "";
+	String date = "";
+	String phone = "";
+	String address = "";
+	
+	
+	for(Order o : list) {
+		orderNos[index++] = o.getOrderNo();
+		totalPrice = o.getPaymentAmount();
+		uid = o.getTrackingNo();
+		name = o.getMemberName();
+		date = o.getOrderDate();
+		phone = o.getResPhone();
+		address = o.getAddress();
+	}
+	
+%>	
+	
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,9 +59,9 @@
 						<div class="head_aticle">
 							<h2 class="tit">주문내역</h2>
 						</div>
-
+						
 						<div class="head_section link_type">
-							<h3 class="tit">주문번호 [주문번호 입력]</h3>
+							<h3 class="tit">주문번호 : <%= orderNos[0] %></h3>
 							<span class="link"> 배송 또는 상품에 문제가 있나요? <a href="#">1:1
 									문의하기</a>
 							</span>
@@ -55,25 +80,24 @@
 								
 								
 								<!-- 상품내역 -->
+								<% for(Order or : list) { %>
 									<tr>
-										<td class="thumb"><a href="javascript:void(0)"
-											style="background-image: url(https://res.kurly.com/mobile/img/1808/img_none_x2.png)"></a>
+										<td class="thumb">
+											<img src="<%= or.getItemImg() %>">
 										</td>
 										<td class="info">
 											<div class="name">
-												<a href="javascript:void(0)" class="link">[상품명]</a>
+												<a href="javascript:void(0)" class="link">[<%= or.getItemName() %>]</a>
 											</div>
-											<div class="name_package">
-												<a href="javascript:void(0)" class="link">[상품 카테고리]</a>
-											</div>
-
 											<div class="desc">
-												<span class="price">가격</span> <span class="ea">0개</span>
+												<span class="price"><%= (int)(Math.log10(or.getItemPrice())+1) > 3
+														  ?  Integer.toString(or.getItemPrice()).replaceAll("\\B(?=(\\d{3})+(?!\\d))", ",")
+														  : or.getItemPrice() %>원</span> <span class="ea">수량 : <%= or.getQuantity() %></span>
 											</div>
 										</td>
 										<td class="progress" colspan="2"><span class="end"> 결제완료 </span></td>
 									</tr>
-									
+								  <% } %>	
 								<!-- 상품내역 끝 -->
 								</tbody>
 							</table>
@@ -92,7 +116,9 @@
 							<tbody>
 								<tr>
 									<th>상품금액</th>
-									<td><span id="paper_goodsprice"> 0 </span> 원</td>
+									<td><span id="paper_goodsprice"> <%= (int)(Math.log10(totalPrice)+1) > 3
+														  ?  Integer.toString(totalPrice).replaceAll("\\B(?=(\\d{3})+(?!\\d))", ",")
+														  : totalPrice %> </span> 원</td>
 								</tr>
 
 								<tr>
@@ -102,7 +128,9 @@
 
 								<tr>
 									<th>결제금액</th>
-									<td><span id="paper_settlement"> 999,999,999 </span> 원</td>
+									<td><span id="paper_settlement"> <%= (int)(Math.log10(totalPrice)+1) > 3
+														  ?  Integer.toString(totalPrice + 3000).replaceAll("\\B(?=(\\d{3})+(?!\\d))", ",")
+														  : totalPrice %> </span> 원</td>
 								</tr>
 
 								<tr>
@@ -127,22 +155,22 @@
 							<tbody>
 								<tr>
 									<th>주문 번호</th>
-									<td>[주문 번호]</td>
+									<td>[<%= uid %>]</td>
 								</tr>
 
 								<tr>
 									<th>주문자명</th>
-									<td>[이름]</td>
+									<td>[<%= name %>]</td>
 								</tr>
 
 								<tr>
 									<th>보내는 분</th>
-									<td>[이름]</td>
+									<td>[<%= name %>]</td>
 								</tr>
 
 								<tr>
 									<th>결제일시</th>
-									<td>[날짜데이터 ex)2020-12-17 12:29:04]</td>
+									<td>[<%= date %>]</td>
 								</tr>
 							</tbody>
 						</table>
@@ -160,17 +188,17 @@
 							<tbody>
 								<tr>
 									<th>받는 분</th>
-									<td>[이름]</td>
+									<td>[<%= name %>]</td>
 								</tr>
 
 								<tr>
 									<th>핸드폰</th>
-									<td>010-1111-1234</td>
+									<td><%= phone %></td>
 								</tr>
 
 								<tr>
 									<th>주소</th>
-									<td>[우편번호] [상세주소]</td>
+									<td><%= address %></td>
 								</tr>
 
 								<tr>

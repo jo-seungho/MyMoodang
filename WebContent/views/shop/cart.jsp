@@ -267,7 +267,7 @@
 				// console.log(rsp);
 			    if ( rsp.success ) {
 			    	var msg = '결제가 완료되었습니다.';
-			    	insertOrder();
+			    	insertOrder(rsp.imp_uid);
 			        // location.href = '/orderComplete';
 			    } else {
 			    	 var msg = '결제에 실패하였습니다.';
@@ -278,22 +278,41 @@
 		}
 
 		// 주문완료시 order 테이블에 상품 담는 용도
-		function insertOrder() {
+		function insertOrder(orderUid) {
 			$.ajax({
 				
 				url: "insertOrder",
 				type: "post",
 				data: {
-					totalPay: parseInt($('.countMoney').text())
+					totalPay: parseInt($('.countMoney').text()),
+					orderUid: orderUid
 				},
 				success: function(res) {
-					// insertItemList();
+					insertItemList()
 				},
 				error: function(err) {
 					console.log(err);
 				}
 			})
 		}
+		
+		
+		
+		function insertItemList() {
+			$.ajax({
+				
+				url: "insertListItem",
+				type: "post",
+				success: function(res) {
+					deleteCart();
+				},
+				error: function(err) {
+					console.log(err);
+				}
+				
+			})
+		}
+		
 		
 		function deleteCart() {
 			
