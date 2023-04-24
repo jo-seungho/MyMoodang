@@ -29,11 +29,11 @@ function inquiryInsert_btn() {
 		return false;
 	}
 
-	var data = {type : $type.val()
+	let data = {type : $type.val()
 			  , title : $title.val()
 			  , content : $content.val()};
 
-	console.log(data);
+	console.log("1:1문의 작성", data);
 
 	$.ajax({
 			url : "insert.in"

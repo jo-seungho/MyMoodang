@@ -159,7 +159,7 @@ public class ItemDao {
 
 		// 2. 쿼리문 작성
 		String sql = prop.getProperty("selectItemList");
-
+		
 		// 3. 쿼리문 실행
 		try {
 			pstmt = conn.prepareStatement(sql);

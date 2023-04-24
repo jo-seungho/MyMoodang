@@ -186,7 +186,7 @@
                                                                 구매 시
                                                                 <strong class="emph">65원 적립</strong>
                                                                 <strong class="name" style="float: right; margin-left: 20px">
-																	<i class="fas fa-eye lg"></i> | <%=i.getItem_hits()%></strong>
+																	<i class="fas fa-eye lg"></i>&nbsp;&nbsp;<%=i.getItemhits()%></strong>
                                                             </span>
                                                         </p>
                                                     </div>

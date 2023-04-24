@@ -1,6 +1,4 @@
 package com.kh.user.shop.item.controller;
-// 2023-04-15 
-// 조승호
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,16 +14,16 @@ import com.kh.user.shop.item.model.service.ItemService;
 import com.kh.user.shop.item.model.vo.Item;
 
 /**
- * Servlet implementation class itemListController
+ * Servlet implementation class itemListSearchController
  */
-@WebServlet("/itemList.it")
-public class itemListController extends HttpServlet {
+@WebServlet("/itemList.se")
+public class itemListSearchController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public itemListController() {
+    public itemListSearchController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,7 +32,7 @@ public class itemListController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			
+		
 		request.setCharacterEncoding("UTF-8");
 		
 		
@@ -43,11 +41,6 @@ public class itemListController extends HttpServlet {
 		// 이태화
 		String keyword = request.getParameter("keyword");
 		
-		// 상품 필터링 검색 기능 추가
-		// 2023-04-24
-		// 이태화
-		String filter = request.getParameter("filter");
-		request.setAttribute("filter", filter);
 		//----------------------------------------------------------------
 		int listCount; 		// 현재 총 게시글의 갯수
 		int currentPage; 	// 현재 페이지 (즉, 사용자가 요청하는 페이지)
@@ -83,7 +76,7 @@ public class itemListController extends HttpServlet {
 				  boardLimit, maxPage, startPage, endPage);
 		
 		 
-		 ArrayList<Item> list = new ItemService().selectItemList(pi, category, keyword, filter);
+		 ArrayList<Item> list = new ItemService().selectItemListSearch(pi, category, keyword);
 		 
 		 // System.out.println(category);
 		 
