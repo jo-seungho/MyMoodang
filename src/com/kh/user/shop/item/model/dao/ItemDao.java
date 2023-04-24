@@ -94,6 +94,8 @@ public class ItemDao {
 				i.setItemhits(rset.getInt("ITEM_HITS"));
 				i.setItemImg(rset.getString("ITEM_IMG_PATH"));
 				i.setDiscountPrice(rset.getInt("DISCOUNT_PRICE"));
+				i.setDescription(rset.getString("DESCRIPTION"));
+				
 				
 			}
             
@@ -444,6 +446,7 @@ public class ItemDao {
 						, rset.getInt("ITEM_PRICE")
 						, rset.getInt("ITEM_HITS")
 						, rset.getString("ITEM_STATUS")
+						, rset.getString("DESCRIPTION")
 						));
 			}
 			
@@ -494,6 +497,7 @@ public class ItemDao {
 						, rset.getInt("ITEM_PRICE")
 						, rset.getInt("ITEM_HITS")
 						, rset.getString("ITEM_STATUS")
+						, rset.getString("DESCRIPTION")
 						));
 			}
 			
@@ -545,6 +549,7 @@ public class ItemDao {
 						, rset.getInt("ITEM_PRICE")
 						, rset.getInt("ITEM_HITS")
 						, rset.getString("ITEM_STATUS")
+						, rset.getString("DESCRIPTION")
 						));
 			}
 			
@@ -595,6 +600,7 @@ public class ItemDao {
 						, rset.getInt("ITEM_PRICE")
 						, rset.getInt("ITEM_HITS")
 						, rset.getString("ITEM_STATUS")
+						, rset.getString("DESCRIPTION")
 						));
 			}
 			
@@ -639,6 +645,8 @@ public class ItemDao {
 					  , rset.getString("ITEM_TEXT")
 					  , rset.getDouble("ITEM_DISCOUNT")
 					  , rset.getString("ITEM_IMG_PATH")
+					  , rset.getString("DESCRIPTION")
+					  
 					  ));
 			}
 			
@@ -675,6 +683,7 @@ public class ItemDao {
 					  , rset.getString("ITEM_TEXT")
 					  , rset.getDouble("ITEM_DISCOUNT")
 					  , rset.getString("ITEM_IMG_PATH")
+					  , rset.getString("DESCRIPTION")
 					  ));
 			}
 			
@@ -711,6 +720,7 @@ public class ItemDao {
 					  , rset.getString("ITEM_TEXT")
 					  , rset.getDouble("ITEM_DISCOUNT")
 					  , rset.getString("ITEM_IMG_PATH")
+					  , rset.getString("DESCRIPTION")
 					  ));
 			}
 			

@@ -125,7 +125,7 @@
                             		<% for(Item ni : newList) { %>
 		                            	<li>
 		                                    <li data-index="1" style="padding-bottom: 70px;">
-		                                        <a class="thumb_goods">
+		                                        <a class="thumb_goods" href="/itemDetail.it?bno=<%=ni.getItemCode()%>">
 		                                            <img src="<%= ni.getItemImg() %>" alt="상품이미지" class="thumb"
 		                                            style="background-image: url('');">
 		                                            <!-- 상품 이미지 임시값임. src는 데이터로 받아오기 -->
@@ -133,10 +133,10 @@
 		                                        <div class="info_goods">
 		                                            <div class="inner_info">
 		                                                <span class="name">
-		                                                    <a class="txt" style="font-size: x-large; font-weight: 700;"><%= ni.getItemName() %></a>
+		                                                    <a  href="/itemDetail.it?bno=<%=ni.getItemCode()%>" class="txt" style="font-size: x-large; font-weight: 700;"><%= ni.getItemName() %></a>
 		                                                </span>
 		                                                <span class="desc">
-		                                                    <a class="txt" style="font-size: initial;"><%= ni.getItemText() %></a>
+		                                                    <a href="/itemDetail.it?bno=<%=ni.getItemCode()%>" class="txt" style="font-size: initial;"><%= ni.getItemText() %></a>
 		                                                </span>
 		                                                <span class="desc" style="font-size: x-large; font-weight: 600;" >
 		                                                	<%= ni.getItemPrice() %>원

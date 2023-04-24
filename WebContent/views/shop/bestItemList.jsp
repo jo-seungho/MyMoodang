@@ -75,7 +75,7 @@
 				<div class="banner_wrapper">
 					<div class="slider">
 						<div class="imgs">
-							<img src="/resources/img/banner2.png" align="center">
+							<img src="/resources/img/banner1.png" align="center">
 						</div>
 
 						<div class="imgs">
@@ -83,7 +83,7 @@
 						</div>
 
 						<div class="imgs">
-							<img src="/resources/img/banner4.png" align="center">
+							<img src="/resources/img/banner5.png" align="center">
 						</div>
 					</div>
 				</div>

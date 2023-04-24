@@ -265,52 +265,43 @@
 								<li class="goods-view-infomation-tab"><a
 									href="#goods-description"
 									class="goods-view-infomation-tab-anchor __active">상품설명</a></li>
-								<li class="goods-view-infomation-tab"><a
-									href="#goods-image" class="goods-view-infomation-tab-anchor">상품이미지
-								</a></li>
+								
 								<li class="goods-view-infomation-tab"><a
 									href="#goods-review" class="goods-view-infomation-tab-anchor">
 										고객후기 <span class="count_review">(0)</span>
 								</a></li>
 							</ul>
-							<div class="goods-view-infomation-content __active"
-								id="goods-description">
-								<div class="goods_wrap">
-									<div class="goods_intro">
-										
-										<div class="context last">
-											<p class="words"><%=it.getItemText()%></p>
-										</div>
-									</div>
-								</div>
-							</div>
+							<div class="goods-view-infomation-content __active" id="goods-description">
+                                  <div class="goods_wrap">
+                                      <div class="goods_intro">
+                                          <div class="pic">
+                                          </div>
+                                          <div class="context last">
+                                              <h3>
+                                                  <small>
+                                                      <%= it.getItemName() %>
+                                                  </small>
+                                                  <%= it.getItemText() %>
+                                              </h3>
+                                              <br><br>
+                                              <div style="text-align:center">
+                                              <%= it.getDescription() %>
+                                              </div>
+      
+                                          </div>
+                                      </div>  
+                                      
+                                  </div>
+                              </div>
 						</div>
-						<ul class="goods-view-infomation-tab-group">
-							<li class="goods-view-infomation-tab"><a
-								href="#goods-description"
-								class="goods-view-infomation-tab-anchor">상품설명</a></li>
-							<li class="goods-view-infomation-tab"><a href="#goods-image"
-								class="goods-view-infomation-tab-anchor __active">상품이미지</a></li>
-							<li class="goods-view-infomation-tab"><a
-								href="#goods-review" class="goods-view-infomation-tab-anchor">
-									고객후기 <span class="count_review">(0)</span>
-							</a></li>
-						</ul>
-						<div class="goods-view-infomation-content" id="goods-image">
-							<div id="goods_pi">
-								<p class="pic">
-									
-								</p>
-							</div>
-						</div>
+						
 
 						<div class="happy_center fst">
 							<ul class="goods-view-infomation-tab-group">
 								<li class="goods-view-infomation-tab"><a
 									href="#goods-description"
 									class="goods-view-infomation-tab-anchor">상품설명</a></li>
-								<li class="goods-view-infomation-tab"><a
-									href="#goods-image" class="goods-view-infomation-tab-anchor">상품이미지</a></li>
+								
 
 								<li class="goods-view-infomation-tab"><a
 									href="#goods-review"
