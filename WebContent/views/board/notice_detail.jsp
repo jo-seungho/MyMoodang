@@ -13,6 +13,7 @@
 
 	<!-- 중복되는 헤더, 푸터, 리셋 css & 제이쿼리 & 헤더 js 담은 common.jsp / 2023-04-20 김서영 -->
 	<%@ include file="../common/common.jsp"%>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <link rel="stylesheet" href="/resources/css/board/notice_detail.css">
 
@@ -52,12 +53,20 @@
                  </div>
                  <div class="cont" align="left"><%=n.getNoticeContent() %></div>
 
-
+				<br><br>
+				<button type="button" onclick="goBack()" class="btn btn-primary" style="font-size : 18px; width : 100px; height : 50px;">목록</button>
              </div>
             </div>
            </div>
 
              <br><br>
+             
+             <script>
+             function goBack() {
+            	 location.href = document.referrer;
+            	}
+             
+             </script>
 
                         <!-- 공지사항 끝 -->
 <%@ include file="../common/footer.jsp" %>
