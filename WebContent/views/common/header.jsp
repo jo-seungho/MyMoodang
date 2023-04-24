@@ -2,6 +2,9 @@
 <!-- 2023-04-19 코드 주석 처리 및 로그인 전/후 로 header 부분의 우측 상단 메뉴바 다르게 수정 및 header 부분에 배송지 관리 url 매핑 / 이지환 */ 	 -->
 <!--  2023.04.23 / 로그아웃 url 매핑값 다시 작성 / 이지환 -->
 
+<!-- 2023.04.24 로그인 / 로그아웃 버전 주소아이콘 클릭 시 다르게 작성 (글자를 클릭해야 넘어감) / 이지환 -->
+
+
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -11,7 +14,7 @@
 <%
 	Member loginUser = (Member)session.getAttribute("loginUser");
 
-	String alertMsg = (String)request.getAttribute("alertMsg");
+	String alertMsg = (String)session.getAttribute("alertMsg");
 	String errorMsg = (String)request.getAttribute("errorMsg");
 %>
 
@@ -49,10 +52,10 @@
             <!-- 고객센터 hover 시 sub_menu 등장 -->
             <ul class="sub_menu">
               <li class="list">
-                <a href="../main/notice.html" class="list_item">공지사항</a>
+                <a href="/noticelist.no?currentPage=1" class="list_item">공지사항</a>
               </li>
               <li class="list">
-                <a href="../main/faq.html" class="list_item">자주하는 질문</a>
+                <a href="/faq" class="list_item">자주하는 질문</a>
               </li>
               <li class="list">
                 <a href="/list.in" class="list_item">1:1 문의</a>
@@ -71,16 +74,16 @@
 		<ul class="sign_menu">
 
           <li class="link">
-            <a href="" class="item service" id="loginAf_hover">
+            <a href="/orderList.it" class="item service" id="loginAf_hover">
             	<b class="join"><%= loginUser.getName() %>님</b>
             	 환영합니다.
             </a>
             <ul class="sub_menu" id="loginAf_menu">
               <li class="list">
-                <a href="#" class="list_item">주문내역</a>
+                <a href="/orderList.it" class="list_item">주문내역</a>
               </li>
               <li class="list">
-                <a href="#" class="list_item">찜한상품</a>
+                <a href="wishList.wi" class="list_item">찜한상품</a>
               </li>
               <li class="list">
                 <a href="/deliveryList.do" class="list_item">배송지 관리</a>
@@ -105,14 +108,14 @@
         <!-- 2023-04-18 / 로그인 시 우측 상단 바뀌는 영역 종료 / 이지환 -->
 
 		 <li class="link">
-            <a href="" class="item service">고객센터</a>
+            <a href="/noticelist.no" class="item service">고객센터</a>
             <!-- 고객센터 hover 시 sub_menu 등장 -->
             <ul class="sub_menu">
               <li class="list">
-                <a href="../main/notice.html" class="list_item">공지사항</a>
+                <a href="/noticelist.no" class="list_item">공지사항</a>
               </li>
               <li class="list">
-                <a href="../main/faq.html" class="list_item">자주하는 질문</a>
+                <a href="faq" class="list_item">자주하는 질문</a>
               </li>
               <li class="list">
                 <a href="/list.in" class="list_item">1:1 문의</a>
@@ -127,7 +130,7 @@
         <h1 class="logo">
           <a href="/main" class="link_main">
             <span class="gnb_logo_container"></span>
-            <img src="/resources/img/logo.png" alt="마켓컬리 로고" class="logo_img" />
+            <img src="/resources/img/logo.png" alt="마이무당 로고" class="logo_img" />
           </a>
         </h1>
       </div>
@@ -147,13 +150,13 @@
                   <!-- hover나 active시 current가 옮겨가도록 설정해야 함 -->
                   <a href="/itemList.it?currentPage=1&category=제로음료" class="main_item">
                     <span class="ico">
-                      <img src="https://img-cf.kurly.com/shop/data/category/icon_newyear_inactive_pc@2x.1609722514.png" alt="" class="ico off" />
-                      <img src="https://img-cf.kurly.com/shop/data/category/icon_newyear_active_pc@2x.1609722514.png" alt="" class="ico on" />
+                      <img src="/resources/img/zero.png" alt="" class="ico off" />
+                      <img src="/resources/img/zero.png" alt="" class="ico on" />
                       <!--카테고리 별 아이콘은 직관적이게 img src로 바로 삽입
                                                 클릭X(off): 기본, 클릭(on): 보라색 아이콘-->
                     </span>
                     <span class="tit">
-                      <span class="txt">제로 음료</span>
+                      <span class="txt">제로음료</span>
                       <!-- ico_nex: bg url로 처리 -->
                     </span>
                     <!-- tit: text + ico -->
@@ -161,8 +164,8 @@
 
                   <a href="/itemList.it?currentPage=1&category=무가당" class="main_item">
                     <span class="ico">
-                      <img src="https://img-cf.kurly.com/shop/data/category/icon_newyear_inactive_pc@2x.1609722514.png" alt="" class="ico off" />
-                      <img src="https://img-cf.kurly.com/shop/data/category/icon_newyear_active_pc@2x.1609722514.png" alt="" class="ico on" />
+                      <img src="/resources/img/무가당.png" alt="" class="ico off" />
+                      <img src="/resources/img/무가당.png" alt="" class="ico on" />
                       <!--카테고리 별 아이콘은 직관적이게 img src로 바로 삽입
                                                 클릭X(off): 기본, 클릭(on): 보라색 아이콘-->
                     </span>
@@ -176,8 +179,8 @@
 
                   <a href="/itemList.it?currentPage=1&category=단백질" class="main_item">
                     <span class="ico">
-                      <img src="https://img-cf.kurly.com/shop/data/category/icon_newyear_inactive_pc@2x.1609722514.png" alt="" class="ico off" />
-                      <img src="https://img-cf.kurly.com/shop/data/category/icon_newyear_active_pc@2x.1609722514.png" alt="" class="ico on" />
+                      <img src="/resources/img/단백질.png" alt="" class="ico off" />
+                      <img src="/resources/img/단백질.png" alt="" class="ico on" />
                       <!--카테고리 별 아이콘은 직관적이게 img src로 바로 삽입
                                                 클릭X(off): 기본, 클릭(on): 보라색 아이콘-->
                     </span>
@@ -190,8 +193,8 @@
 
                   <a href="/itemList.it?currentPage=1&category=도시락" class="main_item">
                     <span class="ico">
-                      <img src="https://img-cf.kurly.com/shop/data/category/icon_newyear_inactive_pc@2x.1609722514.png" alt="" class="ico off" />
-                      <img src="https://img-cf.kurly.com/shop/data/category/icon_newyear_active_pc@2x.1609722514.png" alt="" class="ico on" />
+                      <img src="/resources/img/도시락.png" alt="" class="ico off" />
+                      <img src="/resources/img/도시락.png" alt="" class="ico on" />
                       <!--카테고리 별 아이콘은 직관적이게 img src로 바로 삽입
                                                 클릭X(off): 기본, 클릭(on): 보라색 아이콘-->
                     </span>
@@ -204,8 +207,8 @@
 
                   <a href="/itemList.it?currentPage=1&category=기타" class="main_item">
                     <span class="ico">
-                      <img src="https://img-cf.kurly.com/shop/data/category/icon_newyear_inactive_pc@2x.1609722514.png" alt="" class="ico off" />
-                      <img src="https://img-cf.kurly.com/shop/data/category/icon_newyear_active_pc@2x.1609722514.png" alt="" class="ico on" />
+                      <img src="/resources/img/기타.png" alt="" class="ico off" />
+                      <img src="/resources/img/기타.png" alt="" class="ico on" />
                       <!--카테고리 별 아이콘은 직관적이게 img src로 바로 삽입
                                                 클릭X(off): 기본, 클릭(on): 보라색 아이콘-->
                     </span>
@@ -241,13 +244,12 @@
           </li>
 
           <div class="gnb_search">
-            <form action="">
-              <input type="text" id="keyword" value="건강 기원 새해맞이 보양식 레시피" title="검색어입력" class="inp_search" />
-              <input type="image" src="https://res.kurly.com/pc/service/common/1908/ico_search_x2.png" class="btn_search" />
+              <input type="text" id="keyword" value="" title="keyword" class="inp_search" />
+     
+              <input type="image" src="https://res.kurly.com/pc/service/common/1908/ico_search_x2.png" class="btn_search" onclick="javascript:itemSearch()" >
               <div class="init">
                 <button type="button" id="search_init" class="btn_delete">검색어 삭제하기</button>
               </div>
-            </form>
           </div>
 
           <div class="location_login">
@@ -259,11 +261,29 @@
               <span class="emph">배송지를 등록</span>하고<br />
               <span class="txt">구매가능한 상품을 확인하세요!</span>
               <div class="group_button">
-                <button type="button" class="btn login" href="/loginForm.me">로그인</button>
+              
+              <!-- 2023.04.24 / 로그인 한 유저 기준 주소 아이콘 누르면 나오는 것 변경 / 이지환 -->
+              <% if(loginUser != null) { %>
+              <link class="btn login">
+                <button type="button" class="btn login" href="/logout.me">
+                	<a href="/logout.me" class="item btn login">로그아웃</a>
+                </button>
+                <button type="button" class="btn search_address">
+                  <span class="ico"></span>
+                  		주소검색
+                </button>
+               </link>
+              </div>  
+                <!-- 2023.04.24 / 로그인 하지 않은 경우 주소 아이콘 클릭 시 보이는 메뉴 / 이지환 -->
+              	<% } else { %>
+                <button type="button" class="btn login" action="/loginForm.me">
+                	<a class="item after login_none" href="/loginForm.me">로그인</a></button>
                 <button type="button" class="btn search_address">
                   <span class="ico"></span>
                   주소검색
                 </button>
+                <% } %>
+              
               </div>
             </div>
           </div>
@@ -271,7 +291,7 @@
           <div id="goCart" class="cart_count">
             <% if(loginUser != null) { %>
             <a href="/cart" class="btn_cart">
-              <div class="itemCount">19</div>	
+              <div class="itemCount"></div>
               <span class="blind">장바구니</span>
             </a>
             <% } else { %>
@@ -287,39 +307,49 @@
 
     <script>
     
-    	$(document).ready(function() {
-    		console.log($('.itemCount').text())
-  	        let msg = '<%= alertMsg == null ? "" : alertMsg %>';
-          	if(msg != null && msg.length > 0) {
-          		alert(msg);
-          	}
-          	//----------------------------------------------------
-          	let emsg = '<%= errorMsg == null ? "" : errorMsg %>';
-          	if(emsg != null && emsg.length > 0) {
-          		alert(emsg);
-          	}
-          	
-          	if(isLoginCheck()) {
-          	
-				$.ajax({
-					url: 'count',
-					type: 'get',
-					sucess: function(result) {
-						console.log("GOOD")
-						$('.itemCount').text(result);
-					},
-					error: function(err){
-						console.log(err);
-					}
-				})
-          	}
-			function isLoginCheck() {
-				
-				let aa = $('.blind').text();
-				if (!aa.includes("비로그인")) return true;
-				
-			}
-    	})
+	// 상품 전체 검색 기능 
+	// 2023-04-23
+	// 이태화
+		function itemSearch() {
+		    var keyword = document.getElementById("keyword").value;
+		    location.href="itemList.it?currentPage=1&category=전체&keyword="+keyword;
+
+			
+		    }
+			
+		$("#keyword").on('keyup', function(e) {
+		    if (e.keyCode === 13) { // 엔터키
+		        e.preventDefault();
+		        itemSearch();
+		    }
+		});
+
+	//-------------------------------------------------------------------------------------
+		
+		$(document).ready(function() {
+	    $.ajax({
+	        url: "count",
+	        type: "get",
+	        success: function(res) {
+	            $('.itemCount').text(res);
+	        },
+	        error: function(err) {
+	            console.log(err);
+	        }
+	    });
+	    
+	    let msg = '<%= alertMsg == null ? "" : alertMsg %>';
+	    if(msg != null && msg.length > 0) {
+	        alert(msg);
+	        <% session.removeAttribute("alertMsg"); %>
+	    }
+	
+	    let emsg = '<%= errorMsg == null ? "" : errorMsg %>';
+	    if(emsg != null && emsg.length > 0) {
+	        alert(emsg);
+	    }
+		});
+    	
+    
+
     </script>
-  </body>
-</html>
