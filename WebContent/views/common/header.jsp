@@ -292,15 +292,24 @@
           		alert(emsg);
           	}
          
+          	
+          	
 			// 상품 전체 검색 기능 
 			// 2023-04-23
 			// 이태화
 			function itemSearch() {
 				var keyword = $("#keyword").val();
-				alert(keyword);
 				location.href="itemList.it?currentPage=1&category=전체&keyword="+keyword;
 			
 		}
+		
+			function itemSearchOnEnter(event) {
+				  if (event.keyCode === 13) {
+				    itemSearch();
+				  }
+				}
+
+				$("#keyword").on("keypress", itemSearchOnEnter);
     </script>
   </body>
 </html>

@@ -349,7 +349,7 @@
 								      <tr class="content" id="content<%= r.getReviewNo()%>" style="display:none;">
 								        <td colspan="6" id="contentBox<%= r.getReviewNo()%>">
 									          <p><%= r.getContent()%></p>
-									          <%  if(loginUser != null) { %> 
+									          <%  if(loginUser != null && loginUser.getMemberId().equals(r.getMemberId())) { %> 
 						   								  <button><a href = "/itemReviewDel.it?rno=<%= r.getReviewNo() %>&bno=<%= i.getItemCode() %>" type="button" class=delete>삭제</a></button> 
 						   								  <button type="button" id="updateViewBtn<%= r.getReviewNo() %>" class="update-btn" onclick="javascript:reviewUpdateView(<%= r.getReviewNo() %>)" style="display:block">수정</button>
 						   								  <button type="button" id="updateExcuteBtn<%= r.getReviewNo() %>" class="update-btn" onclick="javascript:reviewUpdate(<%= r.getReviewNo() %>)" style="display:none">수정완료</button>
