@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 import com.kh.common.JDBCTemplate;
 import com.kh.user.member.model.dao.MemberDao;
+import com.kh.user.member.model.util.UUIDRandom;
 import com.kh.user.member.model.vo.Member;
 import com.kh.user.member.model.vo.ShippingAddress;
 
@@ -210,6 +211,12 @@ public class MemberService {
 	}
 
 
+	/**
+	 * 회원탈퇴용 메소드
+	 * 김서영
+	 * @param m
+	 * @return
+	 */
 	public int deleteMember(Member m) {
 		Connection conn = JDBCTemplate.getConnection();
 
@@ -227,6 +234,62 @@ public class MemberService {
 		return result;
 	}
 
+
+	/**
+	 * 비밀번호 찾기 회원의 정보조회용 메소드
+	 * 2023-04-24 김서영
+	 * @param m
+	 * @return
+	 */
+	public int findPwdMember(Member m) {
+		Connection conn = JDBCTemplate.getConnection();
+
+		int result = new MemberDao().findPwdMember(conn, m);
+
+		close(conn);
+
+		return result;
+	}
+
+
+	/**
+	 * 임시비밀번호로 수정하는 메소드
+	 * 2023-04-24 김서영
+	 * @param extraPwd
+	 * @param m
+	 * @return
+	 */
+	public int updateExtraPwd(String extraPwd, Member m) {
+
+		Connection conn = JDBCTemplate.getConnection();
+
+		int result = new MemberDao().updateExtraPwd(conn, extraPwd, m);
+
+		if(result > 0) {
+
+			String title = "안녕하세요. 마이무당입니다. 임시비밀번호 메일입니다.";
+			String content =  "안녕하세요. "
+					+ "\n 즐겁고 건강한 음식, 마이무당 입니다. "
+					+ "\n\n 임시 비밀번호는 " + extraPwd + " 입니다. \n\n"
+					+ "로그인 시, 비밀번호 입력 창에 해당 번호를 입력해주시기 바랍니다. "
+					+ "\n\n 즐겁고 건강한 음식, 마이무당을 앞으로도 많이 찾아주시기 바랍니다. "
+					+ "\n 사랑합니다. 고객님!";
+
+			boolean sendResult = new EmailService().sendEmail(m.getEmail(), title, content);
+
+			if(sendResult) {
+				commit(conn);
+			} else {
+				rollback(conn);
+			}
+		} else {
+			rollback(conn);
+		}
+
+		close(conn);
+
+		return result;
+	}
 
 
 }

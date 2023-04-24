@@ -131,7 +131,22 @@
    			   AND PASSWORD = ?
 		</entry>
 
+<!--  비밀번호 찾기 회원정보 조회용 쿼리문 / 2023-04-20 김서영 -->
+		<entry key="findPwdMember">
+			SELECT *
+		   	  FROM MEMBER
+			 WHERE NAME = ?
+			   AND EMAIL = ?
+		</entry>
 
+<!-- 임시비밀번호로 수정하는 쿼리문 / 2023-04-20 김서영 -->
+		<entry key="updateExtraPwd">
+			UPDATE MEMBER
+			   SET PASSWORD = ?
+			     , ENROLL_DATE = SYSDATE
+			 WHERE NAME = ?
+			   AND EMAIL = ?
+		</entry>
 
 </properties>
 

@@ -270,7 +270,7 @@ public class MemberDao {
 	 * @param m
 	 * @return
 	 */
-	
+
 	public Member loginUser(Connection conn, Member m) {
 
 			// 로그인 하려면 어떤 게 필요할까 고민하자.
@@ -311,7 +311,7 @@ public class MemberDao {
 									 , rset.getInt("TOTAL_MONEY")
 									 , rset.getString("GRADE_NO"));
 					}
-			   	
+
 			    } catch (SQLException e) {
 			        e.printStackTrace();
 			    } finally {
@@ -431,6 +431,13 @@ public class MemberDao {
 	}
 
 
+	/**
+	 * 회원탈퇴용 메소드
+	 * 김서영
+	 * @param conn
+	 * @param m
+	 * @return
+	 */
 	public int deleteMember(Connection conn, Member m) {
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -453,6 +460,71 @@ public class MemberDao {
 		}
 
 //		System.out.println("dao : " + result);
+		return result;
+	}
+
+
+	/**
+	 * 비밀번호 찾기 회원의 정보조회용 메소드
+	 * 2023-04-24 김서영
+	 * @param conn
+	 * @param m
+	 * @return
+	 */
+	public int findPwdMember(Connection conn, Member m) {
+
+		int result = 0;
+		PreparedStatement pstmt = null;
+
+		String sql = prop.getProperty("findPwdMember");
+
+		try {
+			int i = 0;
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(++i, m.getName());
+			pstmt.setString(++i, m.getEmail());
+
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+
+	/**
+	 * 임시비밀번호로 수정하는 메소드
+	 * 2023-04-24 김서영
+	 * @param conn
+	 * @param extraPwd
+	 * @param m
+	 * @return
+	 */
+	public int updateExtraPwd(Connection conn, String extraPwd, Member m) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+
+		String sql = prop.getProperty("updateExtraPwd");
+
+		try {
+			int i = 0;
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(++i, extraPwd);
+			pstmt.setString(++i, m.getName());
+			pstmt.setString(++i, m.getEmail());
+
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
 		return result;
 	}
 }
