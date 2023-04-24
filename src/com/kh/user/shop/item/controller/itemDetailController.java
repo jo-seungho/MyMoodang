@@ -75,7 +75,7 @@ public class itemDetailController extends HttpServlet {
 			request.setAttribute("list", list);
 			request.setAttribute("clist", clist);
 			request.setAttribute("rlist", rlist);
-			
+			System.out.println(i);
 
 		} else { // 조회수 증가 실패 시 에러페이지로 이동
 			request.setAttribute("", "");

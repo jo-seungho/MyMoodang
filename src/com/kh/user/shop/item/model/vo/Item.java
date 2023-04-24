@@ -10,7 +10,7 @@ public class Item {
 	private String itemName;
 	private int itemStock;
 	private int itemPrice;
-	private int item_hits;
+	private int itemhits;
 	private String itemText;
 	private double itemDiscount; // 할인가격 int -> double로 
 	private String itemImg;
@@ -59,7 +59,7 @@ public class Item {
      * @return
      */
 	public Item(int itemCode, String itemDate, String itemCategory, String itemImg, String itemName
-			, String itemText, int itemStock, int itemPrice, int item_hits, String itemStatus) {
+			, String itemText, int itemStock, int itemPrice, int itemhits, String itemStatus) {
 		super();
 		this.itemCode = itemCode;
 		this.itemDate = itemDate;
@@ -69,7 +69,7 @@ public class Item {
 		this.itemText = itemText;
 		this.itemStock = itemStock;
 		this.itemPrice = itemPrice;
-		this.item_hits = item_hits;
+		this.itemhits = itemhits;
 		this.itemStatus = itemStatus;
 	}
 
@@ -143,12 +143,12 @@ public class Item {
 		this.itemPrice = itemPrice;
 	}
 
-	public int getItem_hits() {
-		return item_hits;
+	public int getItemhits() {
+		return itemhits;
 	}
 
-	public void setItem_hits(int item_hits) {
-		this.item_hits = item_hits;
+	public void setItemhits(int itemhits) {
+		this.itemhits = itemhits;
 	}
 
 	public String getItemText() {
@@ -199,7 +199,7 @@ public class Item {
 	public String toString() {
 		return "Item [itemCode=" + itemCode + ", itemCategory=" + itemCategory + ", itemDate=" + itemDate
 				+ ", itemName=" + itemName + ", itemStock=" + itemStock + ", itemPrice=" + itemPrice + ", item_hits="
-				+ item_hits + ", itemText=" + itemText + ", itemDiscount=" + itemDiscount + ", itemImg=" + itemImg
+				+ itemhits + ", itemText=" + itemText + ", itemDiscount=" + itemDiscount + ", itemImg=" + itemImg
 				+ ", itemStatus=" + itemStatus + ", discountPrice=" + discountPrice + "]";
 	}
 

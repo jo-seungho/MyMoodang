@@ -43,6 +43,11 @@ public class itemListController extends HttpServlet {
 		// 이태화
 		String keyword = request.getParameter("keyword");
 		
+		// 상품 필터링 검색 기능 추가
+		// 2023-04-24
+		// 이태화
+		String filter = request.getParameter("filter");
+		request.setAttribute("filter", filter);
 		//----------------------------------------------------------------
 		int listCount; 		// 현재 총 게시글의 갯수
 		int currentPage; 	// 현재 페이지 (즉, 사용자가 요청하는 페이지)
@@ -53,6 +58,8 @@ public class itemListController extends HttpServlet {
 		int endPage; 		// 페이지 하단에 보여질 페이징바의 끝수
 		String category = request.getParameter("category");
 		request.setAttribute("category", category);
+		
+
 		
 		listCount = new ItemService().selectListCountUser(category);
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
@@ -76,7 +83,7 @@ public class itemListController extends HttpServlet {
 				  boardLimit, maxPage, startPage, endPage);
 		
 		 
-		 ArrayList<Item> list = new ItemService().selectItemList(pi, category, keyword);
+		 ArrayList<Item> list = new ItemService().selectItemList(pi, category, keyword, filter);
 		 
 		 // System.out.println(category);
 		 

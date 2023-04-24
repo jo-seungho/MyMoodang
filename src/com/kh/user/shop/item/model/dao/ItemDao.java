@@ -91,6 +91,7 @@ public class ItemDao {
 				i.setItemPrice(rset.getInt("ITEM_PRICE"));
 				i.setItemText(rset.getString("ITEM_TEXT"));
 				i.setItemDiscount(rset.getDouble("ITEM_DISCOUNT"));
+				i.setItemhits(rset.getInt("ITEM_HITS"));
 				i.setItemImg(rset.getString("ITEM_IMG_PATH"));
 				i.setDiscountPrice(rset.getInt("DISCOUNT_PRICE"));
 				
@@ -388,12 +389,29 @@ public class ItemDao {
      * @param pi
      * @return
      */
-	public ArrayList<Item> selectItemList(Connection conn, PageInfo pi, String category, String keyword) {
+	public ArrayList<Item> selectItemList(Connection conn, PageInfo pi, String category, String keyword, String filter) {
 		
 		ArrayList<Item> list = new ArrayList<>();
 		ResultSet rset = null;
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("selectItemList");
+		
+		//필터에 따른 정렬 구분
+		if(filter.equals("1")) {	//낮은가격
+			sql += prop.getProperty("selectItemList_lowPrice");
+		} 
+		else if( filter.equals("2")) {	//높은가격
+			sql += prop.getProperty("selectItemList_highPrice");
+		}
+		else if( filter.equals("3")) {	//등록순
+			sql += prop.getProperty("selectItemList_datePrice");
+		}
+		else if( filter.equals("4")) {	//조회높은순
+			sql += prop.getProperty("selectItemList_viewPrice");
+		}
+		else if( filter.equals("전체")) {	//전체보기
+			sql += prop.getProperty("selectItemList_all");
+		}
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
