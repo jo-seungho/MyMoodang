@@ -127,7 +127,7 @@
         <h1 class="logo">
           <a href="/main" class="link_main">
             <span class="gnb_logo_container"></span>
-            <img src="/resources/img/logo.png" alt="마켓컬리 로고" class="logo_img" />
+            <img src="/resources/img/logo.png" alt="마이무당 로고" class="logo_img" />
           </a>
         </h1>
       </div>
@@ -147,13 +147,13 @@
                   <!-- hover나 active시 current가 옮겨가도록 설정해야 함 -->
                   <a href="/itemList.it?currentPage=1&category=제로음료" class="main_item">
                     <span class="ico">
-                      <img src="https://img-cf.kurly.com/shop/data/category/icon_newyear_inactive_pc@2x.1609722514.png" alt="" class="ico off" />
-                      <img src="https://img-cf.kurly.com/shop/data/category/icon_newyear_active_pc@2x.1609722514.png" alt="" class="ico on" />
+                      <img src="/resources/img/zero.png" alt="" class="ico off" />
+                      <img src="/resources/img/zero.png" alt="" class="ico on" />
                       <!--카테고리 별 아이콘은 직관적이게 img src로 바로 삽입
                                                 클릭X(off): 기본, 클릭(on): 보라색 아이콘-->
                     </span>
                     <span class="tit">
-                      <span class="txt">제로 음료</span>
+                      <span class="txt">제로음료</span>
                       <!-- ico_nex: bg url로 처리 -->
                     </span>
                     <!-- tit: text + ico -->
@@ -161,8 +161,8 @@
 
                   <a href="/itemList.it?currentPage=1&category=무가당" class="main_item">
                     <span class="ico">
-                      <img src="https://img-cf.kurly.com/shop/data/category/icon_newyear_inactive_pc@2x.1609722514.png" alt="" class="ico off" />
-                      <img src="https://img-cf.kurly.com/shop/data/category/icon_newyear_active_pc@2x.1609722514.png" alt="" class="ico on" />
+                      <img src="/resources/img/무가당.png" alt="" class="ico off" />
+                      <img src="/resources/img/무가당.png" alt="" class="ico on" />
                       <!--카테고리 별 아이콘은 직관적이게 img src로 바로 삽입
                                                 클릭X(off): 기본, 클릭(on): 보라색 아이콘-->
                     </span>
@@ -176,8 +176,8 @@
 
                   <a href="/itemList.it?currentPage=1&category=단백질" class="main_item">
                     <span class="ico">
-                      <img src="https://img-cf.kurly.com/shop/data/category/icon_newyear_inactive_pc@2x.1609722514.png" alt="" class="ico off" />
-                      <img src="https://img-cf.kurly.com/shop/data/category/icon_newyear_active_pc@2x.1609722514.png" alt="" class="ico on" />
+                      <img src="/resources/img/단백질.png" alt="" class="ico off" />
+                      <img src="/resources/img/단백질.png" alt="" class="ico on" />
                       <!--카테고리 별 아이콘은 직관적이게 img src로 바로 삽입
                                                 클릭X(off): 기본, 클릭(on): 보라색 아이콘-->
                     </span>
@@ -190,8 +190,8 @@
 
                   <a href="/itemList.it?currentPage=1&category=도시락" class="main_item">
                     <span class="ico">
-                      <img src="https://img-cf.kurly.com/shop/data/category/icon_newyear_inactive_pc@2x.1609722514.png" alt="" class="ico off" />
-                      <img src="https://img-cf.kurly.com/shop/data/category/icon_newyear_active_pc@2x.1609722514.png" alt="" class="ico on" />
+                      <img src="/resources/img/도시락.png" alt="" class="ico off" />
+                      <img src="/resources/img/도시락.png" alt="" class="ico on" />
                       <!--카테고리 별 아이콘은 직관적이게 img src로 바로 삽입
                                                 클릭X(off): 기본, 클릭(on): 보라색 아이콘-->
                     </span>
@@ -204,8 +204,8 @@
 
                   <a href="/itemList.it?currentPage=1&category=기타" class="main_item">
                     <span class="ico">
-                      <img src="https://img-cf.kurly.com/shop/data/category/icon_newyear_inactive_pc@2x.1609722514.png" alt="" class="ico off" />
-                      <img src="https://img-cf.kurly.com/shop/data/category/icon_newyear_active_pc@2x.1609722514.png" alt="" class="ico on" />
+                      <img src="/resources/img/기타.png" alt="" class="ico off" />
+                      <img src="/resources/img/기타.png" alt="" class="ico on" />
                       <!--카테고리 별 아이콘은 직관적이게 img src로 바로 삽입
                                                 클릭X(off): 기본, 클릭(on): 보라색 아이콘-->
                     </span>
@@ -317,14 +317,6 @@
          
           	
           	
-			// 상품 전체 검색 기능 
-			// 2023-04-23
-			// 이태화
-			function itemSearch() {
-				var keyword = $("#keyword").val();
-				location.href="itemList.it?currentPage=1&category=전체&keyword="+keyword;
-			
-		}
 
 		
 			function itemSearchOnEnter(event) {
@@ -334,5 +326,6 @@
 				}
 
 				$("#keyword").on("keypress", itemSearchOnEnter);
-
+        }
+        });
     </script>
