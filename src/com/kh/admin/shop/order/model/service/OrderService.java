@@ -119,6 +119,16 @@ public class OrderService {
 		return o;
 	}
 
+	public String selectImgFile(int id) {
+		Connection conn = getConnection();
+		
+		String imagePath = new OrderDao().selectImgFile(conn, id);
+		
+		close(conn);
+		
+		return imagePath;
+	}
+
 	
 
 	

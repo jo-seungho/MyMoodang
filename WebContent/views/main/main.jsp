@@ -79,7 +79,7 @@
 
  										<% for(Item di : discountList) { %>
  									<li>
-                                        <a class="slideLinkTag" href="../path.html">
+                                        <a class="slideLinkTag" href="/itemDetail.it?bno=<%=di.getItemCode()%>">
                                             <img class="discountImg" src="https://img-cf.kurly.com/shop/data/my_icon/icon_save_10.png">
                                             <img src="<%= di.getItemImg() %>" style="width: 90%; height: 310px;">
                                               <div class="slideText-area">
@@ -177,7 +177,7 @@
 										<% for(Item bi : bestList) { %>
 										 <li>
 										 <h1><i style="color: red; text-shadow: 2px -7px 8px orange;">TOP </i><%= ranking %></h1>
-	                                        <a class="slideLinkTag" href="../path.html">
+	                                        <a class="slideLinkTag" href="/itemDetail.it?bno=<%=bi.getItemCode()%>">
 	                                            <img src="<%= bi.getItemImg() %>" style="width: 90%; height: 310px;">
 	                                              <div class="slideText-area">
 	                                                <span class="name">

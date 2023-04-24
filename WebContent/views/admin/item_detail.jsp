@@ -277,11 +277,7 @@
 								id="goods-description">
 								<div class="goods_wrap">
 									<div class="goods_intro">
-										<div class="pic">
-											<img <%if (list.size() < 2) {%> src="<%=noImage%>"
-												<%} else {%> src="<%=list.get(1).getItemImgPath()%>" <%}%>
-												style="width: 1010px; height: 671px" />
-										</div>
+										
 										<div class="context last">
 											<p class="words"><%=it.getItemText()%></p>
 										</div>
@@ -303,27 +299,7 @@
 						<div class="goods-view-infomation-content" id="goods-image">
 							<div id="goods_pi">
 								<p class="pic">
-									<%
-										int listSize = list.size();
-									if (listSize < 3) {
-									%>
-									<img src="<%=noImage%>" id="smImg" />
-									<%
-										} else {
-									%>
-									<img src="<%=list.get(2).getItemImgPath()%>" />
-									<%
-										}
-									if (listSize < 4) {
-									%>
-									<img src="<%=noImage%>" id="smImg" />
-									<%
-										} else {
-									%>
-									<img src="<%=list.get(3).getItemImgPath()%>" />
-									<%
-										}
-									%>
+									
 								</p>
 							</div>
 						</div>

@@ -204,7 +204,7 @@
 
 						<div class="input-group mb-3">
 
-							<img src="/resources/img/닭가슴살샐러드3.jpg"
+							<img id="img" src="/resources/img/noimage"
 								style="width: 150px; height: 150px;"> <span
 								class="input-group-text" id="spanItem">주문 상품</span> <input
 								type="text" class="form-control" id="itemList" aria-label="text"

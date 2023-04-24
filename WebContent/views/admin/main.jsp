@@ -7,6 +7,11 @@
 	int male = a.getMaleCount();
 	int female = a.getFemaleCount();
 	int uncheck = a.getUncheckedCount();
+	int etc = a.getEtc();
+	int protein = a.getProtein();
+	int lunch = a.getLunch();
+	int noSugar = a.getNoSugar();
+	int zero = a.getZero();
 %>
 <html lang="en">
 <head>
@@ -138,7 +143,7 @@
 			    datasets: [{
 			      backgroundColor: "#FF6699",
 			      borderColor: "#FF6699",
-			      data: [20, 30, 40, 15, 5],
+			      data: [<%=zero%>, <%=noSugar%>, <%=protein%>, <%=lunch%>, <%=etc%>],
 			    }],
 			  },
 			  options: {
@@ -157,7 +162,7 @@
 			      yAxes: [{
 			        ticks: {
 			          min: 0,
-			          max: 100,
+			          max: 30,
 			          maxTicksLimit: 5
 			        },
 			        gridLines: {
