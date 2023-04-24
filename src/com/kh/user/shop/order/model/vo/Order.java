@@ -6,9 +6,9 @@ public class Order {
 	private int vat;
 	private int point;
 	private int discount;
-	
+
 	public Order() { }
-	
+
 	public Order(int total, int tax_free, int vat, int point, int discount) {
 		super();
 		this.total = total;
@@ -63,5 +63,5 @@ public class Order {
 		return "Order [total=" + total + ", tax_free=" + tax_free + ", vat=" + vat + ", point=" + point + ", discount="
 				+ discount + "]";
 	}
-	
+
 }

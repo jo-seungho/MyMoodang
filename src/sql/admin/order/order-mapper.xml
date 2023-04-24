@@ -71,19 +71,6 @@
 		WHERE ORDER_NO = ?
 	</entry>
 
-	<entry key="selectSearchAllCount1">
-		SELECT COUNT(*) COUNT
-		FROM ORDERS
-		JOIN MEMBER USING (MEMBER_NO)
-		WHERE MEMBER_ID LIKE ?
-	</entry>
-
-	<entry key="selectSearchAllCount2">
-		SELECT COUNT(*) COUNT
-		FROM ORDERS
-		JOIN SHIPPING_ADDRESS USING(SHIP_NO)
-		WHERE SHIP_ADDR LIKE ?
-	</entry>
 
 	<entry key="selectSearchAllOrderList1">
 		SELECT *
@@ -180,6 +167,7 @@
 		JOIN ITEM_IMG ON ITEM_CODE = ITEM_IMG_CODE
 		JOIN ITEM ON ITEM_LIST.ITEM_CODE = ITEM.ITEM_CODE
 		WHERE ORDER_NO = ?
+
 	</entry>
 
 

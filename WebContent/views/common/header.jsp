@@ -71,13 +71,13 @@
 		<ul class="sign_menu">
 
           <li class="link">
-            <a href="" class="item service" id="loginAf_hover">
+            <a href="/orderList.it" class="item service" id="loginAf_hover">
             	<b class="join"><%= loginUser.getName() %>님</b>
             	 환영합니다.
             </a>
             <ul class="sub_menu" id="loginAf_menu">
               <li class="list">
-                <a href="/orderComplete" class="list_item">주문내역</a>
+                <a href="/orderList.it" class="list_item">주문내역</a>
               </li>
               <li class="list">
                 <a href="wishList.wi" class="list_item">찜한상품</a>
@@ -269,7 +269,7 @@
           <div id="goCart" class="cart_count">
             <% if(loginUser != null) { %>
             <a href="/cart" class="btn_cart">
-              <div class="itemCount"></div>	
+              <div class="itemCount"></div>
               <span class="blind">장바구니</span>
             </a>
             <% } else { %>
@@ -284,11 +284,11 @@
     </div>
 
     <script>
-    
+
     	$(document).ready(function() {
-    		
+
     		$.ajax({
-    			
+
     			url: "count",
     			type: "get",
     			success: function(res) {
@@ -297,24 +297,37 @@
     			error: function(err) {
     				console.log(err);
     			}
-    			
+
     		})
-    		
-    		
+
+
     		console.log($('.itemCount').text())
   	        let msg = '<%= alertMsg == null ? "" : alertMsg %>';
           	if(msg != null && msg.length > 0) {
           		alert(msg);
           		<% session.removeAttribute("alertMsg"); %>
           	}
-          	
+
           	//----------------------------------------------------
           	let emsg = '<%= errorMsg == null ? "" : errorMsg %>';
           	if(emsg != null && emsg.length > 0) {
           		alert(emsg);
-          		
+
           	}
-         
+
+
+			// 상품 전체 검색 기능
+			// 2023-04-23
+			// 이태화
+			function itemSearch() {
+				var keyword = $("#keyword").val();
+				alert(keyword);
+				location.href="itemList.it?currentPage=1&category=전체&keyword="+keyword;
+
+		}
+
+    	})
+
           	
           	
 
@@ -327,4 +340,5 @@
 
 				$("#keyword").on("keypress", itemSearchOnEnter);
         }
+
     </script>
