@@ -291,7 +291,7 @@
 	// 이태화
 		function itemSearch() {
 		    var keyword = document.getElementById("keyword").value;
-		    location.href="itemList.it?currentPage=1&category=전체&keyword="+keyword;
+		    location.href="itemList.se?currentPage=1&category=전체&keyword="+keyword;
 
 			
 		    }

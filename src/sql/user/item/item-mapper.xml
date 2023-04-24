@@ -285,6 +285,33 @@
 		AND ROWNUM &lt;= 5
 		ORDER BY ITEM_HITS DESC
 	</entry>
+	
+	<entry key="selectItemListSearch">
+		SELECT *
+		FROM (
+		SELECT ROWNUM RNUM,
+		A.*
+		FROM (
+        SELECT ITEM_CODE
+		, TO_CHAR(ITEM_DATE, 'YY/MM/DD HH:MI:SS') ITEM_DATE
+        , ITEM_CATEGORY
+		, ITEM_IMG_PATH
+		, ITEM_NAME
+        , ITEM_TEXT
+		, ITEM_STOCK
+		, ITEM_PRICE
+		, ITEM_HITS
+		, ITEM_STATUS
+		FROM ITEM
+		LEFT JOIN ITEM_IMG ON (ITEM_IMG_CODE = ITEM_CODE)
+		WHERE ITEM_STATUS = 'Y'
+		 AND (ITEM_CATEGORY = ? OR ? = '전체') 
+		 AND ITEM_NAME LIKE '%' || ? || '%' <!-- 상품 전체 키워드 검색 추가 -->
+	     ORDER BY ITEM_DATE DESC
+		) A
+		)
+		WHERE RNUM BETWEEN ? AND ?
+	</entry>
 
 
 

@@ -137,9 +137,17 @@
 								</ul>
 							</div>
 						</div>
-
-
-
+							
+							<!--  검색 했을 떄 빈 페이지면 페이징바 숨김 처리 -->
+							<%
+								if (list.isEmpty()) {
+							%>
+							<div style="display: flex; justify-content: center; align-items: flex-end; height: 100px;">
+						  <div class="item" style="font-size: 25px; color: red; "></div>
+						</div>
+							<%
+						} else {
+							%>
 						<div class="layout-pagination">
 							<div class="pagediv">
 								<% if(currentPage != 1) { %>
@@ -191,6 +199,8 @@
 								<a href="javascript:void(0)" class="layout-pagination-button layout-pagination-last-page">
 								 맨끝 페이지로 가기
 								 </a>
+								 <% } %>
+								 
 								 <% } %>
 
 							</div>
