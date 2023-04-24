@@ -1,15 +1,19 @@
 package com.kh.user.shop.order.model.service;
 
 
-import static com.kh.common.JDBCTemplate.*;
+import static com.kh.common.JDBCTemplate.close;
+import static com.kh.common.JDBCTemplate.commit;
+import static com.kh.common.JDBCTemplate.getConnection;
+import static com.kh.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import com.kh.common.model.vo.PageInfo;
 import com.kh.user.shop.order.model.dao.OrderDao;
 import com.kh.user.shop.order.model.vo.Order;
+import com.kh.user.shop.order.model.vo.OrderImg;
 import com.kh.user.shop.order.model.vo.OrderList;
-import com.kh.common.model.vo.PageInfo;
 
 
 // 2023-04-24 조승호
@@ -132,6 +136,17 @@ public class OrderService {
 		close(conn);
 
 		return img;
+	}
+
+	public int SelectOrderNo() {
+		
+		Connection conn = getConnection();
+		
+		int result = new OrderDao().SelectOrderNo(conn);
+		
+		close(conn);
+		
+		return result;
 	}
 
 

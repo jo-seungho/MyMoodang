@@ -8,11 +8,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import java.util.ArrayList;
 import java.util.Properties;
 
+import com.kh.common.model.vo.PageInfo;
 import com.kh.user.shop.cart.model.dao.CartDao;
 import com.kh.user.shop.order.model.vo.Order;
+import com.kh.user.shop.order.model.vo.OrderImg;
+import com.kh.user.shop.order.model.vo.OrderList;
 
 public class OrderDao {
 	
@@ -53,7 +56,14 @@ public class OrderDao {
 			if(rset.next()) {
 				result = rset.getInt("SHIP_NO");
 			}
-			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return result;
+	}
 
 
 	/**
@@ -81,10 +91,9 @@ public class OrderDao {
 		} finally {
 			close(pstmt);
 		}
-
-		
-		return result;
+		return listCount;
 	}
+		
 
 	/**
 	 * 2023-04-24 조승호
@@ -145,11 +154,6 @@ public class OrderDao {
 		}
 		return result;
 	}
-
-
-		return listCount;
-	}
-
 
 
 	/**
@@ -232,6 +236,33 @@ public class OrderDao {
 		}
 
 		return img;
+	}
+
+
+	public int SelectOrderNo(Connection conn) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result = 0;
+		String sql = prop.getProperty("SelectOrderNo");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getInt("SEQ_ORDER_NO.CURRVAL");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return result;
 	}
 
 
