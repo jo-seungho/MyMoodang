@@ -1,4 +1,4 @@
-package com.kh.user.shop.cart.controller;
+package com.kh.user.shop.order.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -10,19 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.user.member.model.vo.Member;
-import com.kh.user.shop.cart.model.service.CartService;
+import com.kh.user.shop.order.model.service.OrderService;
 
 /**
- * Servlet implementation class CountCartList
+ * Servlet implementation class DeleteCartController
  */
-@WebServlet("/count")
-public class CountCartList extends HttpServlet {
+@WebServlet("/DeleteCart")
+public class DeleteCartController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CountCartList() {
+    public DeleteCartController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,17 +32,14 @@ public class CountCartList extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		if(((Member)request.getSession().getAttribute("loginUser")) != null) {
 		int userNo = ((Member)request.getSession().getAttribute("loginUser")).getMemberNo();
 		
-		int result = new CartService().countItem(userNo);
+		int result = new OrderService().DeleteCart(userNo);
 		
 		response.setContentType("application/json; charset=UTF-8");
-	
 		PrintWriter out = response.getWriter();
-		
 		out.print(result);
-		}
+		
 	}
 
 	/**
