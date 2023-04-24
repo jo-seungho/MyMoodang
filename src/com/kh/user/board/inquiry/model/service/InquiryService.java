@@ -60,12 +60,11 @@ public class InquiryService {
 	 * @param in
 	 * @return
 	 */
-	public int insertInquiry(Inquiry in) {
+	public int insertInquiry(Inquiry in, int memberNo) {
 
 		Connection conn = getConnection();
 
-		int result = new InquiryDao().insertInquiry(conn, in);
-
+		int result = new InquiryDao().insertInquiry(conn, in, memberNo);
 
 
 		if(result > 0) { // 등록 성공
