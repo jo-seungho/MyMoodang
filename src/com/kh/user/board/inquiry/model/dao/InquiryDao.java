@@ -40,7 +40,7 @@ public class InquiryDao {
 	 * @param conn
 	 * @return
 	 */
-	public int selectListCount(Connection conn) {
+	public int selectListCount(Connection conn, int memberNo) {
 		int listCount = 0;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -79,7 +79,7 @@ public class InquiryDao {
 	 * @param pi
 	 * @return
 	 */
-	public ArrayList<Inquiry> selectList(Connection conn, PageInfo pi) {
+	public ArrayList<Inquiry> selectList(Connection conn, PageInfo pi, int memberNo) {
 
 		ArrayList<Inquiry> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
