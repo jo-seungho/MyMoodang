@@ -1,8 +1,39 @@
-<?xml version="1.0" encoding="UTF-8"?>
 
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 
 <properties>
+	
+	<entry key="SelectAddress">
+		SELECT SHIP_NO
+		FROM SHIPPING_ADDRESS
+		WHERE MEMBER_NO = ?	
+	</entry>
+	
+
+	<entry key="OrderService">
+		INSERT INTO ORDERS
+		VALUES(
+		    SEQ_ORDER_NO.NEXTVAL
+		  , 3000
+		  , '요청사항 없음'
+		  , ?
+		  , SYSDATE
+		  , 'Y'
+		  , '546881'
+		  , '카카오페이'
+		  , 'Y'
+		  , ?
+		  , ?
+		  , ?
+		  , '배송완료'
+		)	
+	</entry>
+	
+	<entry key="DeleteCart">
+		DELETE FROM CART
+		WHERE MEMBER_NO = ?	
+	</entry>
 
 <!-- 주문내역 리스트 조회 중 갯수 조회용 쿼리문 / 2023-04-24 김서영 -->
 	<entry key="selectListCount">
