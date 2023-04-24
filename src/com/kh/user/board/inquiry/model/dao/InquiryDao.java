@@ -97,6 +97,7 @@ public class InquiryDao {
 //			System.out.println(startRow);
 //			System.out.println(endRow);
 
+			pstmt.setInt(++i, memberNo);
 			pstmt.setInt(++i, startRow);
 			pstmt.setInt(++i, endRow);
 
@@ -137,7 +138,7 @@ public class InquiryDao {
 	 * @param in
 	 * @return
 	 */
-	public int insertInquiry(Connection conn, Inquiry in) {
+	public int insertInquiry(Connection conn, Inquiry in, int memberNo) {
 
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -151,7 +152,7 @@ public class InquiryDao {
 			pstmt.setString(++i, in.getTitle());
 			pstmt.setString(++i, in.getDescription());
 			pstmt.setString(++i, in.getInquiryType());
-			pstmt.setInt(++i, 6);
+			pstmt.setInt(++i, memberNo);
 
 			result = pstmt.executeUpdate();
 

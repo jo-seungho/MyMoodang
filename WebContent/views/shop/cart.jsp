@@ -3,6 +3,7 @@
 
 <%
 	ArrayList<Cart> list = (ArrayList<Cart>) request.getAttribute("list");
+	int userNo = ((Member)request.getSession().getAttribute("loginUser")).getMemberNo();
 %>
 <!-- 2023-04-23 조승호 -->
 <!DOCTYPE html>
@@ -73,15 +74,15 @@
 							<li>
 								<!-- 상품 목록 중 1. 추가/삭제될 목록임. -->
 								<div class="item">
-								<%-- 
-									<label class="check" for="chkItem1"> <!-- 개당 체크박스 --> <input
+								 
+									<label class="check" for="chkItem1" style="visibility:hidden"> <!-- 개당 체크박스 --> <input
 										onclick='check_sel_all(this)' type="checkbox" id="chkItem1"
 										name="checkOne" class="checkOne"
 										data-item-id="c7b3a4e1-4517-416c-9b3e-d41c0e7592f2"
 										data-item-no="65810" data-item-parent-no="65810"> <span
 										class="ico"></span>
 									</label>								
-								--%>
+								
 
 
 									<div class="name">
@@ -210,20 +211,6 @@
 		</div>
 	</div>
 		<script>
-		
-		$.ajax({
-			
-			url: "count",
-			type: "get",
-			success: function(res) {
-				$('.itemCount').text(res);
-			},
-			error: function(err) {
-				console.log(err);
-			}
-			
-		})
-		
 		// 최조 랜더링시 총액 보여주는 용도
 		
 		// 할인된 총 금액 담을 변수
@@ -241,11 +228,26 @@
 		$('.noDiscount').text(sumNoDis);
 		$('.difference').text(sumNoDis - sumMoney);
 		
+		
+		$.ajax({
+			
+			url: "count",
+			type: "get",
+			success: function(res) {
+				$('.itemCount').text(res);
+			},
+			error: function(err) {
+				console.log(err);
+			}
+			
+		})
+		
+		// 결제기능
 		function orderPay(){
-			let countMoney = $('.countMoney').text();
-			let itemList = $('.package').text()
-			let userName = $('.join').text()
-			let orderAddress = $('.totalprice').text();
+			let countMoney9 = $('.countMoney').text();
+			let itemList9 = $('.package').text()
+			let userName9 = $('.join').text()
+			let orderAddress9 = $('.totalprice').text();
 			// console.log($('.join').text());
 			
 			IMP.init('imp68338217');
@@ -253,22 +255,19 @@
 			    pg : 'kakao',
 			    pay_method : 'card',
 			    merchant_uid : 'merchant_' + new Date().getTime(),
-			    name : itemList , //결제창에서 보여질 이름
-			    amount : countMoney, //실제 결제되는 가격
+			    name : itemList9 , //결제창에서 보여질 이름
+			    amount : countMoney9, //실제 결제되는 가격
 			    // amount : 100, // 테스트를 위한 임시 금액
 			    buyer_email : 'test888@test.do',
-			    buyer_name : userName,
+			    buyer_name : userName9,
 			    buyer_tel : '010-1234-5678',
-			    buyer_addr : orderAddress,
+			    buyer_addr : orderAddress9,
 			    buyer_postcode : '123-456'
 			}, function(rsp) {
-				console.log(rsp);
+				// console.log(rsp);
 			    if ( rsp.success ) {
 			    	var msg = '결제가 완료되었습니다.';
-			        msg += '고유ID : ' + rsp.imp_uid;
-			        msg += '상점 거래ID : ' + rsp.merchant_uid;
-			        msg += '결제 금액 : ' + rsp.paid_amount;
-			        msg += '카드 승인번호 : ' + rsp.apply_num;
+			    	insertOrder();
 			        // location.href = '/orderComplete';
 			    } else {
 			    	 var msg = '결제에 실패하였습니다.';
@@ -278,6 +277,39 @@
 			});
 		}
 
+		// 주문완료시 order 테이블에 상품 담는 용도
+		function insertOrder() {
+			$.ajax({
+				
+				url: "insertOrder",
+				type: "post",
+				data: {
+					totalPay: parseInt($('.countMoney').text())
+				},
+				success: function(res) {
+					// insertItemList();
+				},
+				error: function(err) {
+					console.log(err);
+				}
+			})
+		}
+		
+		function deleteCart() {
+			
+			$.ajax({
+				
+				url: "DeleteCart",
+				type: "post",
+				success: function(res) {
+					location.reload();
+				},
+				error: function(err) {
+					console.log(err);
+				}
+			})
+		}
+		
 	</script>
 </body>
 </html>
