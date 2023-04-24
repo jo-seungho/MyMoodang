@@ -270,8 +270,8 @@ public class ItemDao {
 		return result;
 	}
 	
-	public int insertItemImg(Connection conn, ArrayList<ItemImg> list) {
-		int result = 1;
+	public int insertItemImg(Connection conn, ItemImg at) {
+		int result = 0;
 		// insert를 반복해서 진행 = > 하나라도 실패 할 경우 실패처리
 		// result 를 애초에 1로 셋팅해두고 누적 곱을 구할 예정
 
@@ -279,14 +279,12 @@ public class ItemDao {
 		String sql = prop.getProperty("insertItemImg");
 
 		try {
-
-			for (ItemImg im : list) {
 				pstmt = conn.prepareStatement(sql);
-				pstmt.setInt(1, im.getItemImgLevel());
-				pstmt.setString(2, im.getItemImgPath());
+				pstmt.setInt(1, at.getItemImgLevel());
+				pstmt.setString(2, at.getItemImgPath());
 
-				result *= pstmt.executeUpdate();
-			}
+				result = pstmt.executeUpdate();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -296,34 +294,6 @@ public class ItemDao {
 		return result;
 	}
 	
-
-	public int insertItemImgCode(Connection conn, ArrayList<ItemImg> list, int code) {
-		int result = 1;
-		// insert를 반복해서 진행 = > 하나라도 실패 할 경우 실패처리
-		// result 를 애초에 1로 셋팅해두고 누적 곱을 구할 예정
-
-		PreparedStatement pstmt = null;
-		String sql = prop.getProperty("insertItemImgCode");
-
-		try {
-
-			for (ItemImg im : list) {
-				pstmt = conn.prepareStatement(sql);
-				pstmt.setInt(1, code);
-				pstmt.setInt(2, im.getItemImgLevel());
-				pstmt.setString(3, im.getItemImgPath());
-
-				result *= pstmt.executeUpdate();
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			JDBCTemplate.close(pstmt);
-		}
-
-		return result;
-	}
-
 
 	public int updateItem(Connection conn, int itemCode, Item i) {
 		int result = 0;
@@ -348,7 +318,6 @@ public class ItemDao {
 		} finally {
 			JDBCTemplate.close(pstmt);
 		}
-
 
 
 		return result;
@@ -493,22 +462,21 @@ public class ItemDao {
 		return result;
 	}
 
-	public int updateItemImg(Connection conn, int itemCode, ArrayList<ItemImg> list) {
+	public int updateItemImg(Connection conn, int itemCode, ItemImg at) {
 		
-		int result = 1;
+		int result = 0;
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("updateItemImg");
 		
 		try {
 			
-			for(ItemImg im : list) {
 				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, im.getItemImgPath());
-				pstmt.setInt(2, im.getItemImgLevel());
+				pstmt.setString(1, at.getItemImgPath());
+				pstmt.setInt(2, at.getItemImgLevel());
 				pstmt.setInt(3, itemCode);
 				
-				result *= pstmt.executeUpdate();
-			}
+				result = pstmt.executeUpdate();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

@@ -43,7 +43,7 @@ public class ItemInsertController extends HttpServlet {
 			int itemStock = Integer.parseInt(multiRequest.getParameter("itemStock"));
 			int itemPrice = Integer.parseInt(multiRequest.getParameter("itemPrice"));
 			
-			String itemText = multiRequest.getParameter("itemText");
+			String itemText = multiRequest.getParameter("content");
 
 			int itemDiscount = 0;
 			String itemDiscountParam = multiRequest.getParameter("itemDiscount");
@@ -66,34 +66,23 @@ public class ItemInsertController extends HttpServlet {
 			i.setItemStatus(itemStatus);
 			i.setItemCategory(itemCategory);
 
-			ArrayList<ItemImg> list = new ArrayList<ItemImg>();
 
-			for (int j = 1; j <= 4; j++) {
-				String key = "file" + j;
+				String key = "file1";
+				ItemImg at = null;
 
 				if (multiRequest.getOriginalFileName(key) != null) {
 					// 첨부파일이 있을 경우
 					// Attachment 객체를 생성하여 파일 정보를 담는다.
-					ItemImg at = new ItemImg();
+					at = new ItemImg();
 
 					at.setItemImgPath("/resources/item_upfiles/" + multiRequest.getFilesystemName(key));
-					String a = at.getItemImgPath();
-
-					// 파일 레벨 설정
-					// 대표이미지는 1, 나머지는 2
-					if (j == 1) {
-						at.setItemImgLevel(1);
-					} else {
-						at.setItemImgLevel(2);
-					}
-
-					// Attachment 객체를 ArrayList에 추가
-					list.add(at);
+								
+					at.setItemImgLevel(1);
 				}
 
-			}
+			
 
-			int result = new ItemService().insertItem(i, list);
+			int result = new ItemService().insertItem(i, at);
 
 			if (result > 0) { // 성공
 
