@@ -287,9 +287,7 @@
 					totalPay: parseInt($('.countMoney').text())
 				},
 				success: function(res) {
-					console.log("YEAH");
-					console.log(res);
-					deleteCart();
+					// insertItemList();
 				},
 				error: function(err) {
 					console.log(err);

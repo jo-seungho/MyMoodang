@@ -241,8 +241,9 @@
           </li>
 
           <div class="gnb_search">
-              <input type="text" id="keyword" value="건강 기원 새해맞이 보양식 레시피" title="검색어입력" class="inp_search" />
-              <input type="image" src="https://res.kurly.com/pc/service/common/1908/ico_search_x2.png" class="btn_search" onclick="javascript:itemSearch()"/>
+              <input type="text" id="keyword" value="" title="keyword" class="inp_search" />
+     
+              <input type="image" src="https://res.kurly.com/pc/service/common/1908/ico_search_x2.png" class="btn_search" onclick="javascript:itemSearch()" >
               <div class="init">
                 <button type="button" id="search_init" class="btn_delete">검색어 삭제하기</button>
               </div>
@@ -284,6 +285,7 @@
     </div>
 
     <script>
+
 
     	$(document).ready(function() {
 
@@ -339,5 +341,6 @@
 
 				$("#keyword").on("keypress", itemSearchOnEnter);
 			}
+
 
     </script>
