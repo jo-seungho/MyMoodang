@@ -32,6 +32,7 @@ public class CountCartList extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		if(((Member)request.getSession().getAttribute("loginUser")) != null) {
 		int userNo = ((Member)request.getSession().getAttribute("loginUser")).getMemberNo();
 		
 		int result = new CartService().countItem(userNo);
@@ -41,6 +42,7 @@ public class CountCartList extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		
 		out.print(result);
+		}
 	}
 
 	/**
