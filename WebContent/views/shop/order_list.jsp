@@ -128,7 +128,7 @@
                                           </dl>
                                             <dl>
                                                 <dt>주문번호</dt>
-                                                <dd><%= ol.getOrderNo() %></dd>
+                                                <dd class="orderSelect"><%= ol.getOrderNo() %></dd>
                                             </dl>
                                             <dl>
                                               <dt>결제방법</dt>
@@ -190,5 +190,27 @@
 <%@ include file="../common/footer.jsp"%>
       </div>
     </div>
+    
+    <script>
+    	
+    /*
+    	let orderSelect = $('.orderSelect').text()
+		$.ajax({
+			
+			url: 'orderComplete',
+			type: 'post',
+			data : {
+				orderSelect: orderSelect
+			},
+			success: function(res) {
+				console.log(orderSelect);
+			},
+			error: function(err) {
+				console.log(err);
+			}
+		})
+    */
+    
+    </script>
   </body>
 </html>

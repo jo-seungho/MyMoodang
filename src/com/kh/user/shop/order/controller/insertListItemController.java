@@ -1,6 +1,7 @@
 package com.kh.user.shop.order.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,16 +13,16 @@ import com.kh.user.member.model.vo.Member;
 import com.kh.user.shop.order.model.service.OrderService;
 
 /**
- * Servlet implementation class InsertItemList
+ * Servlet implementation class insertListItemController
  */
-@WebServlet("/InsertItemList")
-public class InsertItemList extends HttpServlet {
+@WebServlet("/insertListItem")
+public class insertListItemController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public InsertItemList() {
+    public insertListItemController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,14 +31,17 @@ public class InsertItemList extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		int userNo = ((Member)request.getSession().getAttribute("loginUser")).getMemberNo();
 		
-		// int userNo = ((Member)request.getSession().getAttribute("loginUser")).getMemberNo();
+		int result = new OrderService().insertListItem(userNo);
+	
+		response.setContentType("application/json; charset=UTF-8");
 		
-		int orderNo = new OrderService().SelectOrderNo();
+		PrintWriter out = response.getWriter();
 		
-		System.out.println(orderNo);
-		
-		
+		out.print(result);
+	
 	}
 
 	/**

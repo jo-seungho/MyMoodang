@@ -19,7 +19,7 @@
 		  , ?
 		  , SYSDATE
 		  , 'Y'
-		  , '546881'
+		  , ?
 		  , '카카오페이'
 		  , 'Y'
 		  , ?
@@ -67,9 +67,49 @@
 		   JOIN ORDERS O USING (ORDER_NO)
 		  WHERE O.MEMBER_NO = ?
 	</entry>
-
-	<entry key="SelectOrderNo">
-		SELECT SEQ_ORDER_NO.CURRVAL FROM dual;
+	
+	<entry key="insertListItem">
+		INSERT INTO ITEM_LIST (ITEM_LIST_NO, ORDER_ITEM, PRICE, ORDER_NO, ITEM_CODE)
+		SELECT SEQ_ILNO.NEXTVAL, C.CART_STOCK, C.PRICE, O.ORDER_NO, C.ITEM_CODE
+		FROM CART C
+		INNER JOIN ORDERS O
+		ON C.MEMBER_NO = O.MEMBER_NO
+		WHERE C.MEMBER_NO = ?
+		AND O.ORDER_STATUS = '배송완료'
+		AND O.ORDER_NO = (select MAX(T.ORDER_NO)
+		                    from ORDERS T
+		                    where C.MEMBER_NO = T.MEMBER_NO)	
+	</entry>
+	
+	<entry key="SelectOrderComplete">
+		SELECT IL.ITEM_LIST_NO AS ITEM_LIST_NO
+		     , IL.ORDER_ITEM AS QUANTITY        
+		     , IL.PRICE AS PRICE
+		     , IL.ORDER_NO AS ORDER_NO                  
+		     , II.ITEM_IMG_PATH AS ITEM_IMG
+		     , O.DELIVERY_FEE AS DELIVERY_FEE           
+		     , O.REQUEST AS REQUEST                      
+		     , O.RES_PHONE AS PHONE                     
+		     , O.ORDER_DATE AS ORDER_DATE               
+		     , O.TRACKING_NO AS TRACKING_NO             
+		     , O.PAYMENT_NO AS PAMENT                   
+		     , O.PAYMENT_STATUS AS PAYMENT_STATUS       
+		     , O.MEMBER_NO AS MEMBER_NO                 
+		     , O.SHIP_NO AS SHIP_NO                     
+		     , O.PAYMENT_AMOUNT AS TOTAL_PRICE          
+		     , O.ORDER_STATUS AS ORDER_STATUS           
+		     , M.NAME AS NAME
+		     , M.GRADE_NO AS GRADE
+		     , S.SHIP_ADDR AS ADDRESS
+		     , IM.ITEM_NAME AS ITEM_NAME
+		  FROM ITEM_LIST IL
+		 INNER JOIN ITEM_IMG II ON IL.ITEM_CODE = II.ITEM_IMG_CODE
+		 INNER JOIN ORDERS O ON IL.ORDER_NO = O.ORDER_NO
+		 INNER JOIN MEMBER M ON O.MEMBER_NO = M.MEMBER_NO
+		 INNER JOIN SHIPPING_ADDRESS S ON O.SHIP_NO = S.SHIP_NO
+		 INNER JOIN ITEM IM ON IL.ITEM_CODE = IM.ITEM_CODE
+		 WHERE O.MEMBER_NO = ?
+		   AND O.ORDER_NO = 24
 	</entry>
 
 </properties>
