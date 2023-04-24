@@ -1,3 +1,5 @@
+<!-- 2023.04.24 / 상세 주소를 기본 배송지에 보이도록 추가 / 이지환  -->
+
 <!-- 2023.04.19 / 파일명 delibery_List -> deliveryList 로 수정 및
 로그인한 회원이 header의 우측 상단의 배송지 관리 클릭 시 내 배송지 목록들이 나오게끔 코드 작성
 스클립틀릿 구문 추가&하드코드들을 소프트코드로 바꿈
@@ -59,8 +61,9 @@
             window.open(url, name, option);
         }
         
-        <% if(session.getAttribute("alertMsg") != null && (boolean)session.getAttribute("isSuccess")){ %>
+         <% if(session.getAttribute("alertMsg") != null && session.getAttribute("isSuccess") != null){ %>
         alert("<%= session.getAttribute("alertMsg") %>");
+        
         
         <% session.removeAttribute("alertMsg"); %>
 
@@ -166,6 +169,8 @@
 								                    </span>
 								                    <p class="addr">
 								                        <%= shipAddress.getShipAddr() %>
+								                        	<!-- 상세주소를 기본 배송지 <p>에 해당되도록 추가 -->
+								                        <%= shipAddress.getShipAddrInfo() %>
 								                    </p>
 								                </td>
 								                <td class="name"><%= shipAddress.getShipName() %></td>

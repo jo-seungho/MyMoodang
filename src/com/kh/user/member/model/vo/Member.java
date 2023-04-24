@@ -1,9 +1,13 @@
+
+
 package com.kh.user.member.model.vo;
 
 import com.kh.common.model.vo.Converter;
 
 public class Member {
 // 2023-04-13 김서영
+// 2023-04-23 조승호 수정 : cartCount 추가
+	private int cartCount;
 	private int memberNo;
 	private String memberId;
 	private String password;
@@ -22,10 +26,11 @@ public class Member {
 
 	}
 
-	public Member(int memberNo, String memberId, String password, String name, String birthDate, String gender,
+	public Member(int cartCount, int memberNo, String memberId, String password, String name, String birthDate, String gender,
 			String email, String phone, String enrollDate, String modifyDate, String status, int totalMoney,
 			String gradeNo) {
 		super();
+		this.cartCount = cartCount;
 		this.memberNo = memberNo;
 		this.memberId = memberId;
 		this.password = password;
@@ -64,10 +69,6 @@ public class Member {
 		this.phone = phone;
 	}
 
-
-
-
-
 	/**
 	 * 아이디 찾기 용 생성자
 	 * 2023-04-17 김서영
@@ -79,6 +80,39 @@ public class Member {
 		this.name = name;
 		this.phone = phone;
 	}
+
+	
+	public int getCartCount() {
+		return cartCount;
+	}
+
+	public void setCartCount(int cartCount) {
+		this.cartCount = cartCount;
+	}
+
+
+
+	/**
+	 * 정보 수정용 생성자
+	 * 2023-04-20 김서영
+	 * @param memberId
+	 * @param name
+	 * @param birthDate
+	 * @param gender
+	 * @param email
+	 * @param phone
+	 */
+	public Member(String memberId, String name, String birthDate, String gender, String email, String phone) {
+		super();
+		this.memberId = memberId;
+		this.name = name;
+		this.birthDate = birthDate;
+		this.gender = gender;
+		this.email = email;
+		this.phone = phone;
+	}
+
+
 
 	public int getMemberNo() {
 		return memberNo;
@@ -187,10 +221,11 @@ public class Member {
 
 	@Override
 	public String toString() {
-		return "Member [memberNo=" + memberNo + ", memberId=" + memberId + ", password=" + password + ", name=" + name
-				+ ", birthDate=" + birthDate + ", gender=" + gender + ", email=" + email + ", phone=" + phone
-				+ ", enrollDate=" + enrollDate + ", modifyDate=" + modifyDate + ", status=" + status + ", totalMoney="
-				+ totalMoney + ", gradeNo=" + gradeNo + "]";
+		return "Member [cartCount=" + cartCount + ", memberNo=" + memberNo + ", memberId=" + memberId + ", password="
+				+ password + ", name=" + name + ", birthDate=" + birthDate + ", gender=" + gender + ", email=" + email
+				+ ", phone=" + phone + ", enrollDate=" + enrollDate + ", modifyDate=" + modifyDate + ", status="
+				+ status + ", totalMoney=" + totalMoney + ", gradeNo=" + gradeNo + "]";
 	}
+
 
 }
