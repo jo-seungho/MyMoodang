@@ -12,7 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 public class Error404 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-
+	/**
+	 * 404에러시 에러페이지로 포워딩
+	 * 2023-04-22 최명진
+	 */
     public Error404() {
         super();
         // TODO Auto-generated constructor stub

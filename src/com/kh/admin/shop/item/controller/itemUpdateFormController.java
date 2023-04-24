@@ -2,6 +2,8 @@ package com.kh.admin.shop.item.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -33,9 +35,11 @@ public class itemUpdateFormController extends HttpServlet {
 		Item item = iService.selectItem(itemCode);
 		ArrayList<ItemImg> list = iService.selectImgList(itemCode);
 		
+		
+		
+		
 		request.setAttribute("list", list);
 		request.setAttribute("item", item);
-		
 		request.getRequestDispatcher("views/admin/item_update.jsp").forward(request, response);
 	}
 

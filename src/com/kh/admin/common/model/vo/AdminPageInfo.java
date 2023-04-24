@@ -58,6 +58,11 @@ public class AdminPageInfo extends com.kh.common.model.vo.PageInfo {
 		this.saleCount = saleCount;
 		this.soldCount = soldCount;
 	}
+	@Override
+	public String toString() {
+		return "AdminPageInfo [saleCount=" + saleCount + ", soldCount=" + soldCount + ", totalCount=" + totalCount
+				+ ", completeCount=" + completeCount + "]";
+	}
 	
 
 	

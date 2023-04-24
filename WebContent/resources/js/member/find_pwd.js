@@ -26,21 +26,22 @@ function check_input_fpw(){
 			   , email : email.val()};
 
 	$.ajax({
-		 url : "/findPwdMailCheck.me"
+		 url : "findPwdMailCheck.me"
 	   , type : "post"
 	   , data : data
 	   , success : function(result) {
 		   if(result.success == "Y") {
-			   console.log("찾았다!");
-			   location.href = ""
+			   console.log("비밀번호 찾았다!");
+			   alert(result.message);
+			   location.href = "/loginForm.me";
+		   } else {
+			   console.log("비밀번호 없는데? 전송도 안됐는데?");
+			   alert(result.message);
 		   }
 	   }
-
+	   ,error : function() {
+			console.log("비밀번호 전송용 Ajax 실패!");
+	   }
 	});
-
-
-
-
-
     return true;
 }

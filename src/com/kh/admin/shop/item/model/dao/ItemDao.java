@@ -31,7 +31,7 @@ public class ItemDao {
 		}
 	}
 
-
+	/** */
     public Item selectItem(Connection conn, int itemCode) {
         Item i = null;
         PreparedStatement pstmt = null;
@@ -269,7 +269,7 @@ public class ItemDao {
 
 		return result;
 	}
-
+	
 	public int insertItemImg(Connection conn, ArrayList<ItemImg> list) {
 		int result = 1;
 		// insert를 반복해서 진행 = > 하나라도 실패 할 경우 실패처리
@@ -295,16 +295,52 @@ public class ItemDao {
 
 		return result;
 	}
+	
+
+	public int insertItemImgCode(Connection conn, ArrayList<ItemImg> list, int code) {
+		int result = 1;
+		// insert를 반복해서 진행 = > 하나라도 실패 할 경우 실패처리
+		// result 를 애초에 1로 셋팅해두고 누적 곱을 구할 예정
+
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertItemImgCode");
+
+		try {
+
+			for (ItemImg im : list) {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, code);
+				pstmt.setInt(2, im.getItemImgLevel());
+				pstmt.setString(3, im.getItemImgPath());
+
+				result *= pstmt.executeUpdate();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+
+		return result;
+	}
 
 
-	public int updateItem(Connection conn, int itemCode) {
+	public int updateItem(Connection conn, int itemCode, Item i) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("updateItem");
 
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, itemCode);
+
+			pstmt.setString(1, i.getItemCategory());
+			pstmt.setString(2, i.getItemName());
+			pstmt.setInt(3, i.getItemStock());
+			pstmt.setInt(4, i.getItemPrice());
+			pstmt.setString(5, i.getItemText());
+			pstmt.setDouble(6, i.getItemDiscount());
+			pstmt.setString(7, i.getItemStatus());
+			pstmt.setInt(8, itemCode);
 
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -312,6 +348,8 @@ public class ItemDao {
 		} finally {
 			JDBCTemplate.close(pstmt);
 		}
+
+
 
 		return result;
 	}
@@ -378,6 +416,110 @@ public class ItemDao {
 
 		return result;
 	}
+
+	public int checkFavorite(Connection conn, int code, int mno) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("checkFavorite");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, code);
+			pstmt.setInt(2, mno);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+
+				result = rset.getInt("COUNT");
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int addFavorite(Connection conn, int code, int mno) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("addFavorite");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, code);
+			pstmt.setInt(2, mno);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+
+	public int deleteFavorite(Connection conn, int code, int mno) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("deleteFavorite");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, code);
+			pstmt.setInt(2, mno);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int updateItemImg(Connection conn, int itemCode, ArrayList<ItemImg> list) {
+		
+		int result = 1;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateItemImg");
+		
+		try {
+			
+			for(ItemImg im : list) {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, im.getItemImgPath());
+				pstmt.setInt(2, im.getItemImgLevel());
+				pstmt.setInt(3, itemCode);
+				
+				result *= pstmt.executeUpdate();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+
+	
 	
  
 

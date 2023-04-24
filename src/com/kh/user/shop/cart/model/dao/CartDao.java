@@ -55,6 +55,7 @@ public class CartDao {
 					  , rset.getInt("MEMBERNO")	
 					  , rset.getString("ITEM_NAME")	
 					  , rset.getString("ITEM_IMG_PATH")
+					  , rset.getInt("ITEM_CODE")
 						));
 			}
 			
@@ -66,6 +67,104 @@ public class CartDao {
 		}
 		return list;
 	}
+
+	/**
+	 * 장바구니 상품 추가
+	 * 2023-04-21 조승호
+	 * @param conn
+	 * @param userNo
+	 * @param countValue
+	 * @param priceItem
+	 * @param itemCodeNo
+	 * @return
+	 */
+	public int insertBoard(Connection conn, int userNo, int countValue, int priceItem, int itemCodeNo) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertCart");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, countValue);
+			pstmt.setInt(2, priceItem);
+			pstmt.setInt(3, userNo);
+			pstmt.setInt(4, itemCodeNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+/**
+ * 장바구니 상품 삭제
+ * 2023-04-21 조승호
+ * @param conn
+ * @param userNo
+ * @param itemCode
+ * @return
+ */
+	public int DeleteCartItem(Connection conn, int userNo, int itemCode) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteCartItem");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, userNo);
+			pstmt.setInt(2, itemCode);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	/**
+	 * 메인페이지 장바구니 갯수 조회
+	 * 2023-04-21 조승호
+	 * @param conn
+	 * @param userNo
+	 * @return
+	 */
+public int countItem(Connection conn, int userNo) {
+	
+	int result = 0;
+	PreparedStatement pstmt = null;
+	ResultSet rset = null;
+	String sql = prop.getProperty("countItem");
+	
+	try {
+		pstmt = conn.prepareStatement(sql);
+		
+		pstmt.setInt(1, userNo);
+		
+		rset = pstmt.executeQuery();
+		
+		if(rset.next()) {
+			result = rset.getInt("COUNT(*)");
+		}
+		
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		close(rset);
+		close(pstmt);
+	}
+	
+	return result;
+}
 
     
 

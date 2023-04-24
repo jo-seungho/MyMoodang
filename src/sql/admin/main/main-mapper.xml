@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+	<entry key="adminInfo">
+		SELECT 'inquiry_null_count' AS type, COUNT(*) AS count
+		FROM inquiry WHERE reply_contents IS NULL
+		UNION
+		SELECT 'inquiry_not_null_count' AS type, COUNT(*) AS count FROM inquiry
+		WHERE reply_contents IS NOT NULL
+		UNION
+		SELECT 'total_member_count' AS type, COUNT(*) AS count FROM member
+		UNION
+		SELECT 'total_payment_amount' AS type, SUM(total_money) AS count FROM member
+		UNION
+		SELECT gender AS type, COUNT(*) AS count FROM member GROUP BY gender
+
+	</entry>
+</properties>
+
+
+
+
+
+

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.admin.common.model.vo.AdminPageInfo;
+
 import com.kh.admin.shop.item.model.service.ItemService;
 import com.kh.admin.shop.item.model.vo.Item;
 
@@ -30,16 +31,19 @@ public class ItemListController extends HttpServlet {
 			throws ServletException, IOException {
 
 		int listCount = new ItemService().selectListCount();
-		int currentPage = Integer.parseInt(request.getParameter("page"));
+		int currentPage = Integer.parseInt((request.getParameter("page") == null ? "1" : request.getParameter("page")));
 
-		ArrayList<Item> list = null;
+		String category = request.getParameter("category");
+		category = category == null ? "A" : category.toUpperCase();
 		
+		
+		ArrayList<Item> list = null;
 
-		String category = request.getParameter("category").toUpperCase();
+		
 
 		int saleCount = new ItemService().selectListSale("Y");
 		int soldCount = new ItemService().selectListSale("N");
-		
+
 		AdminPageInfo pi = null;
 
 		if (category.equals("A")) {
@@ -65,7 +69,8 @@ public class ItemListController extends HttpServlet {
 		doGet(request, response);
 	}
 
-	public AdminPageInfo calculatePage(int currentCount, int currentPage, int totalCount, int saleCount, int soldCount) {
+	public AdminPageInfo calculatePage(int currentCount, int currentPage, int totalCount, int saleCount,
+			int soldCount) {
 		int pageLimit = 10;
 
 		int boardLimit = 10;
@@ -80,9 +85,9 @@ public class ItemListController extends HttpServlet {
 			endPage = maxPage;
 		}
 
-		return new AdminPageInfo(currentCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage, totalCount, saleCount, soldCount);
+		return new AdminPageInfo(currentCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage,
+				totalCount, saleCount, soldCount);
 
-		
 	}
 
 }

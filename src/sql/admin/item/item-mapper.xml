@@ -3,16 +3,22 @@
 
 <properties>
 
+	<!-- 2023-04-22 최명진 모든 상품 갯수 -->
 	<entry key="selectListCount">
 		SELECT COUNT(*) COUNT FROM ITEM
+		LEFT JOIN ITEM_IMG ON (ITEM_IMG_CODE = ITEM_CODE)
+		WHERE ITEM_IMG_LEVEL IS NOT NULL
 	</entry>
 
+	<!-- 2023-04-22 최명진 모든 판매/판매중지 상품 갯수 -->	
 	<entry key="selectListSale">
 		SELECT COUNT(*) COUNT FROM ITEM
-		WHERE ITEM_STATUS = ?
+		LEFT JOIN ITEM_IMG ON (ITEM_IMG_CODE = ITEM_CODE)
+		WHERE ITEM_IMG_LEVEL IS NOT NULL
+		AND ITEM_STATUS = ?
 	</entry>
 
-
+	<!-- 2023-04-22 최명진 모든 상품 조회 -->
 	<entry key="selectItemList">
 		SELECT *
 		FROM (
@@ -31,13 +37,13 @@
 		FROM ITEM
 		LEFT JOIN ITEM_IMG ON (ITEM_IMG_CODE = ITEM_CODE)
 		WHERE ITEM_IMG_LEVEL = 1
-		ORDER BY ITEM_DATE
-		DESC
+		ORDER BY ITEM_STATUS DESC, ITEM_DATE DESC
 		) A
 		)
 		WHERE RNUM BETWEEN ? AND ?
 	</entry>
 
+	<!-- 2023-04-22 최명진 모든 판매/판매중지 상품 조회 -->
 	<entry key="selectSaleItemList">
 		SELECT *
 		FROM (
@@ -60,10 +66,11 @@
 		ORDER BY ITEM_DATE DESC
 		) A
 		)
-		WHERE RNUM BETWEEN ?
-		AND ?
+		WHERE RNUM BETWEEN ? AND ?
 	</entry>
 
+
+	<!-- 2023-04-22 최명진 상품 추가 -->
 	<entry key="insertItem">
 		INSERT INTO ITEM(ITEM_CODE
 		,ITEM_CATEGORY
@@ -82,20 +89,32 @@
 		,?)
 	</entry>
 
+	<!-- 2023-04-22 최명진 상품 이미지 추가 -->
 	<entry key="insertItemImg">
 		INSERT INTO ITEM_IMG(ITEM_IMG_NO
 		, ITEM_IMG_CODE
-		,
-		ITEM_IMG_LEVEL
+		, ITEM_IMG_LEVEL
 		, ITEM_IMG_PATH)
 
 		VALUES(SEQ_IIMGNO.NEXTVAL
-		,
-		SEQ_INO.CURRVAL
+		, SEQ_INO.CURRVAL
+		, ?
+		, ?)
+	</entry>
+	
+	<entry key="insertItemImgCode">
+		INSERT INTO ITEM_IMG(ITEM_IMG_NO
+		, ITEM_IMG_CODE
+		, ITEM_IMG_LEVEL
+		, ITEM_IMG_PATH)
+
+		VALUES(SEQ_IIMGNO.NEXTVAL
+		, ?
 		, ?
 		, ?)
 	</entry>
 
+	<!-- 2023-04-22 최명진 아이템 상세조회 -->
 	<entry key="selectItem">
 		SELECT ITEM_CODE
 		, ITEM_CATEGORY
@@ -118,19 +137,20 @@
 		WHERE ITEM_CODE = ?
 	</entry>
 
+	<!-- 2023-04-22 상품 정보업데이트 -->
 	<entry key="updateItem">
 		UPDATE ITEM
 		SET ITEM_CATEGORY = ?
-		, ITEM_NAME = ?
-		,
-		ITEM_PRICE = ?
-		, ITEM_TEXT = ?
-		, ITEM_DISCOUNT = ?
-		, ITEM_STOCK = ?
-		WHERE
-		ITEM_CODE = ?
+				, ITEM_NAME = ?
+				, ITEM_STOCK = ?	
+				, ITEM_PRICE = ?
+				, ITEM_TEXT = ?
+				, ITEM_DISCOUNT = ?
+				, ITEM_STATUS = ?
+				WHERE ITEM_CODE = ?
 	</entry>
 
+	<!-- 2023-04-22 최명진 상품 이미지 조회 -->
 	<entry key="selectImgList">
 		SELECT ITEM_IMG_NO, ITEM_IMG_CODE, ITEM_IMG_LEVEL,
 		ITEM_IMG_PATH
@@ -142,13 +162,14 @@
 
 	</entry>
 	
+	<!-- 2023-04-22 상품 판매 중지 -->
 	<entry key="deleteItem">
 	UPDATE ITEM 
 	SET ITEM_STATUS = ?
 	WHERE ITEM_CODE = ?
 	</entry>
 
-	
+	<!-- 2023-04-22 최명진 상품 이미지 업데이트 -->
 	<entry key="updateItemImg">
 	INSERT INTO ITEM_IMG(ITEM_IMG_NO
 		, ITEM_IMG_CODE
@@ -161,6 +182,34 @@
 		?,
 		?,
 		?)
+	</entry>
+
+	<!-- 2023-04-22 최명진 찜목록 체크 -->
+	<entry key="checkFavorite">
+		SELECT COUNT(*) COUNT
+		FROM WISHLIST
+		WHERE ITEM_CODE = ?
+		AND MEMBER_NO = ?
+	</entry>
+
+	<!-- 2023-04-22 최명진 찜목록 추가 -->
+	<entry key="addFavorite">
+		INSERT INTO WISHLIST VALUES(?, ?)
+	</entry>
+
+	<!-- 2023-04-22 최명진 찜목록 삭제 -->
+	<entry key="deleteFavorite">
+		DELETE FROM WISHLIST
+		WHERE ITEM_CODE = ?
+		AND MEMBER_NO = ?
+	</entry>
+	
+	<entry key="updateItemImg">
+		UPDATE ITEM_IMG
+		SET ITEM_IMG_PATH = ?
+		
+		WHERE ITEM_IMG_LEVEL = ?
+		AND ITEM_IMG_CODE = ?	
 	</entry>
 
 </properties>

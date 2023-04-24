@@ -13,6 +13,10 @@ public class Error500 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 
+	/**
+	 * 에러시 500페이지로 포워딩
+	 * 2023-04-22 최명진
+	 */
     public Error500() {}
 
 

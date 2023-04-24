@@ -1,5 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.kh.user.board.wishlist.model.vo.WishList, 
+    com.kh.common.model.vo.PageInfo, java.util.ArrayList"
+%>
+<%
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	ArrayList<WishList> list = (ArrayList<WishList>)request.getAttribute("list");
+	
+	// 자주 쓰일법한 변수들 셋팅
+	int currentPage = pi.getCurrentPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	int maxPage = pi.getMaxPage();
+%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -31,7 +43,7 @@
                                     <a href="../main/order_list.html">주문내역</a>
                                 </li>
                                 <li  class="on">
-                                    <a href="#">찜한 상품</a>
+                                    <a href="/wishList.wi">찜한 상품</a>
                                 </li>
                                 <li>
                                     <a href="../main/delivery_list.html">배송지 관리</a>
@@ -70,61 +82,55 @@
                                   <li>
                                       <div class="order_goods">
 
+
+
+										<% if(list.isEmpty())  { %>
+                                             <br>
+                                             <h1 align="center"> 찜목록이 존재하지 않습니다.</h1>
+                                             <hr><br>
+                                             <a href="/itemList.it?currentPage=1&category=전체"><h1 align="center" style="color : red"> 상품 보러 가기</h1></a>	
+                                             <br>
                                       <!-- 상품 1개의 정보 -->
-                                        <div class="order_info">
+                                             <% } else { %>
+                                             	<%  for(WishList w : list) { %>
+                                             <div class="order_info">
                                           <div class="thumb">
-                                            <a href=""><img src="https://img-cf.kurly.com/shop/data/goods/1506389622159s0.jpg" alt="대표 찜한 상품 이미지"></a>
+                                          
+                                            <a href="/itemDetail.it?bno=<%= w.getItemCode() %>"><img src="<%= w.getItemImgPath() %>" alt="대표 찜한 상품 이미지"></a>
 
                                             </div>
-                                              <div class="desc">
+                                             
+                                             <div class="desc">
                                                     <dl>
-                                                        <a href="../main/faq.html"><dt>상품명</dt>
-                                                        <dd>무설탕 수제 푸딩</dd></a>
+                                                        <a href="/itemDetail.it?bno=<%= w.getItemCode() %>"><dt>상품명</dt>
+                                                         <dd><%= w.getItemName() %></dd>
+                                                        </a> 	
                                                     </dl>
                                                     <dl>
                                                         <dt>가격</dt>
-                                                        <dd>(상품 가격 넣는곳)</dd>
+                                                        <dd><%= w.getDiscountPrice() %></dd>
                                                     </dl>
                                               </div>
-
+                                              
+                                              <br><br><br>	
                                               <div class="wish_status">
                                                 <span class="inner_status">
-                                                    <a id="delete" href="#">삭제</a> <br>
-                                                    <a id="cart_in" href="#장바구니에 담기"><span class="material-symbols-outlined">
+                                                    <a id="delete" href="#" onclick="removeFromWishlist(<%= w.getItemCode() %>)">삭제</a> <br>
+                                                    <a id="cart_in" href="#장바구니에 담기">
+                                                    <span class="material-symbols-outlined">
                                                         shopping_cart
                                                         </span> 담기</span>
-                                                       </a>
+                                                   </a>
                                                 </span>
                                                </div>
+                                               
                                           </div>
+                                          <hr>
+                                          	<% } %>
+                                          <% } %>
+                                          
                                             <!-- 상품 1개의 정보 끝-->
-                                          <div class="order_info">
-                                            <div class="thumb">
-                                              <a href=""><img src="https://img-cf.kurly.com/shop/data/goods/1506389622159s0.jpg" alt="대표 찜한 상품 이미지"></a>
-
-                                                </div>
-                                                <div class="desc">
-                                                  <dl>
-                                                    <a href="../main/faq.html"><dt>상품명</dt>
-                                                    <dd>무설탕 수제 푸딩</dd></a>
-                                                  </dl>
-                                                    <dl>
-                                                        <dt>가격</dt>
-                                                        <dd>(상품 가격 넣는곳)</dd>
-                                                    </dl>
-                                                </div>
-
-                                                <div class="wish_status">
-                                                  <span class="inner_status">
-                                                      <a id="delete" href="#">삭제</a> <br>
-                                                      <a id="cart_in" href="#장바구니에 담기"><span class="material-symbols-outlined">
-                                                          shopping_cart
-                                                          </span> 담기</span>
-                                                         </a>
-                                                  </span>
-                                              </div>
-                                            </div>
-                                          </div>
+                                          
                                         </div>
                                   </li>
                               </ul>
@@ -143,6 +149,23 @@
                               </div>
 
 			<%@ include file="../common/footer.jsp" %>
+			
+			<script>
+			function removeFromWishlist(code) {
+          	    $.ajax({
+          	      url: "/heart.wi",
+          	      type: "POST",
+          	      data: {
+          	        action: "remove",
+          	        code: code
+          	      },
+          	      success: function(response) {
+          	    	window.location.reload();
+          	      }
+          	    });
+          	  }
+			
+			</script>
 
   </body>
 </html>

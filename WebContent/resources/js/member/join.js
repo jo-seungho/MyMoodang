@@ -1,3 +1,43 @@
+  //----------------------------------------------------------
+  function idCheck() {  // 아이디 중복확인 함수
+
+	let $memberId = $("#submit_check_id");
+	let regExp = /^[a-z][a-z\d]{6,12}$/;
+
+	if(!regExp.test($memberId.val())) {
+		alert("아이디를 정확히 입력해주세요.");
+		return false;
+	}
+
+	$.ajax({
+		  url : "idCheck.me"
+		, type : "get"
+		, data : { memberId : $memberId.val() }
+		, success : function(result) {
+
+			if(result == "NN") { // 사용불가
+				alert("이미 존재하거나 탈퇴한 회원의 아이디입니다.");
+				$memberId.focus();  // 다시 입력유도
+			} else { // 사용가능
+				let answer = confirm("사용 가능한 아이디입니다. 사용하시겠습니까?");
+
+				if(answer) { // 사용할 것임
+					$("#formSubmit button[type=submit]").removeAttr("disabled"); // 회원가입 버튼 활성화
+
+					$memberId.attr("readonly", true); // 아이디값 수정 못하게 확정
+				} else { // 사용 안할것 임
+					$memberId.focus(); // 다시 입력 유도
+				}
+			}
+		}
+		, error : function() {
+			console.log("아이디 중복체크용 ajax 통신 실패!!");
+		}
+
+	});
+}
+
+//========= [ 약관동의 체크박스 ] ===================
 $( document ).ready(function() {
 	// 체크박스 전체 선택
 	$(".checkbox_group").on("click", "#check_all", function () {
@@ -16,6 +56,77 @@ $( document ).ready(function() {
 	    $("#check_all").prop("checked", is_checked);
 	});
 });
+
+//----------------------- [ 이메일 인증 모달 ] ----------------------------
+
+
+// 인증 메일 보내기 버튼
+function sendEmail() {
+	let $email = $("#email")
+	console.log($email.val());
+
+	var code = "";  // 이메일 전송 인증번호 저장위한 코드
+
+	let regExp = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+
+	if(!regExp.test($email.val())){
+		alert("이메일을 정확히 입력해주세요.");
+		$email.focus();
+		return false;
+	}
+
+	let data = {email : $email.val()}
+
+	console.log(data);
+
+	$.ajax({
+		  url : "emailCheck.me"
+		, type : "post"
+		, data : data
+		, success : function(result) {
+			if(result.success == 'Y') { // 이메일 인증번호 발신 성공
+				alert(result.message);
+				console.log("성공");
+				code = result.authNo;
+				console.log("전송된 인증번호 : " + code);
+
+					$("#authBtn").click(function () {  // 인증 버튼 눌렀을 때!!
+						console.log("여기 들어왔니? 인증번호? : " + code);
+						let $authNo = $("#authCheckNum").val();
+						let checkResult = $("#result");
+						console.log("authNo", $authNo);
+
+						if($authNo == code) {  // 인증번호 일치
+							checkResult.html("인증번호가 일치합니다.");
+							//checkResult.addClass("correct");
+							checkResult.attr("color", "green");
+						} else { // 인증번호 불일치
+							checkResult.html("인증번호를 다시 확인해주세요.");
+							//checkResult.addClass("incorrect");
+							checkResult.addClass("color", "red");
+						}
+					})
+			} else { // 이메일 인증번호 발신 실패
+				alert(result.message);
+				console.log("실패");
+			}
+		}, error : function() {
+			console.log("이메일 인증용 ajax 통신 실패!!");
+		}
+	});
+	}
+
+
+// 인증완료 버튼
+function validateEmail() {
+	console.log("인증완료가 실행되는가?");
+	let $email = $("#email").val();
+
+	$("#loginId").val($email);
+	$("#email_confirm").hide();
+}
+
+
 
 //------------------------------ [ 유효성 검사 ] ---------------------------------
 // 2023-04-16 김서영
@@ -71,7 +182,7 @@ function validate() {
 
 	// 이메일 검사
 	if(email.val().length == 0) {
-		alert("이메일을 정확히 입력해주세요.");
+		alert("이메일을 입력해주세요.");
 		email.focus();
 		return false;
 	}
@@ -121,142 +232,7 @@ function validate() {
 }
 
 
-/* 정규표현식으로 바꿈....
-function on_id_check(){          //id 검사 함수
-    let id = $("#submit_check_id").val();
-    let regExp  =  /^[a-z][a-z\d]{5,11}$/;
 
-    if(!regExp.test(id)) {
-		alert("아이디를 확인 후 다시 입력해 주세요.");
-		id.select();
-		return false;
-	}
-  }
-
-
-  function on_pw_check(){           //비밀번호 검사 함수
-    let pw = $("#submit_check_pw").val();
-    const num = /[0-9]/;
-    const eng = /[a-zA-Z]/;
-    const spe = /[~!@#$%^&*()_+|<>?:{}]/;
-    if(pw.length < 10){
-
-      alert('비밀번호를 정확히 입력해주세요.');
-      return false;
-    }else if(num.test(pw) == 0 || eng.test(pw) == 0 || spe.test(pw) == 0){
-
-      alert('비밀번호를 정확히 입력해주세요.');
-      return false;
-    }
-    else{
-
-      return true;
-    }
-  }
-
-  function on_pw2_check(){           //비밀번호 확인 검사 함수
-    let pw = $("#submit_check_pw").val();
-    let pw2 = $("#submit_check_pw2").val();
-
-   if(pw != pw2){
-
-      alert('비밀번호가 일치하지 않습니다. 확인 후, 다시 입력해주세요.');
-      return false;
-    }
-    else{
-
-      return true;
-    }
-  }
-
-  function on_name_check(){             //이름 검사 함수
-    let name = $("#submit_check_name").val();
-    const num = /[0-9]/;
-    const eng = /[a-zA-Z]/;
-    const spe = /[~!@#$%^&*()_+|<>?:{}]/;
-    if(name.length == 0){
-
-      alert('이름을 입력해주세요.');
-      return false;
-    } else if(num.test(name) == 0 || eng.test(name) == 0 || spe.test(name) == 0){
-
-      alert('이름을 정확히 입력해주세요.');
-      return false;
-    } else{
-
-      return true;
-    }
-  }
-
-  function on_email_check(){             //이메일 검사 함수
-    let email = $("#loginId").val();
-    if(email.length == 0){
-
-      alert('이메일을 정확히 입력해주세요');
-      return false;
-    }else{
-
-      return true;
-    }
-  }
-
-  function on_phone_check(){
-    let phone = $("#submit_check_phone").val();
-    const eng = /[a-zA-Z]/;
-    const spe = /[~!@#$%^&*()_+|<>?:{}]/;
-    const kor = /[ㄱ]/;
-    if(phone.length != 11){
-
-      alert('휴대폰 번호를 정확하게 입력해주세요');
-      return false;
-    }else{
-
-      return true;
-    }
-  }
-*/
-
-
-
-  //----------------------------------------------------------
-  function idCheck() {  // 아이디 중복확인 함수
-
-	let $memberId = $("#submit_check_id");
-	let regExp = /^[a-z][a-z\d]{6,12}$/;
-
-	if(!regExp.test($memberId.val())) {
-		alert("아이디를 정확히 입력해주세요.");
-		return false;
-	}
-
-	$.ajax({
-		  url : "idCheck.me"
-		, type : "get"
-		, data : { memberId : $memberId.val() }
-		, success : function(result) {
-
-
-			if(result == "NN") { // 사용불가
-				alert("이미 존재하거나 탈퇴한 회원의 아이디입니다.");
-				$memberId.focus();  // 다시 입력유도
-			} else { // 사용가능
-				let answer = confirm("사용 가능한 아이디입니다. 사용하시겠습니까?");
-
-				if(answer) { // 사용할 것임
-					$("#formSubmit button[type=submit]").removeAttr("disabled"); // 회원가입 버튼 활성화
-
-					$memberId.attr("readonly", true); // 아이디값 수정 못하게 확정
-				} else { // 사용 안할것 임
-					$memberId.focus(); // 다시 입력 유도
-				}
-			}
-		}
-		, error : function() {
-			console.log("아이디 중복체크용 ajax 통신 실패!!");
-		}
-
-	});
-}
 
 
 // 카카오 주소 API // 2023-04-15 김서영

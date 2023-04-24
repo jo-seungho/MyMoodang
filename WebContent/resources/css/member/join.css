@@ -519,6 +519,14 @@ ol, ul {
   width: 100%;
 }
 
+.correct {
+	color : green;
+}
+
+.incorrect {
+	color : red;
+}
+
 
 
 

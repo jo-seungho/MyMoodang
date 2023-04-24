@@ -7,4 +7,4 @@
 
 	<script src=http://code.jquery.com/jquery-latest.min.js></script>
 
-	<script src="/resources/js/common/header.js"></script>
+	<script src="/resources/js/common/head.js"></script>

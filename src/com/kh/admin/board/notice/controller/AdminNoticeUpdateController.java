@@ -57,7 +57,7 @@ public class AdminNoticeUpdateController extends HttpServlet {
 				
 				request.getSession().setAttribute("alertMsg", "공지사항이 성공적으로 수정되었습니다.");
 				
-				response.sendRedirect(request.getContextPath() + "/noticeForm.ad?nno=" + noticeNo);
+				response.sendRedirect(request.getContextPath() + "/noticelist.ad?currentPage=1");
 				
 			} else { // 실패 => 에러페이지 포워딩
 				

@@ -79,6 +79,7 @@ $(function () {
 
     	  var totalPrices = parseInt($('.countMoney').text())
     	  console.log(totalPrices += price)
+    	  // console.log(totalPrices += price)
     	  var noDisC = parseInt($('.noDiscount').text());
     	  
     	  
@@ -129,7 +130,7 @@ $(function () {
 });
 
 
-// function check_sel_all(checkbox)  { /*개별 선택에 따른 전체선택상태변경 */
+// function check_one(checkbox)  { /*개별 선택에 따른 전체선택상태변경 */
 //     const selectall = document.querySelectorAll('input[name="checkAll"]');
 //     const checkboxes = document.querySelectorAll('input[name="checkOne"]');
 //     var temp = false;
@@ -146,31 +147,105 @@ $(function () {
 //             selectall[1].checked = false;
 //         }
 //     });
-
+//
 //     if (temp === false){  //전체 선택이 아닐 경우2
 //         selectall[0].checked = false;
 //         selectall[1].checked = false;
 //     }
-
+//
 //     else if (temp2 === true){ //전체선택일 경우
 //         selectall[0].checked = true;
 //         selectall[1].checked = true;
 //     }
-
 // }
+
+//function check_one(checkboxOne) {
+//	
+//	let checkboxes = document.querySelectorAll('input[name="checkOne"]');
+//	
+//    let sumMoney = 0;
+//    // 원가 총 금액 담을 변수
+//    let sumNoDis = 0;
+//    $('.in_price').each(function() {
+//    	var totalMoneyVal = $(this).find('.totalMoney').val();
+//    	var noDisMoney = $(this).find('.noDisTotal').val();
+//    	sumMoney += Number(totalMoneyVal);
+//    	sumNoDis += Number(noDisMoney)
+//    });
+//    
+//
+//    
+//    
+//    checkboxes.forEach((checkbox) => {
+//        if (checkboxOne.checked) {
+//        	
+//         
+//            $('.countMoney').text(sumMoney);
+//            $('.noDiscount').text(sumNoDis);
+//            $('.difference').text(sumNoDis - sumMoney);
+//        }
+//    });
+//	
+//}
+
+
 
 function sel_all(selectAll) { /* 전체선택버튼 활성화 */
     const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    
+    let sumMoney = 0;
+    // 원가 총 금액 담을 변수
+    let sumNoDis = 0;
+    $('.in_price').each(function() {
+    	var totalMoneyVal = $(this).find('.totalMoney').val();
+    	var noDisMoney = $(this).find('.noDisTotal').val();
+    	sumMoney += Number(totalMoneyVal);
+    	sumNoDis += Number(noDisMoney)
+    });
+    
+    $('.countMoney').text(sumMoney);
+    $('.noDiscount').text(sumNoDis);
+    $('.difference').text(sumNoDis - sumMoney);
 
     checkboxes.forEach((checkbox) => {
-        checkbox.checked = selectAll.checked
+        if (selectAll.checked) {
+        	checkbox.checked = selectAll.checked
+        } else {
+        	checkbox.checked = selectAll.unChecked
+        	$('.countMoney').text(0);
+        	$('.noDiscount').text(0);
+        	$('.difference').text(0);
+
+        }
     });
+    
+	
+    
+    
 }
 
 function del_row(ths) {
+	var itemCodeString = $(ths).parent().find('.itemCodeOne').val();
+	let itemCode = Number(itemCodeString);
     var ths = $(ths);
-
-    ths.parents("li").remove();
+    
+    $.ajax({
+    	url: 'deleteCart',
+    	type: 'post',
+    	data: {
+    		itemCode : itemCode
+    		},
+    	success: function(res) {
+    		location.reload();
+    		ths.parents("li").remove();
+    		 $(window).prop("location", location.href);
+    	},
+    	error: function(err) {
+    		console.log(err);
+    	}
+    })
+    
+    // console.log(itemCode);
 }
 
 
@@ -198,12 +273,31 @@ $(document).ready(function () { /* 체크박스 선택후 삭제하기 */
 	
     $('.btn_delete').click(function () {
 
-        // 현재 체크된 체크박스의 li 정보 얻기
-        $("input:checkbox[name=checkOne]").each(function () {
-            if (this.checked) {
-                var ths = $(this);
-                ths.parents("li").remove();
-            }
-        });
+        $.ajax({
+        	url: 'deleteCart',
+        	type: 'post',
+        	data: {
+        		itemCode : itemCode
+        		},
+        	success: function(res) {
+        		location.reload();
+        		ths.parents("li").remove();
+        		 $(window).prop("location", location.href);
+        		 
+        		 // 현재 체크된 체크박스의 li 정보 얻기
+        		 $("input:checkbox[name=checkOne]").each(function () {
+        			 if (this.checked) {
+        				 var ths = $(this);
+        				 ths.parents("li").remove();
+        			 }
+        		 });
+        		 
+        	},
+        	error: function(err) {
+        		console.log(err);
+        	}
+        })
+    	
+    	
     });
 });

@@ -49,6 +49,12 @@ public class ItemService {
 		return listCount;
 	}
 
+	/**
+	 * 2023-04-16 최명진 판매/판매중지 상품 갯수
+	 * 
+	 * @param category
+	 * @return
+	 */
 	public int selectListSale(String category) {
 
 		// 1. Connection 객체 생성
@@ -108,25 +114,42 @@ public class ItemService {
 		return result1 * result2;
 	}
 
-	public int updateItem(int itemCode) {
+	/**
+	 * 2023-04-17 최명진 관리자 상품 업데이트
+	 * @param itemCode
+	 * @return
+	 */
+	public int updateItem(int itemCode, Item i, ArrayList<ItemImg> list) {
 	
-		Connection conn = getConnection();
-	
-		int result = new ItemDao().updateItem(conn, itemCode);
-		
-		if(result > 0) {
-			commit(conn);
-		} else {
-			rollback(conn);
+		 Connection conn = getConnection();
+		    int result1 = new ItemDao().updateItem(conn, itemCode, i);
+		    int result2 = 1;
+		    for (ItemImg at : list) {
+		        if (at != null) {
+		            if (at.getItemImgNo() != 0) {
+		                result2 = new ItemDao().updateItemImg(conn, itemCode, list);
+		            } else {
+		                result2 = new ItemDao().insertItemImgCode(conn, list, itemCode);
+		            }
+		        }
+		    }
+		    if (result1 > 0 && result2 > 0) {
+		        commit(conn);
+		    } else {
+		        rollback(conn);
+		    }
+		    close(conn);
+		    return result1 * result2;
 		}
-		
-		close(conn);
-		
-		return result;
-	}
 
+	/**
+	 * 상품 이미지 조회 2023-04-17 최명진
+	 * 
+	 * @param itemCode
+	 * @return
+	 */
 	public ArrayList<ItemImg> selectImgList(int itemCode) {
-		
+
 		Connection conn = getConnection();
 
 		ArrayList<ItemImg> list = new ItemDao().selectImgList(conn, itemCode);
@@ -136,24 +159,94 @@ public class ItemService {
 		return list;
 	}
 
+	/**
+	 * 상품 판매중지 2023-04-17 최명진
+	 * 
+	 * @param code
+	 * @param status
+	 * @return
+	 */
 	public int deleteItem(int code, String status) {
-		
+
 		Connection conn = getConnection();
-		
+
 		int result = new ItemDao().deleteItem(conn, code, status);
-		
-		if(result > 0) {
+
+		if (result > 0) {
 			commit(conn);
 		} else {
 			rollback(conn);
 		}
-		
+
 		close(conn);
-		
+
 		return result;
 	}
 
-	
+	/**
+	 * 찜목록 체크 2023-04-22 최명진
+	 * 
+	 * @param code
+	 * @param mno
+	 * @return
+	 */
+	public int checkFavorite(int code, int mno) {
 
+		Connection conn = getConnection();
+
+		int result = new ItemDao().checkFavorite(conn, code, mno);
+
+		close(conn);
+
+		return result;
+	}
+
+	/**
+	 * 찜목록 추가 2023-04-22 최명진
+	 * 
+	 * @param code
+	 * @param mno
+	 * @return
+	 */
+	public int addFavorite(int code, int mno) {
+
+		Connection conn = getConnection();
+
+		int result = new ItemDao().addFavorite(conn, code, mno);
+
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+
+		close(conn);
+
+		return result;
+	}
+
+	/**
+	 * 찜목록 삭제 2023-04-22 최명진
+	 * 
+	 * @param code
+	 * @param mno
+	 * @return
+	 */
+	public int deleteFavorite(int code, int mno) {
+
+		Connection conn = getConnection();
+
+		int result = new ItemDao().deleteFavorite(conn, code, mno);
+
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+
+		close(conn);
+
+		return result;
+	}
 
 }

@@ -1,11 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
+
+
   <head>
-  	
-    <title>관리자 페이지</title>
-
-
+    <title>상품 관리</title>
 	<%@ include file="common2.jsp" %>
 	
     <link rel="stylesheet" href="/resources/css/shop/item_management.css" />

@@ -5,9 +5,6 @@
 	AdMember adminUser = (AdMember)session.getAttribute("adminUser");
 %>
 
-
-    
-
     <link href="/resources/css/admin/styles.css" rel="stylesheet" />
     <link href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" rel="stylesheet" />
     

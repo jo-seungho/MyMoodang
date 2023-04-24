@@ -52,12 +52,6 @@ public class ItemInsertController extends HttpServlet {
 			    itemDiscount = Integer.parseInt(itemDiscountParam);
 			}
 
-			// Filter에서 예외 처리
-			try {
-//			    chain.doFilter(request, response);
-			} catch (NumberFormatException e) {
-			    // 예외 처리 로직
-			}
 			
 			String itemStatus = multiRequest.getParameter("itemStatus");
 			String itemCategory = multiRequest.getParameter("itemCategory");
