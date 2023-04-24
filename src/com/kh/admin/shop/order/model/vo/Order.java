@@ -14,6 +14,7 @@ public class Order {
 	private String phone; //전화번호
 //	private String trackNo; // 운송장번호
 //	private String paymentNo; //결제번혼데 String으로 되어있어 ..
+	private String imagePath; // 주문상품 썸네일 이미지
 	
 	public Order() {
 		// TODO Auto-generated constructor stub
@@ -118,6 +119,20 @@ public class Order {
 		return "Order [orderNo=" + orderNo + ", memberId=" + memberId + ", paymentAmount=" + paymentAmount
 				+ ", orderDate=" + orderDate + ", shipAddr=" + shipAddr + ", orderStatus=" + orderStatus + ", itemList="
 				+ itemList + ", request=" + request + ", phone=" + phone + "]";
+	}
+
+
+
+
+	public String getImagePath() {
+		return imagePath;
+	}
+
+
+
+
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
 	}
 	
 	

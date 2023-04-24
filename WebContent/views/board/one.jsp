@@ -92,7 +92,7 @@
 								<tbody id="sd1">
 									<% if(list.isEmpty()) { %>
 										<tr>
-											<td colspan="4">조회된 1:1 문의 리스트가 없습니다.</td>
+											<td colspan="4" align="center">조회된 1:1 문의 리스트가 없습니다.</td>
 										</tr>
 									<% } else { %>
 
@@ -180,7 +180,7 @@
 			</div>
 
 		</div>
-	
+
 	</div>
 	<!-- 1:1 페이지 영역 끝 -->
 	<%@ include file="../common/footer.jsp"%>

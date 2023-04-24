@@ -73,6 +73,21 @@ public class AdminDao {
 				case "N":
 					statistics.setUncheckedCount(count);
 					break;
+				case "기타":
+					statistics.setEtc(count);
+					break;
+				case "단백질":
+					statistics.setProtein(count);
+					break;
+				case "도시락":
+					statistics.setLunch(count);
+					break;
+				case "무가당":
+					statistics.setNoSugar(count);
+					break;
+				case "제로음료":
+					statistics.setZero(count);
+					break;
 				}
 			}
 

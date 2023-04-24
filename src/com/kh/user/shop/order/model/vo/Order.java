@@ -2,7 +2,7 @@ package com.kh.user.shop.order.model.vo;
 // 2023-04-24 조승호
 
 public class Order {
-	
+
 	private int orderNo;			//	주문번호
 	private int deliveryFee;		//	배송비
 	private String request;			//	요청사항
@@ -20,6 +20,7 @@ public class Order {
 	public Order() { }
 	
 	public Order(String resPhone, int memberNo, int shipNo, int paymentAmount) {
+
 		super();
 		this.resPhone = resPhone;
 		this.memberNo = memberNo;
@@ -157,5 +158,5 @@ public class Order {
 				+ ", paymentNo=" + paymentNo + ", paymentStatus=" + paymentStatus + ", memberNo=" + memberNo
 				+ ", shipNo=" + shipNo + ", paymentAmount=" + paymentAmount + ", orderStatus=" + orderStatus + "]";
 	}
-	
+
 }

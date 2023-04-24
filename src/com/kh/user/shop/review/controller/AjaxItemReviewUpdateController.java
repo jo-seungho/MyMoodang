@@ -35,10 +35,6 @@ public class AjaxItemReviewUpdateController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
-		// 로그인한 회원 정보 가져오기
-//		HttpSession session = request.getSession();
-//	    Member loginUser = (Member) session.getAttribute("loginUser");
-//	    int mno = loginUser.getMemberNo();
 		
 		// 상품번호 뽑기
 		int bno = Integer.parseInt(request.getParameter("bno"));
@@ -51,7 +47,9 @@ public class AjaxItemReviewUpdateController extends HttpServlet {
 
 		Review re = new Review();
 		re.setReviewNo(bno);
+		//re.setTitle(title);
 		re.setContent(content);
+		//re.setStarPoint(starPoint);
 
 		int result = new itemReviewService().updateReview(re);
 

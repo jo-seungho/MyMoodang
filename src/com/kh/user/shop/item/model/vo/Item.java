@@ -12,7 +12,7 @@ public class Item {
 	private int itemPrice;
 	private int item_hits;
 	private String itemText;
-	private int itemDiscount;
+	private double itemDiscount; // 할인가격 int -> double로 
 	private String itemImg;
 	private String itemStatus;
 	private int discountPrice; // 상품할인가격추가
@@ -40,7 +40,7 @@ public class Item {
      * 2023-04-17 이태화
      * @return
      */
-    public Item(String itemCategory, String itemName, int itemPrice, String itemText, int itemDiscount, String itemImg,
+    public Item(String itemCategory, String itemName, int itemPrice, String itemText, double itemDiscount, String itemImg,
 			int discountPrice) {
 		super();
 		this.itemCategory = itemCategory;
@@ -81,7 +81,7 @@ public class Item {
      * @return
      */
 	public Item(int itemCode, String itemCategory, String itemDate, int itemPrice, int discountPrice, String itemName, String itemText,
-			int itemDiscount, String itemImg) {
+			double itemDiscount, String itemImg) {
 		super();
 		this.itemCode = itemCode;
 		this.itemCategory = itemCategory;
@@ -159,11 +159,11 @@ public class Item {
 		this.itemText = itemText;
 	}
 
-	public int getItemDiscount() {
+	public double getItemDiscount() {
 		return itemDiscount;
 	}
 
-	public void setItemDiscount(int itemDiscount) {
+	public void setItemDiscount(double itemDiscount) {
 		this.itemDiscount = itemDiscount;
 	}
 

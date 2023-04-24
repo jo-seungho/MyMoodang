@@ -1,4 +1,4 @@
-//-----------------------토글 js----------------------------------
+					//-----------------------토글 js----------------------------------
                         function toggleContent(reviewNo) {
                     	    var contentRow = document.getElementById("content" + reviewNo);
                     	    if (contentRow.style.display === "none") {
@@ -79,6 +79,7 @@
                    	  }
                    	}
                    	
+                  //---------------------리뷰 수정하기 ajax--------------------------
                    	
                  // 수정 버튼 클릭 시 처리하는 함수
                    	function reviewUpdateView(reviewNum) {
@@ -89,15 +90,18 @@
 
                    	  // 해당 리뷰의 내용 가져오기
                    	  var reviewContent = $("#content" + reviewNo + " p").text();
+                   	  
                    	  //제목값, 별점 값 가져오기
 
                    	  // 기존 리뷰 내용 지우기(지우지말고 숨기고 나타내기로 변경)
                    	  $("#content" + reviewNo + " p").css('display','none');
-                   	//$("#contentBox" + reviewNo).append("<p>Test</p>");
                    	// 수정할 내용을 입력할 폼 추가하기
                    	//별점
                    	//$("#contentBox" + reviewNo).append("별점");
-                   	//$("#contentBox" + reviewNo).append("<input type='text' value='reviewContent'>");//제목
+                   	  
+                   	//제목
+                   	//$("#contentBox" + reviewNo).append("<input type='text' value='reviewContent'>");
+                   	  
                    	//내용  
                    	$("#contentBox" + reviewNo).append("<textarea id='updateContent'>" + reviewContent + "</textarea>");
                    	
@@ -115,9 +119,9 @@
                             type : 'GET',            // HTTP method type(GET, POST) 형식이다.
                             url : '/AjaxItemReviewUp.re',      // 컨트롤러에서 대기중인 URL 주소이다.
                             data : {bno : reviewNum, content : content},            // Json 형식의 데이터이다.
-                            success : function(result){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+                            success : function(result){ // 비동기통신의 성공일경우 success콜백으로 들어옴.
                                 if(result == 1) {
-                                	alert("리뷰 수정 완료");
+                                	
                                 	$("#content" + reviewNum + " p").text(content);
                                 	$("#content" + reviewNum + " p").css('display','block');
                                 	$('#updateContent').css('display','none');
@@ -134,29 +138,7 @@
                         });
                    	}
                    	  
-                   	
-                   	//$(this).click(function() {
-                   	    // 수정된 리뷰 내용 가져오기
-                   	    //var newReviewContent = $("#edit-review-content").val();
-                   	    
-
-                   	//-------- AJAX를 이용하여 서버에 수정된 내용 전송하기 ---------
-
-                   	    // 수정된 내용으로 리뷰 내용 변경하기
-                   	    //$("#content" + reviewNo).html("<p>" + newReviewContent + "</p>");
-
-                   	    // 수정 완료 버튼을 다시 수정 버튼으로 변경하기
-                   	    //$(this).text("수정");
-                   	  //});
-                   	//});
-                   	
-                   	
-                   	$(document).ready(function() {
-                   	  $(".update-btn").click(function() {
-                   	    // 수정 처리 코드
-                   	  });
-                   	});
-                   	
+                  
                    	
 
     	

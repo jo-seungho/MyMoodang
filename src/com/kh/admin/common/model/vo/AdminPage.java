@@ -8,11 +8,20 @@ public class AdminPage {
 	private int maleCount;
 	private int femaleCount;
 	private int uncheckedCount;
+	private int etc;
+	private int protein;
+	private int lunch;
+	private int noSugar;
+	private int zero;
+
 
 	public AdminPage() {}
 
+
+
 	public AdminPage(int totalMemberCount, int totalPaymentAmount, int inquiryNullCount, int inquiryNotNullCount,
-			int maleCount, int femaleCount, int uncheckedCount) {
+			int maleCount, int femaleCount, int uncheckedCount, int etc, int protein, int lunch, int noSugar,
+			int zero) {
 		super();
 		this.totalMemberCount = totalMemberCount;
 		this.totalPaymentAmount = totalPaymentAmount;
@@ -21,7 +30,14 @@ public class AdminPage {
 		this.maleCount = maleCount;
 		this.femaleCount = femaleCount;
 		this.uncheckedCount = uncheckedCount;
+		this.etc = etc;
+		this.protein = protein;
+		this.lunch = lunch;
+		this.noSugar = noSugar;
+		this.zero = zero;
 	}
+
+
 
 	public int getTotalMemberCount() {
 		return totalMemberCount;
@@ -78,6 +94,47 @@ public class AdminPage {
 	public void setUncheckedCount(int uncheckedCount) {
 		this.uncheckedCount = uncheckedCount;
 	}
+	
+	public int getEtc() {
+		return etc;
+	}
+
+	public void setEtc(int etc) {
+		this.etc = etc;
+	}
+
+	public int getProtein() {
+		return protein;
+	}
+
+	public void setProtein(int protein) {
+		this.protein = protein;
+	}
+
+	public int getLunch() {
+		return lunch;
+	}
+
+	public void setLunch(int lunch) {
+		this.lunch = lunch;
+	}
+
+	public int getNoSugar() {
+		return noSugar;
+	}
+
+	public void setNoSugar(int noSugar) {
+		this.noSugar = noSugar;
+	}
+
+	public int getZero() {
+		return zero;
+	}
+
+	public void setZero(int zero) {
+		this.zero = zero;
+	}
+	
 
 	@Override
 	public String toString() {
