@@ -16,7 +16,8 @@
       ,ITEM_PRICE
       ,ROUND(ITEM_PRICE * (1-ITEM_DISCOUNT),-1) as DISCOUNT_PRICE
       ,ITEM_DISCOUNT
-      ,ITEM_CATEGORY    
+      ,ITEM_CATEGORY
+      ,ITEM_HITS    
       ,ITEM_IMG_PATH
       ,ITEM_TEXT 
 	FROM ITEM I 
@@ -132,12 +133,34 @@
 		WHERE ITEM_STATUS = 'Y'
 		 AND (ITEM_CATEGORY = ? OR ? = '전체') 
 		 AND ITEM_NAME LIKE '%' || ? || '%' <!-- 상품 전체 키워드 검색 추가 -->
-		ORDER BY ITEM_DATE DESC
+<!-- 		ORDER BY ITEM_DATE DESC -->
 		<!-- 필터에 따라 가격, 신상품 등 구현 예정-->
 		) A
 		)
 		WHERE RNUM BETWEEN ? AND ?
 	</entry>
+	
+
+	<entry key="selectItemList_lowPrice">
+		ORDER BY ITEM_PRICE ASC
+	</entry>
+	
+	<entry key="selectItemList_highPrice">
+		ORDER BY ITEM_PRICE DESC
+	</entry>
+	
+	<entry key="selectItemList_datePrice">
+		ORDER BY ITEM_DATE DESC
+	</entry>
+	
+	<entry key="selectItemList_viewPrice">
+		ORDER BY ITEM_HITS DESC
+	</entry>
+	
+	<entry key="selectItemList_all">
+		ORDER BY ITEM_CATEGORY DESC
+	</entry>
+	
 	
 	<entry key="selectBestItemList">
 		SELECT *
