@@ -78,7 +78,7 @@ $(function () {
     	  var disTotal = quantity * noDiscount;
 
     	  var totalPrices = parseInt($('.countMoney').text())
-    	  console.log(totalPrices += price)
+    	  console.log("TOTAL", totalPrices += price)
     	  // console.log(totalPrices += price)
     	  var noDisC = parseInt($('.noDiscount').text());
     	  
@@ -99,7 +99,7 @@ $(function () {
         }
         if (num > 1) {
             $(this).parents('.price').find('.selling').text(parseInt(price1) * (parseInt(num) + 1) + ' 원')
-            $('.countMoney').text(totalPrices + (price%2)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');;
+            $('.countMoney').text((totalPrices + (price%2)))
     		$('.noDiscount').text(noDisC + noDiscount);
     		$('.difference').text((noDisC + noDiscount) - (totalPrices + (price%2)));
         }

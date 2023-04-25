@@ -57,17 +57,17 @@
                           <h2 class="tit_snb">마이페이지</h2>
                           <div class="inner_sub">
                               <ul class="list_menu">
-                              
-                                  <li class="on">
-                                      <a href="/orderList.it" style="color: gray;">주문내역</a>
-                                  </li>
-                                  <li>
-                                      <a href="/wishList.wi">찜한 상품</a>
-                                  </li>
-                                  <li>
-                                      <a href="/delivery_List.do" style="color: #5f0080;">배송지관리</a>
 
-                                  </li>
+                                <li>
+                                    <a href="/orderList.it">주문내역</a>
+                                </li>
+                                <li>
+                                    <a href="/wishList.wi">찜한 상품</a>
+                                </li>
+                                <li class="on" style="color: rgb(254,116,119);">
+                                    <a href="/deliveryList.do">배송지 관리</a>
+                                </li>
+
                                   <li>
                                       <a href="/ready">리뷰 관리</a>
                                   </li>
