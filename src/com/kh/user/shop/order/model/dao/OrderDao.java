@@ -193,7 +193,8 @@ public class OrderDao {
 				, rset.getString("ORDER_STATUS")
 				, rset.getString("ORDER_DATE")
 				, rset.getString("ITEM_LIST")
-				, rset.getInt("TOTAL_PRICE"));
+				, rset.getInt("TOTAL_PRICE")
+				, rset.getString("ITEM_IMG_PATH"));
 					list.add(ol);
 			}
 
