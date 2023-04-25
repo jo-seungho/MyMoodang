@@ -13,7 +13,8 @@
 
 .section_view * {
     font-family: noto sans;
-    color: #333;
+    color: #333;post
+    
     letter-spacing: -.5px;
 }
 
@@ -465,15 +466,6 @@
     content: '';
 }
 
-h3 {
-    display: block;
-    font-size: 1.17em;
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    font-weight: bold;
-}
 
 .__slide-wrapper {
     position: relative;
@@ -1143,14 +1135,6 @@ table.extra-information th {
 }
 
 
-.happy_center {
-    overflow: hidden;
-    padding: 0 5px;
-    border-bottom: 1px solid #ddd;
-    font: normal 16px/23px 'Noto Sans';
-    color: #333;
-    letter-spacing: 0;
-}
 
 .happy_center .happy .tit {
     font-weight: 700;
@@ -1173,16 +1157,8 @@ table.extra-information th {
     color: #666;
 }
 
-.happy_center .list {
-    overflow: hidden;
-    width: 100%;
-    padding: 59px 0 72px;
-}
 
-.happy_center .list li {
-    float: left;
-    width: 340px;
-}
+
 
 .happy_center .list .tit {
     font-weight: 700;
@@ -1216,9 +1192,7 @@ table.extra-information th {
     letter-spacing: -.4px;
 }
 
-.happy_center .list li:last-child {
-    width: 212px;
-}
+
 
 .happy_center .unfold {
     overflow: hidden;

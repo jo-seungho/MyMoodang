@@ -8,6 +8,7 @@
 	ArrayList<Item> list = (ArrayList<Item>) request.getAttribute("list");
 
 	String category = (String)request.getAttribute("category");
+	String filter = (String)request.getAttribute("filter");
 
 	int currentPage = pi.getCurrentPage();
 	int startPage = pi.getStartPage();
@@ -49,8 +50,11 @@
 							<!-- 카테고리와 구분하기 위해 히든을 줌 -->
 							<input type="hidden" id="filterVal">
 							<ul id="colorTest" class="list">
-								<li name="all"><a class="lowprice" href="/itemList.it?currentPage=1&category=${category}&filter=전체">전체보기</a></li>
-								<li name="lowprice"><a class="lowprice" href="/itemList.it?currentPage=1&category=${category}&filter=1">낮은가격순</a></li>
+
+								<li name="all"><a class="all on" href="/itemList.it?currentPage=1&category=${category}&filter=전체">전체보기</a></li>
+								<li name="lowprice"><a class="lowprices" href="/itemList.it?currentPage=1&category=${category}&filter=1">낮은가격순</a></li>
+
+						
 								<li name="highprice"><a class="highprice" href="/itemList.it?currentPage=1&category=${category}&filter=2">높은가격순</a></li>
 								<li name="dateprice"><a class="dateprice" href="/itemList.it?currentPage=1&category=${category}&filter=3">등록일순</a></li>
 								<li name="viewprice"><a class="viewprice" href="/itemList.it?currentPage=1&category=${category}&filter=4">조회높은순</a></li>
@@ -284,21 +288,28 @@
 		function filterClick(filterVal) {
 			$("#filterVal").val(filterVal);
 			selectItemListFunction();
+			console.log(filterVal);
 		}
 		//카테고리 클릭 시 function
 		function categoryClick(categoryVal) {
 			$("#categoryVal").val(categoryVal);
 			selectItemListFunction();
+			console.log(categoryVal);
 		}
 		
 		function selectItemListFunction(){
-			var filter = $("#filterVal").val();	//현재 선택된 필터값
-			var category = $("#categoryVal").val();	//현재 선택된 카테고리값
-			//var category = "전체"
+			var filter = $("#filterVal").val();//현재 선택된 필터값
+			console.log(filter);
+			var category = $("#categoryVal").val(); //현재 선택된 카테고리값
+			console.log(category);
+			
+			
 			if(filter == null || filter == "") filter = "전체";
 			if(category == null || category == "") category = "전체";
 			
-			location.href="/itemList.it?currentPage=1&category=" + category +"&filter=" + filter;
+			location.href="/itemList.it?currentPage=1&category=" +  category +"&filter="   +  filter;
+			
+			
 		}
 		
 		

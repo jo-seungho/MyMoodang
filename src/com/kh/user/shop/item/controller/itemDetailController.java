@@ -66,7 +66,10 @@ public class itemDetailController extends HttpServlet {
 
 			 ArrayList<Review> rlist = new ItemService().selectReviewList(bno);
 			 
-
+			//--------------------------------------------------------------------------------------
+	
+			 int listCount = new ItemService().selectReviewListCount(bno);
+			 
 	
 	
 
@@ -75,6 +78,9 @@ public class itemDetailController extends HttpServlet {
 			request.setAttribute("list", list);
 			request.setAttribute("clist", clist);
 			request.setAttribute("rlist", rlist);
+
+			request.setAttribute("listCount", listCount);
+
 			
 
 		} else { // 조회수 증가 실패 시 에러페이지로 이동
