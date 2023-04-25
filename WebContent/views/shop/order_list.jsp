@@ -116,7 +116,7 @@
                                 <!-- 상품 1개의 정보 -->
                                   <div class="order_info">
                                     <div class="thumb">
-                                      <img src="<%= img.getItemImgPath() %>" alt="해당 주문 대표 상품 이미지">
+                                      <img src="<%= ol.getItemImg().split(",")[0] %>" alt="해당 주문 대표 상품 이미지">
 
                                         </div>
                                         <div class="desc">

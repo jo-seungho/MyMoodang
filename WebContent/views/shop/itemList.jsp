@@ -118,7 +118,7 @@
 											<span class="name"> <%= i.getItemName() %> </span>
 											<span style="color : red; font-weight : bold; font-size : 18px;"> <%=(int)(i.getItemDiscount()*100) %>%</span>
 											<span>&nbsp;<%= i.getDiscountPrice() %>원</span>
-											<span class="cost" style="text-decoration-line : line-through; text"> <span class="price"><%= i.getItemPrice()%>원</span>
+											<span class="cost" style="text-decoration-line : line-through; text"> <span class="price"><%= i.getItemPrice()%></span>
 											<input type="hidden" id="product_cost1" value="<%= i.getItemPrice() %>">
 											<span class="dodo"></span>
 											</span> <span class="desc"><%= i.getItemText() %></span>
@@ -230,8 +230,7 @@
 											</span> 
 											<span class="price"> 
 												<span class="dc_price"></span>
-												<input type="hidden" class="ttt">
-											</span>
+												<input type="hidden" class="ttt"></span>
 										</div></li>
 								</ul>
 							</div>
@@ -304,9 +303,12 @@
 		
 		
 		$('.btn_type1').click(function() {
+			console.log($('#cartPut input[name=itemCode]').val());
+			console.log($("#countValue").text());
+			console.log($('.ttt').text());
 			
 			// let itemCodeNo = $('#cartPut input[name=itemCode]').val();
-			let aa = $('.ttt').text()
+			let aa = $('.ttt').text();
 			let priceItem = Number(aa.replace(",", ""))
 			
 			$.ajax({
@@ -328,14 +330,14 @@
 							$('.itemCount').text(res);
 						},
 						error: function(err) {
-							console.log(err);
+							console.log(err, "아이템리스트");
 						}
 						
 					})
 					// console.log(res)
 				},
 				error: function(err) {
-					console.log(err, "err")
+					console.log(err, "err아이템리스트")
 				}
 			})
 			

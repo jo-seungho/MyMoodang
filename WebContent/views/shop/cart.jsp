@@ -218,10 +218,14 @@
 		<script>
 		// 최조 랜더링시 총액 보여주는 용도
 		
+		
+		
+		
 		// 할인된 총 금액 담을 변수
 		let sumMoney = 0;
 		// 원가 총 금액 담을 변수
 		let sumNoDis = 0;
+		console.log($('.totalprice').text());
 		$('.in_price').each(function() {
 		  var totalMoneyVal = $(this).find('.totalMoney').val();
 		  var noDisMoney = $(this).find('.noDisTotal').val();
@@ -294,7 +298,7 @@
 					orderUid: orderUid
 				},
 				success: function(res) {
-					insertItemList()
+					insertItemList();
 				},
 				error: function(err) {
 					console.log(err);
