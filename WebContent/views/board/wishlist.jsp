@@ -148,6 +148,12 @@
 			<%@ include file="../common/footer.jsp" %>
 			
 			<script>
+			
+			
+			
+			
+			
+			
 			function removeFromWishlist(code) {
           	    $.ajax({
           	      url: "/heart.wi",
