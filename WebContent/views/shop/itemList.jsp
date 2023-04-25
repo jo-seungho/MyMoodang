@@ -170,7 +170,7 @@
 								<% for(int p = startPage; p <= endPage; p++) { %>
 									<% if(p != currentPage) { %>
 
-								<a href="/itemList.it?currentPage=<%= p %>&category=${category}">
+								<a href="/itemList.it?currentPage=<%= p %>&category=${category}&filter=전체">
 
 									<span>
 										<strong class="layout-pagination-button layout-pagination-number __active"><%= p %></strong>
@@ -185,7 +185,7 @@
 								<% } %>
 								<% if(currentPage != maxPage) { %>
 
-								 <a href="/itemList.it?currentPage=<%= currentPage + 1 %>&category=${category}" class="layout-pagination-button layout-pagination-next-page">
+								 <a href="/itemList.it?currentPage=<%= currentPage + 1 %>&category=${category}&filter=전체" class="layout-pagination-button layout-pagination-next-page">
 								 다음 페이지로 가기
 								 </a>
 								 <a href="/itemList.it?currentPage=<%= endPage %>&category=${category}" class="layout-pagination-button layout-pagination-last-page">

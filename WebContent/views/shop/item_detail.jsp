@@ -21,7 +21,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- header css -->
     <%@ include file="../common/common.jsp"%>
-
+	
     <link rel="stylesheet" href="/resources/css/shop/item_detail.css">
     <link rel="stylesheet" href="/resources/css/shop/item_review_detail.css">
 
@@ -191,6 +191,7 @@
                                                         </p>
                                                     </div>
                                                 </div>
+                                                <% if(loginUser != null) { %>
                                                 <div class="group_btn off">
                                                     <span class="btn">
                                                         <button onclick="orderPay()" type="button" class="btn btn2">구매하기</button>
@@ -199,6 +200,18 @@
                                                         <button type="button" class="btn btn2 insertCart">장바구니 담기</button>
                                                     </span>
                                                 </div>
+                                                <% } else {%>
+                                               <div class="group_btn off">
+                                                    <span class="btn">
+                                                        <button type="button" class="btn btn2">구매하기</button>
+                                                    </span>
+                                                    <span class="btn">
+                                                        <button type="button" class="btn btn2 insertCart">
+                                                        	<a href="/loginForm.me" style="color: white;">장바구니 담기</a>
+                                                        </button>
+                                                    </span>
+                                                </div>
+                                                <% } %>
                                             </div>
                                         </form>
                                     </div>
