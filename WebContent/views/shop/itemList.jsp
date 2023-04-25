@@ -152,11 +152,11 @@
 							<div class="pagediv">
 								<% if(currentPage != 1) { %>
 
-								<a href="/itemList.it?currentPage=<%= startPage %>&category=${category}"
+								<a href="/itemList.it?currentPage=<%= startPage %>&category=${category}&filter=${filter}"
 
 									class="layout-pagination-button layout-pagination-first-page">맨 처음 페이지로 가기
 								</a>
-								<a href="/itemList.total?currentPage=<%= currentPage - 1 %>&category=${category}" class="layout-pagination-button layout-pagination-prev-page">
+								<a href="/itemList.total?currentPage=<%= currentPage - 1 %>&category=${category}&filter=${filter}" class="layout-pagination-button layout-pagination-prev-page">
 									이전 페이지로 가기
 								</a>
 								<% } else {%>
@@ -170,7 +170,7 @@
 								<% for(int p = startPage; p <= endPage; p++) { %>
 									<% if(p != currentPage) { %>
 
-								<a href="/itemList.it?currentPage=<%= p %>&category=${category}&filter=전체">
+								<a href="/itemList.it?currentPage=<%= p %>&category=${category}&filter=${filter}">
 
 									<span>
 										<strong class="layout-pagination-button layout-pagination-number __active"><%= p %></strong>
@@ -185,10 +185,10 @@
 								<% } %>
 								<% if(currentPage != maxPage) { %>
 
-								 <a href="/itemList.it?currentPage=<%= currentPage + 1 %>&category=${category}&filter=전체" class="layout-pagination-button layout-pagination-next-page">
+								 <a href="/itemList.it?currentPage=<%= currentPage + 1 %>&category=${category}&filter=${filter}" class="layout-pagination-button layout-pagination-next-page">
 								 다음 페이지로 가기
 								 </a>
-								 <a href="/itemList.it?currentPage=<%= endPage %>&category=${category}" class="layout-pagination-button layout-pagination-last-page">
+								 <a href="/itemList.it?currentPage=<%= endPage %>&category=${category}&filter=${filter}" class="layout-pagination-button layout-pagination-last-page">
 
 								 맨끝 페이지로 가기
 								 </a>
