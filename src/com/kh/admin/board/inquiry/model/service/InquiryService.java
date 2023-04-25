@@ -74,11 +74,11 @@ public class InquiryService {
 	 * @param n
 	 * @return
 	 */
-	public int insertInquiry(Inquiry in) {
+	public int updateInquiry(Inquiry in) {
 		
 		Connection conn = getConnection();
 		
-		int result = new InquiryDao().insertInquiry(conn, in);
+		int result = new InquiryDao().updateInquiry(conn, in);
 		
 		if(result > 0) {
 			

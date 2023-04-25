@@ -36,7 +36,6 @@ public class AdminInquiryDetailController extends HttpServlet {
 		 int inqNo = Integer.parseInt(request.getParameter("ino"));
 		 
 		 Inquiry in = new InquiryService().selectInquiry(inqNo);
-		 System.out.println(in);
 		 request.setAttribute("in",in);
 		 
 		 request.getRequestDispatcher("views/admin/inquiry_detail.jsp").forward(request, response);

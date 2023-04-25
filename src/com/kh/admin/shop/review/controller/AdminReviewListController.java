@@ -1,7 +1,7 @@
-// 1:1문의 리스트 조회용 컨트롤러
-// 2023-04-21 소현아
+// 리뷰관리 조회용 컨트롤러 
+// 2023-04-25 소현아
 
-package com.kh.admin.board.inquiry.controller;
+package com.kh.admin.shop.review.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,26 +12,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.admin.board.inquiry.model.service.InquiryService;
-import com.kh.admin.board.inquiry.model.vo.Inquiry;
+import com.kh.admin.shop.review.model.service.ReviewService;
+import com.kh.admin.shop.review.model.vo.Review;
 import com.kh.common.model.vo.PageInfo;
 
-import com.kh.admin.board.inquiry.model.service.InquiryService;
-import com.kh.admin.board.inquiry.model.vo.Inquiry;
-
-
 /**
- * Servlet implementation class InquiryListController
+ * Servlet implementation class AdminReviewListController
  */
-@WebServlet("/inquiryList.ad")
-public class AdminInquiryListController extends HttpServlet {
+@WebServlet("/reviewList.ad")
+public class AdminReviewListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+       
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminInquiryListController() {
+    public AdminReviewListController() {
         super();
+        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -39,11 +36,6 @@ public class AdminInquiryListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		// 로그인 유저의 회원 번호 조회
-		// => 로그인 기능 구현되면 붙일 예정
-
-
-		// 페이징 처리 하기!!
 		int listCount;
 		int currentPage;
 		int pageLimit;
@@ -53,7 +45,7 @@ public class AdminInquiryListController extends HttpServlet {
 		int startPage;
 		int endPage;
 
-		listCount = new InquiryService().selectListCount();
+		listCount = new ReviewService().selectListCount();
 
 		currentPage = Integer.parseInt((request.getParameter("currentPage") == null ? "1" : request.getParameter("currentPage")));
 
@@ -74,21 +66,23 @@ public class AdminInquiryListController extends HttpServlet {
 
 		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
 
-		ArrayList<Inquiry> list = new InquiryService().selectInquiryList(pi);
+		ArrayList<Review> list = new ReviewService().selectReviewList(pi);
 		
 
 		request.setAttribute("pi", pi);
 		request.setAttribute("list", list);
 
 
-		request.getRequestDispatcher("views/admin/inquiry.jsp").forward(request, response);
-
+		request.getRequestDispatcher("views/admin/review.jsp").forward(request, response);
+		
+		
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 
