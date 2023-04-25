@@ -153,6 +153,7 @@
 				, ITEM_DISCOUNT = ?
 				, ITEM_STATUS = ?
 				, DESCRIPTION = ?
+				, ITEM_DATE = SYSDATE
 				WHERE ITEM_CODE = ?
 	</entry>
 
@@ -171,7 +172,8 @@
 	<!-- 2023-04-22 상품 판매 중지 -->
 	<entry key="deleteItem">
 	UPDATE ITEM 
-	SET ITEM_STATUS = ?
+	SET ITEM_STATUS = ?, ITEM_DATE = SYSDATE
+	
 	WHERE ITEM_CODE = ?
 	</entry>
 

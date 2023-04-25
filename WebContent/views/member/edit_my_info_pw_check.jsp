@@ -44,10 +44,10 @@
                                     <a href="/deliveryList.do">硅价瘤 包府</a>
                                 </li>
                                 <li>
-                                    <a href="#">府轰 包府</a>
+                                    <a href="/ready">府轰 包府</a>
                                 </li>
                                 <li>
-                                    <a href="#">捻迄</a>
+                                    <a href="/ready">捻迄</a>
                                 </li>
                                 <li class="on">
                                     <a href="/updateCheckPwd.me">郴 沥焊 荐沥</a>

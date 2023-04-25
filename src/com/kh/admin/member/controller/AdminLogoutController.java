@@ -1,28 +1,23 @@
-/* 2023-04-18 / 로그아웃컨트롤러 / 이지환 */
-package com.kh.user.member.controller;
+package com.kh.admin.member.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import com.kh.admin.member.model.vo.AdMember;
 
 /**
- * Servlet implementation class LogoutController
+ * Servlet implementation class AdminLogoutController
  */
-@WebServlet("/logout.me")
-public class LogoutController extends HttpServlet {
+@WebServlet("/logout.ad")
+public class AdminLogoutController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LogoutController() {
+    public AdminLogoutController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,15 +26,8 @@ public class LogoutController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		HttpSession adminSession = request.getSession(true);
-		adminSession.invalidate();
-//		AdMember m = (AdMember)adminSession.getAttribute("adminMember");
-		
-		// url 재요청방식으로 메인페이지로 이동시키기
-		
+		request.getSession().invalidate();		
 		response.sendRedirect("/");
-	
 	}
 
 	/**
