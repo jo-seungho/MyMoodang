@@ -16,14 +16,13 @@
 			  FROM (
 	          		 SELECT ROWNUM RNUM
 	                       , R.*
-	              	   FROM (SELECT O.ORDER_NO ORDER_NO
+	              	   FROM (SELECT ITEM_CODE
 	                              , STAR_POINT
                                   , TITLE
 	                              , M.MEMBER_ID MEMBER_ID
 	                              , WRITE_DATE
 	                          FROM REVIEW R
 	                          JOIN MEMBER M USING (MEMBER_NO)
-                              JOIN ORDERS O USING (MEMBER_NO)
 	                         WHERE R.DELETE_STATUS = 'Y'
 	                         ORDER BY WRITE_DATE DESC
 	                       ) R
