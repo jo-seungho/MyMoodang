@@ -49,11 +49,11 @@
 							<!-- 카테고리와 구분하기 위해 히든을 줌 -->
 							<input type="hidden" id="filterVal">
 							<ul id="colorTest" class="list">
-								<li name="all"><a class="lowprice" href="javascript:filterClick('전체')">전체보기</a></li>
-								<li name="lowprice"><a class="lowprice" href="javascript:filterClick('1')">낮은가격순</a></li>
-								<li name="highprice"><a class="highprice" href="javascript:filterClick('2')">높은가격순</a></li>
-								<li name="dateprice"><a class="dateprice" href="javascript:filterClick('3')">등록일순</a></li>
-								<li name="viewprice"><a class="viewprice" href="javascript:filterClick('4')">조회높은순</a></li>
+								<li name="all"><a class="lowprice" href="/itemList.it?currentPage=1&category=${category}&filter=전체">전체보기</a></li>
+								<li name="lowprice"><a class="lowprice" href="/itemList.it?currentPage=1&category=${category}&filter=1">낮은가격순</a></li>
+								<li name="highprice"><a class="highprice" href="/itemList.it?currentPage=1&category=${category}&filter=2">높은가격순</a></li>
+								<li name="dateprice"><a class="dateprice" href="/itemList.it?currentPage=1&category=${category}&filter=3">등록일순</a></li>
+								<li name="viewprice"><a class="viewprice" href="/itemList.it?currentPage=1&category=${category}&filter=4">조회높은순</a></li>
 							</ul>
 							
 							<br><br>

@@ -18,7 +18,7 @@
     <div id="header">
       <div class="user_menu">
         <!-- bnr = banner -->
-        <a href="#" class="bnr_delivery">
+        <a href="/enrollForm.me" class="bnr_delivery">
           <img src="/resources/img/image.gif" alt="서울, 경기, 인천 샛별배송, 수도권 이외 지역 택배배송" class="bnr_delivery_img" />
         </a>
 
