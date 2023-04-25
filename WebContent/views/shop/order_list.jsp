@@ -26,11 +26,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 
 
     <%@ include file="../common/common.jsp"%>
@@ -62,7 +59,9 @@
                           <h2 class="tit_snb">마이페이지</h2>
                           <div class="inner_sub">
                               <ul class="list_menu">
+
                                   <li>
+
                                       <a href="/orderList.it">주문내역</a>
                                   </li>
                                   <li>
@@ -72,10 +71,10 @@
                                       <a href="/deliveryList.do">배송지관리</a>
                                   </li>
                                   <li>
-                                      <a href="#">리뷰 관리</a>
+                                      <a href="/ready">리뷰 관리</a>
                                   </li>
                                   <li>
-                                      <a href="#">쿠폰</a>
+                                      <a href="/ready">쿠폰</a>
                                   </li>
                                   <li>
                                       <a href="/updateCheckPwd.me" class="list_item">내 정보 수정</a>
@@ -132,7 +131,7 @@
                                             </dl>
                                             <dl>
                                               <dt>결제방법</dt>
-                                              <dd>카카오페이</dd>
+                                              <dd></dd>
                                             </dl>
                                             <dl>
                                                 <dt>결제금액</dt>

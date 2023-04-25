@@ -20,6 +20,7 @@
 	                              , M.MEMBER_ID MEMBER_ID
 	                              , TITLE
 	                              , DATE_CREATE
+	                              , NVL2(REPLY_CONTENTS, '답변완료', '답변미완료') AS REPLY_STATE
 	                          FROM INQUIRY I
 	                          JOIN MEMBER M USING (MEMBER_NO)
 	                         WHERE I.DELETE_STATUS = 'Y'
@@ -37,20 +38,18 @@
 	             , INQUIRY_TYPE
 	             , M.MEMBER_ID MEMBER_ID
 	             , DATE_CREATE
+	             , REPLY_TITLE
+	             , REPLY_CONTENTS
 	          FROM INQUIRY I
 	          JOIN MEMBER M USING (MEMBER_NO)
 	         WHERE INQ_NO = ?
 		</entry>
 		
-		<entry key="insertInquiry">
-			 INSERT INTO INQUIRY(INQ_NO
-		                 , TITLE
-		                 , REPLY_CONTENTS
-		                 , DELETE_STATUS)
-		            VALUES(SEQ_NNO.NEXTVAL
-		                 , ?
-		                 , ?
-		                 , 'Y')
+		<entry key="updateInquiry">
+			UPDATE INQUIRY
+			   SET REPLY_TITLE = ?
+				 , REPLY_CONTENTS = ?
+		   	 WHERE INQ_NO = ? 
 		</entry>
 
 		<entry key="selectInquiryCount">
@@ -62,5 +61,7 @@
 		SELECT COUNT(*) FROM INQUIRY
 		WHERE REPLY_CONTENTS IS NULL
 		</entry>
+		
+		
 
 </properties>

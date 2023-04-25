@@ -102,10 +102,7 @@
 													<input class="noDisTotal" type="hidden" value="<%= c.getTotalPrice() %>">
 													<input class="selling1" type="hidden" value="<%= c.getDiscountPrice() %>">
 													<span class="selling">
-													<%= (int)(Math.log10(c.getTotalDiscountPrice())+1) > 3
-																					  ?  Integer.toString(c.getTotalDiscountPrice()).replaceAll("\\B(?=(\\d{3})+(?!\\d))", ",")
-																					  : c.getTotalDiscountPrice()%>
-													
+													<%= c.getTotalDiscountPrice()%>
 													 <span class="won">원</span>
 													<input class="totalMoney" type="hidden" value="<%= c.getTotalDiscountPrice() %>">
 													</span>
@@ -178,9 +175,17 @@
 							</dd>
 						</dl>
 						<dl class="amount lst">
-							<dt class="tit">결제예정금액</dt>
+							<dt class="tit">상품금액</dt>
 							<dd class="price">
 								<span class="num countMoney">6,000</span>
+								<!-- sum of product price here -->
+								<span class="won">원</span>
+							</dd>
+						</dl>
+						<dl class="amount lst">
+							<dt class="tit" style="font-weight: 800;">결제예정금액</dt>
+							<dd class="price">
+								<span class="num pays">6,000</span>
 								<!-- sum of product price here -->
 								<span class="won">원</span>
 							</dd>
@@ -227,6 +232,7 @@
 		$('.countMoney').text(sumMoney);
 		$('.noDiscount').text(sumNoDis);
 		$('.difference').text(sumNoDis - sumMoney);
+		$('.pays').text(sumMoney + 3000);
 		
 		
 		$.ajax({

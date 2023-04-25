@@ -54,6 +54,7 @@
 		  JOIN ITEM USING (ITEM_CODE)
 		 WHERE MEMBER_NO = ?
 		 GROUP BY ORDER_NO, ORDER_STATUS, ORDER_DATE
+		 ORDER BY ORDER_NO DESC
 	</entry>
 
 
@@ -75,7 +76,7 @@
 		INNER JOIN ORDERS O
 		ON C.MEMBER_NO = O.MEMBER_NO
 		WHERE C.MEMBER_NO = ?
-		AND O.ORDER_STATUS = '배송완료'
+		AND O.ORDER_STATUS = '배송준비중'
 		AND O.ORDER_NO = (select MAX(T.ORDER_NO)
 		                    from ORDERS T
 		                    where C.MEMBER_NO = T.MEMBER_NO)	

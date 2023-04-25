@@ -12,13 +12,16 @@ public class Inquiry {
 	private String inquiryType;     // 문의유형
 	private String replyContents;   // 답변내용
 	private String replyDate;       // 답변일
-	private String memberNo;           // 회원번호
-	private String memberId;           // 회원 아이디
+	private String memberNo;        // 회원번호
+	private String memberId;        // 회원 아이디
+	private String replyTitle;      // 답변제목
+	
+	private String replyState; 		// 답변상태
 
 	public Inquiry() {}
 
 
-	public Inquiry(int inqNo, String title, String description, String dateCreate, String inquiryType, String replyContents, String replyDate, String memberNo) {
+	public Inquiry(int inqNo, String title, String description, String dateCreate, String inquiryType, String replyContents, String replyDate, String memberNo, String replyTitle) {
 		super();
 		this.inqNo = inqNo;
 		this.title = title;
@@ -28,9 +31,10 @@ public class Inquiry {
 		this.replyContents = replyContents;
 		this.replyDate = replyDate;
 		this.memberNo = memberNo;
+	    this.replyTitle = replyTitle;
 	}
 
-	public Inquiry(String title, int inqNo, String inquiryType, String memberId, String dateCreate) {
+	public Inquiry(String title, int inqNo, String inquiryType, String memberId, String dateCreate, String replyTitle, String replyContents) {
 		
 		super();
 		this.title = title;
@@ -38,6 +42,8 @@ public class Inquiry {
 		this.inquiryType = inquiryType;
 		this.memberId = memberId;
 		this.dateCreate = dateCreate;
+		this.replyTitle = replyTitle;
+		this.replyContents = replyContents;
 	}
 
 	public Inquiry(int inqNo, String inquiryType,  String memberId, String title, String dateCreate) {
@@ -47,6 +53,16 @@ public class Inquiry {
 		this.memberId = memberId;
 		this.title = title;
 		this.dateCreate = dateCreate;
+	}
+
+
+	public String getReplyTitle() {
+		return replyTitle;
+	}
+
+
+	public void setReplyTitle(String replyTitle) {
+		this.replyTitle = replyTitle;
 	}
 
 
@@ -138,20 +154,25 @@ public class Inquiry {
 	public void setMemberNo(String memberNo) {
 		this.memberNo = memberNo;
 	}
+	
+	
+	public String getReplyState() {
+		return replyState;
+	}
+
+
+	public void setReplyState(String replyState) {
+		this.replyState = replyState;
+	}
 
 
 	@Override
 	public String toString() {
 		return "Inquiry [inqNo=" + inqNo + ", title=" + title + ", description=" + description + ", dateCreate="
 				+ dateCreate + ", inquiryType=" + inquiryType + ", replyContents=" + replyContents + ", replyDate="
-				+ replyDate + ", memberNo=" + memberNo + ", memberId=" + memberId + "]";
+				+ replyDate + ", memberNo=" + memberNo + ", memberId=" + memberId + ", replyTitle=" + replyTitle
+				+ ", replyState=" + replyState + "]";
 	}
-
-
-
-
-
-
 
 
 

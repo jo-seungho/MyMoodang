@@ -14,6 +14,8 @@
 <html lang="en">
   <head>
   	<%@ include file="common2.jsp" %>
+  	<link rel="stylesheet" href="/resources/css/board/faq.css">
+    <link rel="stylesheet" href="/resources/css/board/notice.css">
     <title>1:1 문의 관리</title>
   </head>
 
@@ -52,6 +54,7 @@
                   <th>회원아이디</th>
                   <th>문의제목</th>
                   <th>문의날짜</th>
+                  <th>답변여부</th>
                 </tr>
               </thead>
               <tbody>
@@ -62,37 +65,41 @@
                   <td><%=in.getMemberId() %></td>
                   <td><%=in.getTitle() %></td>
                   <td><%=in.getDateCreate() %></td>
+                  <td><%=in.getReplyState() %></td>
                 </tr>
                 <% } %>
               </tbody>
             </table>
             <br />
 			<div align="center" class="paging-area">
-	
-				<% if(currentPage != 1) { %>
-					<button onclick="location.href = '/noticelist.ad?currentPage=<%= currentPage - 1 %>';">
-						&lt;
-					</button>
-				<% } %>
-			
-				<% for(int p = startPage; p <= endPage; p++) { %>
-					<% if(p != currentPage) { %>
-						<button onclick="location.href = '/noticelist.ad?currentPage=<%= p %>';">
-							<%= p %>
-						</button>
-					<% } else { %>
-						<!-- 현재 내가 보고있는 페이지일 경우에는 클릭이 안되게끔 -->
-						<button disabled><%= p %></button>
-					<% } %>
-				<% } %>
-				
-				<% if(currentPage != maxPage) { %>
-					<button onclick="location.href = '/noticelist.ad?currentPage=<%= currentPage + 1 %>';">
-						&gt;
-					</button>
-				<% } %>
-	
-			</div>
+								 
+		        <div class="layout-pagination">
+		             <div class="pagediv">
+							
+						<a href="/inquiryList.ad?currentPage=<%= currentPage - 1 %>" class="layout-pagination-button layout-pagination-prev-page" style="border : 1px solid lightgray;">이전 페이지로 가기</a>
+
+							<span>
+								<% for(int p = startPage; p <= endPage; p++) { %>
+										
+									<% if(p != currentPage) { %>
+											
+										<strong onclick="location.href = '/inquiryList.ad?currentPage=<%= p %>';" class="layout-pagination-button layout-pagination-number __active" style="height: 32px;">
+											<%= p %>
+										</strong>
+									<% } else { %>
+								<!-- 현재 내가 보고있는 페이지일 경우에는 클릭이 안되게끔 -->
+												
+									<strong class="layout-pagination-button layout-pagination-number __active" style="height: 32px; background-color: lightgray; "><%= p %></strong>
+									<% } %>
+								<% } %>
+							</span>
+
+                                <a href="/inquiryList.ad?currentPage=<%= currentPage + 1 %>" class="layout-pagination-button layout-pagination-next-page" style="border : 1px solid lightgray;">다음 페이지로 가기</a>
+										
+								</div>
+							</div>
+					
+					</div>
            
           </div>
           <br />

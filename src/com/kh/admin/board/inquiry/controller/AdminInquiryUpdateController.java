@@ -14,14 +14,14 @@ import com.kh.admin.board.inquiry.model.vo.Inquiry;
 /**
  * Servlet implementation class AdminInquiryInsertController
  */
-@WebServlet("/inquiryInsert.ad")
-public class AdminInquiryInsertController extends HttpServlet {
+@WebServlet("/inquiryUpdate.ad")
+public class AdminInquiryUpdateController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminInquiryInsertController() {
+    public AdminInquiryUpdateController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,16 +32,16 @@ public class AdminInquiryInsertController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		request.setCharacterEncoding("UTF-8");
-		
-		String inquiryTitle = request.getParameter("title");
-		String inquiryContent = request.getParameter("content");
+		int inqNo = Integer.parseInt(request.getParameter("inqNo"));
+		String replyTitle = request.getParameter("title");
+		String replyContent = request.getParameter("content");
 		
 		Inquiry in = new Inquiry();
-		in.setTitle(inquiryTitle);
-		in.setReplyContents(inquiryContent);
+		in.setInqNo(inqNo);
+		in.setReplyTitle(replyTitle);
+		in.setReplyContents(replyContent);
 		
-		int result = new InquiryService().insertInquiry(in);
-		
+		int result = new InquiryService().updateInquiry(in);
 		
 		if(result > 0) { // 성공
 			

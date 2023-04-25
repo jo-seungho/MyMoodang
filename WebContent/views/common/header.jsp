@@ -7,6 +7,7 @@
     pageEncoding="UTF-8"%>
 
 <%@ page import="com.kh.user.member.model.vo.Member" %>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 
 <%
 	Member loginUser = (Member)session.getAttribute("loginUser");
@@ -18,9 +19,15 @@
     <div id="header">
       <div class="user_menu">
         <!-- bnr = banner -->
-        <a href="#" class="bnr_delivery">
+        <% if(loginUser == null) { %>
+        <a href="/enrollForm.me" class="bnr_delivery">
           <img src="/resources/img/image.gif" alt="서울, 경기, 인천 샛별배송, 수도권 이외 지역 택배배송" class="bnr_delivery_img" />
         </a>
+        <% } else { %>
+        <a href="" class="bnr_delivery">
+          <img src="/resources/img/image.gif" alt="서울, 경기, 인천 샛별배송, 수도권 이외 지역 택배배송" class="bnr_delivery_img" />
+        </a>
+        <% } %>
 
 
         <!-- 2023-04-18 / 로그인 전 우측 상단 바 / 이지환 -->
@@ -67,6 +74,12 @@
         <!-- .sign_menu -->
         <!-- 2023-04-19 / 로그인 후 상단바 코드 수정 및 css 부여 / 이지환 -->
 		<% if(loginUser != null) { %>
+		
+		<%if(loginUser.getMemberId().equals("admin") && loginUser != null) { %>
+            <a href="/main.ad">
+            <i class="fa-solid fa-gear fa-spin-pulse fa-2xl" style="margin-left : 765px; margin-top : 20px;"></i>
+            </a>
+            <% } %>
 		<ul class="sign_menu">
 
           <li class="link">
@@ -129,6 +142,7 @@
             <img src="/resources/img/logo.png" alt="마이무당 로고" class="logo_img" />
           </a>
         </h1>
+        
       </div>
       <div class="gnb">
         <!-- gnb = global nav bar = 최상위 메뉴  -->
@@ -172,6 +186,7 @@
                     </span>
                     <!-- tit: text + ico -->
                   </a>
+                  
 
                   <a href="/itemList.it?currentPage=1&category=단백질" class="main_item">
                     <span class="ico">
@@ -218,6 +233,11 @@
               </ul>
             </div>
           </li>
+          
+          
+          
+          
+          
           <li class="list">
             <a href="/newItemList.it?currentPage=1" class="link">
               <span class="txt">신상품</span>
@@ -264,7 +284,11 @@
                 </button>
               </div>
             </div>
+            
           </div>
+          
+
+			
 
           <div id="goCart" class="cart_count">
             <% if(loginUser != null) { %>

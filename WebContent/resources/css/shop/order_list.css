@@ -86,7 +86,7 @@
 #snb .list_menu li.on a, #snb .list_menu li a:hover {
     background-size: 6px 11px;
     font-weight: 700;
-    color: #5f0080;
+    color: rgb(254,116,119);
 }
 
 #snb .list_menu li a {

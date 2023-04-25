@@ -32,7 +32,7 @@
 								role="button" data-bs-toggle="dropdown" aria-expanded="false">관리자</a>
 								<ul class="dropdown-menu dropdown-menu-end"
 									aria-labelledby="navbarDropdown">
-									<li><a class="dropdown-item" href="#!">로그아웃</a></li>
+									<li><a class="dropdown-item" href="/logout.ad">로그아웃</a></li>
 								</ul></li>
 						</ul>
 					</div>
@@ -67,7 +67,7 @@
 						<nav class="sb-sidenav-menu-nested nav">
 							<a class="nav-link" href="/noticelist.ad?currentPage=1">공지사항 관리</a> <a
 								class="nav-link" href="/inquiryList.ad?currentPage=1">1:1 문의 관리</a> <a
-								class="nav-link" href="review.html">리뷰 관리</a>
+								class="nav-link" href="/reviewList.ad?currentPage=1">리뷰 관리</a>
 						</nav>
 					</div>
 				</div>
