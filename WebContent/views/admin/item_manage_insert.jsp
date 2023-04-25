@@ -58,7 +58,12 @@
                     <input type="number" name="itemPrice" class="form-control" style="margin-left : 50px;" />
                     <label for="floatingPassword" style="margin-left : 50px;">* 판매 가격</label>
                   </div>
-
+                  
+                  <div class="col form-floating mb-3">
+                    <input type="text" name="itemText" class="form-control" value="" style="margin-left : 50px;" required />
+                    <label for="floatingInput" style="margin-left : 50px;">* 상품설명</label>
+                  </div>
+                  
                   <div class="col form-floating mb-3">
                     <textarea id="summernote" name="content" required></textarea>
                   </div>  

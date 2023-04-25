@@ -25,7 +25,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- header css -->
     <%@ include file="../common/common.jsp"%>
-
+	
     <link rel="stylesheet" href="/resources/css/shop/item_detail.css">
     <link rel="stylesheet" href="/resources/css/shop/item_review_detail.css">
 
@@ -195,6 +195,7 @@
                                                         </p>
                                                     </div>
                                                 </div>
+                                                <% if(loginUser != null) { %>
                                                 <div class="group_btn off">
                                                     <span class="btn">
                                                         <button onclick="orderPay()" type="button" class="btn btn2">구매하기</button>
@@ -203,6 +204,18 @@
                                                         <button type="button" class="btn btn2 insertCart">장바구니 담기</button>
                                                     </span>
                                                 </div>
+                                                <% } else {%>
+                                               <div class="group_btn off">
+                                                    <span class="btn">
+                                                        <button type="button" class="btn btn2">구매하기</button>
+                                                    </span>
+                                                    <span class="btn">
+                                                        <button type="button" class="btn btn2 insertCart">
+                                                        	<a href="/loginForm.me" style="color: white;">장바구니 담기</a>
+                                                        </button>
+                                                    </span>
+                                                </div>
+                                                <% } %>
                                             </div>
                                         </form>
                                     </div>
@@ -266,9 +279,7 @@
                                   <li class="goods-view-infomation-tab">
                                       <a href="#goods-description" class="goods-view-infomation-tab-anchor __active">상품설명</a>
                                   </li>
-                                  <li class="goods-view-infomation-tab">
-                                      <a href="#goods-image" class="goods-view-infomation-tab-anchor">상품이미지</a>
-                                  </li>
+                                  
                                   <li class="goods-view-infomation-tab">
                                       <a href="#goods-review" class="goods-view-infomation-tab-anchor">
                                           고객리뷰
@@ -280,7 +291,6 @@
                                   <div class="goods_wrap">
                                       <div class="goods_intro">
                                           <div class="pic">
-                                              <img src="<%= i.getItemImg() %>" style="width:1010px; height:671px;">
                                           </div>
                                           <div class="context last">
                                               <h3>
@@ -289,9 +299,10 @@
                                                   </small>
                                                   <%= i.getItemText() %>
                                               </h3>
-                                              <p class="words">
-                                                  <img src="<%= i.getItemImg() %>" style="width:1010px; height:671px;">
-                                              </p>
+                                              <br><br>
+                                              <div style="text-align:center;">
+                                              <%= i.getDescription() %>
+                                              </div>
       
                                           </div>
                                       </div>  
@@ -299,6 +310,7 @@
                                   </div>
                               </div>
                           	</div>
+
                                 <ul class="goods-view-infomation-tab-group" style="display: flex; align-content: stretch; justify-content: center; ">
                                   <li class="goods-view-infomation-tab">
                                       <a href="#goods-description" class="goods-view-infomation-tab-anchor">상품설명</a>
@@ -320,6 +332,7 @@
                                       </p>
                                   </div>
                               </div>
+
                                     
 
                                  <div class="happy_center fst">
@@ -327,11 +340,7 @@
                                   <li class="goods-view-infomation-tab">
                                       <a href="#goods-description" class="goods-view-infomation-tab-anchor">상품설명</a>
                                   </li>
-                                  <li class="goods-view-infomation-tab">
-                                      <a href="#goods-image" class="goods-view-infomation-tab-anchor">상품이미지</a>
-                                  </li>
-
-
+                                 
                                   <li class="goods-view-infomation-tab">
                                       <a href="#goods-review" class="goods-view-infomation-tab-anchor __active">
                                           고객리뷰
@@ -588,10 +597,6 @@
                 			console.log(rsp);
                 		    if ( rsp.success ) {
                 		    	var msg = '결제가 완료되었습니다.';
-                		        msg += '고유ID : ' + rsp.imp_uid;
-                		        msg += '상점 거래ID : ' + rsp.merchant_uid;
-                		        msg += '결제 금액 : ' + rsp.paid_amount;
-                		        msg += '카드 승인번호 : ' + rsp.apply_num;
                 		        // location.href = '/orderComplete';
                 		    } else {
                 		    	 var msg = '결제에 실패하였습니다.';

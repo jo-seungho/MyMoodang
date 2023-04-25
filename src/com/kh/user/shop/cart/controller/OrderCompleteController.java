@@ -1,11 +1,17 @@
 package com.kh.user.shop.cart.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.kh.user.member.model.vo.Member;
+import com.kh.user.shop.order.model.service.OrderService;
+import com.kh.user.shop.order.model.vo.Order;
 
 /**
  * Servlet implementation class OrderCompleteController
@@ -28,6 +34,13 @@ public class OrderCompleteController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
+		int userNo = ((Member)request.getSession().getAttribute("loginUser")).getMemberNo();
+		
+		int orderSelect = Integer.parseInt(request.getParameter("ono"));
+		
+		ArrayList<Order> list = new OrderService().SelectOrderComplete(userNo, orderSelect);
+		
+		request.setAttribute("list", list);
 		
 		request.getRequestDispatcher("views/shop/orderComplete.jsp").forward(request, response);
 	}

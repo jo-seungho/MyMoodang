@@ -75,7 +75,7 @@
 				<div class="banner_wrapper">
 					<div class="slider">
 						<div class="imgs">
-							<img src="/resources/img/banner2.png" align="center">
+							<img src="/resources/img/banner1.png" align="center">
 						</div>
 
 						<div class="imgs">
@@ -83,7 +83,7 @@
 						</div>
 
 						<div class="imgs">
-							<img src="/resources/img/banner4.png" align="center">
+							<img src="/resources/img/banner5.png" align="center">
 						</div>
 					</div>
 				</div>
@@ -126,7 +126,12 @@
 
 											<a href="/itemDetail.it?bno=<%= i.getItemCode() %>" class="info">
 											<span class="name"> <%= i.getItemName() %> </span>
-											<span class="cost"> <span class="price"><%= i.getItemPrice() %></span>
+											
+											
+											<span style="color : red; font-weight : bold; font-size : 18px;"><%= (int)(i.getItemDiscount()*100) %>%&nbsp;</span>
+	                                                <span class="slidePrice" style="text-decoration-line : line-through"><%= i.getItemPrice() %>원</span>
+	                                               
+											<span class="cost"> <span class="price"><%= i.getDiscountPrice() %></span>
 											<input type="hidden" id="product_cost1" value=1300>
 											<span class="dodo">원</span>
 											</span> <span class="desc"><%= i.getItemText() %></span>

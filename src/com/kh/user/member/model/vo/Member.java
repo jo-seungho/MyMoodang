@@ -1,3 +1,5 @@
+
+
 package com.kh.user.member.model.vo;
 
 import com.kh.common.model.vo.Converter;
@@ -78,6 +80,7 @@ public class Member {
 		this.name = name;
 		this.phone = phone;
 	}
+
 
 	
 	public int getCartCount() {
@@ -224,6 +227,7 @@ public class Member {
 				+ ", phone=" + phone + ", enrollDate=" + enrollDate + ", modifyDate=" + modifyDate + ", status="
 				+ status + ", totalMoney=" + totalMoney + ", gradeNo=" + gradeNo + "]";
 	}
+
 
 
 }

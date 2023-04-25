@@ -3,7 +3,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-	
+
+<%@ page import="com.kh.user.member.model.vo.Member" %>
+
+<% Member loginM = (Member)session.getAttribute("loginUser"); %>
+
+
         <div id="footer">
         <div class="inner_footer">
             <div class="cc_footer">
@@ -29,7 +34,12 @@
                 </div>
                 <div class="cc_view cc_qna">
                     <h3>
-                        <a href="#" class="tit">1:1 문의</a>
+                    	<% if(loginM != null) { %>
+                        	<a href="/list.in" class="tit">1:1 문의</a>
+                        <% } else { %>
+                        	<a href="" id="afterLogin11"  class="tit">1:1 문의</a>
+                       	<% } %>
+
                     </h3>
                     <dl class="list">
                         <dt>24시간 접수 가능</dt>
@@ -130,9 +140,19 @@
                       <p class="txt">
                           고객님의 안전거래를 위해 현금 등으로 결제 시 저희 쇼핑몰에서 가입한<br>
                           토스 페이먼츠 구매안전(에스크로) 서비스를 이용하실 수 있습니다.
-                          
+
                       </p>
                   </a>
               </div>
           </div>
       </div>
+
+
+      <script>
+      $(function() {
+    		$("#afterLogin11").click(function() {
+    			alert("로그인 후 이용이 가능한 서비스입니다.");
+    			location.href = "/";
+    		})
+    	})
+      </script>

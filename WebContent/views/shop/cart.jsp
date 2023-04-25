@@ -102,10 +102,7 @@
 													<input class="noDisTotal" type="hidden" value="<%= c.getTotalPrice() %>">
 													<input class="selling1" type="hidden" value="<%= c.getDiscountPrice() %>">
 													<span class="selling">
-													<%= (int)(Math.log10(c.getTotalDiscountPrice())+1) > 3
-																					  ?  Integer.toString(c.getTotalDiscountPrice()).replaceAll("\\B(?=(\\d{3})+(?!\\d))", ",")
-																					  : c.getTotalDiscountPrice()%>
-													
+													<%= c.getTotalDiscountPrice()%>
 													 <span class="won">원</span>
 													<input class="totalMoney" type="hidden" value="<%= c.getTotalDiscountPrice() %>">
 													</span>
@@ -178,9 +175,17 @@
 							</dd>
 						</dl>
 						<dl class="amount lst">
-							<dt class="tit">결제예정금액</dt>
+							<dt class="tit">상품금액</dt>
 							<dd class="price">
 								<span class="num countMoney">6,000</span>
+								<!-- sum of product price here -->
+								<span class="won">원</span>
+							</dd>
+						</dl>
+						<dl class="amount lst">
+							<dt class="tit" style="font-weight: 800;">결제예정금액</dt>
+							<dd class="price">
+								<span class="num pays">6,000</span>
 								<!-- sum of product price here -->
 								<span class="won">원</span>
 							</dd>
@@ -227,6 +232,7 @@
 		$('.countMoney').text(sumMoney);
 		$('.noDiscount').text(sumNoDis);
 		$('.difference').text(sumNoDis - sumMoney);
+		$('.pays').text(sumMoney + 3000);
 		
 		
 		$.ajax({
@@ -267,7 +273,7 @@
 				// console.log(rsp);
 			    if ( rsp.success ) {
 			    	var msg = '결제가 완료되었습니다.';
-			    	insertOrder();
+			    	insertOrder(rsp.imp_uid);
 			        // location.href = '/orderComplete';
 			    } else {
 			    	 var msg = '결제에 실패하였습니다.';
@@ -278,22 +284,41 @@
 		}
 
 		// 주문완료시 order 테이블에 상품 담는 용도
-		function insertOrder() {
+		function insertOrder(orderUid) {
 			$.ajax({
 				
 				url: "insertOrder",
 				type: "post",
 				data: {
-					totalPay: parseInt($('.countMoney').text())
+					totalPay: parseInt($('.countMoney').text()),
+					orderUid: orderUid
 				},
 				success: function(res) {
-					// insertItemList();
+					insertItemList()
 				},
 				error: function(err) {
 					console.log(err);
 				}
 			})
 		}
+		
+		
+		
+		function insertItemList() {
+			$.ajax({
+				
+				url: "insertListItem",
+				type: "post",
+				success: function(res) {
+					deleteCart();
+				},
+				error: function(err) {
+					console.log(err);
+				}
+				
+			})
+		}
+		
 		
 		function deleteCart() {
 			

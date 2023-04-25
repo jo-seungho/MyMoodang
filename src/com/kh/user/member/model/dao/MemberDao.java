@@ -112,12 +112,13 @@ public class MemberDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 
+		System.out.println("넘어가기 전 멤버" + m);
+
 		String sql = prop.getProperty("insertMember");
 
 		try {
 			int i = 0;
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(++i, m.getMemberNo());
 			pstmt.setString(++i, m.getMemberId());
 			pstmt.setString(++i, m.getPassword());
 			pstmt.setString(++i, m.getName());
@@ -464,6 +465,7 @@ public class MemberDao {
 	}
 
 
+
 	/**
 	 * 비밀번호 찾기 회원의 정보조회용 메소드
 	 * 2023-04-24 김서영
@@ -527,4 +529,101 @@ public class MemberDao {
 		}
 		return result;
 	}
+
+
+	/**
+	 * 2023.04.24 / 배송지 목록 업데이트용 메소드 / 이지환
+	 * @param conn
+	 * @param updateMS
+	 * @return
+	 */
+	public int updateShippingAddress(Connection conn, ShippingAddress updateMS) {
+		// System.out.println(updateMS + "1");
+		// UPDATE 문 => int (처리된 행의 갯수)
+
+		// 1. 필요한 변수 먼저 셋팅
+		int result = 0;
+		PreparedStatement pstmt = null;
+
+		// 실행할 쿼리문
+		String sql = prop.getProperty("updateMemberShipAddress");
+
+		try {
+			// 2. PreparedStatement 객체 생성
+			pstmt = conn.prepareStatement(sql);
+
+			// 3_1. 미완성된 쿼리문 완성시키기
+			pstmt.setString(1, updateMS.getShipAddr());
+			pstmt.setString(2, updateMS.getShipAddrInfo());
+			pstmt.setString(3, updateMS.getPhone());
+			pstmt.setString(4, updateMS.getShipName());
+			pstmt.setInt(5, updateMS.getMemberNo());
+			pstmt.setInt(6, updateMS.getShipNo());
+
+
+			// 3_2. 쿼리문 실행 후 결과 받기
+			result = pstmt.executeUpdate(); // 업데이트가 잘 됐다면 result 에 1, 아니면 0 이 담겨있을 거임
+			System.out.println(result);
+
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+
+			// 4. 자원 반납 (생성 순서의 역순)
+			JDBCTemplate.close(pstmt);
+		}
+
+		// 5. 결과 반환
+		return result;
+	}
+
+
+	/**
+	 * 2023-04-21  shipNo 를 기준으로 그 배송지 목록만 조회하기 위한 것 / 이지환
+	 * @param conn
+	 * @return
+	 */
+	public ShippingAddress selectListByShipNo(Connection conn, int shipNo) {
+
+		/* ShippinAddress h = new ShippingAddress(); 에서 ShippingAddress h = null; 로 변경 이지환 */
+		ShippingAddress h = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		String sql = prop.getProperty("selectShipAddressByShipNo");
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, shipNo);
+
+			rset = pstmt.executeQuery();
+
+		/* 2023.04.24 if문으로 조회 / 이지환 */
+			if(rset.next()) {
+
+				h = new ShippingAddress();
+				h.setShipAddr(rset.getString("SHIP_ADDR"));
+				h.setShipAddrInfo(rset.getString("SHIP_ADDR_INFO"));
+				h.setPhone(rset.getString("PHONE"));
+				h.setShipName(rset.getString("SHIP_NAME"));
+				h.setMemberNo(rset.getInt("MEMBER_NO"));
+				h.setShipNo(rset.getInt("SHIP_NO"));
+
+			}
+
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+
+		}
+
+		return h;
+
+
+	}
 }
+

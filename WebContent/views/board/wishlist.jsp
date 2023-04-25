@@ -40,25 +40,22 @@
                         <div class="inner_sub">
                             <ul class="list_menu">
                                 <li>
-                                    <a href="../main/order_list.html">주문내역</a>
+                                    <a href="/orderList.it">주문내역</a>
                                 </li>
                                 <li  class="on">
                                     <a href="/wishList.wi">찜한 상품</a>
                                 </li>
                                 <li>
-                                    <a href="../main/delivery_list.html">배송지 관리</a>
+                                    <a href="/deliveryList.do">배송지 관리</a>
                                 </li>
                                 <li>
-                                    <a href="#">리뷰 관리</a>
+                                    <a href="/ready">리뷰 관리</a>
                                 </li>
                                 <li>
-                                    <a href="../main/oneonone.html">1:1 문의</a>
+                                    <a href="/ready">쿠폰</a>
                                 </li>
                                 <li>
-                                    <a href="#">쿠폰</a>
-                                </li>
-                                <li>
-                                    <a href="../main/edit_my_info_pw_check.html">내 정보 수정</a>
+                                    <a href="/updateCheckPwd.me">내 정보 수정</a>
                                 </li>
                             </ul>
                         </div>
@@ -104,11 +101,13 @@
                                                     <dl>
                                                         <a href="/itemDetail.it?bno=<%= w.getItemCode() %>"><dt>상품명</dt>
                                                          <dd><%= w.getItemName() %></dd>
+                                                         
                                                         </a> 	
                                                     </dl>
                                                     <dl>
-                                                        <dt>가격</dt>
-                                                        <dd><%= w.getDiscountPrice() %></dd>
+                                                        <dt>가격 :</dt>
+                                                        <dd><%= w.getDiscountPrice() %>원</dd>
+                                                        <input type="hidden" value="<%= w.getDiscountPrice() %>" id="disprice">
                                                     </dl>
                                               </div>
                                               
@@ -116,7 +115,7 @@
                                               <div class="wish_status">
                                                 <span class="inner_status">
                                                     <a id="delete" href="#" onclick="removeFromWishlist(<%= w.getItemCode() %>)">삭제</a> <br>
-                                                    <a id="cart_in" href="#장바구니에 담기">
+                                                    <a id="cart_in" href="#" onclick="insertCart(<%=w.getItemCode() %>); removeFromWishlist(<%= w.getItemCode() %>);">
                                                     <span class="material-symbols-outlined">
                                                         shopping_cart
                                                         </span> 담기</span>
@@ -151,6 +150,47 @@
 			<%@ include file="../common/footer.jsp" %>
 			
 			<script>
+			
+			
+			
+			
+			
+			// 장바구니 담기 2023-04-23 조승호
+         	function insertCart(code) {
+         		
+         		let priceItem = $('#disprice').val();
+
+         		$.ajax({
+         			
+         			url: "/cartList",
+         			type: "post",
+         			data: {
+    					itemCodeNo: code,
+    					countValue: 1,
+    					priceItem: priceItem
+         			},
+         			success: function(res) {
+         				console.log(res);
+    					alert('물품을 장바구니에 담았습니다!');
+    					$.ajax({
+    						
+    						url: "count",
+    						type: "get",
+    						success: function(res) {
+    							$('.itemCount').text(res);
+    						},
+    						error: function(err) {
+    							console.log(err);
+    						}
+    						
+    					})
+         			},
+         			error: function(err) {
+         				
+         			}
+         		});
+         	}
+			
 			function removeFromWishlist(code) {
           	    $.ajax({
           	      url: "/heart.wi",

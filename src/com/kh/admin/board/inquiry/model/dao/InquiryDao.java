@@ -93,12 +93,15 @@ public class InquiryDao {
 			rset = pstmt.executeQuery();
 
 			while(rset.next()) {
-				 list.add(new Inquiry(rset.getInt("INQ_NO")
-						        , rset.getString("INQUIRY_TYPE")
-						        , rset.getString("MEMBER_ID")
-						        , rset.getString("TITLE")
-						        , rset.getString("DATE_CREATE")));
+				 Inquiry i = new Inquiry();
+				 i.setInqNo(rset.getInt("INQ_NO"));
+				 i.setInquiryType(rset.getString("INQUIRY_TYPE"));
+				 i.setMemberId(rset.getString("MEMBER_ID"));
+				 i.setTitle(rset.getString("TITLE"));
+				 i.setDateCreate(rset.getString("DATE_CREATE"));
+				 i.setReplyState(rset.getString("REPLY_STATE"));
 
+				 list.add(i);
 			}
 
 		} catch (SQLException e) {
@@ -108,6 +111,7 @@ public class InquiryDao {
 			close(pstmt);
 		}
 
+		
 		return list;
 
 	}
@@ -140,7 +144,10 @@ public class InquiryDao {
 						       , rset.getInt("INQ_NO")
 						       , rset.getString("INQUIRY_TYPE")
 						       , rset.getString("MEMBER_ID")
-						       , rset.getString("DATE_CREATE"));
+						       , rset.getString("DATE_CREATE")
+						       , rset.getString("REPLY_TITLE")
+						       , rset.getString("REPLY_CONTENTS"));
+					
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -152,18 +159,19 @@ public class InquiryDao {
 	}
 	
 	
-	public int insertInquiry(Connection conn, Inquiry in) {
+	public int updateInquiry(Connection conn, Inquiry in) {
 		
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
-	    String sql = prop.getProperty("insertInquiry");
+	    String sql = prop.getProperty("updateInquiry");
 	    
 	    try {
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setString(1,in.getTitle());
+			pstmt.setString(1,in.getReplyTitle());
 			pstmt.setString(2,in.getReplyContents());
+			pstmt.setInt(3,in.getInqNo());
 			
 			result = pstmt.executeUpdate();
 			
@@ -175,7 +183,7 @@ public class InquiryDao {
 			close(pstmt);
 			
 		}
-	    
+	    System.out.println(result);
 	    return result;
 		
 		

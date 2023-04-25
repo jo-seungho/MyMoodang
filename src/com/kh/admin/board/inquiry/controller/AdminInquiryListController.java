@@ -75,6 +75,7 @@ public class AdminInquiryListController extends HttpServlet {
 		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
 
 		ArrayList<Inquiry> list = new InquiryService().selectInquiryList(pi);
+		
 
 		request.setAttribute("pi", pi);
 		request.setAttribute("list", list);

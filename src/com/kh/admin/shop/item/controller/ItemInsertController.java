@@ -43,7 +43,8 @@ public class ItemInsertController extends HttpServlet {
 			int itemStock = Integer.parseInt(multiRequest.getParameter("itemStock"));
 			int itemPrice = Integer.parseInt(multiRequest.getParameter("itemPrice"));
 			
-			String itemText = multiRequest.getParameter("content");
+			String itemText = multiRequest.getParameter("itemText");
+			String content = multiRequest.getParameter("content");
 
 			int itemDiscount = 0;
 			String itemDiscountParam = multiRequest.getParameter("itemDiscount");
@@ -56,15 +57,17 @@ public class ItemInsertController extends HttpServlet {
 			String itemStatus = multiRequest.getParameter("itemStatus");
 			String itemCategory = multiRequest.getParameter("itemCategory");
 
+			
+			
 			Item i = new Item();
 			i.setItemName(itemName);
 			i.setItemStock(itemStock);
 			i.setItemPrice(itemPrice);
-
 			i.setItemText(itemText);
 			i.setItemDiscount(itemDiscount * 0.01);
 			i.setItemStatus(itemStatus);
 			i.setItemCategory(itemCategory);
+			i.setDescription(content);
 
 
 				String key = "file1";

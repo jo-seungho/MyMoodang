@@ -138,15 +138,32 @@ public class OrderService {
 		return img;
 	}
 
-	public int SelectOrderNo() {
+	public int insertListItem(int userNo) {
 		
 		Connection conn = getConnection();
 		
-		int result = new OrderDao().SelectOrderNo(conn);
+		int result = new OrderDao().insertListItem(conn, userNo);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
 		
 		close(conn);
 		
 		return result;
+	}
+
+	public ArrayList<Order> SelectOrderComplete(int userNo, int orderSelect) {
+		
+		Connection conn = getConnection();
+		
+		ArrayList<Order> list = new OrderDao().SelectOrderComplete(conn, userNo, orderSelect);
+		
+		close(conn);
+		
+		return list;
 	}
 
 

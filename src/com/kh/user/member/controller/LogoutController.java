@@ -2,11 +2,15 @@
 package com.kh.user.member.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.kh.admin.member.model.vo.AdMember;
 
 /**
  * Servlet implementation class LogoutController
@@ -28,7 +32,9 @@ public class LogoutController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		request.getSession().invalidate();
+		HttpSession adminSession = request.getSession(true);
+		adminSession.invalidate();
+//		AdMember m = (AdMember)adminSession.getAttribute("adminMember");
 		
 		// url 재요청방식으로 메인페이지로 이동시키기
 		

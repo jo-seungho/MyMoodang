@@ -59,6 +59,7 @@ public class ItemDao {
                 i.setItemText(rset.getString("ITEM_TEXT"));
                 i.setDiscountPrice(rset.getInt("DISCOUNT_PRICE"));
                 i.setItemStatus(rset.getString("ITEM_STATUS"));
+                i.setDescription(rset.getString("DESCRIPTION"));
                 
                 i.setImgName(rset.getString("ITEM_IMG_PATH"));
                
@@ -182,6 +183,7 @@ public class ItemDao {
 				i.setItemStock(rset.getInt("ITEM_STOCK"));
 				i.setItemPrice(rset.getInt("ITEM_PRICE"));
 				i.setItemStatus(rset.getString("ITEM_STATUS"));
+				i.setDescription(rset.getString("DESCRIPTION"));
 				
 				list.add(i);
 			}
@@ -230,6 +232,7 @@ public class ItemDao {
 				i.setItemStock(rset.getInt("ITEM_STOCK"));
 				i.setItemPrice(rset.getInt("ITEM_PRICE"));
 				i.setItemStatus(rset.getString("ITEM_STATUS"));
+				i.setDescription(rset.getString("DESCRIPTION"));
 				
 				list.add(i);
 			}
@@ -259,6 +262,8 @@ public class ItemDao {
 			pstmt.setInt(4, i.getItemPrice());
 			pstmt.setString(5, i.getItemText());
 			pstmt.setDouble(6, i.getItemDiscount());
+			
+			pstmt.setString(7, i.getDescription());
 
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -310,7 +315,10 @@ public class ItemDao {
 			pstmt.setString(5, i.getItemText());
 			pstmt.setDouble(6, i.getItemDiscount());
 			pstmt.setString(7, i.getItemStatus());
-			pstmt.setInt(8, itemCode);
+			
+			pstmt.setString(8, i.getDescription());
+			
+			pstmt.setInt(9, itemCode);
 
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -350,6 +358,7 @@ public class ItemDao {
 				i.setItemImgLevel(rset.getInt("ITEM_IMG_LEVEL"));
 				i.setItemImgPath(rset.getString("ITEM_IMG_PATH"));
 				i.setItemImg(rset.getString("ITEM_IMG_PATH"));
+				
 				
 				list.add(i);
 			}

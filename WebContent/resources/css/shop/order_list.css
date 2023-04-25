@@ -86,7 +86,7 @@
 #snb .list_menu li.on a, #snb .list_menu li a:hover {
     background-size: 6px 11px;
     font-weight: 700;
-    color: #5f0080;
+    color: rgb(254,116,119);
 }
 
 #snb .list_menu li a {
@@ -370,3 +370,23 @@ body #container #main .layout-pagination .pagediv span strong{
 .layout-pagination-last-page {
     background-image: url(https://res.kurly.com/pc/etc/old/images/common/icon-pagination-last.png);
 }
+
+#snb .list_menu li.on a, .list_menu li a:hover {
+    background: #fafafa url(https://res.kurly.com/pc/ico/2008/ico_arrow_6x11_on.svg) no-repeat 174px 52%;
+    background-size: 6px 11px;
+    font-weight: 700;
+    color: rgb(254,116,119);
+}
+
+#snb .list_menu li a {
+    display: block;
+    overflow: hidden;
+    padding: 15px 0 15px 20px;
+    background: #fff url(https://res.kurly.com/pc/ico/2008/ico_arrow_6x11.svg) no-repeat 174px 52%;
+    background-size: 6px 11px;
+    font-size: 14px;
+    color: #666;
+    line-height: 20px;
+    letter-spacing: -.3px;
+}
+

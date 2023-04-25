@@ -41,7 +41,9 @@ public class insertOrderController extends HttpServlet {
 		
 		int address = new OrderService().SelectAddress(userNo);
 		
-		Order o = new Order(phone, userNo, address, totalPay);
+		String orderUid = request.getParameter("orderUid");
+		
+		Order o = new Order(phone, userNo, address, totalPay, orderUid);
 		
 		int result = new OrderService().insertOrder(o);
 		

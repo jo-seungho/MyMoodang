@@ -26,11 +26,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 
 
     <%@ include file="../common/common.jsp"%>
@@ -62,23 +59,25 @@
                           <h2 class="tit_snb">마이페이지</h2>
                           <div class="inner_sub">
                               <ul class="list_menu">
-                                  <li class="on">
-                                      <a href="#">주문내역</a>
+
+                                  <li>
+
+                                      <a href="/orderList.it">주문내역</a>
                                   </li>
                                   <li>
-                                      <a href="#">찜한상품</a>
+                                      <a href="/wishList.wi">찜한상품</a>
+                                  </li>
+                                  <li  class="on">
+                                      <a href="/deliveryList.do">배송지관리</a>
                                   </li>
                                   <li>
-                                      <a href="#">배송지관리</a>
+                                      <a href="/ready">리뷰 관리</a>
                                   </li>
                                   <li>
-                                      <a href="#">리뷰 관리</a>
+                                      <a href="/ready">쿠폰</a>
                                   </li>
                                   <li>
-                                      <a href="#">쿠폰</a>
-                                  </li>
-                                  <li>
-                                      <a href="#">내 정보 수정</a>
+                                      <a href="/updateCheckPwd.me" class="list_item">내 정보 수정</a>
                                   </li>
                               </ul>
                           </div>
@@ -113,7 +112,7 @@
                                 <div class="order_goods">
                                     <div class="name">
                                         <a href="" style="font-size: large; font-weight: bolder; color: rgb(254, 116, 119);"><%= ol.getOrderStatus() %></a>
-                                        <a href="/orderComplete" style="float:right, padding : 0px 5px">주문 상세보기</a>
+                                        <a href="/orderComplete?ono=<%= ol.getOrderNo() %>" style="float:right, padding : 0px 5px">주문 상세보기</a>
                                     </div>
                                 <!-- 상품 1개의 정보 -->
                                   <div class="order_info">
@@ -128,26 +127,20 @@
                                           </dl>
                                             <dl>
                                                 <dt>주문번호</dt>
-                                                <dd><%= ol.getOrderNo() %></dd>
+                                                <dd class="orderSelect"><%= ol.getOrderNo() %></dd>
                                             </dl>
                                             <dl>
                                               <dt>결제방법</dt>
-                                              <dd>카카오페이</dd>
+                                              <dd></dd>
                                             </dl>
                                             <dl>
                                                 <dt>결제금액</dt>
                                                 <dd><%= ol.getTotalPrice() %></dd>
                                             </dl>
                                         </div>
-                                        <!--
-                                        <div class="order_status">
-                                            <span class="inner_status">
-                                                <a id="review" class="link ga_tracking_event">리뷰 작성</a>
-                                            </span>
-                                        </div>
-                                         -->
                                     </div>
                                     <!-- 상품 1개의 정보 끝-->
+
                                     <% } %>
                                   <% } %>
                                 </div>
@@ -155,29 +148,37 @@
                             </li>
                         </ul>
 
-						<div class="container mt-3" align="center">
-								<ul class="pagination" style="justify-content: center">
-									<% if(currentPage != 1) { %>
-										<li class="page-item"><a class="page-link"
-											href="/orderList.it?currentPage=<%= currentPage - 1 %>">Previous</a></li>
-									<% } %>
+							<div align="center" class="paging-area">
 
-									<% for(int p = startPage; p <= endPage; p++) {%>
-										<% if(p == currentPage) { %>
-											<li class="page-item active"><a class="page-link"
-												href="/orderList.it?currentPage=<%= p %>"><%= p %></a></li>
-										<% } else { %>
-											<li class="page-item"><a class="page-link"
-												href="/orderList.it?currentPage=<%= p %>"><%= p %></a></li>
+		                          <div class="layout-pagination">
+		                            <div class="pagediv">
+
+											<a href="/orderList.it?currentPage=<%= currentPage - 1 %>" class="layout-pagination-button layout-pagination-prev-page">이전 페이지로 가기</a>
+
+										<span>
+										<% for(int p = startPage; p <= endPage; p++) { %>
+
+											<% if(p != currentPage) { %>
+
+												<strong onclick="location.href = '/orderList.it?currentPage=<%= p %>';" class="layout-pagination-button layout-pagination-number __active" style="height: 32px;">
+													<%= p %>
+												</strong>
+											<% } else { %>
+												<!-- 현재 내가 보고있는 페이지일 경우에는 클릭이 안되게끔 -->
+
+												<strong class="layout-pagination-button layout-pagination-number __active" style="height: 32px; background-color: lightgray; "><%= p %></strong>
+											<% } %>
 										<% } %>
-									<% } %>
+										</span>
 
-									<% if(currentPage != maxPage) { %>
-										<li class="page-item"><a class="page-link"
-											href="/orderList.it?currentPage=<%= currentPage + 1 %>">Next</a></li>
-									<% } %>
-								</ul>
+                                			<a href="/orderList.it?currentPage=<%= currentPage + 1 %>" class="layout-pagination-button layout-pagination-next-page">다음 페이지로 가기</a>
+
+										</div>
+									</div>
+
 							</div>
+
+
 
                     </div>
                       </div>
@@ -190,5 +191,6 @@
 <%@ include file="../common/footer.jsp"%>
       </div>
     </div>
+
   </body>
 </html>

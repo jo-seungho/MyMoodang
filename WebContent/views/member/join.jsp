@@ -45,7 +45,7 @@
                                 <label>아이디<span id=ico>*</span></label>
                             </span>
                             <span class="member_content" id="memId">
-                                <input type="text" name="memberId" class="width300 form-control" id="submit_check_id" placeholder="소문자, 숫자를 포함한 6 ~ 12의 아이디를 입력해주세요.">&nbsp;&nbsp;
+                                <input type="text" name="memberId" class="width300 form-control" id="submit_check_id" placeholder="소문자 6 ~ 12글자의 아이디를 입력해주세요. (숫자만 조합가능)">&nbsp;&nbsp;
                                 <button type="button" class="btn-outline-primary width100" id="emailjungbok" onclick="idCheck();">중복확인</button>&nbsp;&nbsp;
                             </span>
                         </div>

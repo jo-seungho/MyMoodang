@@ -112,9 +112,10 @@ public class OrderDao {
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setString(1, o.getResPhone());
-			pstmt.setInt(2, o.getMemberNo());
-			pstmt.setInt(3, o.getShipNo());
-			pstmt.setInt(4, o.getPaymentAmount());
+			pstmt.setString(2, o.getTrackingNo());
+			pstmt.setInt(3, o.getMemberNo());
+			pstmt.setInt(4, o.getShipNo());
+			pstmt.setInt(5, o.getPaymentAmount());
 			
 			result = pstmt.executeUpdate();
 			
@@ -172,20 +173,28 @@ public class OrderDao {
 		String sql = prop.getProperty("selectList");
 
 		try {
-			int i = 0;
+			// int i = 0;
 			pstmt = conn.prepareStatement(sql);
 
-			pstmt.setInt(++i, memberNo);
+			pstmt.setInt(1, memberNo);
 
 			rset = pstmt.executeQuery();
 
-			if(rset.next()) {
+//			if(rset.next()) {
+//				OrderList ol = new OrderList(rset.getInt("ORDER_NO")
+//											, rset.getString("ORDER_STATUS")
+//											, rset.getString("ORDER_DATE")
+//											, rset.getString("ITEM_LIST")
+//											, rset.getInt("TOTAL_PRICE"));
+//				list.add(ol);
+//			}
+			while(rset.next()) {
 				OrderList ol = new OrderList(rset.getInt("ORDER_NO")
-											, rset.getString("ORDER_STATUS")
-											, rset.getString("ORDER_DATE")
-											, rset.getString("ITEM_LIST")
-											, rset.getInt("TOTAL_PRICE"));
-				list.add(ol);
+				, rset.getString("ORDER_STATUS")
+				, rset.getString("ORDER_DATE")
+				, rset.getString("ITEM_LIST")
+				, rset.getInt("TOTAL_PRICE"));
+					list.add(ol);
 			}
 
 		} catch (SQLException e) {
@@ -239,20 +248,69 @@ public class OrderDao {
 	}
 
 
-	public int SelectOrderNo(Connection conn) {
+	public int insertListItem(Connection conn, int userNo) {
 		
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
 		int result = 0;
-		String sql = prop.getProperty("SelectOrderNo");
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertListItem");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
+			pstmt.setInt(1, userNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+
+	public ArrayList<Order> SelectOrderComplete(Connection conn, int userNo, int orderSelect) {
+		
+		ArrayList<Order> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("SelectOrderComplete");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, userNo);
+			
+			pstmt.setInt(2, orderSelect);
+			
 			rset = pstmt.executeQuery();
 			
-			if(rset.next()) {
-				result = rset.getInt("SEQ_ORDER_NO.CURRVAL");
+			while(rset.next()) {
+				
+				list.add(new Order(
+						rset.getInt("ORDER_NO"),
+						rset.getInt("DELIVERY_FEE"),
+						rset.getString("REQUEST"),
+						rset.getString("PHONE"),
+						rset.getString("ORDER_DATE"),
+						rset.getString("TRACKING_NO"),
+						rset.getString("PAMENT"),
+						rset.getString("PAYMENT_STATUS"),
+						rset.getInt("MEMBER_NO"),
+						rset.getInt("SHIP_NO"),
+						rset.getInt("TOTAL_PRICE"),
+						rset.getString("ORDER_STATUS"),
+						rset.getInt("QUANTITY"),
+						rset.getInt("PRICE"),
+						rset.getString("ITEM_IMG"),
+						rset.getString("NAME"),
+						rset.getString("GRADE"),
+						rset.getString("ADDRESS"),
+						rset.getInt("ITEM_LIST_NO"),
+						rset.getString("ITEM_NAME")
+						));
 			}
 			
 		} catch (SQLException e) {
@@ -262,8 +320,9 @@ public class OrderDao {
 			close(pstmt);
 		}
 		
-		return result;
+		return list;
 	}
+
 
 
 }

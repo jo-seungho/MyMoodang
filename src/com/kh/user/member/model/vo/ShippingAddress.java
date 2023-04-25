@@ -1,4 +1,4 @@
-// 2023-04-15 김서영
+// 2023-04.24 / 배송지 수정 생성자 추가 / 이지환
 // 배송지 관련 VO
 
 package com.kh.user.member.model.vo;
@@ -45,11 +45,24 @@ public class ShippingAddress {
 		this.phone = phone;
 		this.zipcode = zipcode;
 	}
+	
+	/* 배송지 수정용 생성자 */
+	public ShippingAddress(int shipNo, String shipAddr, String shipAddrInfo, String phone, String shipName) {
+		super();
+		this.shipNo = shipNo;
+		this.shipAddr = shipAddr;
+		this.shipAddrInfo = shipAddrInfo;
+		this.phone = phone;
+		this.shipName = shipName;
+	}
 
 
 	public int getShipNo() {
 		return shipNo;
 	}
+
+
+
 
 
 	public void setShipNo(int shipNo) {

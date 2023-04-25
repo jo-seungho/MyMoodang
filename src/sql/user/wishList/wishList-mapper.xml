@@ -31,5 +31,24 @@
 		)
 		WHERE RNUM BETWEEN ? AND ?
 	</entry>
+	
+	<entry key="checkFavorite">
+		SELECT COUNT(*) COUNT
+		FROM WISHLIST
+		WHERE ITEM_CODE = ?
+		AND MEMBER_NO = ?
+	</entry>
+
+	<!-- 2023-04-22 최명진 찜목록 추가 -->
+	<entry key="addFavorite">
+		INSERT INTO WISHLIST VALUES(?, ?)
+	</entry>
+
+	<!-- 2023-04-22 최명진 찜목록 삭제 -->
+	<entry key="deleteFavorite">
+		DELETE FROM WISHLIST
+		WHERE ITEM_CODE = ?
+		AND MEMBER_NO = ?
+	</entry>
 
 </properties>
