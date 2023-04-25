@@ -88,12 +88,12 @@ public class ReviewDao {
 
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, endRow);
-
+			
 			rset = pstmt.executeQuery();
 
 			while(rset.next()) {
 				 Review r = new Review();
-				 r.setOrderNo(rset.getInt("ORDER_NO"));
+				 r.setItemCode(rset.getInt("ITEM_CODE"));
 				 r.setStarPoint(rset.getInt("STAR_POINT"));
 				 r.setTitle(rset.getString("TITLE"));
 				 r.setMemberId(rset.getString("MEMBER_ID"));
