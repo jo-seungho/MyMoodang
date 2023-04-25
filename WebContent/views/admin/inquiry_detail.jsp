@@ -39,14 +39,18 @@
             <br />
             <h2>1대1 문의 답변</h2>
             <hr />
-            <form action="/inquiryList.ad" method="post">
+            <form action="/inquiryUpdate.ad" method="post">
               <div class="row center">
-                <div class="col-xl-12"><input type="text" name="title" class="form-control col-xl-12" value="" placeholder="제목을 입력해주세요" /></div>
+                <div class="col-xl-12">
+                <input type="hidden" name="inqNo" value="<%=in.getInqNo()%>">
+	                <input type="text" name="title" class="form-control col-xl-12" 
+	                value="<%=in.getReplyTitle() %>" placeholder="제목을 입력해주세요" />
+                </div>
               </div>
               <hr />
               <textarea name="content" class="form-control col-sm-5" rows="10"><%=in.getReplyContents() %></textarea>
               <div class="btns">
-                <button id="btn" class="btn" onclick="inquiry()">목록</button>
+                <button id="btn" class="btn" type="button" onclick="inquiry()">목록</button>
                 <button id="btn" class="btn" type="submit">작성</button>
               </div>
               <br /><br />
@@ -57,7 +61,10 @@
         <script>
         
         function inquiry(){
-      	  location.href = "/inquiryList.ad?currentPage=1";
+        	
+        	  location.href = "/inquiryList.ad?currentPage=1";
+        }
+     
         </script>
         
       </div>

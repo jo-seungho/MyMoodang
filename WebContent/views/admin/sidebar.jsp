@@ -67,7 +67,7 @@
 						<nav class="sb-sidenav-menu-nested nav">
 							<a class="nav-link" href="/noticelist.ad?currentPage=1">공지사항 관리</a> <a
 								class="nav-link" href="/inquiryList.ad?currentPage=1">1:1 문의 관리</a> <a
-								class="nav-link" href="review.html">리뷰 관리</a>
+								class="nav-link" href="/reviewList.ad?currentPage=1">리뷰 관리</a>
 						</nav>
 					</div>
 				</div>
