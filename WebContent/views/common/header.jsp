@@ -265,6 +265,7 @@
               </div>
             </div>
           </div>
+         <%--  <% if(loginUser.getMemberId().equals("admin"))  %> --%>
 
           <div id="goCart" class="cart_count">
             <% if(loginUser != null) { %>
@@ -272,6 +273,7 @@
               <div class="itemCount"></div>
               <span class="blind">장바구니</span>
             </a>
+            
             <% } else { %>
             <a href="loginForm.me" class="btn_cart">
               <span class="blind">비로그인</span>
