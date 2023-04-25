@@ -19,9 +19,15 @@
     <div id="header">
       <div class="user_menu">
         <!-- bnr = banner -->
+        <% if(loginUser == null) { %>
         <a href="/enrollForm.me" class="bnr_delivery">
           <img src="/resources/img/image.gif" alt="서울, 경기, 인천 샛별배송, 수도권 이외 지역 택배배송" class="bnr_delivery_img" />
         </a>
+        <% } else { %>
+        <a href="" class="bnr_delivery">
+          <img src="/resources/img/image.gif" alt="서울, 경기, 인천 샛별배송, 수도권 이외 지역 택배배송" class="bnr_delivery_img" />
+        </a>
+        <% } %>
 
 
         <!-- 2023-04-18 / 로그인 전 우측 상단 바 / 이지환 -->
