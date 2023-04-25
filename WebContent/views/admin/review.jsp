@@ -1,5 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, com.kh.user.board.notice.model.vo.Notice, com.kh.common.model.vo.PageInfo"%>
+<%
+	// 필요한 데이터들 뽑기
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+    ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("list");
+
+	// 자주 쓰일법한 변수들 셋팅
+	int currentPage = pi.getCurrentPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	int maxPage = pi.getMaxPage();
+%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -33,7 +44,7 @@
             <hr />
             
             <div>
-              <button type="button" id="btn" class="btn">글쓰기</button>
+            
               <form role="search">
                 <button type="submit" id="btn" class="btn">검색하기</button>
                 <input type="search" class="form-control" placeholder="" aria-label="Search" style="width: 30%; float: right" />
@@ -81,15 +92,32 @@
             </table>
             <br />
 
-            <div class="pagination">
-              <a href="#">&lt;</a>
-              <a href="#">1</a>
-              <a class="active" href="#">2</a>
-              <a href="#">3</a>
-              <a href="#">4</a>
-              <a href="#">5</a>
-              <a href="#">&gt;</a>
-            </div>
+			<div align="center" class="paging-area">
+	
+				<% if(currentPage != 1) { %>
+					<button onclick="location.href = '/reviewList.ad?currentPage=<%= currentPage - 1 %>';">
+						&lt;
+					</button>
+				<% } %>
+			
+				<% for(int p = startPage; p <= endPage; p++) { %>
+					<% if(p != currentPage) { %>
+						<button onclick="location.href = '/reviewList.ad?currentPage=<%= p %>';">
+							<%= p %>
+						</button>
+					<% } else { %>
+						<!-- 현재 내가 보고있는 페이지일 경우에는 클릭이 안되게끔 -->
+						<button disabled><%= p %></button>
+					<% } %>
+				<% } %>
+				
+				<% if(currentPage != maxPage) { %>
+					<button onclick="location.href = '/reviewList.ad?currentPage=<%= currentPage + 1 %>';">
+						&gt;
+					</button>
+				<% } %>
+	
+			</div>
           </div>
           <br />
         </main>

@@ -51,7 +51,7 @@
                                       <a href="#">쿠폰</a>
                                   </li>
                                   <li>
-                                      <a href="#">내 정보 수정</a>
+                                      <a href="/updateCheckPwd.me">내 정보 수정</a>
                                   </li>
                               </ul>
                           </div>

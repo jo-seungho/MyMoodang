@@ -19,7 +19,7 @@
     <div id="header">
       <div class="user_menu">
         <!-- bnr = banner -->
-        <a href="#" class="bnr_delivery">
+        <a href="/enrollForm.me" class="bnr_delivery">
           <img src="/resources/img/image.gif" alt="서울, 경기, 인천 샛별배송, 수도권 이외 지역 택배배송" class="bnr_delivery_img" />
         </a>
 
@@ -55,7 +55,7 @@
                 <a href="/faq" class="list_item">자주하는 질문</a>
               </li>
               <li class="list">
-                <a href="/list.in" class="list_item">1:1 문의</a>
+                <a href="" class="list_item" id="afterLogin">1:1 문의</a>
               </li>
             </ul>
           </li>
@@ -86,7 +86,7 @@
                 <a href="/orderList.it" class="list_item">주문내역</a>
               </li>
               <li class="list">
-                <a href="wishList.wi" class="list_item">찜한상품</a>
+                <a href="/wishList.wi" class="list_item">찜한상품</a>
               </li>
               <li class="list">
                 <a href="/deliveryList.do" class="list_item">배송지 관리</a>
@@ -255,7 +255,7 @@
 
           <div class="gnb_search">
               <input type="text" id="keyword" value="" title="keyword" class="inp_search" />
-     
+
               <input type="image" src="https://res.kurly.com/pc/service/common/1908/ico_search_x2.png" class="btn_search" onclick="javascript:itemSearch()" >
               <div class="init">
                 <button type="button" id="search_init" class="btn_delete">검색어 삭제하기</button>
@@ -302,16 +302,16 @@
     </div>
 
     <script>
-    
-	// 상품 전체 검색 기능 
+
+	// 상품 전체 검색 기능
 	// 2023-04-23
 	// 이태화
 		function itemSearch() {
 		    var keyword = document.getElementById("keyword").value;
 		    location.href="itemList.se?currentPage=1&category=전체&keyword="+keyword;
-			
+
 		    }
-			
+
 		$("#keyword").on('keyup', function(e) {
 		    if (e.keyCode === 13) { // 엔터키
 		        e.preventDefault();
@@ -319,7 +319,7 @@
 		    }
 		});
 	//-------------------------------------------------------------------------------------
-		
+
 		$(document).ready(function() {
 	    $.ajax({
 	        url: "count",
@@ -331,17 +331,17 @@
 	            console.log(err);
 	        }
 	    });
-	    
+
 	    let msg = '<%= alertMsg == null ? "" : alertMsg %>';
 	    if(msg != null && msg.length > 0) {
 	        alert(msg);
 	        <% session.removeAttribute("alertMsg"); %>
 	    }
-	
+
 	    let emsg = '<%= errorMsg == null ? "" : errorMsg %>';
 	    if(emsg != null && emsg.length > 0) {
 	        alert(emsg);
 	    }
 		});
-    
+
     </script>

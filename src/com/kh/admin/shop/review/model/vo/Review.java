@@ -9,18 +9,27 @@ public class Review {
 		private int reviewNo;         //	review_no	number
 		private String title;         //	title	varchar2(40 byte)
 		private String content;       //	content	varchar2(4000 byte)
-		private Date writeDate;       //	write_date	date
+		private String writeDate;       //	write_date	date
 		private int starPoint;        //	star_point	number
 		private String filePathName;  //	file_path_name	varchar2(50 byte)
 		private int orderNo;          //	order_no	number
 		private int itemCode;         //	item_code	number
-
-		
+        private int memberNo;         //    MEMBER_NO
+        private String deleteStatus;  //    DELETE_STATUS
+		private String memberId;
+        
+        
+        
 		public Review() { }
 
 
-		public Review(int reviewNo, String title, String content, Date writeDate, int starPoint, String filePathName,
-				int orderNo, int itemCode) {
+
+
+
+
+
+		public Review(int reviewNo, String title, String content, String writeDate, int starPoint, String filePathName,
+				int orderNo, int itemCode, int memberNo, String deleteStatus, String memberId) {
 			super();
 			this.reviewNo = reviewNo;
 			this.title = title;
@@ -30,6 +39,57 @@ public class Review {
 			this.filePathName = filePathName;
 			this.orderNo = orderNo;
 			this.itemCode = itemCode;
+			this.memberNo = memberNo;
+			this.deleteStatus = deleteStatus;
+			this.memberId = memberId;
+		}
+
+
+
+
+
+
+
+
+		public Review(String title, String writeDate, int starPoint, int orderNo, String memberId) {
+			super();
+			this.title = title;
+			this.writeDate = writeDate;
+			this.starPoint = starPoint;
+			this.orderNo = orderNo;
+			this.memberId = memberId;
+		}
+
+
+
+
+		public String getMemberId() {
+			return memberId;
+		}
+
+
+		public void setMemberId(String memberId) {
+			this.memberId = memberId;
+		}
+
+
+		public int getMemberNo() {
+			return memberNo;
+		}
+
+
+		public void setMemberNo(int memberNo) {
+			this.memberNo = memberNo;
+		}
+
+
+		public String getDeleteStatus() {
+			return deleteStatus;
+		}
+
+
+		public void setDeleteStatus(String deleteStatus) {
+			this.deleteStatus = deleteStatus;
 		}
 
 
@@ -63,12 +123,12 @@ public class Review {
 		}
 
 
-		public Date getWriteDate() {
+		public String getWriteDate() {
 			return writeDate;
 		}
 
 
-		public void setWriteDate(Date writeDate) {
+		public void setWriteDate(String writeDate) {
 			this.writeDate = writeDate;
 		}
 
@@ -113,14 +173,22 @@ public class Review {
 		}
 
 
+
+
+
+
+
 		@Override
 		public String toString() {
 			return "Review [reviewNo=" + reviewNo + ", title=" + title + ", content=" + content + ", writeDate="
 					+ writeDate + ", starPoint=" + starPoint + ", filePathName=" + filePathName + ", orderNo=" + orderNo
-					+ ", itemCode=" + itemCode + "]";
+					+ ", itemCode=" + itemCode + ", memberNo=" + memberNo + ", deleteStatus=" + deleteStatus
+					+ ", memberId=" + memberId + "]";
 		}
-		
-		
+
+
+	
+
 		
 		
 		

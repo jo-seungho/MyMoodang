@@ -30,7 +30,7 @@
 	                       , EMAIL
 	                       , PHONE
 	                       , ENROLL_DATE)
-	             VALUES (?
+	             VALUES (SEQ_MNO.NEXTVAL
 	                   , ?
 	                   , ?
 	                   , ?
@@ -156,18 +156,18 @@
 			  	    WHERE MEMBER_NO = ?
 			  	    AND SHIP_NO = ?
 		</entry>
-		
+
 		<!--   2023.04.24 / shipNo 를 기반으로 해당 회원의 배달주소지, 배달상세주소, 연락처, 받는 사람 지정 / 이지환  -->
 		<entry key="selectShipAddressByShipNo">
 			 SELECT SHIP_ADDR
 			  	  , SHIP_ADDR_INFO
 			   	  , PHONE
 			   	  , SHIP_NAME
-			   	  
+
 			   	  <!-- 2023.04.24 MEMBER_NO, SHIP_NO 조회 추가 이지환 -->
 			   	  , MEMBER_NO
 			   	  , SHIP_NO
-			   	  
+
 			   	  <!-- MemberNo 지움 -->
 			   FROM SHIPPING_ADDRESS
 			  WHERE SHIP_NO = ?

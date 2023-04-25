@@ -60,6 +60,7 @@ public class InquiryInsertController extends HttpServlet {
 			int result = new InquiryService().insertInquiry(in, memberNo);
 
 			System.out.println("과연 결과는?" + result);
+			
 			if(result > 0) {  // 성공
 				inResult.setSuccess("Y");
 				inResult.setMessage(name + "님의 1:1문의가 등록되었습니다.");
