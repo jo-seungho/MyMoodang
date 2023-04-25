@@ -62,7 +62,7 @@
 						
 						<div class="head_section link_type">
 							<h3 class="tit">주문번호 : <%= orderNos[0] %></h3>
-							<span class="link"> 배송 또는 상품에 문제가 있나요? <a href="#">1:1
+							<span class="link"> 배송 또는 상품에 문제가 있나요? <a href="/list.in">1:1
 									문의하기</a>
 							</span>
 						</div>

@@ -91,6 +91,7 @@
                           <h2 class="tit_snb">마이페이지</h2>
                           <div class="inner_sub">
                               <ul class="list_menu">
+
                                   <li>
                                       <a href="/orderList.it">주문내역</a>
                                   </li>
@@ -99,12 +100,13 @@
                                   </li>
                                   <li class="on">
                                       <a href="delibery_List.do">배송지관리</a>
+
                                   </li>
                                   <li>
-                                      <a href="#">리뷰 관리</a>
+                                      <a href="/ready">리뷰 관리</a>
                                   </li>
                                   <li>
-                                      <a href="#">쿠폰</a>
+                                      <a href="/ready">쿠폰</a>
                                   </li>
                                   <li>
                                       <a href="/updateCheckPwd.me">내 정보 수정</a>
