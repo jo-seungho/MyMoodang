@@ -42,7 +42,7 @@ public class itemListController extends HttpServlet {
 		// 2023-04-23
 		// 이태화
 		String keyword = request.getParameter("keyword");
-		
+		request.setAttribute("keyword", keyword);
 		// 상품 필터링 검색 기능 추가
 		// 2023-04-24
 		// 이태화

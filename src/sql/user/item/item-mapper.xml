@@ -59,7 +59,10 @@
 	</entry>
 
 	<entry key="selectListCount">
-		SELECT COUNT(*) COUNT FROM ITEM
+		SELECT COUNT(*) COUNT 
+		FROM ITEM
+		WHERE (ITEM_CATEGORY = ? OR ? = '전체')
+		AND ITEM_STATUS = 'Y'
 	</entry>
 	
 		<entry key="selelctAttachmentCategory">
@@ -70,7 +73,8 @@
       ,ITEM_DISCOUNT
       ,ITEM_CATEGORY    
       ,ITEM_IMG_PATH
-      ,ITEM_TEXT 
+      ,ITEM_TEXT
+      ,ITEM_IMG_CODE 
 	FROM ITEM I 
 	JOIN (
     SELECT ITEM_IMG_CODE, ITEM_IMG_PATH
@@ -109,6 +113,12 @@
 		FROM ITEM
 		WHERE (ITEM_CATEGORY = ? OR ? = '전체')
 		AND ITEM_STATUS = 'Y'
+	</entry>
+	
+	<entry key="selectReviewListCount">
+			SELECT COUNT(*) COUNT 
+			FROM REVIEW
+			WHERE ITEM_CODE = ?
 	</entry>
 
 
