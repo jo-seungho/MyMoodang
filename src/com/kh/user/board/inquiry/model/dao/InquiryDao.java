@@ -40,7 +40,7 @@ public class InquiryDao {
 	 * @param conn
 	 * @return
 	 */
-	public int selectListCount(Connection conn) {
+	public int selectListCount(Connection conn, int memberNo) {
 		int listCount = 0;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -79,7 +79,7 @@ public class InquiryDao {
 	 * @param pi
 	 * @return
 	 */
-	public ArrayList<Inquiry> selectList(Connection conn, PageInfo pi) {
+	public ArrayList<Inquiry> selectList(Connection conn, PageInfo pi, int memberNo) {
 
 		ArrayList<Inquiry> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
@@ -97,6 +97,7 @@ public class InquiryDao {
 //			System.out.println(startRow);
 //			System.out.println(endRow);
 
+			pstmt.setInt(++i, memberNo);
 			pstmt.setInt(++i, startRow);
 			pstmt.setInt(++i, endRow);
 
@@ -114,7 +115,6 @@ public class InquiryDao {
 
 				list.add(in);
 
-				System.out.println("뭐가 담겼니" + in);
 			}
 
 		} catch (SQLException e) {
@@ -138,7 +138,7 @@ public class InquiryDao {
 	 * @param in
 	 * @return
 	 */
-	public int insertInquiry(Connection conn, Inquiry in) {
+	public int insertInquiry(Connection conn, Inquiry in, int memberNo) {
 
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -152,7 +152,7 @@ public class InquiryDao {
 			pstmt.setString(++i, in.getTitle());
 			pstmt.setString(++i, in.getDescription());
 			pstmt.setString(++i, in.getInquiryType());
-			pstmt.setInt(++i, 6);
+			pstmt.setInt(++i, memberNo);
 
 			result = pstmt.executeUpdate();
 

@@ -44,6 +44,7 @@ public class ItemInsertController extends HttpServlet {
 			int itemPrice = Integer.parseInt(multiRequest.getParameter("itemPrice"));
 			
 			String itemText = multiRequest.getParameter("itemText");
+			String content = multiRequest.getParameter("content");
 
 			int itemDiscount = 0;
 			String itemDiscountParam = multiRequest.getParameter("itemDiscount");
@@ -52,54 +53,39 @@ public class ItemInsertController extends HttpServlet {
 			    itemDiscount = Integer.parseInt(itemDiscountParam);
 			}
 
-			// Filter에서 예외 처리
-			try {
-//			    chain.doFilter(request, response);
-			} catch (NumberFormatException e) {
-			    // 예외 처리 로직
-			}
 			
 			String itemStatus = multiRequest.getParameter("itemStatus");
 			String itemCategory = multiRequest.getParameter("itemCategory");
 
+			
+			
 			Item i = new Item();
 			i.setItemName(itemName);
 			i.setItemStock(itemStock);
 			i.setItemPrice(itemPrice);
-
 			i.setItemText(itemText);
 			i.setItemDiscount(itemDiscount * 0.01);
 			i.setItemStatus(itemStatus);
 			i.setItemCategory(itemCategory);
+			i.setDescription(content);
 
-			ArrayList<ItemImg> list = new ArrayList<ItemImg>();
 
-			for (int j = 1; j <= 4; j++) {
-				String key = "file" + j;
+				String key = "file1";
+				ItemImg at = null;
 
 				if (multiRequest.getOriginalFileName(key) != null) {
 					// 첨부파일이 있을 경우
 					// Attachment 객체를 생성하여 파일 정보를 담는다.
-					ItemImg at = new ItemImg();
+					at = new ItemImg();
 
 					at.setItemImgPath("/resources/item_upfiles/" + multiRequest.getFilesystemName(key));
-					String a = at.getItemImgPath();
-
-					// 파일 레벨 설정
-					// 대표이미지는 1, 나머지는 2
-					if (j == 1) {
-						at.setItemImgLevel(1);
-					} else {
-						at.setItemImgLevel(2);
-					}
-
-					// Attachment 객체를 ArrayList에 추가
-					list.add(at);
+								
+					at.setItemImgLevel(1);
 				}
 
-			}
+			
 
-			int result = new ItemService().insertItem(i, list);
+			int result = new ItemService().insertItem(i, at);
 
 			if (result > 0) { // 성공
 

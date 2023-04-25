@@ -14,6 +14,9 @@
 		SELECT 'total_payment_amount' AS type, SUM(total_money) AS count FROM member
 		UNION
 		SELECT gender AS type, COUNT(*) AS count FROM member GROUP BY gender
+        UNION
+        SELECT ITEM_CATEGORY AS TYPE, COUNT(*) AS COUNT FROM ITEM GROUP BY ITEM_CATEGORY
+        
 
 	</entry>
 </properties>

@@ -1,14 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
+
+
   <head>
     <title>상품 관리</title>
 	<%@ include file="common2.jsp" %>
+	<%@ include file="summernote.jsp"%>
 	
     <link rel="stylesheet" href="/resources/css/shop/item_management.css" />
     <link rel="stylesheet" href="/resources/css/shop/item_manage_insert.css" />
     <link rel="stylesheet" href="/resources/css/shop/item_manage_detail.css" />
   </head>
+  
+
 
   <style>
     #btn {
@@ -35,48 +40,56 @@
             <form id="myForm" action="/itemInsert.ad" method="POST" enctype="multipart/form-data">
               <div class="mx-auto col-10 col-md-8 col-lg-6 center">
                 <div id="img_view">
-                  <label for="titleImg" style="margin-bottom: 10px">* 대표 이미지</label>
+                  <label for="titleImg" style="margin-bottom: 10px; margin-right : 50px;">* 대표 이미지</label>
                   <div class="col">
                     <img id="titleImg" name="img1" src="/resources/img/noimage.png" class="img-thumbnail" style="width: 500px; height: 300px" />
                   </div>
-
-                  <div class="col form-floating mb-4">
-                    <input type="text" name="itemName" class="form-control" value="" required />
-                    <label for="floatingInput">* 상품명</label>
-                  </div>
-                  <div class="col form-floating mb-3">
-                    <input type="number" name="itemStock" class="form-control" />
-                    <label for="floatingPassword">* 수량(재고)</label>
-                  </div>
-                  <div class="col form-floating mb-3">
-                    <input type="number" name="itemPrice" class="form-control" />
-                    <label for="floatingPassword">* 판매 가격</label>
-                  </div>
+                </div>
 
                   <div class="col form-floating mb-3">
-                    <textarea class="form-control" name="itemText" style="height: 200px; resize: none; margin-bottom: 15px" required></textarea>
-                    <label for="floatingTextarea2">상품 상세설명</label>
+                    <input type="text" name="itemName" class="form-control" value="" style="margin-left : 50px;" required />
+                    <label for="floatingInput" style="margin-left : 50px;">* 상품명</label>
+                  </div>
+                  <div class="col form-floating mb-3">
+                    <input type="number" name="itemStock" class="form-control" style="margin-left : 50px;" />
+                    <label for="floatingPassword" style="margin-left : 50px;">* 수량(재고)</label>
+                  </div>
+                  <div class="col form-floating mb-3">
+                    <input type="number" name="itemPrice" class="form-control" style="margin-left : 50px;" />
+                    <label for="floatingPassword" style="margin-left : 50px;">* 판매 가격</label>
+                  </div>
+                  
+                  <div class="col form-floating mb-3">
+                    <input type="text" name="itemText" class="form-control" value="" style="margin-left : 50px;" required />
+                    <label for="floatingInput" style="margin-left : 50px;">* 상품설명</label>
+                  </div>
+                  
+                  <div class="col form-floating mb-3">
+                    <textarea id="summernote" name="content" required></textarea>
+                  </div>  
 
                     <div class="col form-floating mb-3">
-                      <input type="number" class="form-control" name="itemDiscount" />
-                      <label for="floatingPassword">할인율 (%)</label>
+                      <input type="number" class="form-control" name="itemDiscount" style="margin-left : 50px;" />
+                      <label for="floatingPassword" style="margin-left : 50px;">할인율 (%)</label>
                     </div>
 
                     <div class="col form-floating mb-3">
-                      <select class="form-select" name="itemStatus">
+                      <select class="form-select" name="itemStatus"">
                         <option value="1">판매중</option>
                         <option value="2">판매중지</option>
                       </select>
-                      <label for="floatingSelect">* 판매 상태</label>
+                      <label for="floatingSelect" style="margin-left : 40px;">* 판매 상태</label>
                     </div>
 
                     <div class="col form-floating mb-3">
                       <select class="form-select" name="itemCategory">
-                        <option value="1">제로음료</option>
-                        <option value="2">단백질</option>
-                        <option value="2">무가당</option>
+                        <option value="제로음료">제로음료</option>
+                        <option value="무가당">무가당</option>
+                        <option value="단백질">단백질</option>
+                        <option value="도시락">도시락</option>
+                        <option value="기타">기타</option>
                       </select>
-                      <label for="floatingSelect">* 카테고리</label>
+                      <label for="floatingSelect" style="margin-left : 40px;">* 카테고리</label>
                     </div>
 
                     <!-- 추가 사진 3개 -->
@@ -84,38 +97,20 @@
                     <div class="form-group">
                     <input type="file" id="file1" name="file1" class="form-control" onchange="loadImg(this, 1);" required style="margin-top: 20px; margin-bottom: 20px" />
                       <label class="col image">상품 이미지1</label>
-                      <input type="file" id="file2" name="file2" class="form-control" onchange="loadImg(this, 2);" />
-                    </div>
-
-                    <div class="form-group">
-                      <label class="col image">상품 이미지2</label>
-                      <input type="file" id="file3" name="file3" class="form-control" onchange="loadImg(this, 3);" />
-                    </div>
-
-                    <div class="form-group">
-                      <label class="col image">상품 이미지3</label>
-                      <input type="file" id="file4" name="file4" class="form-control" onchange="loadImg(this, 4);" />
                     </div>
                     <br />
+                  </div>
                     
-                    </div>
-                    
-                    <img id="detailImg1" name="img2" src="/resources/img/noimage.png" class="img-thumbnail" style="width: 200px; height: 200px" />
-                    <img id="detailImg2" name="img3" src="/resources/img/noimage.png" class="img-thumbnail" style="width: 200px; height: 200px" />
-                    <img id="detailImg3" name="img4" src="/resources/img/noimage.png" class="img-thumbnail" style="width: 200px; height: 200px" />
                     
                     <div class="insert-form">
                       <button type="submit" class="btn btn-primary" id="addBtn" style="font-size: larger">추가</button>
                       <a href="/itemList.ad?page=1&category=a" class="btn btn-primary" id="listBtn" style="font-size: larger">목록</a>
                     </div>
-                  </div>
                   <br /><br />
-                </div>
-              </div>
+                </div> 
             </form>
           </div>
         </main>
-      </div>
       </div>
       <!-- layoutSidenav_content -->
 
@@ -128,15 +123,6 @@
         // input type="file" 요소가 클릭되게끔 처리하기
         $('#titleImg').click(function () {
           $('#file1').click();
-        });
-        $('#detailImg1').click(function () {
-          $('#file2').click();
-        });
-        $('#detailImg2').click(function () {
-          $('#file3').click();
-        });
-        $('#detailImg3').click(function () {
-          $('#file4').click();
         });
       });
       // class img-thumbnail 에 첨부파일 이미지 띄우기
@@ -172,15 +158,6 @@
               case 1:
                 $('#titleImg').attr('src', e.target.result);
                 break;
-              case 2:
-                $('#detailImg1').attr('src', e.target.result);
-                break;
-              case 3:
-                $('#detailImg2').attr('src', e.target.result);
-                break;
-              case 4:
-                $('#detailImg3').attr('src', e.target.result);
-                break;
 
               default:
                 break;
@@ -191,15 +168,6 @@
           switch (num) {
             case 1:
               $('#titleImg').attr('src', null);
-              break;
-            case 2:
-              $('#detailImg1').attr('src', null);
-              break;
-            case 3:
-              $('#detailImg2').attr('src', null);
-              break;
-            case 4:
-              $('#detailImg3').attr('src', null);
               break;
 
             default:
@@ -214,10 +182,11 @@
         var numericValue = inputValue.replace(/[^0-9]/g, ''); // 숫자 이외의 문자 제거
         $(this).val(numericValue);
       });
+      
+      
+
     </script>
-    <!-- <script src="assets/demo/chart-area-demo.js">
-    </script>
-    <script src="assets/demo/chart-bar-demo.js"></script>
-    -->
+    
+    <script src="/resources/js/admin/note.js"></script>
   </body>
 </html>

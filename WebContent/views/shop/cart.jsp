@@ -3,7 +3,9 @@
 
 <%
 	ArrayList<Cart> list = (ArrayList<Cart>) request.getAttribute("list");
+	int userNo = ((Member)request.getSession().getAttribute("loginUser")).getMemberNo();
 %>
+<!-- 2023-04-23 조승호 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,6 +22,9 @@
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 <script src="/resources/js/shop/payment.js"></script>
+
+<%-- 결제용 API --%>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 
 <title>장바구니</title>
 </head>
@@ -38,12 +43,15 @@
 			<div class="cart_item ">
 
 				<div class="cart_select">
+				<%-- 
 					<div class="inner_select">
 						<label class="check"> <input type="checkbox"
 							name="checkAll" class="checkAll" onclick="sel_all(this)">
 							<span class="ico"></span>전체선택
 						</label> <a href="#none" class="btn_delete">선택삭제</a>
 					</div>
+				--%>
+
 				</div>
 				<div class="box cold">
 					<div class="tit_box">
@@ -66,13 +74,16 @@
 							<li>
 								<!-- 상품 목록 중 1. 추가/삭제될 목록임. -->
 								<div class="item">
-									<label class="check" for="chkItem1"> <!-- 개당 체크박스 --> <input
+								 
+									<label class="check" for="chkItem1" style="visibility:hidden"> <!-- 개당 체크박스 --> <input
 										onclick='check_sel_all(this)' type="checkbox" id="chkItem1"
 										name="checkOne" class="checkOne"
 										data-item-id="c7b3a4e1-4517-416c-9b3e-d41c0e7592f2"
 										data-item-no="65810" data-item-parent-no="65810"> <span
 										class="ico"></span>
-									</label>
+									</label>								
+								
+
 
 									<div class="name">
 										<div class="inner_name">
@@ -182,7 +193,7 @@
 					</div>
 					<!-- 계산 필요 . -->
 					<div class="btn_submit">
-						<button type="submit" class="btn active orderBtn">주문하기</button>
+						<button type="button" onclick="orderPay()" class="btn active orderBtn">주문하기</button>
 						<!-- 결제 페이지로 이동 -->
 					</div>
 					<div class="notice">
@@ -216,6 +227,107 @@
 		$('.countMoney').text(sumMoney);
 		$('.noDiscount').text(sumNoDis);
 		$('.difference').text(sumNoDis - sumMoney);
+		
+		
+		$.ajax({
+			
+			url: "count",
+			type: "get",
+			success: function(res) {
+				$('.itemCount').text(res);
+			},
+			error: function(err) {
+				console.log(err);
+			}
+			
+		})
+		
+		// 결제기능
+		function orderPay(){
+			let countMoney9 = $('.countMoney').text();
+			let itemList9 = $('.package').text()
+			let userName9 = $('.join').text()
+			let orderAddress9 = $('.totalprice').text();
+			// console.log($('.join').text());
+			
+			IMP.init('imp68338217');
+			IMP.request_pay({
+			    pg : 'kakao',
+			    pay_method : 'card',
+			    merchant_uid : 'merchant_' + new Date().getTime(),
+			    name : itemList9 , //결제창에서 보여질 이름
+			    amount : countMoney9, //실제 결제되는 가격
+			    // amount : 100, // 테스트를 위한 임시 금액
+			    buyer_email : 'test888@test.do',
+			    buyer_name : userName9,
+			    buyer_tel : '010-1234-5678',
+			    buyer_addr : orderAddress9,
+			    buyer_postcode : '123-456'
+			}, function(rsp) {
+				// console.log(rsp);
+			    if ( rsp.success ) {
+			    	var msg = '결제가 완료되었습니다.';
+			    	insertOrder(rsp.imp_uid);
+			        // location.href = '/orderComplete';
+			    } else {
+			    	 var msg = '결제에 실패하였습니다.';
+			         msg += '에러내용 : ' + rsp.error_msg;
+			    }
+			    alert(msg);
+			});
+		}
+
+		// 주문완료시 order 테이블에 상품 담는 용도
+		function insertOrder(orderUid) {
+			$.ajax({
+				
+				url: "insertOrder",
+				type: "post",
+				data: {
+					totalPay: parseInt($('.countMoney').text()),
+					orderUid: orderUid
+				},
+				success: function(res) {
+					insertItemList()
+				},
+				error: function(err) {
+					console.log(err);
+				}
+			})
+		}
+		
+		
+		
+		function insertItemList() {
+			$.ajax({
+				
+				url: "insertListItem",
+				type: "post",
+				success: function(res) {
+					deleteCart();
+				},
+				error: function(err) {
+					console.log(err);
+				}
+				
+			})
+		}
+		
+		
+		function deleteCart() {
+			
+			$.ajax({
+				
+				url: "DeleteCart",
+				type: "post",
+				success: function(res) {
+					location.reload();
+				},
+				error: function(err) {
+					console.log(err);
+				}
+			})
+		}
 		
 	</script>
 </body>

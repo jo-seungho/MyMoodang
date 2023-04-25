@@ -464,6 +464,7 @@ public class MemberDao {
 	}
 
 
+
 	/**
 	 * 비밀번호 찾기 회원의 정보조회용 메소드
 	 * 2023-04-24 김서영
@@ -527,6 +528,7 @@ public class MemberDao {
 		}
 		return result;
 	}
+
 
 	/**
 	 * 2023.04.24 / 배송지 목록 업데이트용 메소드 / 이지환
@@ -623,3 +625,4 @@ public class MemberDao {
 
 	}
 }
+

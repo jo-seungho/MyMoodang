@@ -3,7 +3,7 @@
 
 <properties>
 	<entry key="selectReview">
-SELECT REVIEW_NO
+	SELECT REVIEW_NO
         ,TITLE
         ,CONTENT
         ,WRITE_DATE
@@ -27,13 +27,6 @@ SELECT REVIEW_NO
 		</entry>
 		
 		
-		<entry key="updateReview">
-		   UPDATE REVIEW
-    	   SET TITLE = ?
-      		 , CONTENT = ?
-             , STAR_POINT = ?
-            WHERE REVIEW_NO = ?
-		</entry>
 		
 		<entry key="insertReview">
 		INSERT INTO REVIEW (REVIEW_NO
@@ -53,6 +46,16 @@ SELECT REVIEW_NO
                 ,?
                 ,'Y')
 		
+		</entry>
+		
+		<entry key="updateReview">
+		   UPDATE REVIEW
+    	   SET 
+<!--     	      TITLE = ?  -->
+      		CONTENT = ?
+<!--            ,STAR_POINT = ?  -->
+            WHERE REVIEW_NO = ?
+            
 		</entry>
 
 

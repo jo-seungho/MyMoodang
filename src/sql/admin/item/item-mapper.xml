@@ -34,6 +34,7 @@
 		, ITEM_STOCK
 		, ITEM_PRICE
 		, ITEM_STATUS
+		, DESCRIPTION
 		FROM ITEM
 		LEFT JOIN ITEM_IMG ON (ITEM_IMG_CODE = ITEM_CODE)
 		WHERE ITEM_IMG_LEVEL = 1
@@ -59,6 +60,7 @@
 		, ITEM_STOCK
 		, ITEM_PRICE
 		, ITEM_STATUS
+		, DESCRIPTION
 		FROM ITEM
 		LEFT JOIN ITEM_IMG ON (ITEM_IMG_CODE = ITEM_CODE)
 		WHERE ITEM_STATUS = ?
@@ -78,9 +80,11 @@
 		,ITEM_STOCK
 		,ITEM_PRICE
 		,ITEM_TEXT
-		,ITEM_DISCOUNT)
+		,ITEM_DISCOUNT
+		, DESCRIPTION)
 
 		VALUES(SEQ_INO.NEXTVAL
+		,?
 		,?
 		,?
 		,?
@@ -93,13 +97,23 @@
 	<entry key="insertItemImg">
 		INSERT INTO ITEM_IMG(ITEM_IMG_NO
 		, ITEM_IMG_CODE
-		,
-		ITEM_IMG_LEVEL
+		, ITEM_IMG_LEVEL
 		, ITEM_IMG_PATH)
 
 		VALUES(SEQ_IIMGNO.NEXTVAL
-		,
-		SEQ_INO.CURRVAL
+		, SEQ_INO.CURRVAL
+		, ?
+		, ?)
+	</entry>
+	
+	<entry key="insertItemImgCode">
+		INSERT INTO ITEM_IMG(ITEM_IMG_NO
+		, ITEM_IMG_CODE
+		, ITEM_IMG_LEVEL
+		, ITEM_IMG_PATH)
+
+		VALUES(SEQ_IIMGNO.NEXTVAL
+		, ?
 		, ?
 		, ?)
 	</entry>
@@ -116,6 +130,7 @@
 		, ITEM_HITS
 		, ITEM_STOCK
 		, ITEM_STATUS
+		, DESCRIPTION
 		,
 		TO_CHAR(ITEM_DATE, 'YY/MM/DD HH24:MI:SS') ITEM_DATE
 		, ROUND(ITEM_PRICE
@@ -131,14 +146,14 @@
 	<entry key="updateItem">
 		UPDATE ITEM
 		SET ITEM_CATEGORY = ?
-		, ITEM_NAME = ?
-		,
-		ITEM_PRICE = ?
-		, ITEM_TEXT = ?
-		, ITEM_DISCOUNT = ?
-		, ITEM_STOCK = ?
-		WHERE
-		ITEM_CODE = ?
+				, ITEM_NAME = ?
+				, ITEM_STOCK = ?	
+				, ITEM_PRICE = ?
+				, ITEM_TEXT = ?
+				, ITEM_DISCOUNT = ?
+				, ITEM_STATUS = ?
+				, DESCRIPTION = ?
+				WHERE ITEM_CODE = ?
 	</entry>
 
 	<!-- 2023-04-22 최명진 상품 이미지 조회 -->
@@ -193,6 +208,14 @@
 		DELETE FROM WISHLIST
 		WHERE ITEM_CODE = ?
 		AND MEMBER_NO = ?
+	</entry>
+	
+	<entry key="updateItemImg">
+		UPDATE ITEM_IMG
+		SET ITEM_IMG_PATH = ?
+		
+		WHERE ITEM_IMG_LEVEL = ?
+		AND ITEM_IMG_CODE = ?	
 	</entry>
 
 </properties>

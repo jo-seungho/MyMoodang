@@ -1,6 +1,7 @@
 package com.kh.user.shop.cart.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -34,10 +35,14 @@ public class DeleteCartItem extends HttpServlet {
 		int userNo = ((Member)request.getSession().getAttribute("loginUser")).getMemberNo();
 		
 		int itemCode = Integer.parseInt(request.getParameter("itemCode"));
-		
-		System.out.println(userNo);
-		System.out.println(itemCode);
+
 		int result = new CartService().DeleteCartItem(userNo, itemCode);
+		
+		response.setContentType("application/json; charset=UTF-8");
+		
+		PrintWriter out = response.getWriter();
+		
+		out.print(result);
 		
 	}
 

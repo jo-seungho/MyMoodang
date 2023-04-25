@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.kh.admin.shop.item.model.vo.ItemImg;
 import com.kh.admin.shop.order.model.service.OrderService;
 import com.kh.admin.shop.order.model.vo.Order;
 
@@ -28,11 +29,15 @@ public class AjaxSelectOrderController extends HttpServlet {
 		
 		int id = Integer.parseInt(request.getParameter("orderNo"));
 		
+		
 		Order o = new OrderService().selectOrder(id);
+		String imagePath = new OrderService().selectImgFile(id);
+		o.setImagePath(imagePath);
+		
 		
 		response.setContentType("application/json; charset=UTF-8");
 		
-		if(o != null) {
+		if(o != null && o.getImagePath() != null) {
 			new Gson().toJson(o, response.getWriter());
 		} else {
 			response.getWriter().print(0);

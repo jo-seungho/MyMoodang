@@ -36,7 +36,6 @@ public class itemDetailController extends HttpServlet {
 		
 		
 		
-
 		// 상품을 클릭 했을 때 상품번호를 받아와서 상품 상세보기 페이지로 이동
 		int bno = Integer.parseInt(request.getParameter("bno"));
 		
@@ -76,7 +75,7 @@ public class itemDetailController extends HttpServlet {
 			request.setAttribute("list", list);
 			request.setAttribute("clist", clist);
 			request.setAttribute("rlist", rlist);
-			
+			System.out.println(i);
 
 		} else { // 조회수 증가 실패 시 에러페이지로 이동
 			request.setAttribute("", "");

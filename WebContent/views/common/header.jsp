@@ -139,7 +139,7 @@
         <h2 class="blind">메뉴</h2>
         <ul class="gnb_menu">
           <li class="list gnb_main">
-            <a href="/itemList.it?currentPage=1&category=전체" class="link">
+            <a href="/itemList.it?currentPage=1&category=전체&filter=전체" class="link">
               <span class="ico"></span>
               <!-- ico는 css에서 bg url로 처리 -->
               <span class="txt">전체 카테고리</span>
@@ -306,13 +306,14 @@
     </div>
 
     <script>
+
     
 	// 상품 전체 검색 기능 
 	// 2023-04-23
 	// 이태화
 		function itemSearch() {
 		    var keyword = document.getElementById("keyword").value;
-		    location.href="itemList.it?currentPage=1&category=전체&keyword="+keyword;
+		    location.href="itemList.se?currentPage=1&category=전체&keyword="+keyword;
 
 			
 		    }
@@ -349,7 +350,5 @@
 	        alert(emsg);
 	    }
 		});
-    	
-    
 
     </script>

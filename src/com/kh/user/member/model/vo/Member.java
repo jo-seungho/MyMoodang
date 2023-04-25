@@ -81,6 +81,7 @@ public class Member {
 		this.phone = phone;
 	}
 
+
 	
 	public int getCartCount() {
 		return cartCount;
@@ -226,6 +227,7 @@ public class Member {
 				+ ", phone=" + phone + ", enrollDate=" + enrollDate + ", modifyDate=" + modifyDate + ", status="
 				+ status + ", totalMoney=" + totalMoney + ", gradeNo=" + gradeNo + "]";
 	}
+
 
 
 }

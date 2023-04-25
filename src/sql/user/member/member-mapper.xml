@@ -112,7 +112,6 @@
 			  WHERE MEMBER_ID = ?
 		</entry>
 
-
 <!--  회원정보 (비밀번호) 업데이트용 쿼리문 / 2023-04-20 김서영 -->
 		<entry key="updatePwdMember">
 			UPDATE MEMBER

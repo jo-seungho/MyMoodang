@@ -2,6 +2,8 @@ package com.kh.admin.shop.item.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -32,6 +34,7 @@ public class ItemDetailController extends HttpServlet {
 		Item item = iService.selectItem(itemCode);
 		ArrayList<ItemImg> list = iService.selectImgList(itemCode);
 		
+
 		AdMember m = (AdMember) request.getSession().getAttribute("adminUser");
 		
 		int memberNo = m.getMemberNo();
@@ -43,6 +46,7 @@ public class ItemDetailController extends HttpServlet {
 			
 			request.setAttribute("item", item);
 			request.setAttribute("list", list);
+			
 			request.setAttribute("memberNo", memberNo);
 			
 			request.getRequestDispatcher("views/admin/item_detail.jsp").forward(request, response);

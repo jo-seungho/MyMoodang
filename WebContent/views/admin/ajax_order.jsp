@@ -18,6 +18,8 @@
 <html>
 <head>
 
+
+
 <script src="https://code.jquery.com/jquery-3.6.4.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -27,6 +29,8 @@
 	height: 37px;
 	margin-right: 5px;
 }
+
+
 </style>
 </head>
 <body>
@@ -200,7 +204,7 @@
 
 						<div class="input-group mb-3">
 
-							<img src="/resources/img/닭가슴살샐러드3.jpg"
+							<img id="img" src="/resources/img/noimage"
 								style="width: 150px; height: 150px;"> <span
 								class="input-group-text" id="spanItem">주문 상품</span> <input
 								type="text" class="form-control" id="itemList" aria-label="text"

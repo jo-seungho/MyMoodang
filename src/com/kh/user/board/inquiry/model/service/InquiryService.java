@@ -19,12 +19,12 @@ public class InquiryService {
 	 * 2023-04-17 김서영
 	 * @return
 	 */
-	public int selectListCount() {
+	public int selectListCount(int memberNo) {
 
 		Connection conn = getConnection();
 
 //		System.out.println("짜잔");
-		int listCount = new InquiryDao().selectListCount(conn);
+		int listCount = new InquiryDao().selectListCount(conn, memberNo);
 
 		JDBCTemplate.close(conn);
 
@@ -39,13 +39,13 @@ public class InquiryService {
 	 * @param pi
 	 * @return
 	 */
-	public ArrayList<Inquiry> selectList(PageInfo pi) {
+	public ArrayList<Inquiry> selectList(PageInfo pi, int memberNo) {
 
 		Connection conn = getConnection();
 
 		ArrayList<Inquiry> list = new ArrayList<>();
 
-		list = new InquiryDao().selectList(conn, pi);
+		list = new InquiryDao().selectList(conn, pi, memberNo);
 
 		JDBCTemplate.close(conn);
 
@@ -60,12 +60,11 @@ public class InquiryService {
 	 * @param in
 	 * @return
 	 */
-	public int insertInquiry(Inquiry in) {
+	public int insertInquiry(Inquiry in, int memberNo) {
 
 		Connection conn = getConnection();
 
-		int result = new InquiryDao().insertInquiry(conn, in);
-
+		int result = new InquiryDao().insertInquiry(conn, in, memberNo);
 
 
 		if(result > 0) { // 등록 성공

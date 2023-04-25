@@ -36,8 +36,9 @@ public class AjaxOrderListController extends HttpServlet {
 		int completeCount = orderService.selectOrderStatusCount("배송완료");
 
 		// Get parameters from the request
-		int currentPage = Integer.parseInt(request.getParameter("page"));
-		String category = request.getParameter("category");
+		int currentPage = Integer.parseInt((request.getParameter("page") == null ? "1" : request.getParameter("page")));
+
+		String category = request.getParameter("category") == null ? "A" : request.getParameter("category");
 		String value = request.getParameter("value");
 		String search = request.getParameter("search");
 

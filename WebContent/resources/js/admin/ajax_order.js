@@ -162,7 +162,8 @@ $(document).ready(
 									$('#orderstatus').val(result.orderStatus);
 									$('#pay').val(result.paymentAmount + '원');
 									$('#shipAddr').val(result.shipAddr);
-
+									$('#img').attr('src', result.imagePath);
+									
 									$('#myModal').modal('show');
 								}
 							},

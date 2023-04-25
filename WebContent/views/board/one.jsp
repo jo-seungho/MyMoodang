@@ -56,9 +56,9 @@
 						<h2 class="tit_snb">고객센터</h2>
 						<div class="inner_sub">
 							<ul class="list_menu">
-								<li class="on"><a href="#">공지사항</a></li>
-								<li><a href="#">자주하는 질문</a></li>
-								<li class="one"><a href="#">1 : 1 문의 </a></li>
+								<li><a href="/noticelist.no">공지사항</a></li>
+								<li><a href="/faq">자주하는 질문</a></li>
+								<li class="one on"><a href="/list.in">1 : 1 문의 </a></li>
 							</ul>
 						</div>
 
@@ -92,7 +92,7 @@
 								<tbody id="sd1">
 									<% if(list.isEmpty()) { %>
 										<tr>
-											<td colspan="4">조회된 1:1 문의 리스트가 없습니다.</td>
+											<td colspan="4" align="center">조회된 1:1 문의 리스트가 없습니다.</td>
 										</tr>
 									<% } else { %>
 

@@ -274,7 +274,7 @@ public class MemberService {
 
 		return loginUser;
 	}
-	
+
 	/**
 	 * 2023.04.19 / 내 배송지 목록 조회/ 이지환
 	 * @param memberNo
@@ -282,7 +282,7 @@ public class MemberService {
 	 */
 	public ArrayList<ShippingAddress> manageMyShippingAddressList(int memberNo) {
 		Connection conn = JDBCTemplate.getConnection();
-		
+
 		// 내 배송지 목록 조회
 		ArrayList<ShippingAddress> shippingAddressList = new MemberDao().selectShippingAddressList(conn, memberNo);
 
@@ -290,6 +290,7 @@ public class MemberService {
 
 		return shippingAddressList;
 	}
+
 
 
 	public int updateShippingAddress(ShippingAddress updateMS) {
@@ -304,11 +305,10 @@ public class MemberService {
 		}
 		JDBCTemplate.close(conn);
 		return result;
-
 	}
 
 
-	/**
+	 /**
 		 * 2023.04.21 / shipNo 를 기준으로 조회하기 위한 메소드 / 이지환
 		 * @param shipNo
 		 * @return
@@ -329,5 +329,5 @@ public class MemberService {
 	
 		}
 
-
 }
+

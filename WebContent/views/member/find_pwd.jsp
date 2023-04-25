@@ -11,6 +11,8 @@
 	<%@ include file="../common/common.jsp"%>
 
     <link rel="stylesheet" href="/resources/css/member/login.css">
+    <script src="/resources/js/member/find_pwd.js"></script>
+
 </head>
 <body>
 <!-- jsp 변환 / 2023-04-14 / 김서영 -->
@@ -22,10 +24,6 @@
             <div class="section_login">
                 <h3 class="tit_login">비밀번호 찾기</h3>
                 <div class="write_form find_view">
-                    <form method="post" name="fm_pw" id="form"  action="">
-                        <input type="hidden" name="act" value="Y">
-                        <input type="hidden" name="rncheck" value="none">
-                        <input type="hidden" name="dupeinfo" value>
                         <strong class="tit_label">이름</strong>
                         <input type="text" name="srch_name" id="srch_name" size="20" tabindex="2" size="29" required placeholder="이름 입력">
 
@@ -34,44 +32,11 @@
                         <button type="button" onclick="check_input_fpw()" class="btn_type1">
                             <span class="txt_type">확인</span>
                         </button>
-                    </form>
-
 
                 </div>
             </div>
         </div>
     </div>
-
-        </div>
-
-        <script>
-
-            var name = "테스트"
-            var id = "test"
-            var email = "test@inu.ac.kr"
-
-
-            function check_input_fpw(){
-                if (!document.fm_pw.srch_name.value){
-                    alert("이름을 입력하세요");
-                    document.fm_pw.srch_name.focus();
-                    return;
-                }
-
-                if (!document.fm_pw.srch_email.value){
-                    alert("가입 시 등록한 이메일을 입력하세요");
-                    document.fm_pw.srch_email.focus();
-                    return;
-                }
-                if (document.fm_pw.srch_name.value != name || document.fm_pw.srch_email.value != email){
-                    alert("등록하신 회원정보가 없습니다.");
-                    location.href="find_pw.html";
-                    return;
-                }
-                document.fm_pw.submit();//action미지정. 이동없음
-
-            }
-        </script>
 
     </body>
 

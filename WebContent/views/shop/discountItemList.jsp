@@ -76,15 +76,15 @@
 				<div class="banner_wrapper">
 					<div class="slider">
 						<div class="imgs">
-							<img src="/resources/img/배너1.jpg" align="center">
+							<img src="/resources/img/banner1.png" align="center">
 						</div>
 
 						<div class="imgs">
-							<img src="/resources/img/배너2.jpg" align="center">
+							<img src="/resources/img/banner6.png" align="center">
 						</div>
 
 						<div class="imgs">
-							<img src="/resources/img/배너3.jpg" align="center">
+							<img src="/resources/img/banner7.png" align="center">
 						</div>
 					</div>
 				</div>
@@ -109,7 +109,7 @@
 										<div class="item">
 											<div class="thumb">
 												<a
-													href="/item.detail?bno=<%= i.getItemCode() %>"
+													href="/itemDetail.it?bno=<%= i.getItemCode() %>"
 													class="img"
 													style="background-image: url(https://img-cf.kurly.com/shop/data/goods/1567574126435l0.jpg);">
 													<img src="<%= i.getItemImg() %>"
@@ -125,7 +125,7 @@
 												</div>
 											</div>
 
-											<a href="/item.detail?bno=<%= i.getItemCode() %>" class="info">
+											<a href="/itemDetail.it?bno=<%= i.getItemCode() %>" class="info">
 											<span class="name"> <%= i.getItemName() %> </span>
 											<span class="cost"> <span class="price"><%= i.getItemPrice() %></span>
 											<input type="hidden" id="product_cost1" value=1300>

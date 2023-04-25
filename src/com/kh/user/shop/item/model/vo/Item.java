@@ -10,14 +10,18 @@ public class Item {
 	private String itemName;
 	private int itemStock;
 	private int itemPrice;
-	private int item_hits;
+	private int itemhits;
 	private String itemText;
-	private int itemDiscount;
+	private double itemDiscount; // 할인가격 int -> double로 
 	private String itemImg;
 	private String itemStatus;
 	private int discountPrice; // 상품할인가격추가
+	private String description; // 상품 설명
 	
 	
+
+
+
 	public Item() { }
 
 
@@ -40,7 +44,7 @@ public class Item {
      * 2023-04-17 이태화
      * @return
      */
-    public Item(String itemCategory, String itemName, int itemPrice, String itemText, int itemDiscount, String itemImg,
+    public Item(String itemCategory, String itemName, int itemPrice, String itemText, double itemDiscount, String itemImg,
 			int discountPrice) {
 		super();
 		this.itemCategory = itemCategory;
@@ -59,7 +63,8 @@ public class Item {
      * @return
      */
 	public Item(int itemCode, String itemDate, String itemCategory, String itemImg, String itemName
-			, String itemText, int itemStock, int itemPrice, int item_hits, String itemStatus) {
+			, String itemText, int itemStock, int itemPrice, int item_hits, String itemStatus, String description) {
+
 		super();
 		this.itemCode = itemCode;
 		this.itemDate = itemDate;
@@ -69,8 +74,9 @@ public class Item {
 		this.itemText = itemText;
 		this.itemStock = itemStock;
 		this.itemPrice = itemPrice;
-		this.item_hits = item_hits;
+		this.itemhits = itemhits;
 		this.itemStatus = itemStatus;
+		this.description = description;
 	}
 
 
@@ -81,7 +87,7 @@ public class Item {
      * @return
      */
 	public Item(int itemCode, String itemCategory, String itemDate, int itemPrice, int discountPrice, String itemName, String itemText,
-			int itemDiscount, String itemImg) {
+			double itemDiscount, String itemImg, String description) {
 		super();
 		this.itemCode = itemCode;
 		this.itemCategory = itemCategory;
@@ -92,6 +98,7 @@ public class Item {
 		this.itemText = itemText;
 		this.itemDiscount = itemDiscount;
 		this.itemImg = itemImg;
+		this.description = description;
 	}
 
 
@@ -143,12 +150,12 @@ public class Item {
 		this.itemPrice = itemPrice;
 	}
 
-	public int getItem_hits() {
-		return item_hits;
+	public int getItemhits() {
+		return itemhits;
 	}
 
-	public void setItem_hits(int item_hits) {
-		this.item_hits = item_hits;
+	public void setItemhits(int itemhits) {
+		this.itemhits = itemhits;
 	}
 
 	public String getItemText() {
@@ -159,11 +166,11 @@ public class Item {
 		this.itemText = itemText;
 	}
 
-	public int getItemDiscount() {
+	public double getItemDiscount() {
 		return itemDiscount;
 	}
 
-	public void setItemDiscount(int itemDiscount) {
+	public void setItemDiscount(double itemDiscount) {
 		this.itemDiscount = itemDiscount;
 	}
 
@@ -193,13 +200,22 @@ public class Item {
 	public void setDiscountPrice(int discountPrice) {
 		this.discountPrice = discountPrice;
 	}
+	
+	public String getDescription() {
+		return description;
+	}
+
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
 
 	@Override
 	public String toString() {
 		return "Item [itemCode=" + itemCode + ", itemCategory=" + itemCategory + ", itemDate=" + itemDate
 				+ ", itemName=" + itemName + ", itemStock=" + itemStock + ", itemPrice=" + itemPrice + ", item_hits="
-				+ item_hits + ", itemText=" + itemText + ", itemDiscount=" + itemDiscount + ", itemImg=" + itemImg
+				+ itemhits + ", itemText=" + itemText + ", itemDiscount=" + itemDiscount + ", itemImg=" + itemImg
 				+ ", itemStatus=" + itemStatus + ", discountPrice=" + discountPrice + "]";
 	}
 

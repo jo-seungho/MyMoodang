@@ -69,7 +69,7 @@ public class ItemDao {
      * @return
      */
     public Item selectItem(Connection conn, int bno) {
-        Item i = null;
+        Item i = null;	//보따리 형태 선언(보따리 주문)
         PreparedStatement pstmt = null;
         ResultSet rset = null;
         
@@ -82,16 +82,20 @@ public class ItemDao {
             rset = pstmt.executeQuery();
 
 			if(rset.next()) {
-				i = new Item();
+				i = new Item();//새 보따리 준비  보따리를 펼친다.
 				
+				//보따리에 물건 담기
 				i.setItemCode(rset.getInt("ITEM_CODE"));
 				i.setItemCategory(rset.getString("ITEM_CATEGORY"));
 				i.setItemName(rset.getString("ITEM_NAME"));
 				i.setItemPrice(rset.getInt("ITEM_PRICE"));
 				i.setItemText(rset.getString("ITEM_TEXT"));
-				i.setItemDiscount(rset.getInt("ITEM_DISCOUNT"));
+				i.setItemDiscount(rset.getDouble("ITEM_DISCOUNT"));
+				i.setItemhits(rset.getInt("ITEM_HITS"));
 				i.setItemImg(rset.getString("ITEM_IMG_PATH"));
 				i.setDiscountPrice(rset.getInt("DISCOUNT_PRICE"));
+				i.setDescription(rset.getString("DESCRIPTION"));
+				
 				
 			}
             
@@ -208,7 +212,6 @@ public class ItemDao {
 
             pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, bno);
-            System.out.println(bno);
             
             rset = pstmt.executeQuery();
 
@@ -228,8 +231,6 @@ public class ItemDao {
 				re.setMemberId(rset.getString("MEMBER_ID"));
 
 				list.add(re);
-
-				System.out.println(rset.getString("TITLE"));
                 
        
             }
@@ -390,12 +391,34 @@ public class ItemDao {
      * @param pi
      * @return
      */
-	public ArrayList<Item> selectItemList(Connection conn, PageInfo pi, String category) {
+	public ArrayList<Item> selectItemList(Connection conn, PageInfo pi, String category, String keyword, String filter) {
 		
 		ArrayList<Item> list = new ArrayList<>();
 		ResultSet rset = null;
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("selectItemList");
+		
+	    /**
+	     * 상품 필터 기능
+	     * 2023-04-25 이태화
+	     */
+		//--------필터에 따른 정렬 구분------------------------------------
+		if(filter.equals("1")) {	//낮은가격
+			sql += prop.getProperty("selectItemList_lowPrice");
+		} 
+		else if( filter.equals("2")) {	//높은가격
+			sql += prop.getProperty("selectItemList_highPrice");
+		}
+		else if( filter.equals("3")) {	//등록순
+			sql += prop.getProperty("selectItemList_datePrice");
+		}
+		else if( filter.equals("4")) {	//조회높은순
+			sql += prop.getProperty("selectItemList_viewPrice");
+		}
+		else if( filter.equals("전체")) {	//전체보기
+			sql += prop.getProperty("selectItemList_all");
+		}
+		//----------------------------------------------------------
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -405,8 +428,9 @@ public class ItemDao {
 			
 			pstmt.setString(1, category);
 			pstmt.setString(2, category);
-			pstmt.setInt(3, startRow);
-			pstmt.setInt(4, endRow);
+			pstmt.setString(3, keyword);
+			pstmt.setInt(4, startRow);
+			pstmt.setInt(5, endRow);
 			
 			rset = pstmt.executeQuery();
 			
@@ -422,6 +446,7 @@ public class ItemDao {
 						, rset.getInt("ITEM_PRICE")
 						, rset.getInt("ITEM_HITS")
 						, rset.getString("ITEM_STATUS")
+						, rset.getString("DESCRIPTION")
 						));
 			}
 			
@@ -433,8 +458,8 @@ public class ItemDao {
 		}
 		
 		return list;
-	}
-
+	 }
+	
     /**
      * 인기 리스트 조회
      * 2023-04-17 조승호
@@ -472,6 +497,7 @@ public class ItemDao {
 						, rset.getInt("ITEM_PRICE")
 						, rset.getInt("ITEM_HITS")
 						, rset.getString("ITEM_STATUS")
+						, rset.getString("DESCRIPTION")
 						));
 			}
 			
@@ -523,6 +549,7 @@ public class ItemDao {
 						, rset.getInt("ITEM_PRICE")
 						, rset.getInt("ITEM_HITS")
 						, rset.getString("ITEM_STATUS")
+						, rset.getString("DESCRIPTION")
 						));
 			}
 			
@@ -573,6 +600,7 @@ public class ItemDao {
 						, rset.getInt("ITEM_PRICE")
 						, rset.getInt("ITEM_HITS")
 						, rset.getString("ITEM_STATUS")
+						, rset.getString("DESCRIPTION")
 						));
 			}
 			
@@ -615,8 +643,10 @@ public class ItemDao {
 					  , rset.getInt("DISCOUNTPRICE")
 					  , rset.getString("ITEM_NAME")
 					  , rset.getString("ITEM_TEXT")
-					  , rset.getInt("ITEM_DISCOUNT")
+					  , rset.getDouble("ITEM_DISCOUNT")
 					  , rset.getString("ITEM_IMG_PATH")
+					  , rset.getString("DESCRIPTION")
+					  
 					  ));
 			}
 			
@@ -651,8 +681,9 @@ public class ItemDao {
 					  , rset.getInt("DISCOUNTPRICE")
 					  , rset.getString("ITEM_NAME")
 					  , rset.getString("ITEM_TEXT")
-					  , rset.getInt("ITEM_DISCOUNT")
+					  , rset.getDouble("ITEM_DISCOUNT")
 					  , rset.getString("ITEM_IMG_PATH")
+					  , rset.getString("DESCRIPTION")
 					  ));
 			}
 			
@@ -687,8 +718,9 @@ public class ItemDao {
 					  , rset.getInt("DISCOUNTPRICE")
 					  , rset.getString("ITEM_NAME")
 					  , rset.getString("ITEM_TEXT")
-					  , rset.getInt("ITEM_DISCOUNT")
+					  , rset.getDouble("ITEM_DISCOUNT")
 					  , rset.getString("ITEM_IMG_PATH")
+					  , rset.getString("DESCRIPTION")
 					  ));
 			}
 			
@@ -701,6 +733,54 @@ public class ItemDao {
 		return list;
 	}
 
+	public ArrayList<Item> selectItemListSearch(Connection conn, PageInfo pi, String category, String keyword) {
+		
+		ArrayList<Item> list = new ArrayList<>();
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("selectItemListSearch");
+		
+		
+		try {
+		pstmt = conn.prepareStatement(sql);
+			
+		int startRow = (pi.getCurrentPage() -1) * pi.getBoardLimit() + 1;
+		int endRow = pi.getCurrentPage() * pi.getBoardLimit();
+		
+		
+		pstmt.setString(1, category);
+		pstmt.setString(2, category);
+		pstmt.setString(3, keyword);
+		pstmt.setInt(4, startRow);
+		pstmt.setInt(5, endRow);
+		
+		rset = pstmt.executeQuery();
+		
+		while(rset.next()) {
+			list.add(new Item(
+					  rset.getInt("ITEM_CODE")
+					, rset.getString("ITEM_DATE")
+					, rset.getString("ITEM_CATEGORY")
+					, rset.getString("ITEM_IMG_PATH")
+					, rset.getString("ITEM_NAME")
+					, rset.getString("ITEM_TEXT")
+					, rset.getInt("ITEM_STOCK")
+					, rset.getInt("ITEM_PRICE")
+					, rset.getInt("ITEM_HITS")
+					, rset.getString("ITEM_STATUS")
+					));
+		}
+		
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		close(rset);
+		close(pstmt);
+	}
+	
+	return list;
+ 
 
+	}
 }
 

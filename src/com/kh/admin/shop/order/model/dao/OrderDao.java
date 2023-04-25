@@ -376,4 +376,34 @@ public class OrderDao {
 		return o;
 	}
 
+	public String selectImgFile(Connection conn, int id) {
+
+		String imgFile = "";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		// 2. 쿼리문 작성
+		String sql = prop.getProperty("selectImgFile");
+		
+		// 3. 쿼리문 실행
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, id);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				imgFile = rset.getString("ITEM_IMG_PATH");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);			
+		}
+		
+		return imgFile;
+	}
+
 }

@@ -46,20 +46,31 @@
 									<p><%= category %></p>
 								</span> <span class="tit">전체보기</span>
 							</div>
-
+							<!-- 카테고리와 구분하기 위해 히든을 줌 -->
+							<input type="hidden" id="filterVal">
 							<ul id="colorTest" class="list">
-								<li name="cate_gory"><a class="totalList on" href="/itemList.it?currentPage=1&category=전체">전체보기</a></li>
-								<li name="cate_gory"><a class="zeroDrink" href="/itemList.it?currentPage=1&category=제로음료" class=>제로음료</a></li>
-								<li name="cate_gory"><a class="zeroSugar" href="/itemList.it?currentPage=1&category=무가당" class=>무가당</a></li>
-								<li name="cate_gory"><a class="protein" href="/itemList.it?currentPage=1&category=단백질" class=>단백질</a></li>
-								<li name="cate_gory"><a class="bentto" href="/itemList.it?currentPage=1&category=도시락" class=>도시락</a></li>
-								<li name="cate_gory"><a class="etcList" href="/itemList.it?currentPage=1&category=기타" class=>기타</a></li>
+								<li name="all"><a class="lowprice" href="javascript:filterClick('전체')">전체보기</a></li>
+								<li name="lowprice"><a class="lowprice" href="javascript:filterClick('1')">낮은가격순</a></li>
+								<li name="highprice"><a class="highprice" href="javascript:filterClick('2')">높은가격순</a></li>
+								<li name="dateprice"><a class="dateprice" href="javascript:filterClick('3')">등록일순</a></li>
+								<li name="viewprice"><a class="viewprice" href="javascript:filterClick('4')">조회높은순</a></li>
+							</ul>
+							
+							<br><br>
+							<input type="hidden" id="categoryVal">
+							<ul id="colorTest" class="list">
+								<li name="cate_gory"><a class="totalList on" href="javascript:categoryClick('전체')">전체보기</a></li>
+								<li name="cate_gory"><a class="zeroDrink" href="javascript:categoryClick('제로음료')">제로음료</a></li>
+								<li name="cate_gory"><a class="zeroSugar" href="javascript:categoryClick('무가당')">무가당</a></li>
+								<li name="cate_gory"><a class="protein" href="javascript:categoryClick('단백질')">단백질</a></li>
+								<li name="cate_gory"><a class="bentto" href="javascript:categoryClick('도시락')">도시락</a></li>
+								<li name="cate_gory"><a class="etcList" href="javascript:categoryClick('기타')">기타</a></li>
 							</ul>
 						</div>
 					</div>
 
 
-					<div id="goodsList" class="page_section section_goodslist">
+					<div id="goodsList" class="page_section seon_goodslist">
 						<div class="list_ability"></div>
 
 
@@ -71,7 +82,10 @@
 									<%
 										if (list.isEmpty()) {
 									%>
-									<div class="item">등록된 상품이 없습니다.</div>
+						<div style="display: flex; justify-content: center; align-items: flex-end; height: 100px;">
+						  <div class="item" style="font-size: 25px; color: red; ">등록된 상품이 없습니다.</div>
+						</div>
+								<br><br><br><br><br><br><br><br><br><br><br>
 									<%
 										} else {
 									%>
@@ -123,9 +137,17 @@
 								</ul>
 							</div>
 						</div>
-
-
-
+							
+							<!--  검색 했을 떄 빈 페이지면 페이징바 숨김 처리 -->
+							<%
+								if (list.isEmpty()) {
+							%>
+							<div style="display: flex; justify-content: center; align-items: flex-end; height: 100px;">
+						  <div class="item" style="font-size: 25px; color: red; "></div>
+						</div>
+							<%
+						} else {
+							%>
 						<div class="layout-pagination">
 							<div class="pagediv">
 								<% if(currentPage != 1) { %>
@@ -177,6 +199,8 @@
 								<a href="javascript:void(0)" class="layout-pagination-button layout-pagination-last-page">
 								 맨끝 페이지로 가기
 								 </a>
+								 <% } %>
+								 
 								 <% } %>
 
 							</div>
@@ -251,11 +275,34 @@
 		function showCartModal(itemCode) {
 			// 가격남음
 			$("#cartPut input[name=itemCode]").val(itemCode);
-			console.log(itemCode);
+			// console.log(itemCode);
 			// console.log($('.total > .totalPrice').text(), 8888)
-			console.log($("#countValue").text());
+			// console.log($("#countValue").text());
 			
 		}
+		
+		//필터 클릭 시 function
+		function filterClick(filterVal) {
+			$("#filterVal").val(filterVal);
+			selectItemListFunction();
+		}
+		//카테고리 클릭 시 function
+		function categoryClick(categoryVal) {
+			$("#categoryVal").val(categoryVal);
+			selectItemListFunction();
+		}
+		
+		function selectItemListFunction(){
+			var filter = $("#filterVal").val();	//현재 선택된 필터값
+			var category = $("#categoryVal").val();	//현재 선택된 카테고리값
+			//var category = "전체"
+			if(filter == null || filter == "") filter = "전체";
+			if(category == null || category == "") category = "전체";
+			
+			location.href="/itemList.it?currentPage=1&category=" + category +"&filter=" + filter;
+		}
+		
+		
 		
 		$('.btn_type1').click(function() {
 			
@@ -272,8 +319,20 @@
 					countValue: $("#countValue").text(),
 					priceItem: priceItem
 				},
-				success: function() {
+				success: function(res) {
 					alert('물품을 장바구니에 담았습니다!');
+					$.ajax({
+						
+						url: "count",
+						type: "get",
+						success: function(res) {
+							$('.itemCount').text(res);
+						},
+						error: function(err) {
+							console.log(err);
+						}
+						
+					})
 					// console.log(res)
 				},
 				error: function(err) {

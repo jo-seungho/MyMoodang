@@ -4,9 +4,14 @@
 <!DOCTYPE html>
 <%
 	AdminPage a = (AdminPage) request.getAttribute("mainPage");
-int male = a.getMaleCount();
-int female = a.getFemaleCount();
-int uncheck = a.getUncheckedCount();
+	int male = a.getMaleCount();
+	int female = a.getFemaleCount();
+	int uncheck = a.getUncheckedCount();
+	int etc = a.getEtc();
+	int protein = a.getProtein();
+	int lunch = a.getLunch();
+	int noSugar = a.getNoSugar();
+	int zero = a.getZero();
 %>
 <html lang="en">
 <head>
@@ -97,48 +102,7 @@ int uncheck = a.getUncheckedCount();
 					</div>
 				</div>
 
-				<br />
-				<h5>주문 목록</h5>
-				<hr />
-				<table class="myTable">
-					<thead>
-						<tr>
-							<th>주문번호</th>
-							<th>회원 아이디</th>
-							<th>주문가격</th>
-							<th>주문상태</th>
-							<th>요청사항</th>
-							<th>주문날짜</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>3</td>
-							<td>hyuna95</td>
-							<td>23000</td>
-							<td>배송 대기중</td>
-							<td>문 앞에 놔주세요</td>
-							<td>2023-03-24 06:18:21</td>
-						</tr>
-						<tr>
-							<td>2</td>
-							<td>mjjang</td>
-							<td>89000</td>
-							<td>배송 대기중</td>
-							<td>무인택배함에 놔주세요</td>
-							<td>2023-03-20 08:05:40</td>
-						</tr>
-						<tr>
-							<td>1</td>
-							<td>user01</td>
-							<td>23000</td>
-							<td>배송 완료</td>
-							<td>부재시 전화주세요</td>
-							<td>2023-03-18 13:14:52</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
+		
 			<br />
 		</main>
 	</div>
@@ -179,7 +143,7 @@ int uncheck = a.getUncheckedCount();
 			    datasets: [{
 			      backgroundColor: "#FF6699",
 			      borderColor: "#FF6699",
-			      data: [20, 30, 40, 15, 5],
+			      data: [<%=zero%>, <%=noSugar%>, <%=protein%>, <%=lunch%>, <%=etc%>],
 			    }],
 			  },
 			  options: {
@@ -198,7 +162,7 @@ int uncheck = a.getUncheckedCount();
 			      yAxes: [{
 			        ticks: {
 			          min: 0,
-			          max: 100,
+			          max: 30,
 			          maxTicksLimit: 5
 			        },
 			        gridLines: {

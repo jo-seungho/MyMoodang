@@ -43,7 +43,7 @@ public class AjaxMemberInsertController extends HttpServlet {
 		String name = request.getParameter("userName");
 		String email = request.getParameter("email");
 		String phone = request.getParameter("phoneNumber");
-		String zipcode = request.getParameter("zipCode");
+		String zipcode = request.getParameter("zipcode");
 		String shipAddr = request.getParameter("shipAddr");
 		String shipAddrInfo = request.getParameter("shipAddrInfo");
 

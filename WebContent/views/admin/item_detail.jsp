@@ -15,7 +15,7 @@
 
 <link rel="stylesheet" href="/resources/css/admin/item_detail.css" />
 
-<script src="/resources/js/shop/item_detail.js"></script>
+<script src="/resources/js/shop/newItemDetail.js"></script>
 <script src="/resources/js/common/header.js"></script>
 
 </head>
@@ -43,17 +43,20 @@
 								</p>
 
 								<p class="goods_price">
-									<span class="position"> <span class="dc"> <span
-											style="text-decoration: line-through"><%=it.getItemPrice()%></span>
-											<span class="dc_price" style="color: red"> <%=it.getDiscountPrice()%><input
-												type="hidden" value="<%=it.getDiscountPrice()%>" />
-										</span> <span class="won">원</span><span style="color: red"><%=it.getItemDiscount() * 100%>
-												% 할인</span>
-									</span>
-									</span> <span class="txt_benefit"> <span
-										class="ico_grade grade6">웰컴 5%</span> <span class="point">개당
-											<strong class="emphh">0원 적립</strong>
-									</span>
+									<span class="position"> 
+									<span class="dc">
+                                                    <span>
+                                                        <span class="discount" style="font-size: 22px; font-weight: 400; color: red;"><%= (int)(it.getItemDiscount() * 100) %>%&nbsp;</span>
+                                                    </span>
+                                                    <span style="font-size: 15px; font-weight: 400; color: red;">
+                                                        <del style="font-size: 18px; font-weight: 400; color: lightgray;"><%= it.getItemPrice() %>원 </del>
+                                                        
+                                                        
+                                                    </span>
+                                                    <span class="dc_price" style="font-size: 15px; font-weight: 400;">
+                                                    <span class="won" style="font-size: 22px; margin-top: 10%;">&nbsp;<b><%= it.getDiscountPrice() %>원</b></span>
+                                                	<input type="hidden" value="<%= it.getDiscountPrice() %>">
+                                                	</span>
 									</span>
 								</p>
 								<div class="goods_info">
@@ -102,7 +105,7 @@
 											<div class="total">
 												<div class="price">
 													<strong class="tit">총 상품금액 :</strong> <span class="sum">
-														<span class="num"></span> <span class="won">원</span>
+														<span class="num"></span> <span class="won"></span>
 													</span>
 												</div>
 												<div class="hearts"></div>
@@ -115,7 +118,7 @@
 
 												<strong class="name" style="float: right; margin-left: 20px">
 													<i class="fas fa-eye lg"></i> | <%=it.getItem_hits()%>
-												</strong>
+												</strong> 
 											</div>
 										</div>
 
@@ -262,76 +265,43 @@
 								<li class="goods-view-infomation-tab"><a
 									href="#goods-description"
 									class="goods-view-infomation-tab-anchor __active">상품설명</a></li>
-								<li class="goods-view-infomation-tab"><a
-									href="#goods-image" class="goods-view-infomation-tab-anchor">상품이미지
-								</a></li>
+								
 								<li class="goods-view-infomation-tab"><a
 									href="#goods-review" class="goods-view-infomation-tab-anchor">
 										고객후기 <span class="count_review">(0)</span>
 								</a></li>
 							</ul>
-							<div class="goods-view-infomation-content __active"
-								id="goods-description">
-								<div class="goods_wrap">
-									<div class="goods_intro">
-										<div class="pic">
-											<img <%if (list.size() < 2) {%> src="<%=noImage%>"
-												<%} else {%> src="<%=list.get(1).getItemImgPath()%>" <%}%>
-												style="width: 1010px; height: 671px" />
-										</div>
-										<div class="context last">
-											<p class="words"><%=it.getItemText()%></p>
-										</div>
-									</div>
-								</div>
-							</div>
+							<div class="goods-view-infomation-content __active" id="goods-description">
+                                  <div class="goods_wrap">
+                                      <div class="goods_intro">
+                                          <div class="pic">
+                                          </div>
+                                          <div class="context last">
+                                              <h3>
+                                                  <small>
+                                                      <%= it.getItemName() %>
+                                                  </small>
+                                                  <%= it.getItemText() %>
+                                              </h3>
+                                              <br><br>
+                                              <div style="text-align:center">
+                                              <%= it.getDescription() %>
+                                              </div>
+      
+                                          </div>
+                                      </div>  
+                                      
+                                  </div>
+                              </div>
 						</div>
-						<ul class="goods-view-infomation-tab-group">
-							<li class="goods-view-infomation-tab"><a
-								href="#goods-description"
-								class="goods-view-infomation-tab-anchor">상품설명</a></li>
-							<li class="goods-view-infomation-tab"><a href="#goods-image"
-								class="goods-view-infomation-tab-anchor __active">상품이미지</a></li>
-							<li class="goods-view-infomation-tab"><a
-								href="#goods-review" class="goods-view-infomation-tab-anchor">
-									고객후기 <span class="count_review">(0)</span>
-							</a></li>
-						</ul>
-						<div class="goods-view-infomation-content" id="goods-image">
-							<div id="goods_pi">
-								<p class="pic">
-									<%
-										int listSize = list.size();
-									if (listSize < 3) {
-									%>
-									<img src="<%=noImage%>" id="smImg" />
-									<%
-										} else {
-									%>
-									<img src="<%=list.get(2).getItemImgPath()%>" />
-									<%
-										}
-									if (listSize < 4) {
-									%>
-									<img src="<%=noImage%>" id="smImg" />
-									<%
-										} else {
-									%>
-									<img src="<%=list.get(3).getItemImgPath()%>" />
-									<%
-										}
-									%>
-								</p>
-							</div>
-						</div>
+						
 
 						<div class="happy_center fst">
 							<ul class="goods-view-infomation-tab-group">
 								<li class="goods-view-infomation-tab"><a
 									href="#goods-description"
 									class="goods-view-infomation-tab-anchor">상품설명</a></li>
-								<li class="goods-view-infomation-tab"><a
-									href="#goods-image" class="goods-view-infomation-tab-anchor">상품이미지</a></li>
+								
 
 								<li class="goods-view-infomation-tab"><a
 									href="#goods-review"

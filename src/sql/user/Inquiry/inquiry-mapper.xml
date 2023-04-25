@@ -39,7 +39,7 @@
                           FROM INQUIRY I
                           JOIN MEMBER M USING (MEMBER_NO)
                          WHERE I.DELETE_STATUS = 'Y'
-                           AND MEMBER_NO = 6
+                           AND MEMBER_NO = ?
                          ORDER BY DATE_CREATE DESC
                        ) S
               )

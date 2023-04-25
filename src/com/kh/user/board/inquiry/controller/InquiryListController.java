@@ -11,10 +11,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.kh.common.model.vo.PageInfo;
 import com.kh.user.board.inquiry.model.service.InquiryService;
 import com.kh.user.board.inquiry.model.vo.Inquiry;
+import com.kh.user.member.model.vo.Member;
 
 /**
  * Servlet implementation class InquiryListController
@@ -34,10 +36,15 @@ public class InquiryListController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
 
-		// 로그인 유저의 회원 번호 조회
-		// => 로그인 기능 구현되면 붙일 예정
-//		String memberId = request.getParameter("memberId");
+		Member loginUser = (Member)session.getAttribute("loginUser");
+
+		if(loginUser != null) {
+//		 로그인 유저의 회원 번호 조회
+//		 => 로그인 기능 구현되면 붙일 예정
+		int memberNo = loginUser.getMemberNo();
+
 
 
 		// 페이징 처리 하기!!
@@ -50,7 +57,7 @@ public class InquiryListController extends HttpServlet {
 		int startPage;
 		int endPage;
 
-		listCount = new InquiryService().selectListCount();
+		listCount = new InquiryService().selectListCount(memberNo);
 
 //		System.out.println(request.getParameter("currentPage") + "현재페이지");
 		currentPage = Integer.parseInt((request.getParameter("currentPage") == null ? "1" : request.getParameter("currentPage")));
@@ -77,7 +84,7 @@ public class InquiryListController extends HttpServlet {
 
 		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
 
-		ArrayList<Inquiry> list = new InquiryService().selectList(pi);
+		ArrayList<Inquiry> list = new InquiryService().selectList(pi, memberNo);
 
 		request.setAttribute("pi", pi);
 		request.setAttribute("list", list);
@@ -85,7 +92,10 @@ public class InquiryListController extends HttpServlet {
 //		list.stream().forEach(System.out::println);
 
 		request.getRequestDispatcher("views/board/one.jsp").forward(request, response);
+		} else {
 
+			request.getRequestDispatcher("views/common/error500.jsp").forward(request, response);
+		}
 	}
 
 	/**
