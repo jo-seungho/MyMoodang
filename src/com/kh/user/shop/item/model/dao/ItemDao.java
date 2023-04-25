@@ -417,6 +417,9 @@ public class ItemDao {
 		}
 		else if( filter.equals("전체")) {	//전체보기
 			sql += prop.getProperty("selectItemList_all");
+			//null 조건 추가 (최명진)
+		} else if (filter.equals(null)) {
+			sql += prop.getProperty("selectItemList_all");
 		}
 		//----------------------------------------------------------
 		
@@ -447,6 +450,8 @@ public class ItemDao {
 						, rset.getInt("ITEM_HITS")
 						, rset.getString("ITEM_STATUS")
 						, rset.getString("DESCRIPTION")
+						, rset.getInt("DISCOUNTPRICE")
+						, rset.getDouble("ITEM_DISCOUNT")
 						));
 			}
 			
@@ -498,6 +503,8 @@ public class ItemDao {
 						, rset.getInt("ITEM_HITS")
 						, rset.getString("ITEM_STATUS")
 						, rset.getString("DESCRIPTION")
+						, rset.getInt("DISCOUNTPRICE")
+						, rset.getDouble("ITEM_DISCOUNT")
 						));
 			}
 			
@@ -550,6 +557,8 @@ public class ItemDao {
 						, rset.getInt("ITEM_HITS")
 						, rset.getString("ITEM_STATUS")
 						, rset.getString("DESCRIPTION")
+						, rset.getInt("DISCOUNTPRICE")
+						, rset.getDouble("ITEM_DISCOUNT")
 						));
 			}
 			
@@ -601,6 +610,8 @@ public class ItemDao {
 						, rset.getInt("ITEM_HITS")
 						, rset.getString("ITEM_STATUS")
 						, rset.getString("DESCRIPTION")
+						, rset.getInt("DISCOUNTPRICE")
+						, rset.getDouble("ITEM_DISCOUNT")
 						));
 			}
 			
@@ -768,6 +779,7 @@ public class ItemDao {
 					, rset.getInt("ITEM_PRICE")
 					, rset.getInt("ITEM_HITS")
 					, rset.getString("ITEM_STATUS")
+					, rset.getInt("DISCOUNTPRICE")
 					));
 		}
 		

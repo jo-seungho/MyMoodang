@@ -80,16 +80,18 @@
  										<% for(Item di : discountList) { %>
  									<li>
                                         <a class="slideLinkTag" href="/itemDetail.it?bno=<%=di.getItemCode()%>">
-                                            <img class="discountImg" src="https://img-cf.kurly.com/shop/data/my_icon/icon_save_10.png">
+                                            
                                             <img src="<%= di.getItemImg() %>" style="width: 90%; height: 310px;">
                                               <div class="slideText-area">
-                                                <span class="name">
+	                                                <span class="name">
                                                     <h3 class="slideTitle-text" style="font-weight: 800"><%= di.getItemName() %></h3>
-                                                    <h4 class="slideTitle-text"><%= di.getItemText() %></h4>
-                                                 </span>
-                                                <span class="slidePrice"><%= di.getDiscountPrice() %>원</span>
-                                                <span class="slideCost"><%= di.getItemPrice() %>원</span>
-                                            </div>
+                                                    <h4 class="slideTitle-text" style="font-size : 15px;"><%= di.getItemText() %></h4>
+	                                                 </span>
+	                                                 <p><span style="color : red; font-weight : bold; font-size : 18px;"><%= (int)(di.getItemDiscount()*100) %>%&nbsp;</span>
+	                                                <span class="slidePrice"><%= di.getDiscountPrice() %>원</span>
+	                                               </p>
+	                                                <span class="slideCost" style="font-size : 18px; margin-top : 10px;"><%= di.getItemPrice() %>원</span>
+	                                            </div>
                                         </a>
                                     </li>
  										<% } %>
@@ -124,7 +126,7 @@
 
                             		<% for(Item ni : newList) { %>
 		                            	<li>
-		                                    <li data-index="1" style="padding-bottom: 70px;">
+		                                    <li data-index="1" style="padding-bottom: 10px;">
 		                                        <a class="thumb_goods" href="/itemDetail.it?bno=<%=ni.getItemCode()%>">
 		                                            <img src="<%= ni.getItemImg() %>" alt="상품이미지" class="thumb"
 		                                            style="background-image: url('');">
@@ -137,10 +139,16 @@
 		                                                </span>
 		                                                <span class="desc">
 		                                                    <a href="/itemDetail.it?bno=<%=ni.getItemCode()%>" class="txt" style="font-size: initial;"><%= ni.getItemText() %></a>
-		                                                </span>
-		                                                <span class="desc" style="font-size: x-large; font-weight: 600;" >
-		                                                	<%= ni.getItemPrice() %>원
-		                                                </span>
+		                                                </span>	
+		                                                <br>
+		                                                <p style="text-align : center;"><span style="color : red; font-weight : bold; font-size : 18px;"><%= (int)(ni.getItemDiscount()*100) %>%&nbsp;</span>
+	                                                <span class="slidePrice"><%= ni.getDiscountPrice() %>원</span>
+	                                               </p>
+	                                               <p style="margin-left : 150px; margin-top : 7px">
+	                                                <span class="slideCost" style="font-size : 18px"><%= ni.getItemPrice() %>원</span>
+	                                                </p>
+		                                                	
+                                                		
 		                                            </div>
 		                                        </div>
 		                                    </li>
@@ -182,10 +190,12 @@
 	                                              <div class="slideText-area">
 	                                                <span class="name">
                                                     <h3 class="slideTitle-text" style="font-weight: 800"><%= bi.getItemName() %></h3>
-                                                    <h4 class="slideTitle-text"><%= bi.getItemText() %></h4>
+                                                    <h4 class="slideTitle-text" style="font-size : 15px;"><%= bi.getItemText() %></h4>
 	                                                 </span>
+	                                                 <p><span style="color : red; font-weight : bold; font-size : 18px;"><%= (int)(bi.getItemDiscount()*100) %>%&nbsp;</span>
 	                                                <span class="slidePrice"><%= bi.getDiscountPrice() %>원</span>
-	                                                <span class="slideCost"><%= bi.getItemPrice() %>원</span>
+	                                               </p>
+	                                                <span class="slideCost" style="font-size : 18px; margin-top : 10px;"><%= bi.getItemPrice() %>원</span>
 	                                            </div>
 	                                        </a>
 	                                    </li>
@@ -280,9 +290,12 @@
 
                 <div style="height: 40px; background-color: rgba(254, 116, 119, 0.241); line-height: 40px; margin-top: 100px;">
                     <div style="display: flex; justify-content: center;">
-                        <h3>공지사항 : </h3>
-                        <p>배가 고파요..</p>
+                       <a href="/noticelist.no?currentPage=1">
+                        
+                        	<span style="font-weight : bold; font-size : 17px;">공지사항 :</span>&nbsp; 마이무당에 오신것을 환영합니다!
+                        </a>
                     </div>
+                    
                 </div>
             </div>
 
