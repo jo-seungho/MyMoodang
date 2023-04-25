@@ -5,6 +5,8 @@
 <%
 	PageInfo pi = (PageInfo) request.getAttribute("pi");
 	ArrayList<Item> list = (ArrayList<Item>) request.getAttribute("list");
+	
+	String category = (String)request.getAttribute("category");
 
 	int currentPage = pi.getCurrentPage();
 	int startPage = pi.getStartPage();
@@ -58,14 +60,15 @@
 							</span> <span class="tit">할인</span>
 						</div>
 
-						<ul class="list">
-							<li name="cate_gory"><a class="on">전체보기</a></li>
-							<li name="cate_gory"><a class=>제로음료</a></li>
-							<li name="cate_gory"><a class=>무가당</a></li>
-							<li name="cate_gory"><a class=>단백질</a></li>
-							<li name="cate_gory"><a class=>도시락</a></li>
-							<li name="cate_gory"><a class=>기타</a></li>
-						</ul>
+							<input type="hidden" id="categoryVal">
+							<ul id="colorTest" class="list">
+								<li name="cate_gory"><a class="totalList on" href="javascript:categoryClick('전체')">전체보기</a></li>
+								<li name="cate_gory"><a class="zeroDrink" href="javascript:categoryClick('제로음료')">제로음료</a></li>
+								<li name="cate_gory"><a class="zeroSugar" href="javascript:categoryClick('무가당')">무가당</a></li>
+								<li name="cate_gory"><a class="protein" href="javascript:categoryClick('단백질')">단백질</a></li>
+								<li name="cate_gory"><a class="bentto" href="javascript:categoryClick('도시락')">도시락</a></li>
+								<li name="cate_gory"><a class="etcList" href="javascript:categoryClick('기타')">기타</a></li>
+							</ul>
 					</div>
 				</div>
 				<!-- 카테고리 메뉴바 끝 -->
@@ -163,10 +166,10 @@
 						<div class="layout-pagination">
 							<div class="pagediv">
 								<% if(currentPage != 1) { %>
-								<a href="/bestItemList.it?currentPage=<%= startPage %>"
+								<a href="/discountItemList.it?currentPage=<%= startPage %>"
 									class="layout-pagination-button layout-pagination-first-page">맨 처음 페이지로 가기
 								</a>
-								<a href="/bestItemList.it?currentPage=<%= currentPage - 1 %>" class="layout-pagination-button layout-pagination-prev-page">
+								<a href="/discountItemList.it?currentPage=<%= currentPage - 1 %>" class="layout-pagination-button layout-pagination-prev-page">
 									이전 페이지로 가기
 								</a>
 								<% } else {%>
@@ -179,7 +182,7 @@
 								<% } %>
 								<% for(int p = startPage; p <= endPage; p++) { %>
 									<% if(p != currentPage) { %>
-								<a href="/bestItemList.it?currentPage=<%= p %>">
+								<a href="/discountItemList.it?currentPage=<%= p %>">
 									<span>
 										<strong class="layout-pagination-button layout-pagination-number __active"><%= p %></strong>
 									</span>
@@ -192,10 +195,10 @@
 									<% } %>
 								<% } %>
 								<% if(currentPage != maxPage) { %>
-								 <a href="/bestItemList.it?currentPage=<%= currentPage + 1 %>" class="layout-pagination-button layout-pagination-next-page">
+								 <a href="/discountItemList.it?currentPage=<%= currentPage + 1 %>" class="layout-pagination-button layout-pagination-next-page">
 								 다음 페이지로 가기
 								 </a>
-								 <a href="/bestItemList.it?currentPage=<%= endPage %>" class="layout-pagination-button layout-pagination-last-page">
+								 <a href="/discountItemList.it?currentPage=<%= endPage %>" class="layout-pagination-button layout-pagination-last-page">
 								 맨끝 페이지로 가기
 								 </a>
 								 <% } else { %>
@@ -270,6 +273,21 @@
 
 	<%@ include file="../common/footer.jsp"%>
 
+<script>
+function categoryClick(categoryVal) {
+	$("#categoryVal").val(categoryVal);
+	selectItemListFunction();
+}
 
+function selectItemListFunction(){
+	var filter = $("#filterVal").val();	//현재 선택된 필터값
+	var category = $("#categoryVal").val();	//현재 선택된 카테고리값
+	//var category = "전체"
+	if(filter == null || filter == "") filter = "전체";
+	if(category == null || category == "") category = "전체";
+	
+	location.href="/discountItemList.it?currentPage=1&category=" + category
+}
+</script>
 </body>
 </html>

@@ -99,7 +99,7 @@ $(function () {
         }
         if (num > 1) {
             $(this).parents('.price').find('.selling').text(parseInt(price1) * (parseInt(num) + 1) + ' 원')
-            $('.countMoney').text(totalPrices + (price%2));
+            $('.countMoney').text(totalPrices + (price%2)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');;
     		$('.noDiscount').text(noDisC + noDiscount);
     		$('.difference').text((noDisC + noDiscount) - (totalPrices + (price%2)));
         }

@@ -49,11 +49,11 @@
 							<!-- 카테고리와 구분하기 위해 히든을 줌 -->
 							<input type="hidden" id="filterVal">
 							<ul id="colorTest" class="list">
-								<li name="all"><a class="lowprice" href="javascript:filterClick('전체')">전체보기</a></li>
-								<li name="lowprice"><a class="lowprice" href="javascript:filterClick('1')">낮은가격순</a></li>
-								<li name="highprice"><a class="highprice" href="javascript:filterClick('2')">높은가격순</a></li>
-								<li name="dateprice"><a class="dateprice" href="javascript:filterClick('3')">등록일순</a></li>
-								<li name="viewprice"><a class="viewprice" href="javascript:filterClick('4')">조회높은순</a></li>
+								<li name="all"><a class="lowprice" href="/itemList.it?currentPage=1&category=${category}&filter=전체">전체보기</a></li>
+								<li name="lowprice"><a class="lowprice" href="/itemList.it?currentPage=1&category=${category}&filter=1">낮은가격순</a></li>
+								<li name="highprice"><a class="highprice" href="/itemList.it?currentPage=1&category=${category}&filter=2">높은가격순</a></li>
+								<li name="dateprice"><a class="dateprice" href="/itemList.it?currentPage=1&category=${category}&filter=3">등록일순</a></li>
+								<li name="viewprice"><a class="viewprice" href="/itemList.it?currentPage=1&category=${category}&filter=4">조회높은순</a></li>
 							</ul>
 							
 							<br><br>
@@ -152,11 +152,11 @@
 							<div class="pagediv">
 								<% if(currentPage != 1) { %>
 
-								<a href="/itemList.it?currentPage=<%= startPage %>&category=${category}"
+								<a href="/itemList.it?currentPage=<%= startPage %>&category=${category}&filter=${filter}"
 
 									class="layout-pagination-button layout-pagination-first-page">맨 처음 페이지로 가기
 								</a>
-								<a href="/itemList.total?currentPage=<%= currentPage - 1 %>&category=${category}" class="layout-pagination-button layout-pagination-prev-page">
+								<a href="/itemList.total?currentPage=<%= currentPage - 1 %>&category=${category}&filter=${filter}" class="layout-pagination-button layout-pagination-prev-page">
 									이전 페이지로 가기
 								</a>
 								<% } else {%>
@@ -170,7 +170,7 @@
 								<% for(int p = startPage; p <= endPage; p++) { %>
 									<% if(p != currentPage) { %>
 
-								<a href="/itemList.it?currentPage=<%= p %>&category=${category}">
+								<a href="/itemList.it?currentPage=<%= p %>&category=${category}&filter=${filter}">
 
 									<span>
 										<strong class="layout-pagination-button layout-pagination-number __active"><%= p %></strong>
@@ -185,10 +185,10 @@
 								<% } %>
 								<% if(currentPage != maxPage) { %>
 
-								 <a href="/itemList.it?currentPage=<%= currentPage + 1 %>&category=${category}" class="layout-pagination-button layout-pagination-next-page">
+								 <a href="/itemList.it?currentPage=<%= currentPage + 1 %>&category=${category}&filter=${filter}" class="layout-pagination-button layout-pagination-next-page">
 								 다음 페이지로 가기
 								 </a>
-								 <a href="/itemList.it?currentPage=<%= endPage %>&category=${category}" class="layout-pagination-button layout-pagination-last-page">
+								 <a href="/itemList.it?currentPage=<%= endPage %>&category=${category}&filter=${filter}" class="layout-pagination-button layout-pagination-last-page">
 
 								 맨끝 페이지로 가기
 								 </a>

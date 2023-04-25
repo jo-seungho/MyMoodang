@@ -60,13 +60,14 @@
                           <div class="inner_sub">
                               <ul class="list_menu">
                                   <li class="on">
-                                      <a href="/orderList.it" style="color : rgb(254,116,119)">주문내역</a>
+
+                                      <a href="/orderList.it">주문내역</a>
                                   </li>
                                   <li>
-                                      <a href="/wishList.wi">찜한 상품</a>
+                                      <a href="/wishList.wi">찜한상품</a>
                                   </li>
                                   <li>
-                                      <a href="/deliveryList.do">배송지 관리</a>
+                                      <a href="/deliveryList.do">배송지관리</a>
                                   </li>
                                   <li>
                                       <a href="/ready">리뷰 관리</a>
@@ -136,15 +137,9 @@
                                                 <dd><%= ol.getTotalPrice() %></dd>
                                             </dl>
                                         </div>
-                                        <!--
-                                        <div class="order_status">
-                                            <span class="inner_status">
-                                                <a id="review" class="link ga_tracking_event">리뷰 작성</a>
-                                            </span>
-                                        </div>
-                                         -->
                                     </div>
                                     <!-- 상품 1개의 정보 끝-->
+
                                     <% } %>
                                   <% } %>
                                 </div>

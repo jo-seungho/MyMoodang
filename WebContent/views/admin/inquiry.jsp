@@ -52,6 +52,7 @@
                   <th>회원아이디</th>
                   <th>문의제목</th>
                   <th>문의날짜</th>
+                  <th>답변여부</th>
                 </tr>
               </thead>
               <tbody>
@@ -62,6 +63,7 @@
                   <td><%=in.getMemberId() %></td>
                   <td><%=in.getTitle() %></td>
                   <td><%=in.getDateCreate() %></td>
+                  <td><%=in.getReplyState() %></td>
                 </tr>
                 <% } %>
               </tbody>
@@ -70,14 +72,14 @@
 			<div align="center" class="paging-area">
 	
 				<% if(currentPage != 1) { %>
-					<button onclick="location.href = '/noticelist.ad?currentPage=<%= currentPage - 1 %>';">
+					<button onclick="location.href = '/inquiryList.ad?currentPage=<%= currentPage - 1 %>';">
 						&lt;
 					</button>
 				<% } %>
 			
 				<% for(int p = startPage; p <= endPage; p++) { %>
 					<% if(p != currentPage) { %>
-						<button onclick="location.href = '/noticelist.ad?currentPage=<%= p %>';">
+						<button onclick="location.href = '/inquiryList.ad?currentPage=<%= p %>';">
 							<%= p %>
 						</button>
 					<% } else { %>
@@ -87,7 +89,7 @@
 				<% } %>
 				
 				<% if(currentPage != maxPage) { %>
-					<button onclick="location.href = '/noticelist.ad?currentPage=<%= currentPage + 1 %>';">
+					<button onclick="location.href = '/inquiryList.ad?currentPage=<%= currentPage + 1 %>';">
 						&gt;
 					</button>
 				<% } %>
