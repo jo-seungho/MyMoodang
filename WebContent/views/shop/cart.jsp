@@ -102,10 +102,7 @@
 													<input class="noDisTotal" type="hidden" value="<%= c.getTotalPrice() %>">
 													<input class="selling1" type="hidden" value="<%= c.getDiscountPrice() %>">
 													<span class="selling">
-													<%= (int)(Math.log10(c.getTotalDiscountPrice())+1) > 3
-																					  ?  Integer.toString(c.getTotalDiscountPrice()).replaceAll("\\B(?=(\\d{3})+(?!\\d))", ",")
-																					  : c.getTotalDiscountPrice()%>
-													
+													<%= c.getTotalDiscountPrice()%>
 													 <span class="won">¿ø</span>
 													<input class="totalMoney" type="hidden" value="<%= c.getTotalDiscountPrice() %>">
 													</span>
