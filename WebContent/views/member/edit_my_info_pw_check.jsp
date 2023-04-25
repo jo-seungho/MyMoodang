@@ -35,13 +35,13 @@
                         <div class="inner_sub">
                             <ul class="list_menu">
                                 <li>
-                                    <a href="../main/order_list.html">林巩郴开</a>
+                                    <a href="/orderList.it">林巩郴开</a>
                                 </li>
                                 <li>
-                                    <a href="#">买茄 惑前</a>
+                                    <a href="/wishList.wi">买茄 惑前</a>
                                 </li>
                                 <li>
-                                    <a href="../main/delivery_list.html">硅价瘤 包府</a>
+                                    <a href="/deliveryList.do">硅价瘤 包府</a>
                                 </li>
                                 <li>
                                     <a href="#">府轰 包府</a>
