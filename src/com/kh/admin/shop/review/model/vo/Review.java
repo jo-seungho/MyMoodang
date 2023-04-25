@@ -51,13 +51,16 @@ public class Review {
 
 
 
-		public Review(String title, String writeDate, int starPoint, int orderNo, String memberId) {
+		public Review(int orderNo,int starPoint, String title,String memberId,  String writeDate) {
 			super();
-			this.title = title;
-			this.writeDate = writeDate;
-			this.starPoint = starPoint;
 			this.orderNo = orderNo;
+			this.starPoint = starPoint;
+			this.title = title;
 			this.memberId = memberId;
+			this.writeDate = writeDate;
+			
+			
+			
 		}
 
 
