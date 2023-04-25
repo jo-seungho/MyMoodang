@@ -49,11 +49,11 @@ a {
 
 .notice_num {
     width :15%;
-   
+
 }
 
 .notice_tit {
-	
+
     width :55%;
 }
 
@@ -81,5 +81,25 @@ a {
 
 #no_tit{
 	margin-left:195px;
+}
+
+
+#snb .list_menu li.on a, .list_menu li a:hover {
+    background: #fafafa url(https://res.kurly.com/pc/ico/2008/ico_arrow_6x11_on.svg) no-repeat 174px 52%;
+    background-size: 6px 11px;
+    font-weight: 700;
+    color: rgb(254,116,119);
+}
+
+#snb .list_menu li a {
+    display: block;
+    overflow: hidden;
+    padding: 15px 0 15px 20px;
+    background: #fff url(https://res.kurly.com/pc/ico/2008/ico_arrow_6x11.svg) no-repeat 174px 52%;
+    background-size: 6px 11px;
+    font-size: 14px;
+    color: #666;
+    line-height: 20px;
+    letter-spacing: -.3px;
 }
 

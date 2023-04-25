@@ -63,13 +63,13 @@
                           <div class="inner_sub">
                               <ul class="list_menu">
                                   <li class="on">
-                                      <a href="#">주문내역</a>
+                                      <a href="/orderList.it">주문내역</a>
                                   </li>
                                   <li>
-                                      <a href="#">찜한상품</a>
+                                      <a href="/wishList.wi">찜한상품</a>
                                   </li>
                                   <li>
-                                      <a href="#">배송지관리</a>
+                                      <a href="/deliveryList.do">배송지관리</a>
                                   </li>
                                   <li>
                                       <a href="#">리뷰 관리</a>
@@ -78,7 +78,7 @@
                                       <a href="#">쿠폰</a>
                                   </li>
                                   <li>
-                                      <a href="#">내 정보 수정</a>
+                                      <a href="/updateCheckPwd.me">내 정보 수정</a>
                                   </li>
                               </ul>
                           </div>
@@ -139,15 +139,9 @@
                                                 <dd><%= ol.getTotalPrice() %></dd>
                                             </dl>
                                         </div>
-                                        <!--
-                                        <div class="order_status">
-                                            <span class="inner_status">
-                                                <a id="review" class="link ga_tracking_event">리뷰 작성</a>
-                                            </span>
-                                        </div>
-                                         -->
                                     </div>
                                     <!-- 상품 1개의 정보 끝-->
+
                                     <% } %>
                                   <% } %>
                                 </div>
@@ -190,27 +184,6 @@
 <%@ include file="../common/footer.jsp"%>
       </div>
     </div>
-    
-    <script>
-    	
-    /*
-    	let orderSelect = $('.orderSelect').text()
-		$.ajax({
-			
-			url: 'orderComplete',
-			type: 'post',
-			data : {
-				orderSelect: orderSelect
-			},
-			success: function(res) {
-				console.log(orderSelect);
-			},
-			error: function(err) {
-				console.log(err);
-			}
-		})
-    */
-    
-    </script>
+
   </body>
 </html>
