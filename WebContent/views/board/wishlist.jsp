@@ -49,10 +49,10 @@
                                     <a href="/deliveryList.do">배송지 관리</a>
                                 </li>
                                 <li>
-                                    <a href="#">리뷰 관리</a>
+                                    <a href="/ready">리뷰 관리</a>
                                 </li>
                                 <li>
-                                    <a href="#">쿠폰</a>
+                                    <a href="/ready">쿠폰</a>
                                 </li>
                                 <li>
                                     <a href="/updateCheckPwd.me">내 정보 수정</a>

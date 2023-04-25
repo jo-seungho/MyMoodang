@@ -23,6 +23,8 @@
           float: right;
           margin-left: 10px;
           margin-bottom: 10px;
+          width : 100px;
+          height : 50px;
 }
         
 </style>
@@ -49,10 +51,7 @@
                   <a class="item_registration" href="/inItemForm.ad">
                     <button type="button" id="btn" class="btn">상품추가</button>
                   </a>
-                  <form role="search">
-                    <button type="submit" id="btn" class="btn">검색하기</button>
-                    <input type="search" class="form-control" placeholder="" aria-label="Search" style="width: 30%; float: right" />
-                  </form>
+                  
                 </div>
 
                 <table class="item_manage_list">
@@ -85,7 +84,11 @@
                       <td><%= i.getItemName() %></td>
                       <td><%= i.getItemStock() %></td>
                       <td><%= i.getItemPrice() %></td>
-                      <td><%= i.getItemStatus() %></td>
+                      <% if(i.getItemStatus().equals("Y")) {%>
+                      <td>판매중</td>
+                      <% } else { %>
+                      <td>판매중지</td>
+                      <% } %>
                     </tr>
                     <% } %> <% } %>
                   </tbody>
