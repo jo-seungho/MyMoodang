@@ -113,7 +113,7 @@
                                 <div class="order_goods">
                                     <div class="name">
                                         <a href="" style="font-size: large; font-weight: bolder; color: rgb(254, 116, 119);"><%= ol.getOrderStatus() %></a>
-                                        <a href="/orderComplete" style="float:right, padding : 0px 5px">주문 상세보기</a>
+                                        <a href="/orderComplete?ono=<%= ol.getOrderNo() %>" style="float:right, padding : 0px 5px">주문 상세보기</a>
                                     </div>
                                 <!-- 상품 1개의 정보 -->
                                   <div class="order_info">
@@ -190,27 +190,6 @@
 <%@ include file="../common/footer.jsp"%>
       </div>
     </div>
-    
-    <script>
-    	
-    /*
-    	let orderSelect = $('.orderSelect').text()
-		$.ajax({
-			
-			url: 'orderComplete',
-			type: 'post',
-			data : {
-				orderSelect: orderSelect
-			},
-			success: function(res) {
-				console.log(orderSelect);
-			},
-			error: function(err) {
-				console.log(err);
-			}
-		})
-    */
-    
-    </script>
+
   </body>
 </html>

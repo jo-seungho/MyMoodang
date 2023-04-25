@@ -36,9 +36,9 @@ public class OrderCompleteController extends HttpServlet {
 		
 		int userNo = ((Member)request.getSession().getAttribute("loginUser")).getMemberNo();
 		
-		// int orderSelect = Integer.parseInt(request.getParameter("orderSelect"));
+		int orderSelect = Integer.parseInt(request.getParameter("ono"));
 		
-		ArrayList<Order> list = new OrderService().SelectOrderComplete(userNo);
+		ArrayList<Order> list = new OrderService().SelectOrderComplete(userNo, orderSelect);
 		
 		request.setAttribute("list", list);
 		
