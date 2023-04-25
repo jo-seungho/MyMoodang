@@ -125,40 +125,7 @@ public class MemberService {
 		return m;
 	}
 
-	/**
-	 * 로그인 기능 2023-04-18 이지환
-	 * 로그인 요청 기능
-	 * @param m
-	 * @return
-	 */
-	public Member loginUser(Member m) {
-
-
-		Connection conn = JDBCTemplate.getConnection();
-
-		Member loginUser =  new MemberDao().loginUser(conn, m);
-
-		close(conn);
-
-
-		return loginUser;
-	}
-
-	/**
-	 * 2023.04.19 / 내 배송지 목록 조회/ 이지환
-	 * @param memberNo
-	 * @return
-	 */
-	public ArrayList<ShippingAddress> manageMyShippingAddressList(int memberNo) {
-		Connection conn = JDBCTemplate.getConnection();
-
-		// 내 배송지 목록 조회
-		ArrayList<ShippingAddress> shippingAddressList = new MemberDao().selectShippingAddressList(conn, memberNo);
-
-		close(conn);
-
-		return shippingAddressList;
-	}
+	
 
 
 
@@ -289,7 +256,78 @@ public class MemberService {
 		close(conn);
 
 		return result;
+	}/**
+	 * 로그인 기능 2023-04-18 이지환
+	 * 로그인 요청 기능
+	 * @param m
+	 * @return
+	 */
+	public Member loginUser(Member m) {
+
+
+		Connection conn = JDBCTemplate.getConnection();
+
+		Member loginUser =  new MemberDao().loginUser(conn, m);
+
+		close(conn);
+
+
+		return loginUser;
+	}
+
+	/**
+	 * 2023.04.19 / 내 배송지 목록 조회/ 이지환
+	 * @param memberNo
+	 * @return
+	 */
+	public ArrayList<ShippingAddress> manageMyShippingAddressList(int memberNo) {
+		Connection conn = JDBCTemplate.getConnection();
+
+		// 내 배송지 목록 조회
+		ArrayList<ShippingAddress> shippingAddressList = new MemberDao().selectShippingAddressList(conn, memberNo);
+
+		close(conn);
+
+		return shippingAddressList;
 	}
 
 
+
+	public int updateShippingAddress(ShippingAddress updateMS) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new MemberDao().updateShippingAddress(conn, updateMS);
+		System.out.println("update에서 얻어온 result");
+		System.out.println(result);
+		if (result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+
+	 /**
+		 * 2023.04.21 / shipNo 를 기준으로 조회하기 위한 메소드 / 이지환
+		 * @param shipNo
+		 * @return
+		 */
+		public ShippingAddress selectByShipNo(int shipNo) {
+			
+			Connection conn = getConnection();
+			
+			// shipNo 를 기반으로 그 shipNo 에 해당하는 배송지 정보 조회
+			// 2023.04.24 / selectShippingAddressByShipNo 에서 h 로 변경 / 이지환 */
+			 ShippingAddress h = new MemberDao().selectListByShipNo(conn, shipNo);
+			 
+			 
+				 close(conn);
+				 
+				 return h;
+			 
+	
+		}
+
 }
+

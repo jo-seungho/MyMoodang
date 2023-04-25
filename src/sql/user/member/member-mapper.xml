@@ -112,7 +112,6 @@
 			  WHERE MEMBER_ID = ?
 		</entry>
 
-
 <!--  회원정보 (비밀번호) 업데이트용 쿼리문 / 2023-04-20 김서영 -->
 		<entry key="updatePwdMember">
 			UPDATE MEMBER
@@ -147,9 +146,33 @@
 			 WHERE NAME = ?
 			   AND EMAIL = ?
 		</entry>
-
+<!--   2023.04.21 / 선생님 말씀대로 하기 위해 중간에 하던 것 주석처리 함 / 이지환  -->
+		<entry key="updateMemberShipAddress">
+			 UPDATE SHIPPING_ADDRESS
+			  	SET SHIP_ADDR = ?
+			  	  , SHIP_ADDR_INFO = ?
+			  	  , PHONE = ?
+			  	  , SHIP_NAME = ?
+			  	    WHERE MEMBER_NO = ?
+			  	    AND SHIP_NO = ?
+		</entry>
+		
+		<!--   2023.04.24 / shipNo 를 기반으로 해당 회원의 배달주소지, 배달상세주소, 연락처, 받는 사람 지정 / 이지환  -->
+		<entry key="selectShipAddressByShipNo">
+			 SELECT SHIP_ADDR
+			  	  , SHIP_ADDR_INFO
+			   	  , PHONE
+			   	  , SHIP_NAME
+			   	  
+			   	  <!-- 2023.04.24 MEMBER_NO, SHIP_NO 조회 추가 이지환 -->
+			   	  , MEMBER_NO
+			   	  , SHIP_NO
+			   	  
+			   	  <!-- MemberNo 지움 -->
+			   FROM SHIPPING_ADDRESS
+			  WHERE SHIP_NO = ?
+		 </entry>
 </properties>
-
 
 
 

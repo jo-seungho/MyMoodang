@@ -2,6 +2,9 @@
 <!-- 2023-04-19 코드 주석 처리 및 로그인 전/후 로 header 부분의 우측 상단 메뉴바 다르게 수정 및 header 부분에 배송지 관리 url 매핑 / 이지환 */ 	 -->
 <!--  2023.04.23 / 로그아웃 url 매핑값 다시 작성 / 이지환 -->
 
+<!-- 2023.04.24 로그인 / 로그아웃 버전 주소아이콘 클릭 시 다르게 작성 (글자를 클릭해야 넘어감) / 이지환 -->
+
+
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -258,11 +261,29 @@
               <span class="emph">배송지를 등록</span>하고<br />
               <span class="txt">구매가능한 상품을 확인하세요!</span>
               <div class="group_button">
-                <button type="button" class="btn login" href="/loginForm.me">로그인</button>
+              
+              <!-- 2023.04.24 / 로그인 한 유저 기준 주소 아이콘 누르면 나오는 것 변경 / 이지환 -->
+              <% if(loginUser != null) { %>
+              <link class="btn login">
+                <button type="button" class="btn login" href="/logout.me">
+                	<a href="/logout.me" class="item btn login">로그아웃</a>
+                </button>
+                <button type="button" class="btn search_address">
+                  <span class="ico"></span>
+                  		주소검색
+                </button>
+               </link>
+              </div>  
+                <!-- 2023.04.24 / 로그인 하지 않은 경우 주소 아이콘 클릭 시 보이는 메뉴 / 이지환 -->
+              	<% } else { %>
+                <button type="button" class="btn login" action="/loginForm.me">
+                	<a class="item after login_none" href="/loginForm.me">로그인</a></button>
                 <button type="button" class="btn search_address">
                   <span class="ico"></span>
                   주소검색
                 </button>
+                <% } %>
+              
               </div>
             </div>
           </div>
@@ -329,5 +350,5 @@
 	        alert(emsg);
 	    }
 		});
-    
+
     </script>
