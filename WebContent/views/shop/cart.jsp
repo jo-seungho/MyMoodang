@@ -221,7 +221,7 @@
 		  sumNoDis += Number(noDisMoney)
 		});
 		
-		$('.countMoney').text(sumMoney);
+		$('.countMoney').text(sumMoney + 3000);
 		$('.noDiscount').text(sumNoDis);
 		$('.difference').text(sumNoDis - sumMoney);
 		
