@@ -62,13 +62,13 @@
                           <h2 class="tit_snb">마이페이지</h2>
                           <div class="inner_sub">
                               <ul class="list_menu">
-                                  <li class="on">
+                                  <li>
                                       <a href="/orderList.it">주문내역</a>
                                   </li>
                                   <li>
                                       <a href="/wishList.wi">찜한상품</a>
                                   </li>
-                                  <li>
+                                  <li  class="on">
                                       <a href="/deliveryList.do">배송지관리</a>
                                   </li>
                                   <li>
@@ -78,7 +78,7 @@
                                       <a href="#">쿠폰</a>
                                   </li>
                                   <li>
-                                      <a href="/updateCheckPwd.me">내 정보 수정</a>
+                                      <a href="/updateCheckPwd.me" class="list_item">내 정보 수정</a>
                                   </li>
                               </ul>
                           </div>
@@ -149,29 +149,37 @@
                             </li>
                         </ul>
 
-						<div class="container mt-3" align="center">
-								<ul class="pagination" style="justify-content: center">
-									<% if(currentPage != 1) { %>
-										<li class="page-item"><a class="page-link"
-											href="/orderList.it?currentPage=<%= currentPage - 1 %>">Previous</a></li>
-									<% } %>
+							<div align="center" class="paging-area">
 
-									<% for(int p = startPage; p <= endPage; p++) {%>
-										<% if(p == currentPage) { %>
-											<li class="page-item active"><a class="page-link"
-												href="/orderList.it?currentPage=<%= p %>"><%= p %></a></li>
-										<% } else { %>
-											<li class="page-item"><a class="page-link"
-												href="/orderList.it?currentPage=<%= p %>"><%= p %></a></li>
+		                          <div class="layout-pagination">
+		                            <div class="pagediv">
+
+											<a href="/orderList.it?currentPage=<%= currentPage - 1 %>" class="layout-pagination-button layout-pagination-prev-page">이전 페이지로 가기</a>
+
+										<span>
+										<% for(int p = startPage; p <= endPage; p++) { %>
+
+											<% if(p != currentPage) { %>
+
+												<strong onclick="location.href = '/orderList.it?currentPage=<%= p %>';" class="layout-pagination-button layout-pagination-number __active" style="height: 32px;">
+													<%= p %>
+												</strong>
+											<% } else { %>
+												<!-- 현재 내가 보고있는 페이지일 경우에는 클릭이 안되게끔 -->
+
+												<strong class="layout-pagination-button layout-pagination-number __active" style="height: 32px; background-color: lightgray; "><%= p %></strong>
+											<% } %>
 										<% } %>
-									<% } %>
+										</span>
 
-									<% if(currentPage != maxPage) { %>
-										<li class="page-item"><a class="page-link"
-											href="/orderList.it?currentPage=<%= currentPage + 1 %>">Next</a></li>
-									<% } %>
-								</ul>
+                                			<a href="/orderList.it?currentPage=<%= currentPage + 1 %>" class="layout-pagination-button layout-pagination-next-page">다음 페이지로 가기</a>
+
+										</div>
+									</div>
+
 							</div>
+
+
 
                     </div>
                       </div>

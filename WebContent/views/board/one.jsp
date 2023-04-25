@@ -80,7 +80,7 @@
 
 
 							<table id="nb1" align="center">
-								<thead>
+								<thead align="center">
 									<tr>
 										<th class="n1">번호</th>
 										<th class="n3">제목</th>
@@ -89,7 +89,7 @@
 									</tr>
 								</thead>
 
-								<tbody id="sd1">
+								<tbody id="sd1" align="center">
 									<% if(list.isEmpty()) { %>
 										<tr>
 											<td colspan="4" align="center">조회된 1:1 문의 리스트가 없습니다.</td>
@@ -111,7 +111,7 @@
 
 											<tr class="sd1_q2">
 												<td></td>
-												<td colspan="2"><pre class="text1" style="overflow:visible"><%= in.getDescription() %></pre>
+												<td colspan="2"><pre class="text1" style="overflow:visible"><br><%= in.getDescription() %></pre>
 												</td>
 												<td align="center"><span> <a href="javascript:update_form('<%= in.getInqNo() %>');" id="update_form">수정</a>&nbsp;|
 														<a href="javascript:delete_in('<%= in.getInqNo() %>');">삭제</a>
@@ -119,24 +119,20 @@
 											</tr>
 
 
-											<tr>
-												<td colspan="5">
-													<div class="d3">
+											<tr align="center">
+												<td colspan="5" class="d3 ">
+													<!--  <div class="d3" align="center">  -->
 
 													<% if(in.getReplyContents() != null) { %>
 														<pre class="text2 sd1_q2">
-					                                    <span>
-					                                      안녕하세요. <br>
-					                                      대한민국 1등 건강쇼핑몰 마이무당입니다.
-					                                    </span>
-					                                    <span id="replyContent">
-					                                      <%= in.getReplyContents() %>
-					                                    </span>
-					                                    <span id="mmName">-마이무당-</span> <br>
-					                                    <span id="replyDate"><%= in.getReplyDate() %></span>
-					                                  </pre>
+<br><br>
+<%= in.getReplyContents() %>
+<br><br>
+
+<span id="mmName" align="center">-마이무당-</span> <br>
+<span id="replyDate" align="center"><%= in.getReplyDate() %></span>
+						                                </pre>
 													<% } %>
-													</div>
 												</td>
 											</tr>
 									<!--  for 문 끝 -->
@@ -146,31 +142,6 @@
 									<!--  if 끝 -->
 								</tbody>
 							</table>
-<!--
-							<div class="container mt-3" align="center">
-								<ul class="pagination" style="justify-content: center">
-									<% if(currentPage != 1) { %>
-									<li class="page-item"><a class="page-link"
-										href="/list.in?currentPage=<%= currentPage - 1 %>">Previous</a></li>
-									<% } %>
-
-									<% for(int p = startPage; p <= endPage; p++) {%>
-									<% if(p == currentPage) { %>
-									<li class="page-item active"><a class="page-link"
-										href="/list.in?currentPage=<%= p %>"><%= p %></a></li>
-									<% } else { %>
-									<li class="page-item"><a class="page-link"
-										href="/list.in?currentPage=<%= p %>"><%= p %></a></li>
-									<% } %>
-									<% } %>
-
-									<% if(currentPage != maxPage) { %>
-									<li class="page-item"><a class="page-link"
-										href="/list.in?currentPage=<%= currentPage + 1 %>">Next</a></li>
-									<% } %>
-								</ul>
-							</div>
-							-->
 
 							<div align="center" class="paging-area">
 
