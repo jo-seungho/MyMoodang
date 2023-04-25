@@ -1,6 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="com.kh.admin.board.inquiry.model.vo.Inquiry"%> 
-<% Inquiry in = (Inquiry)request.getAttribute("in"); %>
+<% Inquiry in = (Inquiry)request.getAttribute("in");
+	String a = "";
+	if(in.getReplyTitle()== null ) {
+		in.setReplyTitle("");
+	}
+	if(in.getReplyContents()==null) {
+		in.setReplyContents("");
+	}
+	%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -44,7 +52,8 @@
                 <div class="col-xl-12">
                 <input type="hidden" name="inqNo" value="<%=in.getInqNo()%>">
 	                <input type="text" name="title" class="form-control col-xl-12" 
-	                value="<%=in.getReplyTitle() %>" placeholder="제목을 입력해주세요" />
+	                value="<%=in.getReplyTitle()%>"   placeholder="제목을 입력해주세요" />
+               		
                 </div>
               </div>
               <hr />

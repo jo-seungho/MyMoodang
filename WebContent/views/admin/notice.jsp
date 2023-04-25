@@ -28,6 +28,10 @@
       margin-left: 10px;
       margin-bottom: 10px;
     }
+     .pagediv strong:hover {
+    	cursor : pointer;
+    }
+    
     /* 고유한 */
   </style>
 
