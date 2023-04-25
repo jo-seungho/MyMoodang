@@ -93,5 +93,10 @@ window.addEventListener('DOMContentLoaded', function() {
 
     }
     
+    function addCommas(numb) {
+    	  // 정규표현식을 사용하여 숫자의 천 단위마다 콤마를 추가합니다.
+    	  return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    	}
+    
 
 });

@@ -82,7 +82,7 @@ public class ItemOrderListController extends HttpServlet {
 		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
 
 		ArrayList<OrderList> list = new OrderService().selectList(pi, memberNo);
-
+		
 		// 첨부 이미지
 		OrderImg img = new OrderService().maxImgSelect(memberNo);
 

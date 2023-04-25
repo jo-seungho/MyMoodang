@@ -10,7 +10,11 @@
     ArrayList<Attachment> clist = (ArrayList<Attachment>)request.getAttribute("clist");
     ArrayList<Review> rlist = (ArrayList<Review>)request.getAttribute("rlist");
     
-    Review re = (Review)request.getAttribute("re");  
+    Review re = (Review)request.getAttribute("re");
+    
+    int listCount = (int)request.getAttribute("listCount");
+    System.out.print(listCount);
+   
 %>
 
 <!DOCTYPE html>
@@ -21,7 +25,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- header css -->
     <%@ include file="../common/common.jsp"%>
-
+	
     <link rel="stylesheet" href="/resources/css/shop/item_detail.css">
     <link rel="stylesheet" href="/resources/css/shop/item_review_detail.css">
 
@@ -106,12 +110,12 @@
                                                     
                                                     </span>
                                                     <span style="font-size: 15px; font-weight: 400; color: red;">
-                                                        <del style="font-size: 18px; font-weight: 400; color: lightgray;"><%= i.getItemPrice() %>원 </del>
+                                                        <del style="font-size: 18px; font-weight: 400; color: lightgray;" class="numb"> <%= i.getItemPrice() %>원 </del>
                                                         
                                                         
                                                     </span>
                                                     <span class="dc_price" style="font-size: 15px; font-weight: 400; color: red;">
-                                                    <span class="won" style="font-size: 22px; margin-top: 10%;">&nbsp;<b><%= i.getDiscountPrice()%>원</b></span>
+                                                    <span class="numb" style="font-size: 22px; margin-top: 10%;">&nbsp;<b><%= i.getDiscountPrice()%>원</b></span>
                                                 	<input class="priceItem" type="hidden" value="<%= i.getDiscountPrice()%>">
                                                 	</span>
                                                 </span>
@@ -130,19 +134,19 @@
                                         <div class="goods_info">
                                             <dl class="list fst">
                                                 <dt class="tit">정상가</dt>
-                                                <dd class="desc"><%= i.getItemPrice() %>원</dd>
+                                                <dd class="numb" style="font-size: 15px; font-weight: 400; "><%= i.getItemPrice() %>원</dd>
                                             </dl>
                                             <dl class="list">
                                                 <dt class="tit">할인가 </dt>
-                                                <dd class="desc"><%= i.getDiscountPrice() %>원</dd>
+                                                <dd class="numb" style="font-size: 15px; font-weight: 400; "><%= i.getDiscountPrice() %>원</dd>
                                             </dl>
                                             <dl class="list">
                                                 <dt class="tit">할인율</dt>
-                                                <dd class="desc"><%= (int)(i.getItemDiscount() *100) %>%</dd>
+                                                <dd class="desc" style="font-size: 15px; font-weight: 400; "><%= (int)(i.getItemDiscount() *100) %>%</dd>
                                             </dl>
                                             <dl class="list">
                                                 <dt class="tit">카테고리</dt>
-                                                <dd class="desc"><%= i.getItemCategory() %></dd>
+                                                <dd class="desc" style="font-size: 15px; font-weight: 400; "><%= i.getItemCategory() %></dd>
                                             </dl>
                                         </div>
                                     </div>
@@ -191,6 +195,7 @@
                                                         </p>
                                                     </div>
                                                 </div>
+                                                <% if(loginUser != null) { %>
                                                 <div class="group_btn off">
                                                     <span class="btn">
                                                         <button onclick="orderPay()" type="button" class="btn btn2">구매하기</button>
@@ -199,6 +204,18 @@
                                                         <button type="button" class="btn btn2 insertCart">장바구니 담기</button>
                                                     </span>
                                                 </div>
+                                                <% } else {%>
+                                               <div class="group_btn off">
+                                                    <span class="btn">
+                                                        <button type="button" class="btn btn2">구매하기</button>
+                                                    </span>
+                                                    <span class="btn">
+                                                        <button type="button" class="btn btn2 insertCart">
+                                                        	<a href="/loginForm.me" style="color: white;">장바구니 담기</a>
+                                                        </button>
+                                                    </span>
+                                                </div>
+                                                <% } %>
                                             </div>
                                         </form>
                                     </div>
@@ -227,7 +244,7 @@
                                             	<%  for(Attachment a : clist) { %>
                                           <li class="goods-add-product-item __slide-item">
                                               <div class="goods-add-product-item-figure">
-                                                  <a href="#" target="_blank">
+                                                  <a href ="/itemDetail.it?bno=<%= a.getItemImgCode() %>" target="_blank">
                                                       <img src="<%= a.getItemImgPath() %>" class="goods-add-product-item-image">
                                                   </a>
                                               </div>
@@ -266,7 +283,7 @@
                                   <li class="goods-view-infomation-tab">
                                       <a href="#goods-review" class="goods-view-infomation-tab-anchor">
                                           고객리뷰
-                                          <span class="count_review">(0)</span>
+                                          <span class="count_review">(<%= listCount %>)</span>
                                       </a>
                                   </li>
                               </ul>
@@ -293,10 +310,32 @@
                                   </div>
                               </div>
                           	</div>
-                                
+
+                                <ul class="goods-view-infomation-tab-group" style="display: flex; align-content: stretch; justify-content: center; ">
+                                  <li class="goods-view-infomation-tab">
+                                      <a href="#goods-description" class="goods-view-infomation-tab-anchor">상품설명</a>
+                                  </li>
+                                  <li class="goods-view-infomation-tab">
+                                      <a href="#goods-image" class="goods-view-infomation-tab-anchor __active">상품이미지</a>
+                                  </li>
+                                  <li class="goods-view-infomation-tab">
+                                      <a href="#goods-review" class="goods-view-infomation-tab-anchor">
+                                          고객리뷰
+                                          <span class="count_review">(<%= listCount %>)</span>
+                                      </a>
+                                  </li>
+                              </ul>
+                              <div class="goods-view-infomation-content" id="goods-image">
+                                  <div id="goods_pi">
+                                      <p class="pic">
+                                          <img src="">
+                                      </p>
+                                  </div>
+                              </div>
+
                                     
 
-                                        <div class="happy_center fst">
+                                 <div class="happy_center fst">
                                       <ul class="goods-view-infomation-tab-group" style="display: flex; align-content: stretch; justify-content: center; ">
                                   <li class="goods-view-infomation-tab">
                                       <a href="#goods-description" class="goods-view-infomation-tab-anchor">상품설명</a>
@@ -305,30 +344,34 @@
                                   <li class="goods-view-infomation-tab">
                                       <a href="#goods-review" class="goods-view-infomation-tab-anchor __active">
                                           고객리뷰
-                                          <span class="count_review">(0)</span>
+                                          <span class="count_review">(<%= listCount %>)</span>
                                       </a>
                                   </li>
 
                               </ul>
+          
                                     
                                     
                                     <div class="goods-view-infomation-content" id="goods-review"> 
 
                              		<br>
+                             		
+                       
 							<table>
 						        <thead>
 						        <%  if(loginUser != null) { %> 
-						            <tr>
-								      <th colspan="1">
+						       
+						           
+						            	<td style=" background-color: white; border-bottom: 1px solid white; margin-lefr:500px;">
 								        <button id="review-register-btn" class="reviewbtn" style="text-align: center; font-size: large;">리뷰 등록</button>
-								      </th>
-								    </tr>
+								        </td>
+								
 								   <% } %> 
 								    <br><br>
 							
 						          <tr>
 						            <th onclick="sortTable(0)" width="100px">번호</th>
-						            <th onclick="sortTable(1)" width="100px">작성일</th>
+						            <th onclick="sortTable(1)" width="150px">작성일</th>
 						            <th onclick="sortTable(2)" width="120px">별점</th>
 						            <th onclick="sortTable(3)">제목</th>
 						            <th onclick="sortTable(4)"width="100px">작성자</th>
@@ -387,11 +430,11 @@
 						<form action="/itemReviewIn.it" method="post">
 						  <div>
 						    <label for="title">제목:</label>
-						    <input type="text" id="title" name="title">
+						    <input type="text" id="title" name="title" style="margin-bottom: 15px;">
 						  </div>
 						  
-						  <div>
-						    <label for="contentinsert">내용:</label>
+						  <div style="margin-bottom: 15px;">
+						    <label for="contentinsert" style="position: relative; bottom: 125px;">내용:</label>
 						    <textarea id="contentinsert" name="contentinsert"></textarea>
 						  </div>
 						  
@@ -434,7 +477,7 @@
                 	  heartIcon.on("click", function() {
                   	    $(this).toggleClass("is-active");
 
-                  	    if ($(this).hasClass("is-active")) {
+                  	    if ($(this).hasClass("is-active")) {ㅍ
                   	      addToWishlist(code);
                   	      $(this).css("filter", "");
                   	    } else {
@@ -554,10 +597,6 @@
                 			console.log(rsp);
                 		    if ( rsp.success ) {
                 		    	var msg = '결제가 완료되었습니다.';
-                		        msg += '고유ID : ' + rsp.imp_uid;
-                		        msg += '상점 거래ID : ' + rsp.merchant_uid;
-                		        msg += '결제 금액 : ' + rsp.paid_amount;
-                		        msg += '카드 승인번호 : ' + rsp.apply_num;
                 		        // location.href = '/orderComplete';
                 		    } else {
                 		    	 var msg = '결제에 실패하였습니다.';

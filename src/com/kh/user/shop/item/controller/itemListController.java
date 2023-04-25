@@ -42,11 +42,16 @@ public class itemListController extends HttpServlet {
 		// 2023-04-23
 		// 이태화
 		String keyword = request.getParameter("keyword");
-		
+		request.setAttribute("keyword", keyword);
 		// 상품 필터링 검색 기능 추가
 		// 2023-04-24
 		// 이태화
-		String filter = request.getParameter("filter");
+		
+		//버그 수정 (최명진)
+		String filter = request.getParameter("filter") == null ? "전체" : request.getParameter("filter");
+		
+		
+		
 		request.setAttribute("filter", filter);
 		//----------------------------------------------------------------
 		int listCount; 		// 현재 총 게시글의 갯수

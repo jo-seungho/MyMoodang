@@ -78,10 +78,18 @@ $(function () {
     	  var disTotal = quantity * noDiscount;
 
     	  var totalPrices = parseInt($('.countMoney').text())
-    	  console.log(totalPrices += price)
+    	  console.log("TOTAL", totalPrices += price)
     	  // console.log(totalPrices += price)
     	  var noDisC = parseInt($('.noDiscount').text());
-    	  
+    	  console.log("quantity", quantity)
+    	  console.log("$selling1", $selling1)
+    	  console.log("price", price)
+    	  console.log("totalPrice", totalPrice)
+    	  console.log("$noDis", $noDis)
+    	  console.log("noDiscount", noDiscount)
+    	  console.log("disTotal", disTotal)
+    	  console.log("totalPrices", totalPrices)
+    	  console.log("noDisC", noDisC)
     	  
     	
     	// 상품 하나의 가격을 찾는 변수
@@ -96,12 +104,14 @@ $(function () {
             $('.countMoney').text(totalPrices + (price%2));
     		$('.noDiscount').text(noDisC + noDiscount);
     		$('.difference').text((noDisC + noDiscount) - (totalPrices + (price%2)));
+    		$('.pays').text((totalPrices + (price%2)) + 3000);
         }
         if (num > 1) {
             $(this).parents('.price').find('.selling').text(parseInt(price1) * (parseInt(num) + 1) + ' 원')
-            $('.countMoney').text(totalPrices + (price%2));
+            $('.countMoney').text((totalPrices + (price%2)))
     		$('.noDiscount').text(noDisC + noDiscount);
     		$('.difference').text((noDisC + noDiscount) - (totalPrices + (price%2)));
+    		$('.pays').text((totalPrices + (price%2)) + 3000);
         }
         num = $(".num:eq(" + n + ")").val(num * 1 + 1);
         
@@ -127,6 +137,7 @@ $(function () {
             $('.countMoney').text(totalPriceM - price9);
             $('.noDiscount').text(noDisC - noDiscount);
             $('.difference').text((noDisC - noDiscount) - (totalPriceM - price9));
+            $('.pays').text(totalPriceM - price9 + 3000);
         }
 
     });

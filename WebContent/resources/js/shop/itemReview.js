@@ -121,6 +121,7 @@
                             data : {bno : reviewNum, content : content},            // Json 형식의 데이터이다.
                             success : function(result){ // 비동기통신의 성공일경우 success콜백으로 들어옴.
                                 if(result == 1) {
+                                	alert("리뷰 수정 성공");
                                 	
                                 	$("#content" + reviewNum + " p").text(content);
                                 	$("#content" + reviewNum + " p").css('display','block');
@@ -137,6 +138,15 @@
                             }
                         });
                    	}
+                   	
+                   	
+            		$("#updateExcuteBtn").on('keyup', function(e) {
+            		    if (e.keyCode === 13) { // 엔터키
+            		        e.preventDefault();
+            		        reviewUpdate();
+            		    }
+            		});
+                   	
                    	  
                   
                    	

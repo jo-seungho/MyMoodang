@@ -135,6 +135,7 @@ public class ItemDao {
 
 				
 				at.setItemImgPath(rset.getString("ITEM_IMG_PATH"));
+				at.setItemImgCode(rset.getInt("ITEM_IMG_CODE"));
 				
 				
 				
@@ -176,6 +177,7 @@ public class ItemDao {
 				at.setItemName(rset.getString("ITEM_NAME"));
 				at.setItemPrice(rset.getInt("ITEM_PRICE"));
 				at.setDiscountPrice(rset.getInt("DISCOUNT_PRICE"));
+				at.setItemImgCode(rset.getInt("ITEM_IMG_CODE"));
 				
 				list.add(at);
 			}
@@ -417,6 +419,9 @@ public class ItemDao {
 		}
 		else if( filter.equals("전체")) {	//전체보기
 			sql += prop.getProperty("selectItemList_all");
+			//null 조건 추가 (최명진)
+		} else if (filter.equals(null)) {
+			sql += prop.getProperty("selectItemList_all");
 		}
 		//----------------------------------------------------------
 		
@@ -447,6 +452,8 @@ public class ItemDao {
 						, rset.getInt("ITEM_HITS")
 						, rset.getString("ITEM_STATUS")
 						, rset.getString("DESCRIPTION")
+						, rset.getInt("DISCOUNTPRICE")
+						, rset.getDouble("ITEM_DISCOUNT")
 						));
 			}
 			
@@ -498,6 +505,8 @@ public class ItemDao {
 						, rset.getInt("ITEM_HITS")
 						, rset.getString("ITEM_STATUS")
 						, rset.getString("DESCRIPTION")
+						, rset.getInt("DISCOUNTPRICE")
+						, rset.getDouble("ITEM_DISCOUNT")
 						));
 			}
 			
@@ -550,6 +559,8 @@ public class ItemDao {
 						, rset.getInt("ITEM_HITS")
 						, rset.getString("ITEM_STATUS")
 						, rset.getString("DESCRIPTION")
+						, rset.getInt("DISCOUNTPRICE")
+						, rset.getDouble("ITEM_DISCOUNT")
 						));
 			}
 			
@@ -601,6 +612,8 @@ public class ItemDao {
 						, rset.getInt("ITEM_HITS")
 						, rset.getString("ITEM_STATUS")
 						, rset.getString("DESCRIPTION")
+						, rset.getInt("DISCOUNTPRICE")
+						, rset.getDouble("ITEM_DISCOUNT")
 						));
 			}
 			
@@ -768,6 +781,7 @@ public class ItemDao {
 					, rset.getInt("ITEM_PRICE")
 					, rset.getInt("ITEM_HITS")
 					, rset.getString("ITEM_STATUS")
+					, rset.getInt("DISCOUNTPRICE")
 					));
 		}
 		
@@ -782,5 +796,34 @@ public class ItemDao {
  
 
 	}
+	public int selectReviewListCount(Connection conn, int bno) {
+		
+		int listCount = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectReviewListCount");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bno);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				listCount = rset.getInt("COUNT");
+			}
+			
+
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return listCount;
+	}
+
 }
 

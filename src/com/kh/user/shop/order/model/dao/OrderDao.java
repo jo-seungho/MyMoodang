@@ -173,20 +173,28 @@ public class OrderDao {
 		String sql = prop.getProperty("selectList");
 
 		try {
-			int i = 0;
+			// int i = 0;
 			pstmt = conn.prepareStatement(sql);
 
-			pstmt.setInt(++i, memberNo);
+			pstmt.setInt(1, memberNo);
 
 			rset = pstmt.executeQuery();
 
-			if(rset.next()) {
+//			if(rset.next()) {
+//				OrderList ol = new OrderList(rset.getInt("ORDER_NO")
+//											, rset.getString("ORDER_STATUS")
+//											, rset.getString("ORDER_DATE")
+//											, rset.getString("ITEM_LIST")
+//											, rset.getInt("TOTAL_PRICE"));
+//				list.add(ol);
+//			}
+			while(rset.next()) {
 				OrderList ol = new OrderList(rset.getInt("ORDER_NO")
-											, rset.getString("ORDER_STATUS")
-											, rset.getString("ORDER_DATE")
-											, rset.getString("ITEM_LIST")
-											, rset.getInt("TOTAL_PRICE"));
-				list.add(ol);
+				, rset.getString("ORDER_STATUS")
+				, rset.getString("ORDER_DATE")
+				, rset.getString("ITEM_LIST")
+				, rset.getInt("TOTAL_PRICE"));
+					list.add(ol);
 			}
 
 		} catch (SQLException e) {
@@ -263,7 +271,7 @@ public class OrderDao {
 	}
 
 
-	public ArrayList<Order> SelectOrderComplete(Connection conn, int userNo) {
+	public ArrayList<Order> SelectOrderComplete(Connection conn, int userNo, int orderSelect) {
 		
 		ArrayList<Order> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
@@ -275,7 +283,7 @@ public class OrderDao {
 			
 			pstmt.setInt(1, userNo);
 			
-			// pstmt.setInt(2, orderSelect);
+			pstmt.setInt(2, orderSelect);
 			
 			rset = pstmt.executeQuery();
 			

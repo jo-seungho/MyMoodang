@@ -155,11 +155,11 @@ public class OrderService {
 		return result;
 	}
 
-	public ArrayList<Order> SelectOrderComplete(int userNo) {
+	public ArrayList<Order> SelectOrderComplete(int userNo, int orderSelect) {
 		
 		Connection conn = getConnection();
 		
-		ArrayList<Order> list = new OrderDao().SelectOrderComplete(conn, userNo);
+		ArrayList<Order> list = new OrderDao().SelectOrderComplete(conn, userNo, orderSelect);
 		
 		close(conn);
 		

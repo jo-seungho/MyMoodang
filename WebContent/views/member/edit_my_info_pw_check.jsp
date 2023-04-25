@@ -35,19 +35,19 @@
                         <div class="inner_sub">
                             <ul class="list_menu">
                                 <li>
-                                    <a href="../main/order_list.html">주문내역</a>
+                                    <a href="/orderList.it">주문내역</a>
                                 </li>
                                 <li>
-                                    <a href="#">찜한 상품</a>
+                                    <a href="/wishList.wi">찜한 상품</a>
                                 </li>
                                 <li>
-                                    <a href="../main/delivery_list.html">배송지 관리</a>
+                                    <a href="/deliveryList.do">배송지 관리</a>
                                 </li>
                                 <li>
-                                    <a href="#">리뷰 관리</a>
+                                    <a href="/ready">리뷰 관리</a>
                                 </li>
                                 <li>
-                                    <a href="#">쿠폰</a>
+                                    <a href="/ready">쿠폰</a>
                                 </li>
                                 <li class="on">
                                     <a href="/updateCheckPwd.me">내 정보 수정</a>

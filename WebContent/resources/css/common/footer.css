@@ -119,7 +119,7 @@
 }
 
 .company_info .spec_info .link {
-    color: #5f0080;
+    color: rgb(254,116,119);
 }
 
 .company_info .spec_info .copy {
@@ -144,7 +144,7 @@
     width: 30px;
     height: 30px;
     margin-right: 10px;
-    
+
 }
 
 #footer .link_footer {
