@@ -1,5 +1,6 @@
 // 주문목록 조회용 VO
 // 2023-04-24 김서영
+// 2023-04-25 조승호 수정 (상품 이미지 추가)
 
 package com.kh.user.shop.order.model.vo;
 
@@ -10,18 +11,20 @@ public class OrderList {
 	private String orderDate;  // 주문날짜
 	private String itemList; // 아이템 리스트
 	private int totalPrice;  // 총 금액
+	private String itemImg;	 // 상품 이미지
 
 
 	public OrderList () {}
 
 
-	public OrderList(int orderNo, String orderStatus, String orderDate, String itemList, int totalPrice) {
+	public OrderList(int orderNo, String orderStatus, String orderDate, String itemList, int totalPrice, String itemImg) {
 		super();
 		this.orderNo = orderNo;
 		this.orderStatus = orderStatus;
 		this.orderDate = orderDate;
 		this.itemList = itemList;
 		this.totalPrice = totalPrice;
+		this.itemImg = itemImg;
 	}
 
 
@@ -75,14 +78,20 @@ public class OrderList {
 	}
 
 
-	@Override
-	public String toString() {
-		return "OrderList [orderNo=" + orderNo + ", orderStatus=" + orderStatus + ", orderDate=" + orderDate + ", itemList=" + itemList + ", totalPrice=" + totalPrice + "]";
+	public String getItemImg() {
+		return itemImg;
 	}
 
 
+	public void setItemImg(String itemImg) {
+		this.itemImg = itemImg;
+	}
 
 
-
+	@Override
+	public String toString() {
+		return "OrderList [orderNo=" + orderNo + ", orderStatus=" + orderStatus + ", orderDate=" + orderDate
+				+ ", itemList=" + itemList + ", totalPrice=" + totalPrice + ", itemImg=" + itemImg + "]";
+	}
 
 }

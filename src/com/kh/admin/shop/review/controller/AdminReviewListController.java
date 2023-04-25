@@ -47,7 +47,6 @@ public class AdminReviewListController extends HttpServlet {
 
 		listCount = new ReviewService().selectListCount();
 		
-		System.out.println("listCount : " + listCount);
 
 		currentPage = Integer.parseInt((request.getParameter("currentPage") == null ? "1" : request.getParameter("currentPage")));
 
@@ -69,16 +68,7 @@ public class AdminReviewListController extends HttpServlet {
 		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
 
 		ArrayList<Review> list = new ReviewService().selectReviewList(pi);
-		
-		System.out.println(pi);
-		
-		System.out.println("---");
-		for(Review r : list) {
-			
-			System.out.println(r);
-		}
-		
-
+	
 		request.setAttribute("pi", pi);
 		request.setAttribute("list", list);
 

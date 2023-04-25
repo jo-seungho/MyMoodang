@@ -28,11 +28,17 @@
       margin-left: 10px;
       margin-bottom: 10px;
     }
+     .pagediv strong:hover {
+    	cursor : pointer;
+    }
+    
     /* 고유한 */
   </style>
 
   <body class="sb-nav-fixed">
   <%@ include file="sidebar.jsp" %>
+     <link rel="stylesheet" href="/resources/css/board/faq.css">
+    <link rel="stylesheet" href="/resources/css/board/notice.css">
 
       <div id="layoutSidenav_content">
         <main>
@@ -69,32 +75,35 @@
               </tbody>
             </table>
             <br />
-			 <div align="center" class="paging-area">
+			 		<div align="center" class="paging-area">
+								 
+		        <div class="layout-pagination">
+		             <div class="pagediv">
+							
+						<a href="/noticelist.ad?currentPage=<%= currentPage - 1 %>" class="layout-pagination-button layout-pagination-prev-page" style="border : 1px solid lightgray;">이전 페이지로 가기</a>
 
-			<% if(currentPage != 1) { %>
-				<button onclick="location.href = '/noticelist.ad?currentPage=<%= currentPage - 1 %>';">
-					&lt;
-				</button>
-			<% } %>
-		
-			<% for(int p = startPage; p <= endPage; p++) { %>
-				<% if(p != currentPage) { %>
-					<button onclick="location.href = '/noticelist.ad?currentPage=<%= p %>';">
-						<%= p %>
-					</button>
-				<% } else { %>
-					<!-- 현재 내가 보고있는 페이지일 경우에는 클릭이 안되게끔 -->
-					<button disabled><%= p %></button>
-				<% } %>
-			<% } %>
-			
-			<% if(currentPage != maxPage) { %>
-				<button onclick="location.href = '/noticelist.ad?currentPage=<%= currentPage + 1 %>';">
-					&gt;
-				</button>
-			<% } %>
+							<span>
+								<% for(int p = startPage; p <= endPage; p++) { %>
+										
+									<% if(p != currentPage) { %>
+											
+										<strong onclick="location.href = '/noticelist.ad?currentPage=<%= p %>';" class="layout-pagination-button layout-pagination-number __active" style="height: 32px;">
+											<%= p %>
+										</strong>
+									<% } else { %>
+								<!-- 현재 내가 보고있는 페이지일 경우에는 클릭이 안되게끔 -->
+												
+									<strong class="layout-pagination-button layout-pagination-number __active" style="height: 32px; background-color: lightgray; "><%= p %></strong>
+									<% } %>
+								<% } %>
+							</span>
 
-		</div>
+                                <a href="/noticelist.ad?currentPage=<%= currentPage + 1 %>" class="layout-pagination-button layout-pagination-next-page" style="border : 1px solid lightgray;">다음 페이지로 가기</a>
+										
+								</div>
+							</div>
+					
+					</div>
           
           </div>
           <br />
