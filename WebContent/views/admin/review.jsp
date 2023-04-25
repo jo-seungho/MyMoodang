@@ -66,7 +66,7 @@
             <table class="table table-hover center">
               <thead>
                 <tr>
-                  <th>제품코드</th>
+                  <th>상품코드</th>
                   <th>별점</th>
                   <th>리뷰제목</th>
                   <th>회원아이디</th>

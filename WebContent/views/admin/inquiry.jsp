@@ -28,6 +28,9 @@
       margin-left: 10px;
       margin-bottom: 10px;
     }
+     .pagediv strong:hover {
+    	cursor : pointer;
+    }
   </style>
 
   <body class="sb-nav-fixed">
