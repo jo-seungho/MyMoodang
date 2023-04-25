@@ -34,7 +34,8 @@ public class AdminFilter implements Filter {
 
 		HttpSession userSession = req.getSession();
 		AdMember ad = null;
-
+		
+		
 		if (userSession != null) { // 사용자 세션이 존재하는 경우
 			Member m = (Member) userSession.getAttribute("loginUser"); // 사용자 멤버객체를 가져옴
 
