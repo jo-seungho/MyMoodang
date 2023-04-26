@@ -79,7 +79,7 @@
 				<div class="banner_wrapper">
 					<div class="slider">
 						<div class="imgs">
-							<img src="/resources/img/banner1.png" align="center">
+							<a href="/noticedetail.no?nno=3"><img src="/resources/img/banner1.png" align="center"></a>
 						</div>
 
 						<div class="imgs">
