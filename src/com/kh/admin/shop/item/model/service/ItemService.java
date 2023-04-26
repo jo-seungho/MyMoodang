@@ -246,4 +246,17 @@ public class ItemService {
 		return result;
 	}
 
+	// TOP5 조회수 아이템 조회
+	// 2023-04-25 최명진
+	public ArrayList<Item> selectTopItemList() {
+		
+		Connection conn = getConnection();
+
+		ArrayList<Item> i = new ItemDao().selectTopItemList(conn);
+
+		close(conn);
+
+		return i;
+	}
+
 }

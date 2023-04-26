@@ -58,10 +58,8 @@
             
             <div>
             
-              <form role="search">
-                <button type="submit" id="btn" class="btn">검색하기</button>
-                <input type="search" class="form-control" placeholder="" aria-label="Search" style="width: 30%; float: right" />
-              </form>
+             
+             
             </div>
             <table class="table table-hover center">
               <thead>

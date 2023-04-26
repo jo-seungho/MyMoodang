@@ -14,6 +14,7 @@ public class AdminPage {
 	private int noSugar;
 	private int zero;
 
+	
 
 	public AdminPage() {}
 
@@ -35,6 +36,7 @@ public class AdminPage {
 		this.lunch = lunch;
 		this.noSugar = noSugar;
 		this.zero = zero;
+		
 	}
 
 

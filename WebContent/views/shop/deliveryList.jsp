@@ -107,8 +107,9 @@ add_search.jsp와 연결 및 popup_function 수정 /
                                   <li>
                                       <a href="#">찜한 상품</a>
                                   </li>
-                                  <li>
-                                      <a href="delibery_List.do" style="color: #5f0080;">배송지관리</a>
+
+                                  <li class="on">
+                                      <a href="/deliveryList.do">배송지 관리</a>
                                   </li>
                                   <li>
                                       <a href="#">리뷰 관리</a>
