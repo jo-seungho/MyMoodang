@@ -2,26 +2,28 @@
 
 
 
-/* summernote에서 이미지 업로드시 실행할 함수 */
-	 	function sendFile(file, editor) {
-            // 파일 전송을 위한 폼생성
-	 		data = new FormData();
-	 	    data.append("uploadFile", file);
-	 	    $.ajax({ // ajax를 통해 파일 업로드 처리
-	 	        data : data,
-	 	        type : "POST",
-	 	        url : "/uploadFile",
-	 	        cache : false,
-	 	        contentType : false,
-	 	        processData : false,
-	 	        success : function(data) { // 처리가 성공할 경우
-                    // 에디터에 이미지 출력
-	 	        	$(editor).summernote('editor.insertImage', data.url);
-	 	        }
-	 	    });
-	 	}
+function sendFile(file, editor) {
+  // Generate a unique filename for the uploaded image
+  var filename = new Date().getTime() + '_' + Math.floor(Math.random() * 1000000) + '.' + file.name.split('.').pop();
 
+  // Create a form for file transfer
+  var data = new FormData();
+  data.append("uploadFile", file, filename);
 
+  $.ajax({
+    // Handle file upload via ajax
+    data: data,
+    type: "POST",
+    url: "/uploadFile",
+    cache: false,
+    contentType: false,
+    processData: false,
+    success: function(data) {
+      // If processing succeeds, output the image to the editor
+      $(editor).summernote('editor.insertImage', data.url);
+    }
+  });
+}
 
 
 
