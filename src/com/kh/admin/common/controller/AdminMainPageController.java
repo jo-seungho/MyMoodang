@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.admin.common.model.service.AdminService;
 import com.kh.admin.common.model.vo.AdminPage;
+import com.kh.admin.member.model.service.MemberService;
+import com.kh.admin.member.model.vo.AdMember;
 import com.kh.admin.shop.item.model.service.ItemService;
 import com.kh.admin.shop.item.model.vo.Item;
 
@@ -32,10 +34,12 @@ public class AdminMainPageController extends HttpServlet {
 		
 		AdminPage page = new AdminService().adminInfo();
 		ArrayList<Item> it = new ItemService().selectTopItemList();
+		AdMember m = new MemberService().selectTopMember();
 
 		if(page!= null) {
 			request.setAttribute("mainPage", page);
 			request.setAttribute("it", it);
+			request.setAttribute("m", m);
 			request.getRequestDispatcher("/views/admin/main.jsp").forward(request, response);
 
 		} else {
