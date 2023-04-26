@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8" import="java.util.ArrayList,java.util.Arrays, com.kh.user.shop.order.model.vo.Order"%>
 <%
 	ArrayList<Order> list = (ArrayList<Order>)request.getAttribute("list");
-	
+
 	int[] orderNos = new int[list.size()];
 	int index = 0;
 	int totalPrice = 0;
@@ -11,8 +11,8 @@
 	String date = "";
 	String phone = "";
 	String address = "";
-	
-	
+
+
 	for(Order o : list) {
 		orderNos[index++] = o.getOrderNo();
 		totalPrice = o.getPaymentAmount();
@@ -22,9 +22,9 @@
 		phone = o.getResPhone();
 		address = o.getAddress();
 	}
-	
-%>	
-	
+
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -59,7 +59,7 @@
 						<div class="head_aticle">
 							<h2 class="tit">주문내역</h2>
 						</div>
-						
+
 						<div class="head_section link_type">
 							<h3 class="tit">주문번호 : <%= orderNos[0] %></h3>
 							<span class="link"> 배송 또는 상품에 문제가 있나요? <a href="/list.in">1:1
@@ -77,8 +77,8 @@
 								</colgroup>
 
 								<tbody>
-								
-								
+
+
 								<!-- 상품내역 -->
 								<% for(Order or : list) { %>
 									<tr>
@@ -97,7 +97,7 @@
 										</td>
 										<td class="progress" colspan="2"><span class="end"> 결제완료 </span></td>
 									</tr>
-								  <% } %>	
+								  <% } %>
 								<!-- 상품내역 끝 -->
 								</tbody>
 							</table>
@@ -154,7 +154,7 @@
 
 							<tbody>
 								<tr>
-									<th>주문 번호</th>
+									<th>운송장 번호</th>
 									<td>[<%= uid %>]</td>
 								</tr>
 
