@@ -63,7 +63,7 @@ $( document ).ready(function() {
 // 인증 메일 보내기 버튼
 function sendEmail() {
 	let $email = $("#email")
-	console.log($email.val());
+	//console.log($email.val());
 
 	var code = "";  // 이메일 전송 인증번호 저장위한 코드
 
@@ -77,7 +77,7 @@ function sendEmail() {
 
 	let data = {email : $email.val()}
 
-	console.log(data);
+	//console.log(data);
 
 	$.ajax({
 		  url : "emailCheck.me"
@@ -88,13 +88,13 @@ function sendEmail() {
 				alert(result.message);
 				console.log("성공");
 				code = result.authNo;
-				console.log("전송된 인증번호 : " + code);
+				//console.log("전송된 인증번호 : " + code);
 
 					$("#authBtn").click(function () {  // 인증 버튼 눌렀을 때!!
-						console.log("여기 들어왔니? 인증번호? : " + code);
+						//console.log("여기 들어왔니? 인증번호? : " + code);
 						let $authNo = $("#authCheckNum").val();
 						let checkResult = $("#result");
-						console.log("authNo", $authNo);
+						//console.log("authNo", $authNo);
 
 						if($authNo == code) {  // 인증번호 일치
 							checkResult.html("인증번호가 일치합니다.");
@@ -119,7 +119,7 @@ function sendEmail() {
 
 // 인증완료 버튼
 function validateEmail() {
-	console.log("인증완료가 실행되는가?");
+	//console.log("인증완료가 실행되는가?");
 	let $email = $("#email").val();
 
 	$("#loginId").val($email);

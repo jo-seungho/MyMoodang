@@ -292,5 +292,17 @@ public class ItemService {
 		return list;
 	}
 
+	public int selectReviewListCount(int bno) {
+		
+		Connection conn = getConnection();
+		
+		int listCount = new ItemDao().selectReviewListCount(conn, bno);
+		
+		close(conn);
+		
+		return listCount;
+	}
+
+
 	
 }

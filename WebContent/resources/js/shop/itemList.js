@@ -12,10 +12,14 @@ window.addEventListener('DOMContentLoaded', function () {
 	  
 	  // 파라미터 값을 가져옴
 	  const params = new URLSearchParams(location.search);
-	  
+	  console.log(params);
 	  let setCategory = sessionStorage.setItem('category', params.get('category'));
 	  let getCategory = sessionStorage.getItem('category');
-	  // console.log(getCategory);
+	  let setFilter = sessionStorage.setItem('filter', params.get('filter'));
+	  let getFilter = sessionStorage.getItem('filter');
+	  console.log(getCategory);
+	  console.log(setFilter);
+	  console.log(getFilter);
 	  
 	  if(getCategory == '전체') {
 		  $(".totalList").addClass('on');
@@ -64,6 +68,42 @@ window.addEventListener('DOMContentLoaded', function () {
 		  $(".zeroDrink").removeClass('on');
 		  $(".protein").removeClass('on');
 		  $(".bentto").removeClass('on');
+	  }
+	  
+	  if(getFilter == '전체') {
+		  $(".all").addClass('on');
+		  $(".lowprice").removeClass('on');
+		  $(".highprice").removeClass('on');
+		  $(".dateprice").removeClass('on');
+		  $(".viewprice").removeClass('on');
+	  }
+	  if(getFilter == '1') {
+		  $(".lowprices").addClass('on');
+		  $(".all").removeClass('on');
+		  $(".highprice").removeClass('on');
+		  $(".dateprice").removeClass('on');
+		  $(".viewprice").removeClass('on');
+	  }
+	  if(getFilter == '2') {
+		  $(".highprice").addClass('on');
+		  $(".all").removeClass('on');
+		  $(".lowprices").removeClass('on');
+		  $(".dateprice").removeClass('on');
+		  $(".viewprice").removeClass('on');
+	  }
+	  if(getFilter == '3') {
+		  $(".dateprice").addClass('on');
+		  $(".highprice").removeClass('on');
+		  $(".all").removeClass('on');
+		  $(".lowprices").removeClass('on');
+		  $(".viewprice").removeClass('on');
+	  }
+	  if(getFilter == '4') {
+		  $(".viewprice").addClass('on');
+		  $(".dateprice").removeClass('on');
+		  $(".highprice").removeClass('on');
+		  $(".all").removeClass('on');
+		  $(".lowprices").removeClass('on');
 	  }
 
     var noBody = $('.noBody');

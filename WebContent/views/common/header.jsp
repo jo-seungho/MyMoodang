@@ -7,6 +7,7 @@
     pageEncoding="UTF-8"%>
 
 <%@ page import="com.kh.user.member.model.vo.Member" %>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 
 <%
 	Member loginUser = (Member)session.getAttribute("loginUser");
@@ -18,9 +19,15 @@
     <div id="header">
       <div class="user_menu">
         <!-- bnr = banner -->
-        <a href="#" class="bnr_delivery">
+        <% if(loginUser == null) { %>
+        <a href="/enrollForm.me" class="bnr_delivery">
           <img src="/resources/img/image.gif" alt="서울, 경기, 인천 샛별배송, 수도권 이외 지역 택배배송" class="bnr_delivery_img" />
         </a>
+        <% } else { %>
+        <a href="" class="bnr_delivery">
+          <img src="/resources/img/image.gif" alt="서울, 경기, 인천 샛별배송, 수도권 이외 지역 택배배송" class="bnr_delivery_img" />
+        </a>
+        <% } %>
 
 
         <!-- 2023-04-18 / 로그인 전 우측 상단 바 / 이지환 -->
@@ -54,7 +61,7 @@
                 <a href="/faq" class="list_item">자주하는 질문</a>
               </li>
               <li class="list">
-                <a href="/list.in" class="list_item">1:1 문의</a>
+                <a href="" class="list_item" id="afterLogin">1:1 문의</a>
               </li>
             </ul>
           </li>
@@ -67,6 +74,12 @@
         <!-- .sign_menu -->
         <!-- 2023-04-19 / 로그인 후 상단바 코드 수정 및 css 부여 / 이지환 -->
 		<% if(loginUser != null) { %>
+		
+		<%if(loginUser.getMemberId().equals("admin") && loginUser != null) { %>
+            <a href="/main.ad">
+            <i class="fa-solid fa-gear fa-spin-pulse fa-2xl" style="margin-left : 765px; margin-top : 20px;"></i>
+            </a>
+            <% } %>
 		<ul class="sign_menu">
 
           <li class="link">
@@ -79,7 +92,7 @@
                 <a href="/orderList.it" class="list_item">주문내역</a>
               </li>
               <li class="list">
-                <a href="wishList.wi" class="list_item">찜한상품</a>
+                <a href="/wishList.wi" class="list_item">찜한상품</a>
               </li>
               <li class="list">
                 <a href="/deliveryList.do" class="list_item">배송지 관리</a>
@@ -129,6 +142,7 @@
             <img src="/resources/img/logo.png" alt="마이무당 로고" class="logo_img" />
           </a>
         </h1>
+        
       </div>
       <div class="gnb">
         <!-- gnb = global nav bar = 최상위 메뉴  -->
@@ -172,6 +186,7 @@
                     </span>
                     <!-- tit: text + ico -->
                   </a>
+                  
 
                   <a href="/itemList.it?currentPage=1&category=단백질" class="main_item">
                     <span class="ico">
@@ -218,6 +233,11 @@
               </ul>
             </div>
           </li>
+          
+          
+          
+          
+          
           <li class="list">
             <a href="/newItemList.it?currentPage=1" class="link">
               <span class="txt">신상품</span>
@@ -241,7 +261,7 @@
 
           <div class="gnb_search">
               <input type="text" id="keyword" value="" title="keyword" class="inp_search" />
-     
+
               <input type="image" src="https://res.kurly.com/pc/service/common/1908/ico_search_x2.png" class="btn_search" onclick="javascript:itemSearch()" >
               <div class="init">
                 <button type="button" id="search_init" class="btn_delete">검색어 삭제하기</button>
@@ -264,7 +284,11 @@
                 </button>
               </div>
             </div>
+            
           </div>
+          
+
+			
 
           <div id="goCart" class="cart_count">
             <% if(loginUser != null) { %>
@@ -284,16 +308,16 @@
     </div>
 
     <script>
-    
-	// 상품 전체 검색 기능 
+
+	// 상품 전체 검색 기능
 	// 2023-04-23
 	// 이태화
 		function itemSearch() {
 		    var keyword = document.getElementById("keyword").value;
 		    location.href="itemList.se?currentPage=1&category=전체&keyword="+keyword;
-			
+
 		    }
-			
+
 		$("#keyword").on('keyup', function(e) {
 		    if (e.keyCode === 13) { // 엔터키
 		        e.preventDefault();
@@ -301,7 +325,7 @@
 		    }
 		});
 	//-------------------------------------------------------------------------------------
-		
+
 		$(document).ready(function() {
 	    $.ajax({
 	        url: "count",
@@ -313,17 +337,17 @@
 	            console.log(err);
 	        }
 	    });
-	    
+
 	    let msg = '<%= alertMsg == null ? "" : alertMsg %>';
 	    if(msg != null && msg.length > 0) {
 	        alert(msg);
 	        <% session.removeAttribute("alertMsg"); %>
 	    }
-	
+
 	    let emsg = '<%= errorMsg == null ? "" : errorMsg %>';
 	    if(emsg != null && emsg.length > 0) {
 	        alert(emsg);
 	    }
 		});
-    
+
     </script>

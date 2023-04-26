@@ -8,6 +8,7 @@
 	ArrayList<Item> list = (ArrayList<Item>) request.getAttribute("list");
 
 	String category = (String)request.getAttribute("category");
+	String filter = (String)request.getAttribute("filter");
 
 	int currentPage = pi.getCurrentPage();
 	int startPage = pi.getStartPage();
@@ -49,11 +50,14 @@
 							<!-- 카테고리와 구분하기 위해 히든을 줌 -->
 							<input type="hidden" id="filterVal">
 							<ul id="colorTest" class="list">
-								<li name="all"><a class="lowprice" href="javascript:filterClick('전체')">전체보기</a></li>
-								<li name="lowprice"><a class="lowprice" href="javascript:filterClick('1')">낮은가격순</a></li>
-								<li name="highprice"><a class="highprice" href="javascript:filterClick('2')">높은가격순</a></li>
-								<li name="dateprice"><a class="dateprice" href="javascript:filterClick('3')">등록일순</a></li>
-								<li name="viewprice"><a class="viewprice" href="javascript:filterClick('4')">조회높은순</a></li>
+
+								<li name="all"><a class="all on" href="/itemList.it?currentPage=1&category=${category}&filter=전체">전체보기</a></li>
+								<li name="lowprice"><a class="lowprices" href="/itemList.it?currentPage=1&category=${category}&filter=1">낮은가격순</a></li>
+
+						
+								<li name="highprice"><a class="highprice" href="/itemList.it?currentPage=1&category=${category}&filter=2">높은가격순</a></li>
+								<li name="dateprice"><a class="dateprice" href="/itemList.it?currentPage=1&category=${category}&filter=3">등록일순</a></li>
+								<li name="viewprice"><a class="viewprice" href="/itemList.it?currentPage=1&category=${category}&filter=4">조회높은순</a></li>
 							</ul>
 							
 							<br><br>
@@ -116,12 +120,11 @@
 											<a href="/itemDetail.it?bno=<%= i.getItemCode() %>" class="">
 											<!-- 주소 연결 이슈로 bno 클래스 임시로 삭제해뒀습니다.  - 조승호 -->
 											<span class="name"> <%= i.getItemName() %> </span>
-											<span class="cost"> <span class="price"><%= (int)(Math.log10(i.getItemPrice())+1) > 3
-																					  ?  Integer.toString(i.getItemPrice()).replaceAll("\\B(?=(\\d{3})+(?!\\d))", ",")
-																					  : i.getItemPrice()	  
-											%></span>
+											<span style="color : red; font-weight : bold; font-size : 18px;"> <%=(int)(i.getItemDiscount()*100) %>%</span>
+											<span>&nbsp;<%= i.getDiscountPrice() %>원</span>
+											<span class="cost" style="text-decoration-line : line-through; text"> <span class="price"><%= i.getItemPrice()%>원</span>
 											<input type="hidden" id="product_cost1" value="<%= i.getItemPrice() %>">
-											<span class="dodo">원</span>
+											<span class="dodo"></span>
 											</span> <span class="desc"><%= i.getItemText() %></span>
 											<span class="tag"><%-- 수량이나 날짜 등 필요하면 이 위치에 --%></span>
 											</a>
@@ -152,11 +155,11 @@
 							<div class="pagediv">
 								<% if(currentPage != 1) { %>
 
-								<a href="/itemList.it?currentPage=<%= startPage %>&category=${category}"
+								<a href="/itemList.it?currentPage=<%= startPage %>&category=${category}&filter=${filter}"
 
 									class="layout-pagination-button layout-pagination-first-page">맨 처음 페이지로 가기
 								</a>
-								<a href="/itemList.total?currentPage=<%= currentPage - 1 %>&category=${category}" class="layout-pagination-button layout-pagination-prev-page">
+								<a href="/itemList.total?currentPage=<%= currentPage - 1 %>&category=${category}&filter=${filter}" class="layout-pagination-button layout-pagination-prev-page">
 									이전 페이지로 가기
 								</a>
 								<% } else {%>
@@ -170,7 +173,7 @@
 								<% for(int p = startPage; p <= endPage; p++) { %>
 									<% if(p != currentPage) { %>
 
-								<a href="/itemList.it?currentPage=<%= p %>&category=${category}">
+								<a href="/itemList.it?currentPage=<%= p %>&category=${category}&filter=${filter}">
 
 									<span>
 										<strong class="layout-pagination-button layout-pagination-number __active"><%= p %></strong>
@@ -185,10 +188,10 @@
 								<% } %>
 								<% if(currentPage != maxPage) { %>
 
-								 <a href="/itemList.it?currentPage=<%= currentPage + 1 %>&category=${category}" class="layout-pagination-button layout-pagination-next-page">
+								 <a href="/itemList.it?currentPage=<%= currentPage + 1 %>&category=${category}&filter=${filter}" class="layout-pagination-button layout-pagination-next-page">
 								 다음 페이지로 가기
 								 </a>
-								 <a href="/itemList.it?currentPage=<%= endPage %>&category=${category}" class="layout-pagination-button layout-pagination-last-page">
+								 <a href="/itemList.it?currentPage=<%= endPage %>&category=${category}&filter=${filter}" class="layout-pagination-button layout-pagination-last-page">
 
 								 맨끝 페이지로 가기
 								 </a>
@@ -285,21 +288,28 @@
 		function filterClick(filterVal) {
 			$("#filterVal").val(filterVal);
 			selectItemListFunction();
+			console.log(filterVal);
 		}
 		//카테고리 클릭 시 function
 		function categoryClick(categoryVal) {
 			$("#categoryVal").val(categoryVal);
 			selectItemListFunction();
+			console.log(categoryVal);
 		}
 		
 		function selectItemListFunction(){
-			var filter = $("#filterVal").val();	//현재 선택된 필터값
-			var category = $("#categoryVal").val();	//현재 선택된 카테고리값
-			//var category = "전체"
+			var filter = $("#filterVal").val();//현재 선택된 필터값
+			console.log(filter);
+			var category = $("#categoryVal").val(); //현재 선택된 카테고리값
+			console.log(category);
+			
+			
 			if(filter == null || filter == "") filter = "전체";
 			if(category == null || category == "") category = "전체";
 			
-			location.href="/itemList.it?currentPage=1&category=" + category +"&filter=" + filter;
+			location.href="/itemList.it?currentPage=1&category=" +  category +"&filter="   +  filter;
+			
+			
 		}
 		
 		

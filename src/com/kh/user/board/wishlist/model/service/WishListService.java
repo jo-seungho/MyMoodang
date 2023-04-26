@@ -59,7 +59,7 @@ public class WishListService {
 		
 		Connection conn = getConnection();
 		
-		int result = new ItemDao().checkFavorite(conn, code, mno);
+		int result = new WishListDao().checkFavorite(conn, code, mno);
 		
 		close(conn);
 		
@@ -77,7 +77,7 @@ public class WishListService {
 		
 		Connection conn = getConnection();
 		
-		int result = new ItemDao().addFavorite(conn, code, mno);
+		int result = new WishListDao().addFavorite(conn, code, mno);
 		
 		if(result > 0) {
 			commit(conn);

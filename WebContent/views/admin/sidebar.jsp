@@ -32,7 +32,7 @@
 								role="button" data-bs-toggle="dropdown" aria-expanded="false">관리자</a>
 								<ul class="dropdown-menu dropdown-menu-end"
 									aria-labelledby="navbarDropdown">
-									<li><a class="dropdown-item" href="#!">로그아웃</a></li>
+									<li><a class="dropdown-item" href="/logout.ad">로그아웃</a></li>
 								</ul></li>
 						</ul>
 					</div>

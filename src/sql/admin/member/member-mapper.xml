@@ -48,6 +48,7 @@
 		UPDATE MEMBER
 		SET GRADE_NO = ?
 		, STATUS = ?
+		
 		WHERE MEMBER_NO = ?
 		</entry>
 
