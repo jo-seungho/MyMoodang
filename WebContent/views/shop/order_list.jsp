@@ -62,12 +62,12 @@
 
                                   <li>
 
-                                      <a href="/orderList.it">주문내역</a>
+                                      <a href="/orderList.it"  class="on">주문내역</a>
                                   </li>
                                   <li>
                                       <a href="/wishList.wi">찜한상품</a>
                                   </li>
-                                  <li  class="on">
+                                  <li >
                                       <a href="/deliveryList.do">배송지관리</a>
                                   </li>
                                   <li>
@@ -131,7 +131,7 @@
                                             </dl>
                                             <dl>
                                               <dt>결제방법</dt>
-                                              <dd></dd>
+                                              <dd>카카오페이</dd>
                                             </dl>
                                             <dl>
                                                 <dt>결제금액</dt>
