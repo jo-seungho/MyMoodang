@@ -1,3 +1,5 @@
+<!-- 2023.04.25 import 추가 / 이지환 -->
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -20,7 +22,7 @@
 
     <div class="section_destination" >
         <div id="inputForm">
-            <form action="" method="post">
+            <form action="/add.de" method="post">
                 <div class="modify only_pc">
                     <p class="tit_result">배송지를 선택해주세요.<br>
                         <span class="desc">매일 아침, 고객님의 제품을 문 앞까지 안전하게 보내드릴게요.</span>
@@ -33,7 +35,9 @@
                                 <span class="ico"></span>재검색<!-- 검색kakao api -->
                             </button>
                         </div>
-                        <input type="text" id="addrSub" name="user_detail_address" placeholder="나머지 주소를 입력해주세요">
+                        
+                        <!-- 20203.04.24 밸류 추가 -->
+                        <input type="text" id="addrSub" name="user_detail_address" placeholder="나머지 주소를 입력해주세요" value="">
                     </div>
 
                     <!-- <label class="label_default"><br>
@@ -48,7 +52,9 @@
 
 
                         <!-- db에 반영해야할 요소로 보임.(기본배송지)-->
-                        <button type="submit" class="btn active">저장</button>
+                        
+                        <!-- 2023.04.24 action 태그 추가, url 매핑 -->
+                        <button type="submit" class="btn active" action="/add.de">저장</button>
                         <!-- 저장시 db에 반영됨. 기본배송지 체크 시 반영해야함.-->
                         <br><br>
                 </div>
