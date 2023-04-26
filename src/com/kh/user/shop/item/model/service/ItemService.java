@@ -303,6 +303,17 @@ public class ItemService {
 		return listCount;
 	}
 
+	public int selectItemListSearchCount(String keyword) {
+
+		Connection conn = getConnection();
+		
+		int listCount = new ItemDao().selectItemListSearchCount(conn, keyword);
+		
+		close(conn);
+		
+		return listCount;
+	}
+
 
 	
 }

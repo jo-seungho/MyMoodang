@@ -34,10 +34,18 @@
                                   <li class="on">
                                       <a href="/faq">자주하는 질문</a>
                                   </li>
+                               		<% if(loginUser !=null) { %>
                                   <li><a href="list.in">1 : 1 문의 </a></li>
+                                  <% } else { %>
+                                   <li><a href="/loginForm.me">1 : 1 문의 </a></li>
+                                   <% } %>
                               </ul>
                           </div>
+                          <% if(loginUser !=null) { %>
                           <a href="/list.in" class="link_inquire">
+                          <% } else { %>
+                           <a href="/loginForm.me" class="link_inquire">
+                           <% } %>
                               <span class="emph">도움이 필요하신가요?</span>
                               1:1 문의하기
                           </a>

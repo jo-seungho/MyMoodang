@@ -269,9 +269,10 @@
           </div>
 
           <div class="location_login">
+          <% if(loginUser != null) { %>
             <!-- 버튼 뒤로 넘기기, 가상요소 선택자로 bg url 아이콘 처리-->
             <button type="button" class="btn_location on" onclick="location.href='/deliveryList.do'">배송지 등록</button>
-
+			<% } else { %>
 			<!-- 호버 모달 숨김 -->
 			<!--
 			 <div class="location_notice">
@@ -286,8 +287,8 @@
               </div>
             </div>		
 			  -->
-
-           
+			  <button type="button" class="btn_location on" onclick="location.href='/loginForm.me'">배송지 등록</button>
+			  <% } %>
           </div>
           
 
@@ -352,5 +353,7 @@
 	        alert(emsg);
 	    }
 		});
+	
+	
 
     </script>

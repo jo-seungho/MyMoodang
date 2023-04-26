@@ -293,7 +293,7 @@ public class ItemDao {
 					close(rset);
 					close(pstmt);
 				}
-				System.out.println(listCount);
+
 				return listCount;
 			}
 
@@ -772,14 +772,15 @@ public class ItemDao {
 		while(rset.next()) {
 			list.add(new Item(
 					  rset.getInt("ITEM_CODE")
-					, rset.getString("ITEM_DATE")
 					, rset.getString("ITEM_CATEGORY")
-					, rset.getString("ITEM_IMG_PATH")
+					, rset.getString("ITEM_DATE")
 					, rset.getString("ITEM_NAME")
-					, rset.getString("ITEM_TEXT")
 					, rset.getInt("ITEM_STOCK")
 					, rset.getInt("ITEM_PRICE")
 					, rset.getInt("ITEM_HITS")
+					, rset.getString("ITEM_TEXT")
+					, rset.getDouble("ITEM_DISCOUNT")
+					, rset.getString("ITEM_IMG_PATH")
 					, rset.getString("ITEM_STATUS")
 					, rset.getInt("DISCOUNTPRICE")
 					));
@@ -805,6 +806,35 @@ public class ItemDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, bno);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				listCount = rset.getInt("COUNT");
+			}
+			
+
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return listCount;
+	}
+
+	public int selectItemListSearchCount(Connection conn, String keyword) {
+		
+		int listCount = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectItemListSearchCount");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, keyword);
 			
 			rset = pstmt.executeQuery();
 			

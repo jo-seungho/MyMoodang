@@ -1,3 +1,8 @@
+/* 2023.04.25 
+ *  내 배송지 목록에 기본 배송지를 포함해서 조회하고 수정 가능하도록
+ *  코드 추가 및 수정 (xml 순서 변화에 따른) 번호 수정
+ *   / 이지환 */
+
 package com.kh.user.member.model.dao;
 
 import java.io.FileInputStream;
@@ -112,13 +117,12 @@ public class MemberDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 
-		System.out.println("넘어가기 전 멤버" + m);
-
 		String sql = prop.getProperty("insertMember");
 
 		try {
 			int i = 0;
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(++i, m.getMemberNo());
 			pstmt.setString(++i, m.getMemberId());
 			pstmt.setString(++i, m.getPassword());
 			pstmt.setString(++i, m.getName());
@@ -325,6 +329,7 @@ public class MemberDao {
 
 	/**
 	 * 2023.04.19 / 내 배송지 관리 중 내 배송지 목록 조회 / 이지환
+	 * 
 	 * @param conn
 	 * @param memberNo
 	 * @return
@@ -351,6 +356,7 @@ public class MemberDao {
                 shippingAddress.setShipName(rset.getString("SHIP_NAME"));
                 shippingAddress.setMemberNo(rset.getInt("MEMBER_NO"));
                 shippingAddress.setZipcode(rset.getString("ZIPCODE"));
+                shippingAddress.setDefaultAddress(rset.getString("DEFAULT_ADDRESS"));
                 shippingAddressList.add(shippingAddress);
             }
 		} catch (SQLException e) {
@@ -465,7 +471,6 @@ public class MemberDao {
 	}
 
 
-
 	/**
 	 * 비밀번호 찾기 회원의 정보조회용 메소드
 	 * 2023-04-24 김서영
@@ -530,9 +535,11 @@ public class MemberDao {
 		return result;
 	}
 
-
 	/**
 	 * 2023.04.24 / 배송지 목록 업데이트용 메소드 / 이지환
+	 * 2023.04.25 / default_addr 추가 / 이지환
+	 * , shipNo 추가
+	 * 
 	 * @param conn
 	 * @param updateMS
 	 * @return
@@ -540,68 +547,86 @@ public class MemberDao {
 	public int updateShippingAddress(Connection conn, ShippingAddress updateMS) {
 		// System.out.println(updateMS + "1");
 		// UPDATE 문 => int (처리된 행의 갯수)
-
+		
 		// 1. 필요한 변수 먼저 셋팅
 		int result = 0;
 		PreparedStatement pstmt = null;
-
+		
 		// 실행할 쿼리문
 		String sql = prop.getProperty("updateMemberShipAddress");
-
+		
 		try {
 			// 2. PreparedStatement 객체 생성
 			pstmt = conn.prepareStatement(sql);
-
+			
 			// 3_1. 미완성된 쿼리문 완성시키기
+			
+			
 			pstmt.setString(1, updateMS.getShipAddr());
 			pstmt.setString(2, updateMS.getShipAddrInfo());
 			pstmt.setString(3, updateMS.getPhone());
 			pstmt.setString(4, updateMS.getShipName());
-			pstmt.setInt(5, updateMS.getMemberNo());
-			pstmt.setInt(6, updateMS.getShipNo());
+			pstmt.setString(5, updateMS.getZipcode());
+			pstmt.setString(6, updateMS.getDefaultAddress());
+			
+			// 2023.04.25 default_address 추가 및 (xml 순서 변화에 따른) 번호 수정
+			pstmt.setInt(7, updateMS.getMemberNo());
+			pstmt.setInt(8, updateMS.getShipNo());
+			
+			
+			
+			// 테스트
+			System.out.println("ShipAddr: " + updateMS.getShipAddr());
+			System.out.println("ShipAddrInfo: " + updateMS.getShipAddrInfo());
+			System.out.println("Phone: " + updateMS.getPhone());
+			System.out.println("ShipName: " + updateMS.getShipName());
+			System.out.println("MemberNo: " + updateMS.getMemberNo());
+			System.out.println("ShipNo: " + updateMS.getShipNo());
+			System.out.println("DefaultAddress: " + updateMS.getDefaultAddress());
 
-
+			
+			
 			// 3_2. 쿼리문 실행 후 결과 받기
 			result = pstmt.executeUpdate(); // 업데이트가 잘 됐다면 result 에 1, 아니면 0 이 담겨있을 거임
 			System.out.println(result);
-
-
+			
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-
+			
 			// 4. 자원 반납 (생성 순서의 역순)
 			JDBCTemplate.close(pstmt);
 		}
-
+		
 		// 5. 결과 반환
 		return result;
 	}
 
-
+	
 	/**
 	 * 2023-04-21  shipNo 를 기준으로 그 배송지 목록만 조회하기 위한 것 / 이지환
 	 * @param conn
 	 * @return
 	 */
 	public ShippingAddress selectListByShipNo(Connection conn, int shipNo) {
-
+		
 		/* ShippinAddress h = new ShippingAddress(); 에서 ShippingAddress h = null; 로 변경 이지환 */
 		ShippingAddress h = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-
+		
 		String sql = prop.getProperty("selectShipAddressByShipNo");
-
+		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, shipNo);
-
+		
 			rset = pstmt.executeQuery();
-
+			
 		/* 2023.04.24 if문으로 조회 / 이지환 */
 			if(rset.next()) {
-
+				
 				h = new ShippingAddress();
 				h.setShipAddr(rset.getString("SHIP_ADDR"));
 				h.setShipAddrInfo(rset.getString("SHIP_ADDR_INFO"));
@@ -609,21 +634,107 @@ public class MemberDao {
 				h.setShipName(rset.getString("SHIP_NAME"));
 				h.setMemberNo(rset.getInt("MEMBER_NO"));
 				h.setShipNo(rset.getInt("SHIP_NO"));
-
+				h.setZipcode(rset.getString("ZIPCODE"));
+				h.setDefaultAddress(rset.getString("DEFAULT_ADDRESS"));
+			
 			}
-
-
+			
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			JDBCTemplate.close(rset);
 			JDBCTemplate.close(pstmt);
-
-		}
-
+			
+		} 
+		
 		return h;
-
+		
 
 	}
-}
 
+	/**
+	 * 2023.04.25 배송지 수정 시 기본 배송지 check 유무 확인 / 이지환
+	 * @param conn
+	 * @param memberNo
+	 * @return
+	 */
+	public int countDefaultAddresses(Connection conn, int memberNo) {
+        int count = 0;
+        PreparedStatement pstmt = null;
+        ResultSet rset = null;
+        
+        String sql = prop.getProperty("selectDefaultAddress");
+        
+        try {
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, memberNo);
+            rset = pstmt.executeQuery();
+            
+            if (rset.next()) {
+                count = rset.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JDBCTemplate.close(rset);
+            JDBCTemplate.close(pstmt);
+        }
+        
+        return count;
+    }
+
+    /**
+     * 2023.04.25 기본배송지 업데이트 추가 / 이지환
+     * @param conn
+     * @param memberNo
+     * @return
+     */
+    public int updateDefaultAddressToNo(Connection conn, int memberNo) {
+        int result = 0;
+        PreparedStatement pstmt = null;
+        
+        String sql = prop.getProperty("updteDefaultAddress");
+        
+        try {
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, memberNo);
+            result = pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JDBCTemplate.close(pstmt);
+        }
+        
+        return result;
+    }
+
+	/**
+	 * 2023.04.25
+	 * @param conn
+	 * @param shipNo
+	 * @return
+	 */
+	public int updateShippingAddressToDefault(Connection conn, int memberNo, int shipNo) {
+		 
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("updateShippingAddressToDefault");
+	        try {
+	        	pstmt = conn.prepareStatement(sql);
+	            pstmt.setInt(1, memberNo);
+	            pstmt.setInt(2, shipNo);
+	            result = pstmt.executeUpdate();
+	        }
+	            catch (SQLException e) {
+	                e.printStackTrace();
+	            } finally {
+	                JDBCTemplate.close(pstmt);
+	            }
+	            
+	            return result;
+	        }
+	
+	
+}

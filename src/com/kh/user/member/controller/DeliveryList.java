@@ -1,4 +1,5 @@
 /* 2023.04.24 이지환 */
+ // 2023.04.25 회원별 배송지목록 중 그 회원의 배송지별로 기본 배송지 여부 확인 가능하도록 수정 
 
 
 /* 2023-04-19 / url 매핑값 및 서비스로 값 넘기는 메소드명 수정 및 파일명 통일(deliberyList -> deliveryList) / 이지환 */
@@ -36,11 +37,11 @@ public class DeliveryList extends HttpServlet {
     }
 
 	/**
-	 * 2023.04.19 / 개인 회원의 본인 배송지 리스트 조회 / 이지환
+	 * 2023.04.25 / 회원별 배송지목록 중 배송지별로 기본 배송지 여부 확인 가능하도록 수정 / 이지환
+	 * 
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		 
-		/* 2023.04.19 / 로그인한 회원의 정보가 담기는 것까진 확인했음 / 이지환 */
 		HttpSession session = request.getSession();
 		  // 로그인한 회원 정보 가져오기
 	    Member loginUser = (Member) session.getAttribute("loginUser");
@@ -49,7 +50,13 @@ public class DeliveryList extends HttpServlet {
 	    
 	    ArrayList<ShippingAddress> shippingAddressList = new MemberService().manageMyShippingAddressList(memberNo);
 	    
+	    // 기본 배송지용
+	   ArrayList<ShippingAddress> shipDefault = (ArrayList<ShippingAddress>) request.getAttribute("defaultAddress");
+	 
 	    System.out.println(shippingAddressList);
+	    
+	    // 2023.04.25 그 회원의 기본배송지 배송지 목록별 해당 배송지의 기본배송지 설정 유무 조회 가능하도록 추가
+	    request.setAttribute("defaultAddress", shipDefault);
 	    
 	    request.setAttribute("list", shippingAddressList);
 	    request.getRequestDispatcher("/views/shop/deliveryList.jsp").forward(request, response);

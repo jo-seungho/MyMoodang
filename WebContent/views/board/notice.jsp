@@ -52,7 +52,7 @@
                                                 </li>
                                                 <li>
                                                 	<% if (loginUser==null) { %>
-                                                    <a href="" id="afterLogin">1 : 1 문의</a>
+                                                    <a href="/loginForm.me" class="" >1 : 1 문의</a>
                                                     <% } else { %>
                                                     <a href="/list.in">1 : 1 문의</a>
                                                     <% } %>
@@ -172,12 +172,7 @@
 
 
 		 // 1:1문의 비회원 접근 막기 / 2023-04-25 김서영
-		    $(function() {
-		    	$("#afterLogin").click(function() {
-		    		alert("로그인 후 이용이 가능한 서비스입니다.");
-		    		location.href = "/";
-		    	})
-		    })
+		    
 
 	    </script>
 

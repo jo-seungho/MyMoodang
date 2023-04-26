@@ -281,60 +281,128 @@ public class MemberService {
 
 		return loginUser;
 	}
-
+	/*
 	/**
-	 * 2023.04.19 / 내 배송지 목록 조회/ 이지환
-	 * @param memberNo
-	 * @return
-	 */
-	public ArrayList<ShippingAddress> manageMyShippingAddressList(int memberNo) {
-		Connection conn = JDBCTemplate.getConnection();
+ * 2023.04.19 / 내 배송지 목록 조회 / 이지환
+ * @param memberNo
+ * @return ArrayList<ShippingAddress>
+ */
+public ArrayList<ShippingAddress> manageMyShippingAddressList(int memberNo) {
+    Connection conn = JDBCTemplate.getConnection();
 
-		// 내 배송지 목록 조회
-		ArrayList<ShippingAddress> shippingAddressList = new MemberDao().selectShippingAddressList(conn, memberNo);
+    // 내 배송지 목록 조회
+    ArrayList<ShippingAddress> shippingAddressList = new MemberDao().selectShippingAddressList(conn, memberNo);
 
-		close(conn);
+    close(conn);
 
-		return shippingAddressList;
-	}
-
-
-
-	public int updateShippingAddress(ShippingAddress updateMS) {
-		Connection conn = JDBCTemplate.getConnection();
-		int result = new MemberDao().updateShippingAddress(conn, updateMS);
-		System.out.println("update에서 얻어온 result");
-		System.out.println(result);
-		if (result > 0) {
-			JDBCTemplate.commit(conn);
-		} else {
-			JDBCTemplate.rollback(conn);
-		}
-		JDBCTemplate.close(conn);
-		return result;
-	}
-
-
-	 /**
-		 * 2023.04.21 / shipNo 를 기준으로 조회하기 위한 메소드 / 이지환
-		 * @param shipNo
-		 * @return
-		 */
-		public ShippingAddress selectByShipNo(int shipNo) {
-
-			Connection conn = getConnection();
-
-			// shipNo 를 기반으로 그 shipNo 에 해당하는 배송지 정보 조회
-			// 2023.04.24 / selectShippingAddressByShipNo 에서 h 로 변경 / 이지환 */
-			 ShippingAddress h = new MemberDao().selectListByShipNo(conn, shipNo);
-
-
-				 close(conn);
-
-				 return h;
-
-
-		}
-
+    return shippingAddressList;
 }
 
+/**
+ * 배송지 정보 업데이트
+ * @param updateMS: 수정할 배송지 정보 객체
+ * @return int: 결과 (1 이상이면 성공, 0 이면 실패)
+ */
+public int updateShippingAddress(ShippingAddress updateMS) {
+    Connection conn = JDBCTemplate.getConnection();
+    int result = new MemberDao().updateShippingAddress(conn, updateMS);
+
+    if (result > 0) {
+        JDBCTemplate.commit(conn);
+    } else {
+        JDBCTemplate.rollback(conn);
+    }
+    JDBCTemplate.close(conn);
+    return result;
+}
+
+/**
+ * 2023.04.21 / shipNo 를 기준으로 조회하기 위한 메소드 / 이지환
+ * @param shipNo
+ * @return ShippingAddress
+ */
+public ShippingAddress selectByShipNo(int shipNo) {
+    Connection conn = getConnection();
+
+    // shipNo를 기준으로 해당 배송지 정보 조회
+    ShippingAddress h = new MemberDao().selectListByShipNo(conn, shipNo);
+
+    close(conn);
+
+
+    return h;
+}
+
+/**
+ * 2023.04.25 / 기본 배송지가 있는 지 카운트 / 이지환
+ * @param memberNo
+ * @return int: 기본 배송지의 수
+ */
+public int countDefaultAddresses(int memberNo) {
+    Connection conn = getConnection();
+    int count = new MemberDao().countDefaultAddresses(conn, memberNo);
+
+    close(conn);
+    return count;
+}
+
+
+/**
+ * 2023.04.25 / 기본 배송지를 "N"으로 업데이트 / 이지환
+ * @param memberNo
+ * @return int: 결과 (1 이상이면 성공, 0 이면 실패)
+ */
+public int updateDefaultAddressToNo(int memberNo) {
+    Connection conn = getConnection();
+    int result = new MemberDao().updateDefaultAddressToNo(conn, memberNo);
+
+    if (result > 0) {
+        commit(conn);
+    } else {
+        rollback(conn);
+    }
+
+    close(conn);
+    return result;
+}
+
+/**
+ * 2023.04.25 / 기본 배송지를 업데이트 / 이지환
+ * @param shipNo: 선택된 배송지 번호
+ * @param defaultAddress: 선택된 배송지의 기본 배송지 여부
+ * @param memberNo: 회원 번호
+ * @return int: 결과 (1 이상이면 성공, 0 이면 실패)
+ */
+public int updateDefaultAddress(int shipNo, String defaultAddress, int memberNo) {
+    Connection conn = JDBCTemplate.getConnection();
+
+    // 해당 회원의 배송지 목록 중 기본 배송지로 설정된 게 있을 경우
+    if (defaultAddress.equals("Y")) { 
+    		// 기존 기본 배송지를 \"N\"으로 변경
+    		int result = new MemberDao().updateDefaultAddressToNo(conn, memberNo); 
+    		if (result <= 0) {
+	    		JDBCTemplate.rollback(conn); 
+	    		JDBCTemplate.close(conn);
+	    		return result; 
+	    	} else {
+	    		// 새로 선택된 배송지를 기본 배송지로 설정
+	    		result = new MemberDao().updateShippingAddressToDefault(conn, memberNo, shipNo);
+	    		if (result > 0)  {
+		    		JDBCTemplate.commit(conn); 
+		    		} else {
+		    		JDBCTemplate.rollback(conn); 
+		    		}
+		    		JDBCTemplate.close(conn);
+		    		return result;
+	    		}
+    		
+    	} else { 
+    		// 선택된 배송지가 기본 배송지가 아닌 경우, 기본 배송지 변경 없이 성공 반환\r\n" + 
+    		JDBCTemplate.close(conn); 
+    		return 1;
+    	}
+    }
+    
+
+    		
+}

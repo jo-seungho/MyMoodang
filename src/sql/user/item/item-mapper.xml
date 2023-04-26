@@ -119,6 +119,7 @@
 			SELECT COUNT(*) COUNT 
 			FROM REVIEW
 			WHERE ITEM_CODE = ?
+			AND DELETE_STATUS = 'Y'
 	</entry>
 
 
@@ -340,6 +341,15 @@
 		) A
 		)
 		WHERE RNUM BETWEEN ? AND ?
+	</entry>
+
+	<entry key="selectItemListSearchCount">
+		SELECT COUNT(*) COUNT
+		FROM ITEM
+		WHERE ITEM_STATUS = 'Y'
+		AND ITEM_NAME LIKE '%' || ? || '%'
+
+
 	</entry>
 
 

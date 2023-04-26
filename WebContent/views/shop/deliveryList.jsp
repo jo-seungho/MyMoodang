@@ -1,10 +1,8 @@
 <!-- 2023.04.24 / 상세 주소를 기본 배송지에 보이도록 추가 / 이지환  -->
+<!-- 2023.04.25 defaultAddress 스클립틀릿 구문 추가, 기본 배송지 설정 유무에 따라 <span>기본배송지</span>영역이 보이고, 안 보이고 설정
+add_search.jsp와 연결 및 popup_function 수정 /
+ / 이지환 -->
 
-<!-- 2023.04.19 / 파일명 delibery_List -> deliveryList 로 수정 및
-로그인한 회원이 header의 우측 상단의 배송지 관리 클릭 시 내 배송지 목록들이 나오게끔 코드 작성
-스클립틀릿 구문 추가&하드코드들을 소프트코드로 바꿈
-수정하기 버튼 클릭 시 수정창 호출되게 작성 예정 */
-/ 이지환  -->
 
 <!-- 2023.04.23 이지환
 	popUp_change function의 매개변수에 shipNo 추가,
@@ -12,16 +10,26 @@
 	/*	<%-- 		(<%= shipAddress.getShipNo() %>) 스클립틀릿 구문 추가 --%>
 -->
 
+ 
+ <!-- 2023.04.19 / 파일명 delibery_List -> deliveryList 로 수정 및
+로그인한 회원이 header의 우측 상단의 배송지 관리 클릭 시 내 배송지 목록들이 나오게끔 코드 작성
+스클립틀릿 구문 추가&하드코드들을 소프트코드로 바꿈
+
+/ 이지환  -->
+
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
 <%@ page import="java.util.ArrayList, com.kh.user.member.model.vo.ShippingAddress" %>
 
-<!-- 2023.04.19 deliveryList.controller 로부터 개인 회원의 배송지 목록 호출 -->
+
 <% // 조회된 list 를 request 로부터 뽑아내기
 	ArrayList<ShippingAddress> list = (ArrayList<ShippingAddress>)request.getAttribute("list");
 %>
+
+<!-- 2023.04.25 defaultAddress 스클립틀릿 구문 추가 / 이지환 -->
+<% ShippingAddress defaultAddress = (ShippingAddress)request.getAttribute("defaultAddress"); %>
 
 
 
@@ -43,10 +51,12 @@
 
     <title>배송지관리</title>
     <script>
-        function popup_address_add(){    //배송지 추가
+        function popup_address_add(memberNo){    //배송지 추가
             var popupX = (window.screen.width / 2) - (530 / 2);   // 팝업창을 가운데 띄우기 위한거
             var popupY = (window.screen.height / 2) - (400 / 2);
-            var url = "address_search.html";        // var url = "product_modify/"+ id;
+            
+   <%-- 2023.04.24 url 수정 / 이지환 --%>
+            var url = "http://localhost:8082/addForm.de?=memberNo";        // var url = "product_modify/"+ id;
             var name = "popup test";
             var option = "width = 530, height = 400, top = " + popupY + " , left = " + popupX + " , location = no"
             window.open(url, name, option);
@@ -91,16 +101,15 @@
                           <h2 class="tit_snb">마이페이지</h2>
                           <div class="inner_sub">
                               <ul class="list_menu">
-
-                                  <li>
-                                      <a href="/orderList.it">주문내역</a>
+                                  <li class="on">
+                                      <a href="/orderList.it" style="color: gray;">주문내역</a>
                                   </li>
                                   <li>
                                       <a href="/wishList.wi">찜한 상품</a>
                                   </li>
+
                                   <li class="on">
                                       <a href="/deliveryList.do">배송지 관리</a>
-
                                   </li>
                                   <li>
                                       <a href="/ready">리뷰 관리</a>
@@ -121,6 +130,7 @@
                     <div class="page_section section_destination">
                         <div class="head_aticle">
                             <h2 class="tit">
+
                  <!--
 		                               배송지 관리
 
@@ -132,12 +142,13 @@
                                 <h2 class="tit">
                                 배송지 관리
                                 <span class="tit_sub">
+
                                 <span id="addrListInfo" class="tit_sub">배송지에 따라 상품 정보가 달라질 수 있습니다.</span>
                             </h2>
                             <div class="new_address">
                                 <button type="button" class="btn" id="newAddressAdd" onclick="popup_address_add()">
                                     <img src="https://res.kurly.com/pc/ico/2006/ico_add_16x16.svg" alt="" class="ico">
-                                    새 배송지 추가
+                                    	새 배송지 추가
                                 </button>
                             </div>
                         </div>
@@ -152,12 +163,7 @@
                                         <th class="tit_phone">연락처</th>
                                         <th class="tit_delivery">배송유형</th>
                                         <th class="tit_modify">수정</th>
-                                     <!--
-											 회원 정보 받는 메소드,
-											회원정보를 뽑은 멤버객체에서 회원넘버 외래키를 get 으로뽑아서 그거를 매개변수로 배송지를 불러오는 메서드 만들기
-											memeber 회원정보, ArrayList<배송정보> 이 배송정보를 리퀘스트로 담아서 여기서 뽑으면 됨
-                                        =
-                                     -->
+                                  	
                                     </tr>
                                 </thead>
 
@@ -168,13 +174,18 @@
 								        <% int index = 1; %>
 								        <% for(ShippingAddress shipAddress : list) { %>
 								            <tr>
-								                <td class="num"><%= index %></td>
+								                <td class="num"><%=  index %></td>
 								                <td class="address">
-								                    <span class="badge_default">
-								                        기본 배송지
-								                    </span>
-								                    <p class="addr">
-								                        <%= shipAddress.getShipAddr() %>
+								                
+								                <!-- 2023.04.25 로그인하고 기본배송지에 해당되는 배송지만 기본배송지 라는 글자가 보이게 함 이지환 -->
+								                      <% if("Y".equals(shipAddress.getDefaultAddress().toUpperCase())) { %>
+                    									<span class="badge_default">
+									                       	기본 배송지
+									                    </span>
+									                  <% } %>
+								                  
+								                   <p class="addr">
+								                  		<%= shipAddress.getShipAddr() %>
 								                        	<!-- 상세주소를 기본 배송지 <p>에 해당되도록 추가 -->
 								                        <%= shipAddress.getShipAddrInfo() %>
 								                    </p>
@@ -184,7 +195,7 @@
 								                <td>
 								                    <span class="delivery star">
 								                        샛별배송
-								                    </span>
+								                  </span>
 								                </td>
 								                <td>
 								                    <button type="button" class="ico modify" onclick="popup_change(<%= shipAddress.getShipNo() %>)">

@@ -54,7 +54,8 @@ public class itemListSearchController extends HttpServlet {
 		
 
 		
-		listCount = new ItemService().selectListCountUser(category);
+		listCount = new ItemService().selectItemListSearchCount(keyword);
+		
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		// * pageLimit : 페이지 하단에 보여질 페이징바의 페이지 최대 갯수
 		pageLimit = 10;

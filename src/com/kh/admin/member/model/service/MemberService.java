@@ -104,5 +104,16 @@ public class MemberService {
 		
 		return result;
 	}
+	
+	public ArrayList<AdMember> selectTopMember() {
+		
+		Connection conn = getConnection();
+		
+		ArrayList<AdMember> result = new MemberDao().selectTopMember(conn);
+		
+		close(conn);
+		
+		return result;
+	}
 
 }

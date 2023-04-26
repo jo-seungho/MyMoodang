@@ -1,6 +1,6 @@
 package com.kh.user.shop.cart.model.service;
 
-import static com.kh.common.JDBCTemplate.close;
+import static com.kh.common.JDBCTemplate.*;
 import static com.kh.common.JDBCTemplate.commit;
 import static com.kh.common.JDBCTemplate.getConnection;
 import static com.kh.common.JDBCTemplate.rollback;
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import com.kh.common.model.vo.PageInfo;
 import com.kh.user.shop.cart.model.dao.CartDao;
 import com.kh.user.shop.cart.model.vo.Cart;
-import com.kh.user.shop.order.model.vo.ItemList;
+// import com.kh.user.shop.order.model.vo.ItemList;
 
 /**
  * 장바구니 목록 조회

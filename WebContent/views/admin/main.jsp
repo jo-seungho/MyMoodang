@@ -1,4 +1,4 @@
-<%@page import="com.kh.admin.common.model.vo.AdminPage, com.kh.admin.shop.item.model.vo.Item, java.util.ArrayList"%>
+<%@page import="com.kh.admin.common.model.vo.AdminPage, com.kh.admin.shop.item.model.vo.Item, java.util.ArrayList, com.kh.admin.member.model.vo.AdMember"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	
@@ -14,6 +14,7 @@
 	int noSugar = a.getNoSugar();
 	int zero = a.getZero();
 	ArrayList<Item> it = (ArrayList<Item>) request.getAttribute("it");
+	ArrayList<AdMember> m = (ArrayList<AdMember>) request.getAttribute("m");
 %>
 <html lang="en">
 <head>
@@ -110,6 +111,36 @@
 							</div>
 							<div class="card-body">
 								<canvas id="myBarChart2" width="100%" height="50"></canvas>
+							</div>
+						</div>
+					</div>
+					
+					<div class="col-lg-6">
+						<div class="card mb-4">
+							<div class="card-header">
+								이달의 구매왕 TOP 3
+							</div>
+							<div class="card-body">
+								<table class="table">
+								  <thead>
+								    <tr>
+								    <th scope="col">회원번호</th>
+								    <th scope="col">회원 아이디</th>
+								    <th scope="col">회원 이름</th>
+								    <th scope="col">총 주문 수</th>
+								    </tr>
+								    </thead>
+								    <tbody>
+								    <% for(AdMember b :m  ) { %>
+								    <tr>
+								    	<th><%= b.getMemberNo() %></th>
+								    	<th><%= b.getMemberId() %></th>
+								    	<th><%= b.getName() %></th>
+								    	<th><%= b.getOrderCount() %></th>
+								    </tr>
+								    <% } %>
+								    </tbody>
+								    </table>					  					
 							</div>
 						</div>
 					</div>

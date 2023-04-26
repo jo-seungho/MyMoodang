@@ -1,26 +1,23 @@
-package com.kh.user.shop.review.controller;
+package com.kh.user.member.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.user.shop.review.model.service.itemReviewService;
-
 /**
- * Servlet implementation class itemReviewDeleteController
+ * Servlet implementation class DeliveryAddForm
  */
-@WebServlet("/itemReviewDel.it")
-public class itemReviewDeleteController extends HttpServlet {
+@WebServlet("/addForm.de")
+public class DeliveryAddForm extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public itemReviewDeleteController() {
+    public DeliveryAddForm() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,20 +27,8 @@ public class itemReviewDeleteController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int rno = Integer.parseInt(request.getParameter("rno"));
-		int bno = Integer.parseInt(request.getParameter("bno"));
-		
-		
-		int result = new itemReviewService().deleteReview(rno);
-		
-		if(result > 0) {
-			request.getSession().setAttribute("alertMsg", "성공적으로 게시글이 삭제되었습니다.");
-			response.sendRedirect("/itemDetail.it?bno=" + bno);
-		} else {
-			request.setAttribute("msg", "리뷰 삭제에 실패하였습니다.");
-			request.getRequestDispatcher("").forward(request, response);
-		}
-
+		// url 포워드
+		request.getRequestDispatcher("views/shop/address_search.jsp").forward(request, response);
 	}
 
 	/**
