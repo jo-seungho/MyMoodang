@@ -270,10 +270,11 @@
 
           <div class="location_login">
             <!-- 버튼 뒤로 넘기기, 가상요소 선택자로 bg url 아이콘 처리-->
-            <button type="button" class="btn_location on">배송지 등록</button>
+            <button type="button" class="btn_location on" onclick="location.href='/deliveryList.do'">배송지 등록</button>
 
-            <div class="location_notice">
-              <!-- 첫 홈페이지 화면에 몇 초간 notice 띄우고 자동으로 off -->
+			<!-- 호버 모달 숨김 -->
+			<!--
+			 <div class="location_notice">
               <span class="emph">배송지를 등록</span>하고<br />
               <span class="txt">구매가능한 상품을 확인하세요!</span>
               <div class="group_button">
@@ -283,8 +284,10 @@
                   주소검색
                 </button>
               </div>
-            </div>
-            
+            </div>		
+			  -->
+
+           
           </div>
           
 
