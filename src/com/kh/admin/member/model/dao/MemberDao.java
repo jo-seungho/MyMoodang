@@ -244,4 +244,38 @@ public class MemberDao {
 		
 		return result;
 	}
+
+	public AdMember selectTopMember(Connection conn) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		AdMember m = null;
+		
+		String sql = prop.getProperty("selectTopMember");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				m = new AdMember();
+				m.setMemberNo(rset.getInt("MEMBER_NO"));
+				m.setOrderCount(rset.getInt("ORDER_COUNT"));
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				rset.close();
+				pstmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		return m;
+	}
 }
