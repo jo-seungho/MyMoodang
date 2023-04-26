@@ -60,11 +60,18 @@ public class MemberService {
 		addr.setMemberNo(memberNo);
 		addr.setPhone(m.getPhone());
 
+		System.out.println("addr : " + addr);
+
+		//		System.out.println(result1);// 1
+
 		int result2 = 0;
 
 		if (result1 > 0) { // 회원정보 추가가 된 상황
 			// 주소도 등록해야 함 (멤버 번호 받아야 하므로 => 핸드폰 번호가 똑같은 멤버의 번호 가져오기)
 			result2 = new MemberDao().insertMemberAddr(conn, addr);
+
+//			System.out.println(result2); // 0
+
 		}
 
 		if (result1 > 0 && result2 > 0) {
@@ -125,7 +132,7 @@ public class MemberService {
 		return m;
 	}
 
-	
+
 
 
 
@@ -314,19 +321,19 @@ public class MemberService {
 		 * @return
 		 */
 		public ShippingAddress selectByShipNo(int shipNo) {
-			
+
 			Connection conn = getConnection();
-			
+
 			// shipNo 를 기반으로 그 shipNo 에 해당하는 배송지 정보 조회
 			// 2023.04.24 / selectShippingAddressByShipNo 에서 h 로 변경 / 이지환 */
 			 ShippingAddress h = new MemberDao().selectListByShipNo(conn, shipNo);
-			 
-			 
+
+
 				 close(conn);
-				 
+
 				 return h;
-			 
-	
+
+
 		}
 
 }

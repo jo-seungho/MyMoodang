@@ -158,7 +158,7 @@ public class MemberDao {
 			pstmt.setString(++i, addr.getShipAddrInfo());
 			pstmt.setString(++i, addr.getPhone());
 			pstmt.setString(++i, addr.getZipcode());
-			pstmt.setInt(++i, addr.getMemberNo());
+//			pstmt.setInt(++i, addr.getMemberNo());
 
 			result = pstmt.executeUpdate();
 
