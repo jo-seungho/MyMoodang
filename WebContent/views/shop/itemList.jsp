@@ -123,6 +123,7 @@
 											<span style="color : red; font-weight : bold; font-size : 18px;"> <%=(int)(i.getItemDiscount()*100) %>%</span>
 											<span>&nbsp;<%= i.getDiscountPrice() %>원</span>
 											<span class="cost" style="text-decoration-line : line-through; text"> <span class="price"><%= i.getItemPrice()%></span>
+											<span class="dallar">원</span>
 											<input type="hidden" id="product_cost1" value="<%= i.getItemPrice() %>">
 											<span class="dodo"></span>
 											</span> <span class="desc"><%= i.getItemText() %></span>
