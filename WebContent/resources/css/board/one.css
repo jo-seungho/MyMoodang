@@ -326,14 +326,6 @@ body #container #main .layout-pagination .pagediv span strong{
 
 }
 
-#nb1{
-     border-top: 5px solid lightgray;
-     font-size: large;
-     font-weight: 900;
-     border-radius: 5px;
-     border-spacing: 20px;
-    /* border-collapse: separate;*/
-}
 
 #one-section{
     margin-top: 50px;
@@ -360,3 +352,12 @@ body #container #main .layout-pagination .pagediv span strong{
     display: none;
 }
 
+
+#nb1{
+     border-top: 5px solid lightgray;
+     font-size: large;
+     font-weight: 900;
+     border-radius: 5px;
+     border-spacing: 20px;
+     border-collapse: separate;
+}
