@@ -4,6 +4,16 @@
 <%
 	ArrayList<Cart> list = (ArrayList<Cart>) request.getAttribute("list");
 	int userNo = ((Member)request.getSession().getAttribute("loginUser")).getMemberNo();
+	
+	int[] orderNos = new int[list.size()];
+	int index = 0;
+	String address = "";
+
+
+	for(Cart c : list) {
+		address = c.getShipAddr();
+	}
+	
 %>
 <!-- 2023-04-23 조승호 -->
 <!DOCTYPE html>
@@ -147,7 +157,7 @@
 						<h3 id="payPrice" class="tits">
 							<span class="material-symbols-outlined"> location_on </span>배송지
 						</h3>
-						<h3 class="totalPrice">서울특별시 영등포구 선유동2로 57 이레빌딩</h3>
+						<h3 class="totalPrice"><%= address %></h3>
 						<br>
 						<br>
 						<!-- <button type="button"><p>배송지 변경</p></button> -->

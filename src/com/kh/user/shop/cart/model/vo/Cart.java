@@ -14,13 +14,14 @@ public class Cart {
 	private int itemCode;				//	상품코드
 	private String itemName;			//  상품 이름
 	private String imgPath;				//  상품 이미지
+	private String shipAddr;			//  배송지
 	
 	public Cart() { }
 	
 	
 
 	public Cart(int cartNo, int cartStock, int price, int discountPrice, int totalPrice, int totalDiscountPrice,
-			int difference, int memberNo, String itemName, String imgPath, int itemCode) {
+			int difference, int memberNo, String itemName, String imgPath, int itemCode, String shipAddr) {
 		super();
 		this.cartNo = cartNo;
 		this.cartStock = cartStock;
@@ -33,11 +34,12 @@ public class Cart {
 		this.itemName = itemName;
 		this.imgPath = imgPath;
 		this.itemCode = itemCode;
+		this.shipAddr = shipAddr;
 	}
 
 
 	public Cart(int cartNo, int cartStock, int price, int discountPrice, int totalPrice, int totalDiscountPrice,
-			int difference, int memberNo, int itemCode, String itemName, String imgPath) {
+			int difference, int memberNo, int itemCode, String itemName, String imgPath, String shipAddr) {
 		super();
 		this.cartNo = cartNo;
 		this.cartStock = cartStock;
@@ -50,6 +52,7 @@ public class Cart {
 		this.itemCode = itemCode;
 		this.itemName = itemName;
 		this.imgPath = imgPath;
+		this.shipAddr = shipAddr;
 	}
 
 	public int getCartNo() {
@@ -144,13 +147,25 @@ public class Cart {
 	}
 
 
+
+	public String getShipAddr() {
+		return shipAddr;
+	}
+
+
+
+	public void setShipAddr(String shipAddr) {
+		this.shipAddr = shipAddr;
+	}
+
+
+
 	@Override
 	public String toString() {
 		return "Cart [cartNo=" + cartNo + ", cartStock=" + cartStock + ", price=" + price + ", discountPrice="
 				+ discountPrice + ", totalPrice=" + totalPrice + ", totalDiscountPrice=" + totalDiscountPrice
 				+ ", difference=" + difference + ", memberNo=" + memberNo + ", itemCode=" + itemCode + ", itemName="
-				+ itemName + ", imgPath=" + imgPath + "]";
+				+ itemName + ", imgPath=" + imgPath + ", shipAddr=" + shipAddr + "]";
 	}
 
-	
 }
