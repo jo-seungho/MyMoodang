@@ -54,13 +54,17 @@
 	                                , SHIP_ADDR_INFO
 	                                , PHONE
 	                                , ZIPCODE
-	                                , MEMBER_NO)
+	                                , MEMBER_NO
+	                                , SHIP_NAME
+	                                , DEFAULT_ADDRESS)
 	                          VALUES (SEQ_SHIP_NO.NEXTVAL
 	                                , ?
 	                                , ?
 	                                , ?
 	                                , ?
-	                                , ?)
+	                                , SEQ_MNO.CURRVAL
+	                                , '집'
+	                                , 'Y')
 	</entry>
 
 <!-- 2023-04-17 김서영 / 아이디 찾기-->
@@ -158,6 +162,7 @@
 		</entry>
 
 <!-- 2023.04.25 배송지 목록 업데이트 쿼리문 수정 / 이지환 -->
+
 		<entry key="updateMemberShipAddress">
 			 UPDATE SHIPPING_ADDRESS
 			 

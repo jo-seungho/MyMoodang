@@ -4,9 +4,9 @@ add_search.jsp와 연결 및 popup_function 수정 /
  / 이지환 -->
 
 
-<!-- 2023.04.23 이지환 
+<!-- 2023.04.23 이지환
 	popUp_change function의 매개변수에 shipNo 추가,
-	수정하기 버튼의  팝업 function 안에 
+	수정하기 버튼의  팝업 function 안에
 	/*	<%-- 		(<%= shipAddress.getShipNo() %>) 스클립틀릿 구문 추가 --%>
 -->
 
@@ -70,14 +70,14 @@ add_search.jsp와 연결 및 popup_function 수정 /
             var option = "width = 530, height = 510, top = " + popupY + " , left = " + popupX + " , location = no"
             window.open(url, name, option);
         }
-        
+
          <% if(session.getAttribute("alertMsg") != null && session.getAttribute("isSuccess") != null){ %>
         alert("<%= session.getAttribute("alertMsg") %>");
-        
-        
+
+
         <% session.removeAttribute("alertMsg"); %>
 
-        
+
         <%-- 2023.04.24 / 팝업창을 닫고, 부모창 기준으로 새로 고침한다( opener.location.reload() ) / 이지환 --%>
         window.close();
         opener.location.reload();
@@ -130,7 +130,19 @@ add_search.jsp와 연결 및 popup_function 수정 /
                     <div class="page_section section_destination">
                         <div class="head_aticle">
                             <h2 class="tit">
-                
+
+                 <!--
+		                               배송지 관리
+
+		                                db 회원 배송지 정보
+		                                요걸 불러오려고 하거든요?
+		                                ArrayList<ShippingAdress> = new ArrayList<
+                                -->
+
+                                <h2 class="tit">
+                                배송지 관리
+                                <span class="tit_sub">
+
                                 <span id="addrListInfo" class="tit_sub">배송지에 따라 상품 정보가 달라질 수 있습니다.</span>
                             </h2>
                             <div class="new_address">
