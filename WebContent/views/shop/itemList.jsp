@@ -121,8 +121,8 @@
 											<!-- 주소 연결 이슈로 bno 클래스 임시로 삭제해뒀습니다.  - 조승호 -->
 											<span class="name"> <%= i.getItemName() %> </span>
 											<span style="color : red; font-weight : bold; font-size : 18px;"> <%=(int)(i.getItemDiscount()*100) %>%</span>
-											<span>&nbsp;<%= i.getDiscountPrice() %>원</span>
-											<span class="cost" style="text-decoration-line : line-through; text"> <span class="price"><%= i.getItemPrice()%></span>
+											<span style="text-decoration-line : line-through; text">&nbsp;<%= i.getItemPrice()%>원</span>
+											<span class="cost" > <span class="price"><%= i.getDiscountPrice() %></span>
 											<span class="dallar">원</span>
 											<input type="hidden" id="product_cost1" value="<%= i.getItemPrice() %>">
 											<span class="dodo"></span>
