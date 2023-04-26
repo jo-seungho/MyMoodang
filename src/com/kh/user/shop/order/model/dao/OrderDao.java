@@ -81,11 +81,13 @@ public class OrderDao {
 		String sql = prop.getProperty("selectListCount");
 
 		try {
-			int i = 0;
+			// int i = 0;
 			pstmt = conn.prepareStatement(sql);
 
-			pstmt.setInt(++i, memberNo);
+			pstmt.setInt(1, memberNo);
 
+			listCount = pstmt.executeUpdate();
+				
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
