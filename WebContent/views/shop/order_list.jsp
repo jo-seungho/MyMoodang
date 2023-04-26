@@ -131,11 +131,11 @@
                                             </dl>
                                             <dl>
                                               <dt>결제방법</dt>
-                                              <dd></dd>
+                                              <dd>카카오페이</dd>
                                             </dl>
                                             <dl>
                                                 <dt>결제금액</dt>
-                                                <dd><%= ol.getTotalPrice() %></dd>
+                                                <dd><%= ol.getTotalPrice() %> 원</dd>
                                             </dl>
                                         </div>
                                     </div>
