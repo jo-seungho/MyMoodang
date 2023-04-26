@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 
 <!-- 개인 회원의 배송지 조회용 쿼리문 수정함 / 2023.04.19 이지환 -->
+<!-- 기본 배송지 관련 추가 / 이지환 -->
+<!-- 2023.04.25 /
+	shipNo를 기반으로 한 특정 배송지 조회 기능 수정
+	기본배송지로 설정 체크박스 클릭된 상태로 저장하기 버튼 클릭 시 해당 회원의 해당 배송지만
+	기본배송지로 수정되도록 설정 및 그 후 기본배송지를 포함해서 화면에 나타나도록 조회 기능 추가 / 이지환
+	  -->
 
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
@@ -30,7 +36,7 @@
 	                       , EMAIL
 	                       , PHONE
 	                       , ENROLL_DATE)
-	             VALUES (SEQ_MNO.NEXTVAL
+	             VALUES (?
 	                   , ?
 	                   , ?
 	                   , ?
@@ -98,6 +104,9 @@
 	        SELECT *
 	        FROM SHIPPING_ADDRESS
 	        WHERE MEMBER_NO = ?
+	        
+	       <!--  2023.04.25 추가 -->
+	          
         </entry>
 
 <!-- 회원정보 (기본 정보) 업데이트용 쿼리문 / 2023-04-20 김서영 -->
@@ -111,6 +120,7 @@
 			      , MODIFY_DATE = SYSDATE
 			  WHERE MEMBER_ID = ?
 		</entry>
+
 
 <!--  회원정보 (비밀번호) 업데이트용 쿼리문 / 2023-04-20 김서영 -->
 		<entry key="updatePwdMember">
@@ -146,32 +156,70 @@
 			 WHERE NAME = ?
 			   AND EMAIL = ?
 		</entry>
-<!--   2023.04.21 / 선생님 말씀대로 하기 위해 중간에 하던 것 주석처리 함 / 이지환  -->
+
+<!-- 2023.04.25 배송지 목록 업데이트 쿼리문 수정 / 이지환 -->
 		<entry key="updateMemberShipAddress">
 			 UPDATE SHIPPING_ADDRESS
+			 
+			 <!--  2023.04.25 ship_no 추가 -->
 			  	SET SHIP_ADDR = ?
 			  	  , SHIP_ADDR_INFO = ?
 			  	  , PHONE = ?
 			  	  , SHIP_NAME = ?
+			  	  
+			  	  <!-- 2023.04.25 ZIPCODE 추가 / 이지환 -->
+			  	  , ZIPCODE = ?
+			  	  <!-- DEFAULT_ADDR 추가 -->
+			  	  
+			   	  , DEFAULT_ADDRESS = ?
 			  	    WHERE MEMBER_NO = ?
 			  	    AND SHIP_NO = ?
 		</entry>
-
-		<!--   2023.04.24 / shipNo 를 기반으로 해당 회원의 배달주소지, 배달상세주소, 연락처, 받는 사람 지정 / 이지환  -->
+		
+		<!--   2023.04.25 / shipNo를 기반으로 한 특정 배송지 조회 기능 수정 / 이지환  -->
 		<entry key="selectShipAddressByShipNo">
 			 SELECT SHIP_ADDR
 			  	  , SHIP_ADDR_INFO
 			   	  , PHONE
 			   	  , SHIP_NAME
-
-			   	  <!-- 2023.04.24 MEMBER_NO, SHIP_NO 조회 추가 이지환 -->
 			   	  , MEMBER_NO
 			   	  , SHIP_NO
-
-			   	  <!-- MemberNo 지움 -->
+			   	  , ZIPCODE
+			   	  , DEFAULT_ADDRESS
+			   	  
+			   	 
 			   FROM SHIPPING_ADDRESS
 			  WHERE SHIP_NO = ?
 		 </entry>
+		 
+		 <!-- 2023.04.25 / 기본 배송지 업데이트 시 해당 회원의 배송지 목록을 다 n으로 바꿈 / 이지환 -->
+		 	<entry key= "updteDefaultAddress">
+		 		UPDATE SHIPPING_ADDRESS
+		 	 	   SET DEFAULT_ADDRESS = 'N'
+		 	 	 WHERE MEMBER_NO = ?
+		 	 </entry>
+		 	 
+		 	 <!-- 2023.04.25 기본 배송지 유무 조회 (있으면 1, 없으면 0) 이지환 -->
+		 	 <entry key= "selectDefaultAddress">
+		 	 	SELECT COUNT *
+		 	 	  FROM SHIPPING_ADDRESS
+		 	 	 WHERE MEMBER_NO = ?
+		 	 	   AND DEFAULT_ADDRESS = 'Y'
+		 	 </entry>
+		 	 
+		 	 <!-- 2023.04.25
+		 	 기본 배송지 수정 및 조회 기능
+		 	 (그 회원의 배송지 목록을 다 n으로 바꾼 후, 그 회원의 기본배송지가 없을 때 체크박스를 선택한 저장하기 버튼을 누른 행을 기본배송지로 설정하도록) / 이지환-->
+		 	 <entry key = "updateShippingAddressToDefault">
+		 	 	  UPDATE SHIPPING_ADDRESS
+		 	 	     SET DEFAULT_ADDRESS = 'Y'
+		 	 	   WHERE MEMBER_NO = ?
+		 	 	     AND SHIP_NO = ? 
+		 	 	     AND DEFAULT_ADDRESS = 'N'
+		 	 </entry>
+		 	 
+		 	
+		 	
 </properties>
 
 
