@@ -307,6 +307,8 @@ public class OrderDao {
 			sql = prop.getProperty("selectSearchAllCount1");
 		} else if(value.equals("SHIPPING_ADDR")) {
 			sql = prop.getProperty("selectSearchAllCount2");
+		} else {
+			sql = prop.getProperty("selectSearchAllCount1");
 		}
 
 		// 3. 쿼리문 실행

@@ -98,10 +98,10 @@
                 <a href="/deliveryList.do" class="list_item">배송지 관리</a>
               </li>
               <li class="list">
-                <a href="#" class="list_item">리뷰 관리</a>
+                <a href="/ready" class="list_item">리뷰 관리</a>
               </li>
               <li class="list">
-                <a href="#" class="list_item">쿠폰</a>
+                <a href="/ready" class="list_item">쿠폰</a>
               </li>
               <li class="list">
                 <!-- <a href="javascript:update_me('<%= loginUser.getMemberId() %>');" class="list_item">내 정보수정</a> -->
