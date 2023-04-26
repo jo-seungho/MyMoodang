@@ -264,7 +264,7 @@
 		
 		// 결제기능
 		function orderPay(){
-			let countMoney9 = $('.countMoney').text();
+			let countMoney9 = $('.pays').text();
 			let itemList9 = $('.package').text()
 			let userName9 = $('.join').text()
 			let orderAddress9 = $('.totalprice').text();
@@ -277,7 +277,6 @@
 			    merchant_uid : 'merchant_' + new Date().getTime(),
 			    name : itemList9 , //결제창에서 보여질 이름
 			    amount : countMoney9, //실제 결제되는 가격
-			    // amount : 100, // 테스트를 위한 임시 금액
 			    buyer_email : 'test888@test.do',
 			    buyer_name : userName9,
 			    buyer_tel : '010-1234-5678',
