@@ -245,11 +245,11 @@ public class MemberDao {
 		return result;
 	}
 
-	public AdMember selectTopMember(Connection conn) {
+	public ArrayList<AdMember> selectTopMember(Connection conn) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		AdMember m = null;
+		ArrayList<AdMember> list = new ArrayList<AdMember>();
 		
 		String sql = prop.getProperty("selectTopMember");
 		
@@ -257,10 +257,16 @@ public class MemberDao {
 			pstmt = conn.prepareStatement(sql);
 			rset = pstmt.executeQuery();
 			
-			if(rset.next()) {
-				m = new AdMember();
-				m.setMemberNo(rset.getInt("MEMBER_NO"));
-				m.setOrderCount(rset.getInt("ORDER_COUNT"));
+			while(rset.next()) {
+				AdMember a = new AdMember();
+				a.setMemberNo(rset.getInt("MEMBER_NO"));
+				a.setOrderCount(rset.getInt("ORDER_COUNT"));
+				a.setName(rset.getString("NAME"));
+				a.setMemberId(rset.getString("MEMBER_ID"));
+				
+				
+				list.add(a);
+				
 			}
 			
 		} catch (SQLException e) {
@@ -276,6 +282,6 @@ public class MemberDao {
 			}
 		}
 		
-		return m;
+		return list;
 	}
 }

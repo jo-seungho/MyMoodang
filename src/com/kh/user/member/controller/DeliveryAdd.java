@@ -47,7 +47,7 @@ public class DeliveryAdd extends HttpServlet {
 	    
 		String user_address = request.getParameter("user_address");
         String user_detail_address = request.getParameter("user_detail_address");
-        int default_address = Integer.parseInt(request.getParameter("Default_address"));
+        int default_address = Integer.parseInt(request.getParameter("Default_address")== null ? "1" : request.getParameter("Default_address"));
 
         // Service 클래스 호출
         // ShippingAddress shippingAddress = new ShippingAddress(0, user_address, user_detail_address, default_address);
@@ -60,9 +60,9 @@ public class DeliveryAdd extends HttpServlet {
         shippingAddress.setShipAddr(user_detail_address);
         
         // 기본 배송지 컬럼 만들어야되지 핞나
-        shippingAddress.setDefault_address(default_address);
-        int result = new MemberService().insertShippingAddress(shippingAddress);
-
+//        shippingAddress.set(default_address);
+//        int result = new MemberService().(shippingAddress);
+        int result = 0;
         // 결과에 따라 성공/실패 페이지로 리다이렉트
         if (result > 0) {
             response.sendRedirect(request.getContextPath() + "/deliveryList.do");

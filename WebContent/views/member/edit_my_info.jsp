@@ -144,7 +144,11 @@
                     <div id="edit_form_btn" align="center">
                         <button type="button" id="edit_info_btn" onclick="updateInfo();">수정하기</button> &nbsp;
                         <button type="button" id="edit_pwd_btn" data-toggle="modal" data-target="#updatePwdForm">비밀번호 변경</button> &nbsp;
+                        <% if(loginUser.getMemberId().equals("admin")) { %>
+                        <button type="button" id="delete_info_btn" data-toggle="modal" data-target="#deleteForm" disabled>회원탈퇴</button>
+                        <%  } else {  %>
                         <button type="button" id="delete_info_btn" data-toggle="modal" data-target="#deleteForm">회원탈퇴</button>
+                     	<% } %>
                      </div>
 
                 </form>
