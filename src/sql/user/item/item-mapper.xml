@@ -62,8 +62,7 @@
 	<entry key="selectListCount">
 		SELECT COUNT(*) COUNT 
 		FROM ITEM
-		WHERE (ITEM_CATEGORY = ? OR ? = '전체')
-		AND ITEM_STATUS = 'Y'
+
 	</entry>
 	
 		<entry key="selelctAttachmentCategory">
