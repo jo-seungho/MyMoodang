@@ -36,7 +36,6 @@ public class itemReviewDeleteController extends HttpServlet {
 		
 		int result = new itemReviewService().deleteReview(rno);
 		
-		System.out.println(result);
 		if(result > 0) {
 			request.getSession().setAttribute("alertMsg", "성공적으로 게시글이 삭제되었습니다.");
 			response.sendRedirect("/itemDetail.it?bno=" + bno);
