@@ -13,7 +13,7 @@ import java.util.Properties;
 
 import com.kh.common.model.vo.PageInfo;
 import com.kh.user.shop.cart.model.vo.Cart;
-import com.kh.user.shop.order.model.vo.ItemList;
+// import com.kh.user.shop.order.model.vo.ItemList;
 
 public class CartDao {
 
@@ -55,6 +55,7 @@ public class CartDao {
 					  , rset.getString("ITEM_NAME")
 					  , rset.getString("ITEM_IMG_PATH")
 					  , rset.getInt("ITEM_CODE")
+					  , rset.getString("SHIP_ADDRESS")
 						));
 			}
 
