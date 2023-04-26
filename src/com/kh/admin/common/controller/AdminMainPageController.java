@@ -1,6 +1,7 @@
 package com.kh.admin.common.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.admin.common.model.service.AdminService;
 import com.kh.admin.common.model.vo.AdminPage;
+import com.kh.admin.shop.item.model.service.ItemService;
+import com.kh.admin.shop.item.model.vo.Item;
 
 
 @WebServlet("/main.ad")
@@ -28,9 +31,11 @@ public class AdminMainPageController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		AdminPage page = new AdminService().adminInfo();
+		ArrayList<Item> it = new ItemService().selectTopItemList();
 
 		if(page!= null) {
 			request.setAttribute("mainPage", page);
+			request.setAttribute("it", it);
 			request.getRequestDispatcher("/views/admin/main.jsp").forward(request, response);
 
 		} else {

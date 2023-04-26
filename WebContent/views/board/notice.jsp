@@ -51,7 +51,11 @@
                                                     <a href="/faq">자주하는 질문</a>
                                                 </li>
                                                 <li>
+                                                	<% if (loginUser==null) { %>
                                                     <a href="" id="afterLogin">1 : 1 문의</a>
+                                                    <% } else { %>
+                                                    <a href="/list.in">1 : 1 문의</a>
+                                                    <% } %>
                                                 </li>
                                             </ul>
                                         </div>

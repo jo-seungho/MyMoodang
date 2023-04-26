@@ -495,6 +495,45 @@ public class ItemDao {
 		return result;
 	}
 
+	//TOP 5 조회수 조회 2023-04-25 최명진
+	public ArrayList<Item> selectTopItemList(Connection conn) {
+		
+		ArrayList<Item> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		// 2. 쿼리문 작성
+		String sql = prop.getProperty("selectTopItemList");
+
+		// 3. 쿼리문 실행
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			rset = pstmt.executeQuery();
+
+			while (rset.next()) {
+				
+				Item i = new Item();
+
+				i.setItemCode(rset.getInt("ITEM_CODE"));
+				i.setItemName(rset.getString("ITEM_NAME"));
+				i.setItemStock(rset.getInt("ITEM_STOCK"));
+				i.setItem_hits(rset.getInt("ITEM_HITS"));
+				
+				list.add(i);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt); 
+		}
+
+		return list;
+		
+	}
+
 
 	
 	

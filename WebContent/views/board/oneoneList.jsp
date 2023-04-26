@@ -12,6 +12,7 @@
 
 <link rel="stylesheet" href="/resources/css/board/onelist.css">
 
+
 <script defer src="/resources/js/board/oneoneList.js"></script>
 
 <title>1 : 1 문의 글 작성</title>
@@ -28,9 +29,9 @@
 						<h2 class="tit_snb">고객센터</h2>
 						<div class="inner_sub">
 							<ul class="list_menu">
-								<li class="on"><a href="#">공지사항</a></li>
-								<li><a href="#">자주하는 질문</a></li>
-								<li class="one"><a href="/list.in">1 : 1 문의 </a></li>
+								<li><a href="/notice.no">공지사항</a></li>
+								<li><a href="/fqa">자주하는 질문</a></li>
+								<li class="on"><a href="/list.in">1 : 1 문의 </a></li>
 							</ul>
 						</div>
 

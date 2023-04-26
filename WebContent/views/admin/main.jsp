@@ -1,6 +1,7 @@
-<%@page import="com.kh.admin.common.model.vo.AdminPage"%>
+<%@page import="com.kh.admin.common.model.vo.AdminPage, com.kh.admin.shop.item.model.vo.Item, java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
 <!DOCTYPE html>
 <%
 	AdminPage a = (AdminPage) request.getAttribute("mainPage");
@@ -12,6 +13,7 @@
 	int lunch = a.getLunch();
 	int noSugar = a.getNoSugar();
 	int zero = a.getZero();
+	ArrayList<Item> it = (ArrayList<Item>) request.getAttribute("it");
 %>
 <html lang="en">
 <head>
@@ -100,6 +102,17 @@
 							</div>
 						</div>
 					</div>
+					
+					<div class="col-lg-6">
+						<div class="card mb-4">
+							<div class="card-header">
+								<i class="fas fa-chart-bar me-1"></i> 조회수 TOP 5
+							</div>
+							<div class="card-body">
+								<canvas id="myBarChart2" width="100%" height="50"></canvas>
+							</div>
+						</div>
+					</div>
 				</div>
 
 		
@@ -175,6 +188,45 @@
 			    }
 			  }
 			});
+		
+		var ctx = document.getElementById('myBarChart2');
+		var hrefs = ["itemDetail.ad?code=<%= it.get(0).getItemCode() %>", "itemDetail.ad?code=<%= it.get(1).getItemCode() %>", "itemDetail.ad?code=<%= it.get(2).getItemCode() %>", "itemDetail.ad?code=<%= it.get(3).getItemCode() %>", "itemDetail.ad?code=<%= it.get(4).getItemCode() %>"];
+
+		var labels = [];
+		var data = [];
+
+		<% for (Item i : it) { %>
+		  labels.push('<%= i.getItemName() %>');
+		  data.push(<%= i.getItem_hits() %>);
+		<% } %>
+
+		var myBarChart2 = new Chart(ctx, {
+		  type: 'horizontalBar',
+		  data: {
+		    labels: labels,
+		    datasets: [{
+		      backgroundColor: "#FF6699",
+		      borderColor: "#FF6699",
+		      data: data,
+		    }],
+		  },
+		  options: {
+		  legend: {
+		      display: false
+		    }
+		  }
+		});
+
+		ctx.addEventListener('click', function(evt) {
+		  // Get the clicked bar
+		  var activeElement = myBarChart2.getElementAtEvent(evt)[0];
+		  
+		  // Get the corresponding HREF for the clicked bar
+		  var href = hrefs[activeElement._index];
+		  
+		  // Navigate to the corresponding HREF
+		  window.location.href = href;
+		});
 	</script>
 
 

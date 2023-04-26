@@ -311,27 +311,7 @@
                               </div>
                           	</div>
 
-                                <ul class="goods-view-infomation-tab-group" style="display: flex; align-content: stretch; justify-content: center; ">
-                                  <li class="goods-view-infomation-tab">
-                                      <a href="#goods-description" class="goods-view-infomation-tab-anchor">상품설명</a>
-                                  </li>
-                                  <li class="goods-view-infomation-tab">
-                                      <a href="#goods-image" class="goods-view-infomation-tab-anchor __active">상품이미지</a>
-                                  </li>
-                                  <li class="goods-view-infomation-tab">
-                                      <a href="#goods-review" class="goods-view-infomation-tab-anchor">
-                                          고객리뷰
-                                          <span class="count_review">(<%= listCount %>)</span>
-                                      </a>
-                                  </li>
-                              </ul>
-                              <div class="goods-view-infomation-content" id="goods-image">
-                                  <div id="goods_pi">
-                                      <p class="pic">
-                                          <img src="">
-                                      </p>
-                                  </div>
-                              </div>
+              
 
                                     
 
@@ -477,7 +457,7 @@
                 	  heartIcon.on("click", function() {
                   	    $(this).toggleClass("is-active");
 
-                  	    if ($(this).hasClass("is-active")) {ㅍ
+                  	    if ($(this).hasClass("is-active")) {
                   	      addToWishlist(code);
                   	      $(this).css("filter", "");
                   	    } else {
