@@ -34,7 +34,7 @@ public class AdminMainPageController extends HttpServlet {
 		
 		AdminPage page = new AdminService().adminInfo();
 		ArrayList<Item> it = new ItemService().selectTopItemList();
-		AdMember m = new MemberService().selectTopMember();
+		ArrayList<AdMember> m = new MemberService().selectTopMember();
 
 		if(page!= null) {
 			request.setAttribute("mainPage", page);

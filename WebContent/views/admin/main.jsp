@@ -14,7 +14,7 @@
 	int noSugar = a.getNoSugar();
 	int zero = a.getZero();
 	ArrayList<Item> it = (ArrayList<Item>) request.getAttribute("it");
-	AdMember m = (AdMember) request.getAttribute("m");
+	ArrayList<AdMember> m = (ArrayList<AdMember>) request.getAttribute("m");
 %>
 <html lang="en">
 <head>
@@ -121,8 +121,26 @@
 								이달의 구매왕 TOP 3
 							</div>
 							<div class="card-body">
-								<%= m.getMemberNo() %>
-								<%= m.getOrderCount() %>
+								<table class="table">
+								  <thead>
+								    <tr>
+								    <th scope="col">회원번호</th>
+								    <th scope="col">회원 아이디</th>
+								    <th scope="col">회원 이름</th>
+								    <th scope="col">총 주문 수</th>
+								    </tr>
+								    </thead>
+								    <tbody>
+								    <% for(AdMember b :m  ) { %>
+								    <tr>
+								    	<th><%= b.getMemberNo() %></th>
+								    	<th><%= b.getMemberId() %></th>
+								    	<th><%= b.getName() %></th>
+								    	<th><%= b.getOrderCount() %></th>
+								    </tr>
+								    <% } %>
+								    </tbody>
+								    </table>					  					
 							</div>
 						</div>
 					</div>
