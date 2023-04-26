@@ -144,36 +144,59 @@
 							</table>
 
 							<div align="center" class="paging-area">
-
-		                          <div class="layout-pagination">
-		                            <div class="pagediv">
-
-
-											<a href="/list.in?currentPage=<%= currentPage - 1 %>" class="layout-pagination-button layout-pagination-prev-page">이전 페이지로 가기</a>
-
-
-										<span>
-										<% for(int p = startPage; p <= endPage; p++) { %>
-
-											<% if(p != currentPage) { %>
-
-												<strong onclick="location.href = '/list.in?currentPage=<%= p %>';" class="layout-pagination-button layout-pagination-number __active" style="height: 32px;">
-													<%= p %>
-												</strong>
-											<% } else { %>
-												<!-- 현재 내가 보고있는 페이지일 경우에는 클릭이 안되게끔 -->
-
-												<strong class="layout-pagination-button layout-pagination-number __active" style="height: 32px; background-color: lightgray; "><%= p %></strong>
-											<% } %>
-										<% } %>
-										</span>
-
-                                			<a href="/list.in?currentPage=<%= currentPage + 1 %>" class="layout-pagination-button layout-pagination-next-page">다음 페이지로 가기</a>
-
-										</div>
-									</div>
+								 
+		       				 <div class="layout-pagination">
+							<div class="pagediv">
+								<% if(currentPage != 1) { %>
+								<a href="/list.in?currentPage=<%= startPage %>"
+									class="layout-pagination-button layout-pagination-first-page">맨 처음 페이지로 가기
+								</a>
+								<a href="/list.in?currentPage=<%= currentPage - 1 %>" class="layout-pagination-button layout-pagination-prev-page">
+									이전 페이지로 가기
+								</a>
+								<% } else {%>
+								<a href="javascript:void(0)"
+									class="layout-pagination-button layout-pagination-first-page">맨 처음 페이지로 가기
+								</a>
+								<a href="javascript:void(0)" class="layout-pagination-button layout-pagination-prev-page">
+									이전 페이지로 가기
+								</a>
+								<% } %>
+								<% for(int p = startPage; p <= endPage; p++) { %>
+									<% if(p != currentPage) { %>
+								<a href="/list.in?currentPage=<%= p %>">
+									<span>
+										<strong class="layout-pagination-button layout-pagination-number __active"><%= p %></strong>
+									</span>
+								</a>
+									<% } else { %>
+									<span>
+										<strong class="layout-pagination-button layout-pagination-number __active"
+										style="background-color: #fbb6b6;"><%= p %></strong>
+									</span>
+									<% } %>
+								<% } %>
+								<% if(currentPage != maxPage) { %>
+								 <a href="/list.in?currentPage=<%= currentPage + 1 %>" class="layout-pagination-button layout-pagination-next-page">
+								 다음 페이지로 가기
+								 </a>
+								 <a href="/list.in?currentPage=<%= endPage %>" class="layout-pagination-button layout-pagination-last-page">
+								 맨끝 페이지로 가기
+								 </a>
+								 <% } else { %>
+								<a href="javascript:void(0)" class="layout-pagination-button layout-pagination-next-page">
+									다음 페이지로 가기
+								</a>
+								<a href="javascript:void(0)" class="layout-pagination-button layout-pagination-last-page">
+								 맨끝 페이지로 가기
+								 </a>
+								 <% } %>
+								 
 
 							</div>
+						</div>
+
+					</div>
 
 
 

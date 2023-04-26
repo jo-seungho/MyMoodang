@@ -136,13 +136,13 @@
                               
                               <div align="center" class="paging-area">
 								 
-		        <div class="layout-pagination">
+		       				 <div class="layout-pagination">
 							<div class="pagediv">
 								<% if(currentPage != 1) { %>
-								<a href="/bestItemList.it?currentPage=<%= startPage %>"
+								<a href="/wishList.wi?page=<%= startPage %>"
 									class="layout-pagination-button layout-pagination-first-page">맨 처음 페이지로 가기
 								</a>
-								<a href="/bestItemList.it?currentPage=<%= currentPage - 1 %>" class="layout-pagination-button layout-pagination-prev-page">
+								<a href="/wishList.wi?page=<%= currentPage - 1 %>" class="layout-pagination-button layout-pagination-prev-page">
 									이전 페이지로 가기
 								</a>
 								<% } else {%>
@@ -155,7 +155,7 @@
 								<% } %>
 								<% for(int p = startPage; p <= endPage; p++) { %>
 									<% if(p != currentPage) { %>
-								<a href="/bestItemList.it?currentPage=<%= p %>">
+								<a href="/wishList.wi?page=<%= p %>">
 									<span>
 										<strong class="layout-pagination-button layout-pagination-number __active"><%= p %></strong>
 									</span>
@@ -168,10 +168,10 @@
 									<% } %>
 								<% } %>
 								<% if(currentPage != maxPage) { %>
-								 <a href="/bestItemList.it?currentPage=<%= currentPage + 1 %>" class="layout-pagination-button layout-pagination-next-page">
+								 <a href="/wishList.wi?page=<%= currentPage + 1 %>" class="layout-pagination-button layout-pagination-next-page">
 								 다음 페이지로 가기
 								 </a>
-								 <a href="/bestItemList.it?currentPage=<%= endPage %>" class="layout-pagination-button layout-pagination-last-page">
+								 <a href="/wishList.wi?page=<%= endPage %>" class="layout-pagination-button layout-pagination-last-page">
 								 맨끝 페이지로 가기
 								 </a>
 								 <% } else { %>
@@ -182,10 +182,11 @@
 								 맨끝 페이지로 가기
 								 </a>
 								 <% } %>
+								 
 
 							</div>
 						</div>
-					
+					<br>
 					</div>
 
 			<%@ include file="../common/footer.jsp" %>
