@@ -100,7 +100,7 @@ public class Item {
 		this.itemStatus = itemStatus;
 		this.discountPrice = dicsountPrice;
 	}
-
+	
 
 
 
@@ -123,12 +123,29 @@ public class Item {
 		this.itemImg = itemImg;
 		this.description = description;
 	}
+	
+	
+	
 
 
+	public Item(int itemCode, String itemCategory, String itemDate, String itemName, int itemStock, int itemPrice,
+			int itemhits, String itemText, double itemDiscount, String itemImg, String itemStatus, int discountPrice) {
+		super();
+		this.itemCode = itemCode;
+		this.itemCategory = itemCategory;
+		this.itemDate = itemDate;
+		this.itemName = itemName;
+		this.itemStock = itemStock;
+		this.itemPrice = itemPrice;
+		this.itemhits = itemhits;
+		this.itemText = itemText;
+		this.itemDiscount = itemDiscount;
+		this.itemImg = itemImg;
+		this.itemStatus = itemStatus;
+		this.discountPrice = discountPrice;
+	}
 
-
-
-
+	
 
 	public int getItemCode() {
 		return itemCode;

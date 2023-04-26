@@ -279,11 +279,15 @@
                                   <li class="goods-view-infomation-tab">
                                       <a href="#goods-description" class="goods-view-infomation-tab-anchor __active">상품설명</a>
                                   </li>
-                                  
+                           
                                   <li class="goods-view-infomation-tab">
                                       <a href="#goods-review" class="goods-view-infomation-tab-anchor">
+                                      
                                           고객리뷰
+
                                           <span class="count_review">(<%= listCount %>)</span>
+                                          
+                                          
                                       </a>
                                   </li>
                               </ul>
