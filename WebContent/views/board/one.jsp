@@ -79,7 +79,7 @@
 						<div id="one-section">
 
 
-							<table id="nb1" align="center">
+							<table id="nb1" align="center" style="border-collapse: separate;">
 								<thead align="center">
 									<tr>
 										<th class="n1">번호</th>
